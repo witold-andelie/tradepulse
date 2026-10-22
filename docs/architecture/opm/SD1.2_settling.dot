@@ -1,0 +1,32 @@
+// SD1.2 · Settling in-zoomed. Past recommendations are scored before new ones are made.
+digraph SD1_2 {
+  graph [rankdir=TB, fontname="Helvetica", fontsize=14, labelloc=t, nodesep=0.4, ranksep=0.45,
+         compound=true, newrank=true, label="SD1.2 · Settling in-zoomed"];
+  node  [fontname="Helvetica", fontsize=11, style=filled, fillcolor="#e6e6e6"];
+  edge  [fontname="Helvetica", fontsize=9];
+
+  hmem [shape=plain, style="", label=<
+    <TABLE BORDER="1" CELLBORDER="1" CELLSPACING="4" CELLPADDING="3" BGCOLOR="#f3e8ff">
+      <TR><TD BORDER="0" COLSPAN="2"><B>Recommendation Memory</B><BR/><FONT POINT-SIZE="9">Meterless H-MEM</FONT></TD></TR>
+      <TR><TD PORT="pending" STYLE="rounded" BGCOLOR="white">pending</TD><TD PORT="settled" STYLE="rounded" BGCOLOR="white">settled</TD></TR>
+    </TABLE>>];
+  prices [shape=box, fillcolor="#cfe2ff", label="Price Bars\n(as_of-bounded)"];
+  qset   [shape=box, fillcolor="#ffe0b3", label="quant.settlement\n(excess return, hit, Brier,\ncalibration buckets)"];
+  track  [shape=box, label="Track Record\n(per pool, per tier, per horizon)"];
+  conflicts [shape=box, label="Conflict Notes\n(new call contradicts a recent one)"];
+
+  subgraph cluster_s {
+    label="Settling"; style="rounded,bold"; color="#333333"; fontsize=13;
+    t1 [shape=ellipse, label="1 Loading Matured Recommendations\n(entry + horizon <= as_of)"];
+    t2 [shape=ellipse, fillcolor="#ffe0b3", label="2 Scoring Outcomes"];
+    t3 [shape=ellipse, label="3 Updating Track Record"];
+    t4 [shape=ellipse, label="4 Detecting Conflicts"];
+    t1 -> t2 -> t3 -> t4 [style=invis, weight=10];
+  }
+
+  hmem:pending -> t1 [arrowhead=odot];
+  prices -> t2 [arrowhead=odot]; qset -> t2 [arrowhead=odot];
+  t2 -> hmem:settled;
+  t3 -> track [dir=both];
+  hmem -> t4 [arrowhead=odot]; t4 -> conflicts;
+}

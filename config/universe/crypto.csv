@@ -1,0 +1,26 @@
+symbol,name,category,wikipedia_title,notes
+BTC-USD,Bitcoin,layer-1,,
+ETH-USD,Ethereum,layer-1,,
+XRP-USD,XRP,payments,,
+BNB-USD,BNB,exchange-token,,
+SOL-USD,Solana,layer-1,,
+DOGE-USD,Dogecoin,meme,,
+ADA-USD,Cardano,layer-1,,
+TRX-USD,TRON,layer-1,,
+AVAX-USD,Avalanche,layer-1,,
+LINK-USD,Chainlink,oracle,,
+XLM-USD,Stellar,payments,,
+BCH-USD,Bitcoin Cash,payments,,
+LTC-USD,Litecoin,payments,,
+DOT-USD,Polkadot,layer-1,,
+HBAR-USD,Hedera,layer-1,,
+SHIB-USD,Shiba Inu,meme,,
+NEAR-USD,NEAR Protocol,layer-1,,
+ICP-USD,Internet Computer,layer-1,,
+ETC-USD,Ethereum Classic,layer-1,,
+AAVE-USD,Aave,defi,,
+,Toncoin,layer-1,,TODO(A): find the Yahoo symbol (may carry a numeric suffix)
+,Sui,layer-1,,TODO(A): find the Yahoo symbol (may carry a numeric suffix)
+,Uniswap,defi,,TODO(A): find the Yahoo symbol (may carry a numeric suffix)
+,Aptos,layer-1,,TODO(A): find the Yahoo symbol (may carry a numeric suffix)
+,Pepe,meme,,TODO(A): find the Yahoo symbol (may carry a numeric suffix)

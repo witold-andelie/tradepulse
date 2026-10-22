@@ -1,0 +1,48 @@
+// SD1.4 · Researching Factors in-zoomed. Measure -> predict -> earn gates (docs/architecture/factors.md).
+digraph SD1_4 {
+  graph [rankdir=TB, fontname="Helvetica", fontsize=14, labelloc=t, nodesep=0.4, ranksep=0.45,
+         compound=true, newrank=true, label="SD1.4 · Researching Factors in-zoomed"];
+  node  [fontname="Helvetica", fontsize=11, style=filled, fillcolor="#e6e6e6"];
+  edge  [fontname="Helvetica", fontsize=9];
+
+  lake    [shape=box, fillcolor="#cfe2ff", label="Market Data Lake"];
+  events  [shape=box, label="Structured Events"];
+  wm      [shape=box, style="filled,dashed", color="#7a3db8", fillcolor="#f3e8ff", label="Relation Graph\n(World Model snapshot @ as_of)"];
+  zetaris [shape=box, style="filled,dashed", color="#7a3db8", fillcolor="#f3e8ff", label="Zetaris / DuckDB\n(templated SQL)"];
+  qlib    [shape=box, fillcolor="#ffe0b3", label="quant library\n(indicators, crosssection,\nevaluation, costs, earnings)"];
+  thresholds [shape=box, label="Gate Thresholds & Costs\n(config/tradepulse.toml)"];
+  panel [shape=plain, style="", label=<
+    <TABLE BORDER="1" CELLBORDER="1" CELLSPACING="4" CELLPADDING="3" BGCOLOR="#e6e6e6">
+      <TR><TD BORDER="0" COLSPAN="3"><B>Factor Panel</B></TD></TR>
+      <TR><TD PORT="raw" STYLE="rounded" BGCOLOR="white">raw</TD><TD PORT="std" STYLE="rounded" BGCOLOR="white">standardised</TD><TD PORT="res" STYLE="rounded" BGCOLOR="white">residualised</TD></TR>
+    </TABLE>>];
+  card [shape=plain, style="", label=<
+    <TABLE BORDER="1" CELLBORDER="1" CELLSPACING="4" CELLPADDING="3" BGCOLOR="#e6e6e6">
+      <TR><TD BORDER="0" COLSPAN="3"><B>Factor Card</B></TD></TR>
+      <TR><TD PORT="active" STYLE="rounded" BGCOLOR="white">ACTIVE</TD><TD PORT="mo" STYLE="rounded" BGCOLOR="white">MEASURED_ONLY</TD><TD PORT="ins" STYLE="rounded" BGCOLOR="white">INSUFFICIENT_DATA</TD></TR>
+    </TABLE>>];
+  weights [shape=box, label="Factor Weights"];
+
+  subgraph cluster_f {
+    label="Researching Factors"; style="rounded,bold"; color="#333333"; fontsize=13;
+    f1 [shape=ellipse, fillcolor="#ffe0b3", label="1 Computing Raw Factors\n(price-volume, attention, SUE,\ndemand language, event drift, spillover)"];
+    f2 [shape=ellipse, fillcolor="#ffe0b3", label="2 Standardising\n(winsorise, z-score, sector-neutralise)"];
+    f3 [shape=ellipse, fillcolor="#ffe0b3", label="3 Residualising vs Price-Volume Baseline"];
+    f4 [shape=ellipse, fillcolor="#ffe0b3", label="4 Evaluating\n(IC decay 1/5/20d, same-day IC,\nquintile L/S net of cost, half split)"];
+    f5 [shape=ellipse, label="5 Gating\nG1 measure · G2 incremental · G3 predictive\nG4 net of cost · G5 consistency"];
+    f6 [shape=ellipse, label="6 Weighting\n(IC-IR, shrunk to equal, 0 if any gate fails)"];
+    f1 -> f2 -> f3 -> f4 -> f5 -> f6 [style=invis, weight=10];
+  }
+
+  lake -> f1 [arrowhead=odot]; events -> f1 [arrowhead=odot]; wm -> f1 [arrowhead=odot];
+  zetaris -> f1 [arrowhead=odot]; qlib -> f1 [arrowhead=odot];
+  f1 -> panel:raw;
+  panel:raw -> f2; f2 -> panel:std;
+  panel:std -> f3; f3 -> panel:res;
+  panel:res -> f4 [arrowhead=odot]; lake -> f4 [arrowhead=odot, label="forward returns"];
+  thresholds -> f4 [arrowhead=odot]; qlib -> f4 [arrowhead=odot];
+  f4 -> card [label="metrics"];
+  thresholds -> f5 [arrowhead=odot];
+  f5 -> card:active; f5 -> card:mo; f5 -> card:ins;
+  card:active -> f6 [arrowhead=odot]; f6 -> weights;
+}

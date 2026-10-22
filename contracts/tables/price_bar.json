@@ -1,0 +1,22 @@
+{
+  "name": "price_bar",
+  "path": "data/lake/price_bar.parquet",
+  "description": "Daily OHLCV bars for pool members and reference series (benchmarks, VIX, VIX3M).",
+  "owner": "ingest (Member A)",
+  "primary_key": ["pool", "symbol", "date"],
+  "checks": ["high >= low", "high >= open", "high >= close", "low <= open", "low <= close", "close > 0"],
+  "columns": [
+    {"name": "pool", "dtype": "string", "nullable": false, "enum": ["us_equity", "eu_equity", "crypto", "reference"], "description": "Pool, or 'reference' for benchmarks and indices."},
+    {"name": "symbol", "dtype": "string", "nullable": false, "description": "Yahoo Finance symbol."},
+    {"name": "date", "dtype": "date", "nullable": false, "description": "Session date in the market's local calendar (UTC date for crypto)."},
+    {"name": "open", "dtype": "float", "nullable": false, "description": "Unadjusted open."},
+    {"name": "high", "dtype": "float", "nullable": false, "description": "Unadjusted high."},
+    {"name": "low", "dtype": "float", "nullable": false, "description": "Unadjusted low."},
+    {"name": "close", "dtype": "float", "nullable": false, "description": "Unadjusted close."},
+    {"name": "adj_close", "dtype": "float", "nullable": false, "description": "Close adjusted for splits and dividends; used for returns."},
+    {"name": "volume", "dtype": "float", "nullable": true, "description": "Shares (equities) or units (crypto); null for indices without volume."},
+    {"name": "currency", "dtype": "string", "nullable": false, "description": "ISO 4217."},
+    {"name": "source", "dtype": "string", "nullable": false, "enum": ["yahoo"], "description": "Provider."},
+    {"name": "ingested_at", "dtype": "datetime", "nullable": false, "description": "UTC time the row was fetched."}
+  ]
+}

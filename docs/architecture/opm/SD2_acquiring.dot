@@ -1,0 +1,57 @@
+// SD2 · Acquiring in-zoomed (batch job, run before Recommending). ingest/ (Member A); Zetaris registration in integrations/ (Member D).
+digraph SD2 {
+  graph [rankdir=TB, fontname="Helvetica", fontsize=14, labelloc=t, nodesep=0.4, ranksep=0.45,
+         compound=true, newrank=true, label="SD2 · Acquiring in-zoomed (ingest/, Member A; Zetaris registration: Member D)"];
+  node  [fontname="Helvetica", fontsize=11, style=filled, fillcolor="#cfe2ff"];
+  edge  [fontname="Helvetica", fontsize=9];
+
+  // ---------- environment ----------
+  wiki   [shape=box, style="filled,dashed", fillcolor="#ffffff", label="Wikipedia\n(index member lists)"];
+  yahoo  [shape=box, style="filled,dashed", fillcolor="#ffffff", label="Yahoo Finance\n(daily OHLCV)"];
+  wmf    [shape=box, style="filled,dashed", fillcolor="#ffffff", label="Wikimedia Pageviews API"];
+  sec    [shape=box, style="filled,dashed", fillcolor="#ffffff", label="SEC EDGAR\n(submissions, companyfacts,\nfiling documents)"];
+  fred   [shape=box, style="filled,dashed", fillcolor="#ffffff", label="FRED\n(HY OAS CSV)"];
+  zetaris [shape=box, style="filled,dashed", color="#7a3db8", fillcolor="#f3e8ff", label="Zetaris\n(registered tables)"];
+  config [shape=box, fillcolor="#e6e6e6", label="Pool Config\n(config/tradepulse.toml,\nconfig/universe/*.csv)"];
+  contracts [shape=box, fillcolor="#e6e6e6", label="Table Contracts\n(contracts/tables/*.json)"];
+
+  // ---------- the lake and its parts ----------
+  lake [shape=box, penwidth=2, label="Market Data Lake\n(data/lake/*.parquet)"];
+  agg  [shape=triangle, style=filled, fillcolor=black, label="", width=0.25, height=0.22];
+  universe [shape=box, label="Universe Members"];
+  prices   [shape=box, label="Price Bars"];
+  views    [shape=box, label="Pageviews"];
+  filings  [shape=box, label="Filings"];
+  facts    [shape=box, label="Fundamental Facts"];
+  texts    [shape=box, label="Filing Texts"];
+  macro    [shape=box, label="Macro Points"];
+  lake -> agg [arrowhead=none];
+  agg -> {universe prices views filings facts texts macro} [arrowhead=none];
+  sample [shape=box, label="Sample Snapshot\n(data/sample, committed)"];
+  report [shape=box, label="Coverage Report"];
+
+  subgraph cluster_acq {
+    label="Acquiring"; style="rounded,bold"; color="#333333"; fontsize=13;
+    p1 [shape=ellipse, label="1 Building Universe"];
+    p2 [shape=ellipse, label="2 Fetching Prices"];
+    p3 [shape=ellipse, label="3 Fetching Pageviews"];
+    p4 [shape=ellipse, label="4 Fetching Filings & Facts"];
+    p5 [shape=ellipse, label="5 Fetching Filing Texts"];
+    p6 [shape=ellipse, label="6 Fetching Macro"];
+    p7 [shape=ellipse, label="7 Validating Contracts"];
+    p8 [shape=ellipse, fillcolor="#ead7ff", label="8 Registering in Zetaris\n(Member D)"];
+    p9 [shape=ellipse, label="9 Cutting Sample Snapshot"];
+    p1 -> p2 -> p3 -> p4 -> p5 -> p6 -> p7 -> p8 -> p9 [style=invis, weight=10];
+  }
+
+  config -> p1 [arrowhead=odot]; wiki -> p1 [arrowhead=odot]; p1 -> universe;
+  universe -> p2 [arrowhead=odot]; yahoo -> p2 [arrowhead=odot]; p2 -> prices;
+  universe -> p3 [arrowhead=odot]; wmf -> p3 [arrowhead=odot]; p3 -> views;
+  universe -> p4 [arrowhead=odot]; sec -> p4 [arrowhead=odot]; p4 -> filings; p4 -> facts;
+  filings -> p5 [arrowhead=odot]; sec -> p5 [arrowhead=odot]; p5 -> texts;
+  fred -> p6 [arrowhead=odot]; yahoo -> p6 [arrowhead=odot]; p6 -> macro;
+  contracts -> p7 [arrowhead=odot]; lake -> p7 [arrowhead=odot]; p7 -> report;
+  p8 -> zetaris [dir=both, label="CREATE LIGHTNING\nFILESTORE / REST TABLE"]; lake -> p8 [arrowhead=odot];
+  lake -> p9 [arrowhead=odot]; p9 -> sample;
+  p7 -> p2 [style=dashed, constraint=false, label="[contract violated]\nre-fetch, max 2"];
+}

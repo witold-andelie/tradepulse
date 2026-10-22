@@ -1,0 +1,42 @@
+// SD1.7 · Explaining in-zoomed. LangGraph fan-out (Send) per focus name with a bounded verify loop.
+digraph SD1_7 {
+  graph [rankdir=TB, fontname="Helvetica", fontsize=14, labelloc=t, nodesep=0.4, ranksep=0.45,
+         compound=true, newrank=true, label="SD1.7 · Explaining in-zoomed (per focus name, in parallel)"];
+  node  [fontname="Helvetica", fontsize=11, style=filled, fillcolor="#e6e6e6"];
+  edge  [fontname="Helvetica", fontsize=9];
+
+  focus   [shape=box, label="Focus Name"];
+  book    [shape=box, label="Ranked Book row\n(contributions, tier)"];
+  zetaris [shape=box, style="filled,dashed", color="#7a3db8", fillcolor="#f3e8ff", label="Zetaris / DuckDB\n(templated evidence queries)"];
+  wm      [shape=box, style="filled,dashed", color="#7a3db8", fillcolor="#f3e8ff", label="World Model\n(events & edges @ as_of)"];
+  analyst [shape=box, style="filled,dashed", color="#7a3db8", fillcolor="#f3e8ff", label="Analyst role\n(NIM model A)"];
+  skeptic [shape=box, style="filled,dashed", color="#7a3db8", fillcolor="#f3e8ff", label="Skeptic role\n(NIM model B, different family)"];
+  bundle  [shape=box, label="Evidence Bundle\n(query, params, rows sha256)"];
+  claims  [shape=plain, style="", label=<
+    <TABLE BORDER="1" CELLBORDER="1" CELLSPACING="4" CELLPADDING="3" BGCOLOR="#e6e6e6">
+      <TR><TD BORDER="0" COLSPAN="3"><B>Claim</B></TD></TR>
+      <TR><TD PORT="draft" STYLE="rounded" BGCOLOR="white">drafted</TD><TD PORT="ok" STYLE="rounded" BGCOLOR="white">verified</TD><TD PORT="rej" STYLE="rounded" BGCOLOR="white">rejected</TD></TR>
+    </TABLE>>];
+  counter [shape=box, label="Counter-case\n(already priced? crowded?\nevent timing? ruled-out causes)"];
+  expl    [shape=box, label="Explanation\n(verified claims, counter-case,\ninvalidation, what to watch)"];
+
+  subgraph cluster_e {
+    label="Explaining"; style="rounded,bold"; color="#333333"; fontsize=13;
+    e1 [shape=ellipse, label="1 Attributing\n(deterministic factor contributions)"];
+    e2 [shape=ellipse, label="2 Gathering Evidence\n(tool calls, allow-listed)"];
+    e3 [shape=ellipse, label="3 Drafting Claims"];
+    e4 [shape=ellipse, label="4 Challenging"];
+    e5 [shape=ellipse, label="5 Verifying Claims (deterministic)\nre-run query · hash match · cause before move ·\ncontributions sum to score · no future data"];
+    e6 [shape=ellipse, label="6 Composing Explanation\n(or abstaining)"];
+    e1 -> e2 -> e3 -> e4 -> e5 -> e6 [style=invis, weight=10];
+  }
+
+  focus -> e1; book -> e1 [arrowhead=odot];
+  zetaris -> e2 [arrowhead=odot]; wm -> e2 [arrowhead=odot]; e2 -> bundle;
+  analyst -> e3 [arrowhead=dot]; bundle -> e3 [arrowhead=odot]; e3 -> claims:draft;
+  skeptic -> e4 [arrowhead=dot]; claims:draft -> e4 [arrowhead=odot]; e4 -> counter;
+  claims:draft -> e5; bundle -> e5 [arrowhead=odot]; zetaris -> e5 [arrowhead=odot];
+  e5 -> claims:ok; e5 -> claims:rej;
+  e5 -> e3 [style=dashed, constraint=false, label="[rejected and retries < 2]\nrevise with failure reasons"];
+  claims:ok -> e6; counter -> e6; e6 -> expl;
+}

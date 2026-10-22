@@ -1,0 +1,93 @@
+// SD1 · Recommending in-zoomed. Subprocesses run top to bottom (OPM timeline).
+digraph SD1 {
+  graph [rankdir=TB, fontname="Helvetica", fontsize=14, labelloc=t, nodesep=0.5, ranksep=0.45,
+         compound=true, newrank=true, label="SD1 · Recommending in-zoomed (one /run)"];
+  node  [fontname="Helvetica", fontsize=11, style=filled, fillcolor="#e6e6e6"];
+  edge  [fontname="Helvetica", fontsize=9];
+
+  // ---------- objects outside the in-zoomed process ----------
+  request  [shape=box, label="Analysis Request"];
+  lake     [shape=box, fillcolor="#cfe2ff", label="Market Data Lake"];
+  hmem     [shape=plain, style="", label=<
+    <TABLE BORDER="1" CELLBORDER="1" CELLSPACING="4" CELLPADDING="3" BGCOLOR="#f3e8ff">
+      <TR><TD BORDER="0" COLSPAN="2"><B>Recommendation Memory</B><BR/><FONT POINT-SIZE="9">Meterless H-MEM</FONT></TD></TR>
+      <TR><TD PORT="pending" STYLE="rounded" BGCOLOR="white">pending</TD><TD PORT="settled" STYLE="rounded" BGCOLOR="white">settled</TD></TR>
+    </TABLE>>];
+  graph_wm [shape=box, style="filled,dashed", color="#7a3db8", fillcolor="#f3e8ff", label="Relation Graph\n(Meterless World Model)"];
+  events   [shape=box, label="Structured Events"];
+  panel    [shape=box, label="Factor Panel"];
+  cards    [shape=box, label="Factor Cards\n(3 gates per factor)"];
+  regime   [shape=plain, style="", label=<
+    <TABLE BORDER="1" CELLBORDER="1" CELLSPACING="4" CELLPADDING="3" BGCOLOR="#e6e6e6">
+      <TR><TD BORDER="0" COLSPAN="3"><B>Regime State</B></TD></TR>
+      <TR><TD PORT="normal" STYLE="rounded" BGCOLOR="white">normal</TD><TD PORT="elevated" STYLE="rounded" BGCOLOR="white">elevated</TD><TD PORT="stressed" STYLE="rounded" BGCOLOR="white">stressed</TD></TR>
+    </TABLE>>];
+  book     [shape=box, label="Ranked Book\n(score, tier, net edge)"];
+  focus    [shape=box, label="Focus List"];
+  expl     [shape=box, label="Explanation Set"];
+  report   [shape=box, label="Recommendation Report"];
+  track    [shape=box, label="Track Record"];
+  trace    [shape=box, label="Trace Log"];
+  zetaris  [shape=box, style="filled,dashed", color="#7a3db8", fillcolor="#f3e8ff", label="Zetaris / DuckDB\n(query adapter)"];
+  runtime  [shape=box, style="filled,dashed", color="#7a3db8", fillcolor="#f3e8ff", label="Meterless Runtime\n(local 8B)"];
+  nim      [shape=box, style="filled,dashed", color="#7a3db8", fillcolor="#f3e8ff", label="NVIDIA NIM"];
+
+  // ---------- the in-zoomed process ----------
+  subgraph cluster_recommending {
+    label="Recommending"; style="rounded,bold"; color="#333333"; fontsize=13;
+    guarding    [shape=ellipse, label="1 Guarding Request"];
+    settling    [shape=ellipse, label="2 Settling"];
+    extracting  [shape=ellipse, label="3 Extracting & Linking"];
+    researching [shape=ellipse, label="4 Researching Factors"];
+    assessing   [shape=ellipse, label="5 Assessing Regime"];
+    ranking     [shape=ellipse, label="6 Ranking"];
+    explaining  [shape=ellipse, label="7 Explaining"];
+    reporting   [shape=ellipse, label="8 Reporting"];
+    guarding -> settling -> extracting -> researching -> assessing -> ranking -> explaining -> reporting
+      [style=invis, weight=10];
+  }
+
+  // ---------- links ----------
+  request -> guarding [dir=both, label="validated / rejected"];
+  runtime -> guarding [arrowhead=odot];
+
+  hmem:pending -> settling;
+  settling -> hmem:settled;
+  lake -> settling [arrowhead=odot];
+  settling -> track [dir=both];
+
+  lake -> extracting [arrowhead=odot];
+  runtime -> extracting [arrowhead=odot];
+  extracting -> events;
+  extracting -> graph_wm [dir=both];
+
+  lake -> researching [arrowhead=odot];
+  events -> researching [arrowhead=odot];
+  graph_wm -> researching [arrowhead=odot];
+  zetaris -> researching [arrowhead=odot];
+  researching -> panel;
+  researching -> cards;
+
+  lake -> assessing [arrowhead=odot];
+  assessing -> regime;
+
+  panel -> ranking [arrowhead=odot];
+  cards -> ranking [arrowhead=odot];
+  regime -> ranking [arrowhead=odot];
+  request -> ranking [arrowhead=odot];
+  ranking -> book;
+  ranking -> focus;
+
+  focus -> explaining;
+  book -> explaining [arrowhead=odot];
+  zetaris -> explaining [arrowhead=odot];
+  nim -> explaining [arrowhead=odot];
+  explaining -> expl;
+
+  book -> reporting;
+  expl -> reporting;
+  reporting -> report;
+  reporting -> hmem:pending;
+
+  reporting -> trace [ltail=cluster_recommending, label="every subprocess appends events"];
+}

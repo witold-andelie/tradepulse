@@ -1,0 +1,19 @@
+{
+  "name": "universe_member",
+  "path": "data/lake/universe_member.parquet",
+  "description": "One row per instrument in a ranking pool. Snapshot of current index membership (survivorship bias is disclosed).",
+  "owner": "ingest (Member A)",
+  "primary_key": ["pool", "symbol"],
+  "columns": [
+    {"name": "pool", "dtype": "string", "nullable": false, "enum": ["us_equity", "eu_equity", "crypto"], "description": "Ranking pool."},
+    {"name": "symbol", "dtype": "string", "nullable": false, "description": "Yahoo Finance symbol, e.g. AAPL, BRK-B, SAP.DE, BTC-USD."},
+    {"name": "name", "dtype": "string", "nullable": false, "description": "Company or asset name."},
+    {"name": "sector", "dtype": "string", "nullable": false, "description": "GICS sector (US), industry (EU) or category (crypto, e.g. layer-1)."},
+    {"name": "country", "dtype": "string", "nullable": true, "description": "ISO 3166-1 alpha-2 country of the main listing; null for crypto."},
+    {"name": "currency", "dtype": "string", "nullable": false, "description": "ISO 4217 currency of prices."},
+    {"name": "cik", "dtype": "string", "nullable": true, "description": "SEC CIK, 10 digits zero-padded; US only."},
+    {"name": "wikipedia_title", "dtype": "string", "nullable": true, "description": "English Wikipedia article title with underscores; null if none was found."},
+    {"name": "index_membership", "dtype": "string", "nullable": false, "description": "Pipe-separated source lists, e.g. SP500|NDX, SX5E, EXTRA, CRYPTO_TOP."},
+    {"name": "snapshot_date", "dtype": "date", "nullable": false, "description": "Date the membership list was read."}
+  ]
+}

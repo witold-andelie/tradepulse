@@ -1,0 +1,14 @@
+{
+  "name": "macro_point",
+  "path": "data/lake/macro_point.parquet",
+  "description": "Macro series that are not on Yahoo Finance (FRED). VIX and VIX3M live in price_bar under pool 'reference'.",
+  "owner": "ingest (Member A)",
+  "primary_key": ["series_id", "date"],
+  "columns": [
+    {"name": "series_id", "dtype": "string", "nullable": false, "enum": ["BAMLH0A0HYM2"], "description": "FRED series id (ICE BofA US High Yield OAS, percent)."},
+    {"name": "date", "dtype": "date", "nullable": false, "description": "Observation date."},
+    {"name": "value", "dtype": "float", "nullable": false, "description": "Value; FRED's '.' (missing) rows are dropped."},
+    {"name": "source", "dtype": "string", "nullable": false, "enum": ["fred"], "description": "Provider."},
+    {"name": "available_at", "dtype": "datetime", "nullable": false, "description": "date + 1 day at 00:00 UTC (conservative)."}
+  ]
+}

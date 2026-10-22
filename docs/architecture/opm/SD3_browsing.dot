@@ -1,0 +1,41 @@
+// SD3 · Browsing in-zoomed. Implemented in web/ (Member B).
+digraph SD3 {
+  graph [rankdir=TB, fontname="Helvetica", fontsize=14, labelloc=t, nodesep=0.4, ranksep=0.45,
+         compound=true, newrank=true, label="SD3 · Browsing in-zoomed (web/, Member B)"];
+  node  [fontname="Helvetica", fontsize=11, style=filled, fillcolor="#d1f0d1"];
+  edge  [fontname="Helvetica", fontsize=9];
+
+  customer [shape=box, style="filled,dashed", fillcolor="#ffffff", label="Customer"];
+  api      [shape=box, fillcolor="#e6e6e6", label="HTTP API\n(POST /run, GET /runs/latest,\nGET /runs/{id}/trace)"];
+  fixtures [shape=box, fillcolor="#e6e6e6", label="Contract Fixtures\n(contracts/fixtures, SYNTHETIC)"];
+  runout   [shape=plain, style="", label=<
+    <TABLE BORDER="1" CELLBORDER="1" CELLSPACING="4" CELLPADDING="3" BGCOLOR="#e6e6e6">
+      <TR><TD BORDER="0" COLSPAN="3"><B>Run Output</B> (data_mode)</TD></TR>
+      <TR><TD PORT="real" STYLE="rounded" BGCOLOR="white">REAL</TD><TD PORT="replay" STYLE="rounded" BGCOLOR="white">REPLAY</TD><TD PORT="synthetic" STYLE="rounded" BGCOLOR="white">SYNTHETIC</TD></TR>
+    </TABLE>>];
+  pages [shape=box, penwidth=2, label="Web App Pages"];
+  agg   [shape=triangle, style=filled, fillcolor=black, label="", width=0.25, height=0.22];
+  lb    [shape=box, label="Leaderboard\n(pool tabs, search, sector filter,\nsector heatmap)"];
+  td    [shape=box, label="Ticker Detail\n(contributions, claims + verifier\nbadges, counter-case)"];
+  fl    [shape=box, label="Factor Lab\n(factor cards, IC decay)"];
+  rg    [shape=box, label="Regime\n(indicator table, state history)"];
+  tr    [shape=box, label="Track Record\n(hit rate, calibration)"];
+  rt    [shape=box, label="Run Trace\n(node timeline, retries)"];
+  pages -> agg [arrowhead=none]; agg -> {lb td fl rg tr rt} [arrowhead=none];
+  banner [shape=box, label="Data-mode Banner\n+ disclaimer"];
+
+  subgraph cluster_b {
+    label="Browsing"; style="rounded,bold"; color="#333333"; fontsize=13;
+    b1 [shape=ellipse, label="1 Loading Run Output\n(API, else fixtures)"];
+    b2 [shape=ellipse, label="2 Validating Against Contract"];
+    b3 [shape=ellipse, label="3 Rendering Pages"];
+    b4 [shape=ellipse, label="4 Requesting a New Run\n(optional, API only)"];
+    b1 -> b2 -> b3 -> b4 [style=invis, weight=10];
+  }
+
+  customer -> b3 [arrowhead=dot]; customer -> b4 [arrowhead=dot];
+  api -> b1 [arrowhead=odot]; fixtures -> b1 [arrowhead=odot]; b1 -> runout;
+  runout -> b2 [arrowhead=odot]; b2 -> banner;
+  runout -> b3 [arrowhead=odot]; b3 -> pages; banner -> b3 [arrowhead=odot];
+  b4 -> api [dir=both];
+}

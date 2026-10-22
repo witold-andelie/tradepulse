@@ -1,0 +1,39 @@
+[build-system]
+requires = ["setuptools>=69"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "tradepulse"
+version = "0.1.0"
+description = "Explainable cross-sectional ranking agent for US equities, European equities and crypto."
+readme = "README.md"
+requires-python = ">=3.11"
+license = { text = "Apache-2.0" }
+dependencies = [
+  "numpy>=1.26",
+  "pandas>=2.2",
+  "pyarrow>=15",
+  "duckdb>=1.0",
+  "requests>=2.31",
+  "jsonschema>=4.21",
+]
+
+[project.optional-dependencies]
+ingest = ["yfinance>=0.2.40", "lxml>=5.0", "beautifulsoup4>=4.12"]
+agent = ["langgraph>=0.2", "openai>=1.40", "fastapi>=0.110", "uvicorn>=0.29", "pydantic>=2.6"]
+dev = ["pytest>=8.0", "ruff>=0.4"]
+
+[tool.setuptools.packages.find]
+include = ["tradepulse*", "ingest*", "quant*", "integrations*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tradepulse/tests", "ingest/tests", "quant/tests", "integrations/tests"]
+markers = [
+  "network: needs internet access (deselected by default; run with -m network)",
+  "lake: needs data/lake produced by `py -3 -m ingest all` (skipped when absent)",
+]
+addopts = "-m \"not network\" -p no:cacheprovider --basetemp=.pytest_tmp"
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"

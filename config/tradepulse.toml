@@ -1,0 +1,78 @@
+# Single source of truth for tunable parameters. Code must read values from here,
+# never hard-code them. Cost and threshold values are ASSUMPTIONS, documented in
+# docs/architecture/decisions.md; change them here, not in code.
+
+[backtest]
+window_days = 365          # evaluation window (calendar days) ending at as_of
+warmup_days = 420          # extra history so 252-day lookbacks and the 200-day MA are defined
+execution_lag_days = 1     # a signal known at close t is traded at close t+1
+horizons = [1, 5, 20]      # forward-return horizons (trading days) for IC decay
+primary_horizon = 5        # horizon used for tiers and expected alpha
+
+[pools.us_equity]
+label = "US equities"
+benchmark = "SPY"
+currency = "USD"
+cost_bps_one_way = 5.0
+sector_neutral = true
+has_filings = true         # SEC EDGAR is available -> earnings / event factors enabled
+
+[pools.eu_equity]
+label = "European equities"
+benchmark = "^STOXX50E"
+currency = "EUR"
+cost_bps_one_way = 8.0
+sector_neutral = true
+has_filings = false        # no free point-in-time filings feed -> filing factors N/A
+
+[pools.crypto]
+label = "Crypto"
+benchmark = "BTC-USD"
+currency = "USD"
+cost_bps_one_way = 15.0
+sector_neutral = false
+has_filings = false
+
+[factors]
+winsor_sigma = 3.0
+min_names_per_date = 20    # skip a date's cross-section when fewer names have values
+
+[gates]
+min_coverage = 0.60                    # G1: share of pool-days with a value
+min_incremental_ic_t = 2.0             # G2: t-stat of residual rank IC at the best horizon
+require_positive_ic_after_lag = true   # G3: IC must be > 0 at h >= 1 with the execution lag
+min_net_sharpe = 0.5                   # G4: annualised net Sharpe of the quintile long-short
+require_half_split_sign_agreement = true  # G5: same IC sign in both halves of the window
+ic_weight_shrinkage = 0.5              # shrink IC-IR weights halfway toward equal weights
+
+[tiers]
+strong_overweight_pct = 0.05
+overweight_pct = 0.20
+underweight_pct = 0.20
+avoid_pct = 0.05
+min_net_edge_cost_multiple = 1.0       # OVERWEIGHT needs net edge > 1x round-trip cost
+strong_net_edge_cost_multiple = 2.0
+valuation_block_pct = 0.90             # US only: no STRONG_OVERWEIGHT above the 90th pct of P/S
+
+[regime]
+# each indicator that triggers adds 1 point; 0-1 normal, 2-3 elevated, 4+ stressed
+elevated_min_points = 2
+stressed_min_points = 4
+trend_ma_days = 200
+vix_term_ratio_trigger = 1.0           # VIX / VIX3M above this = inverted term structure
+corr_window_days = 20
+corr_pctile_trigger = 0.90
+breadth_below_ma_trigger = 0.40        # share of pool above its 200-day MA below this
+hy_oas_change_bp_trigger = 75.0        # 20-day change in high-yield OAS
+crypto_vol_pctile_trigger = 0.90
+
+[explain]
+top_k = 5                  # explain the k strongest and k weakest names per pool
+movers_k = 3               # plus the k biggest 1-day movers
+max_verify_retries = 2
+max_edge_proposal_rounds = 3
+llm_timeout_s = 180
+
+[extract]
+max_docs_per_run = 200
+schema_version = "1.0"

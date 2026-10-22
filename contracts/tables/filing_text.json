@@ -1,0 +1,20 @@
+{
+  "name": "filing_text",
+  "path": "data/lake/filing_text.parquet",
+  "description": "Plain text of selected filing documents: 8-K Item 2.02 EX-99.1 press releases (all US members) and 10-K business sections (showcase names). Untrusted input for the LLM extractor.",
+  "owner": "ingest (Member A)",
+  "primary_key": ["accession_number", "document_name", "symbol"],
+  "columns": [
+    {"name": "accession_number", "dtype": "string", "nullable": false, "description": "Accession of the filing."},
+    {"name": "cik", "dtype": "string", "nullable": false, "description": "10-digit zero-padded CIK."},
+    {"name": "symbol", "dtype": "string", "nullable": false, "description": "Yahoo Finance symbol."},
+    {"name": "document_name", "dtype": "string", "nullable": false, "description": "File name inside the filing."},
+    {"name": "document_type", "dtype": "string", "nullable": false, "enum": ["EX-99.1", "10-K"], "description": "Document type."},
+    {"name": "url", "dtype": "string", "nullable": false, "description": "Source URL on sec.gov."},
+    {"name": "sha256", "dtype": "string", "nullable": false, "description": "sha256 hex of the text column (UTF-8)."},
+    {"name": "text", "dtype": "string", "nullable": false, "description": "Plain text, HTML stripped, whitespace collapsed, max 200000 chars."},
+    {"name": "char_count", "dtype": "int", "nullable": false, "description": "len(text)."},
+    {"name": "available_at", "dtype": "datetime", "nullable": false, "description": "Acceptance time of the filing in UTC."},
+    {"name": "fetched_at", "dtype": "datetime", "nullable": false, "description": "UTC fetch time."}
+  ]
+}

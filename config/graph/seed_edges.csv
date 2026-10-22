@@ -1,0 +1,25 @@
+src_symbol,dst_symbol,relation,weight,evidence_note
+MSFT,NVDA,supplier_of,0.6,Hypothesis: hyperscaler AI capex flows to GPU supplier. Must pass the lead-lag test.
+META,NVDA,supplier_of,0.6,Hypothesis: hyperscaler AI capex flows to GPU supplier. Must pass the lead-lag test.
+AMZN,NVDA,supplier_of,0.5,Hypothesis: hyperscaler AI capex flows to GPU supplier. Must pass the lead-lag test.
+GOOGL,AVGO,supplier_of,0.6,Hypothesis: custom accelerator partnership. Must pass the lead-lag test.
+META,AVGO,supplier_of,0.4,Hypothesis: custom accelerator and networking demand. Must pass the lead-lag test.
+META,ANET,supplier_of,0.5,Hypothesis: data-center networking demand. Must pass the lead-lag test.
+MSFT,ANET,supplier_of,0.5,Hypothesis: data-center networking demand. Must pass the lead-lag test.
+NVDA,TSM,supplier_of,0.6,Hypothesis: foundry relationship; confirm in 10-K/20-F disclosures. Must pass the lead-lag test.
+AMD,TSM,supplier_of,0.4,Hypothesis: foundry relationship. Must pass the lead-lag test.
+AAPL,TSM,supplier_of,0.5,Hypothesis: foundry relationship. Must pass the lead-lag test.
+NVDA,FN,supplier_of,0.6,Hypothesis: contract manufacturing of optical modules; confirm in FN 10-K customer concentration. Must pass the lead-lag test.
+NVDA,COHR,ecosystem,0.4,Hypothesis: AI cluster build-outs drive optical transceiver demand. Must pass the lead-lag test.
+NVDA,LITE,ecosystem,0.4,Hypothesis: AI cluster build-outs drive optical component demand. Must pass the lead-lag test.
+NVDA,VRT,ecosystem,0.4,Hypothesis: AI data-center power and cooling demand. Must pass the lead-lag test.
+TSM,ASML.AS,supplier_of,0.5,Hypothesis: lithography equipment supplier. Cross-pool edge. Must pass the lead-lag test.
+TSM,ASM.AS,supplier_of,0.4,Hypothesis: deposition equipment supplier. Cross-pool edge. Must pass the lead-lag test.
+TSM,BESI.AS,ecosystem,0.3,Hypothesis: advanced packaging. Cross-pool edge. Must pass the lead-lag test.
+BTC-USD,MSTR,holds_asset,0.9,Hypothesis: BTC treasury company. Cross-pool edge. Must pass the lead-lag test.
+BTC-USD,MARA,ecosystem,0.8,Hypothesis: miner revenue tied to BTC price. Cross-pool edge. Must pass the lead-lag test.
+BTC-USD,RIOT,ecosystem,0.8,Hypothesis: miner revenue tied to BTC price. Cross-pool edge. Must pass the lead-lag test.
+BTC-USD,CLSK,ecosystem,0.8,Hypothesis: miner revenue tied to BTC price. Cross-pool edge. Must pass the lead-lag test.
+BTC-USD,COIN,ecosystem,0.6,Hypothesis: exchange volumes follow crypto prices. Cross-pool edge. Must pass the lead-lag test.
+ETH-USD,COIN,ecosystem,0.4,Hypothesis: exchange volumes follow crypto prices. Cross-pool edge. Must pass the lead-lag test.
+BTC-USD,HOOD,ecosystem,0.3,Hypothesis: retail crypto trading activity. Cross-pool edge. Must pass the lead-lag test.

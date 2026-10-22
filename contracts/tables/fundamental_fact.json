@@ -1,0 +1,29 @@
+{
+  "name": "fundamental_fact",
+  "path": "data/lake/fundamental_fact.parquet",
+  "description": "Selected XBRL facts from SEC companyfacts for US pool members. Every reported value is kept with its filed date so consumers can choose the first-reported (point-in-time) value.",
+  "owner": "ingest (Member A)",
+  "primary_key": ["symbol", "taxonomy", "tag", "unit", "period_start", "period_end", "accession_number"],
+  "tags": [
+    "us-gaap:EarningsPerShareDiluted",
+    "us-gaap:Revenues",
+    "us-gaap:RevenueFromContractWithCustomerExcludingAssessedTax",
+    "dei:EntityCommonStockSharesOutstanding"
+  ],
+  "columns": [
+    {"name": "cik", "dtype": "string", "nullable": false, "description": "10-digit zero-padded CIK."},
+    {"name": "symbol", "dtype": "string", "nullable": false, "description": "Yahoo Finance symbol."},
+    {"name": "taxonomy", "dtype": "string", "nullable": false, "enum": ["us-gaap", "dei"], "description": "XBRL taxonomy."},
+    {"name": "tag", "dtype": "string", "nullable": false, "description": "XBRL concept name."},
+    {"name": "unit", "dtype": "string", "nullable": false, "description": "e.g. USD, USD/shares, shares."},
+    {"name": "value", "dtype": "float", "nullable": false, "description": "Reported value."},
+    {"name": "period_start", "dtype": "date", "nullable": true, "description": "Start of a duration fact; null for instant facts."},
+    {"name": "period_end", "dtype": "date", "nullable": false, "description": "End of the period (or the instant)."},
+    {"name": "fiscal_year", "dtype": "int", "nullable": true, "description": "fy field."},
+    {"name": "fiscal_period", "dtype": "string", "nullable": true, "description": "fp field: Q1, Q2, Q3, FY."},
+    {"name": "form", "dtype": "string", "nullable": false, "description": "Form that reported the value."},
+    {"name": "filed", "dtype": "date", "nullable": false, "description": "Date the value was filed (availability date)."},
+    {"name": "accession_number", "dtype": "string", "nullable": false, "description": "Accession of the reporting filing."},
+    {"name": "frame", "dtype": "string", "nullable": true, "description": "EDGAR frame, e.g. CY2025Q2; null if absent."}
+  ]
+}

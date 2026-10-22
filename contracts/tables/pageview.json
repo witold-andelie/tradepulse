@@ -1,0 +1,15 @@
+{
+  "name": "pageview",
+  "path": "data/lake/pageview.parquet",
+  "description": "Daily English Wikipedia pageviews (user agents only) per pool member: an attention proxy with full history.",
+  "owner": "ingest (Member A)",
+  "primary_key": ["pool", "symbol", "date"],
+  "columns": [
+    {"name": "pool", "dtype": "string", "nullable": false, "enum": ["us_equity", "eu_equity", "crypto"], "description": "Pool."},
+    {"name": "symbol", "dtype": "string", "nullable": false, "description": "Yahoo Finance symbol."},
+    {"name": "wikipedia_title", "dtype": "string", "nullable": false, "description": "Article title used for the request."},
+    {"name": "date", "dtype": "date", "nullable": false, "description": "UTC day the views happened."},
+    {"name": "views", "dtype": "int", "nullable": false, "description": "Number of views (agent=user)."},
+    {"name": "available_at", "dtype": "datetime", "nullable": false, "description": "date + 1 day at 00:00 UTC (the day must be complete)."}
+  ]
+}

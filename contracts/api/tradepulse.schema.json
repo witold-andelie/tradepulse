@@ -1,0 +1,425 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/witold-andelie/tradepulse/contracts/api/tradepulse.schema.json",
+  "title": "TradePulse API contract",
+  "description": "Root = RunOutput (response of POST /run and GET /runs/latest). Other payloads are under $defs: validate them with {\"$ref\": \"#/$defs/<Name>\"}. Changing this file requires a PR reviewed by the team lead.",
+  "$ref": "#/$defs/RunOutput",
+  "$defs": {
+    "Pool": {"type": "string", "enum": ["us_equity", "eu_equity", "crypto"]},
+    "Tier": {"type": "string", "enum": ["STRONG_OVERWEIGHT", "OVERWEIGHT", "NEUTRAL", "UNDERWEIGHT", "AVOID", "NO_CALL"]},
+    "DataMode": {"type": "string", "enum": ["REAL", "REPLAY", "SYNTHETIC"], "description": "REAL = live data and live LLM calls; REPLAY = sample data with recorded LLM answers; SYNTHETIC = generated fixture for UI development, never a result."},
+    "RegimeLabel": {"type": "string", "enum": ["normal", "elevated", "stressed"]},
+    "NullableNumber": {"type": ["number", "null"]},
+
+    "RunRequest": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["pools"],
+      "properties": {
+        "as_of": {"type": ["string", "null"], "format": "date", "description": "Decision date; null = latest available."},
+        "pools": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"$ref": "#/$defs/Pool"}},
+        "tickers": {"type": "array", "items": {"type": "string", "pattern": "^[A-Z0-9.^=-]{1,20}$"}, "maxItems": 20, "description": "Names to explain in addition to the focus list."},
+        "horizon_days": {"type": "integer", "enum": [1, 5, 20], "default": 5},
+        "top_k": {"type": "integer", "minimum": 1, "maximum": 20, "default": 5}
+      }
+    },
+
+    "RunOutput": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["schema_version", "run_id", "created_at", "as_of", "data_mode", "sample_mode", "horizon_days", "request", "pools", "recommendations", "factor_cards", "regimes", "explanations", "track_record", "warnings", "trace_path", "disclaimer"],
+      "properties": {
+        "schema_version": {"const": "1.0"},
+        "run_id": {"type": "string", "pattern": "^[a-z0-9-]{8,64}$"},
+        "created_at": {"type": "string", "format": "date-time"},
+        "as_of": {"type": "string", "format": "date"},
+        "data_mode": {"$ref": "#/$defs/DataMode"},
+        "sample_mode": {"type": "boolean"},
+        "horizon_days": {"type": "integer", "enum": [1, 5, 20]},
+        "request": {"$ref": "#/$defs/RunRequest"},
+        "pools": {"type": "array", "items": {"$ref": "#/$defs/PoolSummary"}},
+        "recommendations": {"type": "array", "items": {"$ref": "#/$defs/Recommendation"}},
+        "factor_cards": {"type": "array", "items": {"$ref": "#/$defs/FactorCard"}},
+        "regimes": {"type": "array", "items": {"$ref": "#/$defs/RegimeState"}},
+        "explanations": {"type": "array", "items": {"$ref": "#/$defs/Explanation"}},
+        "track_record": {"$ref": "#/$defs/TrackRecord"},
+        "warnings": {"type": "array", "items": {"type": "string"}},
+        "trace_path": {"type": "string"},
+        "disclaimer": {"type": "string", "minLength": 20}
+      }
+    },
+
+    "PoolSummary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["pool", "label", "benchmark", "n_members", "n_ranked", "composite_ic", "regime_state", "as_of_close"],
+      "properties": {
+        "pool": {"$ref": "#/$defs/Pool"},
+        "label": {"type": "string"},
+        "benchmark": {"type": "string"},
+        "n_members": {"type": "integer", "minimum": 0},
+        "n_ranked": {"type": "integer", "minimum": 0},
+        "composite_ic": {"$ref": "#/$defs/NullableNumber"},
+        "regime_state": {"$ref": "#/$defs/RegimeLabel"},
+        "as_of_close": {"type": "string", "format": "date"}
+      }
+    },
+
+    "Contribution": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["factor", "z", "weight", "contribution"],
+      "properties": {
+        "factor": {"type": "string"},
+        "z": {"$ref": "#/$defs/NullableNumber"},
+        "weight": {"type": "number", "minimum": 0},
+        "contribution": {"type": "number", "description": "weight * z (0 when z is null). Contributions sum to score."}
+      }
+    },
+
+    "Recommendation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["pool", "symbol", "name", "sector", "rank", "percentile", "score", "coverage", "tier", "expected_alpha_bps", "cost_bps_round_trip", "net_edge_bps", "horizon_days", "contributions", "valuation_pctile", "regime_adjusted", "invalidation", "what_to_watch", "explanation_id", "last_close", "ret_1d"],
+      "properties": {
+        "pool": {"$ref": "#/$defs/Pool"},
+        "symbol": {"type": "string"},
+        "name": {"type": "string"},
+        "sector": {"type": "string"},
+        "rank": {"type": "integer", "minimum": 1},
+        "percentile": {"type": "number", "exclusiveMinimum": 0, "maximum": 1, "description": "1.0 = best score in pool."},
+        "score": {"type": "number"},
+        "coverage": {"type": "number", "minimum": 0, "maximum": 1},
+        "tier": {"$ref": "#/$defs/Tier"},
+        "expected_alpha_bps": {"$ref": "#/$defs/NullableNumber"},
+        "cost_bps_round_trip": {"type": "number", "minimum": 0},
+        "net_edge_bps": {"$ref": "#/$defs/NullableNumber"},
+        "horizon_days": {"type": "integer", "enum": [1, 5, 20]},
+        "contributions": {"type": "array", "items": {"$ref": "#/$defs/Contribution"}},
+        "valuation_pctile": {"$ref": "#/$defs/NullableNumber"},
+        "regime_adjusted": {"type": "boolean", "description": "True when the regime overlay changed the tier."},
+        "invalidation": {"type": "array", "items": {"type": "string"}},
+        "what_to_watch": {"type": "array", "items": {"type": "string"}},
+        "explanation_id": {"type": ["string", "null"]},
+        "last_close": {"type": "number", "exclusiveMinimum": 0},
+        "ret_1d": {"type": "number"}
+      }
+    },
+
+    "GateResult": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["gate", "name", "passed", "value", "threshold", "note"],
+      "properties": {
+        "gate": {"type": "string", "enum": ["G1", "G2", "G3", "G4", "G5"]},
+        "name": {"type": "string", "enum": ["measure", "incremental", "predictive", "net_of_cost", "consistency"]},
+        "passed": {"type": ["boolean", "null"], "description": "null = not evaluated (an earlier gate failed or data missing)."},
+        "value": {"$ref": "#/$defs/NullableNumber"},
+        "threshold": {"$ref": "#/$defs/NullableNumber"},
+        "note": {"type": "string"}
+      }
+    },
+
+    "FactorCard": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["factor", "pool", "title", "measures", "definition", "sources", "availability", "status", "weight", "coverage", "gates", "ic_decay", "same_day_ic", "mostly_descriptive", "long_short", "evaluation_mode", "window"],
+      "properties": {
+        "factor": {"type": "string"},
+        "pool": {"$ref": "#/$defs/Pool"},
+        "title": {"type": "string"},
+        "measures": {"type": "string"},
+        "definition": {"type": "string"},
+        "sources": {"type": "array", "items": {"type": "string"}},
+        "availability": {"type": "string"},
+        "status": {"type": "string", "enum": ["ACTIVE", "MEASURED_ONLY", "INSUFFICIENT_DATA"]},
+        "weight": {"type": "number", "minimum": 0, "maximum": 1},
+        "coverage": {"type": "number", "minimum": 0, "maximum": 1},
+        "gates": {"type": "array", "minItems": 5, "maxItems": 5, "items": {"$ref": "#/$defs/GateResult"}},
+        "ic_decay": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["horizon_days", "mean_ic", "t_stat", "n"],
+            "properties": {
+              "horizon_days": {"type": "integer"},
+              "mean_ic": {"$ref": "#/$defs/NullableNumber"},
+              "t_stat": {"$ref": "#/$defs/NullableNumber"},
+              "n": {"type": "integer", "minimum": 0}
+            }
+          }
+        },
+        "same_day_ic": {"$ref": "#/$defs/NullableNumber"},
+        "mostly_descriptive": {"type": "boolean"},
+        "long_short": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["gross_ann_return", "net_ann_return", "net_sharpe", "turnover_per_rebalance", "max_drawdown"],
+          "properties": {
+            "gross_ann_return": {"$ref": "#/$defs/NullableNumber"},
+            "net_ann_return": {"$ref": "#/$defs/NullableNumber"},
+            "net_sharpe": {"$ref": "#/$defs/NullableNumber"},
+            "turnover_per_rebalance": {"$ref": "#/$defs/NullableNumber"},
+            "max_drawdown": {"$ref": "#/$defs/NullableNumber"}
+          }
+        },
+        "evaluation_mode": {"const": "in_sample_research"},
+        "window": {"$ref": "#/$defs/Window"}
+      }
+    },
+
+    "Window": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["start", "end"],
+      "properties": {"start": {"type": "string", "format": "date"}, "end": {"type": "string", "format": "date"}}
+    },
+
+    "RegimeIndicator": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["name", "value", "threshold", "triggered", "note"],
+      "properties": {
+        "name": {"type": "string", "enum": ["trend", "volatility", "correlation", "breadth", "credit"]},
+        "value": {"$ref": "#/$defs/NullableNumber"},
+        "threshold": {"$ref": "#/$defs/NullableNumber"},
+        "triggered": {"type": ["boolean", "null"]},
+        "note": {"type": "string"}
+      }
+    },
+
+    "RegimeState": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["pool", "as_of", "points", "state", "indicators", "history", "lift"],
+      "properties": {
+        "pool": {"$ref": "#/$defs/Pool"},
+        "as_of": {"type": "string", "format": "date"},
+        "points": {"type": "integer", "minimum": 0, "maximum": 5},
+        "state": {"$ref": "#/$defs/RegimeLabel"},
+        "indicators": {"type": "array", "items": {"$ref": "#/$defs/RegimeIndicator"}},
+        "history": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["date", "points", "state"],
+            "properties": {
+              "date": {"type": "string", "format": "date"},
+              "points": {"type": "integer", "minimum": 0, "maximum": 5},
+              "state": {"$ref": "#/$defs/RegimeLabel"}
+            }
+          }
+        },
+        "lift": {
+          "type": ["object", "null"],
+          "additionalProperties": false,
+          "required": ["drawdown_threshold", "horizon_days", "lift_elevated", "lift_stressed", "n_days"],
+          "properties": {
+            "drawdown_threshold": {"type": "number"},
+            "horizon_days": {"type": "integer"},
+            "lift_elevated": {"$ref": "#/$defs/NullableNumber"},
+            "lift_stressed": {"$ref": "#/$defs/NullableNumber"},
+            "n_days": {"type": "integer", "minimum": 0}
+          }
+        }
+      }
+    },
+
+    "EvidenceRef": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["evidence_id", "query_template", "params", "rows_sha256", "source_table", "as_of", "url"],
+      "properties": {
+        "evidence_id": {"type": "string"},
+        "query_template": {"type": "string", "description": "Name of an allow-listed SQL template."},
+        "params": {"type": "object"},
+        "rows_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+        "source_table": {"type": "string"},
+        "as_of": {"type": "string", "format": "date"},
+        "url": {"type": ["string", "null"]}
+      }
+    },
+
+    "Claim": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["claim_id", "text", "kind", "evidence", "status", "checks"],
+      "properties": {
+        "claim_id": {"type": "string"},
+        "text": {"type": "string"},
+        "kind": {"type": "string", "enum": ["factor", "event", "relation", "price", "fundamental"]},
+        "evidence": {"type": "array", "items": {"$ref": "#/$defs/EvidenceRef"}},
+        "status": {"type": "string", "enum": ["verified", "rejected"]},
+        "checks": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["name", "passed", "detail"],
+            "properties": {
+              "name": {"type": "string", "enum": ["rerun_hash_match", "cause_before_move", "contributions_sum", "no_future_data", "schema"]},
+              "passed": {"type": "boolean"},
+              "detail": {"type": "string"}
+            }
+          }
+        }
+      }
+    },
+
+    "Explanation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["explanation_id", "pool", "symbol", "verdict", "summary", "claims", "counter_case", "ruled_out", "models", "retries"],
+      "properties": {
+        "explanation_id": {"type": "string"},
+        "pool": {"$ref": "#/$defs/Pool"},
+        "symbol": {"type": "string"},
+        "verdict": {"type": "string", "enum": ["explained", "abstained"]},
+        "summary": {"type": "string"},
+        "claims": {"type": "array", "items": {"$ref": "#/$defs/Claim"}},
+        "counter_case": {"type": "array", "items": {"type": "string"}},
+        "ruled_out": {"type": "array", "items": {"type": "string"}},
+        "models": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["analyst", "skeptic"],
+          "properties": {"analyst": {"type": "string"}, "skeptic": {"type": "string"}}
+        },
+        "retries": {"type": "integer", "minimum": 0, "maximum": 2}
+      }
+    },
+
+    "TrackRecord": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["mode", "window", "settled_count", "pending_count", "by_tier", "calibration", "composite_ic_series"],
+      "properties": {
+        "mode": {"const": "walk_forward"},
+        "window": {"$ref": "#/$defs/Window"},
+        "settled_count": {"type": "integer", "minimum": 0},
+        "pending_count": {"type": "integer", "minimum": 0},
+        "by_tier": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["pool", "tier", "n", "hit_rate", "mean_excess_bps"],
+            "properties": {
+              "pool": {"$ref": "#/$defs/Pool"},
+              "tier": {"$ref": "#/$defs/Tier"},
+              "n": {"type": "integer", "minimum": 0},
+              "hit_rate": {"$ref": "#/$defs/NullableNumber"},
+              "mean_excess_bps": {"$ref": "#/$defs/NullableNumber"}
+            }
+          }
+        },
+        "calibration": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["bucket_low", "bucket_high", "n", "predicted", "observed"],
+            "properties": {
+              "bucket_low": {"type": "number"},
+              "bucket_high": {"type": "number"},
+              "n": {"type": "integer", "minimum": 0},
+              "predicted": {"$ref": "#/$defs/NullableNumber"},
+              "observed": {"$ref": "#/$defs/NullableNumber"}
+            }
+          }
+        },
+        "composite_ic_series": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["date", "pool", "ic"],
+            "properties": {
+              "date": {"type": "string", "format": "date"},
+              "pool": {"$ref": "#/$defs/Pool"},
+              "ic": {"$ref": "#/$defs/NullableNumber"}
+            }
+          }
+        }
+      }
+    },
+
+    "TraceEvent": {
+      "type": "object",
+      "additionalProperties": false,
+      "description": "One line of logs/trace-<run_id>.jsonl.",
+      "required": ["ts", "run_id", "seq", "node", "kind", "status", "duration_ms", "model", "tokens_in", "tokens_out", "data_mode", "message", "payload"],
+      "properties": {
+        "ts": {"type": "string", "format": "date-time"},
+        "run_id": {"type": "string"},
+        "seq": {"type": "integer", "minimum": 0},
+        "node": {"type": "string"},
+        "kind": {"type": "string", "enum": ["node_start", "node_end", "tool_call", "llm_call", "verify", "retry", "error", "info"]},
+        "status": {"type": "string", "enum": ["ok", "error", "skipped"]},
+        "duration_ms": {"type": ["integer", "null"], "minimum": 0},
+        "model": {"type": ["string", "null"]},
+        "tokens_in": {"type": ["integer", "null"], "minimum": 0},
+        "tokens_out": {"type": ["integer", "null"], "minimum": 0},
+        "data_mode": {"$ref": "#/$defs/DataMode"},
+        "message": {"type": "string"},
+        "payload": {"type": "object"}
+      }
+    },
+
+    "ExtractedEvent": {
+      "type": "object",
+      "additionalProperties": false,
+      "description": "Output of the LLM extractor after the deterministic grounding check.",
+      "required": ["event_id", "doc_sha256", "accession_number", "symbol", "event_type", "direction", "counterparty", "counterparty_symbol", "magnitude_usd", "novelty", "demand_signals", "quote", "available_at", "extractor_model", "schema_version"],
+      "properties": {
+        "event_id": {"type": "string"},
+        "doc_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+        "accession_number": {"type": "string"},
+        "symbol": {"type": "string"},
+        "event_type": {"type": "string", "enum": ["earnings_release", "guidance_raise", "guidance_cut", "partnership_or_contract", "capacity_or_compute_deal", "customer_win", "product_launch", "supply_constraint", "m_and_a", "financing", "regulatory_or_legal", "management_change", "other"]},
+        "direction": {"type": "integer", "enum": [-1, 0, 1], "description": "Expected effect on the FILER (entity-relative)."},
+        "counterparty": {"type": ["string", "null"]},
+        "counterparty_symbol": {"type": ["string", "null"]},
+        "magnitude_usd": {"$ref": "#/$defs/NullableNumber"},
+        "novelty": {"type": "string", "enum": ["new", "update", "repeat"]},
+        "demand_signals": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["type", "polarity", "quote"],
+            "properties": {
+              "type": {"type": "string", "enum": ["demand_exceeds_supply", "capacity_constrained", "price_increase", "guidance_raised", "record_backlog", "guidance_cut", "demand_weakness", "inventory_build", "price_decrease"]},
+              "polarity": {"type": "integer", "enum": [-1, 1]},
+              "quote": {"type": "string", "minLength": 1, "maxLength": 400}
+            }
+          }
+        },
+        "quote": {"type": "string", "minLength": 1, "maxLength": 400, "description": "Verbatim span from the document supporting the event."},
+        "available_at": {"type": "string", "format": "date-time"},
+        "extractor_model": {"type": "string"},
+        "schema_version": {"const": "1.0"}
+      }
+    },
+
+    "GraphEdge": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["edge_id", "src_symbol", "dst_symbol", "relation", "weight", "source", "evidence_ref", "status", "lead_lag_t", "valid_from"],
+      "properties": {
+        "edge_id": {"type": "string"},
+        "src_symbol": {"type": "string", "description": "Leader: shocks flow from src to dst."},
+        "dst_symbol": {"type": "string"},
+        "relation": {"type": "string", "enum": ["supplier_of", "customer_of", "competitor_of", "holds_asset", "ecosystem", "peer"], "description": "Read as 'dst <relation> src', e.g. src=NVDA, dst=TSM, supplier_of = TSM is a supplier of NVDA."},
+        "weight": {"type": "number", "minimum": -1, "maximum": 1},
+        "source": {"type": "string", "enum": ["seed", "filing_10k", "llm_proposed"]},
+        "evidence_ref": {"type": ["string", "null"]},
+        "status": {"type": "string", "enum": ["proposed", "validated", "rejected"]},
+        "lead_lag_t": {"$ref": "#/$defs/NullableNumber"},
+        "valid_from": {"type": "string", "format": "date"}
+      }
+    }
+  }
+}

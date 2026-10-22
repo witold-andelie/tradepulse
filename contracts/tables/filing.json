@@ -1,0 +1,19 @@
+{
+  "name": "filing",
+  "path": "data/lake/filing.parquet",
+  "description": "SEC EDGAR filing index for US pool members (8-K, 10-Q, 10-K and amendments). One row per filing per symbol (share classes share a CIK).",
+  "owner": "ingest (Member A)",
+  "primary_key": ["accession_number", "symbol"],
+  "columns": [
+    {"name": "cik", "dtype": "string", "nullable": false, "description": "10-digit zero-padded CIK."},
+    {"name": "symbol", "dtype": "string", "nullable": false, "description": "Yahoo Finance symbol."},
+    {"name": "accession_number", "dtype": "string", "nullable": false, "description": "e.g. 0000320193-25-000071."},
+    {"name": "form", "dtype": "string", "nullable": false, "enum": ["8-K", "8-K/A", "10-Q", "10-Q/A", "10-K", "10-K/A"], "description": "Form type."},
+    {"name": "items", "dtype": "string", "nullable": true, "description": "8-K items, comma-separated, e.g. 2.02,9.01; null for other forms."},
+    {"name": "filing_date", "dtype": "date", "nullable": false, "description": "EDGAR filing date."},
+    {"name": "acceptance_datetime", "dtype": "datetime", "nullable": false, "description": "Acceptance time converted to UTC (see data-sources.md: the raw field is US/Eastern clock time)."},
+    {"name": "report_date", "dtype": "date", "nullable": true, "description": "Period of report, when given."},
+    {"name": "primary_document", "dtype": "string", "nullable": false, "description": "File name of the main document."},
+    {"name": "primary_doc_url", "dtype": "string", "nullable": false, "description": "https://www.sec.gov/Archives/edgar/data/{cik_int}/{accession_no_dashes}/{primary_document}"}
+  ]
+}

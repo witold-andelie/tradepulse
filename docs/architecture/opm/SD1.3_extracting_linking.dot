@@ -1,0 +1,48 @@
+// SD1.3 · Extracting & Linking in-zoomed. LLM proposes, deterministic code disposes.
+digraph SD1_3 {
+  graph [rankdir=TB, fontname="Helvetica", fontsize=14, labelloc=t, nodesep=0.4, ranksep=0.45,
+         compound=true, newrank=true, label="SD1.3 · Extracting & Linking in-zoomed"];
+  node  [fontname="Helvetica", fontsize=11, style=filled, fillcolor="#e6e6e6"];
+  edge  [fontname="Helvetica", fontsize=9];
+
+  texts   [shape=box, fillcolor="#cfe2ff", label="Filing Texts\n(untrusted)"];
+  prices  [shape=box, fillcolor="#cfe2ff", label="Price Bars"];
+  cache   [shape=box, label="Extraction Cache\n(keyed by doc sha256)"];
+  seeds   [shape=box, label="Seed Edges\n(config/graph/seed_edges.csv)"];
+  runtime [shape=box, style="filled,dashed", color="#7a3db8", fillcolor="#f3e8ff", label="Meterless Runtime\n(local 8B, extractor role)"];
+  wm      [shape=box, style="filled,dashed", color="#7a3db8", fillcolor="#f3e8ff", label="Relation Graph\n(Meterless World Model)"];
+  ev [shape=plain, style="", label=<
+    <TABLE BORDER="1" CELLBORDER="1" CELLSPACING="4" CELLPADDING="3" BGCOLOR="#e6e6e6">
+      <TR><TD BORDER="0" COLSPAN="3"><B>Structured Event</B></TD></TR>
+      <TR><TD PORT="raw" STYLE="rounded" BGCOLOR="white">raw</TD><TD PORT="valid" STYLE="rounded" BGCOLOR="white">validated</TD><TD PORT="rej" STYLE="rounded" BGCOLOR="white">rejected</TD></TR>
+    </TABLE>>];
+  edge_o [shape=plain, style="", label=<
+    <TABLE BORDER="1" CELLBORDER="1" CELLSPACING="4" CELLPADDING="3" BGCOLOR="#e6e6e6">
+      <TR><TD BORDER="0" COLSPAN="3"><B>Candidate Edge</B></TD></TR>
+      <TR><TD PORT="prop" STYLE="rounded" BGCOLOR="white">proposed</TD><TD PORT="valid" STYLE="rounded" BGCOLOR="white">validated</TD><TD PORT="rej" STYLE="rounded" BGCOLOR="white">rejected</TD></TR>
+    </TABLE>>];
+  leadlag [shape=box, fillcolor="#ffe0b3", label="Lead-Lag Test\n(quant.evaluation)"];
+
+  subgraph cluster_x {
+    label="Extracting & Linking"; style="rounded,bold"; color="#333333"; fontsize=13;
+    s1 [shape=ellipse, label="1 Selecting New Documents"];
+    s2 [shape=ellipse, label="2 Extracting Events (LLM)"];
+    s3 [shape=ellipse, label="3 Grounding Check\n(quote must occur in doc,\nschema valid, timestamps PIT)"];
+    s4 [shape=ellipse, label="4 Proposing Edges (LLM)"];
+    s5 [shape=ellipse, label="5 Validating Edges"];
+    s6 [shape=ellipse, label="6 Committing to World Model"];
+    s1 -> s2 -> s3 -> s4 -> s5 -> s6 [style=invis, weight=10];
+  }
+
+  texts -> s1 [arrowhead=odot]; cache -> s1 [arrowhead=odot];
+  runtime -> s2 [arrowhead=odot]; s2 -> ev:raw;
+  ev:raw -> s3; s3 -> ev:valid; s3 -> ev:rej;
+  s3 -> s2 [style=dashed, constraint=false, label="[rejected] retry once"];
+  s3 -> cache [dir=both];
+  ev:valid -> s4 [arrowhead=odot]; runtime -> s4 [arrowhead=odot]; s4 -> edge_o:prop;
+  edge_o:prop -> s5; prices -> s5 [arrowhead=odot]; leadlag -> s5 [arrowhead=odot];
+  s5 -> edge_o:valid; s5 -> edge_o:rej;
+  s5 -> s4 [style=dashed, constraint=false, label="[rounds < 3] refine with\nrejection reasons"];
+  seeds -> s6 [arrowhead=odot]; edge_o:valid -> s6; ev:valid -> s6 [arrowhead=odot];
+  s6 -> wm [dir=both, label="append-only, valid_from = as_of"];
+}

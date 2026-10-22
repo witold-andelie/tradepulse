@@ -1,0 +1,61 @@
+// OPM legend for every diagram in this folder (ISO/PAS 19450 notation drawn with Graphviz).
+digraph legend {
+  graph [rankdir=LR, fontname="Helvetica", fontsize=14, labelloc=t, nodesep=0.35, ranksep=0.5,
+         label="OPM legend · things, links and owner colours"];
+  node  [fontname="Helvetica", fontsize=10, style=filled, fillcolor="#e6e6e6"];
+  edge  [fontname="Helvetica", fontsize=9];
+
+  subgraph cluster_things {
+    label="Things"; style=rounded; color="#999999";
+    obj   [shape=box, label="Object\n(informational)"];
+    env   [shape=box, style="filled,dashed", fillcolor="#ffffff", label="Environmental object\n(outside the system)"];
+    proc  [shape=ellipse, label="Process"];
+    st    [shape=plain, style="", label=<
+      <TABLE BORDER="1" CELLBORDER="1" CELLSPACING="4" CELLPADDING="3" BGCOLOR="#e6e6e6">
+        <TR><TD BORDER="0" COLSPAN="2"><B>Object with states</B></TD></TR>
+        <TR><TD STYLE="rounded" BGCOLOR="white">state a</TD><TD STYLE="rounded" BGCOLOR="white">state b</TD></TR>
+      </TABLE>>];
+  }
+
+  subgraph cluster_proc_links {
+    label="Procedural links"; style=rounded; color="#999999";
+    c1 [shape=box, label="Object"];  c2 [shape=ellipse, label="Process"];
+    c1 -> c2 [label="consumption"];
+    r1 [shape=ellipse, label="Process"]; r2 [shape=box, label="Object"];
+    r1 -> r2 [label="result"];
+    e1 [shape=ellipse, label="Process"]; e2 [shape=box, label="Object"];
+    e1 -> e2 [dir=both, label="effect"];
+    a1 [shape=box, label="Agent\n(human / LLM role)"]; a2 [shape=ellipse, label="Process"];
+    a1 -> a2 [arrowhead=dot, label="agent"];
+    i1 [shape=box, label="Instrument"]; i2 [shape=ellipse, label="Process"];
+    i1 -> i2 [arrowhead=odot, label="instrument"];
+    v1 [shape=ellipse, label="Process"]; v2 [shape=ellipse, label="Process"];
+    v1 -> v2 [style=dashed, label="invocation\n[condition]"];
+  }
+
+  subgraph cluster_struct_links {
+    label="Structural links"; style=rounded; color="#999999";
+    w  [shape=box, label="Whole"];
+    ag [shape=triangle, style=filled, fillcolor=black, label="", width=0.25, height=0.22];
+    p  [shape=box, label="Part"];
+    w -> ag -> p [arrowhead=none];
+    o  [shape=box, label="Exhibitor"];
+    ex [shape=triangle, style=filled, fillcolor=white, peripheries=2, label="", width=0.25, height=0.22];
+    f  [shape=box, label="Feature"];
+    o -> ex -> f [arrowhead=none];
+    g  [shape=box, label="General"];
+    ge [shape=triangle, style=filled, fillcolor=white, label="", width=0.25, height=0.22];
+    s  [shape=box, label="Specialisation"];
+    g -> ge -> s [arrowhead=none];
+  }
+
+  subgraph cluster_owners {
+    label="Fill colour = who implements it"; style=rounded; color="#999999";
+    o_core [shape=box, fillcolor="#e6e6e6", label="Core (team lead)"];
+    o_a    [shape=box, fillcolor="#cfe2ff", label="ingest/ (Member A)"];
+    o_b    [shape=box, fillcolor="#d1f0d1", label="web/ (Member B)"];
+    o_c    [shape=box, fillcolor="#ffe0b3", label="quant/ (Member C)"];
+    o_d    [shape=box, fillcolor="#ead7ff", label="integrations/ (Member D)"];
+    o_s    [shape=box, style="filled,dashed", color="#7a3db8", fillcolor="#f3e8ff", label="Sponsor technology\n(integrated by Member D)"];
+  }
+}

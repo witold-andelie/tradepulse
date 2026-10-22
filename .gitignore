@@ -1,0 +1,41 @@
+# --- secrets: never commit ---
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+
+# --- python ---
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.pytest_cache/
+.pytest_tmp/
+.ruff_cache/
+*.egg-info/
+build/
+dist/
+
+# --- data produced by ingest (large, regenerated) ---
+data/lake/
+data/cache/
+# the small sample snapshot used by SAMPLE_MODE IS committed
+!data/sample/
+
+# --- run artefacts ---
+logs/
+runs/
+
+# --- web ---
+web/node_modules/
+web/dist/
+
+# --- hackathon reference docs (official texts, not our work) ---
+docs/hackathon/
+
+# --- OS / editor ---
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/

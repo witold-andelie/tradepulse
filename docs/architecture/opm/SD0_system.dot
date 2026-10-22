@@ -1,0 +1,59 @@
+// SD0 · System diagram (top level). The system's function is Recommending.
+digraph SD0 {
+  graph [rankdir=LR, fontname="Helvetica", fontsize=14, labelloc=t, nodesep=0.45, ranksep=0.9,
+         label="SD0 · TradePulse system diagram"];
+  node  [fontname="Helvetica", fontsize=11, style=filled, fillcolor="#e6e6e6"];
+  edge  [fontname="Helvetica", fontsize=9];
+
+  // ---------- objects ----------
+  customer  [shape=box, style="filled,dashed", fillcolor="#ffffff", label="Customer\n(retail / independent trader)"];
+  system    [shape=box, penwidth=2, label="TradePulse\n(system)"];
+  webapp    [shape=box, fillcolor="#d1f0d1", label="Web App"];
+  request   [shape=box, label="Analysis Request\n(pools, as_of, tickers, horizon)"];
+  report    [shape=box, label="Recommendation Report\n(tiers + explanations)"];
+  track     [shape=box, label="Track Record"];
+  trace     [shape=box, label="Trace Log\n(JSONL)"];
+  lake      [shape=box, fillcolor="#cfe2ff", label="Market Data Lake"];
+  providers [shape=box, style="filled,dashed", fillcolor="#ffffff",
+             label="Public Data Providers\n(Yahoo Finance, SEC EDGAR,\nWikimedia, FRED)"];
+  zetaris   [shape=box, style="filled,dashed", color="#7a3db8", fillcolor="#f3e8ff", label="Zetaris\n(federated query)"];
+  meterless [shape=box, style="filled,dashed", color="#7a3db8", fillcolor="#f3e8ff",
+             label="Meterless\n(Runtime, World Model, H-MEM)"];
+  nim       [shape=box, style="filled,dashed", color="#7a3db8", fillcolor="#f3e8ff", label="NVIDIA NIM\n(hosted LLMs)"];
+
+  // ---------- processes ----------
+  requesting   [shape=ellipse, fillcolor="#d1f0d1", label="Requesting"];
+  acquiring    [shape=ellipse, fillcolor="#cfe2ff", label="Acquiring"];
+  recommending [shape=ellipse, penwidth=2, label="Recommending"];
+  browsing     [shape=ellipse, fillcolor="#d1f0d1", label="Browsing"];
+
+  // ---------- structural ----------
+  exh [shape=triangle, style=filled, fillcolor=white, peripheries=2, label="", width=0.25, height=0.22];
+  system -> exh -> recommending [arrowhead=none];
+
+  // ---------- procedural ----------
+  customer -> requesting [arrowhead=dot];
+  webapp   -> requesting [arrowhead=odot];
+  requesting -> request;
+
+  providers -> acquiring [arrowhead=odot];
+  acquiring -> lake [dir=both];
+
+  request   -> recommending;
+  lake      -> recommending [arrowhead=odot];
+  zetaris   -> recommending [arrowhead=odot];
+  meterless -> recommending [arrowhead=odot];
+  nim       -> recommending [arrowhead=odot];
+  recommending -> report;
+  recommending -> trace;
+  recommending -> track [dir=both];
+
+  customer -> browsing [arrowhead=dot];
+  webapp   -> browsing [arrowhead=odot];
+  report   -> browsing [arrowhead=odot];
+  track    -> browsing [arrowhead=odot];
+  trace    -> browsing [arrowhead=odot];
+
+  { rank=same; customer; webapp; }
+  { rank=same; report; track; trace; }
+}

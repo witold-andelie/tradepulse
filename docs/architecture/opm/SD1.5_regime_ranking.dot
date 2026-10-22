@@ -1,0 +1,47 @@
+// SD1.5 · Assessing Regime and Ranking in-zoomed (SD1 subprocesses 5 and 6).
+digraph SD1_5 {
+  graph [rankdir=TB, fontname="Helvetica", fontsize=14, labelloc=t, nodesep=0.4, ranksep=0.45,
+         compound=true, newrank=true, label="SD1.5 · Assessing Regime & Ranking in-zoomed"];
+  node  [fontname="Helvetica", fontsize=11, style=filled, fillcolor="#e6e6e6"];
+  edge  [fontname="Helvetica", fontsize=9];
+
+  lake    [shape=box, fillcolor="#cfe2ff", label="Market Data Lake\n(benchmarks, VIX, VIX3M, HY OAS)"];
+  panel   [shape=box, label="Factor Panel (residualised)"];
+  weights [shape=box, label="Factor Weights"];
+  config  [shape=box, label="Tier & Cost Rules\n(config/tradepulse.toml)"];
+  request [shape=box, label="Analysis Request"];
+  indic   [shape=box, label="Fragility Indicators\n(trend, vol term, correlation,\nbreadth, credit)"];
+  regime  [shape=plain, style="", label=<
+    <TABLE BORDER="1" CELLBORDER="1" CELLSPACING="4" CELLPADDING="3" BGCOLOR="#e6e6e6">
+      <TR><TD BORDER="0" COLSPAN="3"><B>Regime State</B> (per pool)</TD></TR>
+      <TR><TD PORT="normal" STYLE="rounded" BGCOLOR="white">normal</TD><TD PORT="elevated" STYLE="rounded" BGCOLOR="white">elevated</TD><TD PORT="stressed" STYLE="rounded" BGCOLOR="white">stressed</TD></TR>
+    </TABLE>>];
+  book [shape=plain, style="", label=<
+    <TABLE BORDER="1" CELLBORDER="1" CELLSPACING="4" CELLPADDING="3" BGCOLOR="#e6e6e6">
+      <TR><TD BORDER="0" COLSPAN="3"><B>Ranked Book</B></TD></TR>
+      <TR><TD PORT="scored" STYLE="rounded" BGCOLOR="white">scored</TD><TD PORT="tiered" STYLE="rounded" BGCOLOR="white">tiered</TD><TD PORT="overlaid" STYLE="rounded" BGCOLOR="white">regime-overlaid</TD></TR>
+    </TABLE>>];
+  focus [shape=box, label="Focus List\n(top k, bottom k, movers,\nrequested tickers)"];
+
+  subgraph cluster_r {
+    label="Assessing Regime → Ranking"; style="rounded,bold"; color="#333333"; fontsize=13;
+    r1 [shape=ellipse, fillcolor="#ffe0b3", label="1 Computing Fragility Indicators"];
+    r2 [shape=ellipse, label="2 Classifying Regime\n(points → state)"];
+    r3 [shape=ellipse, label="3 Combining Scores\nscore = Σ w·z"];
+    r4 [shape=ellipse, label="4 Estimating Expected Alpha\nα = IC_comp · σ · score"];
+    r5 [shape=ellipse, fillcolor="#ffe0b3", label="5 Subtracting Round-Trip Cost"];
+    r6 [shape=ellipse, label="6 Assigning Tiers\n(+ valuation block, NO_CALL rules)"];
+    r7 [shape=ellipse, label="7 Applying Regime Overlay"];
+    r8 [shape=ellipse, label="8 Selecting Focus Names"];
+    r1 -> r2 -> r3 -> r4 -> r5 -> r6 -> r7 -> r8 [style=invis, weight=10];
+  }
+
+  lake -> r1 [arrowhead=odot]; r1 -> indic;
+  indic -> r2 [arrowhead=odot]; config -> r2 [arrowhead=odot]; r2 -> regime;
+  panel -> r3 [arrowhead=odot]; weights -> r3 [arrowhead=odot]; r3 -> book:scored;
+  book:scored -> r4 [dir=both];
+  config -> r5 [arrowhead=odot]; r5 -> book:scored [dir=both];
+  book:scored -> r6; config -> r6 [arrowhead=odot]; r6 -> book:tiered;
+  book:tiered -> r7; regime -> r7 [arrowhead=odot]; r7 -> book:overlaid;
+  book:overlaid -> r8 [arrowhead=odot]; request -> r8 [arrowhead=odot]; r8 -> focus;
+}

@@ -3,6 +3,7 @@
 .env.*
 data/lake
 data/cache
+# Keep web/ sources and contracts/ in the build context; exclude generated files.
 web/node_modules
 web/dist
 logs

@@ -69,6 +69,17 @@ cd web && npm install && npm run dev   # web app on the synthetic fixtures
 
 Copy `.env.example` to `.env` for local settings. Never commit `.env`.
 
+## Run with Docker
+
+```sh
+docker compose up --build
+```
+
+Open http://localhost:8080. `SAMPLE_MODE=true` by default; no credentials are needed.
+The core is limited to 3 GB of memory and the web server to 256 MB, fitting Docker Desktop
+with 6 GB or less allocated, including this machine's 5.6 GB total Docker budget.
+Zetaris runs on AWS, not locally.
+
 ## License
 
 Apache-2.0

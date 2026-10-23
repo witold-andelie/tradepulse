@@ -65,3 +65,15 @@ def test_coerce_frame():
     assert out["date"].iloc[0] == pd.Timestamp("2025-01-02") and pd.isna(out["date"].iloc[2])
     assert str(out["ts"].dt.tz) == "UTC" and pd.isna(out["ts"].iloc[1])
     assert list(out["name"]) == ["a", "b", "c"]
+
+
+def test_duckdb_adapter_is_thread_safe(tmp_path):
+    from concurrent.futures import ThreadPoolExecutor
+
+    _write_lake(tmp_path)
+    adapter = DuckDBAdapter(tmp_path)
+    params = {"symbol": "AAA", "start": "2025-01-01", "end": "2025-01-31"}
+    expected = adapter.run("price_symbol_window", params).rows_sha256
+    with ThreadPoolExecutor(max_workers=8) as pool:
+        hashes = list(pool.map(lambda _: adapter.run("price_symbol_window", dict(params)).rows_sha256, range(200)))
+    assert set(hashes) == {expected}

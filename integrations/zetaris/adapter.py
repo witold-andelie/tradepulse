@@ -94,7 +94,11 @@ class DuckDBAdapter:
             for name in table_names():
                 path = table_path(name, root=self.lake_root)
                 if path.is_file():
-                    self._connection.from_parquet(str(path)).create_view(name)
+                    # A database-level view (not a connection-local relation view), so it is
+                    # visible from the per-query cursors used in run().
+                    escaped = path.as_posix().replace("'", "''")
+                    self._connection.execute(
+                        f"CREATE VIEW {name} AS SELECT * FROM read_parquet('{escaped}')")
                     self._tables.add(name)
         except Exception:
             self._connection.close()
@@ -110,7 +114,10 @@ class DuckDBAdapter:
 
         saved_params = deepcopy(params)
         sql = render(template, saved_params, table)
-        df = self._connection.execute(sql).fetchdf()
+        # One cursor per query: a DuckDB connection must not be shared across threads, and the
+        # explanation graph runs evidence queries in parallel.
+        with self._connection.cursor() as cursor:
+            df = cursor.execute(sql).fetchdf()
         return QueryResult(template, saved_params, sql, self.backend, df, rows_sha256(df),
                            int((perf_counter() - started) * 1000))
 

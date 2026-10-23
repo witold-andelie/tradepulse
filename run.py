@@ -54,8 +54,9 @@ def main(argv: list[str] | None = None) -> int:
 
         output = run_pipeline(request)
         assert_payload(output, "RunOutput")
-        RunStore().save(output)
-        print(json.dumps(output, ensure_ascii=False, allow_nan=False))
+        path = RunStore().save(output)
+        print(json.dumps({"run_id": output["run_id"], "output": str(path),
+                          "trace": output["trace_path"], "data_mode": output["data_mode"]}))
         return 0
     except Exception as exc:
         print(f"Run failed: {type(exc).__name__}", file=sys.stderr)

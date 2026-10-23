@@ -49,10 +49,14 @@ def create_app(store: RunStore | None = None, runner: Callable[[dict], dict] | N
                today: dt.date | None = None, earliest: dt.date | None = None) -> FastAPI:
     store = store if store is not None else RunStore()
     runner = runner if runner is not None else _default_runner
-    today = today if today is not None else dt.date.today()
-    if earliest is None:
-        cfg = load_config()["backtest"]
-        earliest = today - dt.timedelta(days=cfg["window_days"] + cfg["warmup_days"])
+    fixed_today, fixed_earliest = today, earliest
+    span = load_config()["backtest"]
+    lookback = dt.timedelta(days=span["window_days"] + span["warmup_days"])
+
+    def bounds() -> tuple[dt.date, dt.date]:
+        # Evaluated per request so a long-running server never uses a stale date.
+        current = fixed_today if fixed_today is not None else dt.date.today()
+        return current, fixed_earliest if fixed_earliest is not None else current - lookback
     run_lock = Lock()
     app = FastAPI()
     app.add_middleware(
@@ -70,7 +74,8 @@ def create_app(store: RunStore | None = None, runner: Callable[[dict], dict] | N
     @app.post("/run")
     def post_run(raw: Any = Body(...)) -> JSONResponse:
         try:
-            request = guard_request(raw, today=today, earliest=earliest)
+            current, first = bounds()
+            request = guard_request(raw, today=current, earliest=first)
         except GuardRejection as exc:
             return JSONResponse({"error": exc.code, "detail": exc.detail}, status_code=422)
         if not run_lock.acquire(blocking=False):

@@ -1,7 +1,6 @@
 import datetime as dt
 from types import SimpleNamespace
 
-import pytest
 
 from tradepulse.contracts import validate_payload
 from tradepulse.verify import (check_cause_before_move, check_contributions_sum, check_no_future_data,

@@ -17,3 +17,6 @@ You are helping Member B build the TradePulse web app.
 6. Pages get data only through `src/api/client.js`.
 7. Run `npm test` and `npm run build` after every change. Fix every console error.
 8. Write code, comments and UI text in English.
+9. Follow the "Accessibility (WCAG 2.2 AA)" section of `web/TASK.md` on every page: semantic
+   markup, keyboard operability, visible focus, text alternatives for charts, no colour-only
+   signals, sufficient contrast, reduced-motion support.

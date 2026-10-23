@@ -35,6 +35,24 @@ npm run build             # succeeds, no errors
 - [ ] With `VITE_API_BASE=http://localhost:9` (nothing listening), the app shows a readable error
   and a Retry button. It must not render a blank page.
 
+## Accessibility checks (every changed page; see "Accessibility" in TASK.md)
+
+These need no extra packages. They use Chrome DevTools and the free axe DevTools browser extension.
+
+- [ ] Lighthouse → Accessibility score **≥ 95**; paste the score in the PR.
+- [ ] axe DevTools scan: **0 critical and 0 serious** issues; list any moderate ones with a reason.
+- [ ] **Keyboard-only walkthrough:**
+  - unplug or ignore the mouse
+  - reach and use every control on the page
+  - the focus ring is always visible, and there is no trap
+  - describe the route in the PR, e.g. "Tab to search → type → Tab to table → Enter opens NVDA"
+- [ ] **Screen reader spot check:** use NVDA on Windows (free) or VoiceOver on macOS. The page
+  title, the banner, one table and one chart's text alternative are read sensibly.
+- [ ] **Zoom and width:** the page works at 200% browser zoom and at 320 px width.
+- [ ] **Reduced motion:** with "reduce motion" on in the OS, charts render without animation.
+- [ ] Every chart has an `aria-label` summary computed from data and a "Show data as table"
+  toggle.
+
 ## Code checks
 
 - [ ] No result numbers, tickers or explanation text are hard-coded in components. Grep for

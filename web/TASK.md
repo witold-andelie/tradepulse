@@ -47,6 +47,55 @@ npm run check:contracts   # validates the fixtures against the schema
 5. **No secrets, no tracking scripts, no external fonts or CDNs.** Everything is bundled.
 6. **English only.**
 
+## Accessibility (WCAG 2.2 AA) — applies to every page
+
+Accessibility is a first-class requirement, proposed by Huyin. The shared components (`Page`,
+`Badge`, `State`) and the layout provide the site-wide parts. Every page adds the page-level parts.
+
+**Site-wide (base):**
+- `<html lang="en">`.
+- A "Skip to main content" link as the first focusable element.
+- Landmarks: `<header>`, `<nav aria-label="Primary">`, `<main id="main">`, `<footer>`.
+- One `<h1>` per page, and headings that never skip a level.
+- A visible focus ring on every interactive element; never use `outline: none` without a
+  replacement.
+- Loading and error states are announced: `<Loading>` uses `role="status"` and
+  `aria-live="polite"`; `<ErrorState>` uses `role="alert"`.
+- Respect `prefers-reduced-motion`: no chart or panel animation when it is set
+  (`animation: false` for ECharts).
+- The data-mode banner and the Run notes toggle are reachable and readable by keyboard and screen
+  reader. The toggle uses `aria-expanded`.
+- Route changes move focus to the new page's `<h1>` and update `document.title`
+  ("Leaderboard · TradePulse").
+
+**Every page:**
+- **Colour is never the only signal:**
+  - tiers, gates, regime states and verified/rejected badges always carry text or an icon with a
+    text alternative
+  - positive and negative numbers carry a sign (+ / −)
+- **Contrast:** text at least 4.5:1, large text and UI parts at least 3:1, in both colours of every
+  badge.
+- **Keyboard:**
+  - everything works without a mouse: tabs, filters, table sorting, row opening (Enter), the
+    treemap filter, expanding claims, pagination
+  - no keyboard traps
+  - targets are at least 24×24 px
+- **Tables:**
+  - real `<table>` markup with `<th scope="col">` and a `<caption>` (can be visually hidden)
+  - sortable headers are `<button>`s with `aria-sort` on the `<th>`
+  - pagination states "Page X of Y"
+- **Charts (ECharts):**
+  - set `aria: { enabled: true, decal: { show: true } }`, so series also differ by pattern
+  - every chart has a text alternative: a one-sentence `aria-label` summary computed from the data
+    (e.g. "Composite IC, US equities: mean 0.031 over 52 dates"), plus a "Show data as table"
+    toggle that renders the same numbers as an accessible table
+  - the sector treemap's table view doubles as its keyboard-operable filter
+- **Forms:** every input, select and multi-select has a visible `<label>`. Search results announce
+  their count through an `aria-live="polite"` region ("37 results").
+- **Text and zoom:** the layout works at 200% zoom and at 320 px width without losing content. Use
+  `rem` units for text. Numbers use tabular figures.
+- **Abbreviations:** IC, bp, SUE, OAS and VIX use `<abbr title="…">` on their first use per page.
+
 ## Shared interfaces (Member B and Member C build to these)
 
 Member B (Huyin) owns the base: B1–B6 and B10. Member C (Tanhao) owns pages B7–B9. Both build
@@ -182,7 +231,7 @@ skeleton; an error shows the message and a Retry button.
 
 ### B10 · Polish (after B1–B9)
 
-- Responsive down to 768 px width. The leaderboard table scrolls horizontally inside its card,
+- Responsive down to 320 px width and 200% zoom (see Accessibility). The leaderboard table scrolls horizontally inside its card,
   never the page.
 - Keyboard navigation: table rows are focusable, and Enter opens the detail page.
 - `npm run build` has no warnings about chunks over 1 MB. Lazy-load ECharts pages if needed.

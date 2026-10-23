@@ -10,6 +10,8 @@ horizons = [1, 5, 20]      # forward-return horizons (trading days) for IC decay
 primary_horizon = 5        # horizon used for tiers and expected alpha
 
 [pools.us_equity]
+rows_per_year = 252
+rows_per_month = 21
 label = "US equities"
 benchmark = "SPY"
 currency = "USD"
@@ -18,6 +20,8 @@ sector_neutral = true
 has_filings = true         # SEC EDGAR is available -> earnings / event factors enabled
 
 [pools.eu_equity]
+rows_per_year = 252
+rows_per_month = 21
 label = "European equities"
 benchmark = "^STOXX50E"
 currency = "EUR"
@@ -26,6 +30,8 @@ sector_neutral = true
 has_filings = false        # no free point-in-time filings feed -> filing factors N/A
 
 [pools.crypto]
+rows_per_year = 365
+rows_per_month = 30
 label = "Crypto"
 benchmark = "BTC-USD"
 currency = "USD"

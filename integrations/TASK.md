@@ -172,19 +172,49 @@ This closes the open item "How Zetaris reads lake files" in `decisions.md`.
 
 - Implement `read_token`, `runtime_status`, `cassette_key`, `Cassette`, `ChainClient` and
   `build_routes_from_env`.
-- **Meterless Runtime runs on the lead's laptop in Europe**, not on AWS. Nightshift's Windows
-  edition needs a local NVIDIA GPU; the lead has an RTX 4060 with 8 GB. Your part:
-  - make `llm.py` work against it
-  - write `integrations/meterless/SETUP.md`: install steps, where the proxy token file lives, and
-    how to pick **one** 7–8B non-thinking model that stays resident, because an 8 GB GPU cannot
-    hold two
-  - write the live smoke test (`network` marker): `runtime_status` is `online`, and one extractor
-    request goes through Meterless. The lead runs it and sends you the output.
+- **The local model is fixed and runs on the lead's laptop in Europe** (RTX 4060, 8 GB VRAM):
+  `D:\AI_Models\omnicoder-9b-q4_k_m.gguf`.
+  - It is a Qwen3.5-family 9B (hybrid attention + state-space), quantised Q4_K_M, 5.7 GB.
+  - Its GGUF chat template supports thinking (`enable_thinking`).
+  - It already runs on that laptop with llama.cpp's `llama-server`.
+  - It serves the `extractor` and `guard` roles.
+- **Preferred route: Meterless Nightshift serves this GGUF**, so these calls really go through the
+  sponsor. Find out from the Meterless docs and Discord how Nightshift loads a custom GGUF, and how
+  to route `meterless/fast` (or `meterless/local`) to it.
+  - Nightshift's installer stops every running `llama-server.exe`, so the two cannot run at the
+    same time.
   - Ask the lead whether participants get a Nightshift licence.
+- **Fallback route, only if Nightshift cannot load it:** the lead runs `llama-server` with the
+  GGUF. You add an optional `local` provider to `build_routes_from_env`, configured by
+  `LOCAL_LLM_BASE_URL` and `LOCAL_LLM_MODEL`, with no API key.
+  - Its traces must name the provider honestly as `local-llama.cpp`.
+  - In this case Meterless carries load through the engines (D5), and `docs/sponsors.md` must say
+    so plainly.
+- **Thinking must be off for these roles.** Small thinking models can spin without answering.
+  - Disable thinking per request: `extra_body={"chat_template_kwargs": {"enable_thinking": false}}`,
+    or the server-side equivalent.
+  - As a safety net, strip any leftover `<think>…</think>` block from the reply text in `llm.py`
+    before returning it. Add a unit test for that.
+- Context window: the documents sent are up to about 30 000 characters, so a 16k-token context is
+  enough. Do not ask for the full 262k context; it will not fit in 8 GB.
+- **Write `integrations/meterless/SETUP.md`** so the lead can follow it without help:
+  - both routes, with the exact commands
+  - for the fallback: the `llama-server` flags for GPU offload, a 16k context, Jinja chat
+    templates and disabled thinking
+  - which `.env` variables to set
+- **Write the live smoke test** (`network` marker). The lead runs it and sends you the output:
+  - `runtime_status` is `online` (preferred route), or the local endpoint answers (fallback)
+  - one extractor request on a short sample filing returns valid JSON with no `<think>` text
 - NIM is hosted, so test it yourself with both the analyst and the skeptic model. They must be
-  **different model families**; propose them to the lead.
-- `py -3 -m integrations.meterless.llm --record` records the cassette for the three sample inputs
-  that the lead provides. The cassette file is committed; it holds no secrets.
+  **different model families**; propose them to the lead. The lead will use their own NIM key,
+  so no keys are exchanged.
+- **Cassette recording happens on the lead's laptop**, because the extractor role is local.
+  Prepare the exact commands; the lead runs them once A's `data/sample/` is merged:
+  - record: `SAMPLE_MODE=true RECORD_LLM=true py -3 run.py --as-of <sample as_of> --pools us_equity eu_equity crypto`
+  - verify offline: the same command with `RECORD_LLM=false`. Its warnings must not mention
+    "model answer was unavailable".
+  - The resulting `data/sample/llm_cassette.jsonl` and `data/sample/extraction_cache.jsonl` hold
+    no secrets and are committed.
 
 ### D5 · Engines sidecar (`engines/`, `meterless/engines_client.py`)
 

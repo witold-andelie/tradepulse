@@ -23,14 +23,87 @@ class ZetarisError(RuntimeError):
 def ensure_single_statement(sql: str) -> str:
     """Strip whitespace and one trailing ';'. Raise ValueError if another ';' remains outside
     single-quoted string literals (a second statement)."""
-    raise NotImplementedError("D3")
+    result = sql.strip()
+    if result.endswith(";"):
+        result = result[:-1].rstrip()
+    if not result:
+        raise ValueError("SQL statement is empty")
+    quote: str | None = None
+    line_comment = False
+    block_comment = False
+    skip = False
+    for index, char in enumerate(result):
+        if skip:
+            skip = False
+            continue
+        following = result[index + 1:index + 2]
+        if line_comment:
+            line_comment = char != "\n"
+        elif block_comment:
+            if char == "*" and following == "/":
+                block_comment = False
+                skip = True
+        elif quote:
+            if char == quote:
+                if following == quote:
+                    skip = True
+                else:
+                    quote = None
+        elif char in "'\"":
+            quote = char
+        elif char == "-" and following == "-":
+            line_comment = True
+            skip = True
+        elif char == "/" and following == "*":
+            block_comment = True
+            skip = True
+        elif char == ";":
+            raise ValueError("Only one SQL statement is allowed")
+    if quote or block_comment:
+        raise ValueError("Unterminated SQL literal or comment")
+    return result
 
 
 def coerce_frame(df: pd.DataFrame, dtypes: dict[str, str]) -> pd.DataFrame:
     """Convert string columns to contract dtypes ('float', 'int', 'date', 'datetime', 'string',
     'bool'). Columns not in dtypes are left as they are. Numeric strings may use exponent form.
     Empty strings and 'null' become missing. 'datetime' becomes tz-aware UTC."""
-    raise NotImplementedError("D3")
+    result = df.copy()
+    for column, kind in dtypes.items():
+        if column not in result:
+            continue
+        values = result[column].map(
+            lambda v: None if isinstance(v, str) and v.strip().lower() in {"", "null"} else v
+        )
+        if kind == "float":
+            converted = pd.to_numeric(values, errors="raise").astype(float)
+        elif kind == "int":
+            converted = pd.to_numeric(values, errors="raise").astype("Int64")
+        elif kind == "date":
+            converted = pd.to_datetime(values, format="mixed", errors="raise").dt.normalize()
+            if converted.dt.tz is not None:
+                raise ValueError(f"Date column must be timezone-naive: {column}")
+        elif kind == "datetime":
+            converted = pd.to_datetime(values, format="mixed", errors="raise", utc=True)
+        elif kind == "string":
+            converted = values.astype("string")
+        elif kind == "bool":
+            def boolean(value):
+                if pd.isna(value):
+                    return pd.NA
+                if isinstance(value, str):
+                    value = value.strip().lower()
+                if value in (True, 1, "true", "1"):
+                    return True
+                if value in (False, 0, "false", "0"):
+                    return False
+                raise ValueError(f"Invalid boolean in column: {column}")
+
+            converted = values.map(boolean).astype("boolean")
+        else:
+            raise ValueError(f"Unknown dtype: {kind}")
+        result[column] = converted
+    return result
 
 
 class ZetarisClient:

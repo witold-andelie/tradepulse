@@ -140,7 +140,13 @@ skeleton; an error shows the message and a Retry button.
 
 - Window and settled/pending counts.
 - A table by pool × tier: n, hit rate, mean excess (bp).
-- A calibration chart: predicted vs observed with a diagonal reference line, and bubble size by n.
+- A "score vs outcome" chart from `calibration`, with one bubble per bucket.
+  - `predicted` is the mean **score percentile** of the bucket (x axis).
+  - `observed` is the **share of names that beat the benchmark** (y axis).
+  - Bubble size is `n`.
+  - Draw a dashed 50% line; it marks what a coin flip would give.
+  - Label the axes exactly like that. It is not a probability calibration, so do not call it one.
+  - Skip buckets with `n = 0`.
 - A composite IC line chart per pool.
 - A label at the top: "Walk-forward: each decision used only data available at that time."
 

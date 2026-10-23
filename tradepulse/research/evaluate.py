@@ -5,7 +5,8 @@ from __future__ import annotations
 
 import pandas as pd
 
-from tradepulse.research.gates import FactorMetrics
+from quant import evaluation
+from tradepulse.research.gates import FactorMetrics, build_card, compute_weights, evaluate_gates
 
 FACTOR_SPECS: dict[str, dict] = {
     "pv_mom_12_1": {"title": "12-1 month momentum", "measures": "12-month trend, skipping the last month",
@@ -41,6 +42,11 @@ FACTOR_SPECS: dict[str, dict] = {
 }
 
 
+def _optional_float(value: float) -> float | None:
+    """Represent an undefined scalar metric as None."""
+    return None if pd.isna(value) else float(value)
+
+
 def factor_metrics(factor: str, pool: str, z: pd.DataFrame, prices: pd.DataFrame, *, horizons: list[int],
                    primary_horizon: int, lag: int, cost_bps_one_way: float, rows_per_year: int,
                    min_names: int) -> FactorMetrics:
@@ -57,7 +63,37 @@ def factor_metrics(factor: str, pool: str, z: pd.DataFrame, prices: pd.DataFrame
     - half_split_agree = half_split_sign_agreement(primary-horizon rank IC series).
     - spec_complete = factor in FACTOR_SPECS.
     """
-    raise NotImplementedError
+    price_count = int(prices.notna().to_numpy().sum())
+    coverage = float(z.notna().to_numpy().sum() / price_count) if price_count else 0.0
+    ic_by_horizon = {}
+    primary_ic = None
+    for horizon in horizons:
+        ic = evaluation.rank_ic(z, evaluation.forward_returns(prices, horizon, lag), min_names)
+        summary = evaluation.ic_summary(ic, horizon)
+        ic_by_horizon[horizon] = {
+            key: _optional_float(summary[key]) for key in ("mean", "t_stat", "ir")
+        }
+        ic_by_horizon[horizon]["n"] = int(summary["n"])
+        if horizon == primary_horizon:
+            primary_ic = ic
+    if primary_ic is None:
+        primary_ic = evaluation.rank_ic(
+            z, evaluation.forward_returns(prices, primary_horizon, lag), min_names)
+    long_short = evaluation.quantile_long_short(
+        z, prices, primary_horizon, lag, 0.2, cost_bps_one_way, rows_per_year)
+    return FactorMetrics(
+        factor=factor, pool=pool, coverage=coverage, n_dates=int(primary_ic.notna().sum()),
+        spec_complete=factor in FACTOR_SPECS, ic_by_horizon=ic_by_horizon,
+        same_day_ic=_optional_float(evaluation.same_day_ic(z, prices, min_names).mean()),
+        long_short={
+            "gross_ann_return": _optional_float(long_short["ann_return_gross"]),
+            "net_ann_return": _optional_float(long_short["ann_return_net"]),
+            "net_sharpe": _optional_float(long_short["sharpe_net"]),
+            "max_drawdown": _optional_float(long_short["max_drawdown"]),
+            "turnover_per_rebalance": _optional_float(long_short["turnover"].mean()),
+        },
+        half_split_agree=evaluation.half_split_sign_agreement(primary_ic),
+    )
 
 
 def research_pool(pool: str, panels: dict[str, pd.DataFrame], prices: pd.DataFrame, cfg: dict,
@@ -76,7 +112,32 @@ def research_pool(pool: str, panels: dict[str, pd.DataFrame], prices: pd.DataFra
       FACTOR_SPECS[factor].
     Returns {"cards": [FactorCard], "weights": {factor: w}, "metrics": {factor: FactorMetrics}}.
     """
-    raise NotImplementedError
+    backtest = cfg["backtest"]
+    pool_cfg = cfg["pools"][pool]
+    gates_cfg = cfg["gates"]
+    primary_horizon = backtest["primary_horizon"]
+    window_prices = prices.loc[window[0]:window[1]]
+    metrics = {}
+    gate_results = {}
+    weight_inputs = []
+    for factor in sorted(panels):
+        m = factor_metrics(
+            factor, pool, panels[factor].reindex_like(window_prices), window_prices,
+            horizons=backtest["horizons"], primary_horizon=primary_horizon,
+            lag=backtest["execution_lag_days"], cost_bps_one_way=pool_cfg["cost_bps_one_way"],
+            rows_per_year=pool_cfg["rows_per_year"],
+            min_names=cfg["factors"]["min_names_per_date"],
+        )
+        metrics[factor] = m
+        gates, status = evaluate_gates(m, gates_cfg, primary_horizon)
+        gate_results[factor] = (gates, status)
+        weight_inputs.append({"factor": factor, "status": status,
+                              "ir": m.ic_by_horizon.get(primary_horizon, {}).get("ir")})
+    weights = compute_weights(weight_inputs, gates_cfg["ic_weight_shrinkage"])
+    cards = [build_card(m, FACTOR_SPECS[factor], *gate_results[factor], weights[factor],
+                        {"start": window[0], "end": window[1]}, primary_horizon)
+             for factor, m in metrics.items()]
+    return {"cards": cards, "weights": weights, "metrics": metrics}
 
 
 def composite_ic(panels: dict[str, pd.DataFrame], weights: dict[str, float], prices: pd.DataFrame, *,
@@ -84,4 +145,17 @@ def composite_ic(panels: dict[str, pd.DataFrame], weights: dict[str, float], pri
     """Mean rank IC (primary horizon) of the composite sum_f w_f * z_f, where a missing z
     contributes 0 but a cell with no factor present at all stays NaN. Factors with weight 0 are
     ignored. Returns None when no weight is positive or no IC is defined."""
-    raise NotImplementedError
+    composite = pd.DataFrame(0.0, index=prices.index, columns=prices.columns)
+    present = pd.DataFrame(False, index=prices.index, columns=prices.columns)
+    for factor, weight in weights.items():
+        if weight <= 0:
+            continue
+        z = panels[factor].reindex_like(prices)
+        composite += weight * z.fillna(0.0)
+        present |= z.notna()
+    if not present.to_numpy().any():
+        return None
+    ic = evaluation.rank_ic(
+        composite.where(present), evaluation.forward_returns(prices, primary_horizon, lag),
+        min_names)
+    return _optional_float(ic.mean())

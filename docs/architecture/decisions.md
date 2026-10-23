@@ -8,7 +8,8 @@ entry, not by editing an old one.
 | # | decision | why |
 |---|---|---|
 | D14 | **A fifth member (Member D) owns the sponsor integrations** (`integrations/`): Zetaris deployment, registration, templates, adapters; Meterless Runtime, the LLM chain with cassette, the engines sidecar; the sponsor write-up draft. Zetaris registration moves from `ingest/` (old A8) to D1. | Sponsor work is load-bearing and specialised. It also takes the Zetaris instance off the lead's laptop (only 6 GB available to Docker). |
-| D15 | **Recommended Zetaris hosting: AWS free tier with the lake in a private S3 bucket** (`s3a://` paths, which the Zetaris recipes have proven). Local Docker remains the fallback. | Removes the open question of how a local container reads host files, and gives the team one shared instance. |
+| D15 | **Zetaris hosting: AWS (required, see D17) with the lake in a private S3 bucket** (`s3a://` paths, which the Zetaris recipes have proven). Local Docker remains the fallback. | Removes the open question of how a local container reads host files, and gives the team one shared instance. |
+| D17 | **Member D deploys on AWS only (EU region), exposing HTTPS, IP-allow-listed, token-protected endpoints documented in `integrations/ACCESS.md`.** Meterless Runtime (Nightshift) runs on the lead's RTX 4060 laptop in Europe; D writes the integration code and the setup guide. The engines sidecar runs locally (docker-compose, judges) and on AWS (shared). | D is in the US and the rest of the team is in Europe, so no one can use D's machine. Nightshift needs a local NVIDIA GPU. |
 | D16 | **Agents query data only through allow-listed SQL templates** (`integrations/zetaris/templates/`) rendered with typed parameters. `rows_sha256` is back-end independent. | Safety (no LLM-written SQL), and the verifier can re-run evidence on either back end. |
 
 ## 2026-10-22

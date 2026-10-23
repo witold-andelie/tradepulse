@@ -13,15 +13,22 @@ cd integrations/engines && npm test && npm run conformance   # both exit 0
 
 ## Evidence checklist
 
-- [ ] D0: `DEPLOY.md` explains where Zetaris runs and how lake files reach it. Preflight and verify
-  output is pasted. Budget alert set (AWS). No secrets anywhere.
+- [ ] D0: Zetaris and the engines sidecar run on **AWS** (EU region unless documented otherwise).
+  - [ ] `DEPLOY.md` explains the setup and how lake files reach Zetaris (private S3). Preflight and
+    verify output is pasted. A budget alert is set.
+  - [ ] Both endpoints are HTTPS only, IP allow-listed and token protected. No plain-HTTP port, and
+    the GUI is not public.
+  - [ ] `ACCESS.md` is complete, and **the lead has run its smoke test successfully from Europe**.
+  - [ ] Member A has write access to the S3 lake prefix only.
+  - [ ] No secrets anywhere in the repository.
 - [ ] D1: the registration CLI ran twice; the second run reports `exists`, not errors. A GUI
   screenshot shows all 7 lake tables plus the EDGAR REST table.
 - [ ] D2: every template renders, passes the injection tests and runs on DuckDB over `data/sample`.
 - [ ] D3: `test_parity.py` shows equal `rows_sha256` on both back ends for every template. The
   recorded response fixture contains no token or org id. The on-demand EDGAR lookup works for one
   ticker outside the universe.
-- [ ] D4: `runtime_status` returns `online` on the Nightshift machine.
+- [ ] D4: `SETUP.md` lets the lead install Nightshift without help. `runtime_status` returns
+  `online` on the lead's laptop (the lead runs the smoke test and shares the output).
   - [ ] One extractor call ran through Meterless and one analyst call through NIM; trace excerpts
     are pasted.
   - [ ] The cassette replays the sample inputs with the network disabled.

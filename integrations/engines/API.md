@@ -5,6 +5,11 @@ implementations** of World Model and H-MEM, listening on `127.0.0.1:8790` (`ENGI
 Docker it binds `0.0.0.0`. JSON in and out. Errors return `{"error": "<message>"}` with a 4xx/5xx
 status.
 
+Authentication: when the server's `ENGINES_TOKEN` environment variable is set (always on the
+shared AWS instance), every endpoint except `GET /health` requires
+`Authorization: Bearer <token>`; anything else gets 401 `{"error": "unauthorized"}`. With no token
+set (local docker-compose, judges), there is no authentication. Compare tokens in constant time.
+
 | method | path | body / query | response |
 |---|---|---|---|
 | GET | `/health` | — | `{"status": "ok", "engines": {"world_model": "<version>", "hmem": "<version>"}}` |

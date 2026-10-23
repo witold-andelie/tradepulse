@@ -69,21 +69,43 @@ copy .env.example .env                 # fill Zetaris / Meterless / NIM values l
 
 ## Tasks
 
-### D0 · Zetaris deployment
+### D0 · Shared AWS deployment (required)
 
-Pick where the shared instance runs and document it in `zetaris/DEPLOY.md`, without secrets.
+You are in the US and the rest of the team is in Europe, so nobody can use your computer. Every
+shared service therefore runs on **AWS** and is reached by the team over the internet. A local-only
+setup does not count.
 
-- **Recommended: AWS free tier.** New accounts get $200 in credits; a Mini cluster costs about $80 a
-  week.
-  - Put the lake parquet files in a **private S3 bucket**. Register them with `s3a://` paths; this
-    is the route the Zetaris recipes have proven.
-  - Restrict the security group to the team's IPs.
+- **Region:** use an EU region, `eu-central-1` (Frankfurt) or `eu-west-1` (Ireland), because four of
+  five members are in Europe. If the Zetaris AWS install does not support EU regions, use
+  `us-east-1` and say so in `DEPLOY.md`.
+- **Zetaris:** install it on AWS following the Zetaris AWS guide. The free tier gives $200 in credits;
+  a Mini cluster costs about $80 a week.
+  - Stop the instance when nobody is working.
   - Set a budget alert.
-- **Alternative: local Docker** on a machine that can give Docker at least 8 GB (the preflight fails
-  below 6 GB). Then find out how the container reads host parquet files.
+- **Lake storage:** create a **private S3 bucket** for the parquet lake and register the tables with
+  `s3a://` paths; this is the route the Zetaris recipes have proven.
+  - Give Member A an IAM user that can only write to `s3://<bucket>/lake/`.
+  - Give the core a read-only IAM role or user.
+- **Team endpoints:** expose the Zetaris REST API and the engines sidecar (D5) over **HTTPS only**:
+  - Put a reverse proxy in front with automatic TLS, e.g. Caddy on the instance, or an ALB with an
+    ACM certificate.
+  - Restrict access to the team's IP addresses, and also require a token: the Zetaris API key for
+    Zetaris, `ENGINES_TOKEN` for the sidecar.
+  - Never expose a plain-HTTP port or the Zetaris GUI publicly. Reach the GUI only through an SSH
+    tunnel or AWS SSM port forwarding.
 - Run the Zetaris preflight and verify scripts and paste their output.
-- Create an API token in the GUI yourself. Never ask an AI agent to create one.
-- Share access with the lead through a private channel, never through the repository.
+- Create API tokens in the GUI yourself; never ask an AI agent to create one.
+
+**Deliverable: `integrations/ACCESS.md`**, the interface the rest of the team plugs into. It contains
+no secrets. It lists:
+
+- the HTTPS base URLs: `ZETARIS_REST_URL`, `ENGINES_URL`
+- how each teammate receives their token and org id through a private channel
+- how to add a new IP to the allow-list
+- a 3-line smoke test each teammate can run from Europe:
+  - `GET /health` on the sidecar
+  - `SELECT 1` through `ZetarisClient`
+  - one template through `ZetarisAdapter`
 
 This closes the open item "How Zetaris reads lake files" in `decisions.md`.
 
@@ -124,13 +146,17 @@ This closes the open item "How Zetaris reads lake files" in `decisions.md`.
 
 - Implement `read_token`, `runtime_status`, `cassette_key`, `Cassette`, `ChainClient` and
   `build_routes_from_env`.
-- Install Meterless Nightshift (Windows edition, needs an NVIDIA GPU) on a machine that has one.
-  - Ask the lead whether participants get a licence.
-  - Pick **one** 7–8B non-thinking model that stays resident: an 8 GB GPU cannot hold two.
-- Live smoke test (`network` marker): `runtime_status` is `online`, and one extractor request goes
-  through Meterless.
-- Then do the same for NIM with both analyst and skeptic models. These must be **different model
-  families**; propose them to the lead.
+- **Meterless Runtime runs on the lead's laptop in Europe**, not on AWS. Nightshift's Windows
+  edition needs a local NVIDIA GPU; the lead has an RTX 4060 with 8 GB. Your part:
+  - make `llm.py` work against it
+  - write `integrations/meterless/SETUP.md`: install steps, where the proxy token file lives, and
+    how to pick **one** 7–8B non-thinking model that stays resident, because an 8 GB GPU cannot
+    hold two
+  - write the live smoke test (`network` marker): `runtime_status` is `online`, and one extractor
+    request goes through Meterless. The lead runs it and sends you the output.
+  - Ask the lead whether participants get a Nightshift licence.
+- NIM is hosted, so test it yourself with both the analyst and the skeptic model. They must be
+  **different model families**; propose them to the lead.
 - `py -3 -m integrations.meterless.llm --record` records the cassette for the three sample inputs
   that the lead provides. The cassette file is committed; it holds no secrets.
 
@@ -145,7 +171,13 @@ This closes the open item "How Zetaris reads lake files" in `decisions.md`.
 - `npm test` runs a smoke test that ingests 2 edges and 1 event, then checks that the snapshot
   filters by `as_of` and that H-MEM conflict detection fires on two contradicting records.
 - Implement `EnginesClient` (Python) to make the given tests pass.
-- Add a `Dockerfile` for the sidecar. The lead adds it to docker-compose.
+- Add a `Dockerfile` for the sidecar. It must run in two places:
+  - **locally**, through docker-compose. Judges and SAMPLE_MODE use this, and no token is needed on
+    `127.0.0.1`.
+  - **on AWS** behind the HTTPS proxy from D0, as the team's shared instance. There,
+    `ENGINES_TOKEN` is required: requests without `Authorization: Bearer <token>` get 401.
+- `EnginesClient` sends `Authorization: Bearer <ENGINES_TOKEN>` when that environment variable is
+  set.
 
 ### D6 · Sponsor write-up (`docs/sponsors.md`, draft)
 

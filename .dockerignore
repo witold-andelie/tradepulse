@@ -1,0 +1,12 @@
+.git
+.env
+.env.*
+data/lake
+data/cache
+web/node_modules
+web/dist
+logs
+runs
+**/__pycache__
+.pytest_tmp
+docs/hackathon

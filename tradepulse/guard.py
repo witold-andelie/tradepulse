@@ -1,9 +1,12 @@
-"""SD1 · Guarding Request: deterministic validation of run requests and screening of untrusted text."""
+"""SD1 Guarding Request: deterministic validation and screening of untrusted text."""
 
 from __future__ import annotations
 
 import datetime as dt
 import re
+
+from tradepulse.config import load_config
+from tradepulse.contracts import validate_payload
 
 
 class GuardRejection(ValueError):
@@ -39,11 +42,32 @@ def guard_request(raw: dict, *, today: dt.date, earliest: dt.date) -> dict:
     - Returns a new dict with exactly the keys as_of (ISO string or None), pools, tickers,
       horizon_days, top_k. The input is not modified.
     """
-    raise NotImplementedError
+    errors = validate_payload(raw, "RunRequest")
+    if errors:
+        raise GuardRejection("schema", "; ".join(errors[:20]))
+    as_of = raw.get("as_of")
+    if as_of is not None:
+        decision_date = dt.date.fromisoformat(as_of)
+        if not earliest <= decision_date <= today:
+            raise GuardRejection("as_of", f"as_of must be between {earliest} and {today}")
+        as_of = decision_date.isoformat()
+    cfg = load_config()
+    return {
+        "as_of": as_of,
+        "pools": list(dict.fromkeys(raw["pools"])),
+        "tickers": list(dict.fromkeys(raw.get("tickers", []))),
+        "horizon_days": raw.get("horizon_days", cfg["backtest"]["primary_horizon"]),
+        "top_k": raw.get("top_k", cfg["explain"]["top_k"]),
+    }
 
 
 def screen_text(text: str) -> list[str]:
     """Rule names that match untrusted free text, in this order when present:
     "instruction_override", "execution_intent", "secret_request". Empty list = clean.
     Used to flag (not block) filing texts before they reach an LLM."""
-    raise NotImplementedError
+    rules = (
+        ("instruction_override", INSTRUCTION_OVERRIDE),
+        ("execution_intent", EXECUTION_INTENT),
+        ("secret_request", SECRET_REQUEST),
+    )
+    return [name for name, pattern in rules if pattern.search(text)]

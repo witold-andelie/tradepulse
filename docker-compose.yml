@@ -1,0 +1,11 @@
+services:
+  core:
+    build: .
+    ports:
+      - "8000:8000"
+    env_file:
+      - path: .env
+        required: false
+    volumes:
+      - ./runs:/app/runs
+      - ./logs:/app/logs

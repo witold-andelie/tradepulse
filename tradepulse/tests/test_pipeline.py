@@ -165,3 +165,11 @@ def test_extraction_feeds_event_factors(output):
     assert not any("Event extraction unavailable" in w for w in out["warnings"])
     lines = Path(out["trace_path"]).read_text(encoding="utf-8").splitlines()
     assert any(json.loads(line)["message"] == "1 grounded events" for line in lines)
+
+
+def test_track_record_is_walk_forward(output):
+    out, _ = output
+    tr = out["track_record"]
+    assert tr["mode"] == "walk_forward" and tr["settled_count"] > 0
+    assert {r["pool"] for r in tr["composite_ic_series"]} == {"us_equity", "crypto"}
+    assert not any("in-sample over the research window, not walk-forward" in w for w in out["warnings"])

@@ -23,8 +23,10 @@ from tradepulse.contracts import REPO_ROOT
 from tradepulse.extract.grounding import ExtractionCache
 from tradepulse.extract.runner import run_extraction
 from tradepulse.ports import LLMPort, QueryPort
-from tradepulse.regime_inputs import assess
-from tradepulse.research.evaluate import composite_ic, research_pool
+from quant.regime_indicators import regime_points
+from tradepulse.backtest import track_record, walk_forward
+from tradepulse.regime_inputs import assess, indicator_series
+from tradepulse.research.evaluate import research_pool
 from tradepulse.research.panels import build_pool_panels
 from tradepulse.research.signals import (EPS_TAG, demand_panel, event_drift_panel, event_priors,
                                          spillover_panel, sue_panel, validate_edges)
@@ -163,15 +165,27 @@ def _rank_pool(data: dict, extra: dict[str, pd.DataFrame], cfg: dict, window_sta
         panels = build_pool_panels(prices, data["volume"], data["views"], groups, pool_cfg, cfg["factors"],
                                    extra=extra)
         research = research_pool(pool, panels, prices, cfg, (window_start, as_of))
-        window_prices = prices.loc[window_start:as_of]
-        ic_comp = composite_ic({f: p.loc[window_start:as_of] for f, p in panels.items()}, research["weights"],
-                               window_prices, primary_horizon=cfg["backtest"]["primary_horizon"],
-                               lag=cfg["backtest"]["execution_lag_days"],
-                               min_names=cfg["factors"]["min_names_per_date"])
         active = sum(c["status"] == "ACTIVE" for c in research["cards"])
-        tracer.event(f"research:{pool}", "info", message=f"{active}/{len(research['cards'])} factors active",
-                     payload={"composite_ic_in_sample": ic_comp, "weights": research["weights"]})
-        warnings.append(f"{pool}: composite IC is in-sample over the research window, not walk-forward")
+        tracer.event(f"research:{pool}", "info", message=f"{active}/{len(research['cards'])} factors active in-sample",
+                     payload={"in_sample_weights": research["weights"]})
+
+    with tracer.span(f"walk_forward:{pool}"):
+        bench = reference.get(pool_cfg["benchmark"])
+        values, flags = indicator_series(pool, prices, reference, hy, cfg["regime"], pool_cfg)
+        points = regime_points(flags) if len(flags.columns) else pd.Series(0, index=prices.index)
+        if bench is None:
+            warnings.append(f"{pool}: benchmark {pool_cfg['benchmark']} missing; no walk-forward, every name is NO_CALL")
+            wf = None
+            weights, ic_comp = {}, None
+        else:
+            wf = walk_forward(pool, panels, prices, bench.reindex(prices.index).ffill(limit=3), points, cfg,
+                              window_start)
+            weights, ic_comp = wf["latest_weights"], wf["ic_comp_oos"]
+            tracer.event(f"walk_forward:{pool}", "info",
+                         message=f"{wf['decisions']} decisions, {wf['settled']} settled outcomes",
+                         payload={"ic_comp_oos": ic_comp, "weights": weights})
+        for card in research["cards"]:  # cards show the weight actually used for ranking
+            card["weight"] = round(float(weights.get(card["factor"], 0.0)), 6)
 
     with tracer.span(f"regime:{pool}"):
         regime = assess(pool, as_of, prices, reference, hy, cfg["regime"], pool_cfg, window_start)
@@ -179,14 +193,14 @@ def _rank_pool(data: dict, extra: dict[str, pd.DataFrame], cfg: dict, window_sta
     with tracer.span(f"rank:{pool}"):
         last = prices.index[-1]
         z_today = {f: p.loc[last] for f, p in panels.items()}
-        book = ranking.composite(z_today, research["weights"])
+        book = ranking.composite(z_today, weights)
         sigma = (realized_vol(prices, 20, pool_cfg["rows_per_year"]).loc[last] / np.sqrt(pool_cfg["rows_per_year"]))
         book = book.join(sigma.rename("sigma_daily"))
         tiers = ranking.assign_tiers(book, ic_comp=ic_comp, cost_bps_one_way=pool_cfg["cost_bps_one_way"],
                                      horizon=cfg["backtest"]["primary_horizon"], tiers_cfg=cfg["tiers"])
         tiers = ranking.apply_regime(tiers, regime["state"])
         ret_1d = prices.pct_change(fill_method=None).iloc[-1]
-    return {"pool": pool, "universe": universe, "prices": prices, "book": tiers, "ret_1d": ret_1d,
+    return {"pool": pool, "universe": universe, "prices": prices, "book": tiers, "ret_1d": ret_1d, "wf": wf,
             "research": research, "ic_comp": ic_comp, "regime": regime, "as_of_close": str(last.date())}
 
 
@@ -209,7 +223,12 @@ def run_pipeline(request: dict, *, query: QueryPort | None = None, llm: LLMPort 
     data_mode = "REPLAY" if is_sample else "REAL"
     tracer = Tracer(run_id, data_mode, log_dir=log_dir or REPO_ROOT / "logs")
     tracer.event("run", "info", message=f"run {run_id} as_of {as_of}", payload={"request": request})
-    warnings: list[str] = ["The valuation constraint is not applied in this run."]
+    warnings: list[str] = [
+        "The valuation constraint is not applied in this run.",
+        "Ranking uses walk-forward weights and out-of-sample composite IC; factor cards show in-sample research "
+        "statistics over the window.",
+        "Walk-forward excludes evt_drift and rel_spillover because their priors and edges are fitted in-sample.",
+    ]
 
     reference, hy = _load_reference(query, start, as_of)
     loaded = [_load_pool(p, query, start, as_of, tracer, warnings) for p in request["pools"]]
@@ -245,7 +264,8 @@ def run_pipeline(request: dict, *, query: QueryPort | None = None, llm: LLMPort 
             sample_mode=is_sample, horizon=request["horizon_days"], request=request, pools=summaries,
             recommendations=recommendations, factor_cards=[c for p in pools for c in p["research"]["cards"]],
             regimes=[p["regime"] for p in pools], explanations=[v["explanation"] for v in explained.values()],
-            track_record=report.empty_track_record({"start": window_start, "end": as_of}),
+            track_record=track_record([p["wf"] for p in pools if p["wf"] is not None],
+                                      {"start": window_start, "end": as_of}),
             warnings=warnings, trace_path=str(tracer.path.relative_to(REPO_ROOT)) if tracer.path.is_relative_to(REPO_ROOT)
             else str(tracer.path))
     tracer.event("run", "info", message="run complete",

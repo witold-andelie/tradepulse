@@ -8,7 +8,13 @@
  * opts.tiers: array of tiers to keep when non-empty.
  */
 export function filterRecommendations(rows, opts = {}) {
-  throw new Error('B1: implement filterRecommendations');
+  const query = (opts.query ?? '').trim().toLowerCase();
+  return rows.filter((row) => (
+    (!opts.pool || row.pool === opts.pool)
+    && (!query || row.symbol.toLowerCase().includes(query) || row.name.toLowerCase().includes(query))
+    && (!opts.sector || row.sector === opts.sector)
+    && (!opts.tiers?.length || opts.tiers.includes(row.tier))
+  ));
 }
 
 /**
@@ -16,7 +22,18 @@ export function filterRecommendations(rows, opts = {}) {
  * dir: "asc" (default) or "desc". null/undefined values always go last, whatever the direction.
  */
 export function sortRecommendations(rows, key = 'rank', dir = 'asc') {
-  throw new Error('B1: implement sortRecommendations');
+  const direction = dir === 'desc' ? -1 : 1;
+  return [...rows].sort((a, b) => {
+    const left = a[key];
+    const right = b[key];
+    if (left == null && right == null) return 0;
+    if (left == null) return 1;
+    if (right == null) return -1;
+    const comparison = typeof left === 'string'
+      ? left.localeCompare(right)
+      : left - right;
+    return direction * comparison;
+  });
 }
 
 /**
@@ -25,12 +42,25 @@ export function sortRecommendations(rows, key = 'rank', dir = 'asc') {
  * Sorted by meanScore descending.
  */
 export function sectorSummary(rows) {
-  throw new Error('B1: implement sectorSummary');
+  const sectors = new Map();
+  for (const row of rows) {
+    if (!sectors.has(row.sector)) {
+      sectors.set(row.sector, { sector: row.sector, count: 0, meanScore: 0, overweight: 0, underweight: 0 });
+    }
+    const summary = sectors.get(row.sector);
+    summary.count += 1;
+    summary.meanScore += row.score;
+    if (row.tier === 'STRONG_OVERWEIGHT' || row.tier === 'OVERWEIGHT') summary.overweight += 1;
+    if (row.tier === 'UNDERWEIGHT' || row.tier === 'AVOID') summary.underweight += 1;
+  }
+  return [...sectors.values()]
+    .map((summary) => ({ ...summary, meanScore: summary.meanScore / summary.count }))
+    .sort((a, b) => b.meanScore - a.meanScore);
 }
 
 /** A recommendation's contributions sorted by absolute contribution, largest first (new array). */
 export function contributionsSorted(rec) {
-  throw new Error('B1: implement contributionsSorted');
+  return [...rec.contributions].sort((a, b) => Math.abs(b.contribution) - Math.abs(a.contribution));
 }
 
 /**
@@ -41,5 +71,14 @@ export function contributionsSorted(rec) {
  * Anything else throws.
  */
 export function dataModeBanner(dataMode) {
-  throw new Error('B1: implement dataModeBanner');
+  switch (dataMode) {
+    case 'SYNTHETIC':
+      return { show: true, tone: 'warning', text: 'SYNTHETIC FIXTURE — fictional instruments, generated numbers. Not results.' };
+    case 'REPLAY':
+      return { show: true, tone: 'info', text: 'REPLAY — sample data with recorded model answers.' };
+    case 'REAL':
+      return { show: false, tone: 'none', text: '' };
+    default:
+      throw new Error(`Unknown data mode: ${dataMode}`);
+  }
 }

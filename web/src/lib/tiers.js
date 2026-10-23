@@ -8,7 +8,15 @@ export const TIER_ORDER = ['STRONG_OVERWEIGHT', 'OVERWEIGHT', 'NEUTRAL', 'UNDERW
  * An unknown value throws an Error (a contract violation must be visible, not hidden).
  */
 export function tierLabel(tier) {
-  throw new Error('B1: implement tierLabel');
+  switch (tier) {
+    case 'STRONG_OVERWEIGHT': return 'Strong overweight';
+    case 'OVERWEIGHT': return 'Overweight';
+    case 'NEUTRAL': return 'Neutral';
+    case 'UNDERWEIGHT': return 'Underweight';
+    case 'AVOID': return 'Avoid';
+    case 'NO_CALL': return 'No call';
+    default: throw new Error(`Unknown tier: ${tier}`);
+  }
 }
 
 /**
@@ -17,5 +25,13 @@ export function tierLabel(tier) {
  * UNDERWEIGHT -> "negative", AVOID -> "strong-negative", NO_CALL -> "muted". Unknown throws.
  */
 export function tierTone(tier) {
-  throw new Error('B1: implement tierTone');
+  switch (tier) {
+    case 'STRONG_OVERWEIGHT': return 'strong-positive';
+    case 'OVERWEIGHT': return 'positive';
+    case 'NEUTRAL': return 'neutral';
+    case 'UNDERWEIGHT': return 'negative';
+    case 'AVOID': return 'strong-negative';
+    case 'NO_CALL': return 'muted';
+    default: throw new Error(`Unknown tier: ${tier}`);
+  }
 }

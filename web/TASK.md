@@ -127,7 +127,7 @@ skeleton; an error shows the message and a Retry button.
   `docs/architecture/factors.md`, and mark it as explanatory text, not a result.
 - The cards state "In-sample research window: start – end".
 
-### B7 · Regime (`/regime`)
+### B7 · Regime (`/regime`) — owned by Member C
 
 - One panel per pool with the state badge and points of 5.
 - An indicator table: name, value, threshold, triggered ✓ / ✗ / –, note.
@@ -136,7 +136,7 @@ skeleton; an error shows the message and a Retry button.
 - The lift numbers, with the sentence: "Fragility is measured, not predicted. Lift is reported with
   its sample size."
 
-### B8 · Track Record (`/track-record`)
+### B8 · Track Record (`/track-record`) — owned by Member C
 
 - Window and settled/pending counts.
 - A table by pool × tier: n, hit rate, mean excess (bp).
@@ -144,7 +144,7 @@ skeleton; an error shows the message and a Retry button.
 - A composite IC line chart per pool.
 - A label at the top: "Walk-forward: each decision used only data available at that time."
 
-### B9 · Run Trace (`/trace`)
+### B9 · Run Trace (`/trace`) — owned by Member C
 
 - A timeline (Gantt-style) of `node_start` / `node_end` pairs from `loadTrace()`, using ECharts
   custom series or stacked bars.

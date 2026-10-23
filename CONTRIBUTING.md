@@ -7,7 +7,7 @@
 | Team lead | `tradepulse/`, `contracts/`, `config/`, `docs/` | `tradepulse/README.md` |
 | Member A | `ingest/` | `ingest/TASK.md` |
 | Member B | `web/` | `web/TASK.md` |
-| Member C | `quant/` | `quant/TASK.md` |
+| Member C | `quant/` (C9) + `web/` pages B7–B9 | `quant/TASK.md` |
 | Member D | `integrations/` (Zetaris, Meterless, NIM) | `integrations/TASK.md` |
 
 The team lead reviews and merges every PR, and owns QA and delivery: README, demo video, slides and

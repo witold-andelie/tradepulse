@@ -1,5 +1,15 @@
 # Member C — Quant library (`quant/`)
 
+> **Status (2026-10-23): C1–C7 are implemented and merged.** Every module lies on the critical
+> path of the pipeline, so the lead completed them with a coding agent against the acceptance tests
+> in `quant/tests/` (54 passing). Read the code to learn how each formula was vectorised.
+>
+> **Your tasks now:**
+> 1. **C9 · Property tests** (below). Add new test files only; do not edit the given ones.
+> 2. **Web pages B7–B9** (Regime, Track Record, Run Trace). They are described in `web/TASK.md`.
+>    Coordinate with Member B on shared components, and follow `web/ACCEPTANCE.md`. Use the branch
+>    prefix `c/`, for example `c/b8-track-record`.
+
 You write the **math** of TradePulse as small, pure, tested functions:
 
 - indicators

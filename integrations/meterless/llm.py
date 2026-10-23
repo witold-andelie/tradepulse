@@ -1,9 +1,11 @@
 """LLM provider chain with record/replay (task D4).
 
-Roles and default routes (fallback order):
-    extractor, guard -> Meterless Runtime (METERLESS_MODEL, default meterless/fast) -> NVIDIA NIM
+Roles and default routes (decision D18: all models are hosted on NVIDIA NIM):
+    extractor, guard -> NVIDIA NIM (NIM_EXTRACTOR_MODEL, falls back to NIM_ANALYST_MODEL)
     analyst          -> NVIDIA NIM (NIM_ANALYST_MODEL)
     skeptic          -> NVIDIA NIM (NIM_SKEPTIC_MODEL; a different model family from the analyst)
+Optional and off by default: when METERLESS_TOKEN_FILE is set, Meterless Runtime is tried first
+for extractor and guard, with NIM as the fallback.
 
 Every provider is OpenAI-compatible (/v1/chat/completions). Meterless Runtime facts:
 - base http://127.0.0.1:8088/v1
@@ -197,9 +199,12 @@ def build_routes_from_env() -> dict:
         call = caller(nim)
         analyst = os.environ.get("NIM_ANALYST_MODEL")
         skeptic = os.environ.get("NIM_SKEPTIC_MODEL")
+        extractor = os.environ.get("NIM_EXTRACTOR_MODEL") or analyst
+        if extractor:
+            for role in ("extractor", "guard"):
+                routes.setdefault(role, []).append(("nim", extractor, call))
         if analyst:
-            for role in ("extractor", "guard", "analyst"):
-                routes.setdefault(role, []).append(("nim", analyst, call))
+            routes.setdefault("analyst", []).append(("nim", analyst, call))
         if skeptic:
             routes["skeptic"] = [("nim", skeptic, call)]
     return routes

@@ -1,35 +1,32 @@
 # Member D — Sponsor integrations (`integrations/`)
 
-> **Status (2026-10-23): the pure-code parts are being implemented by a coding agent** because the
-> pipeline waits on them. They are tested offline:
-> - `templates.py`
-> - the DuckDB adapter and `rows_sha256` (D2)
+> **DEADLINE: finish everything by Sunday 25 October 2026, 11:59 pm US Eastern (EDT)**
+> = Monday 26 October 03:59 UTC. Target: done on Saturday 24 October. The hackathon closes
+> 27 October 23:45 UTC; the remaining time is for the lead's QA, demo video and submission.
+>
+> **Status (2026-10-23):** the pure-code parts are merged and tested:
+> - SQL templates
+> - the DuckDB adapter and `rows_sha256`
 > - `ensure_single_statement` and `coerce_frame`
-> - the registration helpers and CLI
-> - `llm.py` (D4 code)
+> - the registration CLI
+> - `llm.py`, including the hosted NIM routes
 > - `EnginesClient`
 >
-> When it is merged you own that code too. **Your work is everything that needs AWS, a live
-> instance or a real model:**
+> **Decision D18: every LLM role runs on hosted NVIDIA NIM.** No model runs on anyone's laptop.
+> Meterless carries its load through the **World Model and H-MEM engines (D5)**.
 >
-> 1. **D0** AWS deployment and `ACCESS.md`. The lead must be able to run the smoke test from Europe.
-> 2. **D1** registration SQL files, then run the registration CLI against your instance.
-> 3. **D3** `ZetarisClient` (`from_env`, `execute`, `parse_response` from a recorded real response)
->    and `ZetarisAdapter`, the parity test, and the on-demand EDGAR lookup.
-> 4. **D4 live:**
->    - `SETUP.md` for Nightshift; the lead runs it on the lead's GPU laptop.
->    - The NIM model choice, two different families.
->    - **Recording the LLM cassette** `data/sample/llm_cassette.jsonl`. Without it, SAMPLE_MODE
->      cannot replay model answers and judges cannot run the demo. Coordinate with the lead, who
->      provides the request set.
-> 5. **D5** the Node sidecar: vendored reference engines, `server.ts`, conformance, Docker, and
->    deployment on AWS behind the token.
-> 6. **D6** the `docs/sponsors.md` draft, with evidence.
+> Your work, in priority order:
+> 1. **D0, D1, D3**: Zetaris on AWS, registration, `ZetarisClient` and `ZetarisAdapter`, parity,
+>    `ACCESS.md`. This is the disqualification risk, so it comes first.
+> 2. **D4**: pick the NIM models, run the live smoke test, and **record the LLM cassette** once A's
+>    `data/sample/` is merged.
+> 3. **D5**: the Meterless engines sidecar, running locally (docker-compose) and on AWS.
+> 4. **D6**: the `docs/sponsors.md` draft, with evidence.
 
 You own everything that connects TradePulse to **Zetaris** and **Meterless**:
 
 - the Zetaris deployment, table registration and the query layer
-- the LLM provider chain through Meterless Runtime and NVIDIA NIM
+- the hosted LLM chain on NVIDIA NIM (Meterless Runtime is an optional, off-by-default route)
 - the Meterless engines (World Model and H-MEM) running as a sidecar
 
 Sponsor integration is a scoring criterion, and a disqualifier when it is missing or decorative. Each
@@ -57,7 +54,7 @@ integrations/
     sql/                D1  registration SQL files (README inside)
     DEPLOY.md           D0  how the instance runs (no secrets)
   meterless/
-    llm.py              D4  provider chain Meterless Runtime -> NIM, record/replay cassette
+    llm.py              D4  hosted NIM routes per role, record/replay cassette
     engines_client.py   D5  Python client for the sidecar
   engines/              D5  Node/TypeScript sidecar hosting the official reference engines (API.md)
   tests/                acceptance tests (given; do not weaken them)
@@ -168,55 +165,53 @@ This closes the open item "How Zetaris reads lake files" in `decisions.md`.
   a CIK outside the universe, through the REST table registered in D1. `CACHE TABLE` first; the
   first call can take about 50 s.
 
-### D4 · LLM provider chain (`meterless/llm.py`)
+### D4 · Hosted LLMs on NVIDIA NIM (`meterless/llm.py`)
 
-- Implement `read_token`, `runtime_status`, `cassette_key`, `Cassette`, `ChainClient` and
-  `build_routes_from_env`.
-- **The local model is fixed and runs on the lead's laptop in Europe** (RTX 4060, 8 GB VRAM):
-  `D:\AI_Models\omnicoder-9b-q4_k_m.gguf`.
-  - It is a Qwen3.5-family 9B (hybrid attention + state-space), quantised Q4_K_M, 5.7 GB.
-  - Its GGUF chat template supports thinking (`enable_thinking`).
-  - It already runs on that laptop with llama.cpp's `llama-server`.
-  - It serves the `extractor` and `guard` roles.
-- **Preferred route: Meterless Nightshift serves this GGUF**, so these calls really go through the
-  sponsor. Find out from the Meterless docs and Discord how Nightshift loads a custom GGUF, and how
-  to route `meterless/fast` (or `meterless/local`) to it.
-  - Nightshift's installer stops every running `llama-server.exe`, so the two cannot run at the
-    same time.
-  - Ask the lead whether participants get a Nightshift licence.
-- **Fallback route, only if Nightshift cannot load it:** the lead runs `llama-server` with the
-  GGUF. You add an optional `local` provider to `build_routes_from_env`, configured by
-  `LOCAL_LLM_BASE_URL` and `LOCAL_LLM_MODEL`, with no API key.
-  - Its traces must name the provider honestly as `local-llama.cpp`.
-  - In this case Meterless carries load through the engines (D5), and `docs/sponsors.md` must say
-    so plainly.
-- **Thinking must be off for these roles.** Small thinking models can spin without answering.
-  - Disable thinking per request: `extra_body={"chat_template_kwargs": {"enable_thinking": false}}`,
-    or the server-side equivalent.
-  - As a safety net, strip any leftover `<think>…</think>` block from the reply text in `llm.py`
-    before returning it. Add a unit test for that.
-- Context window: the documents sent are up to about 30 000 characters, so a 16k-token context is
-  enough. Do not ask for the full 262k context; it will not fit in 8 GB.
-- **Write `integrations/meterless/SETUP.md`** so the lead can follow it without help:
-  - both routes, with the exact commands
-  - for the fallback: the `llama-server` flags for GPU offload, a 16k context, Jinja chat
-    templates and disabled thinking
-  - which `.env` variables to set
-- **Write the live smoke test** (`network` marker). The lead runs it and sends you the output:
-  - `runtime_status` is `online` (preferred route), or the local endpoint answers (fallback)
-  - one extractor request on a short sample filing returns valid JSON with no `<think>` text
-- NIM is hosted, so test it yourself with both the analyst and the skeptic model. They must be
-  **different model families**; propose them to the lead. The lead will use their own NIM key,
-  so no keys are exchanged.
-- **Cassette recording happens on the lead's laptop**, because the extractor role is local.
-  Prepare the exact commands; the lead runs them once A's `data/sample/` is merged:
-  - record: `SAMPLE_MODE=true RECORD_LLM=true py -3 run.py --as-of <sample as_of> --pools us_equity eu_equity crypto`
-  - verify offline: the same command with `RECORD_LLM=false`. Its warnings must not mention
-    "model answer was unavailable".
-  - The resulting `data/sample/llm_cassette.jsonl` and `data/sample/extraction_cache.jsonl` hold
-    no secrets and are committed.
+The chain code is merged. `build_routes_from_env` maps every role to NIM:
+
+| role | model setting |
+|---|---|
+| `extractor`, `guard` | `NIM_EXTRACTOR_MODEL` (falls back to `NIM_ANALYST_MODEL`) |
+| `analyst` | `NIM_ANALYST_MODEL` |
+| `skeptic` | `NIM_SKEPTIC_MODEL` |
+
+Steps:
+
+1. Get a key at build.nvidia.com and keep it only in your local `.env`.
+2. Choose three hosted chat models from the NIM catalogue and send the choice to the lead
+   **before** recording. The skeptic must be from a **different model family** than the analyst.
+   - extractor and guard: a mid-size, fast instruct model that follows "reply with JSON only"
+     reliably
+   - analyst: a strong reasoning-capable instruct model
+   - skeptic: a strong model from a different family
+   - Prefer models whose replies contain no visible `<think>` blocks. If a model emits them, add a
+     small `strip_thinking()` step in `llm.py` with a unit test.
+3. Write `integrations/tests/test_live_llm.py` (`@pytest.mark.network`):
+   - one extractor call on a short sample filing returns parseable JSON whose quote passes
+     `grounding_problems`
+   - one analyst call returns parseable JSON
+   - one skeptic call returns parseable JSON
+   Paste the output in the PR.
+4. **Record the cassette** (judges replay it offline), as soon as A's `data/sample/` is on `main`:
+
+   ```
+   SAMPLE_MODE=true RECORD_LLM=true  py -3 run.py --as-of <sample as_of> --pools us_equity eu_equity crypto
+   SAMPLE_MODE=true RECORD_LLM=false py -3 run.py --as-of <same date>   --pools us_equity eu_equity crypto
+   ```
+
+   - The second command must run with the network disabled, and its warnings must not mention
+     "model answer was unavailable".
+   - Use the same `--as-of` both times; different prompts would miss the cassette.
+   - Commit `data/sample/llm_cassette.jsonl` and `data/sample/extraction_cache.jsonl` (model text
+     only, no secrets) in a PR.
+5. The Meterless Runtime route (Nightshift) stays in the code as an **optional, off-by-default**
+   path. Do not spend time on it.
 
 ### D5 · Engines sidecar (`engines/`, `meterless/engines_client.py`)
+
+**This is where Meterless carries its load** (decision D18): the World Model holds the validated
+relation graph and events with `as_of` snapshots, and H-MEM stores every recommendation and settles
+it later, with conflict detection. Treat it as a core deliverable, not an extra.
 
 - Vendor the reference implementations of **World Model** and **H-MEM** from the Meterless repo
   into `engines/vendor/`, with LICENSE and a NOTICE naming the source commit.
@@ -227,7 +222,8 @@ This closes the open item "How Zetaris reads lake files" in `decisions.md`.
 - `npm test` runs a smoke test that ingests 2 edges and 1 event, then checks that the snapshot
   filters by `as_of` and that H-MEM conflict detection fires on two contradicting records.
 - Implement `EnginesClient` (Python) to make the given tests pass.
-- Add a `Dockerfile` for the sidecar. It must run in two places:
+- Add a `Dockerfile` for the sidecar (small memory footprint: the local Docker budget is 5.6 GB in
+  total). It must run in two places:
   - **locally**, through docker-compose. Judges and SAMPLE_MODE use this, and no token is needed on
     `127.0.0.1`.
   - **on AWS** behind the HTTPS proxy from D0, as the team's shared instance. There,

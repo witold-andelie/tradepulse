@@ -27,11 +27,12 @@ cd integrations/engines && npm test && npm run conformance   # both exit 0
 - [ ] D3: `test_parity.py` shows equal `rows_sha256` on both back ends for every template. The
   recorded response fixture contains no token or org id. The on-demand EDGAR lookup works for one
   ticker outside the universe.
-- [ ] D4: `SETUP.md` lets the lead install Nightshift without help. `runtime_status` returns
-  `online` on the lead's laptop (the lead runs the smoke test and shares the output).
-  - [ ] One extractor call ran through Meterless and one analyst call through NIM; trace excerpts
-    are pasted.
-  - [ ] The cassette replays the sample inputs with the network disabled.
+- [ ] D4: the three NIM models were agreed with the lead (the skeptic is from a different family
+  than the analyst).
+  - [ ] `test_live_llm.py` passes for extractor, analyst and skeptic; the output is pasted.
+  - [ ] `data/sample/llm_cassette.jsonl` and `extraction_cache.jsonl` are committed. With the
+    network disabled, a SAMPLE_MODE run of the same `--as-of` prints no "model answer was
+    unavailable" warning.
 - [ ] D5:
   - [ ] the conformance suites for World Model and H-MEM are green against the vendored engines
   - [ ] the smoke test is green

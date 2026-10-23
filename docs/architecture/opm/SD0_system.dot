@@ -18,7 +18,7 @@ digraph SD0 {
              label="Public Data Providers\n(Yahoo Finance, SEC EDGAR,\nWikimedia, FRED)"];
   zetaris   [shape=box, style="filled,dashed", color="#7a3db8", fillcolor="#f3e8ff", label="Zetaris\n(federated query)"];
   meterless [shape=box, style="filled,dashed", color="#7a3db8", fillcolor="#f3e8ff",
-             label="Meterless\n(Runtime, World Model, H-MEM)"];
+             label="Meterless\n(World Model, H-MEM engines)"];
   nim       [shape=box, style="filled,dashed", color="#7a3db8", fillcolor="#f3e8ff", label="NVIDIA NIM\n(hosted LLMs)"];
 
   // ---------- processes ----------

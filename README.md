@@ -16,7 +16,7 @@ re-checks against the data. When the evidence is weak, it says so and abstains.
 > and gives no investment advice.
 
 Built for the Open Agent Hackathon 2026, on **Zetaris** (federated data layer), **Meterless**
-(local runtime, World Model, H-MEM) and **NVIDIA NIM** (hosted models).
+(World Model and H-MEM engines) and **NVIDIA NIM** (hosted models for every LLM role).
 
 ## Status
 
@@ -53,7 +53,7 @@ The full model is written in OPM (Object-Process Methodology) as Graphviz DOT:
 | `ingest/` | data acquisition → `data/lake/`, sample snapshot → `data/sample/` | Member A |
 | `web/` | React app | Member B |
 | `quant/` | pure quant functions | Member C |
-| `integrations/` | Zetaris query layer, Meterless runtime and engines sidecar, NVIDIA NIM chain | Member D |
+| `integrations/` | Zetaris query layer, Meterless engines sidecar, NVIDIA NIM chain | Member D |
 
 Every member folder has a `TASK.md` (what to build), an `ACCEPTANCE.md` (definition of done) and an
 `AGENTS.md` (rules for AI coding assistants).

@@ -4,8 +4,8 @@ OPL is the text twin of the OPM diagrams. Every sentence below corresponds to on
 `.dot` file in this folder. If a diagram and this file disagree, fix both in the same PR.
 
 Owner tags: **[core]** team lead · **[A]** `ingest/` · **[B]** `web/` · **[C]** `quant/` ·
-**[D]** `integrations/`. Every sponsor instrument (Zetaris / DuckDB adapter, Meterless Runtime, World
-Model, H-MEM, NVIDIA NIM chain) is implemented by **[D]**.
+**[D]** `integrations/`. Every sponsor instrument (Zetaris / DuckDB adapter, World Model, H-MEM,
+NVIDIA NIM chain) is implemented by **[D]**.
 
 ## SD0 · System diagram (`SD0_system.dot`)
 
@@ -13,7 +13,7 @@ Model, H-MEM, NVIDIA NIM chain) is implemented by **[D]**.
 - **Customer** handles **Requesting**. **Requesting** requires **Web App** and yields **Analysis Request**. [B]
 - **Acquiring** requires **Public Data Providers** and affects **Market Data Lake**. [A]
 - **Recommending** consumes **Analysis Request**. [core]
-- **Recommending** requires **Market Data Lake**, **Zetaris**, **Meterless** and **NVIDIA NIM**.
+- **Recommending** requires **Market Data Lake**, **Zetaris**, **Meterless** (World Model and H-MEM engines) and **NVIDIA NIM** (every LLM role, decision D18).
 - **Recommending** yields **Recommendation Report** and **Trace Log**, and affects **Track Record**.
 - **Customer** handles **Browsing**. **Browsing** requires **Web App**, **Recommendation Report**,
   **Track Record** and **Trace Log**. [B]
@@ -25,10 +25,10 @@ Model, H-MEM, NVIDIA NIM chain) is implemented by **[D]**.
 in that sequence.
 
 - **Guarding Request** affects **Analysis Request** from *raw* to *validated* or *rejected*, and
-  requires **Meterless Runtime**. A request to place, route or size real orders is rejected.
+  requires **NVIDIA NIM** (guard role). A request to place, route or size real orders is rejected.
 - **Settling** changes **Recommendation Memory** from *pending* to *settled*, requires
   **Market Data Lake** and affects **Track Record**. (SD1.2)
-- **Extracting & Linking** requires **Market Data Lake** and **Meterless Runtime**, yields
+- **Extracting & Linking** requires **Market Data Lake** and **NVIDIA NIM**, yields
   **Structured Events** and affects **Relation Graph**. (SD1.3)
 - **Researching Factors** requires **Market Data Lake**, **Structured Events**, **Relation Graph** and
   **Zetaris / DuckDB**, and yields **Factor Panel** and **Factor Cards**. (SD1.4)
@@ -54,12 +54,12 @@ in that sequence.
 
 - **Selecting New Documents** requires **Filing Texts** and **Extraction Cache**. Documents whose
   sha256 is already cached are skipped.
-- **Extracting Events** requires **Meterless Runtime** and yields **Structured Event** in state *raw*.
+- **Extracting Events** requires **NVIDIA NIM** (extractor role) and yields **Structured Event** in state *raw*.
 - **Grounding Check** changes **Structured Event** from *raw* to *validated* or *rejected*. It is
   deterministic: the JSON matches the schema, every quoted span occurs verbatim in the document,
   and `available_at` is not earlier than the document's own timestamp.
   **Grounding Check** invokes **Extracting Events** once more when the event is rejected.
-- **Proposing Edges** requires validated **Structured Events** and **Meterless Runtime**, and yields
+- **Proposing Edges** requires validated **Structured Events** and **NVIDIA NIM**, and yields
   **Candidate Edge** in state *proposed*.
 - **Validating Edges** requires **Price Bars** and **Lead-Lag Test**, and changes **Candidate Edge**
   to *validated* or *rejected*. It invokes **Proposing Edges** again with the rejection reasons

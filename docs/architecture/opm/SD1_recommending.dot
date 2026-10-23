@@ -29,7 +29,7 @@ digraph SD1 {
   track    [shape=box, label="Track Record"];
   trace    [shape=box, label="Trace Log"];
   zetaris  [shape=box, style="filled,dashed", color="#7a3db8", fillcolor="#f3e8ff", label="Zetaris / DuckDB\n(query adapter)"];
-  runtime  [shape=box, style="filled,dashed", color="#7a3db8", fillcolor="#f3e8ff", label="Meterless Runtime\n(local 8B)"];
+  runtime  [shape=box, style="filled,dashed", color="#7a3db8", fillcolor="#f3e8ff", label="NVIDIA NIM\n(extractor + guard roles)"];
   nim      [shape=box, style="filled,dashed", color="#7a3db8", fillcolor="#f3e8ff", label="NVIDIA NIM"];
 
   // ---------- the in-zoomed process ----------

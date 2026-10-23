@@ -9,7 +9,7 @@ digraph SD1_3 {
   prices  [shape=box, fillcolor="#cfe2ff", label="Price Bars"];
   cache   [shape=box, label="Extraction Cache\n(keyed by doc sha256)"];
   seeds   [shape=box, label="Seed Edges\n(config/graph/seed_edges.csv)"];
-  runtime [shape=box, style="filled,dashed", color="#7a3db8", fillcolor="#f3e8ff", label="Meterless Runtime\n(local 8B, extractor role)"];
+  runtime [shape=box, style="filled,dashed", color="#7a3db8", fillcolor="#f3e8ff", label="NVIDIA NIM\n(extractor role)"];
   wm      [shape=box, style="filled,dashed", color="#7a3db8", fillcolor="#f3e8ff", label="Relation Graph\n(Meterless World Model)"];
   ev [shape=plain, style="", label=<
     <TABLE BORDER="1" CELLBORDER="1" CELLSPACING="4" CELLPADDING="3" BGCOLOR="#e6e6e6">

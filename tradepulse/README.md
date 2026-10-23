@@ -13,7 +13,7 @@ Planned modules, mapped to OPM processes (`docs/architecture/opm/`):
 |---|---|---|
 | `trace.py` | every process → Trace Log | JSONL `logs/trace-<run_id>.jsonl` plus stdout. Each event matches `$defs/TraceEvent`. |
 | *(Member D)* `integrations/zetaris/` | instrument "Zetaris / DuckDB" | `make_adapter(sample_mode)`, then `.run(template, params)`, which returns a `QueryResult` with `rows_sha256`. The core only calls this. |
-| *(Member D)* `integrations/meterless/llm.py` | instruments "Meterless Runtime", "NVIDIA NIM" | `ChainClient.complete(role, messages, schema)` with the roles extractor, guard, analyst and skeptic, plus a record/replay cassette. |
+| *(Member D)* `integrations/meterless/llm.py` | instrument "NVIDIA NIM" (every LLM role, D18) | `ChainClient.complete(role, messages, schema)` with the roles extractor, guard, analyst and skeptic, plus a record/replay cassette. |
 | *(Member D)* `integrations/meterless/engines_client.py` + `integrations/engines/` | "World Model", "H-MEM" | `EnginesClient` over the Node sidecar that hosts the official reference engines. |
 | `guard.py` | SD1 · Guarding Request | Schema check, order-execution intent rejected, prompt-injection screen on free text. |
 | `extract/` | SD1.3 | Extractor prompt and schema (`$defs/ExtractedEvent`), the deterministic grounding check, a sha256 cache. |

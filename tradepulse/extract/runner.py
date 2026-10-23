@@ -1,6 +1,6 @@
 """SD1.3 steps 1-3: run the LLM extractor over filing texts, keep only grounded events, cache them.
 
-The document text is untrusted DATA. The LLM (Meterless Runtime, extractor role) proposes events;
+The document text is untrusted DATA. The LLM (NVIDIA NIM, extractor role) proposes events;
 tradepulse.extract.grounding decides which survive. One retry with the problems listed is allowed.
 """
 

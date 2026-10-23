@@ -18,8 +18,8 @@
 <!-- request -->
 <g id="node1" class="node">
 <title>request</title>
-<polygon fill="#e6e6e6" stroke="black" points="1009.18,-1062.08 909.93,-1062.08 909.93,-1026.08 1009.18,-1026.08 1009.18,-1062.08"/>
-<text xml:space="preserve" text-anchor="middle" x="959.55" y="-1040.38" font-family="Helvetica,sans-Serif" font-size="11.00">Analysis Request</text>
+<polygon fill="#e6e6e6" stroke="black" points="1015.18,-1062.08 915.93,-1062.08 915.93,-1026.08 1015.18,-1026.08 1015.18,-1062.08"/>
+<text xml:space="preserve" text-anchor="middle" x="965.55" y="-1040.38" font-family="Helvetica,sans-Serif" font-size="11.00">Analysis Request</text>
 </g>
 <!-- guarding -->
 <g id="node18" class="node">
@@ -30,10 +30,10 @@
 <!-- request&#45;&gt;guarding -->
 <g id="edge8" class="edge">
 <title>request&#45;&gt;guarding</title>
-<path fill="none" stroke="black" d="M898.91,-1027.16C827.58,-1008.43 709.96,-977.55 639.41,-959.03"/>
-<polygon fill="black" stroke="black" points="897.59,-1030.43 908.15,-1029.59 899.37,-1023.66 897.59,-1030.43"/>
-<polygon fill="black" stroke="black" points="640.53,-955.71 629.97,-956.55 638.75,-962.48 640.53,-955.71"/>
-<text xml:space="preserve" text-anchor="middle" x="864.77" y="-1001.53" font-family="Helvetica,sans-Serif" font-size="9.00">validated / rejected</text>
+<path fill="none" stroke="black" d="M904.74,-1027.37C832.25,-1008.63 711.88,-977.52 639.99,-958.94"/>
+<polygon fill="black" stroke="black" points="903.59,-1030.68 914.15,-1029.8 905.34,-1023.91 903.59,-1030.68"/>
+<polygon fill="black" stroke="black" points="640.91,-955.56 630.35,-956.45 639.16,-962.34 640.91,-955.56"/>
+<text xml:space="preserve" text-anchor="middle" x="868.66" y="-1001.53" font-family="Helvetica,sans-Serif" font-size="9.00">validated / rejected</text>
 </g>
 <!-- ranking -->
 <g id="node23" class="node">
@@ -44,7 +44,7 @@
 <!-- request&#45;&gt;ranking -->
 <g id="edge29" class="edge">
 <title>request&#45;&gt;ranking</title>
-<path fill="none" stroke="black" d="M1009.4,-1037.86C1064.49,-1029.01 1145.55,-1005.47 1145.55,-943.58 1145.55,-943.58 1145.55,-943.58 1145.55,-483.08 1145.55,-431.2 766.63,-412.99 629.41,-408.09"/>
+<path fill="none" stroke="black" d="M1015.21,-1037.07C1068.49,-1027.53 1145.55,-1003.39 1145.55,-943.58 1145.55,-943.58 1145.55,-943.58 1145.55,-483.08 1145.55,-431.2 766.63,-412.99 629.41,-408.09"/>
 <ellipse fill="none" stroke="black" cx="625.23" cy="-407.95" rx="4" ry="4"/>
 </g>
 <!-- lake -->
@@ -288,9 +288,9 @@
 <!-- runtime -->
 <g id="node16" class="node">
 <title>runtime</title>
-<polygon fill="#f3e8ff" stroke="#7a3db8" stroke-dasharray="5,2" points="737.55,-1062.08 631.55,-1062.08 631.55,-1026.08 737.55,-1026.08 737.55,-1062.08"/>
-<text xml:space="preserve" text-anchor="middle" x="684.55" y="-1047.13" font-family="Helvetica,sans-Serif" font-size="11.00">Meterless Runtime</text>
-<text xml:space="preserve" text-anchor="middle" x="684.55" y="-1033.63" font-family="Helvetica,sans-Serif" font-size="11.00">(local 8B)</text>
+<polygon fill="#f3e8ff" stroke="#7a3db8" stroke-dasharray="5,2" points="750.68,-1062.08 618.43,-1062.08 618.43,-1026.08 750.68,-1026.08 750.68,-1062.08"/>
+<text xml:space="preserve" text-anchor="middle" x="684.55" y="-1047.13" font-family="Helvetica,sans-Serif" font-size="11.00">NVIDIA NIM</text>
+<text xml:space="preserve" text-anchor="middle" x="684.55" y="-1033.63" font-family="Helvetica,sans-Serif" font-size="11.00">(extractor + guard roles)</text>
 </g>
 <!-- runtime&#45;&gt;guarding -->
 <g id="edge9" class="edge">

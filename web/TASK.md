@@ -1,5 +1,25 @@
 # Member B — Web app (`web/`)
 
+> **Status (2026-10-23): the base is done and merged** (B1 helpers, B2 data access and hooks,
+> B3 layout and routes, shared components, site-wide accessibility). Every route already renders
+> an honest placeholder page wired to real data. Replace the placeholders:
+> - **Huyin:** `LeaderboardPage({ run, pool })`, `TickerPage({ run, pool, symbol })`,
+>   `FactorLabPage({ factorCards })` (B4–B6), then B10.
+> - **Tanhao:** `RegimePage({ regimes })`, `TrackRecordPage({ trackRecord })`,
+>   `RunTracePage({ events })` (B7–B9).
+>
+> Wrap each page in `<Page title="...">`. It already renders the data-mode banner, the `<h1>`
+> (focused on navigation), the Run notes and the footer, so pages only add their own content.
+> **Every chart uses `src/components/ChartFigure.jsx`**, with these props:
+> - `title`
+> - `summary`: a sentence computed from the data
+> - `option`: the ECharts option
+> - `columns` and `rows`: the table view
+> - `height` and `onEvents`, optional
+>
+> That gives you the accessibility requirements for charts for free.
+> Run `npm install` once. On this team's machines, set `npm_config_cache` to a folder on D:.
+
 You build what customers and judges actually **see**: a ranked list of hundreds of stocks and coins,
 an explanation for each one, and the evidence that the engine is honest. The whole app is built
 against the **contract fixtures**. You do not need the engine running; the data has the same
@@ -103,13 +123,14 @@ against the names below, so neither has to wait for the other.
 
 | piece | file | contract |
 |---|---|---|
-| run data hook | `src/api/useRunOutput.js` | `useRunOutput()` → `{ data, error, loading, reload }`. `data` is a RunOutput. |
+| run data hook | `src/api/useRunOutput.js` | `useRunOutput()` → `{ data, error, loading, reload }` (named export; needs `RunOutputProvider`, already in `App.jsx`). `data` is a RunOutput. |
 | trace hook | `src/api/useTrace.js` | `useTrace(runId)` → `{ events, error, loading }`. `events` is a list of TraceEvent. |
 | page wrapper | `src/components/Page.jsx` | `<Page title>` renders the data-mode banner, the title, `children`, the run notes and the disclaimer footer. |
 | badge | `src/components/Badge.jsx` | `<Badge tone label />`. `tone` is one of the values `tierTone()` returns, plus `"info"` and `"warning"`. It always shows the text label. |
 | card | `src/components/Card.jsx` | `<Card title>` → a white rounded panel. |
 | empty or error state | `src/components/State.jsx` | `<Loading />` and `<ErrorState message onRetry />`. |
-| pages | `src/pages/*.jsx` | Each page is a component that takes its data as props, e.g. `RegimePage({ regimes })`. The router wraps it with the hook. |
+| pages | `src/pages/*.jsx` | Each page is a component that takes its data as props (signatures in the status box above). The router in `App.jsx` wraps it with the hook. |
+| chart | `src/components/ChartFigure.jsx` | `<ChartFigure title summary option columns rows />`: data-derived summary, ECharts ARIA and decal patterns, reduced motion, "Show data as table". |
 
 B merges B1, B2, B3 and these shared components **first**. Until then, C may develop with the
 fixture imported directly and switch to the hook when it lands.

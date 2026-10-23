@@ -31,11 +31,23 @@ def _validate_all(as_of: dt.date | None) -> int:
 
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(prog="ingest", description="Build the TradePulse data lake.")
-    parser.add_argument("command", choices=["universe", "prices", "pageviews", "filings", "texts",
-                                            "macro", "validate", "sample", "all"])
+    parser.add_argument(
+        "command",
+        choices=[
+            "universe",
+            "prices",
+            "pageviews",
+            "filings",
+            "texts",
+            "macro",
+            "validate",
+            "sample",
+            "all",
+        ],
+    )
     parser.add_argument("--as-of", type=dt.date.fromisoformat, default=None)
     args = parser.parse_args(argv)
-    as_of = args.as_of or dt.date.today()
+    as_of = args.as_of or dt.datetime.now(dt.timezone.utc).date()
 
     from ingest import edgar, macro, pageviews, prices, sample, universe
 
@@ -50,7 +62,7 @@ def main(argv: list[str] | None = None) -> int:
     if args.command == "validate":
         return _validate_all(args.as_of)
     if args.command == "sample":
-        print(sample.cut_sample())
+        print(sample.cut_sample(showcase_symbols=edgar.showcase_symbols()))
         return 0
     order = list(steps) if args.command == "all" else [args.command]
     for step in order:

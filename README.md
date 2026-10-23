@@ -76,9 +76,9 @@ docker compose up --build
 ```
 
 Open http://localhost:8080. `SAMPLE_MODE=true` by default; no credentials are needed.
-The core is limited to 3 GB of memory and the web server to 256 MB, fitting Docker Desktop
-with 6 GB or less allocated, including this machine's 5.6 GB total Docker budget.
-Zetaris runs on AWS, not locally.
+The core is limited to 3 GB of memory and the web server to 256 MB, so it fits Docker Desktop
+with 4 GB or more allocated. Zetaris is not part of the local stack: SAMPLE_MODE reads the
+committed snapshot through DuckDB, and live mode connects to the team's hosted Zetaris instance.
 
 ## License
 

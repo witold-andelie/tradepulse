@@ -20,10 +20,14 @@ from tradepulse import ranking, report
 from tradepulse.agents.explain import Explainer
 from tradepulse.config import load_config
 from tradepulse.contracts import REPO_ROOT
+from tradepulse.extract.grounding import ExtractionCache
+from tradepulse.extract.runner import run_extraction
 from tradepulse.ports import LLMPort, QueryPort
 from tradepulse.regime_inputs import assess
 from tradepulse.research.evaluate import composite_ic, research_pool
 from tradepulse.research.panels import build_pool_panels
+from tradepulse.research.signals import (EPS_TAG, demand_panel, event_drift_panel, event_priors,
+                                         spillover_panel, sue_panel, validate_edges)
 from tradepulse.trace import Tracer
 
 SAMPLE_ROOT = REPO_ROOT / "data" / "sample"
@@ -73,9 +77,7 @@ def _load_reference(query: QueryPort, start: str, end: str) -> tuple[pd.DataFram
     return reference, hy
 
 
-def _rank_pool(pool: str, cfg: dict, query: QueryPort, start: str, window_start: str, as_of: str,
-               reference: pd.DataFrame, hy: pd.Series | None, tracer: Tracer, warnings: list[str]) -> dict:
-    pool_cfg = cfg["pools"][pool]
+def _load_pool(pool: str, query: QueryPort, start: str, as_of: str, tracer: Tracer, warnings: list[str]) -> dict:
     with tracer.span(f"load:{pool}"):
         universe = query.run("universe_pool", {"pool": pool}).df.set_index("symbol")
         bars = query.run("price_pool_window", {"pool": pool, "start": start, "end": as_of}).df
@@ -86,10 +88,80 @@ def _rank_pool(pool: str, cfg: dict, query: QueryPort, start: str, window_start:
     views = _wide(views_df, "views").reindex_like(prices) if not views_df.empty else None
     if views is None:
         warnings.append(f"{pool}: no pageview data; att_pageviews not evaluated")
+    return {"pool": pool, "universe": universe, "prices": prices, "volume": volume, "views": views}
+
+
+def _empty(index: pd.DatetimeIndex, symbols: list[str]) -> pd.DataFrame:
+    return pd.DataFrame(np.nan, index=index, columns=symbols)
+
+
+def _signal_panels(cfg: dict, query: QueryPort, llm: LLMPort, loaded: list[dict], reference: pd.DataFrame,
+                   window_start: str, as_of: str, cache_path: Path, tracer: Tracer,
+                   warnings: list[str]) -> dict[str, dict[str, pd.DataFrame]]:
+    """Raw extra panels per pool: filing-based factors (US only) and relational spillover (all pools).
+    Pools without a source still get all-NaN panels, so their cards honestly read INSUFFICIENT_DATA."""
+    combined = pd.concat([d["prices"] for d in loaded] + [reference], axis=1)
+    combined = combined.loc[:, ~combined.columns.duplicated()].sort_index().ffill(limit=3)
+    extras: dict[str, dict[str, pd.DataFrame]] = {}
+    spy = reference["SPY"].reindex(combined.index).ffill(limit=3) if "SPY" in reference else None
+    if spy is None:
+        warnings.append("SPY reference prices missing; relational and event factors are empty.")
+
+    edges: list[dict] = []
+    if spy is not None:
+        with tracer.span("graph", "validating seed edges"):
+            seeds = pd.read_csv(REPO_ROOT / "config" / "graph" / "seed_edges.csv")
+            edges = validate_edges(seeds, combined, spy, train_start=window_start, train_end=as_of, as_of=as_of)
+            validated = sum(e["status"] == "validated" for e in edges)
+            tracer.event("graph", "info", message=f"{validated}/{len(edges)} seed edges validated",
+                         payload={"edges": [{"src": e["src_symbol"], "dst": e["dst_symbol"], "status": e["status"],
+                                             "t": e["lead_lag_t"]} for e in edges]})
+        warnings.append("Graph edges are validated on the same window they are used in (in-sample).")
+
+    events: list[dict] = []
+    if spy is not None and any(d["pool"] == "us_equity" for d in loaded):
+        with tracer.span("extract", "filing texts"):
+            try:
+                docs = query.run("filing_texts_window", {"start": window_start, "end": as_of}).df
+                result = run_extraction(docs, llm, ExtractionCache(cache_path),
+                                        max_docs=cfg["extract"]["max_docs_per_run"], tracer=tracer)
+                events = result["events"]
+                tracer.event("extract", "info", message=f"{len(events)} grounded events",
+                             payload={k: result[k] for k in ("processed", "cached", "skipped", "rejected_problems")})
+            except Exception as exc:  # missing table or extractor unavailable: the factors stay empty
+                warnings.append(f"Event extraction unavailable ({type(exc).__name__}); event factors are empty.")
+
+    for d in loaded:
+        pool, prices = d["pool"], d["prices"]
+        symbols, index = list(prices.columns), prices.index
+        extra = {name: _empty(index, symbols) for name in ("rel_spillover", "earn_sue", "evt_drift",
+                                                           "earn_demand_language")}
+        if spy is not None:
+            extra["rel_spillover"] = spillover_panel(combined, spy, edges, symbols, index)
+        if pool == "us_equity" and spy is not None:
+            try:
+                facts = query.run("facts_tag_window", {"tag": EPS_TAG, "end": as_of}).df
+                extra["earn_sue"] = sue_panel(facts, index, symbols)
+            except Exception as exc:
+                warnings.append(f"Fundamental facts unavailable ({type(exc).__name__}); earn_sue is empty.")
+            if events:
+                priors = event_priors(events, prices, spy.reindex(index), train_end=as_of)
+                extra["evt_drift"] = event_drift_panel(events, index, symbols, priors)
+                extra["earn_demand_language"] = demand_panel(events, index, symbols)
+                warnings.append("Event priors are estimated on the research window (in-sample).")
+        extras[pool] = extra
+    return extras
+
+
+def _rank_pool(data: dict, extra: dict[str, pd.DataFrame], cfg: dict, window_start: str, as_of: str,
+               reference: pd.DataFrame, hy: pd.Series | None, tracer: Tracer, warnings: list[str]) -> dict:
+    pool, universe, prices = data["pool"], data["universe"], data["prices"]
+    pool_cfg = cfg["pools"][pool]
     groups = universe["sector"] if pool_cfg["sector_neutral"] else None
 
     with tracer.span(f"research:{pool}"):
-        panels = build_pool_panels(prices, volume, views, groups, pool_cfg, cfg["factors"])
+        panels = build_pool_panels(prices, data["volume"], data["views"], groups, pool_cfg, cfg["factors"],
+                                   extra=extra)
         research = research_pool(pool, panels, prices, cfg, (window_start, as_of))
         window_prices = prices.loc[window_start:as_of]
         ic_comp = composite_ic({f: p.loc[window_start:as_of] for f, p in panels.items()}, research["weights"],
@@ -137,11 +209,14 @@ def run_pipeline(request: dict, *, query: QueryPort | None = None, llm: LLMPort 
     data_mode = "REPLAY" if is_sample else "REAL"
     tracer = Tracer(run_id, data_mode, log_dir=log_dir or REPO_ROOT / "logs")
     tracer.event("run", "info", message=f"run {run_id} as_of {as_of}", payload={"request": request})
-    warnings: list[str] = ["Valuation constraint and filing-based factors are not wired into this run yet."]
+    warnings: list[str] = ["The valuation constraint is not applied in this run."]
 
     reference, hy = _load_reference(query, start, as_of)
-    pools = [_rank_pool(p, cfg, query, start, window_start, as_of, reference, hy, tracer, warnings)
-             for p in request["pools"]]
+    loaded = [_load_pool(p, query, start, as_of, tracer, warnings) for p in request["pools"]]
+    cache_path = (SAMPLE_ROOT if is_sample else REPO_ROOT / "data" / "cache") / "extraction_cache.jsonl"
+    extras = _signal_panels(cfg, query, llm, loaded, reference, window_start, as_of, cache_path, tracer, warnings)
+    pools = [_rank_pool(d, extras[d["pool"]], cfg, window_start, as_of, reference, hy, tracer, warnings)
+             for d in loaded]
 
     items = []
     for p in pools:

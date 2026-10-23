@@ -1,6 +1,7 @@
 """End-to-end: run_pipeline on a synthetic lake through fake ports (no network, no sponsors)."""
 
 import hashlib
+from pathlib import Path
 import json
 import re
 from types import SimpleNamespace
@@ -13,6 +14,7 @@ from tradepulse.contracts import validate_payload
 from tradepulse.pipeline import run_pipeline
 
 AS_OF = pd.Timestamp("2026-10-21")
+DOC_TEXT = "Q3 results. Demand continues to exceed supply. We raised full-year guidance."
 
 
 def _lake():
@@ -63,6 +65,14 @@ class LakeQuery:
             df = self._between(self.macro, params["start"], params["end"])
         elif template == "filings_symbol_window":
             df = pd.DataFrame(columns=["accession_number", "form", "items", "acceptance_datetime"])
+        elif template == "filing_texts_window":
+            df = pd.DataFrame([{"accession_number": "0000000001-26-000001", "cik": "0000000001", "symbol": "U01",
+                                "document_name": "ex991.htm", "document_type": "EX-99.1", "url": "https://www.sec.gov/x",
+                                "sha256": hashlib.sha256(DOC_TEXT.encode()).hexdigest(), "text": DOC_TEXT,
+                                "char_count": len(DOC_TEXT), "available_at": pd.Timestamp("2026-09-15 20:05", tz="UTC"),
+                                "fetched_at": pd.Timestamp("2026-10-01", tz="UTC")}])
+        elif template == "facts_tag_window":
+            df = pd.DataFrame(columns=["symbol", "tag", "unit", "value", "period_start", "period_end", "filed"])
         else:
             raise KeyError(template)
         df = df.reset_index(drop=True)
@@ -76,6 +86,13 @@ class ScriptedLLM:
 
     def complete(self, role, messages, response_schema=None):
         self.roles.append(role)
+        if role == "extractor":
+            text = json.dumps({"events": [{"event_type": "guidance_raise", "direction": 1, "novelty": "new",
+                                           "quote": "We raised full-year guidance",
+                                           "demand_signals": [{"type": "demand_exceeds_supply", "polarity": 1,
+                                                               "quote": "Demand continues to exceed supply"}]}]})
+            return SimpleNamespace(text=text, provider="fake", model="fake-extractor", tokens_in=1, tokens_out=1,
+                                   cassette_key="0" * 64, replayed=True)
         if role == "analyst":
             sym = re.search(r'"symbol": "([^"]+)"', messages[-1]["content"]).group(1)
             slug = re.sub(r"[^a-z0-9]+", "-", sym.lower()).strip("-")
@@ -94,7 +111,14 @@ def output(tmp_path_factory):
     request = {"as_of": "2026-10-21", "pools": ["us_equity", "crypto"], "tickers": ["U05"], "horizon_days": 5,
                "top_k": 2}
     llm = ScriptedLLM()
-    out = run_pipeline(request, query=LakeQuery(), llm=llm, log_dir=tmp_path_factory.mktemp("logs"))
+    import tradepulse.pipeline as pipeline_module
+    cache_dir = tmp_path_factory.mktemp("cache")
+    original = pipeline_module.SAMPLE_ROOT
+    pipeline_module.SAMPLE_ROOT = cache_dir  # keep the extraction cache out of data/sample
+    try:
+        out = run_pipeline(request, query=LakeQuery(), llm=llm, log_dir=tmp_path_factory.mktemp("logs"))
+    finally:
+        pipeline_module.SAMPLE_ROOT = original
     return out, llm
 
 
@@ -115,7 +139,9 @@ def test_every_member_is_ranked_once(output):
 
 def test_cards_regimes_and_explanations(output):
     out, llm = output
-    assert len(out["factor_cards"]) == 14  # 6 price-volume + attention, per pool
+    assert len(out["factor_cards"]) == 22  # 6 price-volume + attention + 4 signal factors, per pool
+    crypto = {c["factor"]: c for c in out["factor_cards"] if c["pool"] == "crypto"}
+    assert crypto["earn_sue"]["status"] == "INSUFFICIENT_DATA"  # no filings for crypto: said, not hidden
     assert {r["pool"] for r in out["regimes"]} == {"us_equity", "crypto"}
     assert out["explanations"], "focus names must be explained"
     assert all(e["verdict"] == "explained" for e in out["explanations"])
@@ -129,3 +155,13 @@ def test_trace_written(output):
     lines = Path(out["trace_path"]).read_text(encoding="utf-8").splitlines()
     nodes = {json.loads(line)["node"] for line in lines}
     assert {"research:us_equity", "regime:crypto", "explain", "report"} <= nodes
+
+
+def test_extraction_feeds_event_factors(output):
+    out, llm = output
+    assert "extractor" in llm.roles
+    us = {c["factor"]: c for c in out["factor_cards"] if c["pool"] == "us_equity"}
+    assert {"evt_drift", "earn_demand_language", "rel_spillover", "earn_sue"} <= set(us)
+    assert not any("Event extraction unavailable" in w for w in out["warnings"])
+    lines = Path(out["trace_path"]).read_text(encoding="utf-8").splitlines()
+    assert any(json.loads(line)["message"] == "1 grounded events" for line in lines)

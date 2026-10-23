@@ -1,5 +1,31 @@
 # Member D — Sponsor integrations (`integrations/`)
 
+> **Status (2026-10-23): the pure-code parts are being implemented by a coding agent** because the
+> pipeline waits on them. They are tested offline:
+> - `templates.py`
+> - the DuckDB adapter and `rows_sha256` (D2)
+> - `ensure_single_statement` and `coerce_frame`
+> - the registration helpers and CLI
+> - `llm.py` (D4 code)
+> - `EnginesClient`
+>
+> When it is merged you own that code too. **Your work is everything that needs AWS, a live
+> instance or a real model:**
+>
+> 1. **D0** AWS deployment and `ACCESS.md`. The lead must be able to run the smoke test from Europe.
+> 2. **D1** registration SQL files, then run the registration CLI against your instance.
+> 3. **D3** `ZetarisClient` (`from_env`, `execute`, `parse_response` from a recorded real response)
+>    and `ZetarisAdapter`, the parity test, and the on-demand EDGAR lookup.
+> 4. **D4 live:**
+>    - `SETUP.md` for Nightshift; the lead runs it on the lead's GPU laptop.
+>    - The NIM model choice, two different families.
+>    - **Recording the LLM cassette** `data/sample/llm_cassette.jsonl`. Without it, SAMPLE_MODE
+>      cannot replay model answers and judges cannot run the demo. Coordinate with the lead, who
+>      provides the request set.
+> 5. **D5** the Node sidecar: vendored reference engines, `server.ts`, conformance, Docker, and
+>    deployment on AWS behind the token.
+> 6. **D6** the `docs/sponsors.md` draft, with evidence.
+
 You own everything that connects TradePulse to **Zetaris** and **Meterless**:
 
 - the Zetaris deployment, table registration and the query layer

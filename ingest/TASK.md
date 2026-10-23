@@ -1,5 +1,25 @@
 # Member A — Data ingestion (`ingest/`)
 
+> **Status (2026-10-23): the code for A1–A7 and A9 is being implemented by a coding agent** against the
+> acceptance tests in `ingest/tests/`, because the whole pipeline waits on it. When it is merged,
+> **you own the code from then on.** Your work is everything that needs a human, a real network and
+> judgement:
+>
+> 1. **First live run.** Put a real contact e-mail in your `.env` (`SEC_USER_AGENT`,
+>    `WIKIMEDIA_USER_AGENT`), then run `py -3 -m ingest all --as-of <latest trading day>`. Fix every
+>    failure in `ingest/` and open PRs for the fixes.
+> 2. **Data quality.** Read `data/lake/_reports/` and meet every number in `ACCEPTANCE.md`. List each
+>    exception with its reason in your PR.
+> 3. **Crypto universe.** Complete `config/universe/crypto.csv`: Yahoo symbols (some need numeric
+>    suffixes), Wikipedia titles, about 40 assets, no stablecoins or wrapped tokens.
+> 4. **EDGAR timezone check.** Compare 3 filings with their index pages and record the result in your PR.
+> 5. **Sample snapshot (A9).** Run `py -3 -m ingest sample`, check that it is under 25 MB, and commit
+>    `data/sample/`. Judges run the whole product from it.
+> 6. **Upload the lake to S3** using the location and write-only credentials Member D sends you
+>    privately. Never commit them.
+> 7. **News-tone probe** (open item in `docs/architecture/decisions.md`): can GDELT give one year of
+>    tone for 3 tickers? Report yes or no with evidence.
+
 You build the **Market Data Lake**: every table the engine reads. The engine never calls the
 internet itself. If your tables are correct, complete and point-in-time, the whole product works.
 If they are wrong, every ranking is wrong.

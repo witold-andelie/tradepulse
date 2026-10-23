@@ -47,6 +47,28 @@ npm run check:contracts   # validates the fixtures against the schema
 5. **No secrets, no tracking scripts, no external fonts or CDNs.** Everything is bundled.
 6. **English only.**
 
+## Shared interfaces (Member B and Member C build to these)
+
+Member B (Huyin) owns the base: B1–B6 and B10. Member C (Tanhao) owns pages B7–B9. Both build
+against the names below, so neither has to wait for the other.
+
+| piece | file | contract |
+|---|---|---|
+| run data hook | `src/api/useRunOutput.js` | `useRunOutput()` → `{ data, error, loading, reload }`. `data` is a RunOutput. |
+| trace hook | `src/api/useTrace.js` | `useTrace(runId)` → `{ events, error, loading }`. `events` is a list of TraceEvent. |
+| page wrapper | `src/components/Page.jsx` | `<Page title>` renders the data-mode banner, the title, `children`, the run notes and the disclaimer footer. |
+| badge | `src/components/Badge.jsx` | `<Badge tone label />`. `tone` is one of the values `tierTone()` returns, plus `"info"` and `"warning"`. It always shows the text label. |
+| card | `src/components/Card.jsx` | `<Card title>` → a white rounded panel. |
+| empty or error state | `src/components/State.jsx` | `<Loading />` and `<ErrorState message onRetry />`. |
+| pages | `src/pages/*.jsx` | Each page is a component that takes its data as props, e.g. `RegimePage({ regimes })`. The router wraps it with the hook. |
+
+B merges B1, B2, B3 and these shared components **first**. Until then, C may develop with the
+fixture imported directly and switch to the hook when it lands.
+
+**Run notes:** `run.warnings` lists the honest limitations of each run, for example in-sample
+statistics and excluded factors. `Page` shows them as a collapsible "Run notes" panel above the
+footer, collapsed by default and showing the count. Never hide them.
+
 ## Tasks
 
 ### B1 · Helpers (`src/lib/`) — make the given tests green first
@@ -56,8 +78,8 @@ Implement `format.js`, `tiers.js` and `data.js` exactly as their comments say. T
 
 ### B2 · Data access (`src/api/client.js`)
 
-Implement `loadRunOutput`, `loadTrace` and `requestRun` as described in the file. Add a small
-`useRunOutput()` hook that returns `{ data, error, loading }`. Every page uses it. Loading shows a
+Implement `loadRunOutput`, `loadTrace` and `requestRun` as described in the file. Add the
+`useRunOutput()` and `useTrace()` hooks from "Shared interfaces". Every page uses them. Loading shows a
 skeleton; an error shows the message and a Retry button.
 
 ### B3 · Layout and routing

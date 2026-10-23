@@ -1,6 +1,9 @@
+# Docker has a 5.6 GB total memory budget on this machine.
+# Zetaris is NOT run locally; it runs on AWS (see integrations/ACCESS.md).
 services:
   core:
     build: .
+    mem_limit: 3g
     ports:
       - "8000:8000"
     env_file:
@@ -9,3 +12,22 @@ services:
     volumes:
       - ./runs:/app/runs
       - ./logs:/app/logs
+
+  web:
+    build:
+      context: .
+      dockerfile: web/Dockerfile
+    mem_limit: 256m
+    ports:
+      - "8080:80"
+    depends_on:
+      - core
+
+  # Future Meterless sidecar; commented out because it does not exist yet.
+  # engines:
+  #   build:
+  #     context: integrations/engines
+  #   ports:
+  #     - "8790:8790"
+  #   environment:
+  #     ENGINES_TOKEN: ${ENGINES_TOKEN:-} # Optional

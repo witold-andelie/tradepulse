@@ -1,3 +1,27 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+  :focus-visible {
+    @apply outline outline-[3px] outline-offset-2 outline-blue-700;
+  }
+
+  /* Numbers line up in tables and stat rows. */
+  table,
+  .num {
+    font-variant-numeric: tabular-nums;
+  }
+}
+
+/* Honour the operating-system "reduce motion" setting everywhere. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

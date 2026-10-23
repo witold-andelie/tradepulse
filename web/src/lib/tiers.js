@@ -2,13 +2,22 @@
 
 export const TIER_ORDER = ['STRONG_OVERWEIGHT', 'OVERWEIGHT', 'NEUTRAL', 'UNDERWEIGHT', 'AVOID', 'NO_CALL'];
 
+const labels = ['Strong overweight', 'Overweight', 'Neutral', 'Underweight', 'Avoid', 'No call'];
+const tones = ['strong-positive', 'positive', 'neutral', 'negative', 'strong-negative', 'muted'];
+
+function tierIndex(tier) {
+  const index = TIER_ORDER.indexOf(tier);
+  if (index === -1) throw new Error('Unknown research tier');
+  return index;
+}
+
 /**
  * Human label: STRONG_OVERWEIGHT -> "Strong overweight", OVERWEIGHT -> "Overweight",
  * NEUTRAL -> "Neutral", UNDERWEIGHT -> "Underweight", AVOID -> "Avoid", NO_CALL -> "No call".
  * An unknown value throws an Error (a contract violation must be visible, not hidden).
  */
 export function tierLabel(tier) {
-  throw new Error('B1: implement tierLabel');
+  return labels[tierIndex(tier)];
 }
 
 /**
@@ -17,5 +26,5 @@ export function tierLabel(tier) {
  * UNDERWEIGHT -> "negative", AVOID -> "strong-negative", NO_CALL -> "muted". Unknown throws.
  */
 export function tierTone(tier) {
-  throw new Error('B1: implement tierTone');
+  return tones[tierIndex(tier)];
 }

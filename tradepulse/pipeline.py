@@ -47,11 +47,21 @@ def default_ports(is_sample: bool) -> tuple[QueryPort, LLMPort]:
     from integrations.zetaris.adapter import make_adapter
 
     query = make_adapter(is_sample, SAMPLE_ROOT if is_sample else None)
-    if is_sample:
+    if is_sample and record_llm():
+        # Sample data + live models: records the cassette that judges later replay offline.
+        llm = ChainClient(build_routes_from_env(), Cassette(CASSETTE_PATH), mode="record")
+    elif is_sample:
         llm = ChainClient({}, Cassette(CASSETTE_PATH), mode="replay")
     else:
-        llm = ChainClient(build_routes_from_env(), Cassette(CASSETTE_PATH), mode="record")
+        live_cassette = REPO_ROOT / "data" / "cache" / "llm_cassette.jsonl"
+        live_cassette.parent.mkdir(parents=True, exist_ok=True)
+        llm = ChainClient(build_routes_from_env(), Cassette(live_cassette), mode="record")
     return query, llm
+
+
+def record_llm() -> bool:
+    """RECORD_LLM=true with SAMPLE_MODE=true: call live models on the sample data and record them."""
+    return os.getenv("RECORD_LLM", "false").strip().lower() in {"true", "1", "yes", "on"}
 
 
 def _wide(df: pd.DataFrame, column: str) -> pd.DataFrame:
@@ -248,6 +258,9 @@ def run_pipeline(request: dict, *, query: QueryPort | None = None, llm: LLMPort 
                           "n": len(p["book"]), "as_of": as_of, "contributions": row["contributions"]})
     with tracer.span("explain", f"{len(items)} focus names"):
         explained = Explainer(query, llm, max_retries=cfg["explain"]["max_verify_retries"], tracer=tracer).run(items)
+        offline = sum("unavailable" in v["explanation"]["models"].values() for v in explained.values())
+        if offline:
+            warnings.append(f"{offline} explanation(s) abstained because a model answer was unavailable.")
 
     with tracer.span("report"):
         recommendations, summaries = [], []

@@ -131,3 +131,14 @@ def test_parallel_fan_out():
     assert set(out) == {"NVDA", "AMD", "BTC-USD"}
     assert all(r["explanation"]["verdict"] == "explained" for r in out.values())
     assert Explainer(FakeQuery(), ScriptedLLM([])).run([]) == {}
+
+
+def test_unavailable_model_abstains_without_crashing(tmp_path):
+    class Down:
+        def complete(self, role, messages, response_schema=None):
+            raise KeyError("cassette miss")
+    tracer = Tracer("run-explain-02", "REPLAY", log_dir=tmp_path, echo=False)
+    exp = Explainer(FakeQuery(), Down(), tracer=tracer).run([_item()])["NVDA"]["explanation"]
+    assert exp["verdict"] == "abstained" and exp["models"]["analyst"] == "unavailable"
+    assert validate_payload(exp, "Explanation") == []
+    assert any(e["kind"] == "error" and "unavailable" in e["message"] for e in tracer.events())

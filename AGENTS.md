@@ -1,4 +1,4 @@
-# Repository rules for AI coding agents (Cursor, Claude Code, others)
+# Repository rules for AI coding assistants (any tool)
 
 These rules apply everywhere. A folder's own `AGENTS.md` adds rules for that folder.
 

@@ -159,7 +159,11 @@ class Explainer:
             self.tracer.event(f"explain:{item['symbol']}", kind, message=message, **extra)
 
     def _ask(self, item: dict, role: str, messages: list[dict], schema: dict) -> tuple[dict | None, str]:
-        response = self.llm.complete(role, messages, schema)
+        try:
+            response = self.llm.complete(role, messages, schema)
+        except Exception as exc:  # provider down or cassette miss: this name abstains, the run goes on
+            self._trace(item, "error", f"{role} unavailable ({type(exc).__name__})", status="error")
+            return None, "unavailable"
         self._trace(item, "llm_call", f"{role} answered", model=response.model,
                     tokens_in=response.tokens_in, tokens_out=response.tokens_out,
                     payload={"provider": response.provider, "replayed": response.replayed,

@@ -30,7 +30,7 @@ Do not target main with an eventual redesign PR while PR #2 is unmerged. The rev
 - Build: no warnings; largest lazy ChartEngine chunk 627.54 kB (209.94 kB gzip), below the unchanged 1 MB ceiling.
 - Original browser regression: 17/17 groups pass in Pro View, with the original script unmodified.
 - New research/accessibility journeys: 18/18 groups pass in the production build, including both presentations at 1440/768/390/320 CSS pixels, 200% text enlargement, keyboard flow, storage disabled and data parity.
-- Computed accessibility checks: 14 route/view combinations, 5,428 visible text nodes checked; minimum observed text contrast 5.66:1; sampled view-control border contrast 3.35:1; no unnamed controls or inspected effective targets below 24px. This is a focused check, not a conformance audit.
+- Computed accessibility checks: 14 route/view combinations, 5,414 visible text nodes checked; minimum observed text contrast 5.66:1; sampled view-control border contrast 3.35:1; no unnamed controls or inspected effective targets below 24px. This is a focused check, not a conformance audit.
 - Additional local API checks: unavailable API with Retry, REPLAY/REAL modes, contract-valid empty datasets, malformed run rejection and independent trace HTTP failure pass.
 - Browser: Chromium 154.0.8037.57 on Linux. No native screen reader, native 400% zoom or non-Chromium browser was tested. 320 CSS pixels is the equivalent reflow width; see ACCESSIBILITY.md.
 - Final evidence set: 100 genuine PNG captures (33 legacy route captures, 43 new route/reflow captures, 23 full-page/panel/focus captures and one API error capture). These files are kept outside the source tree and have not been uploaded or attached to any PR.

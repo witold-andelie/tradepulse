@@ -378,3 +378,6 @@ h1, h2, h3, h4, p, dt, dd { overflow-wrap: anywhere; }
 .candidate-score { flex-wrap: wrap; }
 .candidate-score dt { min-width: 0; }
 .check-list li > * { max-width: 100%; overflow-wrap: anywhere; }
+/* Keep the skip link available to keyboards without off-screen capture artifacts. */
+.skip-link { opacity: 0; pointer-events: none; }
+.skip-link:focus { opacity: 1; pointer-events: auto; }

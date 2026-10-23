@@ -28,7 +28,7 @@ fs.mkdirSync(out, { recursive: true });
         };
         const luminance = (color) => color.map((value) => value / 255).map((value) => value <= .04045 ? value / 12.92 : ((value + .055) / 1.055) ** 2.4).reduce((sum, value, index) => sum + value * [.2126, .7152, .0722][index], 0);
         const contrast = (a, b) => (Math.max(luminance(a), luminance(b)) + .05) / (Math.min(luminance(a), luminance(b)) + .05);
-        const visible = (element) => { const rect = element.getBoundingClientRect(); const style = getComputedStyle(element); return rect.width > 0 && rect.height > 0 && style.visibility !== 'hidden' && !element.closest('[aria-hidden=true]'); };
+        const visible = (element) => { const rect = element.getBoundingClientRect(); const style = getComputedStyle(element); return rect.width > 0 && rect.height > 0 && style.visibility !== 'hidden' && Number(style.opacity) > 0 && !element.closest('[aria-hidden=true]'); };
         const failures = []; let inspected = 0; let minimum = 99;
         for (const element of document.querySelectorAll('a,button,p,span,dt,dd,th,td,label,summary,h1,h2,h3,h4,small,strong,legend')) {
           if (!visible(element) || element.closest(':disabled') || ![...element.childNodes].some((node) => node.nodeType === Node.TEXT_NODE && node.textContent.trim())) continue;

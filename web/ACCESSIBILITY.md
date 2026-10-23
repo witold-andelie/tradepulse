@@ -59,4 +59,6 @@ TradePulse targets WCAG 2.2 AA. This document records implementation and observe
 
 ## Recorded final results
 
-Chromium 154.0.8037.57 was used. The unchanged Pro regression suite passed 17/17 groups; the redesign suite passed 18/18 groups. Computed checks covered 14 route/view combinations and 5,428 visible text nodes, with an observed minimum text contrast of 5.66:1 and sampled view-control border contrast of 3.35:1. No unnamed inspected controls or effective targets below 24px were reported. The 100 final captures include keyboard focus, rejected evidence and both presentation modes. These results do not close the native assistive-technology and complete audit gaps above.
+Chromium 154.0.8037.57 was used. The unchanged Pro regression suite passed 17/17 groups; the redesign suite passed 18/18 groups. Computed checks covered 14 route/view combinations and 5,414 visible text nodes, with an observed minimum text contrast of 5.66:1 and sampled view-control border contrast of 3.35:1. No unnamed inspected controls or effective targets below 24px were reported. The 100 final captures include keyboard focus, rejected evidence and both presentation modes. These results do not close the native assistive-technology and complete audit gaps above.
+
+Final visual review also repaired an off-screen skip-link capture artifact. The link is transparent until it receives keyboard focus; Tab makes it visibly outlined and Enter moves focus to main content. Both browser suites and the focused skip-link check passed after this repair.

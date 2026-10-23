@@ -1,7 +1,8 @@
 import { useEffect, useRef } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { tierLabel, tierTone } from '../lib/tiers.js';
 
+const initialHistoryKey = typeof window === 'undefined' ? 'default' : window.history.state?.key || 'default';
 export const number = (value, digits = 0) => value == null || !Number.isFinite(value) ? '—' : value.toLocaleString('en-US', { maximumFractionDigits: digits });
 export const tickerPath = (row) => `/ticker/${encodeURIComponent(row.pool)}/${encodeURIComponent(row.symbol)}`;
 const toneClasses = {
@@ -16,7 +17,18 @@ export function Tier({ value }) { return <Badge tone={tierTone(value)}>{tierLabe
 export function Gate({ value }) { return <span className={value === false ? 'negative' : value === true ? 'positive' : 'muted'}>{value == null ? '– Not evaluated' : value ? '✓ Passed' : '✗ Failed'}</span>; }
 export function PageTitle({ eyebrow = 'Research workspace', title, children, action }) {
   const titleRef = useRef(null);
-  useEffect(() => { titleRef.current?.focus({ preventScroll: true }); }, [title]);
+  const location = useLocation();
+  useEffect(() => {
+    const frame = requestAnimationFrame(() => {
+      if (location.key === initialHistoryKey && !location.hash) return;
+      const active = document.activeElement;
+      if (active && ['INPUT', 'TEXTAREA', 'SELECT', 'BUTTON', 'SUMMARY'].includes(active.tagName)) return;
+      const target = location.hash ? document.getElementById(location.hash.slice(1)) : null;
+      (target || titleRef.current)?.focus({ preventScroll: true });
+      if (target) target.scrollIntoView({ block: 'start' });
+    });
+    return () => cancelAnimationFrame(frame);
+  }, [title, location.pathname, location.hash]);
   return <div className="page-title"><div><p className="eyebrow">{eyebrow}</p><h1 ref={titleRef} tabIndex={-1} id="page-title">{title}</h1>{children && <div className="subtitle">{children}</div>}</div>{action}</div>;
 }
 export function Empty({ title = 'No data available', children, action }) { return <div className="empty"><span aria-hidden="true" className="empty-symbol">∅</span><h2>{title}</h2><div className="muted">{children}</div>{action}</div>; }

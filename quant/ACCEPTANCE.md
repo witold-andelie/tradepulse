@@ -2,6 +2,9 @@
 
 The team lead merges a PR only when every item that applies is true.
 
+C1–C7 are implemented. Apply this checklist to C9 and math changes. For B7–B9 review, retain
+Huyin's existing pages and use `../web/ACCEPTANCE.md` as well. See `../docs/STATUS.md` for owners.
+
 ## Automated (must pass)
 
 ```

@@ -3,6 +3,12 @@
 OPL is the text twin of the OPM diagrams. Every sentence below corresponds to one link in a
 `.dot` file in this folder. If a diagram and this file disagree, fix both in the same PR.
 
+This is the target model. [Current status](../../STATUS.md) distinguishes it from implemented
+behavior: the guard is deterministic; seed graph fitting is in-sample; World Model, H-MEM and
+iterative model-proposed edges are not wired. Current TrackRecord comes from walk-forward
+simulation. The frontend is implemented and preserved under D19; B owns the UI baseline and
+C reviews/extends its existing Regime, Track Record and Run Trace pages.
+
 Owner tags: **[core]** team lead · **[A]** `ingest/` · **[B]** `web/` · **[C]** `quant/` ·
 **[D]** `integrations/`. Every sponsor instrument (Zetaris / DuckDB adapter, World Model, H-MEM,
 NVIDIA NIM chain) is implemented by **[D]**.
@@ -129,12 +135,15 @@ This runs once per focus name, in parallel (LangGraph `Send`).
   table for on-demand EDGAR lookups).
 - **Cutting Sample Snapshot** yields **Sample Snapshot**, which is committed and used by SAMPLE_MODE.
 
-## SD3 · Browsing (`SD3_browsing.dot`) — all [B]
+## SD3 · Browsing (`SD3_browsing.dot`) — Huyin baseline [B], B7–B9 review [C]
 
 - **Loading Run Output** requires **HTTP API**. When no API is configured it requires
   **Contract Fixtures**. It yields **Run Output** with `data_mode` *REAL*, *REPLAY* or *SYNTHETIC*.
 - **Validating Against Contract** requires **Run Output** and yields **Data-mode Banner**.
 - **Customer** handles **Rendering Pages**, which yields **Web App Pages**. **Web App Pages**
-  consists of **Leaderboard**, **Ticker Detail**, **Factor Lab**, **Regime**, **Track Record** and
-  **Run Trace**.
+  consists of **Discover**, **Leaderboard**, **Ticker Detail**, **Factor Lab**, **Regime**,
+  **Track Record** and **Run Trace**.
+- **Customer** handles **Selecting Presentation**, which affects **Presentation Preference**
+  (*Simple* or *Pro*). **Rendering Pages** requires **Presentation Preference**; both
+  presentations use the same source records rather than recomputing recommendations.
 - **Customer** handles **Requesting a New Run**, which affects **HTTP API**.

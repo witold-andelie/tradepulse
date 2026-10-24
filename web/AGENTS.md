@@ -1,6 +1,7 @@
 # Instructions for AI coding agents working in `web/`
 
-You are helping Member B build the TradePulse web app.
+You are helping Member B maintain Huyin's implemented TradePulse web app, or Member C review
+its existing B7–B9 pages. Read `docs/STATUS.md` and `web/INTEGRATION.md`; do not recreate the base.
 
 1. Read `web/TASK.md` and `web/ACCEPTANCE.md` first. The data shape is defined by
    `contracts/api/tradepulse.schema.json`. Never invent fields; if a field you need is missing,
@@ -14,9 +15,14 @@ You are helping Member B build the TradePulse web app.
    hard-code results.
 5. Always render the data-mode banner from `dataModeBanner()` and the run's disclaimer. Never use
    "Buy"/"Sell" wording; use `tierLabel()`.
-6. Pages get data only through `src/api/client.js`.
+6. Pages get data only through `src/api/client.js`. Use the shared provider and validated UI
+   functions; legacy named transport functions remain for compatibility, not as a way to
+   bypass schema validation. Keep the existing `*Page` adapters and both hook import paths.
 7. Run `npm test` and `npm run build` after every change. Fix every console error.
 8. Write code, comments and UI text in English.
 9. Follow the "Accessibility (WCAG 2.2 AA)" section of `web/TASK.md` on every page: semantic
    markup, keyboard operability, visible focus, text alternatives for charts, no colour-only
    signals, sufficient contrast, reduced-motion support.
+10. Preserve Huyin's pages, Simple/Pro, Discover and original test assertions. `App.jsx` owns
+    the single main landmark and global disclosures. `Chart` delegates to `ChartFigure`;
+    reuse the modular renderer and numeric alternatives rather than adding another UI base.

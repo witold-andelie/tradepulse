@@ -1,9 +1,9 @@
 # Member A — Data ingestion (`ingest/`)
 
-> **Status (2026-10-23): the code for A1–A7 and A9 is being implemented by a coding agent** against the
-> acceptance tests in `ingest/tests/`, because the whole pipeline waits on it. When it is merged,
-> **you own the code from then on.** Your work is everything that needs a human, a real network and
-> judgement:
+> **Status (2026-10-24): A1–A7 and A9 code is implemented and merged.** Do not rebuild it.
+> You own the existing implementation and its live-data acceptance. No lake or sample snapshot
+> is present in the publication checkout. See `docs/STATUS.md` for cross-team dependencies.
+> Your remaining work needs real network runs and judgment:
 >
 > 1. **First live run.** Put a real contact e-mail in your `.env` (`SEC_USER_AGENT`,
 >    `WIKIMEDIA_USER_AGENT`), then run `py -3 -m ingest all --as-of <latest trading day>`. Fix every
@@ -54,13 +54,13 @@ issue for the team lead.
 ```
 py -3 -m pip install -e ".[ingest,dev]"
 copy .env.example .env      # then put a real contact e-mail into SEC_USER_AGENT and WIKIMEDIA_USER_AGENT
-py -3 -m pytest ingest -q   # all tests are red until you implement the functions
+py -3 -m pytest ingest -q   # offline tests; absent lake/sample cases skip until delivery
 ```
 
 ## Global rules
 
 1. **Signatures are fixed.** The function names, arguments and return columns in the stubs are the
-   contract the tests check. Implement the bodies.
+   contract the tests check. Maintain the existing implementations.
 2. **Unit tests never touch the network.** Parse functions take already-downloaded text or JSON.
    Network code lives in separate `fetch_*` functions.
 3. **Be polite to providers.** Every request goes through `net.build_session()` and a `RateLimiter`:
@@ -76,7 +76,7 @@ py -3 -m pytest ingest -q   # all tests are red until you implement the function
 7. **No secrets in code or data.** The User-Agent e-mail comes from `.env`.
 8. **English only** in code, comments, logs and commit messages.
 
-## Tasks
+## Existing implementation and remaining live acceptance
 
 ### A1 · Universe (`universe.py`) → `universe_member`
 

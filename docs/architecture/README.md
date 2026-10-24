@@ -4,6 +4,11 @@ The system is modelled with **OPM** (Object-Process Methodology, ISO/PAS 19450).
 written in Graphviz DOT, so they can be diffed and reviewed like code. Every diagram has an OPL
 (text) twin in [`opm/OPL.md`](opm/OPL.md). The rendered SVGs live in `opm/svg/`.
 
+These diagrams describe the **target architecture**, not a deployment certificate.
+[Current implementation status](../STATUS.md) identifies what exists and what remains.
+World Model/H-MEM wiring, model-proposed graph expansion and live services are still pending;
+the implemented frontend preserves Huyin's pages and accessibility work (D19).
+
 | diagram | scope | owner colours |
 |---|---|---|
 | [legend](opm/svg/legend.svg) | notation and owner colours | — |
@@ -15,7 +20,7 @@ written in Graphviz DOT, so they can be diffed and reviewed like code. Every dia
 | [SD1.5](opm/svg/SD1.5_regime_ranking.svg) | Assessing regime and ranking | lead + C |
 | [SD1.7](opm/svg/SD1.7_explaining.svg) | Explaining with a bounded verify loop | lead |
 | [SD2](opm/svg/SD2_acquiring.svg) | Acquiring the data lake | A |
-| [SD3](opm/svg/SD3_browsing.svg) | Browsing the web app | B |
+| [SD3](opm/svg/SD3_browsing.svg) | Browsing, Discover and Simple/Pro presentation | Huyin baseline, B + C review |
 
 Supporting specs:
 

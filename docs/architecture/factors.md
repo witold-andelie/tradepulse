@@ -3,6 +3,19 @@
 This is the contract between research (team lead) and the `quant/` library (Member C).
 Parameters live in `config/tradepulse.toml`. Code reads them from there.
 
+## Implementation status
+
+See [project status](../STATUS.md) and [limitations](../honest-limitations.md). Factor cards
+show in-sample diagnostics; current ranking uses walk-forward weights and out-of-sample
+composite IC. Event drift and relational spillover are excluded from walk-forward because
+their priors/edges are fitted in-sample. The valuation constraint below is a target rule
+that the current pipeline does not apply. Unsupported filing inputs stay visibly insufficient.
+
+TrackRecord's `calibration` field holds mean score percentile (`predicted`) and the share of
+names beating the benchmark (`observed`). The UI uses a horizontal 50% reference and omits
+zero-observation buckets from the plot. These are not predicted probabilities or a probability
+calibration result; the schema field names are retained for compatibility.
+
 ## Principle: measuring ≠ predicting ≠ earning
 
 A signal can describe today's market well and still predict nothing. A factor can predict and still
@@ -23,8 +36,9 @@ Every factor therefore answers four questions on its **factor card**:
 - Each factor is **oriented so that higher means higher expected return**.
 - A value at row `t` may only use information **available at the close of `t`**. A source that is
   published after the close (for example the pageviews of day `t`) is lagged by one row.
-- `fwd_h(t) = P[t+L+h] / P[t+L] - 1` with execution lag `L = 1`. Only `quant.evaluation` may look
-  forward, and only to build the targets.
+- `fwd_h(t) = P[t+L+h] / P[t+L] - 1` with execution lag `L = 1`. `quant.evaluation` constructs
+  forward targets; `tradepulse.backtest` reads realized outcomes after fixing each simulated
+  decision. Neither path may feed future outcomes into that decision's features or weights.
 
 ## Factor catalogue (P0)
 

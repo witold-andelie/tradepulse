@@ -4,6 +4,10 @@ The team lead merges a PR only when every item that applies is true. Attach scre
 page you changed, at 1440 px, 768 px and 320 px width. Existing implementation is preserved;
 these checks identify remaining gaps rather than requiring pages to be rebuilt.
 
+The main baseline includes Huyin's implementation and recorded integration checks. See
+`INTEGRATION.md` and `../docs/STATUS.md`. Items below are continuing acceptance requirements,
+not a declaration that every native/accessibility or real-backend check has passed.
+
 ## Automated (must pass)
 
 ```

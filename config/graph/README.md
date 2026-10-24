@@ -1,9 +1,11 @@
 # Seed edges
 
-`seed_edges.csv` lists **hypotheses** for the relation graph. These edges are not facts. An edge
-enters the graph with `status = validated` only when it passes the lead-lag test in
-`quant.evaluation.lead_lag_tstat`. That test runs on the training part of the one-year window
-(SD1.3).
+`seed_edges.csv` lists **hypotheses**, not established relationships or causal facts.
+`tradepulse.research.signals.validate_edges` applies the lead-lag test from
+`quant.evaluation.lead_lag_tstat`. The current pipeline fits seed edges on the research window
+and discloses this as in-sample. Relational spillover is excluded from walk-forward ranking;
+World Model persistence and point-in-time graph snapshots are still pending.
+See [current status](../../docs/STATUS.md) and [limitations](../../docs/honest-limitations.md).
 
 Reading an edge: **`dst` `relation` `src`**. Shocks flow from `src` (the leader) to `dst` (the
 follower).

@@ -1,14 +1,18 @@
 # Member C — Quant library (`quant/`)
 
-> **Status (2026-10-23): C1–C7 are implemented and merged.** Every module lies on the critical
+> **Status (2026-10-24): C1–C7 are implemented and merged.** Every module lies on the critical
 > path of the pipeline, so the lead completed them with a coding agent against the acceptance tests
 > in `quant/tests/` (54 passing). Read the code to learn how each formula was vectorised.
 >
 > **Your tasks now:**
 > 1. **C9 · Property tests** (below). Add new test files only; do not edit the given ones.
-> 2. **Web pages B7–B9** (Regime, Track Record, Run Trace). They are described in `web/TASK.md`.
->    Coordinate with Member B on shared components, and follow `web/ACCEPTANCE.md`. Use the branch
->    prefix `c/`, for example `c/b8-track-record`.
+> 2. **Review and extend existing web pages B7–B9** (Regime, Track Record, Run Trace).
+>    Huyin has implemented them; the integration preserves that work. Do not create replacement
+>    pages. Check evaluation meaning, real API compatibility and concrete acceptance gaps.
+>    Read `web/TASK.md`, `web/AGENTS.md` and `web/ACCEPTANCE.md`, and coordinate shared changes
+>    with Huyin and the lead. Use a branch such as `c/b8-evaluation-review`.
+>
+> See `docs/STATUS.md` for the current integration and remaining dependencies.
 
 You write the **math** of TradePulse as small, pure, tested functions:
 
@@ -20,8 +24,9 @@ You write the **math** of TradePulse as small, pure, tested functions:
 - regime indicators
 - settlement scoring
 
-The team lead wires them into the pipeline. You never touch files, the network, LLMs or
-configuration. Data comes in as pandas objects, and results go out as pandas objects.
+The team lead wires the quant library into the pipeline. Quant functions never touch files,
+the network, LLMs or configuration: pandas objects come in and pandas objects go out. The
+separate assigned web review follows web data-access and UI rules.
 
 - Architecture view: the orange boxes in `docs/architecture/opm/svg/SD1.4_researching_factors.svg`,
   `SD1.5_regime_ranking.svg` and `SD1.2_settling.svg`.
@@ -42,17 +47,18 @@ quant/
   tests/                acceptance tests (given; do not weaken them)
 ```
 
-Do **not** edit anything outside `quant/`. If a test looks wrong, tell the team lead. Do not change
-the test.
+Quant changes stay in `quant/`. The assigned web review may change the existing B7–B9 page files
+under `web/` (including their `*Page` adapters), following web rules. Shared UI changes require
+coordination. If a given test looks wrong, tell the lead rather than changing it.
 
 ## Setup
 
 ```
 py -3 -m pip install -e ".[dev]"
-py -3 -m pytest quant -q          # every test is red until you implement the functions
+py -3 -m pytest quant -q          # validate the existing math implementation
 ```
 
-Work one module at a time, in the order C1 → C7. Run its test file after every change, for example
+Maintain the existing modules; do not restart C1–C7. Run the relevant test file after a change, e.g.
 `py -3 -m pytest quant/tests/test_indicators.py -q`.
 
 ## Data shapes

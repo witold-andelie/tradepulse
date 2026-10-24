@@ -2,6 +2,9 @@
 
 You are helping Member A implement the data-ingestion module of TradePulse.
 
+The acquisition code is already implemented. Read `docs/STATUS.md`; focus on real collection,
+data quality and the missing validated sample rather than rebuilding the module.
+
 1. Read `ingest/TASK.md` and `ingest/ACCEPTANCE.md` before writing code. Read the contract file in
    `contracts/tables/` for any table you touch.
 2. Edit only files under `ingest/`, `config/universe/` and `data/sample/`. Never edit `contracts/`,

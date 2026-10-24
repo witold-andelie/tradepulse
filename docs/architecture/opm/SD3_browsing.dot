@@ -1,7 +1,7 @@
-// SD3 · Browsing in-zoomed. Implemented in web/ (Member B).
+// SD3 · Browsing target model. Huyin's UI baseline; C reviews the existing B7-B9 pages.
 digraph SD3 {
   graph [rankdir=TB, fontname="Helvetica", fontsize=14, labelloc=t, nodesep=0.4, ranksep=0.45,
-         compound=true, newrank=true, label="SD3 · Browsing in-zoomed (web/, Member B)"];
+         compound=true, newrank=true, label="SD3 · Browsing in-zoomed (web/, Huyin baseline; B + C review)"];
   node  [fontname="Helvetica", fontsize=11, style=filled, fillcolor="#d1f0d1"];
   edge  [fontname="Helvetica", fontsize=9];
 
@@ -16,24 +16,28 @@ digraph SD3 {
   pages [shape=box, penwidth=2, label="Web App Pages"];
   agg   [shape=triangle, style=filled, fillcolor=black, label="", width=0.25, height=0.22];
   lb    [shape=box, label="Leaderboard\n(pool tabs, search, sector filter,\nsector heatmap)"];
+  dc    [shape=box, label="Discover\n(guided journeys over\nexisting research records)"];
   td    [shape=box, label="Ticker Detail\n(contributions, claims + verifier\nbadges, counter-case)"];
   fl    [shape=box, label="Factor Lab\n(factor cards, IC decay)"];
   rg    [shape=box, label="Regime\n(indicator table, state history)"];
-  tr    [shape=box, label="Track Record\n(hit rate, calibration)"];
+  tr    [shape=box, label="Track Record\n(score percentile vs outcome,\n50% reference, hit rate)"];
   rt    [shape=box, label="Run Trace\n(node timeline, retries)"];
-  pages -> agg [arrowhead=none]; agg -> {lb td fl rg tr rt} [arrowhead=none];
+  pages -> agg [arrowhead=none]; agg -> {dc lb td fl rg tr rt} [arrowhead=none];
   banner [shape=box, label="Data-mode Banner\n+ disclaimer"];
+  view [shape=box, label="Presentation Preference\nSimple / Pro\n(same source records)"];
 
   subgraph cluster_b {
     label="Browsing"; style="rounded,bold"; color="#333333"; fontsize=13;
-    b1 [shape=ellipse, label="1 Loading Run Output\n(API, else fixtures)"];
+    b1 [shape=ellipse, label="1 Loading Run Output\n(configured API or fixture mode;\nno silent fallback)"];
     b2 [shape=ellipse, label="2 Validating Against Contract"];
     b3 [shape=ellipse, label="3 Rendering Pages"];
     b4 [shape=ellipse, label="4 Requesting a New Run\n(optional, API only)"];
+    b5 [shape=ellipse, label="Selecting Presentation"];
     b1 -> b2 -> b3 -> b4 [style=invis, weight=10];
   }
 
   customer -> b3 [arrowhead=dot]; customer -> b4 [arrowhead=dot];
+  customer -> b5 [arrowhead=dot]; b5 -> view [dir=both]; view -> b3 [arrowhead=odot];
   api -> b1 [arrowhead=odot]; fixtures -> b1 [arrowhead=odot]; b1 -> runout;
   runout -> b2 [arrowhead=odot]; b2 -> banner;
   runout -> b3 [arrowhead=odot]; b3 -> pages; banner -> b3 [arrowhead=odot];

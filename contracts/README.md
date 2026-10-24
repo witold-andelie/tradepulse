@@ -4,6 +4,11 @@ Contracts are the **only** interface between modules. A module may rely on what 
 nothing else. Changing a contract requires a PR reviewed by the team lead, because every other
 module depends on it.
 
+The frontend integration does not change table or API schemas or regenerate fixtures.
+See [current implementation status](../docs/STATUS.md). UI entry points in
+`web/src/api/client.js` validate responses before rendering; legacy transport functions are
+retained for existing callers. `*Page` adapters are internal UI interfaces, not new API fields.
+
 | folder | what | checked by |
 |---|---|---|
 | `tables/*.json` | One file per parquet table in `data/lake/`: columns, dtypes, nullability, enums, primary key, row checks | `tradepulse.contracts.validate_table(df, name, as_of=None)` |
@@ -46,3 +51,8 @@ it renders them. Regenerate the fixtures with:
 ```
 py -3 contracts/fixtures/make_fixtures.py
 ```
+
+Do not regenerate or rewrite fixtures to hide source discrepancies. The current by-tier sample
+counts sum to 1,808 while `settled_count` is 1,200; the frontend preserves and discloses both.
+Trace timestamps and reported durations are also displayed as distinct measurements. These
+generated records are not evidence that real sample data or sponsor services have run.

@@ -1,36 +1,66 @@
 # Core (`tradepulse/`) — team lead
 
-Implemented so far:
+The deterministic research pipeline and LangGraph explanation graph are implemented.
+See [current project status](../docs/STATUS.md) for delivery blockers and
+[limitations](../docs/honest-limitations.md) before describing results.
 
-| module | purpose |
+## Implemented modules
+
+| Module | Role |
 |---|---|
-| `config.py` | Loads `config/tradepulse.toml`. |
-| `contracts.py` | Validates tables (`validate_table`) and API payloads (`validate_payload`) against `contracts/`. |
+| `config.py`, `contracts.py` | Load TOML settings and validate tables/API payloads. |
+| `guard.py` | Deterministic request schema/date checks and rule-based source-text screening. |
+| `extract/runner.py`, `extract/grounding.py` | Bounded event extraction, quote/time grounding and hash cache. |
+| `research/signals.py` | Filing signals, event priors, seed-edge validation and spillover panels. |
+| `research/panels.py`, `evaluate.py`, `gates.py` | Factor panels, evaluation, G1–G5, diagnostic cards and weights. |
+| `regime.py`, `regime_inputs.py` | Fragility indicators, states and lift diagnostics. |
+| `ranking.py` | Composite score, expected alpha, cost-aware research tiers and focus names. |
+| `backtest.py` | Walk-forward decisions, matured simulated outcomes and TrackRecord assembly. |
+| `agents/explain.py`, `agents/prompts.py` | LangGraph fan-out, analyst, skeptic, bounded revision and abstention. |
+| `verify.py` | Re-run evidence queries, compare row hashes, check dates and attribution sums. |
+| `pipeline.py`, `ports.py` | Orchestration and injected query/LLM/engine interfaces. |
+| `report.py`, `store.py`, `trace.py` | Contract-valid reports, saved runs and JSONL traces. |
+| `api.py`, `../run.py` | HTTP and command-line entry points. |
 
-Planned modules, mapped to OPM processes (`docs/architecture/opm/`):
+The query layer and hosted LLM client are in `integrations/`. The UI consumes the unchanged
+RunOutput and TraceEvent contracts.
 
-| module | OPM process | notes |
-|---|---|---|
-| `trace.py` | every process → Trace Log | JSONL `logs/trace-<run_id>.jsonl` plus stdout. Each event matches `$defs/TraceEvent`. |
-| *(Member D)* `integrations/zetaris/` | instrument "Zetaris / DuckDB" | `make_adapter(sample_mode)`, then `.run(template, params)`, which returns a `QueryResult` with `rows_sha256`. The core only calls this. |
-| *(Member D)* `integrations/meterless/llm.py` | instrument "NVIDIA NIM" (every LLM role, D18) | `ChainClient.complete(role, messages, schema)` with the roles extractor, guard, analyst and skeptic, plus a record/replay cassette. |
-| *(Member D)* `integrations/meterless/engines_client.py` + `integrations/engines/` | "World Model", "H-MEM" | `EnginesClient` over the Node sidecar that hosts the official reference engines. |
-| `guard.py` | SD1 · Guarding Request | Schema check, order-execution intent rejected, prompt-injection screen on free text. |
-| `extract/` | SD1.3 | Extractor prompt and schema (`$defs/ExtractedEvent`), the deterministic grounding check, a sha256 cache. |
-| `graph/` | SD1.3 | Seed edges, LLM edge proposals with at most 3 rounds, lead-lag validation (`quant.evaluation.lead_lag_tstat`), commit to the World Model. |
-| `research/` | SD1.4 | Builds the factor panels with `quant/`, gates G1–G5, weights and factor cards (`$defs/FactorCard`). |
-| `regime.py` | SD1.5 | Indicators from `quant.regime_indicators`, the state, the lift. |
-| `ranking.py` | SD1.5 | Composite, Grinold alpha, net edge, tiers, regime overlay, focus list. |
-| `agents/` | SD1.7 | LangGraph: typed state, `Send` fan-out per focus name, analyst, skeptic, verifier and a bounded retry loop (≤ 2). |
-| `verify.py` | SD1.7 · Verifying Claims | Re-runs the query and compares hashes, checks cause before move, checks that contributions sum to the score, checks no data after `as_of`. |
-| `settle.py` | SD1.2 | Settles matured recommendations in H-MEM and builds the track record (`$defs/TrackRecord`). |
-| `report.py` | SD1 · Reporting | Assembles `RunOutput` and validates it with `contracts.assert_payload` before returning. |
-| `api.py`, `../run.py` | entry points | FastAPI (`POST /run`, `GET /runs/latest`, `GET /runs/{id}`, `GET /runs/{id}/trace`, `GET /health`) on `0.0.0.0`; `py -3 run.py --as-of ... --pools ...`. |
+## Entry points
 
-Delivery items owned by the lead:
+`py -3 run.py --serve` starts FastAPI on `0.0.0.0:8000`.
+Endpoints: `POST /run`, `GET /runs/latest`, `GET /runs/{run_id}`,
+`GET /runs/{run_id}/trace`, and `GET /health`.
 
-- Dockerfile and docker-compose (core, engines sidecar, static web)
-- `.env.example`
-- 3 or more sample input/output pairs
-- `docs/honest-limitations.md`
-- the demo script
+A health response does not establish that a complete run can execute. Default SAMPLE_MODE
+requires a validated snapshot and matching cassette under `data/sample/`; they are still
+absent. A configured live run currently reaches unimplemented Zetaris client/adapter methods.
+
+Direct Python commands read process environment variables, not the root `.env` automatically.
+The frontend can be previewed separately on synthetic fixtures while these dependencies are
+completed. Docker Compose reads `.env` and supplies an API-mode web build.
+
+## Current differences from the target OPM model
+
+- Graph handling validates seed edges in the research window. Iterative LLM edge proposals,
+  World Model persistence and engine snapshots are not wired into the pipeline.
+- H-MEM recommendation persistence, settlement and conflict detection are pending. Current
+  TrackRecord values come from the deterministic walk-forward simulation, not persisted calls.
+- The request guard is deterministic. D18 configures hosted NIM for any LLM roles; this does
+  not mean the current guard calls a model.
+- Ranking uses walk-forward weights and out-of-sample composite IC. Factor cards display
+  in-sample diagnostics. Event drift and relational spillover are excluded from walk-forward
+  because their priors/edges are fitted in-sample.
+- The US valuation constraint is not applied by the current pipeline.
+- A requested ticker outside the loaded pool is not yet implemented as an on-demand lookup.
+
+## Lead's remaining delivery work
+
+1. Review A's real lake/sample and D's service/cassette evidence.
+2. Wire World Model and H-MEM after D's engines sidecar passes its tests.
+3. Run the real offline SAMPLE_MODE acceptance with networking disabled and inspect traces.
+4. Review the integrated frontend's real API behavior and remaining accessibility evidence.
+5. Produce at least three real sample input/output pairs, the demo script, slides and video.
+   Keep [limitations](../docs/honest-limitations.md) and [sponsor evidence](../docs/sponsors.md)
+   accurate as services and artifacts become available.
+
+The Docker configuration exists for core/web; the engines service is not yet enabled.

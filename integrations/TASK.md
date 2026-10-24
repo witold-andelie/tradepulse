@@ -4,7 +4,7 @@
 > = Monday 26 October 03:59 UTC. Target: done on Saturday 24 October. The hackathon closes
 > 27 October 23:45 UTC; the remaining time is for the lead's QA, demo video and submission.
 >
-> **Status (2026-10-23):** the pure-code parts are merged and tested:
+> **Status (2026-10-24):** the pure-code parts are merged and tested:
 > - SQL templates
 > - the DuckDB adapter and `rows_sha256`
 > - `ensure_single_statement` and `coerce_frame`
@@ -22,6 +22,12 @@
 >    `data/sample/` is merged.
 > 3. **D5**: the Meterless engines sidecar, running locally (docker-compose) and on AWS.
 > 4. **D6**: the `docs/sponsors.md` draft, with evidence.
+
+The frontend and core already exist. D's service and cassette work is still on the critical
+path; `ZetarisClient` and `ZetarisAdapter` remain stubs and no engines server is present.
+`docs/sponsors.md` now tracks the honest implementation/evidence status; attach actual live
+evidence there rather than replacing the draft with unverified completion claims.
+See `docs/STATUS.md` for current artifacts, owners and acceptance results.
 
 You own everything that connects TradePulse to **Zetaris** and **Meterless**:
 
@@ -68,7 +74,7 @@ output columns or the sidecar API, open a PR for the team lead, because the core
 
 ```
 py -3 -m pip install -e ".[agent,dev]"
-py -3 -m pytest integrations -q        # red until implemented
+py -3 -m pytest integrations -q        # existing offline tests; live acceptance is separate
 copy .env.example .env                 # fill Zetaris / Meterless / NIM values locally, never commit
 ```
 
@@ -101,8 +107,8 @@ setup does not count.
 - **Region:** use an EU region, `eu-central-1` (Frankfurt) or `eu-west-1` (Ireland), because four of
   five members are in Europe. If the Zetaris AWS install does not support EU regions, use
   `us-east-1` and say so in `DEPLOY.md`.
-- **Zetaris:** install it on AWS following the Zetaris AWS guide. The free tier gives $200 in credits;
-  a Mini cluster costs about $80 a week.
+- **Zetaris:** install it on AWS following the Zetaris AWS guide. Verify current account credits
+  and deployment pricing before provisioning; earlier planning estimates are not a quote.
   - Stop the instance when nobody is working.
   - Set a budget alert.
 - **Lake storage:** create a **private S3 bucket** for the parquet lake and register the tables with
@@ -156,6 +162,8 @@ This closes the open item "How Zetaris reads lake files" in `decisions.md`.
 
 - Implement `ensure_single_statement`, `coerce_frame`, `ZetarisClient` (`from_env`, `execute`,
   `parse_response`), `ZetarisAdapter` and `make_adapter`.
+  The statement/dtype helpers and sample factory already exist; complete the live stubs,
+  including bounded pagination, without replacing tested offline behavior.
 - Record one real query response with secrets removed into
   `integrations/tests/fixtures/zetaris_query_response.json` and add a test for `parse_response`.
 - **Parity test:** add `integrations/tests/test_parity.py`, marked `@pytest.mark.network`. It runs

@@ -3,13 +3,17 @@
 The team lead merges a PR only when every item that applies is true. Paste the command output
 into the PR description.
 
+The implementation exists. The data-dependent checks below remain incomplete while the
+lake/sample are absent; skipped tests do not complete data delivery. See `../docs/STATUS.md`.
+
 ## Automated (must pass)
 
 ```
 py -3 -m pytest ingest -q                    # offline unit tests: 0 failed
 py -3 -m ingest all --as-of 2026-10-21       # live run; ends with "all tables valid"
 py -3 -m pytest ingest -q -m lake            # lake tests run (not skipped) and pass
-py -3 -m pytest ingest/tests/test_sample.py  # sample snapshot exists and passes (must NOT skip)
+py -3 -m pytest ingest/tests/test_lake_and_sample.py::test_sample_snapshot_is_complete_and_valid -q
+# sample snapshot exists and passes; this case must NOT skip
 ```
 
 ## Data checks (paste numbers in the PR)

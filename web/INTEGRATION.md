@@ -5,6 +5,10 @@ frontend. It combines main `55ddedd` with `b/agent-accessible-ui` at `f9c8e0b`, 
 the original B1 commit `c8e1d7d`, B2–B10 commit `a4a5169` and accessibility commits
 `e2c3818` and `f9c8e0b`. The original commits and authors remain in the merge ancestry.
 
+Merge `aaf3b5f` is the preserved main frontend baseline. Continue new work from main rather
+than replaying either older branch over it. See [project status](../docs/STATUS.md) for
+the current cross-team plan and [limitations](../docs/honest-limitations.md) for open acceptance.
+
 ## Reused implementation
 
 - All six business pages, their filtering, pagination, drill-down and evidence rendering.
@@ -33,7 +37,7 @@ the original B1 commit `c8e1d7d`, B2–B10 commit `a4a5169` and accessibility co
 
 ## Remaining work and ownership
 
-- Lead: review the integration diff, backend compatibility and final acceptance. Do not ask
+- Lead: maintain integration, backend compatibility and final acceptance. Do not ask
   Huyin to resolve the duplicated-base work by rebuilding pages.
 - Huyin: review visual and interaction fidelity, help attach existing screenshots, and fix
   concrete review findings. B4–B6 and the design system are existing work.

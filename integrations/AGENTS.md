@@ -2,6 +2,9 @@
 
 You are helping Member D integrate the sponsor technologies (Zetaris, Meterless, NVIDIA NIM).
 
+Read `docs/STATUS.md` for current blockers. Templates, DuckDB, record/replay and EnginesClient
+already exist; complete live Zetaris, sample recording and the actual engines sidecar.
+
 1. Read `integrations/TASK.md`, `integrations/ACCEPTANCE.md` and `integrations/engines/API.md`
    first.
 2. Edit only files under `integrations/` and `docs/sponsors.md`. Never edit `contracts/`,

@@ -1,7 +1,8 @@
 # Member B implementation and acceptance map
 
 Historical record from Huyin's original B2–B10 branch. Its validation numbers and publication
-notes describe that earlier environment. See `INTEGRATION.md` for the integrated baseline;
+notes describe that earlier environment. The original commits are preserved in main by
+`aaf3b5f`. See `INTEGRATION.md` and `../docs/STATUS.md` for the current baseline;
 do not treat these older results as a fresh integration test run.
 
 Baseline: remote main a5c685dfad7f4e710e2edc6d48dcc15c5428879f; B1 PR #1 open and unmerged at inspection. Git fetch failed because the configured proxy was unreachable. GitHub connector retrieved the exact B1 blobs and commit metadata; blob, tree and commit SHA checks reproduced c8e1d7da9bf18fd78ee297896e9a60b61cf857ea locally. Development branch: b/b2-b10-frontend. No remote mutations.
@@ -42,11 +43,15 @@ From the repository: `cd web`, `npm install`, `npm run dev`. Leave VITE_API_BASE
 
 The production host must rewrite unknown non-asset paths to index.html for BrowserRouter deep links. `npm run preview` supports local verification; no deployment was performed.
 
-## Review and recovery
+## Original review and recovery record
 
 All implementation changes are confined to web/. B1 helpers, existing tests, contracts and shared fixtures are unchanged from the baseline. No dependencies were added and no remote branch or PR was modified.
 
-Use the complete B2-B10 patch on c8e1d7da9bf18fd78ee297896e9a60b61cf857ea. A separate combined patch is provided for a5c685dfad7f4e710e2edc6d48dcc15c5428879f. Apply only one patch, in a new local worktree; do not overwrite an existing checkout or B1 PR. Re-run the acceptance commands and perform backend integration before a team PR. The user, not this task, decides when to create/push that PR.
+The original recovery artifacts were based on c8e1d7da9bf18fd78ee297896e9a60b61cf857ea or
+a5c685dfad7f4e710e2edc6d48dcc15c5428879f. That patch-application procedure is superseded by
+the history-preserving integration. Do not apply those patches over current main. Update main
+and extend the integrated implementation; real-backend and remaining accessibility acceptance
+are still required.
 
 ## Validation evidence
 
@@ -59,6 +64,6 @@ Use the complete B2-B10 patch on c8e1d7da9bf18fd78ee297896e9a60b61cf857ea. A sep
 - `web/scripts/browser-acceptance.cjs` is repeatable in an environment with a preinstalled Playwright runtime. Configure `TRADEPULSE_CHROMIUM`, `TRADEPULSE_PREVIEW_URL` and `TRADEPULSE_QA_DIR` as needed. No browser-testing dependency was added to package.json. The production preview also passed all 17 grouped checks. A production-only controlled-checkbox delay was fixed with synchronous URL navigation; chart margins were adjusted after native-size inspection.
 - Screenshots are genuine Chromium captures. Browser testing found and repaired callback arity, explicit accessible select names, and Tailwind dynamic tone-class retention. No existing tests or shared fixtures were edited.
 
-## Export constraints
+## Original export constraints (historical)
 
 During the original implementation phase, the managed environment could not create the designated chat output directory (read-only root, then permission denied outside the sandbox). No generic file-upload tool is available. Local handoff files are preserved in the task workspace. A filesystem path is not claimed to be a downloadable attachment. The task's file export facility, if provided by its client, is required to move those bytes out of the isolated environment; no GitHub push, deployment, email or external upload was used as a substitute during that phase. Subsequent branch publication is governed by separate explicit user authorization.

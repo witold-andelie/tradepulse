@@ -1,5 +1,9 @@
 # Engines sidecar HTTP API (task D5)
 
+This is the target server contract. The Python client is implemented, but the TypeScript
+server/vendor engines and core wiring are still pending. The local Compose service is commented
+out. See [project status](../../docs/STATUS.md) and [sponsor evidence](../../docs/sponsors.md).
+
 A small Node (TypeScript) HTTP server that hosts the **official Meterless reference
 implementations** of World Model and H-MEM, listening on `127.0.0.1:8790` (`ENGINES_URL`). Inside
 Docker it binds `0.0.0.0`. JSON in and out. Errors return `{"error": "<message>"}` with a 4xx/5xx

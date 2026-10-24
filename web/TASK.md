@@ -1,9 +1,10 @@
 # Member B — Web app (`web/`)
 
-> **Integration status (2026-10-24): Huyin has already implemented B1–B10.** This branch
+> **Main baseline (2026-10-24): Huyin has already implemented B1–B10.** Integration `aaf3b5f`
 > preserves her original commits, six business pages, Discover, Simple/Pro presentation,
 > keyboard interactions, numeric chart alternatives and accessibility work. The pages are
-> no longer placeholders. See `INTEGRATION.md` for provenance and the remaining review work.
+> no longer placeholders. See `INTEGRATION.md` for provenance, and `docs/STATUS.md` for current
+> project dependencies and acceptance. Continue from main rather than the older UI branches.
 > - **Huyin:** review the integrated visual design and interactions; address specific review
 >   findings and help attach existing evidence. Do not rebuild B4–B6 or another shared base.
 > - **Tanhao:** review and improve the existing B7–B9 pages; do not build competing copies.
@@ -54,7 +55,7 @@ shape either way.
 cd web
 npm install
 npm run dev               # http://localhost:5173
-npm test                  # unit tests (red until B1 is done)
+npm test                  # existing unit/regression tests
 npm run check:contracts   # validates the fixtures against the schema
 ```
 
@@ -145,23 +146,26 @@ do not replace the client, shell or design system with another implementation.
 statistics and excluded factors. The application shell shows them as a collapsible Run
 limitations panel with their count. Never hide them.
 
-## Tasks
+## Existing functionality and review checklist
+
+The B1–B10 sections below define the behavior to preserve and review, not a request to implement
+the same pages again. Work on a specific acceptance finding; the lead handles baseline issues.
 
 ### B1 · Helpers (`src/lib/`) — make the given tests green first
 
-Implement `format.js`, `tiers.js` and `data.js` exactly as their comments say. Tests:
+Maintain the existing `format.js`, `tiers.js` and `data.js` according to their comments. Tests:
 `src/lib/*.test.js`.
 
 ### B2 · Data access (`src/api/client.js`)
 
-Implement `loadRunOutput`, `loadTrace` and `requestRun` as described in the file. Add the
-`useRunOutput()` and `useTrace()` hooks from "Shared interfaces". Every page uses them. Loading shows a
-skeleton; an error shows the message and a Retry button.
+The transport functions, strict `createClient`, validated UI entry points and shared hooks exist.
+Keep schema validation at the UI boundary and cancellation/timeout behavior. Both hook import
+paths use one provider. Loading shows a status; failures show a readable message and Retry.
 
 ### B3 · Layout and routing
 
-- Top bar: product name, pool tabs (US equities · European equities · Crypto), links to Factor Lab,
-  Regime, Track Record and Run Trace.
+- Existing shell: product name, pool tabs (US equities · European equities · Crypto), navigation
+  to Discover, Factor Lab, Regime, Track Record and Run Trace, plus Simple/Pro presentation.
 - Run info line: as_of, run_id, horizon, data mode.
 - Routes:
 
@@ -225,7 +229,7 @@ skeleton; an error shows the message and a Retry button.
   `docs/architecture/factors.md`, and mark it as explanatory text, not a result.
 - The cards state "In-sample research window: start – end".
 
-### B7 · Regime (`/regime`) — owned by Member C
+### B7 · Regime (`/regime`) — existing Huyin page, reviewed/extended by Member C
 
 - One panel per pool with the state badge and points of 5.
 - An indicator table: name, value, threshold, triggered ✓ / ✗ / –, note.
@@ -234,7 +238,7 @@ skeleton; an error shows the message and a Retry button.
 - The lift numbers, with the sentence: "Fragility is measured, not predicted. Lift is reported with
   its sample size."
 
-### B8 · Track Record (`/track-record`) — owned by Member C
+### B8 · Track Record (`/track-record`) — existing Huyin page, reviewed/extended by Member C
 
 - Window and settled/pending counts.
 - A table by pool × tier: n, hit rate, mean excess (bp).
@@ -248,7 +252,7 @@ skeleton; an error shows the message and a Retry button.
 - A composite IC line chart per pool.
 - A label at the top: "Walk-forward: each decision used only data available at that time."
 
-### B9 · Run Trace (`/trace`) — owned by Member C
+### B9 · Run Trace (`/trace`) — existing Huyin page, reviewed/extended by Member C
 
 - A timeline (Gantt-style) of `node_start` / `node_end` pairs from `loadTrace()`, using ECharts
   custom series or stacked bars.
@@ -256,7 +260,7 @@ skeleton; an error shows the message and a Retry button.
   `error` rows. Filter by node and by kind.
 - Totals: duration, LLM calls, tokens in and out.
 
-### B10 · Polish (after B1–B9)
+### B10 · Review and polish the existing B1–B9 implementation
 
 - Responsive down to 320 px width and 200% zoom (see Accessibility). The leaderboard table scrolls horizontally inside its card,
   never the page.
@@ -265,5 +269,6 @@ skeleton; an error shows the message and a Retry button.
 
 ## Definition of done
 
-See `ACCEPTANCE.md`. Open one PR per task, or per pair of small tasks. Branch names are `b/<task>`,
-for example `b/b4-leaderboard`.
+See `ACCEPTANCE.md`. Open focused review/fix PRs, for example `b/ui-review` or
+`c/b8-evaluation-review`. Preserve the integrated contributor history; do not re-split or
+reimplement already delivered pages just to recreate the old task sequence.

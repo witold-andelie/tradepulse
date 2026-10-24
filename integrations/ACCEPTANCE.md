@@ -3,6 +3,10 @@
 The team lead merges a PR only when every item that applies is true. Paste command output into the
 PR, with secrets redacted.
 
+Offline helper/client tests are already implemented. They do not establish hosted Zetaris,
+actual Meterless engine use or NIM live acceptance. The current evidence draft is
+`../docs/sponsors.md`; missing evidence remains unchecked. See `../docs/STATUS.md`.
+
 ## Automated (must pass)
 
 ```

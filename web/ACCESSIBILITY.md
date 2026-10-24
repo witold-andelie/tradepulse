@@ -4,6 +4,10 @@ The recorded numerical results below belong to Huyin's original branch. They are
 as historical evidence, not a claim that the integrated build has passed the same audit.
 See `INTEGRATION.md` for current checks and outstanding acceptance.
 
+The integration separately reran the original browser journeys and focused Chromium check;
+those current results are recorded in `INTEGRATION.md` and `../docs/STATUS.md`. Native
+assistive-technology, Lighthouse and axe acceptance remain outstanding after publication.
+
 TradePulse targets WCAG 2.2 AA. This document records implementation and observed checks, not certification or a claim of complete AA conformance.
 
 ## Implemented structure and interaction

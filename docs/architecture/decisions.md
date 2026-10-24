@@ -3,6 +3,16 @@
 Short records of decisions that shape the code. Newest first. Change a decision by adding a new
 entry, not by editing an old one.
 
+Current implementation and acceptance are recorded in [project status](../STATUS.md).
+Historical D7/D17 local-inference plans are superseded by D18. Decisions state intended
+architecture; they do not themselves establish service deployment or test completion.
+
+## 2026-10-24
+
+| # | decision | why |
+|---|---|---|
+| D19 | **Preserve Huyin's original frontend and accessibility history as the UI baseline.** Merge `aaf3b5f` retains B1, B2–B10 and the subsequent accessibility commits, adapting the agreed page/hook/chart interfaces. Huyin reviews the existing UI; Tanhao reviews and extends its existing B7–B9 pages; the lead owns baseline integration. Keep both original test suites. | Avoid duplicate implementation and lost contributor work. Separate implemented functionality from outstanding real-backend, Lighthouse/axe, native screen-reader and native zoom acceptance. |
+
 ## 2026-10-23
 
 | # | decision | why |
@@ -35,8 +45,10 @@ entry, not by editing an old one.
 
 | item | owner | how it closes |
 |---|---|---|
-| How Zetaris reads the lake files | D | D0: AWS + private S3 (recommended, D15) or a local mount; documented in `integrations/zetaris/DEPLOY.md`. |
+| Deploy the agreed lake access route | D | D0/D1: AWS + private S3 (`s3a://`, D15/D17); document the deployment and demonstrate queries in `integrations/zetaris/DEPLOY.md` and `integrations/ACCESS.md`. The hosting choice is decided; implementation/evidence are pending. |
 | EDGAR `acceptanceDateTime` timezone | A | Compare 3 filings with their index pages. Record the result in `ingest/TASK.md`. |
 | News-tone history coverage | A | Probe GDELT for a 1-year range on 3 tickers. |
-| Meterless Nightshift Windows licence for participants | D (lead asks at onboarding) | Ask at onboarding. |
-| NIM model choice for the analyst and skeptic roles (two different families) | D proposes, lead decides | Pick from the NIM catalogue. Record the choice in `.env.example`. |
+| Meterless Nightshift Windows licence | Optional, outside the critical path | D18 makes local inference optional/off by default; do not block engines or hosted NIM work on a licence. |
+| NIM models and recorded sample cassette | D proposes, lead agrees | Agree extractor/analyst/skeptic IDs; analyst and skeptic use different families. Run live checks, then record/replay A's exact snapshot and decision date. |
+| World Model and H-MEM integration | D + lead | D supplies the actual tested engines sidecar; the lead wires snapshots, persistence, settlement and conflicts into the pipeline. |
+| Frontend independent acceptance | B + C + lead | Review the preserved implementation, real API data and the remaining accessibility checks; do not rebuild the six pages. |

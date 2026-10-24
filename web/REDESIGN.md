@@ -1,10 +1,12 @@
 # TradePulse 2.0 implementation map
 
-Historical record from Huyin's accessibility branch. The branch was subsequently published
-and is now being integrated with main. The original validation and environment limitations
-below are preserved as provenance; see `INTEGRATION.md` for current integration status.
+Historical record from Huyin's accessibility branch. Its original commits are preserved in main
+by merge `aaf3b5f`. The validation and environment limitations below describe that earlier work;
+see `INTEGRATION.md` and `../docs/STATUS.md` for the current baseline and remaining acceptance.
 
-Base: verified latest remote b/b2-b10-frontend at a4a516909aae88b324f95ab5facbf6fd4b531ae2. PRs #1 and #2 were open and unmerged at inspection. Local isolated branch: b/agent-accessible-ui. This work is not authorized for publication.
+Original base: b/b2-b10-frontend at a4a516909aae88b324f95ab5facbf6fd4b531ae2. PRs #1 and #2
+were open at that historical inspection; the original isolated branch was b/agent-accessible-ui.
+The lead subsequently authorized publication and integration into main.
 
 ## Product and regression map
 
@@ -25,7 +27,9 @@ Only tradepulse.view is persisted in browser storage. Market filters and paginat
 
 The original browser suite is unchanged. Because the product now defaults to Simple View, its table-specific assertions are exercised with a Playwright preload that selects Pro View. This changes initial UI preference only; it does not remove assertions. Separate tests exercise the new default presentation.
 
-Do not target main with an eventual redesign PR while PR #2 is unmerged. The review base should be b/b2-b10-frontend so reviewers see the UI-only redesign. Push/PR creation needs separate explicit user authorization.
+The original pre-integration plan used b/b2-b10-frontend as the review base. That instruction
+is superseded: the lead authorized a history-preserving main integration. New review/fix PRs
+start from current main rather than reconstructing the old stacked branches.
 
 ## Final verification
 
@@ -51,10 +55,15 @@ node web/scripts/accessibility-check.cjs
 
 The preload selects only the Pro UI preference for the legacy table suite. It does not change records, intercept requests or disable assertions. Run the redesign suite without that preload to verify the fresh Simple default.
 
-## Handoff and publication boundary
+## Original handoff and publication history
 
-This branch is local and unpublished. Existing B1/B2-B10 history and PRs are not rewritten. A local patch and bundle preserve a reviewable UI-only diff against the verified B2-B10 base. Native assistive-technology testing, independent team review and actual backend integration remain outstanding.
+At the original handoff this branch was local and unpublished. It was later published and
+integrated without rewriting the B1/B2–B10 commits. The original patch/bundle is a historical
+recovery artifact. Native assistive-technology testing and actual backend integration remain
+outstanding.
 
 The managed environment cannot create the designated chat output directory, so an internal file path is not a downloadable attachment. Use a task-client export facility if one is available; otherwise obtaining the artifact bytes remains a platform limitation. Do not claim that git fetch can retrieve this unpublished branch.
 
-After a bundle is exported, fetch its branch into an existing clone and create a new worktree with a fresh local branch name. Never copy source files over the B1 or B2-B10 checkout. An eventual remote branch push and Draft PR require separate authorization; while PR #2 is unmerged, the appropriate review base is b/b2-b10-frontend, not main.
+The old bundle-import instructions are superseded by the current main baseline. Update main,
+retain original commits and work on concrete review findings. Do not copy the old patch over
+the integrated implementation or recreate completed pages.

@@ -1,4 +1,4 @@
-"""macro_point table (task A6). See contracts/tables/macro_point.json."""
+"""FRED observations; downloaded vintages retain revision risk."""
 
 from __future__ import annotations
 
@@ -8,36 +8,45 @@ from pathlib import Path
 
 import pandas as pd
 
-from ingest._common import table_frame, user_agent
+from ingest.common import before_cutoff, environment, frame, window_start
 from ingest.lake import write_table
-from ingest.net import RateLimiter, build_session, get_with_retries
+from ingest.net import RateLimiter, build_session, fetch_response
 
 FRED_CSV = "https://fred.stlouisfed.org/graph/fredgraph.csv?id={series_id}"
 
 
 def parse_fred_csv(text: str, series_id: str) -> pd.DataFrame:
-    """Parse a FRED CSV download into macro_point rows.
+    raw = pd.read_csv(StringIO(text), na_values=["."])
+    date_col = "DATE" if "DATE" in raw else "observation_date"
+    raw = raw.dropna(subset=[series_id])
+    dates = pd.to_datetime(raw[date_col])
+    return (
+        frame(
+            pd.DataFrame(
+                {
+                    "series_id": series_id,
+                    "date": dates,
+                    "value": pd.to_numeric(raw[series_id]),
+                    "source": "fred",
+                    "available_at": dates.dt.tz_localize("UTC") + pd.Timedelta(days=1),
+                }
+            ).to_dict("records"),
+            "macro_point",
+        )
+        .sort_values("date")
+        .reset_index(drop=True)
+    )
 
-    Header is either 'DATE,<series_id>' or 'observation_date,<series_id>'. Rows whose value is '.'
-    are dropped. source = 'fred'; available_at = date + 1 day at 00:00 UTC. Sorted by date.
-    """
-    frame = pd.read_csv(StringIO(text), dtype="string")
-    header = "DATE" if "DATE" in frame else "observation_date"
-    frame = frame[frame[series_id].notna() & frame[series_id].ne(".")].copy()
-    frame["date"] = pd.to_datetime(frame[header])
-    frame["value"] = pd.to_numeric(frame[series_id])
-    frame["available_at"] = frame["date"].dt.tz_localize("UTC") + pd.Timedelta(days=1)
-    frame = frame.assign(series_id=series_id, source="fred")
-    return table_frame("macro_point", frame).sort_values("date").reset_index(drop=True)
+
+def fetch_macro(series_id):
+    with build_session(environment("WIKIMEDIA_USER_AGENT")) as session:
+        return fetch_response(session, FRED_CSV.format(series_id=series_id), RateLimiter(2)).text
 
 
 def run(as_of: dt.date, root: Path | None = None) -> pd.DataFrame:
-    """Download BAMLH0A0HYM2, keep dates <= as_of, write macro_point."""
-    series = "BAMLH0A0HYM2"
-    with build_session(user_agent("WIKIMEDIA_USER_AGENT", root)) as session:
-        response = get_with_retries(session, FRED_CSV.format(series_id=series), RateLimiter(2))
-        response.raise_for_status()
-        output = parse_fred_csv(response.text, series)
-    output = output[output["date"] <= pd.Timestamp(as_of)].reset_index(drop=True)
-    write_table(output, "macro_point", root, as_of)
-    return output
+    result = before_cutoff(
+        parse_fred_csv(fetch_macro("BAMLH0A0HYM2"), "BAMLH0A0HYM2"), "macro_point", as_of
+    )
+    result = result[result.date >= pd.Timestamp(window_start(as_of))]
+    write_table(result, "macro_point", root, as_of)
+    return result

@@ -1,201 +1,162 @@
-"""universe_member table (task A1). See contracts/tables/universe_member.json."""
+"""Build the current membership snapshot from provider lists and curated extras."""
 
 from __future__ import annotations
 
 import datetime as dt
 from pathlib import Path
-from urllib.parse import unquote, urlsplit
+from urllib.parse import unquote, urljoin, urlsplit
 
 import pandas as pd
-from bs4 import BeautifulSoup, Tag
+from bs4 import BeautifulSoup
 
-from ingest._common import project_root, table_frame, user_agent
-from ingest.edgar import cik10
+from ingest.common import environment, frame
 from ingest.lake import write_table
-from ingest.net import RateLimiter, build_session, get_with_retries
-
-EXCHANGES = {
-    ".DE": ("xetra", "frankfurt", "deutsche börse", "deutsche boerse"),
-    ".PA": ("euronext paris", "paris"),
-    ".AS": ("euronext amsterdam", "amsterdam"),
-    ".BR": ("euronext brussels", "brussels"),
-    ".MI": ("borsa italiana", "euronext milan", "milan"),
-    ".MC": ("bolsa de madrid", "bme", "madrid"),
-    ".HE": ("nasdaq helsinki", "helsinki"),
-    ".IR": ("euronext dublin", "dublin"),
-    ".LS": ("euronext lisbon", "lisbon"),
-}
-COUNTRIES = {
-    "germany": "DE",
-    "france": "FR",
-    "netherlands": "NL",
-    "belgium": "BE",
-    "italy": "IT",
-    "spain": "ES",
-    "finland": "FI",
-    "ireland": "IE",
-    "portugal": "PT",
-    "austria": "AT",
-    "luxembourg": "LU",
-}
-
-
-def _text(cell: Tag) -> str:
-    return " ".join(cell.stripped_strings)
-
-
-def _article(cell: Tag) -> str | None:
-    for link in cell.select('a[href*="/wiki/"]'):
-        path = urlsplit(link["href"]).path
-        if path.startswith("/wiki/"):
-            title = unquote(path.removeprefix("/wiki/"))
-            if not title.startswith(("File:", "Help:", "Special:")):
-                return title
-    return None
-
-
-def _rows(table: Tag) -> list[dict[str, Tag]]:
-    """Read simple constituent tables; remove footnotes from cell text."""
-    for note in table.select("sup.reference"):
-        note.decompose()
-    headers: list[str] = []
-    output = []
-    for row in table.select("tr"):
-        cells = row.find_all(["th", "td"], recursive=False)
-        if not headers and cells and all(cell.name == "th" for cell in cells):
-            headers = [_text(cell).casefold() for cell in cells]
-        elif headers and len(cells) == len(headers) and row.find("td"):
-            output.append(dict(zip(headers, cells, strict=True)))
-    return output
-
-
-def _cell(row: dict[str, Tag], *names: str) -> Tag:
-    for name in names:
-        if name in row:
-            return row[name]
-    raise ValueError(f"Wikipedia table missing column: {' / '.join(names)}")
-
-
-def _eu_symbol(row: dict[str, Tag]) -> str:
-    ticker_cell = _cell(row, "ticker", "symbol", "ticker symbol")
-    ticker = _text(ticker_cell)
-    for key in ("exchange", "stock exchange"):
-        if key in row:
-            return eu_yahoo_symbol(ticker, _text(row[key]))
-    # A Yahoo suffix or a named exchange in the ticker link is explicit evidence;
-    # the company's country alone is insufficient to choose a listing.
-    for suffix, names in EXCHANGES.items():
-        if ticker.upper().endswith(suffix):
-            return eu_yahoo_symbol(ticker, names[0])
-    exchange = " ".join(
-        str(link.get(key, "")) for link in ticker_cell.find_all("a") for key in ("title", "href")
-    )
-    return eu_yahoo_symbol(ticker, unquote(exchange))
-
-
-def _parse_us(html: str, *, sp500: bool) -> pd.DataFrame:
-    table = BeautifulSoup(html, "lxml").find("table", id="constituents")
-    if table is None:
-        raise ValueError("Wikipedia constituents table not found")
-    output = []
-    for row in _rows(table):
-        company = _cell(row, "security", "company")
-        record = {
-            "symbol": to_yahoo_symbol_us(_text(_cell(row, "symbol", "ticker"))),
-            "name": _text(company),
-            "sector": _text(_cell(row, "gics sector", "gics sector[3]")),
-            "wikipedia_title": _article(company),
-        }
-        if sp500:
-            record["cik"] = cik10(_text(_cell(row, "cik")))
-        output.append(record)
-    columns = ["symbol", "name", "sector"] + (["cik"] if sp500 else []) + ["wikipedia_title"]
-    return pd.DataFrame(output, columns=columns)
+from ingest.net import RateLimiter, build_session, fetch_response
+from tradepulse.contracts import REPO_ROOT
 
 
 def to_yahoo_symbol_us(ticker: str) -> str:
-    """Wikipedia/SEC US ticker -> Yahoo symbol: strip, upper-case, '.' -> '-' (BRK.B -> BRK-B)."""
     return ticker.strip().upper().replace(".", "-")
 
 
 def eu_yahoo_symbol(ticker: str, exchange: str) -> str:
-    """European ticker + exchange text -> Yahoo symbol, using the exchange map in ingest/TASK.md.
+    mapping = [
+        ("xetra|frankfurt|deutsche börse", ".DE"),
+        ("paris", ".PA"),
+        ("amsterdam", ".AS"),
+        ("brussels", ".BR"),
+        ("milan|borsa italiana", ".MI"),
+        ("madrid|bme", ".MC"),
+        ("helsinki", ".HE"),
+        ("dublin", ".IR"),
+        ("lisbon", ".LS"),
+    ]
+    for aliases, suffix in mapping:
+        if any(alias in exchange.lower() for alias in aliases.split("|")):
+            return "-".join(ticker.strip().upper().split()) + suffix
+    raise ValueError(f"Unsupported exchange: {exchange}")
 
-    Matching is case-insensitive on substrings of `exchange`. The ticker is stripped and
-    upper-cased; inner spaces become '-'. Unknown exchange -> ValueError (never guess).
-    """
-    symbol = "-".join(ticker.strip().upper().split())
-    for suffix, names in EXCHANGES.items():
-        if any(name in exchange.casefold() for name in names):
-            return symbol if symbol.endswith(suffix) else symbol + suffix
-    raise ValueError(f"Unknown European exchange: {exchange}")
+
+def _table_rows(table):
+    rows = table.find_all("tr")
+    if not rows:
+        return []
+    headers = [_text(c) for c in rows[0].find_all(["th", "td"])]
+    output = []
+    for row in rows[1:]:
+        cells = row.find_all(["td", "th"], recursive=False)
+        if len(cells) == len(headers):
+            output.append(dict(zip(headers, cells)))
+    return output
+
+
+def _cell(row, *keys):
+    for key in keys:
+        if key in row:
+            return row[key]
+    raise ValueError(f"Missing source column: {keys}")
+
+
+def _text(cell):
+    for note in cell.select("sup"):
+        note.decompose()
+    return cell.get_text(" ", strip=True)
+
+
+def _title(cell):
+    for link in cell.find_all("a", href=True):
+        url = urlsplit(urljoin("https://en.wikipedia.org/wiki/", link["href"]))
+        if url.hostname == "en.wikipedia.org" and url.path.startswith("/wiki/"):
+            return unquote(url.path[6:])
+    return None
+
+
+def _parse_us(html, sp500):
+    table = BeautifulSoup(html, "lxml").find("table", id="constituents")
+    if table is None:
+        raise ValueError("Constituents table missing; provider layout changed")
+    rows = []
+    for source in _table_rows(table):
+        company = _cell(source, "Security", "Company")
+        row = {
+            "symbol": to_yahoo_symbol_us(_text(_cell(source, "Symbol", "Ticker"))),
+            "name": _text(company),
+            "sector": _text(source["GICS Sector"]) if "GICS Sector" in source else None,
+            "wikipedia_title": _title(company),
+        }
+        if sp500:
+            row["cik"] = str(int(_text(_cell(source, "CIK")))).zfill(10)
+        rows.append(row)
+    columns = ["symbol", "name", "sector"] + (["cik"] if sp500 else []) + ["wikipedia_title"]
+    return pd.DataFrame(rows, columns=columns)
 
 
 def parse_sp500(html: str) -> pd.DataFrame:
-    """Parse the Wikipedia S&P 500 page (table id="constituents").
-
-    Returns columns: symbol (Yahoo form), name, sector (GICS Sector), cik (10-digit zero-padded
-    string), wikipedia_title (from the company link href after /wiki/, URL-decoded; None if no link).
-    Hint: pandas.read_html(..., attrs={"id": "constituents"}, extract_links="body").
-    """
-    return _parse_us(html, sp500=True)
+    return _parse_us(html, True)
 
 
 def parse_nasdaq100(html: str) -> pd.DataFrame:
-    """Parse the Wikipedia Nasdaq-100 page (table id="constituents").
-
-    Returns columns: symbol (Yahoo form), name, sector, wikipedia_title. Column headers may be
-    'Ticker' or 'Symbol' and 'Company' or 'Security'; accept both.
-    """
-    return _parse_us(html, sp500=False)
+    return _parse_us(html, False)
 
 
 def parse_eurostoxx50(html: str) -> pd.DataFrame:
-    """Parse the Wikipedia EURO STOXX 50 components table.
-
-    Returns columns: symbol (Yahoo form via eu_yahoo_symbol), name, sector, country (ISO alpha-2),
-    wikipedia_title. Inspect the live page and document the columns you rely on in a comment.
-    """
-    # Expected headers: Company/Name, Ticker/Symbol, Sector/Industry/ICB sector,
-    # Country and Exchange/Stock exchange. Verify these against the first live page;
-    # absent exchange information must fail rather than invent a Yahoo suffix.
-    soup = BeautifulSoup(html, "lxml")
-    for table in soup.find_all("table"):
-        rows = _rows(table)
-        if not rows or not ({"ticker", "symbol", "ticker symbol"} & rows[0].keys()):
+    # Wikipedia inspected 2026-10-23: Ticker, Main listing, Name, Corporate form,
+    # Registered office, Sector, Founded. Main listing supplies the exchange; registered
+    # office is NOT the listing country. Also accept the explicit Exchange/Country layout.
+    countries = {
+        "Germany": "DE",
+        "France": "FR",
+        "Netherlands": "NL",
+        "Belgium": "BE",
+        "Italy": "IT",
+        "Spain": "ES",
+        "Finland": "FI",
+        "Ireland": "IE",
+        "Portugal": "PT",
+        "Luxembourg": "LU",
+    }
+    for table in BeautifulSoup(html, "lxml").find_all("table"):
+        records = _table_rows(table)
+        if not records or not ("Exchange" in records[0] or "Main listing" in records[0]):
             continue
-        if not ({"company", "name"} & rows[0].keys()):
-            continue
-        output = []
-        for row in rows:
-            company = _cell(row, "company", "name")
-            country = _text(_cell(row, "country"))
-            country_code = COUNTRIES.get(country.casefold(), country.upper())
-            if len(country_code) != 2:
-                raise ValueError(f"Unknown country in EURO STOXX table: {country}")
-            output.append(
+        result = []
+        for row in records:
+            company = _cell(row, "Company", "Name")
+            listing = _text(_cell(row, "Exchange", "Main listing"))
+            # The abbreviated exchange labels are explicit links on the source page.
+            exchange = {"FWB": "Frankfurt", "BMAD": "Madrid", "BIT": "Borsa Italiana"}.get(
+                listing.split(":")[0].strip(), listing
+            )
+            ticker = _text(_cell(row, "Ticker", "Symbol"))
+            # Ticker may already carry a Yahoo suffix. Derive the suffix from the exchange.
+            symbol = eu_yahoo_symbol(ticker.rsplit(".", 1)[0], exchange)
+            country = {
+                ".DE": "DE",
+                ".PA": "FR",
+                ".AS": "NL",
+                ".BR": "BE",
+                ".MI": "IT",
+                ".MC": "ES",
+                ".HE": "FI",
+                ".IR": "IE",
+                ".LS": "PT",
+            }[symbol[-3:]]
+            if "Country" in row:
+                raw_country = _text(row["Country"])
+                if raw_country not in countries and raw_country not in countries.values():
+                    raise ValueError(f"Unknown country: {raw_country}")
+                country = countries.get(raw_country, raw_country)
+            result.append(
                 {
-                    "symbol": _eu_symbol(row),
+                    "symbol": symbol,
                     "name": _text(company),
-                    "sector": _text(
-                        _cell(
-                            row,
-                            "sector",
-                            "industry",
-                            "icb sector",
-                            "gics sector",
-                            "supersector",
-                            "icb supersector",
-                        )
-                    ),
-                    "country": country_code,
-                    "wikipedia_title": _article(company),
+                    "sector": _text(_cell(row, "Industry", "Sector")),
+                    "country": country,
+                    "wikipedia_title": _title(company),
                 }
             )
-        return pd.DataFrame(
-            output, columns=["symbol", "name", "sector", "country", "wikipedia_title"]
-        )
-    raise ValueError("EURO STOXX components table not found")
+        return pd.DataFrame(result)
+    raise ValueError("EU components table requires explicit Exchange and Country columns")
 
 
 def combine_us(
@@ -205,20 +166,11 @@ def combine_us(
     ticker_ciks: dict[str, str],
     snapshot_date: dt.date,
 ) -> pd.DataFrame:
-    """Merge the US sources into rows that satisfy the universe_member contract.
-
-    - One row per symbol; pool "us_equity", currency "USD", country "US".
-    - index_membership joins the sources the symbol appears in, in the order SP500|NDX|EXTRA.
-    - name, sector and wikipedia_title come from the first source in that order that has them.
-    - cik comes from sp500 when present, else from ticker_ciks[symbol], else None.
-    - extras columns: symbol, name, sector (plus optional notes columns that are ignored).
-    """
-    members: dict[str, dict] = {}
-    ciks = {to_yahoo_symbol_us(symbol): cik10(cik) for symbol, cik in ticker_ciks.items()}
-    for membership, frame in (("SP500", sp500), ("NDX", ndx), ("EXTRA", extras)):
-        for source in frame.to_dict("records"):
-            symbol = to_yahoo_symbol_us(source["symbol"])
-            row = members.setdefault(
+    merged = {}
+    for label, source in [("SP500", sp500), ("NDX", ndx), ("EXTRA", extras)]:
+        for item in source.to_dict("records"):
+            symbol = to_yahoo_symbol_us(item["symbol"])
+            row = merged.setdefault(
                 symbol,
                 {
                     "pool": "us_equity",
@@ -227,86 +179,162 @@ def combine_us(
                     "sector": None,
                     "country": "US",
                     "currency": "USD",
-                    "cik": ciks.get(symbol),
+                    "cik": None,
                     "wikipedia_title": None,
                     "index_membership": "",
                     "snapshot_date": snapshot_date,
                 },
             )
             memberships = row["index_membership"].split("|") if row["index_membership"] else []
-            if membership not in memberships:
-                row["index_membership"] = "|".join([*memberships, membership])
+            if label not in memberships:
+                row["index_membership"] = "|".join(memberships + [label])
             for key in ("name", "sector", "wikipedia_title"):
-                value = source.get(key)
-                if row[key] is None and pd.notna(value) and str(value).strip():
-                    row[key] = value
-            if membership == "SP500" and pd.notna(source.get("cik")):
-                row["cik"] = cik10(source["cik"])
-    return table_frame("universe_member", list(members.values()))
+                if pd.isna(row[key]) and pd.notna(item.get(key)) and item.get(key):
+                    row[key] = item[key]
+            if label == "SP500" and pd.notna(item.get("cik")):
+                row["cik"] = str(int(item["cik"])).zfill(10)
+    for symbol, row in merged.items():
+        if row["cik"] is None and symbol in ticker_ciks:
+            row["cik"] = str(int(ticker_ciks[symbol])).zfill(10)
+    return (
+        frame(list(merged.values()), "universe_member").sort_values("symbol").reset_index(drop=True)
+    )
+
+
+def fetch_universe_sources():
+    with build_session(environment("WIKIMEDIA_USER_AGENT")) as session:
+        limiter = RateLimiter(50)
+        pages = [
+            fetch_response(session, "https://en.wikipedia.org/wiki/" + path, limiter).text
+            for path in ["List_of_S%26P_500_companies", "Nasdaq-100", "EURO_STOXX_50"]
+        ]
+        if BeautifulSoup(pages[1], "lxml").find("table", id="constituents") is None:
+            # The index article now links to a dedicated constituents article.
+            soup = BeautifulSoup(pages[1], "lxml")
+            link = soup.find(
+                "a",
+                href=lambda href: (
+                    bool(href) and href.endswith("/wiki/List_of_NASDAQ-100_companies")
+                ),
+            )
+            if link is None:
+                raise ValueError(
+                    "Nasdaq constituent table and linked component article are missing"
+                )
+            pages[1] = fetch_response(
+                session, "https://en.wikipedia.org/wiki/List_of_NASDAQ-100_companies", limiter
+            ).text
+    with build_session(environment("SEC_USER_AGENT")) as session:
+        tickers = fetch_response(
+            session, "https://www.sec.gov/files/company_tickers.json", RateLimiter(8)
+        ).json()
+    return pages, {
+        to_yahoo_symbol_us(v["ticker"]): str(v["cik_str"]).zfill(10) for v in tickers.values()
+    }
 
 
 def run(as_of: dt.date, root: Path | None = None) -> pd.DataFrame:
-    """Fetch every source, build all three pools, write the table with lake.write_table and return it."""
-    root = project_root(root)
-    directory = root / "config" / "universe"
-    crypto = pd.read_csv(directory / "crypto.csv", dtype="string")
-    symbol_column = "yahoo_symbol" if "yahoo_symbol" in crypto else "symbol"
-    if crypto[symbol_column].isna().any() or crypto[symbol_column].str.strip().eq("").any():
-        raise ValueError(
-            "config/universe/crypto.csv has missing Yahoo symbols; curate before running"
-        )
-    snapshot_date = dt.datetime.now(dt.timezone.utc).date()
-    wiki_limiter, sec_limiter = RateLimiter(50), RateLimiter(8)
-    with build_session(user_agent("WIKIMEDIA_USER_AGENT", root)) as wiki_session:
-        pages = []
-        for page in ("List_of_S%26P_500_companies", "Nasdaq-100", "EURO_STOXX_50"):
-            response = get_with_retries(
-                wiki_session, f"https://en.wikipedia.org/wiki/{page}", wiki_limiter
-            )
-            response.raise_for_status()
-            pages.append(response.text)
-    with build_session(user_agent("SEC_USER_AGENT", root)) as sec_session:
-        response = get_with_retries(
-            sec_session, "https://www.sec.gov/files/company_tickers.json", sec_limiter
-        )
-        response.raise_for_status()
-        ticker_ciks = {
-            entry["ticker"]: cik10(entry["cik_str"]) for entry in response.json().values()
-        }
+    pages, tickers = fetch_universe_sources()
+    base = REPO_ROOT / "config/universe"
+    # Current constituents cannot be represented as a historical membership snapshot.
+    snapshot = dt.datetime.now(dt.UTC).date()
     us = combine_us(
         parse_sp500(pages[0]),
         parse_nasdaq100(pages[1]),
-        pd.read_csv(directory / "us_extras.csv"),
-        ticker_ciks,
-        snapshot_date,
+        pd.read_csv(base / "us_extras.csv"),
+        tickers,
+        snapshot,
     )
-    if us["cik"].isna().any():
-        raise ValueError("SEC ticker map did not resolve every US member CIK")
-    eu = parse_eurostoxx50(pages[2])
-    eu["index_membership"] = "SX5E"
-    extra = pd.read_csv(directory / "eu_extras.csv")
-    extra["index_membership"] = "EXTRA"
-    eu = pd.concat([eu, extra], ignore_index=True)
-    eu["symbol"] = eu["symbol"].str.strip().str.upper()
-    for symbol, group in eu.groupby("symbol", sort=False):
-        eu.loc[eu["symbol"] == symbol, "index_membership"] = "|".join(
-            dict.fromkeys(group["index_membership"])
+    if us.sector.isna().any():
+        source_sectors = fetch_gics_sectors()
+        missing = us.sector.isna()
+        us.loc[missing, "sector"] = us.loc[missing, "symbol"].map(source_sectors)
+        from ingest.common import report
+
+        report(
+            pd.DataFrame(
+                [
+                    {
+                        "symbol": symbol,
+                        "sector": source_sectors.get(symbol),
+                        "source": GICS_HOLDINGS_URL,
+                        "taxonomy": "GICS",
+                    }
+                    for symbol in us.loc[missing, "symbol"]
+                ]
+            ),
+            "universe_sector_sources.csv",
+            root,
         )
-    eu = eu.groupby("symbol", sort=False, as_index=False).first()
-    eu = eu.assign(pool="eu_equity", currency="EUR", cik=None, snapshot_date=snapshot_date)
-    crypto = crypto.assign(symbol=crypto[symbol_column].str.strip().str.upper())
-    crypto = crypto.rename(columns={"category": "sector"})
+        if us.sector.isna().any():
+            raise ValueError(
+                "US members still lack verified GICS sectors; see universe_sector_sources.csv"
+            )
+    eu = parse_eurostoxx50(pages[2]).assign(index_membership="SX5E")
+    extras = pd.read_csv(base / "eu_extras.csv").assign(index_membership="EXTRA")
+    eu = pd.concat([eu, extras], ignore_index=True)
+    eu["index_membership"] = eu.groupby("symbol")["index_membership"].transform(
+        lambda s: "|".join(dict.fromkeys(s))
+    )
+    eu = eu.drop_duplicates("symbol").assign(
+        pool="eu_equity", currency="EUR", cik=None, snapshot_date=snapshot
+    )
+    crypto = pd.read_csv(base / "crypto.csv").rename(columns={"category": "sector"})
+    if crypto.symbol.isna().any():
+        raise ValueError(
+            "Complete missing symbols in config/universe/crypto.csv before live ingestion"
+        )
     crypto = crypto.assign(
         pool="crypto",
-        currency="USD",
         country=None,
+        currency="USD",
         cik=None,
         index_membership="CRYPTO_TOP",
-        snapshot_date=snapshot_date,
+        snapshot_date=snapshot,
     )
-    output = table_frame(
-        "universe_member",
-        [*us.to_dict("records"), *eu.to_dict("records"), *crypto.to_dict("records")],
+    result = frame(pd.concat([us, eu, crypto]).to_dict("records"), "universe_member")
+    write_table(result, "universe_member", root, as_of)
+    return result
+
+
+GICS_HOLDINGS_URL = (
+    "https://www.ishares.com/uk/individual/en/products/253741/"
+    "ishares-nasdaq-100-ucits-etf/latest-holdings.csv"
+)
+
+
+def fetch_gics_sectors():
+    """Use the issuer's Nasdaq holdings sector data, never translate ICB labels."""
+    from io import StringIO
+
+    with build_session(environment("WIKIMEDIA_USER_AGENT")) as session:
+        text = fetch_response(session, GICS_HOLDINGS_URL, RateLimiter(1)).text
+    cache = REPO_ROOT / "data/cache/diagnostics/CNDX_holdings.csv"
+    cache.parent.mkdir(parents=True, exist_ok=True)
+    cache.write_text(text, encoding="utf-8")
+    lines = text.lstrip("\ufeff").splitlines()
+    header = next(
+        (i for i, line in enumerate(lines) if line.startswith(("Ticker,", '"Ticker",'))), None
     )
-    write_table(output, "universe_member", root, as_of)
-    return output
+    if header is None:
+        raise ValueError("iShares holdings CSV header missing")
+    data = pd.read_csv(StringIO("\n".join(lines[header:])))
+    data = data[data["Asset Class"] == "Equity"].copy()
+    # BlackRock abbreviates this GICS sector as "Communication" in its CSV.
+    data["Sector"] = data["Sector"].replace({"Communication": "Communication Services"})
+    allowed = {
+        "Information Technology",
+        "Health Care",
+        "Consumer Discretionary",
+        "Consumer Staples",
+        "Communication Services",
+        "Industrials",
+        "Energy",
+        "Financials",
+        "Real Estate",
+        "Utilities",
+        "Materials",
+    }
+    if not set(data.Sector) <= allowed:
+        raise ValueError("Issuer holdings sector labels are not the required GICS vocabulary")
+    return dict(zip(data.Ticker, data.Sector))

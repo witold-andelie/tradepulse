@@ -71,6 +71,7 @@ proves live services work, or establishes predictive investment performance.
 
 - [Frontend tasks](../web/TASK.md), [integration details](../web/INTEGRATION.md) and
   [acceptance](../web/ACCEPTANCE.md)
+- [Detailed current instructions for Huyin](../web/HUYIN_NEXT_STEPS.md)
 - [Ingest](../ingest/TASK.md), [quant/C review](../quant/TASK.md),
   [sponsor integration tasks](../integrations/TASK.md)
 - [Core implementation](../tradepulse/README.md), [architecture](architecture/README.md),

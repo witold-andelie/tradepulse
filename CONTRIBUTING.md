@@ -2,6 +2,8 @@
 
 Read [current project status](docs/STATUS.md), your folder's TASK, ACCEPTANCE and AGENTS files.
 Task catalogues describe the required behavior; the status sections identify what remains.
+Huyin's detailed current review assignment is in
+[web/HUYIN_NEXT_STEPS.md](web/HUYIN_NEXT_STEPS.md).
 
 ## Team and current work
 

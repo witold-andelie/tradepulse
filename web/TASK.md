@@ -1,5 +1,8 @@
 # Member B — Web app (`web/`)
 
+Huyin's detailed current assignment is [HUYIN_NEXT_STEPS.md](HUYIN_NEXT_STEPS.md).
+It supersedes the earlier message asking for three new placeholder implementations.
+
 > **Main baseline (2026-10-24): Huyin has already implemented B1–B10.** Integration `aaf3b5f`
 > preserves her original commits, six business pages, Discover, Simple/Pro presentation,
 > keyboard interactions, numeric chart alternatives and accessibility work. The pages are

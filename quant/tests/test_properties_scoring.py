@@ -92,6 +92,7 @@ def test_sue_scale_and_sign(seed):
     ends = pd.date_range("2020-03-31", periods=20, freq="QE")
     eps = pd.DataFrame({"period_end": ends, "value": rng.normal(1.0, 0.3, 20),
                         "filed": ends + pd.Timedelta(days=30)})
+    before = eps.copy()
     base = ea.sue(eps)
     scaled = ea.sue(eps.assign(value=eps["value"] * 2.5))
     assert np.allclose(scaled["sue"], base["sue"], equal_nan=True)
@@ -99,7 +100,7 @@ def test_sue_scale_and_sign(seed):
     negated = ea.sue(eps.assign(value=-eps["value"]))
     assert np.allclose(negated["sue"], -base["sue"], equal_nan=True)
     assert base["sue"].iloc[:8].isna().all()  # needs 4 diffs before q, and diffs need 4 quarters
-    pd.testing.assert_frame_equal(eps, eps.copy())
+    pd.testing.assert_frame_equal(eps, before)  # sue must not modify its input
 
 
 @pytest.mark.parametrize("seed", SEEDS)

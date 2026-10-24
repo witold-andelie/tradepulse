@@ -1,11 +1,12 @@
-"""Polite HTTP: contact User-Agent, rate limiting and bounded retries (task A1-A6)."""
+"""Bounded, rate-limited HTTP with contact identification."""
 
 from __future__ import annotations
 
 import math
 import threading
 import time
-from typing import Callable
+from collections.abc import Callable
+from urllib.parse import urlsplit
 
 import requests
 
@@ -13,16 +14,14 @@ RETRY_STATUSES = frozenset({429, *range(500, 600)})
 
 
 class IngestHTTPError(RuntimeError):
-    """Raised when a request still fails after the last retry."""
+    """A provider request failed after bounded retries."""
+
+    def __init__(self, message, status_code=None):
+        super().__init__(message)
+        self.status_code = status_code
 
 
 class RateLimiter:
-    """Guarantee at least 1 / max_per_second seconds between consecutive wait() returns.
-
-    clock and sleep are injectable so tests can use a fake clock.
-    The first call never sleeps.
-    """
-
     def __init__(
         self,
         max_per_second: float,
@@ -30,34 +29,40 @@ class RateLimiter:
         sleep: Callable[[float], None] = time.sleep,
     ) -> None:
         if not math.isfinite(max_per_second) or max_per_second <= 0:
-            raise ValueError("max_per_second must be positive and finite")
-        self._interval = 1.0 / max_per_second
-        self._clock = clock
-        self._sleep = sleep
-        self._last: float | None = None
-        self._lock = threading.Lock()
+            raise ValueError("max_per_second must be finite and positive")
+        self.interval = 1 / max_per_second
+        self.clock, self.sleep, self.last = clock, sleep, None
+        self.lock = threading.Lock()
 
     def wait(self) -> None:
-        with self._lock:
-            now = self._clock()
-            if self._last is not None:
-                delay = self._last + self._interval - now
+        with self.lock:
+            now = self.clock()
+            if self.last is not None:
+                delay = self.last + self.interval - now
                 if delay > 0:
-                    self._sleep(delay)
-            self._last = self._clock()
+                    self.sleep(delay)
+            self.last = self.clock()
+
+
+class PolicySession(requests.Session):
+    """Apply timeouts and spacing to every transport send, including redirects."""
+
+    def __init__(self):
+        super().__init__()
+        self.limiter = RateLimiter(1)
+        self.max_redirects = 5
+
+    def send(self, request, **kwargs):
+        kwargs["timeout"] = kwargs.get("timeout") or 30.0
+        self.limiter.wait()
+        return super().send(request, **kwargs)
 
 
 def build_session(user_agent: str) -> requests.Session:
-    """Return a Session whose User-Agent header is user_agent.
-
-    Raise ValueError when user_agent is empty or contains no e-mail address ('@'):
-    SEC and Wikimedia require contact details.
-    """
     if not user_agent.strip() or "@" not in user_agent:
-        raise ValueError("A contact User-Agent is required in the provider environment variable")
-    session = requests.Session()
+        raise ValueError("A contact User-Agent is required")
+    session = PolicySession()
     session.headers["User-Agent"] = user_agent
-    session.max_redirects = 5
     return session
 
 
@@ -72,66 +77,38 @@ def get_with_retries(
     sleep: Callable[[float], None] = time.sleep,
     **kwargs,
 ) -> requests.Response:
-    """GET url, waiting on limiter before every attempt.
-
-    - Status in RETRY_STATUSES, requests.Timeout or requests.ConnectionError -> retry after
-      sleep(backoff * 2**i) for i = 0, 1, ... (so 1 s, 2 s with the defaults), up to `attempts`
-      attempts in total.
-    - Any other status (including 404) -> return the response immediately; the caller decides.
-    - Still failing after the last attempt -> raise IngestHTTPError naming the url and last status.
-    """
-    if attempts < 1 or attempts > 3:
+    if not isinstance(attempts, int) or not 1 <= attempts <= 3:
         raise ValueError("attempts must be between 1 and 3")
-    if not math.isfinite(timeout) or timeout <= 0 or timeout > 30:
-        raise ValueError("timeout must be positive and at most 30 seconds")
+    if not math.isfinite(timeout) or not 0 < timeout <= 30:
+        raise ValueError("timeout must be finite, positive and at most 30 seconds")
     if not math.isfinite(backoff) or backoff < 0:
-        raise ValueError("backoff must be nonnegative and finite")
-    # Return non-retry statuses literally, including redirects. Automatic redirect
-    # requests would bypass the limiter; providers use canonical URLs in callers.
-    kwargs.setdefault("allow_redirects", False)
+        raise ValueError("backoff must be finite and nonnegative")
     last = "unknown"
-    for attempt in range(attempts):
-        limiter.wait()
+    if isinstance(session, PolicySession):
+        session.limiter = limiter
+    for i in range(attempts):
+        if not isinstance(session, PolicySession):
+            limiter.wait()
         try:
             response = session.get(url, timeout=timeout, **kwargs)
-        except (requests.Timeout, requests.ConnectionError) as error:
-            last = type(error).__name__
-        else:
-            if response.status_code not in RETRY_STATUSES:
+            last = response.status_code
+            if last not in RETRY_STATUSES:
                 return response
-            last = str(response.status_code)
-            if hasattr(response, "close"):
-                response.close()
-        if attempt + 1 < attempts:
-            sleep(backoff * 2**attempt)
-    raise IngestHTTPError(f"GET {url} failed after {attempts} attempts; last status: {last}")
+        except (requests.Timeout, requests.ConnectionError) as exc:
+            last = type(exc).__name__
+        if i + 1 < attempts:
+            sleep(backoff * 2**i)
+    parsed = urlsplit(url)
+    raise IngestHTTPError(
+        f"GET {parsed.hostname}{parsed.path} failed: {last}",
+        last if isinstance(last, int) else None,
+    ) from None
 
 
-class YahooAdapter(requests.adapters.HTTPAdapter):
-    """Apply the same policy to all yfinance transport calls, including cookies and POSTs.
-
-    yfinance owns its protocol and parsing; the adapter limits each actual HTTP attempt.
-    urllib3 retries are disabled to avoid multiplying the bounded retry budget.
-    """
-
-    def __init__(self, limiter: RateLimiter) -> None:
-        super().__init__(max_retries=0)
-        self._limiter = limiter
-
-    def send(self, request: requests.PreparedRequest, **kwargs) -> requests.Response:
-        kwargs["timeout"] = 30.0
-        last = "unknown"
-        for attempt in range(3):
-            self._limiter.wait()
-            try:
-                response = super().send(request, **kwargs)
-            except (requests.Timeout, requests.ConnectionError) as error:
-                last = type(error).__name__
-            else:
-                if response.status_code not in RETRY_STATUSES:
-                    return response
-                last = str(response.status_code)
-                response.close()
-            if attempt < 2:
-                time.sleep(2**attempt)
-        raise IngestHTTPError(f"Yahoo request failed after 3 attempts; last status: {last}")
+def fetch_response(session, url, limiter):
+    response = get_with_retries(session, url, limiter)
+    if response.status_code != 200:
+        raise IngestHTTPError(
+            f"Provider returned HTTP {response.status_code}", response.status_code
+        )
+    return response

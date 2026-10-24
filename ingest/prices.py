@@ -1,234 +1,234 @@
-"""price_bar table (task A2). See contracts/tables/price_bar.json."""
+"""Daily Yahoo bars and explicit per-member coverage reports."""
 
 from __future__ import annotations
 
 import datetime as dt
-from pathlib import Path
 import time
+from pathlib import Path
 
 import pandas as pd
 
-from ingest._common import (
-    concat_tables,
-    project_root,
-    report_path,
-    table_frame,
-    user_agent,
-    window_start,
-)
+from ingest.common import environment, frame, report, window_start
 from ingest.lake import read_table, write_table
-from ingest.net import RateLimiter, YahooAdapter, build_session
+from ingest.net import RETRY_STATUSES, IngestHTTPError, RateLimiter, build_session
+from tradepulse.contracts import REPO_ROOT
 
 REFERENCE_SYMBOLS = ("SPY", "^VIX", "^VIX3M", "^STOXX50E", "BTC-USD")
-RAW_COLUMNS = ("symbol", "date", "Open", "High", "Low", "Close", "Adj Close", "Volume")
-
-
-def _session_date(value: object) -> pd.Timestamp:
-    stamp = pd.Timestamp(value)
-    return stamp.tz_localize(None).normalize() if stamp.tzinfo else stamp.normalize()
+RAW_COLUMNS = ["symbol", "date", "Open", "High", "Low", "Close", "Adj Close", "Volume"]
 
 
 def to_price_bars(
     raw: pd.DataFrame, pool: str, currency_by_symbol: dict[str, str], ingested_at: pd.Timestamp
 ) -> pd.DataFrame:
-    """Convert a long raw frame into price_bar rows.
-
-    raw columns: symbol, date, Open, High, Low, Close, Adj Close, Volume (yfinance names, one row
-    per symbol and date). Output columns follow the contract in contract order; source = "yahoo".
-    - Rows with a missing Close or Adj Close are dropped (never filled).
-    - date becomes a timezone-naive midnight datetime64.
-    - Volume 0 or missing on a 'reference' symbol becomes null (indices have no volume).
-    - Output sorted by symbol, date with a fresh RangeIndex.
-    """
-    frame = raw.dropna(subset=["Close", "Adj Close"]).copy()
-    frame = frame.rename(
-        columns={
-            "Open": "open",
-            "High": "high",
-            "Low": "low",
-            "Close": "close",
-            "Adj Close": "adj_close",
-            "Volume": "volume",
-        }
+    out = raw.dropna(subset=["Close", "Adj Close"]).copy()
+    out = out.rename(columns={k: k.lower().replace(" ", "_") for k in RAW_COLUMNS})
+    out["date"] = out["date"].map(lambda v: pd.Timestamp(v).tz_localize(None).normalize())
+    out["pool"], out["currency"], out["source"], out["ingested_at"] = (
+        pool,
+        out.symbol.map(currency_by_symbol),
+        "yahoo",
+        ingested_at,
     )
-    frame["date"] = frame["date"].map(_session_date)
-    frame["currency"] = frame["symbol"].map(currency_by_symbol)
-    if frame["currency"].isna().any():
-        raise ValueError("Missing price currency for a requested symbol")
     if pool == "reference":
-        frame["volume"] = frame["volume"].mask(frame["volume"].eq(0))
-    frame = frame.assign(pool=pool, source="yahoo", ingested_at=ingested_at)
-    return table_frame("price_bar", frame).sort_values(["symbol", "date"]).reset_index(drop=True)
+        out["volume"] = out["volume"].replace(0, float("nan"))
+    return (
+        frame(out.to_dict("records"), "price_bar")
+        .sort_values(["symbol", "date"])
+        .reset_index(drop=True)
+    )
 
 
 def coverage_report(bars: pd.DataFrame, calendar: pd.DatetimeIndex) -> pd.DataFrame:
-    """One row per (pool, symbol): rows, first_date, last_date, coverage.
-
-    coverage = (number of calendar dates between first_date and the calendar's last date that the
-    symbol has a bar for) / (number of calendar dates in that same range). A symbol listed recently
-    is therefore not punished for dates before it existed. Sorted by coverage ascending.
-    """
-    calendar = pd.DatetimeIndex([_session_date(value) for value in calendar]).unique().sort_values()
-    output = []
-    for (pool, symbol), group in bars.groupby(["pool", "symbol"], sort=True):
-        dates = pd.DatetimeIndex(group["date"].map(_session_date)).unique().sort_values()
-        eligible = calendar[calendar >= dates.min()]
-        coverage = len(dates.intersection(eligible)) / len(eligible) if len(eligible) else 0.0
-        output.append(
+    calendar = pd.DatetimeIndex(calendar).normalize().unique().sort_values()
+    result = []
+    for (pool, symbol), group in bars.groupby(["pool", "symbol"]):
+        dates = pd.DatetimeIndex(group.date).normalize().unique()
+        first, last = dates.min(), dates.max()
+        expected = calendar[calendar >= first]
+        result.append(
             {
                 "pool": pool,
                 "symbol": symbol,
-                "rows": len(dates),
-                "first_date": dates.min(),
-                "last_date": dates.max(),
-                "coverage": coverage,
+                "rows": len(group),
+                "first_date": first,
+                "last_date": last,
+                "coverage": len(expected.intersection(dates)) / len(expected)
+                if len(expected)
+                else 0.0,
             }
         )
     return (
         pd.DataFrame(
-            output, columns=["pool", "symbol", "rows", "first_date", "last_date", "coverage"]
+            result, columns=["pool", "symbol", "rows", "first_date", "last_date", "coverage"]
         )
         .sort_values("coverage", kind="stable")
         .reset_index(drop=True)
     )
 
 
+def _yahoo_session():
+    """Use the shared Session policy, including yfinance's GET and POST requests.
+
+    Verified offline against yfinance 1.7.0, which accepts requests.Session.
+    Versions requiring only curl_cffi must fail rather than bypass this transport.
+    """
+    import requests
+
+    session = build_session(environment("WIKIMEDIA_USER_AGENT"))
+    original_request = session.request
+    limiter = RateLimiter(2)
+    session.limiter = limiter
+
+    def request(method, url, **kwargs):
+        kwargs["timeout"] = 30
+        last = None
+        response = None
+        for attempt in range(3):
+            try:
+                response = original_request(method, url, **kwargs)
+                last = response.status_code
+                if response.status_code not in RETRY_STATUSES:
+                    return response
+            except (requests.Timeout, requests.ConnectionError) as exc:
+                last = type(exc).__name__
+            if attempt < 2:
+                time.sleep(2**attempt)
+        if response is not None:
+            # yfinance interprets cookie/crumb endpoint status itself; preserve the response
+            # so its supported unauthenticated chart path can decide whether a crumb is needed.
+            return response
+        raise IngestHTTPError(
+            f"Yahoo request failed after 3 attempts: {last}",
+            last if isinstance(last, int) else None,
+        ) from None
+
+    session.request = request
+    session.max_redirects = 5
+    return session
+
+
 def fetch_prices(symbols: list[str], start: dt.date, end: dt.date) -> pd.DataFrame:
-    """Download daily bars with yfinance (auto_adjust=False) in batches of 50; return the raw long frame."""
     import yfinance as yf
 
-    if start > end:
-        raise ValueError("start must be on or before end")
+    cache = REPO_ROOT / "data/cache/yfinance"
+    cache.mkdir(parents=True, exist_ok=True)
+    yf.set_tz_cache_location(str(cache))
+
+    if end < start:
+        raise ValueError("Price window is reversed")
     symbols = list(dict.fromkeys(symbols))
-    if not symbols:
-        return pd.DataFrame(columns=RAW_COLUMNS)
-    frames = []
-    limiter = RateLimiter(2)
-    # Yahoo has no separate contact setting; reuse the Wikimedia contact identity.
-    with build_session(user_agent("WIKIMEDIA_USER_AGENT")) as session:
-        adapter = YahooAdapter(limiter)
-        session.mount("https://", adapter)
-        session.mount("http://", adapter)
-        # Newer yfinance can retry internally too. Transport retries own that budget.
-        network = getattr(getattr(yf, "config", None), "network", None)
-        old_retries = getattr(network, "retries", None)
-        if old_retries is not None:
-            network.retries = 0
-        try:
+    parts = []
+    network = getattr(getattr(yf, "config", None), "network", None)
+    old_retries = getattr(network, "retries", None)
+    if old_retries is not None:
+        network.retries = 0
+    try:
+        with _yahoo_session() as session:
             for offset in range(0, len(symbols), 50):
-                if offset:
-                    time.sleep(1.0)
                 batch = symbols[offset : offset + 50]
+                print(
+                    f"Yahoo batch {offset // 50 + 1}/{(len(symbols) + 49) // 50}: {len(batch)} symbols",
+                    flush=True,
+                )
                 raw = yf.download(
                     batch,
-                    start=start,
-                    end=end + dt.timedelta(days=1),
-                    interval="1d",
+                    start=start.isoformat(),
+                    end=(end + dt.timedelta(days=1)).isoformat(),
                     auto_adjust=False,
-                    group_by="ticker",
-                    threads=False,
                     progress=False,
+                    threads=False,
                     timeout=30,
+                    group_by="ticker",
                     session=session,
                 )
-                if raw is None or raw.empty:
-                    continue
                 for symbol in batch:
                     if isinstance(raw.columns, pd.MultiIndex):
-                        level = next(
-                            (
-                                index
-                                for index in range(raw.columns.nlevels)
-                                if symbol in raw.columns.get_level_values(index)
-                            ),
-                            None,
-                        )
-                        if level is None:
+                        if symbol not in raw.columns.get_level_values(0):
                             continue
-                        part = raw.xs(symbol, axis=1, level=level).copy()
-                    elif len(batch) == 1:
-                        part = raw.copy()
+                        one = raw[symbol].copy()
                     else:
-                        raise ValueError("Unexpected yfinance columns for multiple symbols")
-                    # DatetimeIndex.map can retain its original timezone even when
-                    # the function returns naive timestamps; construct explicitly.
-                    part["date"] = pd.DatetimeIndex([_session_date(value) for value in part.index])
-                    part["symbol"] = symbol
-                    part = part.reindex(columns=RAW_COLUMNS)
-                    part = part[part["date"].between(pd.Timestamp(start), pd.Timestamp(end))]
-                    frames.append(part.reset_index(drop=True))
-        finally:
-            if old_retries is not None:
-                network.retries = old_retries
-    return pd.concat(frames, ignore_index=True) if frames else pd.DataFrame(columns=RAW_COLUMNS)
-
-
-def _calendar(bars: pd.DataFrame, pool: str, start: dt.date, end: dt.date) -> pd.DatetimeIndex:
-    if pool == "crypto":
-        return pd.date_range(start, end, freq="D")
-    benchmark = {"us_equity": "SPY", "eu_equity": "^STOXX50E"}[pool]
-    dates = bars.loc[(bars["pool"] == pool) | bars["symbol"].eq(benchmark), "date"]
-    return pd.DatetimeIndex(dates).unique().sort_values()
-
-
-def _coverage(
-    bars: pd.DataFrame, requested: pd.DataFrame, start: dt.date, end: dt.date
-) -> pd.DataFrame:
-    reports = []
-    for pool, members in requested.groupby("pool", sort=False):
-        pool_bars = bars[bars["pool"] == pool]
-        if pool == "reference":
-            parts = []
-            for symbol in members["symbol"]:
-                market = (
-                    "crypto"
-                    if symbol == "BTC-USD"
-                    else ("eu_equity" if symbol == "^STOXX50E" else "us_equity")
-                )
-                parts.append(
-                    coverage_report(
-                        pool_bars[pool_bars["symbol"] == symbol],
-                        _calendar(bars, market, start, end),
-                    )
-                )
-            report = pd.concat(parts, ignore_index=True)
-        else:
-            report = coverage_report(pool_bars, _calendar(bars, pool, start, end))
-        report = members[["pool", "symbol"]].merge(report, how="left", on=["pool", "symbol"])
-        report["rows"] = report["rows"].fillna(0).astype("int64")
-        report["coverage"] = report["coverage"].fillna(0.0)
-        reports.append(report)
-    return pd.concat(reports, ignore_index=True).sort_values("coverage", kind="stable")
+                        one = raw.copy()
+                    if one.empty:
+                        continue
+                    one["date"] = one.index
+                    one["symbol"] = symbol
+                    parts.append(one.reset_index(drop=True).reindex(columns=RAW_COLUMNS))
+                if offset + 50 < len(symbols):
+                    time.sleep(1)
+    finally:
+        if old_retries is not None:
+            network.retries = old_retries
+    return pd.concat(parts, ignore_index=True) if parts else pd.DataFrame(columns=RAW_COLUMNS)
 
 
 def run(as_of: dt.date, root: Path | None = None) -> pd.DataFrame:
-    """Fetch all pools and reference symbols, write price_bar and the coverage report."""
-    root = project_root(root)
-    # Load root-local contact settings before fetch_prices uses the process environment.
-    user_agent("WIKIMEDIA_USER_AGENT", root)
-    universe = read_table("universe_member", root)
-    start = window_start(as_of, root)
-    symbols = list(dict.fromkeys([*universe["symbol"], *REFERENCE_SYMBOLS]))
-    raw = fetch_prices(symbols, start, as_of)
-    raw = raw[pd.to_datetime(raw["date"]).between(pd.Timestamp(start), pd.Timestamp(as_of))]
-    ingested_at = pd.Timestamp.now(tz="UTC")
-    frames = []
-    requested = universe[["pool", "symbol", "currency"]].copy()
-    references = pd.DataFrame(
+    members = read_table("universe_member", root)
+    reference = pd.DataFrame(
         {
-            "pool": "reference",
             "symbol": REFERENCE_SYMBOLS,
+            "pool": "reference",
             "currency": ["USD", "USD", "USD", "EUR", "USD"],
         }
     )
-    requested = pd.concat([requested, references], ignore_index=True)
-    for pool, members in requested.groupby("pool", sort=False):
-        currencies = dict(zip(members["symbol"], members["currency"], strict=True))
-        frames.append(
-            to_price_bars(raw[raw["symbol"].isin(currencies)], pool, currencies, ingested_at)
+    requested = pd.concat([members[["pool", "symbol", "currency"]], reference], ignore_index=True)
+    raw = fetch_prices(requested.symbol.unique().tolist(), window_start(as_of), as_of)
+    parts = []
+    now = pd.Timestamp.now(tz="UTC")
+    for pool, group in requested.groupby("pool"):
+        parts.append(
+            to_price_bars(
+                raw[raw.symbol.isin(group.symbol)],
+                pool,
+                dict(zip(group.symbol, group.currency)),
+                now,
+            )
         )
-    output = concat_tables("price_bar", frames)
-    report = _coverage(output, requested, start, as_of)
-    write_table(output, "price_bar", root, as_of)
-    report.to_csv(report_path(root, "prices_coverage.csv"), index=False)
-    return output
+    result = frame(pd.concat(parts).to_dict("records"), "price_bar")
+    result = result[result.date.between(pd.Timestamp(window_start(as_of)), pd.Timestamp(as_of))]
+    write_coverage(result, requested, as_of, root)
+    write_table(result, "price_bar", root, as_of)
+    return result
+
+
+def write_coverage(result, requested, as_of, root=None):
+    """Recompute report only; references use their own market calendar, never a crypto union."""
+    reports = []
+    benchmarks = {"us_equity": "SPY", "eu_equity": "^STOXX50E", "crypto": "BTC-USD"}
+    for pool, group in requested.groupby("pool"):
+        if pool == "crypto":
+            calendar = pd.date_range(window_start(as_of), as_of)
+        elif pool in benchmarks:
+            calendar = pd.DatetimeIndex(
+                result.loc[
+                    (result.pool == "reference") & (result.symbol == benchmarks[pool]), "date"
+                ]
+            )
+            if calendar.empty:
+                raise ValueError(f"Missing benchmark calendar for {pool}")
+        else:
+            for symbol in group.symbol:
+                if symbol == "BTC-USD":
+                    calendar = pd.date_range(window_start(as_of), as_of)
+                else:
+                    benchmark = "^STOXX50E" if symbol == "^STOXX50E" else "SPY"
+                    calendar = pd.DatetimeIndex(
+                        result.loc[
+                            (result.pool == "reference") & (result.symbol == benchmark), "date"
+                        ]
+                    )
+                one = coverage_report(
+                    result[(result.pool == "reference") & (result.symbol == symbol)], calendar
+                )
+                one = group.loc[group.symbol == symbol, ["pool", "symbol"]].merge(
+                    one, on=["pool", "symbol"], how="left"
+                )
+                one[["rows", "coverage"]] = one[["rows", "coverage"]].fillna(0)
+                reports.append(one)
+            continue
+        coverage = coverage_report(result[result.pool == pool], calendar)
+        coverage = group[["pool", "symbol"]].merge(coverage, on=["pool", "symbol"], how="left")
+        coverage[["rows", "coverage"]] = coverage[["rows", "coverage"]].fillna(0)
+        reports.append(coverage)
+    report(
+        pd.concat(reports).sort_values(["coverage", "pool", "symbol"]), "prices_coverage.csv", root
+    )

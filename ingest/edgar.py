@@ -1,26 +1,20 @@
-"""filing, fundamental_fact and filing_text tables (tasks A4, A5)."""
+"""SEC filings, point-in-time facts, and grounded document text."""
 
 from __future__ import annotations
 
 import datetime as dt
 import hashlib
 from pathlib import Path
-from urllib.parse import parse_qs, unquote, urljoin, urlsplit
+from urllib.parse import parse_qs, urljoin, urlsplit
 
 import pandas as pd
 from bs4 import BeautifulSoup
 
-from ingest._common import (
-    concat_tables,
-    project_root,
-    report_path,
-    table_frame,
-    user_agent,
-    window_start,
-)
+from ingest.common import before_cutoff, environment, frame, report, showcase
 from ingest.lake import read_table, write_table
-from ingest.net import RateLimiter, build_session, get_with_retries
-from tradepulse.contracts import load_table_spec
+from ingest.net import IngestHTTPError, RateLimiter, build_session, fetch_response
+from tradepulse.config import load_config
+from tradepulse.contracts import REPO_ROOT, load_table_spec
 
 ARCHIVES = "https://www.sec.gov/Archives/edgar/data"
 FACT_TAGS = (
@@ -33,77 +27,55 @@ FORMS = ("8-K", "8-K/A", "10-Q", "10-Q/A", "10-K", "10-K/A")
 
 
 def cik10(cik: int | str) -> str:
-    """Zero-pad a CIK to 10 digits: 320193 -> '0000320193'."""
-    value = str(cik).strip()
-    if not value.isascii() or not value.isdigit() or len(value) > 10:
-        raise ValueError("CIK must contain at most 10 decimal digits")
-    return value.zfill(10)
+    text = str(cik).strip()
+    if not text.isdigit() or not 0 < int(text) < 10**10:
+        raise ValueError("CIK must be a positive integer of at most 10 digits")
+    return str(int(text)).zfill(10)
 
 
 def acceptance_to_utc(raw: str) -> pd.Timestamp:
-    """Convert EDGAR submissions 'acceptanceDateTime' to a UTC Timestamp.
-
-    The field looks like '2025-08-05T16:05:12.000Z' but the clock time is US/Eastern
-    (see data-sources.md and the timezone check in TASK.md). Ignore the 'Z', localise to
-    America/New_York (DST-aware), convert to UTC.
-    """
-    stamp = pd.Timestamp(raw.removesuffix("Z"))
-    if stamp.tzinfo is not None:
-        raise ValueError("Expected an EDGAR Eastern clock time with an optional trailing Z")
-    return stamp.tz_localize("America/New_York").tz_convert("UTC")
+    # Required repository interpretation; live collection verifies it before persisting filings.
+    timestamp = pd.Timestamp(raw)
+    if timestamp.tzinfo is not None:
+        timestamp = timestamp.tz_localize(None)
+    return timestamp.tz_localize("America/New_York").tz_convert("UTC")
 
 
 def parse_submissions(payload: dict, symbol: str) -> pd.DataFrame:
-    """Turn submissions JSON (filings.recent column arrays) into filing rows for `symbol`.
-
-    - Keep only forms in FORMS.
-    - items: the raw string, or None when empty.
-    - report_date: None when empty.
-    - primary_doc_url = f"{ARCHIVES}/{int(cik)}/{accession without dashes}/{primaryDocument}".
-    - Columns in contract order, sorted by acceptance_datetime.
-    """
-    cik = cik10(payload["cik"])
-    recent = pd.DataFrame(payload.get("filings", {}).get("recent", {}))
+    recent = payload.get("filings", {}).get("recent", {})
     rows = []
-    for filing in recent.to_dict("records"):
-        if filing["form"] not in FORMS:
+    cik = cik10(payload["cik"])
+    for i, form in enumerate(recent.get("form", [])):
+        if form not in FORMS:
             continue
-        accession = filing["accessionNumber"]
-        document = filing["primaryDocument"]
+        accession = recent["accessionNumber"][i]
+        doc = recent["primaryDocument"][i]
         rows.append(
             {
                 "cik": cik,
                 "symbol": symbol,
                 "accession_number": accession,
-                "form": filing["form"],
-                "items": filing.get("items") or None,
-                "filing_date": filing["filingDate"],
-                "acceptance_datetime": acceptance_to_utc(filing["acceptanceDateTime"]),
-                "report_date": filing.get("reportDate") or None,
-                "primary_document": document,
-                "primary_doc_url": f"{ARCHIVES}/{int(cik)}/{accession.replace('-', '')}/{document}",
+                "form": form,
+                "items": recent["items"][i] or None,
+                "filing_date": recent["filingDate"][i],
+                "acceptance_datetime": acceptance_to_utc(recent["acceptanceDateTime"][i]),
+                "report_date": recent["reportDate"][i] or None,
+                "primary_document": doc,
+                "primary_doc_url": f"{ARCHIVES}/{int(cik)}/{accession.replace('-', '')}/{doc}",
             }
         )
-    return table_frame("filing", rows).sort_values("acceptance_datetime").reset_index(drop=True)
+    return frame(rows, "filing").sort_values("acceptance_datetime").reset_index(drop=True)
 
 
 def parse_companyfacts(payload: dict, symbol: str) -> pd.DataFrame:
-    """Turn companyfacts JSON into fundamental_fact rows for the tags in FACT_TAGS only.
-
-    Each element of facts[taxonomy][tag]["units"][unit] becomes one row:
-    value=val, period_start=start (None for instant facts), period_end=end, fiscal_year=fy,
-    fiscal_period=fp, form, filed, accession_number=accn, frame (None if absent).
-    Exact duplicate rows (same primary key) are dropped. Columns in contract order.
-    """
-    cik = cik10(payload["cik"])
     rows = []
     for taxonomy, tag in FACT_TAGS:
         units = payload.get("facts", {}).get(taxonomy, {}).get(tag, {}).get("units", {})
-        for unit, facts in units.items():
-            for fact in facts:
+        for unit, records in units.items():
+            for fact in records:
                 rows.append(
                     {
-                        "cik": cik,
+                        "cik": cik10(payload["cik"]),
                         "symbol": symbol,
                         "taxonomy": taxonomy,
                         "tag": tag,
@@ -119,175 +91,433 @@ def parse_companyfacts(payload: dict, symbol: str) -> pd.DataFrame:
                         "frame": fact.get("frame"),
                     }
                 )
-    frame = table_frame("fundamental_fact", rows)
-    return frame.drop_duplicates(load_table_spec("fundamental_fact")["primary_key"]).reset_index(
-        drop=True
-    )
+    result = frame(rows, "fundamental_fact")
+    pk = load_table_spec("fundamental_fact")["primary_key"]
+    # EDGAR may repeat a fact with and without a frame. Conflicting values must never be hidden.
+    if not result.empty and (result.groupby(pk, dropna=False).value.nunique() > 1).any():
+        raise ValueError("Conflicting values for a fundamental_fact primary key")
+    return result.drop_duplicates(pk).sort_values(["period_end", "filed"]).reset_index(drop=True)
 
 
 def find_exhibit_url(index_html: str, exhibit_type: str = "EX-99.1") -> str | None:
-    """Find the document of type `exhibit_type` in a filing index page (*-index.htm).
-
-    The page has a table with columns Seq, Description, Document, Type, Size. Return the absolute
-    URL ("https://www.sec.gov" + href) of the first row whose Type equals exhibit_type.
-    Inline-XBRL viewer links ('/ix?doc=/Archives/...') must be turned into the plain
-    '/Archives/...' path. Return None when no row matches.
-    """
-    soup = BeautifulSoup(index_html, "lxml")
-    for table in soup.find_all("table"):
-        headers = []
-        for row in table.find_all("tr"):
-            cells = row.find_all(["th", "td"], recursive=False)
-            values = [cell.get_text(" ", strip=True) for cell in cells]
-            if "Type" in values and "Document" in values:
-                headers = values
-                continue
-            if not headers or len(cells) != len(headers):
-                continue
-            if values[headers.index("Type")] != exhibit_type:
+    for table in BeautifulSoup(index_html, "lxml").find_all("table"):
+        rows = table.find_all("tr")
+        if not rows:
+            continue
+        headers = [c.get_text(strip=True) for c in rows[0].find_all(["th", "td"])]
+        if "Type" not in headers or "Document" not in headers:
+            continue
+        for row in rows[1:]:
+            cells = row.find_all(["th", "td"])
+            if (
+                len(cells) != len(headers)
+                or cells[headers.index("Type")].get_text(strip=True) != exhibit_type
+            ):
                 continue
             link = cells[headers.index("Document")].find("a", href=True)
-            if link is None:
+            if not link:
                 continue
             href = link["href"]
-            parts = urlsplit(href)
-            if parts.path.rstrip("/") in {"/ix", "/ixviewer/doc/action"}:
-                href = parse_qs(parts.query).get("doc", [""])[0]
+            href = parse_qs(urlsplit(href).query).get("doc", [href])[0]
             url = urljoin("https://www.sec.gov", href)
-            parts = urlsplit(url)
-            if parts.scheme != "https" or parts.netloc != "www.sec.gov":
-                raise ValueError("Filing document must be hosted on the SEC archive")
-            if not parts.path.startswith("/Archives/"):
-                raise ValueError("Filing document is outside the SEC archive")
+            if urlsplit(url).hostname != "www.sec.gov" or not urlsplit(url).path.startswith(
+                "/Archives/"
+            ):
+                raise ValueError("Exhibit URL must remain in SEC Archives")
             return url
     return None
 
 
 def html_to_text(html: str, max_chars: int = 200_000) -> str:
-    """Strip tags, drop <script>/<style> content, decode entities (&nbsp; -> space),
-    collapse all whitespace runs to one space, strip, truncate to max_chars."""
     if max_chars < 0:
         raise ValueError("max_chars must be nonnegative")
     soup = BeautifulSoup(html, "lxml")
-    for element in soup(["script", "style"]):
-        element.decompose()
+    for node in soup(["script", "style"]):
+        node.decompose()
     return " ".join(soup.get_text(" ").split())[:max_chars]
 
 
+def fetch_sec(session, limiter, url):
+    import requests
+
+    cache = REPO_ROOT / "data/cache/sec" / dt.datetime.now(dt.UTC).date().isoformat()
+    path = cache / (hashlib.sha256(url.encode()).hexdigest() + ".body")
+    if path.exists():
+        response = requests.Response()
+        response.status_code, response.url, response.encoding = 200, url, "utf-8"
+        response._content = path.read_bytes()
+        response.ingest_fetched_at = pd.Timestamp(path.stat().st_mtime, unit="s", tz="UTC")
+        return response
+    response = fetch_response(session, url, limiter)
+    cache.mkdir(parents=True, exist_ok=True)
+    path.write_bytes(response.content)
+    response.ingest_fetched_at = pd.Timestamp.now(tz="UTC")
+    return response
+
+
+def fetch_optional_sec(session, limiter, url):
+    """Only a genuine 404 is optional; provider blocking and retry exhaustion are fatal."""
+    try:
+        return fetch_sec(session, limiter, url)
+    except IngestHTTPError as exc:
+        if exc.status_code == 404:
+            return None
+        raise
+
+
+def _index_url(cik, accession):
+    return f"{ARCHIVES}/{int(cik)}/{accession.replace('-', '')}/{accession}-index.htm"
+
+
+def fetch_timezone_checks(session, limiter, payload, root=None):
+    """Compare three accepted clocks against index pages; fail closed on a contradiction."""
+    import re
+
+    recent = payload["filings"]["recent"]
+    checks = []
+    for i in range(min(3, len(recent["accessionNumber"]))):
+        accession = recent["accessionNumber"][i]
+        html = fetch_sec(session, limiter, _index_url(payload["cik"], accession)).text
+        text = BeautifulSoup(html, "lxml").get_text(" ", strip=True)
+        match = re.search(r"Accepted\s+(\d{4}-\d{2}-\d{2}\s+\d{2}:\d{2}:\d{2})", text)
+        if not match:
+            raise ValueError("Cannot verify SEC Accepted time on index page")
+        raw = recent["acceptanceDateTime"][i]
+        accepted = pd.Timestamp(match.group(1)).tz_localize("America/New_York").tz_convert("UTC")
+        checks.append(
+            {
+                "accession_number": accession,
+                "raw": raw,
+                "index_accepted": match.group(1),
+                "interpreted_utc": acceptance_to_utc(raw).isoformat(),
+                "matches": accepted == acceptance_to_utc(raw),
+            }
+        )
+    report(pd.DataFrame(checks), "edgar_timezone.csv", root)
+    if len(checks) != 3 or not all(c["matches"] for c in checks):
+        raise ValueError("SEC timezone hypothesis not confirmed; team-lead decision required")
+
+
+def _accepted_from_index(html):
+    """Canonical source approved by the user after the three real comparisons failed."""
+    import re
+
+    text = BeautifulSoup(html, "lxml").get_text(" ", strip=True)
+    match = re.search(r"Accepted\s+(\d{4}-\d{2}-\d{2}\s+\d{2}:\d{2}:\d{2})", text)
+    if not match:
+        raise ValueError("SEC Accepted timestamp missing from index")
+    return pd.Timestamp(match.group(1)).tz_localize("America/New_York").tz_convert("UTC")
+
+
 def run_filings(as_of: dt.date, root: Path | None = None) -> tuple[pd.DataFrame, pd.DataFrame]:
-    """Fetch submissions and companyfacts for every US member; write filing and fundamental_fact."""
-    universe = read_table("universe_member", root)
-    us = universe[universe["pool"] == "us_equity"]
-    if us["cik"].isna().any():
-        raise ValueError("Every US member needs a CIK before fetching SEC data")
-    start = pd.Timestamp(window_start(as_of, root))
-    end = pd.Timestamp(as_of)
-    cutoff = end.tz_localize("UTC") + pd.Timedelta(days=1)
-    filings, facts = [], []
+    from concurrent.futures import ThreadPoolExecutor
+
+    members = read_table("universe_member", root)
+    groups = list(members[members.pool == "us_equity"].groupby("cik", dropna=False))
+    if any(pd.isna(cik) for cik, _ in groups):
+        raise ValueError("US member is missing CIK")
+    user_agent = environment("SEC_USER_AGENT")
     limiter = RateLimiter(8)
-    with build_session(user_agent("SEC_USER_AGENT", root)) as session:
-        for cik, members in us.groupby("cik", sort=False):
-            cik = cik10(cik)
-            payloads = []
-            for url in (
-                f"https://data.sec.gov/submissions/CIK{cik}.json",
-                f"https://data.sec.gov/api/xbrl/companyfacts/CIK{cik}.json",
-            ):
-                response = get_with_retries(session, url, limiter)
-                response.raise_for_status()
-                payloads.append(response.json())
-            for symbol in members["symbol"]:
-                filing = parse_submissions(payloads[0], symbol)
-                mask = filing["filing_date"].between(start, end)
-                mask &= filing["acceptance_datetime"] <= cutoff
-                mask &= filing["report_date"].isna() | filing["report_date"].le(end)
-                filings.append(filing[mask])
-                fact = parse_companyfacts(payloads[1], symbol)
-                mask = fact["filed"].between(start, end) & fact["period_end"].le(end)
-                mask &= fact["period_start"].isna() | fact["period_start"].le(end)
-                facts.append(fact[mask])
-    filing = concat_tables("filing", filings)
-    fact = concat_tables("fundamental_fact", facts)
-    write_table(filing, "filing", root, as_of)
-    write_table(fact, "fundamental_fact", root, as_of)
-    return filing, fact
+    start = pd.Timestamp(as_of) - pd.Timedelta(days=load_config()["backtest"]["window_days"])
+    showcase_names = set(showcase())
+
+    def collect(item):
+        cik, group = item
+        filing_parts, fact_parts, missing, checks = [], [], [], []
+        with build_session(user_agent) as session:
+            response = fetch_optional_sec(
+                session, limiter, f"https://data.sec.gov/submissions/CIK{cik10(cik)}.json"
+            )
+            if response is None:
+                return [], [], [{"cik": cik, "reason": "submissions_HTTP_404"}], []
+            payload = response.json()
+            first_symbol = group.symbol.iloc[0]
+            base = parse_submissions(payload, first_symbol)
+            base = base[base.filing_date <= pd.Timestamp(as_of)].copy()
+            selected = base.filing_date >= start
+            if showcase_names.intersection(group.symbol):
+                latest = base[base.form == "10-K"].sort_values("filing_date").tail(1)
+                selected |= base.accession_number.isin(latest.accession_number)
+            base = base[selected].copy()
+            recent = payload["filings"]["recent"]
+            raw_times = dict(zip(recent["accessionNumber"], recent["acceptanceDateTime"]))
+            for index, filing in base.iterrows():
+                response = fetch_optional_sec(
+                    session, limiter, _index_url(cik, filing.accession_number)
+                )
+                if response is None:
+                    missing.append(
+                        {"cik": cik, "reason": "index_HTTP_404:" + filing.accession_number}
+                    )
+                    base = base.drop(index)
+                    continue
+                accepted = _accepted_from_index(response.text)
+                base.loc[index, "acceptance_datetime"] = accepted
+                checks.append(
+                    {
+                        "accession_number": filing.accession_number,
+                        "cik": cik,
+                        "raw": raw_times[filing.accession_number],
+                        "index_accepted": accepted.tz_convert("America/New_York").isoformat(),
+                        "interpreted_utc": filing.acceptance_datetime.isoformat(),
+                        "raw_interpretation_matches": accepted == filing.acceptance_datetime,
+                        "applied_utc": accepted.isoformat(),
+                        "applied_policy": "index_accepted_approved",
+                        "matches": base.loc[index, "acceptance_datetime"] == accepted,
+                    }
+                )
+            response = fetch_optional_sec(
+                session, limiter, f"https://data.sec.gov/api/xbrl/companyfacts/CIK{cik10(cik)}.json"
+            )
+            facts_payload = response.json() if response is not None else None
+            if facts_payload is None:
+                missing.append({"cik": cik, "reason": "companyfacts_HTTP_404"})
+            for symbol in group.symbol:
+                filing_parts.append(base.assign(symbol=symbol))
+                if facts_payload is not None:
+                    fact_parts.append(parse_companyfacts(facts_payload, symbol))
+        return filing_parts, fact_parts, missing, checks
+
+    filings, facts, missing, checks = [], [], [], []
+    with ThreadPoolExecutor(max_workers=6) as executor:
+        for number, result in enumerate(executor.map(collect, groups), 1):
+            fp, xp, errors, times = result
+            filings.extend(fp)
+            facts.extend(xp)
+            missing.extend(errors)
+            checks.extend(times)
+            if number % 20 == 0 or number == len(groups):
+                print(f"SEC companies {number}/{len(groups)}", flush=True)
+    report(pd.DataFrame(missing, columns=["cik", "reason"]), "edgar_missing.csv", root)
+    report(pd.DataFrame(checks), "edgar_timezone.csv", root)
+    output = []
+    for name, parts in [("filing", filings), ("fundamental_fact", facts)]:
+        result = before_cutoff(
+            frame(pd.concat(parts).to_dict("records") if parts else [], name), name, as_of
+        )
+        write_table(result, name, root, as_of)
+        output.append(result)
+    return tuple(output)
+
+
+def _earnings_evidence(text: str) -> str:
+    """Conservative body evidence required for the explicitly approved exhibit aliases."""
+    lower = text.lower()
+    groups = (
+        ("earnings", "revenue", "net income", "financial results", "net sales"),
+        ("quarter", "fiscal", "year ended", "three months", "six months", "nine months"),
+        ("reports", "announces", "press release", "results"),
+    )
+    matches = [next((word for word in group if word in lower), "") for group in groups]
+    return " | ".join(matches) if all(matches) and len(text) > 500 else ""
 
 
 def run_texts(as_of: dt.date, root: Path | None = None) -> pd.DataFrame:
-    """Download EX-99.1 for 8-K item 2.02 filings in the window (+ 10-K for showcase names)."""
-    filings = read_table("filing", root)
-    end = pd.Timestamp(as_of)
-    cutoff = end.tz_localize("UTC") + pd.Timedelta(days=1)
-    filings = filings[(filings["filing_date"] <= end) & (filings["acceptance_datetime"] <= cutoff)]
-    start = pd.Timestamp(window_start(as_of, root, warmup=False))
-    releases = filings[
-        filings["form"].isin(["8-K", "8-K/A"])
-        & filings["filing_date"].ge(start)
-        & filings["items"]
+    filings = before_cutoff(read_table("filing", root), "filing", as_of)
+    start = pd.Timestamp(as_of) - pd.Timedelta(days=load_config()["backtest"]["window_days"])
+    is_earnings = (
+        filings["items"]
         .fillna("")
         .str.split(",")
-        .map(lambda items: "2.02" in [item.strip() for item in items])
-    ]
-    showcase = showcase_symbols(root)
-    annual = filings[filings["form"].eq("10-K") & filings["symbol"].isin(showcase)]
-    annual = annual.sort_values("acceptance_datetime").groupby("symbol", sort=False).tail(1)
-    selected = pd.concat(
-        [releases.assign(document_type="EX-99.1"), annual.assign(document_type="10-K")],
-        ignore_index=True,
+        .map(lambda values: "2.02" in [v.strip() for v in values])
     )
-    rows, missing = [], []
-    cache: dict[str, tuple[str, pd.Timestamp]] = {}
-    index_cache: dict[str, str | None] = {}
+    earnings = filings[
+        (filings.form == "8-K") & is_earnings & (filings.filing_date >= start)
+    ].assign(document_type="EX-99.1")
+    annual = (
+        filings[(filings.form == "10-K") & filings.symbol.isin(showcase())]
+        .sort_values("acceptance_datetime")
+        .groupby("symbol")
+        .tail(1)
+        .assign(document_type="10-K")
+    )
+    from concurrent.futures import ThreadPoolExecutor
+
+    work = list(pd.concat([earnings, annual]).groupby(["cik", "accession_number", "document_type"]))
+    user_agent = environment("SEC_USER_AGENT")
     limiter = RateLimiter(8)
-    with build_session(user_agent("SEC_USER_AGENT", root)) as session:
-        for filing in selected.itertuples(index=False):
-            url = filing.primary_doc_url
-            if filing.document_type == "EX-99.1":
-                accession = filing.accession_number
-                index_url = f"{ARCHIVES}/{int(filing.cik)}/{accession.replace('-', '')}/{accession}-index.htm"
-                if index_url not in index_cache:
-                    response = get_with_retries(session, index_url, limiter)
-                    response.raise_for_status()
-                    index_cache[index_url] = find_exhibit_url(response.text)
-                url = index_cache[index_url]
-                if url is None:
-                    missing.append(
-                        {
-                            "symbol": filing.symbol,
-                            "accession_number": accession,
-                            "reason": "EX-99.1 not found",
-                        }
-                    )
-                    continue
-            if url not in cache:
-                response = get_with_retries(session, url, limiter)
-                response.raise_for_status()
-                cache[url] = (html_to_text(response.text), pd.Timestamp.now(tz="UTC"))
-            text, fetched_at = cache[url]
-            rows.append(
+    # Resume validated documents without downloading or reparsing their cached bodies.
+    existing = {}
+    prior_sources = []
+    try:
+        saved = before_cutoff(read_table("filing_text", root), "filing_text", as_of)
+        for key, group in saved.groupby(["cik", "accession_number", "document_type"]):
+            existing[key] = group
+        provenance_path = (
+            Path(root or REPO_ROOT) / "data/lake/_reports/filing_text_normalization.csv"
+        )
+        if provenance_path.exists() and provenance_path.stat().st_size > 1:
+            prior_sources = pd.read_csv(provenance_path).to_dict("records")
+    except FileNotFoundError:
+        pass
+
+    def collect(item):
+        key, group = item
+        first = group.iloc[0]
+        if key in existing:
+            saved = existing[key]
+            if set(group.symbol) <= set(saved.symbol):
+                selected = saved[saved.symbol.isin(group.symbol)].copy()
+                selected["available_at"] = first.acceptance_datetime
+                provenance = [
+                    r
+                    for r in prior_sources
+                    if r.get("accession") == first.accession_number
+                    and r.get("symbol") in set(group.symbol)
+                ]
+                return selected.to_dict("records"), [], provenance
+        rows, missing, sources = [], [], []
+        reason = None
+        original_type = first.document_type
+        index_url = _index_url(first.cik, first.accession_number)
+        verified_index = False
+        url = first.primary_doc_url
+        with build_session(user_agent) as session:
+            if first.document_type == "EX-99.1":
+                response = fetch_optional_sec(session, limiter, index_url)
+                verified_index = response is not None
+                url = find_exhibit_url(response.text) if verified_index else None
+                if url is None and verified_index:
+                    for alias in ("EX-99.01", "EX-99"):
+                        url = find_exhibit_url(response.text, alias)
+                        if url is not None:
+                            original_type = alias
+                            break
+            if url is None:
+                reason = "missing_exhibit"
+            else:
+                response = fetch_optional_sec(session, limiter, url)
+                if response is None:
+                    reason = "document_HTTP_404"
+                elif urlsplit(url).path.lower().endswith(".pdf") or getattr(
+                    response, "content", b""
+                ).startswith(b"%PDF"):
+                    reason = "unsupported_pdf_exhibit"
+                else:
+                    text = html_to_text(response.text)
+                    if not text or (first.document_type == "EX-99.1" and len(text) <= 500):
+                        reason = "short_exhibit"
+                    elif original_type in ("EX-99.01", "EX-99") and not _earnings_evidence(text):
+                        reason = "alias_body_not_verified_as_earnings"
+                    else:
+                        digest = hashlib.sha256(text.encode("utf-8")).hexdigest()
+                        if original_type in ("EX-99.01", "EX-99"):
+                            sources.extend(
+                                {
+                                    "symbol": f.symbol,
+                                    "accession": f.accession_number,
+                                    "original_type": original_type,
+                                    "canonical_type": "EX-99.1",
+                                    "index_url": index_url,
+                                    "url": url,
+                                    "evidence": _earnings_evidence(text),
+                                    "policy": "approved_index_and_body_normalization",
+                                }
+                                for f in group.itertuples()
+                            )
+                        fetched_at = getattr(
+                            response, "ingest_fetched_at", pd.Timestamp.now(tz="UTC")
+                        )
+                        for filing in group.itertuples():
+                            rows.append(
+                                {
+                                    "accession_number": filing.accession_number,
+                                    "cik": filing.cik,
+                                    "symbol": filing.symbol,
+                                    "document_name": Path(urlsplit(url).path).name,
+                                    "document_type": filing.document_type,
+                                    "url": url,
+                                    "sha256": digest,
+                                    "text": text,
+                                    "char_count": len(text),
+                                    "available_at": filing.acceptance_datetime,
+                                    "fetched_at": fetched_at,
+                                }
+                            )
+            if reason:
+                missing.extend(
+                    {
+                        "symbol": filing.symbol,
+                        "accession": filing.accession_number,
+                        "reason": reason,
+                        "index_url": index_url,
+                        "index_verified": verified_index,
+                        "original_type": original_type,
+                        "policy": "approved_source_exception"
+                        if verified_index and reason == "missing_exhibit"
+                        else "unresolved",
+                    }
+                    for filing in group.itertuples()
+                )
+        return rows, missing, sources
+
+    rows, missing, sources = [], [], []
+    executor = ThreadPoolExecutor(max_workers=6)
+    try:
+        for number, (parts, errors, provenance) in enumerate(executor.map(collect, work), 1):
+            rows.extend(parts)
+            missing.extend(errors)
+            sources.extend(provenance)
+            if number % 100 == 0 or number == len(work):
+                print(f"SEC documents {number}/{len(work)}", flush=True)
+    finally:
+        executor.shutdown(wait=True, cancel_futures=True)
+    report(
+        pd.DataFrame(
+            missing,
+            columns=[
+                "symbol",
+                "accession",
+                "reason",
+                "index_url",
+                "index_verified",
+                "original_type",
+                "policy",
+            ],
+        ),
+        "filing_text_missing.csv",
+        root,
+    )
+    report(pd.DataFrame(sources), "filing_text_normalization.csv", root)
+    result = frame(rows, "filing_text")
+    write_table(result, "filing_text", root, as_of)
+    return result
+
+
+def verify_saved_timestamps(as_of, root=None):
+    """Check three persisted filings against index pages under the approved policy."""
+    filings = read_table("filing", root)
+    selected = (
+        filings.sort_values("acceptance_datetime", ascending=False).drop_duplicates("cik").head(3)
+    )
+    checks = []
+    with build_session(environment("SEC_USER_AGENT")) as session:
+        limiter = RateLimiter(2)
+        for row in selected.itertuples():
+            url = _index_url(row.cik, row.accession_number)
+            accepted = _accepted_from_index(fetch_sec(session, limiter, url).text)
+            checks.append(
                 {
-                    "accession_number": filing.accession_number,
-                    "cik": filing.cik,
-                    "symbol": filing.symbol,
-                    "document_name": unquote(urlsplit(url).path.rsplit("/", 1)[-1]),
-                    "document_type": filing.document_type,
-                    "url": url,
-                    "sha256": hashlib.sha256(text.encode("utf-8")).hexdigest(),
-                    "text": text,
-                    "char_count": len(text),
-                    "available_at": filing.acceptance_datetime,
-                    "fetched_at": fetched_at,
+                    "symbol": row.symbol,
+                    "accession_number": row.accession_number,
+                    "index_url": url,
+                    "acceptance_datetime": row.acceptance_datetime.isoformat(),
+                    "acceptance_eastern": row.acceptance_datetime.tz_convert(
+                        "America/New_York"
+                    ).isoformat(),
+                    "index_accepted_eastern": accepted.tz_convert("America/New_York").isoformat(),
+                    "matches": row.acceptance_datetime == accepted,
+                    "policy": "index_accepted_approved",
                 }
             )
-    output = table_frame("filing_text", rows)
-    write_table(output, "filing_text", root, as_of)
-    pd.DataFrame(missing, columns=["symbol", "accession_number", "reason"]).to_csv(
-        report_path(root, "filing_text_missing.csv"), index=False
-    )
-    return output
+    result = pd.DataFrame(checks)
+    report(result, "edgar_timezone_verification.csv", root)
+    if len(result) != 3 or not result.matches.all():
+        raise ValueError("Persisted filing timestamps do not match index pages")
+    return result
 
 
 def showcase_symbols(root: Path | None = None) -> tuple[str, ...]:
-    """Both endpoints of the curated seed graph are showcase names."""
-    edges = pd.read_csv(project_root(root) / "config" / "graph" / "seed_edges.csv")
-    return tuple(dict.fromkeys([*edges["src_symbol"].dropna(), *edges["dst_symbol"].dropna()]))
+    """Preserve the upstream showcase helper and its root-local graph lookup."""
+    edges = pd.read_csv(Path(root or REPO_ROOT) / "config/graph/seed_edges.csv")
+    return tuple(dict.fromkeys([*edges.src_symbol.dropna(), *edges.dst_symbol.dropna()]))

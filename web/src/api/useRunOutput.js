@@ -1,5 +1,5 @@
 import { createContext, createElement, useCallback, useContext, useEffect, useState } from 'react';
-import { loadRunOutput } from './client.js';
+import { loadValidatedRunOutput as loadRunOutput } from './client.js';
 
 const RunOutputContext = createContext(null);
 
@@ -25,7 +25,7 @@ export function RunOutputProvider({ children }) {
     return () => controller.abort();
   }, [revision]);
 
-  return createElement(RunOutputContext.Provider, { value: { ...state, reload } }, children);
+  return createElement(RunOutputContext.Provider, { value: { ...state, reload, retry: reload } }, children);
 }
 
 export function useRunOutput() {

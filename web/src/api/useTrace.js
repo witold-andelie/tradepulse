@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { loadTrace } from './client.js';
+import { loadValidatedTrace as loadTrace } from './client.js';
 
 export function useTrace(runId) {
   const [state, setState] = useState({ runId: null, events: [], error: null, loading: false });

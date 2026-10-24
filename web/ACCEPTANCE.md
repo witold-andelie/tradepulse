@@ -1,7 +1,8 @@
 # Acceptance — Member B (`web/`)
 
 The team lead merges a PR only when every item that applies is true. Attach screenshots of every
-page you changed, at 1440 px and at 768 px width.
+page you changed, at 1440 px, 768 px and 320 px width. Existing implementation is preserved;
+these checks identify remaining gaps rather than requiring pages to be rebuilt.
 
 ## Automated (must pass)
 
@@ -29,7 +30,9 @@ npm run build             # succeeds, no errors
   shows all five gate chips on every card.
 - [ ] Regime shows normal / elevated / stressed for the three fixture pools, with the history
   chart.
-- [ ] Track Record shows the calibration chart with a diagonal, and the by-tier table.
+- [ ] Track Record plots mean score percentile against the share of names beating the benchmark,
+  with a horizontal 50% reference and bubble sizes by n. It is not labeled probability
+  calibration; buckets with n = 0 are not plotted. The by-tier table is present.
 - [ ] Run Trace shows the timeline and highlights the `retry` event.
 - [ ] An unknown route and an unknown ticker show friendly not-found pages.
 - [ ] With `VITE_API_BASE=http://localhost:9` (nothing listening), the app shows a readable error
@@ -73,5 +76,5 @@ These need no extra packages. They use Chrome DevTools and the free axe DevTools
 - [ ] npm test: <summary>
 - [ ] check:contracts: ok
 - [ ] build: ok, largest chunk <size>
-- [ ] screenshots: 1440px + 768px for each changed page
+- [ ] screenshots: 1440px + 768px + 320px for each changed page
 ```

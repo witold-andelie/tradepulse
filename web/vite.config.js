@@ -11,6 +11,11 @@ export default defineConfig({
       '@contracts': fileURLToPath(new URL('../contracts', import.meta.url)),
     },
   },
+  build: {
+    // Both lazy payloads stay below the task's 1 MB ceiling. ECharts imports only
+    // the chart types used by this application; the fixture is a single contract.
+    chunkSizeWarningLimit: 1000,
+  },
   server: {
     fs: { allow: ['..'] },
   },

@@ -1,23 +1,29 @@
 # Member B — Web app (`web/`)
 
-> **Status (2026-10-23): the base is done and merged** (B1 helpers, B2 data access and hooks,
-> B3 layout and routes, shared components, site-wide accessibility). Every route already renders
-> an honest placeholder page wired to real data. Replace the placeholders:
-> - **Huyin:** `LeaderboardPage({ run, pool })`, `TickerPage({ run, pool, symbol })`,
->   `FactorLabPage({ factorCards })` (B4–B6), then B10.
-> - **Tanhao:** `RegimePage({ regimes })`, `TrackRecordPage({ trackRecord })`,
->   `RunTracePage({ events })` (B7–B9).
+> **Integration status (2026-10-24): Huyin has already implemented B1–B10.** This branch
+> preserves her original commits, six business pages, Discover, Simple/Pro presentation,
+> keyboard interactions, numeric chart alternatives and accessibility work. The pages are
+> no longer placeholders. See `INTEGRATION.md` for provenance and the remaining review work.
+> - **Huyin:** review the integrated visual design and interactions; address specific review
+>   findings and help attach existing evidence. Do not rebuild B4–B6 or another shared base.
+> - **Tanhao:** review and improve the existing B7–B9 pages; do not build competing copies.
+> - **Lead:** owns baseline integration, backend compatibility and final acceptance.
 >
-> Wrap each page in `<Page title="...">`. It already renders the data-mode banner, the `<h1>`
-> (focused on navigation), the Run notes and the footer, so pages only add their own content.
-> **Every chart uses `src/components/ChartFigure.jsx`**, with these props:
+> The agreed `*Page` exports and props remain available as adapters to Huyin's implementations.
+> The application shell owns the single main landmark, provenance, Run notes and footer.
+> Existing pages use `PageTitle`; new page content can use `<Page title="...">` without
+> duplicating the shell. Both use the same heading and focus implementation.
+> **Every chart uses `src/components/ChartFigure.jsx`**; Huyin's `Chart` import delegates to it.
+> New figures support these props:
 > - `title`
 > - `summary`: a sentence computed from the data
 > - `option`: the ECharts option
 > - `columns` and `rows`: the table view
 > - `height` and `onEvents`, optional
 >
-> That gives you the accessibility requirements for charts for free.
+> Existing figures retain their adjacent numeric tables/disclosures and keyboard filters.
+> Shared rendering provides ARIA defaults and reduced motion; independent accessibility
+> acceptance is still required.
 > Run `npm install` once. On this team's machines, set `npm_config_cache` to a folder on D:.
 
 You build what customers and judges actually **see**: a ranked list of hundreds of stocks and coins,
@@ -118,26 +124,26 @@ Accessibility is a first-class requirement, proposed by Huyin. The shared compon
 
 ## Shared interfaces (Member B and Member C build to these)
 
-Member B (Huyin) owns the base: B1–B6 and B10. Member C (Tanhao) owns pages B7–B9. Both build
-against the names below, so neither has to wait for the other.
+Huyin's existing implementation supplies B1–B10. Member C (Tanhao) reviews and maintains B7–B9.
+Use the compatibility interfaces below when extending it; preserve existing functionality.
 
 | piece | file | contract |
 |---|---|---|
 | run data hook | `src/api/useRunOutput.js` | `useRunOutput()` → `{ data, error, loading, reload }` (named export; needs `RunOutputProvider`, already in `App.jsx`). `data` is a RunOutput. |
 | trace hook | `src/api/useTrace.js` | `useTrace(runId)` → `{ events, error, loading }`. `events` is a list of TraceEvent. |
-| page wrapper | `src/components/Page.jsx` | `<Page title>` renders the data-mode banner, the title, `children`, the run notes and the disclaimer footer. |
+| page wrapper | `src/components/Page.jsx` | `<Page title>` renders the shared heading and `children`. `App.jsx` owns provenance, Run notes, footer and the single main landmark. Existing pages use the same heading via `PageTitle`. |
 | badge | `src/components/Badge.jsx` | `<Badge tone label />`. `tone` is one of the values `tierTone()` returns, plus `"info"` and `"warning"`. It always shows the text label. |
 | card | `src/components/Card.jsx` | `<Card title>` → a white rounded panel. |
 | empty or error state | `src/components/State.jsx` | `<Loading />` and `<ErrorState message onRetry />`. |
-| pages | `src/pages/*.jsx` | Each page is a component that takes its data as props (signatures in the status box above). The router in `App.jsx` wraps it with the hook. |
+| pages | `src/pages/*Page.jsx` | The agreed prop signatures delegate to Huyin's existing pages. A page can use supplied props or the shared run provider. Keep these entry points for collaborators. |
 | chart | `src/components/ChartFigure.jsx` | `<ChartFigure title summary option columns rows />`: data-derived summary, ECharts ARIA and decal patterns, reduced motion, "Show data as table". |
 
-B merges B1, B2, B3 and these shared components **first**. Until then, C may develop with the
-fixture imported directly and switch to the hook when it lands.
+The shared base and all pages already exist. Extend them after reviewing the integration;
+do not replace the client, shell or design system with another implementation.
 
 **Run notes:** `run.warnings` lists the honest limitations of each run, for example in-sample
-statistics and excluded factors. `Page` shows them as a collapsible "Run notes" panel above the
-footer, collapsed by default and showing the count. Never hide them.
+statistics and excluded factors. The application shell shows them as a collapsible Run
+limitations panel with their count. Never hide them.
 
 ## Tasks
 

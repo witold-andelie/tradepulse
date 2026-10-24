@@ -8,7 +8,7 @@
  * opts.tiers: array of tiers to keep when non-empty.
  */
 export function filterRecommendations(rows, opts = {}) {
-  const query = (opts.query || '').trim().toLowerCase();
+  const query = (opts.query ?? '').trim().toLowerCase();
   return rows.filter((row) => (
     (!opts.pool || row.pool === opts.pool)
     && (!query || row.symbol.toLowerCase().includes(query) || row.name.toLowerCase().includes(query))
@@ -22,14 +22,17 @@ export function filterRecommendations(rows, opts = {}) {
  * dir: "asc" (default) or "desc". null/undefined values always go last, whatever the direction.
  */
 export function sortRecommendations(rows, key = 'rank', dir = 'asc') {
+  const direction = dir === 'desc' ? -1 : 1;
   return [...rows].sort((a, b) => {
     const left = a[key];
     const right = b[key];
     if (left == null && right == null) return 0;
     if (left == null) return 1;
     if (right == null) return -1;
-    const order = left < right ? -1 : left > right ? 1 : 0;
-    return dir === 'desc' ? -order : order;
+    const comparison = typeof left === 'string'
+      ? left.localeCompare(right)
+      : left - right;
+    return direction * comparison;
   });
 }
 
@@ -41,17 +44,17 @@ export function sortRecommendations(rows, key = 'rank', dir = 'asc') {
 export function sectorSummary(rows) {
   const sectors = new Map();
   for (const row of rows) {
-    const entry = sectors.get(row.sector) || {
-      sector: row.sector, count: 0, meanScore: 0, overweight: 0, underweight: 0,
-    };
-    entry.count += 1;
-    entry.meanScore += row.score;
-    if (['STRONG_OVERWEIGHT', 'OVERWEIGHT'].includes(row.tier)) entry.overweight += 1;
-    if (['UNDERWEIGHT', 'AVOID'].includes(row.tier)) entry.underweight += 1;
-    sectors.set(row.sector, entry);
+    if (!sectors.has(row.sector)) {
+      sectors.set(row.sector, { sector: row.sector, count: 0, meanScore: 0, overweight: 0, underweight: 0 });
+    }
+    const summary = sectors.get(row.sector);
+    summary.count += 1;
+    summary.meanScore += row.score;
+    if (row.tier === 'STRONG_OVERWEIGHT' || row.tier === 'OVERWEIGHT') summary.overweight += 1;
+    if (row.tier === 'UNDERWEIGHT' || row.tier === 'AVOID') summary.underweight += 1;
   }
   return [...sectors.values()]
-    .map((entry) => ({ ...entry, meanScore: entry.meanScore / entry.count }))
+    .map((summary) => ({ ...summary, meanScore: summary.meanScore / summary.count }))
     .sort((a, b) => b.meanScore - a.meanScore);
 }
 
@@ -76,6 +79,6 @@ export function dataModeBanner(dataMode) {
     case 'REAL':
       return { show: false, tone: 'none', text: '' };
     default:
-      throw new Error('Unknown data mode');
+      throw new Error(`Unknown data mode: ${dataMode}`);
   }
 }

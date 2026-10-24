@@ -65,8 +65,42 @@ CSV is not acceptance evidence. `handoff` generates the same local audit/manifes
 it is not an upload. The author's reported snapshot audit exited 1: 35 earnings filings had no
 allowed exhibit, although exception accounting passed. That audit has not been reproduced here;
 retain its strict failure separately from any exception-qualified result.
-The current sample CLI does not apply its --as-of argument during cutting; run explicit lake
-validation first and audit with the intended decision date afterwards.
+The sample CLI validates the complete source lake against its requested --as-of before cutting;
+missing, empty or future-dated source tables block publication. Audit the published snapshot
+against that same decision date afterwards.
+
+## Fresh collection through final delivery
+
+The lead is rebuilding the excluded artifacts from their sources, using decision date
+2026-10-23. No real lake or sample is currently delivered. Configure the two contact settings
+in the ignored .env before making provider requests; configuration checks never print them.
+
+```powershell
+py -3 -m ingest smoke --as-of 2026-10-23
+py -3 -m ingest crypto-research --as-of 2026-10-23
+py -3 -m ingest crypto-verify --as-of 2026-10-23
+py -3 -m ingest config
+py -3 -m ingest all --as-of 2026-10-23
+py -3 -m ingest timezone --as-of 2026-10-23
+py -3 -m ingest validate --as-of 2026-10-23
+py -3 -m ingest sample --as-of 2026-10-23
+py -3 -m ingest audit --as-of 2026-10-23
+py -3 -m pytest ingest -q -m lake
+py -3 -m pytest ingest/tests/test_lake_and_sample.py::test_sample_snapshot_is_complete_and_valid -q
+```
+
+Run stages in order, inspect each exit status, and stop acquisition when a provider blocks it.
+Do not turn an audit failure into a success flag. Review every missing exhibit against its
+source before presenting any exception-qualified result; retain the strict result separately.
+Fresh crypto research writes empty candidate lists explicitly, and verification can refine
+missing cells from older reports without inventing a ticker or article.
+
+Final module delivery includes the reviewed crypto CSV, seven real sample tables, recorded
+decision date, recomputed coverage, provenance, table hashes and an explicit exceptions record.
+All eight artifact-dependent tests must execute without skips. Verify local reads from the
+sample without networking before declaring the ingestion delivery complete. The complete
+product replay additionally needs D's matching model cassette and core integration acceptance.
+S3 upload follows only when D supplies a private destination and access method.
 
 ## Local artifacts and sharing
 

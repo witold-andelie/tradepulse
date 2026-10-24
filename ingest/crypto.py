@@ -92,8 +92,8 @@ def fetch_crypto_research(as_of):
                 "market_cap": asset["market_cap"],
                 "category": CATEGORIES[ident],
                 "coingecko_symbol": asset["symbol"],
-                "yahoo_candidates": "",
-                "wiki_candidates": "",
+                "yahoo_candidates": "[]",
+                "wiki_candidates": "[]",
             }
             for source in ["yahoo", "wiki"]:
                 path = cache / f"{ident}-{source}.json"
@@ -191,6 +191,18 @@ ARTICLE_CANDIDATES = {
 }
 
 
+def _candidate_quotes(value):
+    """Missing CSV cells mean no candidates, allowing a fresh source search."""
+    if not isinstance(value, str):
+        if pd.isna(value):
+            return []
+        raise TypeError("Yahoo candidates must be a JSON list")
+    options = json.loads(value) if value.strip() else []
+    if not isinstance(options, list):
+        raise TypeError("Yahoo candidates must be a JSON list")
+    return options
+
+
 def fetch_crypto_verification(as_of):
     """Verify candidate articles and real five-day Yahoo bars before publishing configuration."""
     from ingest.prices import fetch_prices
@@ -230,7 +242,7 @@ def fetch_crypto_verification(as_of):
                     verified[title] = canonical.replace(" ", "_")
         # Refine empty search results using the asset's source ticker, not a guessed Yahoo code.
         for index, row in candidates.iterrows():
-            if json.loads(row.yahoo_candidates or "[]"):
+            if _candidate_quotes(row.yahoo_candidates):
                 continue
             response = get_with_retries(
                 session,
@@ -251,7 +263,7 @@ def fetch_crypto_verification(as_of):
                 candidates.loc[index, "yahoo_candidates"] = json.dumps(options)
     proposed = []
     for row in candidates.itertuples():
-        options = json.loads(row.yahoo_candidates or "[]")
+        options = _candidate_quotes(row.yahoo_candidates)
         target = row.name.lower() + " usd"
         option = next((q for q in options if (q.get("name") or "").lower() == target), None)
         aliases = {
@@ -338,6 +350,8 @@ def fetch_crypto_verification(as_of):
         )
     report(pd.DataFrame(removed, columns=["id", "reason"]), "crypto_selection_exceptions.csv")
     selected.sort(key=lambda r: r["market_cap_rank"])
+    if not selected:
+        raise ValueError("No verified Yahoo crypto candidates; see crypto_candidates.csv")
     result = pd.DataFrame(selected)
     result.to_csv(cache / "proposed.csv", index=False)
     print(f"Verifying real Yahoo histories for {len(result)} selected assets", flush=True)

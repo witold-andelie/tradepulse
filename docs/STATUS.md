@@ -14,7 +14,7 @@ by the lead. These merges retain the original contributor commits.
 | Area | Implemented | Remaining |
 |---|---|---|
 | Core / lead | Research gates, ranking, regime, walk-forward, grounded extraction, LangGraph explanation/verifier, reports, API and traces | Engine wiring, real artifact/service acceptance and delivery materials |
-| A / ingest, lead follow-up | Provider fixes, local-evidence documentation, lake/sample code, current-bar coverage auditing and offline regressions | Lead: obtain excluded real artifacts/crypto CSV, independently accept data and source policies, publish sample and arrange S3 upload with D |
+| A / ingest, lead follow-up | Provider fixes, local-evidence documentation, lake/sample code, current-bar coverage auditing and offline regressions | Lead: collect real artifacts/crypto CSV from sources, independently accept data and source policies, publish sample and arrange S3 upload with D |
 | B / Huyin | Six business pages, Discover, Simple/Pro, filtering, evidence drill-down, responsive design and accessibility interactions | Visual/interaction review, concrete findings and remaining manual acceptance |
 | C / Tanhao | C1–C7 math, 235 C9 property cases, B7–B9 review fixes and recorded fixture accessibility acceptance | Regression against delivered real API outputs |
 | D / integrations | SQL templates, DuckDB adapter, registration runner, hosted NIM record/replay client and Python engines client | Zetaris deployment/registration/live client/parity, recorded cassette and TypeScript engines sidecar |
@@ -34,6 +34,9 @@ local artifacts. They do not deliver those artifacts or independently establish 
 The lead follow-up fixes stale coverage-report acceptance, missing crypto article lookup and
 sample document selection without changing schemas or original tests. The 35 reported exhibit
 exceptions and SEC timestamp-policy synchronization still require explicit lead disposition.
+No existing real artifact delivery is available; the lead is preparing fresh collection for
+2026-10-23. The local contact User-Agent settings are not yet configured, so provider requests
+have not started. The ignored .env template is ready for local completion.
 
 The standalone web preview works with synthetic fixtures. Full SAMPLE_MODE is not yet an
 accepted offline delivery. Docker's API-mode web build needs a saved backend output and will
@@ -41,8 +44,8 @@ show a visible API error when one is missing.
 
 ## Remaining sequence and owners
 
-1. **Lead, taking over A's delivery:** obtain the excluded lake/sample, curated crypto CSV and
-   source reports, or collect the required data if unavailable. Independently validate them,
+1. **Lead, taking over A's delivery:** collect the lake, curated crypto CSV and source reports
+   from the providers for the fixed decision date. Independently validate them,
    publish the snapshot/decision date and arrange upload to D's private location. Existing
    coverage and point-in-time acceptance thresholds remain in force. Do not assign A more fixes.
 2. **D:** finish Zetaris client/deployment/parity; agree the NIM models with the lead; record
@@ -60,14 +63,16 @@ These are the recorded project deadlines, not a live check of organizer announce
 
 ## Verified checks
 
-- Full offline Python suite after PRs #3–#5 and lead ingestion fixes: **567 passed, 8 skipped**,
+- Full offline Python suite after PRs #3–#5, ingestion fixes and collection readiness: **576 passed, 8 skipped**,
   with 19 existing BeautifulSoup/lxml deprecation warnings.
   The skips are seven lake-table cases and the sample snapshot case; absent real artifacts
   still block A's acceptance.
 - Eleven new ingestion regression cases passed; eight failed against the merged implementation
   before the fixes, covering stale/missing coverage evidence, absent crypto article mappings
   and multi-share-class sample selection. No original test was edited.
-- Changed ingestion files and the new regression file pass Ruff **0.17.2** with `--no-cache`.
+- Nine further collection-readiness cases cover absent Yahoo candidates and source-date
+  validation before sample publication. Ingest alone: **101 passed, 8 skipped**.
+- Changed ingestion files and new regression files pass Ruff **0.17.2** with `--no-cache`.
   Full-repository Ruff 0.17.2 acceptance is not claimed: the previously identified unused
   `noqa` at `quant/tests/test_evaluation.py:87` remains a separate maintenance item.
 - Frontend, last checked for PR #4: **68 tests passed** across 12 files; fixtures and all 19 trace lines validate;

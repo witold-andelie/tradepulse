@@ -182,6 +182,9 @@ def main(argv: list[str] | None = None) -> int:
         return _validate_all(args.as_of)
     if args.command == "sample":
         try:
+            if _validate_all(as_of):
+                print("[FAIL] sample: source lake does not validate for the requested as_of")
+                return 1
             print(sample.cut_sample())
             return 0
         except (FileNotFoundError, ValueError, RuntimeError) as exc:

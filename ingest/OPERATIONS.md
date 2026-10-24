@@ -2,11 +2,17 @@
 
 ## Scope and status
 
-This branch extends the merged ingestion implementation for real provider responses and adds
-local validation of an as_of=2026-10-23 sample. The sample and curated crypto CSV are excluded
-from this ingest-only PR and need separate delivery. See PR_EVIDENCE.md for coverage, provenance and
-explicit limitations. Passing implementation tests is separate from real-data acceptance.
-The strict audit intentionally remains nonzero for 35 approved source exceptions.
+PR #5 (merge `af229b4`) preserves Member A's provider fixes and reported local validation of an
+as_of=2026-10-23 sample. The sample and curated crypto CSV were excluded and need separate
+delivery. The lead now owns follow-up work. See PR_EVIDENCE.md for the author's historical
+coverage/provenance record; those local artifacts have not been independently accepted here.
+Passing implementation tests is separate from real-data acceptance. The author's strict audit
+remained nonzero for 35 reported source exceptions; merging the code does not approve them.
+
+The lead follow-up fixes acceptance coverage to use current bars instead of a cached CSV,
+retains missing crypto article mappings as explicit gaps, and limits sample exhibits by
+document keys while keeping all attached share classes. Eleven new offline regressions cover
+these cases; existing tests and shared table contracts are unchanged.
 
 ## Environment
 
@@ -52,10 +58,13 @@ python -m pytest ingest/tests/test_lake_and_sample.py::test_sample_snapshot_is_c
 
 `all` runs acquisition then validation; it does not publish a sample, register services or upload
 anything. Failed upstream stages block dependent stages while independent macro work continues.
-`validate` checks table contracts and rejects empty tables. `audit` additionally checks coverage,
-text integrity/completeness and evidence. `handoff` generates the same local audit/manifest;
-it is not an upload. For the current snapshot audit exits 1: 35 earnings filings have no allowed
-exhibit, even though their approved-source-exception accounting passes. Never hide this exit.
+`validate` checks table contracts and rejects empty tables. `audit` additionally recomputes
+coverage from current bars and benchmark calendars, checks text integrity/completeness and
+evidence, and fails coverage when a required benchmark calendar is absent. A cached coverage
+CSV is not acceptance evidence. `handoff` generates the same local audit/manifest;
+it is not an upload. The author's reported snapshot audit exited 1: 35 earnings filings had no
+allowed exhibit, although exception accounting passed. That audit has not been reproduced here;
+retain its strict failure separately from any exception-qualified result.
 The current sample CLI does not apply its --as-of argument during cutting; run explicit lake
 validation first and audit with the intended decision date afterwards.
 
@@ -81,10 +90,12 @@ Original lake bodies, logs, cache, environment files and complete backups must s
   variants, need verification rather than bypassing the shared request policy.
 - Wikipedia Nasdaq constituents are followed to the linked dedicated article. Missing GICS
   sectors use official CNDX holdings labels with provenance; ICB is not silently relabelled.
-- Every selected SEC filing reads its own index Accepted time, localized to America/New_York
-  and converted to UTC under explicit approval. The legacy pure parser remains unchanged.
-- EX-99 and EX-99.01 are canonicalized only under the approved index/body evidence policy;
-  original types and URLs remain in the normalization sidecar. Missing exhibits stay exceptions.
+- The live SEC path reads each selected filing's index Accepted time, localized to
+  America/New_York and converted to UTC. The legacy pure parser remains unchanged; independent
+  source verification and synchronization of the shared policy remain lead-owned.
+- EX-99 and EX-99.01 normalization preserves #5's index/body evidence policy and records
+  original types and URLs in a sidecar. The excluded evidence still needs independent acceptance;
+  missing exhibits stay exceptions.
 - Date filtering respects the following UTC midnight, rather than guaranteeing every market's
   close-specific availability. Pageviews and FRED data available next midnight are excluded
   on the as_of day. Current membership is not backdated; FRED vintage risk remains.
@@ -93,8 +104,10 @@ Original lake bodies, logs, cache, environment files and complete backups must s
   interpretation; coverage alone does not prove complete historical membership.
 - Crypto identifiers and article existence have real-source review. Some titles are issuer or
   platform attention proxies; three remain null. This is a curated pool, not an exact top-40.
-- Samples stage and size-check all outputs before publication. Individual file replacement is
-  atomic, but the seven-file publication is not one transaction; avoid concurrent readers.
+- Samples select at most 300 distinct earnings documents, retaining every share-class row for
+  those document keys. They stage and size-check all outputs before publication. Individual
+  file replacement is atomic, but publication of all seven files is not one transaction;
+  avoid concurrent readers.
 
 ## Additional commands
 

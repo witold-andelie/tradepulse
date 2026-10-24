@@ -275,7 +275,8 @@ def fetch_crypto_verification(as_of):
             )
         if option is None:
             continue
-        article = verified.get(ARTICLE_CANDIDATES[row.id])
+        article_candidate = ARTICLE_CANDIDATES.get(row.id)
+        article = verified.get(article_candidate)
         proposed.append(
             {
                 "symbol": option["symbol"],

@@ -11,7 +11,7 @@ import pandas as pd
 
 from ingest.common import report
 from ingest.lake import read_table
-from ingest.prices import REFERENCE_SYMBOLS
+from ingest.prices import REFERENCE_SYMBOLS, requested_coverage
 from tradepulse.contracts import REPO_ROOT, table_names, table_path, validate_table
 
 
@@ -65,16 +65,18 @@ def audit(as_of: dt.date, root: Path | None = None):
         bars = tables["price_bar"]
         reference = set(bars.loc[bars.pool == "reference", "symbol"])
         check("prices.references", set(REFERENCE_SYMBOLS) <= reference, sorted(reference))
-        coverage_path = Path(root or REPO_ROOT) / "data/lake/_reports/prices_coverage.csv"
-        if coverage_path.exists():
-            coverage = pd.read_csv(coverage_path)
-            for pool in ["us_equity", "eu_equity", "crypto"]:
-                required = universe.loc[universe.pool == pool, ["symbol"]]
-                values = required.merge(coverage[coverage.pool == pool], on="symbol", how="left")
-                share = (values.coverage.fillna(0) >= 0.95).mean()
-                check(f"{pool}.price_coverage", share >= 0.95, share)
-        else:
-            check("prices.coverage_report", False, "missing")
+        for pool in ["us_equity", "eu_equity", "crypto"]:
+            required = universe.loc[universe.pool == pool, ["pool", "symbol"]]
+            if required.empty:
+                check(f"{pool}.price_coverage", False, "no members")
+                continue
+            try:
+                values = requested_coverage(bars, required, as_of)
+            except ValueError as exc:
+                check(f"{pool}.price_coverage", False, str(exc))
+                continue
+            share = (values.coverage >= 0.95).mean()
+            check(f"{pool}.price_coverage", share >= 0.95, share)
         filing = tables["filing"]
         from tradepulse.config import load_config
 

@@ -1,9 +1,11 @@
 # Member A — Data ingestion (`ingest/`)
 
 > **Status (2026-10-24): A1–A7 and A9 code is implemented and merged.** Do not rebuild it.
-> You own the existing implementation and its live-data acceptance. No lake or sample snapshot
-> is present in the publication checkout. See `docs/STATUS.md` for cross-team dependencies.
-> Your remaining work needs real network runs and judgment:
+> Member A's provider fixes and local evidence were preserved in PR #5 (merge `af229b4`).
+> The lead has taken over follow-up fixes and remaining delivery; Member A is not assigned
+> more implementation work. No lake or sample snapshot is present in the publication checkout,
+> and the curated crypto CSV was excluded from #5. See `docs/STATUS.md` for dependencies.
+> The following requirements remain owned by the lead, with Member D handling the upload destination:
 >
 > 1. **First live run.** Put a real contact e-mail in your `.env` (`SEC_USER_AGENT`,
 >    `WIKIMEDIA_USER_AGENT`), then run `py -3 -m ingest all --as-of <latest trading day>`. Fix every

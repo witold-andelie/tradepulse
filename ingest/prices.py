@@ -190,8 +190,12 @@ def run(as_of: dt.date, root: Path | None = None) -> pd.DataFrame:
     return result
 
 
-def write_coverage(result, requested, as_of, root=None):
-    """Recompute report only; references use their own market calendar, never a crypto union."""
+def requested_coverage(result, requested, as_of):
+    """Compute coverage from current bars, including requested symbols with no observations.
+
+    References use their own market calendar, never a crypto union. This calculation is
+    shared by collection reports and acceptance audits so a stale CSV cannot certify new bars.
+    """
     reports = []
     benchmarks = {"us_equity": "SPY", "eu_equity": "^STOXX50E", "crypto": "BTC-USD"}
     for pool, group in requested.groupby("pool"):
@@ -229,6 +233,13 @@ def write_coverage(result, requested, as_of, root=None):
         coverage = group[["pool", "symbol"]].merge(coverage, on=["pool", "symbol"], how="left")
         coverage[["rows", "coverage"]] = coverage[["rows", "coverage"]].fillna(0)
         reports.append(coverage)
-    report(
-        pd.concat(reports).sort_values(["coverage", "pool", "symbol"]), "prices_coverage.csv", root
-    )
+    if not reports:
+        return pd.DataFrame(
+            columns=["pool", "symbol", "rows", "first_date", "last_date", "coverage"]
+        )
+    return pd.concat(reports, ignore_index=True).sort_values(["coverage", "pool", "symbol"])
+
+
+def write_coverage(result, requested, as_of, root=None):
+    """Recompute the saved report from the supplied bars and requested membership."""
+    report(requested_coverage(result, requested, as_of), "prices_coverage.csv", root)

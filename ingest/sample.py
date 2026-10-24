@@ -6,6 +6,8 @@ import os
 import tempfile
 from pathlib import Path
 
+import pandas as pd
+
 from ingest.common import showcase
 from ingest.lake import read_table, write_table
 from tradepulse.contracts import table_names, table_path
@@ -40,9 +42,12 @@ def cut_sample(
                     ascending=[False, True, True, True],
                 )
                 annual = ordered[(ordered.document_type == "10-K") & ordered.symbol.isin(names)]
-                exhibits = ordered[ordered.document_type == "EX-99.1"].head(max_ex99_docs)
-                import pandas as pd
-
+                exhibits = ordered[ordered.document_type == "EX-99.1"]
+                # A single document can have rows for several share classes. Limit documents,
+                # then retain every symbol attached to the selected document keys.
+                keys = ["accession_number", "document_name"]
+                selected = exhibits[keys].drop_duplicates().head(max_ex99_docs)
+                exhibits = exhibits.merge(selected, on=keys, how="inner", validate="many_to_one")
                 data = pd.concat([annual, exhibits], ignore_index=True)
                 if data.empty:
                     raise ValueError("Text selection would produce an empty sample table")

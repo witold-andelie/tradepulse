@@ -6,6 +6,10 @@ into the PR description.
 The implementation exists. The data-dependent checks below remain incomplete while the
 lake/sample are absent; skipped tests do not complete data delivery. See `../docs/STATUS.md`.
 
+The lead explicitly merged PR #5 as an implementation integration and took over its review
+fixes. This does not complete the real-data checks below. The sample, curated crypto CSV,
+independent source verification and upload remain separate delivery requirements.
+
 ## Automated (must pass)
 
 ```

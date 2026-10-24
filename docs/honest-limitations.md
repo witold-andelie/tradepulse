@@ -8,6 +8,9 @@ Status: 24 October 2026. See [project status](STATUS.md) for verified checks and
   labeled SYNTHETIC. It does not establish performance on real instruments.
 - The publication checkout has no validated lake/sample or matching LLM cassette. The
   complete credential-free SAMPLE_MODE acceptance is pending.
+- PR #5 preserves Member A's ingestion code and local evidence, but excludes the reported
+  sample and curated crypto CSV. The lead owns their delivery and independent acceptance;
+  code integration does not approve the 35 reported missing-exhibit exceptions.
 - ZetarisClient and ZetarisAdapter live methods are stubs. Hosted service access, query parity
   and model smoke-test evidence are pending.
 - The Meterless engines client exists, but the engines server/vendor implementation and
@@ -32,7 +35,9 @@ Status: 24 October 2026. See [project status](STATUS.md) for verified checks and
 - The current pipeline anchors the decision date to the latest SPY session. Independent
   weekend crypto decisions and cross-market timing need further review.
 - Historical fundamental restatements, EDGAR acceptance-time interpretation and revised
-  macro series require explicit point-in-time review. A's live verification is still pending.
+  macro series require explicit point-in-time review. A reports index Accepted comparisons,
+  but the source artifacts are excluded and the shared timestamp description still needs
+  lead-reviewed synchronization with live ingestion's index-based policy.
 - Arbitrary out-of-universe ticker lookup and iterative model-proposed graph expansion are
   target features, not completed end-to-end behavior.
 
@@ -51,8 +56,9 @@ Status: 24 October 2026. See [project status](STATUS.md) for verified checks and
 
 ## Acceptance still outstanding
 
-Focused Chromium, keyboard, reflow and contrast checks passed. Lighthouse, axe, native
-NVDA/VoiceOver, native browser zoom and additional-browser checks remain pending.
-200% text enlargement and 320 CSS pixel reflow are not substitutes for those tests.
+Focused Chromium, keyboard, reflow and contrast checks passed. PR #4 records Lighthouse 100,
+axe zero critical/serious, keyboard, native NVDA, 200% zoom and reduced-motion acceptance for
+Regime, Track Record and Run Trace on the synthetic fixture. These results do not complete
+other-page or real-backend acceptance. Full product testing with delivered artifacts remains pending.
 
 No real orders are placed, routed or sized. Research stances are not execution instructions.

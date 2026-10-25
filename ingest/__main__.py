@@ -242,7 +242,7 @@ def main(argv: list[str] | None = None) -> int:
             continue
         try:
             steps[step]()
-        except Exception as exc:  # noqa: BLE001 -- isolate stages and redact provider exceptions
+        except Exception as exc:  # Isolate stages and redact provider exceptions.
             # Provider exceptions may include sensitive request headers. Do not print them.
             print(f"[FAIL] {step}: {type(exc).__name__}; check provider configuration and reports")
             from ingest.common import ConfigurationError

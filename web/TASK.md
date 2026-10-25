@@ -52,11 +52,15 @@ shape either way.
 |---|---|
 | UI | React 18, **plain JavaScript (.jsx / .js)**, function components and hooks |
 | build/dev | Vite |
-| routing | React Router 6 (`createBrowserRouter`) |
+| routing | React Router 7 (`createBrowserRouter`); the existing v7-ready routes are preserved |
 | styling | Tailwind CSS (utility classes; no other CSS framework) |
 | tables | TanStack Table v8 (sorting, filtering, pagination) |
 | charts | Apache ECharts via `echarts-for-react` |
 | tests | Vitest |
+
+The lead's 25 October security maintenance upgraded existing libraries to fixed releases;
+it did not add a UI framework or change API/table schemas. Use Node 22.12+ within the 22 LTS
+line, Node 24+, or the supported Node 20.19+ line. See [dependency policy](DEPENDENCIES.md).
 
 ## Setup
 

@@ -83,3 +83,14 @@ listed in [gap provenance](../data/sample/provenance/pageview_gaps.csv).
 
 No S3 destination or access delivery has been received from D. The ZIP remains private on
 the collector; no cloud resources, upload, hosted query or model recording is claimed.
+
+## Timestamp documentation synchronization, 25 October
+
+The lead's maintenance change updates the filing timestamp description and source-policy
+documentation to match index-based New York-to-UTC persistence. It explicitly distinguishes
+the unchanged legacy synthetic parser and discloses the UTC date-only cutoff; it does not
+claim a market-close implementation. The three saved source comparisons were checked against
+the actual sample again, all seven frozen table hashes were unchanged, and no schema field or
+given test was edited. [Maintenance evidence](../docs/validation/maintenance-2026-10-25/README.md)
+also records the resolved Ruff policy mismatch; earlier validation figures above are retained
+as the original release evidence.

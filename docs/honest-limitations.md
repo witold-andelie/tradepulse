@@ -43,7 +43,9 @@ Status: 25 October 2026. See [project status](STATUS.md) for verified checks and
   weekend crypto decisions and cross-market timing need further review.
 - Historical fundamental restatements, revised macro series and market-close availability
   remain point-in-time limitations. Three persisted EDGAR timestamps match original index
-  Accepted times; the older shared raw-field hypothesis still needs documentation correction.
+  Accepted times. Documentation now distinguishes index-based UTC persistence from the legacy
+  synthetic helper. The date-only ingestion cutoff is next-day 00:00 UTC; a 16:00 New York
+  market-close decision or automatic next-session shift is not implemented.
 - Three crypto article titles are missing and some mapped titles describe a platform or issuer.
   The curated pool meets the 90% title threshold but is not an exact top-40 market-cap index.
 - GDELT returned year-spanning daily observations for three probe names, with 20 missing dates
@@ -75,7 +77,9 @@ with no normal console errors or fixture requests. New guide acceptance includes
 VoiceOver on that guide, native-speaker editing and audible voice quality remain pending.
 Repeat real-output checks when genuine model recordings are supplied.
 
-The 25 October npm audit returned 15 dependency findings (two critical, five high, eight
-moderate). This delivery does not claim a completed dependency-security migration.
+The 25 October security maintenance upgraded existing dependencies and reduced the official
+registry audit from 15 findings to zero. Original test suites, browser journeys and the
+Node 22 container build passed; see [maintenance scope](validation/maintenance-2026-10-25/README.md).
+An audit result is dated registry evidence rather than a guarantee against future disclosures.
 
 No real orders are placed, routed or sized. Research stances are not execution instructions.

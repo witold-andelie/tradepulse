@@ -52,6 +52,8 @@ The other routes are Ticker Detail, Factor Lab, Regime, Track Record and Run Tra
 The persistent banner identifies fictional instruments and generated numbers.
 
 On the team's Windows machines, set `npm_config_cache` to a folder on D: before installing.
+Use Node 22.12+ within the 22 LTS line or Node 24+; Node 20.19+ is also supported. The existing
+libraries were upgraded for security on 25 October; see [dependency policy](web/DEPENDENCIES.md).
 
 ## Run the core
 

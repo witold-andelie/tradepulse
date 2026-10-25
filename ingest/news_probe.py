@@ -109,7 +109,7 @@ def fetch_news_probe(as_of, selected_symbol=None):
                             )
                         else:
                             row.update(status="NO", detail="no_timeline_points")
-            except Exception as exc:  # noqa: BLE001 -- never print transport credentials
+            except Exception as exc:  # Never print transport credentials.
                 from ingest.net import IngestHTTPError
 
                 row["detail"] = str(exc) if isinstance(exc, IngestHTTPError) else type(exc).__name__

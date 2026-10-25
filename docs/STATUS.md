@@ -38,8 +38,9 @@ run and genuine traces remain local/ignored. PR #5's older excluded sample is hi
 Strict data audit: 31/32 checks pass. The remaining completeness check truthfully reports
 35 missing exhibits; every source index was independently verified to have no permitted
 candidate. The lead accepted these exceptions for a source-qualified release on 2026-10-25;
-the strict completeness flag remains false. Source
-timestamp descriptions still need lead-reviewed synchronization with verified index-based UTC.
+the strict completeness flag remains false. Source timestamp descriptions now match the
+verified index-based UTC policy, while explicitly preserving the legacy synthetic helper and
+disclosing the current date-only cutoff rather than claiming a market-close implementation.
 
 A complete three-pool run finished with networking blocked and a contract-valid RunOutput:
 616 NO_CALL records, 33 factor cards (20 MEASURED_ONLY, 13 INSUFFICIENT_DATA), and nine abstained
@@ -75,10 +76,11 @@ the actual region in `DEPLOY.md` and supply the HTTPS endpoints/smoke instructio
 5. **Lead:** three genuine input/output/trace pairs and the demo/slide content are prepared.
    Finalize cloud-service scenes, sponsor evidence, the rendered deck/video and submission.
    Confirm one primary track, roster, Cursor usage and pre-existing component declarations.
-6. **Maintenance:** the 25 October npm audit reported 15 dependency findings (two critical,
-   five high, eight moderate). Version migration needs its own browser regression; do not run
-   `npm audit fix --force` or describe dependency security as certified. The existing Ruff
-   maintenance item and lead-reviewed source timestamp documentation sync also remain open.
+
+Completed maintenance, 25 October: existing libraries were upgraded and the official npm audit
+fell from 15 findings to zero. Ruff 0.17.2 and 0.15.20 pass the same explicit rule policy;
+all original tests are unchanged. SEC timestamp descriptions were synchronized with actual
+index-based persistence and the documented UTC date cutoff. See [maintenance evidence](validation/maintenance-2026-10-25/README.md).
 
 Team planning dates remain: B's hard limit 25 October 23:59 UTC; D's hard limit
 26 October 03:59 UTC (25 October 23:59 US Eastern); submission 27 October 23:45 UTC.
@@ -99,9 +101,9 @@ These are the recorded project deadlines, not a live check of organizer announce
 - Nine collection-readiness cases cover absent Yahoo candidates and source-date validation.
   Public Yahoo transport, privacy normalization and blocked-news reporting have new offline
   regressions. No given test assertion was changed.
-- Changed ingestion files and new regression files pass Ruff **0.17.2** with `--no-cache`.
-  Full-repository Ruff 0.17.2 acceptance is not claimed: the previously identified unused
-  `noqa` at `quant/tests/test_evaluation.py:87` remains a separate maintenance item.
+- Full-project Ruff **0.17.2** and **0.15.20** pass with `--no-cache` under the explicit
+  pre-0.16 project rules plus `RUF100`. The original quant test and its meaningful `E731`
+  suppression remain unchanged. Four unused ingestion suppressions became plain comments.
 - Frontend, last checked for PR #4: **68 tests passed** across 12 files; fixtures and all 19 trace lines validate;
   production build passes, largest chunk **627.84 kB**.
 - Research-guide follow-up on main: **84 tests passed across 14 files**, contracts and build
@@ -113,6 +115,12 @@ These are the recorded project deadlines, not a live check of organizer announce
 - Fresh-start/provenance follow-up: **609 Python tests** and **89 frontend tests across 15 files**
   pass. Contracts and build pass; largest chunk remains **627.84 kB**. All original assertions
   are preserved. The UI now distinguishes REPLAY mode from actual model-answer availability.
+- Security/tool maintenance: official registry audit **15 → 0 findings**; **609 Python** and
+  **89 frontend** cases pass, contracts validate, and the largest production chunk is now
+  **672.22 kB**. Original browser suites pass **17/17, 18/18 and 15/15**; real API/container
+  checks pass **9/9**. Six chart families were visually inspected; timeline offset bars remain
+  transparent instead of acquiring an accessibility decal. The SEC description-only change
+  preserves every column/schema property and all seven frozen sample table hashes.
 - First-start computation with an empty store and networking blocked passed in **32.26 seconds**;
   cached startup reused the same run in **0.12 seconds**, with zero network attempts.
   Three separately computed pool examples include original traces and verified hashes.

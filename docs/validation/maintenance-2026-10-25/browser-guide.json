@@ -1,0 +1,100 @@
+{
+  "browser": "156.0.8078.47",
+  "nativeSpeech": {
+    "api": true,
+    "voices": [
+      {
+        "name": "Microsoft Huihui - Chinese (Simplified, PRC)",
+        "lang": "zh-CN"
+      },
+      {
+        "name": "Microsoft David - English (United States)",
+        "lang": "en-US"
+      },
+      {
+        "name": "Microsoft Mark - English (United States)",
+        "lang": "en-US"
+      },
+      {
+        "name": "Microsoft Zira - English (United States)",
+        "lang": "en-US"
+      },
+      {
+        "name": "Microsoft Jakub - Czech (Czech Republic)",
+        "lang": "cs-CZ"
+      },
+      {
+        "name": "Microsoft Kangkang - Chinese (Simplified, PRC)",
+        "lang": "zh-CN"
+      },
+      {
+        "name": "Microsoft Yaoyao - Chinese (Simplified, PRC)",
+        "lang": "zh-CN"
+      }
+    ]
+  },
+  "results": [
+    {
+      "name": "explained record and four question-led disclosures",
+      "status": "PASS"
+    },
+    {
+      "name": "abstention, verified and rejected claims, exact original evidence and missing timing",
+      "status": "PASS"
+    },
+    {
+      "name": "same original claims and financial fields across Simple and Pro",
+      "status": "PASS"
+    },
+    {
+      "name": "all eleven locales preserve numbers, enums, evidence and original narratives",
+      "status": "PASS"
+    },
+    {
+      "name": "Arabic RTL region with isolated LTR identifiers and original text",
+      "status": "PASS"
+    },
+    {
+      "name": "locale persistence, invalid preference fallback and blocked storage",
+      "status": "PASS"
+    },
+    {
+      "name": "play, pause, resume, stop and exact readable structured speech",
+      "status": "PASS"
+    },
+    {
+      "name": "locale changes cancel speech without auto-playing another language",
+      "status": "PASS"
+    },
+    {
+      "name": "route navigation and instrument changes cancel active speech",
+      "status": "PASS"
+    },
+    {
+      "name": "no explanation and unknown instrument retain honest existing states",
+      "status": "PASS"
+    },
+    {
+      "name": "missing voices and unsupported browser remain readable with no silent fallback",
+      "status": "PASS"
+    },
+    {
+      "name": "speech errors leave the page and readable research usable",
+      "status": "PASS"
+    },
+    {
+      "name": "keyboard disclosures, language selection, focus ring and control labels",
+      "status": "PASS"
+    },
+    {
+      "name": "1440, 768 and 320px layouts in English, Chinese and Arabic",
+      "status": "PASS"
+    },
+    {
+      "name": "clean browser console throughout the normal fixture journeys",
+      "status": "PASS"
+    }
+  ],
+  "errors": [],
+  "speechTesting": "Playback lifecycle tested with an injected browser API double. No audible native voice acceptance is claimed."
+}

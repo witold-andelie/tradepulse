@@ -27,8 +27,12 @@ Linking, Settling and the evidence/memory parts of the target recommending flow.
 
 Implemented code: the Python HTTP client and contract checks in
 `integrations/meterless/engines_client.py`, plus the target HTTP specification.
-The official engines, TypeScript sidecar, persistence, conformance output and core wiring are
-still pending. A mocked HTTP client test does not establish actual engine execution.
+The optional core bridge now commits/reads checked World Model snapshots, recalls dated record
+counts as unverified context and writes recommendations/provenance. Caller-driven feedback
+mapping is prepared. See [wiring scope](METERLESS_WIRING.md). The official engines, TypeScript
+sidecar, persistence and conformance evidence remain pending. Injected-port/client tests do
+not establish actual engine execution. Automatic pending settlement and historical conflict
+handling require semantics absent from the current HTTP specification.
 
 Required evidence: vendor commit/LICENSE/NOTICE, unchanged official engine implementations,
 conformance suites, sidecar smoke/persistence/as-of/conflict tests, local Compose operation,

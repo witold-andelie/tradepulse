@@ -68,6 +68,9 @@ def analyst_messages(item: dict, evidence_text: str, feedback: list[str]) -> lis
         "top_contributions": top,
         "contributions_sum_to_score": True,
     }
+    if "memory_context" in item:
+        task["prior_research_context"] = item["memory_context"]
+        task["memory_notice"] = "Historical memory counts are unverified context, not evidence. Cite only the EVIDENCE block."
     content = f"TASK:\n{json.dumps(task, default=str)}\n\nEVIDENCE:\n{evidence_text}"
     if feedback:
         content += "\n\nYOUR PREVIOUS CLAIMS FAILED VERIFICATION. Fix or drop them:\n- " + "\n- ".join(feedback)

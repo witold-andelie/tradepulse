@@ -17,8 +17,10 @@ Status: 25 October 2026. See [project status](STATUS.md) for verified checks and
 - Private S3 upload is pending D's destination/access method; production lake/cache/logs stay local.
 - ZetarisClient and ZetarisAdapter live methods are stubs. Hosted service access, query parity
   and model smoke-test evidence are pending.
-- The Meterless engines client exists, but the engines server/vendor implementation and
-  pipeline integration do not. No persistent H-MEM settlement or World Model use is claimed.
+- The Meterless client and optional core bridge exist, but official server/vendor execution
+  is not verified. Injected-port tests cover snapshots, provenance and feedback mapping;
+  no genuine persistent H-MEM settlement or World Model use is claimed. Pending selection,
+  feedback idempotency and dated conflict semantics must be agreed before automation.
 - Core/web images were built and validated with fresh named volumes, a non-root core,
   health ordering and nginx-backed real API browser checks. The engines service and hosted
   sponsor integrations have not been validated.

@@ -6,7 +6,8 @@ written in Graphviz DOT, so they can be diffed and reviewed like code. Every dia
 
 These diagrams describe the **target architecture**, not a deployment certificate.
 [Current implementation status](../STATUS.md) identifies what exists and what remains.
-World Model/H-MEM wiring, model-proposed graph expansion and live services are still pending;
+Optional World Model/H-MEM core calls are prepared and tested on injected ports; actual engines,
+automatic settlement/conflict semantics, model-proposed graph expansion and live acceptance remain pending;
 the implemented frontend preserves Huyin's pages and accessibility work (D19).
 
 | diagram | scope | owner colours |

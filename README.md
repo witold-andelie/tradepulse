@@ -96,8 +96,11 @@ ingest -> parquet lake -> templated DuckDB / planned Zetaris live adapter
       -> fixture-backed or API-backed React frontend
 ```
 
-World Model and H-MEM are planned load-bearing integrations; the current pipeline does not yet
-call the engines client. All configured LLM roles use hosted NVIDIA NIM by default (D18).
+World Model and H-MEM have an opt-in core bridge against the agreed sidecar API: snapshot inputs,
+bounded historical memory context and research-record persistence. Official engine execution,
+automatic pending settlement and dated conflicts still need D's delivery/semantics acceptance.
+SAMPLE_MODE never auto-connects to engine HTTP services. See [wiring scope](docs/METERLESS_WIRING.md).
+All configured LLM roles use hosted NVIDIA NIM by default (D18).
 The current request guard itself is deterministic.
 
 | Path | Responsibility | Owner |
@@ -113,6 +116,10 @@ The current request guard itself is deterministic.
 
 ## Validation
 
+[GitHub Actions CI](docs/CI.md) runs Python/Ruff/offline-sample acceptance on Windows and
+frontend tests/contracts/build/audit on Node 22 and 24. It needs no cloud credentials and
+publishes measured reports; live sponsor acceptance remains separate.
+
 ```powershell
 py -3 -m pytest -q
 py -3 -m ruff check ingest quant integrations tradepulse run.py scripts --no-cache
@@ -122,7 +129,7 @@ npm run check:contracts
 npm run build
 ```
 
-The collector's latest checks are **609 Python tests passed, none skipped**. The research-guide
+The collector's latest checks are **642 Python tests passed, none skipped**. The research-guide
 and provenance follow-up has **89 frontend tests passed**, valid contract fixtures and a successful production build. Existing browser suites
 passed 17/17 and 18/18 groups. See [status](docs/STATUS.md) for scope and outstanding manual QA.
 The full production lake is ignored rather than committed; its seven lake cases require local

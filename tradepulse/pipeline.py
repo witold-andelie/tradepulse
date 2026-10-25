@@ -22,7 +22,8 @@ from tradepulse.config import load_config
 from tradepulse.contracts import REPO_ROOT
 from tradepulse.extract.grounding import ExtractionCache
 from tradepulse.extract.runner import run_extraction
-from tradepulse.ports import LLMPort, QueryPort
+from tradepulse.ports import EnginesPort, LLMPort, QueryPort
+from tradepulse.engines import EngineBridge, configured_engines
 from quant.regime_indicators import regime_points
 from tradepulse.backtest import track_record, walk_forward
 from tradepulse.regime_inputs import assess, indicator_series
@@ -109,7 +110,7 @@ def _empty(index: pd.DatetimeIndex, symbols: list[str]) -> pd.DataFrame:
 
 def _signal_panels(cfg: dict, query: QueryPort, llm: LLMPort, loaded: list[dict], reference: pd.DataFrame,
                    window_start: str, as_of: str, cache_path: Path, tracer: Tracer,
-                   warnings: list[str]) -> dict[str, dict[str, pd.DataFrame]]:
+                   warnings: list[str], memory: EngineBridge | None = None) -> dict[str, dict[str, pd.DataFrame]]:
     """Raw extra panels per pool: filing-based factors (US only) and relational spillover (all pools).
     Pools without a source still get all-NaN panels, so their cards honestly read INSUFFICIENT_DATA."""
     combined = pd.concat([d["prices"] for d in loaded] + [reference], axis=1)
@@ -142,6 +143,9 @@ def _signal_panels(cfg: dict, query: QueryPort, llm: LLMPort, loaded: list[dict]
                              payload={k: result[k] for k in ("processed", "cached", "skipped", "rejected_problems")})
             except Exception as exc:  # missing table or extractor unavailable: the factors stay empty
                 warnings.append(f"Event extraction unavailable ({type(exc).__name__}); event factors are empty.")
+
+    if memory is not None:
+        events, edges = memory.world_snapshot(events, edges)
 
     for d in loaded:
         pool, prices = d["pool"], d["prices"]
@@ -215,7 +219,8 @@ def _rank_pool(data: dict, extra: dict[str, pd.DataFrame], cfg: dict, window_sta
 
 
 def run_pipeline(request: dict, *, query: QueryPort | None = None, llm: LLMPort | None = None,
-                 log_dir: Path | None = None, now: dt.datetime | None = None) -> dict:
+                 log_dir: Path | None = None, now: dt.datetime | None = None,
+                 engines: EnginesPort | None = None) -> dict:
     """Execute one run for a guarded RunRequest and return a contract-valid RunOutput."""
     cfg = load_config()
     is_sample = sample_mode()
@@ -239,11 +244,15 @@ def run_pipeline(request: dict, *, query: QueryPort | None = None, llm: LLMPort 
         "statistics over the window.",
         "Walk-forward excludes evt_drift and rel_spillover because their priors and edges are fitted in-sample.",
     ]
+    engine_port = engines if engines is not None else configured_engines(is_sample)
+    memory = EngineBridge(engine_port, as_of, tracer) if engine_port is not None else None
+    if memory is None:
+        warnings.append("Meterless engines were not used; no World Model/H-MEM persistence or memory context is claimed.")
 
     reference, hy = _load_reference(query, start, as_of)
     loaded = [_load_pool(p, query, start, as_of, tracer, warnings) for p in request["pools"]]
     cache_path = (SAMPLE_ROOT if is_sample else REPO_ROOT / "data" / "cache") / "extraction_cache.jsonl"
-    extras = _signal_panels(cfg, query, llm, loaded, reference, window_start, as_of, cache_path, tracer, warnings)
+    extras = _signal_panels(cfg, query, llm, loaded, reference, window_start, as_of, cache_path, tracer, warnings, memory)
     pools = [_rank_pool(d, extras[d["pool"]], cfg, window_start, as_of, reference, hy, tracer, warnings)
              for d in loaded]
 
@@ -256,6 +265,8 @@ def run_pipeline(request: dict, *, query: QueryPort | None = None, llm: LLMPort 
             items.append({"pool": p["pool"], "symbol": symbol, "name": str(p["universe"].at[symbol, "name"]),
                           "tier": str(row["tier"]), "score": float(row["score"]), "rank": int(row["rank"]),
                           "n": len(p["book"]), "as_of": as_of, "contributions": row["contributions"]})
+    if memory is not None:
+        items = memory.prior_context(items)
     with tracer.span("explain", f"{len(items)} focus names"):
         explained = Explainer(query, llm, max_retries=cfg["explain"]["max_verify_retries"], tracer=tracer).run(items)
         offline = sum("unavailable" in v["explanation"]["models"].values() for v in explained.values())
@@ -281,6 +292,8 @@ def run_pipeline(request: dict, *, query: QueryPort | None = None, llm: LLMPort 
                                       {"start": window_start, "end": as_of}),
             warnings=warnings, trace_path=str(tracer.path.relative_to(REPO_ROOT)) if tracer.path.is_relative_to(REPO_ROOT)
             else str(tracer.path))
+    if memory is not None:
+        memory.remember(output, cfg["backtest"]["execution_lag_days"])
     tracer.event("run", "info", message="run complete",
                  payload={"recommendations": len(recommendations), "explanations": len(explained)})
     return output

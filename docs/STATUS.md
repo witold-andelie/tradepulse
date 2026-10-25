@@ -15,7 +15,7 @@ The lead approved that guide-only UI exception and took over the two follow-up r
 
 | Area | Implemented | Remaining |
 |---|---|---|
-| Core / lead | Research gates, ranking, regime, walk-forward, grounded extraction, LangGraph explanation/verifier, reports, API/traces, hash-verified fresh sample launcher and three genuine examples | Engine wiring after D, complete model replay and final delivery media |
+| Core / lead | Research gates, ranking, regime, walk-forward, grounded extraction, LangGraph explanation/verifier, API/traces, sample launcher, three examples and optional World Model/H-MEM core wiring with offline port tests | Actual engine acceptance, pending/conflict semantics, complete model replay and final media |
 | A / ingest, lead follow-up | Real seven-table lake/sample for 2026-10-23, crypto CSV/provenance, source checks, accepted source exceptions, offline execution and reproducible private full-lake package/verification | Actual S3 upload awaits D's destination/access; model recordings are D's separate dependency |
 | B / Huyin | Six business pages, Discover, Simple/Pro, evidence drill-down, responsive/accessibility interactions, localized guide, independent Lighthouse/axe/native zoom and real-API journeys | New guide's actual NVDA/VoiceOver check, native-speaker editing and audible voice quality |
 | C / Tanhao | C1–C7 math, 235 C9 property cases, B7–B9 fixes, fixture accessibility acceptance and real-API regressions completed by the lead | Recheck after D supplies fully explained real outputs |
@@ -67,9 +67,11 @@ the actual region in `DEPLOY.md` and supply the HTTPS endpoints/smoke instructio
 2. **D:** finish Zetaris client/deployment/parity; agree the NIM models with the lead; record
    model answers for the delivered snapshot/date and redacted text hashes; implement and test
    the Meterless engines sidecar. The earlier excluded sample is not cassette-compatible.
-3. **Lead:** connect engines, verify hosted access from Europe, and run offline SAMPLE_MODE
+3. **Lead:** validate the prepared core bridge against actual engines, verify access from Europe, and run offline SAMPLE_MODE
    with networking disabled after recording models. Offline data loading, pipeline execution,
    API contract and abstention behavior have already passed; model replay is still pending.
+   Automatic H-MEM pending selection/idempotency and historical conflict handling require
+   semantics not declared by the existing HTTP API; the bridge does not invent them.
 4. **B and C / lead QA:** the current real-output regression is complete. Repeat it after D's
    cassette supplies genuinely explained outputs. The new guide still needs actual NVDA/VoiceOver,
    native-speaker editing and audible voice checks; automated tools do not certify those.
@@ -87,6 +89,12 @@ Team planning dates remain: B's hard limit 25 October 23:59 UTC; D's hard limit
 These are the recorded project deadlines, not a live check of organizer announcements.
 
 ## Verified checks
+
+- CI/core-wiring preparation: **642 Python tests** pass, including **33 new SYNTHETIC
+  injected-port cases**. No given test or assertion changed. Ruff/actionlint, 89 frontend
+  tests, contracts and build pass. Fresh real-sample computation still produces 616 records,
+  33 cards and nine actual abstentions, with zero attempted network connections and cached
+  reuse. This is offline/interface acceptance, not official Meterless execution.
 
 - Full offline Python suite on the collector after fresh-start completion, with real lake and delivered sample: **609 passed, none skipped**,
   with 19 existing BeautifulSoup/lxml deprecation warnings.
@@ -173,3 +181,4 @@ proves live services work, or establishes predictive investment performance.
 - [Honest limitations](honest-limitations.md) and [sponsor evidence status](sponsors.md)
 - [Clean sample startup and API](RUNNING.md), [runtime evidence](validation/README.md),
   [computed examples](../examples/README.md) and [submission preparation](submission/README.md)
+- [Credential-free CI](CI.md) and [Meterless wiring/remaining semantics](METERLESS_WIRING.md)

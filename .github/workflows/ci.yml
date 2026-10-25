@@ -1,0 +1,118 @@
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  python:
+    name: Python, contracts and offline sample
+    runs-on: windows-latest
+    timeout-minutes: 20
+    env:
+      PY_PYTHON3: '3.13'
+      SAMPLE_MODE: 'true'
+      RECORD_LLM: 'false'
+      ENGINES_ENABLED: 'false'
+      LANGSMITH_TRACING: 'false'
+    defaults:
+      run:
+        shell: pwsh
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0 # v7.1.0
+        with:
+          python-version: '3.13'
+          cache: pip
+          cache-dependency-path: pyproject.toml
+      - name: Install and verify Python runtime
+        run: |
+          py -3 -c "import sys; assert sys.version_info[:2] == (3, 13)"
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          py -3 -m pip install --disable-pip-version-check --retries 2 --timeout 30 -e ".[ingest,agent,dev]"
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          New-Item -ItemType Directory -Force .ci-output | Out-Null
+      - name: Lint existing project policy
+        run: py -3 -m ruff check ingest quant integrations tradepulse run.py serve.py scripts --no-cache
+      - name: Run all offline tests
+        run: py -3 -m pytest -q --basetemp="$env:RUNNER_TEMP/tradepulse-pytest" --junitxml=.ci-output/python.xml
+      - name: Require the committed sample test to execute
+        run: |
+          py -3 -c "import xml.etree.ElementTree as E; cases=list(E.parse('.ci-output/python.xml').getroot().iter('testcase')); required=[c for c in cases if c.get('name') == 'test_sample_snapshot_is_complete_and_valid']; assert len(required)==1 and required[0].find('skipped') is None"
+      - name: Fresh sample, no network and cached reuse
+        run: py -3 -m scripts.ci_offline_smoke --output .ci-output/offline-smoke.json
+      - name: Preserve frozen contracts and sample
+        run: git diff --exit-code -- contracts data/sample
+      - name: Upload actual Python results
+        if: always()
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: python-results
+          path: .ci-output/
+          if-no-files-found: ignore
+          retention-days: 7
+
+  web:
+    name: Web / Node ${{ matrix.node }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    strategy:
+      fail-fast: false
+      matrix:
+        node: ['22', '24']
+    defaults:
+      run:
+        working-directory: web
+    env:
+      VITE_API_BASE: ''
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: ${{ matrix.node }}
+          cache: npm
+          cache-dependency-path: web/package-lock.json
+      - name: Install frozen dependencies
+        run: npm ci --registry=https://registry.npmjs.org --fetch-retries=2 --fetch-timeout=30000
+      - name: Audit complete dependency graph
+        run: npm audit --registry=https://registry.npmjs.org --fetch-retries=2 --fetch-timeout=30000
+      - name: Unit tests
+        run: |
+          mkdir -p ../.ci-output
+          npm test -- --reporter=json --outputFile=../.ci-output/web-tests.json
+      - name: API fixtures and all trace lines
+        run: npm run check:contracts
+      - name: Production build
+        run: npm run build
+      - name: Enforce the chunk budget
+        run: |
+          node --input-type=module <<'NODE'
+          import fs from 'node:fs';
+          const files = fs.readdirSync('dist/assets').filter(name => name.endsWith('.js'));
+          if (!files.length || files.length > 1000) throw new Error('Invalid build asset list');
+          const sizes = files.map(file => ({ file, bytes: fs.statSync('dist/assets/' + file).size }));
+          if (sizes.some(row => !row.file.includes('.fixture-') && row.bytes > 1_000_000)) throw new Error('Production chunk exceeds 1 MB');
+          fs.mkdirSync('../.ci-output', { recursive: true });
+          fs.writeFileSync('../.ci-output/build-sizes.json', JSON.stringify(sizes, null, 2));
+          NODE
+      - name: Upload actual web results
+        if: always()
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: web-results-node-${{ matrix.node }}
+          path: .ci-output/
+          if-no-files-found: ignore
+          retention-days: 7

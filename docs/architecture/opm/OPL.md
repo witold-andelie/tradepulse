@@ -4,8 +4,10 @@ OPL is the text twin of the OPM diagrams. Every sentence below corresponds to on
 `.dot` file in this folder. If a diagram and this file disagree, fix both in the same PR.
 
 This is the target model. [Current status](../../STATUS.md) distinguishes it from implemented
-behavior: the guard is deterministic; seed graph fitting is in-sample; World Model, H-MEM and
-iterative model-proposed edges are not wired. Current TrackRecord comes from walk-forward
+behavior: the guard is deterministic; seed graph fitting is in-sample. Optional World Model/
+H-MEM core calls are prepared against the target HTTP API, but genuine engine acceptance,
+automatic settlement/conflict semantics and iterative model-proposed edges remain pending.
+Current TrackRecord comes from walk-forward
 simulation. The frontend is implemented and preserved under D19; B owns the UI baseline and
 C reviews/extends its existing Regime, Track Record and Run Trace pages.
 

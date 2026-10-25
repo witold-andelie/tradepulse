@@ -5,6 +5,7 @@
 .aws
 .scratch
 .work
+.ci-output
 .env
 .env.*
 **/*.pem

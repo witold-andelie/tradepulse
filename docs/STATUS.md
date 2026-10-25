@@ -16,7 +16,7 @@ The lead approved that guide-only UI exception and took over the two follow-up r
 | Area | Implemented | Remaining |
 |---|---|---|
 | Core / lead | Research gates, ranking, regime, walk-forward, grounded extraction, LangGraph explanation/verifier, reports, API and traces | Engine wiring, real artifact/service acceptance and delivery materials |
-| A / ingest, lead follow-up | Real seven-table lake/sample for 2026-10-23, crypto CSV/provenance, source checks, lead-accepted source exceptions and offline execution | D's private S3 destination and matching model recordings |
+| A / ingest, lead follow-up | Real seven-table lake/sample for 2026-10-23, crypto CSV/provenance, source checks, accepted source exceptions, offline execution and reproducible private full-lake package/verification | Actual S3 upload awaits D's destination/access; model recordings are D's separate dependency |
 | B / Huyin | Six business pages, Discover, Simple/Pro, filtering, evidence drill-down, responsive design, accessibility interactions and localized research guide with optional speech | Visual/interaction review and remaining manual acceptance, including new guide controls and native speech |
 | C / Tanhao | C1–C7 math, 235 C9 property cases, B7–B9 review fixes and recorded fixture accessibility acceptance | Regression against delivered real API outputs |
 | D / integrations | SQL templates, DuckDB adapter, registration runner, hosted NIM record/replay client and Python engines client | Zetaris deployment/registration/live client/parity, recorded cassette and TypeScript engines sidecar |
@@ -49,7 +49,8 @@ was fabricated. Full explained replay and sponsor acceptance remain incomplete.
 The checkout lacks `integrations/ACCESS.md`, deployed-service evidence, engines server/vendor
 files, a committed LLM cassette and live parity/model smoke evidence. The standalone frontend
 still defaults to synthetic fixtures; API mode needs a generated/saved run. Cloud upload is
-pending D's private destination and access method.
+pending D's private destination and access method. The verified local full-lake ZIP and A1–A9
+closure matrix are in [A delivery](../ingest/DELIVERY.md); no upload has occurred.
 
 ## Remaining sequence and owners
 
@@ -73,11 +74,11 @@ These are the recorded project deadlines, not a live check of organizer announce
 
 ## Verified checks
 
-- Full offline Python suite on the collector, with real lake and delivered sample: **595 passed, none skipped**,
+- Full offline Python suite on the collector after private-handoff completion, with real lake and delivered sample: **603 passed, none skipped**,
   with 19 existing BeautifulSoup/lxml deprecation warnings.
   All seven lake cases and the sample case execute. Passing these tests does not override the
   separate strict completeness failure for the 35 verified source exceptions.
-  A clean repository export without credentials/caches passed **588 tests with 7 expected
+  At the initial real-sample release, a clean export without credentials/caches passed **588 tests with 7 expected
   production-lake skips** and zero attempted external network connections. The sample test
   passed. Its seven production-lake cases require local collection/private handoff.
 - Eleven new ingestion regression cases passed; eight failed against the merged implementation
@@ -97,6 +98,13 @@ These are the recorded project deadlines, not a live check of organizer announce
   guide browser suite and additional summary/pause-preserving browser regressions passed.
   See [guide acceptance scope](../web/AGENT_ACCESSIBILITY_DEMO.md); its native/manual checks
   remain separate from the earlier B7–B9 fixture acceptance.
+- Independent Ticker Detail acceptance: Lighthouse 13.5.0 scores **100 desktop / 100 at 320 px**;
+  **28 axe-core 4.14.0 cases have zero violations** after fixing the brand name and Run context
+  landmark; **18 native Chrome zoom cases passed**, including 200% at 320 CSS px. Original
+  reports, residual contrast review and scope are [published with the web app](../web/ACCESSIBILITY_ACCEPTANCE.md).
+  NVDA/VoiceOver on the new guide, native-speaker editing and audible voice quality remain pending.
+  After that shell correction, unchanged guide/original/redesign browser suites passed
+  **15/15, 17/17 and 18/18 groups**, respectively, on the corrected production build.
 - Huyin's unchanged original browser suite: **17/17 groups passed**.
 - Her unchanged redesign/accessibility journeys: **18/18 groups passed**, including 320 CSS
   pixel reflow and 200% text enlargement.

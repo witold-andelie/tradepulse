@@ -175,5 +175,14 @@ providers. No teammate needs to implement an API or translate generated Agent pr
   console errors. These checks do not certify audible native speech or assistive technology.
 - Lead evidence is local under `D:/AI_Models/hackson/.work/agent-guide-followup-20261025/`.
   The original branch's validation paths and pending acceptance above remain historical and
-  are not uploaded attachments. Lighthouse, axe, NVDA/VoiceOver, native browser zoom,
-  native-speaker editing and broader native speech/browser acceptance are still pending.
+  are not uploaded attachments. At that stage Lighthouse, axe, NVDA/VoiceOver, native browser
+  zoom, native-speaker editing and broader native speech/browser acceptance were still pending.
+
+## Subsequent independent acceptance
+
+Lighthouse desktop and 320 px accessibility scores are now 100; all 28 expanded-state
+axe-core cases have zero violations, following a shared-shell label/landmark correction.
+Eighteen native Chrome zoom cases also passed, including 200% at 320 CSS px. Source/report
+hashes, actual test scope and the outstanding NVDA/VoiceOver/native voice review are in
+[ACCESSIBILITY_ACCEPTANCE.md](ACCESSIBILITY_ACCEPTANCE.md). The extension UI and a real
+screen-reader walkthrough were not performed; automated checks do not stand in for them.

@@ -1,0 +1,770 @@
+{
+  "scope": "Ticker Detail, expanded guide/source disclosures and chart data tables, SYNTHETIC fixture, Simple/Pro. No live backend or complete WCAG certification is claimed.",
+  "base_commit": "8c641ee67c989235500852e0655d17137ef13bae",
+  "app_sha256": "7b27680ad96b5832b2cf283a936dcfc60ba932a2d46d8ab0433f567b3396637f",
+  "lighthouse": [
+    {
+      "name": "ticker-desktop-after",
+      "version": "13.5.0",
+      "score": 100,
+      "failed_audits": [],
+      "warnings": [],
+      "files": [
+        {
+          "path": "ticker-desktop-after.report.json",
+          "bytes": 292822,
+          "sha256": "e910abc6b68e2790994b76e4812f8c31bbaaa0d74e672c110f4ea767a1913d4a"
+        },
+        {
+          "path": "ticker-desktop-after.report.html",
+          "bytes": 455461,
+          "sha256": "30fe89a4ff4e8806653ceb9eb6e620d05eea8e49b5bf415a2bc8b62558f9e97f",
+          "raw_sha256": "9bcd2cdbbb5645b7c0ca557e82d266c2fcfa9341f7ea0765a269f1e5e604acc9",
+          "normalization": "Whitespace-only lines normalized for Git; audit content is unchanged."
+        }
+      ]
+    },
+    {
+      "name": "ticker-mobile-320-after",
+      "version": "13.5.0",
+      "score": 100,
+      "failed_audits": [],
+      "warnings": [],
+      "files": [
+        {
+          "path": "ticker-mobile-320-after.report.json",
+          "bytes": 280053,
+          "sha256": "e57b4dc1cbb597347d1afbf9154a557dfd9c507f90cd4c0ffbf3357551a4a752"
+        },
+        {
+          "path": "ticker-mobile-320-after.report.html",
+          "bytes": 442692,
+          "sha256": "7be64cd4e09240b42ff06c62881835d773327ec32a1741b76b7bf0780d9649e3",
+          "raw_sha256": "75a40bb81b7010db829896c338f267ab34bd5a82188b6eca3c054b263f129e12",
+          "normalization": "Whitespace-only lines normalized for Git; audit content is unchanged."
+        }
+      ]
+    }
+  ],
+  "axe_core": {
+    "browser": "156.0.8078.47",
+    "cases": [
+      {
+        "case": "simple-en-320",
+        "axe_version": "4.14.0",
+        "counts": {
+          "critical": 0,
+          "serious": 0,
+          "moderate": 0,
+          "minor": 0
+        },
+        "violations": [],
+        "incomplete": [
+          "color-contrast"
+        ]
+      },
+      {
+        "case": "simple-zh-CN-320",
+        "axe_version": "4.14.0",
+        "counts": {
+          "critical": 0,
+          "serious": 0,
+          "moderate": 0,
+          "minor": 0
+        },
+        "violations": [],
+        "incomplete": [
+          "color-contrast"
+        ]
+      },
+      {
+        "case": "simple-zh-TW-320",
+        "axe_version": "4.14.0",
+        "counts": {
+          "critical": 0,
+          "serious": 0,
+          "moderate": 0,
+          "minor": 0
+        },
+        "violations": [],
+        "incomplete": [
+          "color-contrast"
+        ]
+      },
+      {
+        "case": "simple-es-320",
+        "axe_version": "4.14.0",
+        "counts": {
+          "critical": 0,
+          "serious": 0,
+          "moderate": 0,
+          "minor": 0
+        },
+        "violations": [],
+        "incomplete": [
+          "color-contrast"
+        ]
+      },
+      {
+        "case": "simple-fr-320",
+        "axe_version": "4.14.0",
+        "counts": {
+          "critical": 0,
+          "serious": 0,
+          "moderate": 0,
+          "minor": 0
+        },
+        "violations": [],
+        "incomplete": [
+          "color-contrast"
+        ]
+      },
+      {
+        "case": "simple-de-320",
+        "axe_version": "4.14.0",
+        "counts": {
+          "critical": 0,
+          "serious": 0,
+          "moderate": 0,
+          "minor": 0
+        },
+        "violations": [],
+        "incomplete": [
+          "color-contrast"
+        ]
+      },
+      {
+        "case": "simple-pt-BR-320",
+        "axe_version": "4.14.0",
+        "counts": {
+          "critical": 0,
+          "serious": 0,
+          "moderate": 0,
+          "minor": 0
+        },
+        "violations": [],
+        "incomplete": [
+          "color-contrast"
+        ]
+      },
+      {
+        "case": "simple-ja-320",
+        "axe_version": "4.14.0",
+        "counts": {
+          "critical": 0,
+          "serious": 0,
+          "moderate": 0,
+          "minor": 0
+        },
+        "violations": [],
+        "incomplete": [
+          "color-contrast"
+        ]
+      },
+      {
+        "case": "simple-ko-320",
+        "axe_version": "4.14.0",
+        "counts": {
+          "critical": 0,
+          "serious": 0,
+          "moderate": 0,
+          "minor": 0
+        },
+        "violations": [],
+        "incomplete": [
+          "color-contrast"
+        ]
+      },
+      {
+        "case": "simple-cs-320",
+        "axe_version": "4.14.0",
+        "counts": {
+          "critical": 0,
+          "serious": 0,
+          "moderate": 0,
+          "minor": 0
+        },
+        "violations": [],
+        "incomplete": [
+          "color-contrast"
+        ]
+      },
+      {
+        "case": "simple-ar-320",
+        "axe_version": "4.14.0",
+        "counts": {
+          "critical": 0,
+          "serious": 0,
+          "moderate": 0,
+          "minor": 0
+        },
+        "violations": [],
+        "incomplete": [
+          "color-contrast"
+        ]
+      },
+      {
+        "case": "pro-en-320",
+        "axe_version": "4.14.0",
+        "counts": {
+          "critical": 0,
+          "serious": 0,
+          "moderate": 0,
+          "minor": 0
+        },
+        "violations": [],
+        "incomplete": [
+          "color-contrast"
+        ]
+      },
+      {
+        "case": "pro-zh-CN-320",
+        "axe_version": "4.14.0",
+        "counts": {
+          "critical": 0,
+          "serious": 0,
+          "moderate": 0,
+          "minor": 0
+        },
+        "violations": [],
+        "incomplete": [
+          "color-contrast"
+        ]
+      },
+      {
+        "case": "pro-zh-TW-320",
+        "axe_version": "4.14.0",
+        "counts": {
+          "critical": 0,
+          "serious": 0,
+          "moderate": 0,
+          "minor": 0
+        },
+        "violations": [],
+        "incomplete": [
+          "color-contrast"
+        ]
+      },
+      {
+        "case": "pro-es-320",
+        "axe_version": "4.14.0",
+        "counts": {
+          "critical": 0,
+          "serious": 0,
+          "moderate": 0,
+          "minor": 0
+        },
+        "violations": [],
+        "incomplete": [
+          "color-contrast"
+        ]
+      },
+      {
+        "case": "pro-fr-320",
+        "axe_version": "4.14.0",
+        "counts": {
+          "critical": 0,
+          "serious": 0,
+          "moderate": 0,
+          "minor": 0
+        },
+        "violations": [],
+        "incomplete": [
+          "color-contrast"
+        ]
+      },
+      {
+        "case": "pro-de-320",
+        "axe_version": "4.14.0",
+        "counts": {
+          "critical": 0,
+          "serious": 0,
+          "moderate": 0,
+          "minor": 0
+        },
+        "violations": [],
+        "incomplete": [
+          "color-contrast"
+        ]
+      },
+      {
+        "case": "pro-pt-BR-320",
+        "axe_version": "4.14.0",
+        "counts": {
+          "critical": 0,
+          "serious": 0,
+          "moderate": 0,
+          "minor": 0
+        },
+        "violations": [],
+        "incomplete": [
+          "color-contrast"
+        ]
+      },
+      {
+        "case": "pro-ja-320",
+        "axe_version": "4.14.0",
+        "counts": {
+          "critical": 0,
+          "serious": 0,
+          "moderate": 0,
+          "minor": 0
+        },
+        "violations": [],
+        "incomplete": [
+          "color-contrast"
+        ]
+      },
+      {
+        "case": "pro-ko-320",
+        "axe_version": "4.14.0",
+        "counts": {
+          "critical": 0,
+          "serious": 0,
+          "moderate": 0,
+          "minor": 0
+        },
+        "violations": [],
+        "incomplete": [
+          "color-contrast"
+        ]
+      },
+      {
+        "case": "pro-cs-320",
+        "axe_version": "4.14.0",
+        "counts": {
+          "critical": 0,
+          "serious": 0,
+          "moderate": 0,
+          "minor": 0
+        },
+        "violations": [],
+        "incomplete": [
+          "color-contrast"
+        ]
+      },
+      {
+        "case": "pro-ar-320",
+        "axe_version": "4.14.0",
+        "counts": {
+          "critical": 0,
+          "serious": 0,
+          "moderate": 0,
+          "minor": 0
+        },
+        "violations": [],
+        "incomplete": [
+          "color-contrast"
+        ]
+      },
+      {
+        "case": "simple-en-1440",
+        "axe_version": "4.14.0",
+        "counts": {
+          "critical": 0,
+          "serious": 0,
+          "moderate": 0,
+          "minor": 0
+        },
+        "violations": [],
+        "incomplete": [
+          "color-contrast"
+        ]
+      },
+      {
+        "case": "simple-zh-CN-1440",
+        "axe_version": "4.14.0",
+        "counts": {
+          "critical": 0,
+          "serious": 0,
+          "moderate": 0,
+          "minor": 0
+        },
+        "violations": [],
+        "incomplete": [
+          "color-contrast"
+        ]
+      },
+      {
+        "case": "simple-ar-1440",
+        "axe_version": "4.14.0",
+        "counts": {
+          "critical": 0,
+          "serious": 0,
+          "moderate": 0,
+          "minor": 0
+        },
+        "violations": [],
+        "incomplete": [
+          "color-contrast"
+        ]
+      },
+      {
+        "case": "pro-en-1440",
+        "axe_version": "4.14.0",
+        "counts": {
+          "critical": 0,
+          "serious": 0,
+          "moderate": 0,
+          "minor": 0
+        },
+        "violations": [],
+        "incomplete": [
+          "color-contrast"
+        ]
+      },
+      {
+        "case": "pro-zh-CN-1440",
+        "axe_version": "4.14.0",
+        "counts": {
+          "critical": 0,
+          "serious": 0,
+          "moderate": 0,
+          "minor": 0
+        },
+        "violations": [],
+        "incomplete": [
+          "color-contrast"
+        ]
+      },
+      {
+        "case": "pro-ar-1440",
+        "axe_version": "4.14.0",
+        "counts": {
+          "critical": 0,
+          "serious": 0,
+          "moderate": 0,
+          "minor": 0
+        },
+        "violations": [],
+        "incomplete": [
+          "color-contrast"
+        ]
+      }
+    ],
+    "page_errors": [],
+    "scanned_state": "All native details and available chart tables expanded; SYNTHETIC fixture; no custom runOnly or rule exclusions."
+  },
+  "native_zoom": {
+    "method": "Native Chrome per-host zoom in isolated profiles; no viewport, root-font or page-scale emulation. At 1440px outer width, innerWidth changes 1418 to709 and DPR1 to2; root font stays16px and visual scale1.",
+    "cases": [
+      {
+        "innerWidth": 1418,
+        "outerWidth": 1440,
+        "devicePixelRatio": 1,
+        "rootFontSize": "16px",
+        "visualScale": 1,
+        "documentWidth": 1418,
+        "guideWidth": 1112,
+        "guideContent": 1112,
+        "zoom": 1,
+        "view": "Simple",
+        "locale": "en",
+        "physical_width": 1440
+      },
+      {
+        "innerWidth": 1418,
+        "outerWidth": 1440,
+        "devicePixelRatio": 1,
+        "rootFontSize": "16px",
+        "visualScale": 1,
+        "documentWidth": 1418,
+        "guideWidth": 1112,
+        "guideContent": 1112,
+        "zoom": 1,
+        "view": "Simple",
+        "locale": "zh-CN",
+        "physical_width": 1440
+      },
+      {
+        "innerWidth": 1418,
+        "outerWidth": 1440,
+        "devicePixelRatio": 1,
+        "rootFontSize": "16px",
+        "visualScale": 1,
+        "documentWidth": 1418,
+        "guideWidth": 1112,
+        "guideContent": 1112,
+        "zoom": 1,
+        "view": "Simple",
+        "locale": "ar",
+        "physical_width": 1440
+      },
+      {
+        "innerWidth": 1418,
+        "outerWidth": 1440,
+        "devicePixelRatio": 1,
+        "rootFontSize": "16px",
+        "visualScale": 1,
+        "documentWidth": 1418,
+        "guideWidth": 1112,
+        "guideContent": 1112,
+        "zoom": 1,
+        "view": "Pro",
+        "locale": "en",
+        "physical_width": 1440
+      },
+      {
+        "innerWidth": 1418,
+        "outerWidth": 1440,
+        "devicePixelRatio": 1,
+        "rootFontSize": "16px",
+        "visualScale": 1,
+        "documentWidth": 1418,
+        "guideWidth": 1112,
+        "guideContent": 1112,
+        "zoom": 1,
+        "view": "Pro",
+        "locale": "zh-CN",
+        "physical_width": 1440
+      },
+      {
+        "innerWidth": 1418,
+        "outerWidth": 1440,
+        "devicePixelRatio": 1,
+        "rootFontSize": "16px",
+        "visualScale": 1,
+        "documentWidth": 1418,
+        "guideWidth": 1112,
+        "guideContent": 1112,
+        "zoom": 1,
+        "view": "Pro",
+        "locale": "ar",
+        "physical_width": 1440
+      },
+      {
+        "innerWidth": 709,
+        "outerWidth": 1440,
+        "devicePixelRatio": 2,
+        "rootFontSize": "16px",
+        "visualScale": 1,
+        "documentWidth": 709,
+        "guideWidth": 659,
+        "guideContent": 659,
+        "zoom": 2,
+        "view": "Simple",
+        "locale": "en",
+        "physical_width": 1440
+      },
+      {
+        "innerWidth": 709,
+        "outerWidth": 1440,
+        "devicePixelRatio": 2,
+        "rootFontSize": "16px",
+        "visualScale": 1,
+        "documentWidth": 709,
+        "guideWidth": 659,
+        "guideContent": 659,
+        "zoom": 2,
+        "view": "Simple",
+        "locale": "zh-CN",
+        "physical_width": 1440
+      },
+      {
+        "innerWidth": 709,
+        "outerWidth": 1440,
+        "devicePixelRatio": 2,
+        "rootFontSize": "16px",
+        "visualScale": 1,
+        "documentWidth": 709,
+        "guideWidth": 659,
+        "guideContent": 659,
+        "zoom": 2,
+        "view": "Simple",
+        "locale": "ar",
+        "physical_width": 1440
+      },
+      {
+        "innerWidth": 709,
+        "outerWidth": 1440,
+        "devicePixelRatio": 2,
+        "rootFontSize": "16px",
+        "visualScale": 1,
+        "documentWidth": 709,
+        "guideWidth": 659,
+        "guideContent": 659,
+        "zoom": 2,
+        "view": "Pro",
+        "locale": "en",
+        "physical_width": 1440
+      },
+      {
+        "innerWidth": 709,
+        "outerWidth": 1440,
+        "devicePixelRatio": 2,
+        "rootFontSize": "16px",
+        "visualScale": 1,
+        "documentWidth": 709,
+        "guideWidth": 659,
+        "guideContent": 659,
+        "zoom": 2,
+        "view": "Pro",
+        "locale": "zh-CN",
+        "physical_width": 1440
+      },
+      {
+        "innerWidth": 709,
+        "outerWidth": 1440,
+        "devicePixelRatio": 2,
+        "rootFontSize": "16px",
+        "visualScale": 1,
+        "documentWidth": 709,
+        "guideWidth": 659,
+        "guideContent": 659,
+        "zoom": 2,
+        "view": "Pro",
+        "locale": "ar",
+        "physical_width": 1440
+      },
+      {
+        "innerWidth": 320,
+        "outerWidth": 662,
+        "devicePixelRatio": 2,
+        "rootFontSize": "16px",
+        "visualScale": 1,
+        "documentWidth": 320,
+        "guideWidth": 286,
+        "guideContent": 286,
+        "zoom": 2,
+        "view": "Simple",
+        "locale": "en",
+        "physical_width": 662
+      },
+      {
+        "innerWidth": 320,
+        "outerWidth": 662,
+        "devicePixelRatio": 2,
+        "rootFontSize": "16px",
+        "visualScale": 1,
+        "documentWidth": 320,
+        "guideWidth": 286,
+        "guideContent": 286,
+        "zoom": 2,
+        "view": "Simple",
+        "locale": "zh-CN",
+        "physical_width": 662
+      },
+      {
+        "innerWidth": 320,
+        "outerWidth": 662,
+        "devicePixelRatio": 2,
+        "rootFontSize": "16px",
+        "visualScale": 1,
+        "documentWidth": 320,
+        "guideWidth": 286,
+        "guideContent": 286,
+        "zoom": 2,
+        "view": "Simple",
+        "locale": "ar",
+        "physical_width": 662
+      },
+      {
+        "innerWidth": 320,
+        "outerWidth": 662,
+        "devicePixelRatio": 2,
+        "rootFontSize": "16px",
+        "visualScale": 1,
+        "documentWidth": 320,
+        "guideWidth": 286,
+        "guideContent": 286,
+        "zoom": 2,
+        "view": "Pro",
+        "locale": "en",
+        "physical_width": 662
+      },
+      {
+        "innerWidth": 320,
+        "outerWidth": 662,
+        "devicePixelRatio": 2,
+        "rootFontSize": "16px",
+        "visualScale": 1,
+        "documentWidth": 320,
+        "guideWidth": 286,
+        "guideContent": 286,
+        "zoom": 2,
+        "view": "Pro",
+        "locale": "zh-CN",
+        "physical_width": 662
+      },
+      {
+        "innerWidth": 320,
+        "outerWidth": 662,
+        "devicePixelRatio": 2,
+        "rootFontSize": "16px",
+        "visualScale": 1,
+        "documentWidth": 320,
+        "guideWidth": 286,
+        "guideContent": 286,
+        "zoom": 2,
+        "view": "Pro",
+        "locale": "ar",
+        "physical_width": 662
+      }
+    ],
+    "passed": true
+  },
+  "contrast_review": [
+    {
+      "target": ".brand-mark",
+      "review": "Decorative glyph is aria-hidden; adjacent visible text supplies the meaning. Not the sole signal."
+    },
+    {
+      "target": ".mode-banner > span[aria-hidden=\"true\"]",
+      "review": "Decorative glyph is aria-hidden; adjacent visible text supplies the meaning. Not the sole signal."
+    },
+    {
+      "text": "+0.78",
+      "foreground": "rgb(36, 53, 79)",
+      "background": "rgb(255, 255, 255)",
+      "target": "tr:nth-child(1) > td:nth-child(4)",
+      "contrast": 12.37363108465764,
+      "review": "Horizontally clipped table cells become visible by scrolling the table container; normal text contrast measured from computed colors."
+    },
+    {
+      "text": "+0.46",
+      "foreground": "rgb(36, 53, 79)",
+      "background": "rgb(255, 255, 255)",
+      "target": "tr:nth-child(2) > td:nth-child(4)",
+      "contrast": 12.37363108465764,
+      "review": "Horizontally clipped table cells become visible by scrolling the table container; normal text contrast measured from computed colors."
+    },
+    {
+      "text": "+0.15",
+      "foreground": "rgb(36, 53, 79)",
+      "background": "rgb(255, 255, 255)",
+      "target": "tr:nth-child(3) > td:nth-child(4)",
+      "contrast": 12.37363108465764,
+      "review": "Horizontally clipped table cells become visible by scrolling the table container; normal text contrast measured from computed colors."
+    }
+  ],
+  "screen_reader": {
+    "status": "not_run",
+    "reason": "Windows Computer Use native pipe is unavailable; no NVDA executable was discovered in the checked install locations. ARIA and automated output do not substitute for a real screen-reader walkthrough."
+  },
+  "browser_regressions": [
+    {
+      "suite": "guide-browser",
+      "groups": 15,
+      "passed": 15,
+      "failures": 0,
+      "console_errors": [],
+      "raw_result_sha256": "0bd439ed44400f4f9fcba54b250f485f6b9bf1f0d79be7ed8c4e35b7ba5164b3"
+    },
+    {
+      "suite": "legacy-browser",
+      "groups": 17,
+      "passed": 17,
+      "failures": 0,
+      "console_errors": [],
+      "raw_result_sha256": "082f36938dab49c4f67b89c3442d51e3fec29501be94e2240858ece6c225b774"
+    },
+    {
+      "suite": "redesign-browser",
+      "groups": 18,
+      "passed": 18,
+      "failures": 0,
+      "console_errors": [],
+      "raw_result_sha256": "abecca45122f4d66299e21b6a71056da631b441cc0557df702c5ec2ce7544c87"
+    }
+  ]
+}

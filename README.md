@@ -118,14 +118,19 @@ npm run check:contracts
 npm run build
 ```
 
-The collector's latest checks are **595 Python tests passed, none skipped**. The research-guide
+The collector's latest checks are **603 Python tests passed, none skipped**. The research-guide
 follow-up has **84 frontend tests passed**, valid contract fixtures and a successful production build. Existing browser suites
 passed 17/17 and 18/18 groups. See [status](docs/STATUS.md) for scope and outstanding manual QA.
 The full production lake is ignored rather than committed; its seven lake cases require local
-collection or the private handoff. A clean repository export passed **588 tests with 7 expected
+collection or the private handoff. At the initial real-sample release, a clean export passed **588 tests with 7 expected
 production-lake skips**, including the committed sample test, with no external network attempts.
 Keep Python temporary files on D: with `--basetemp`. Re-render changed OPM diagrams using
 `py -3 scripts/render_opm.py`.
+
+Independent Ticker Detail checks now include Lighthouse 100 desktop/mobile, 28 axe-core
+cases without violations and 18 native zoom cases. See [actual scope and remaining reader
+acceptance](web/ACCESSIBILITY_ACCEPTANCE.md). A's [private full-lake handoff](ingest/DELIVERY.md)
+is built and locally verified; actual S3 upload still awaits a supplied destination/access.
 
 ## Docker
 

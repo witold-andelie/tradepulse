@@ -5,7 +5,7 @@ COPY web/ ./web/
 COPY contracts/ ./contracts/
 
 WORKDIR /app/web
-RUN npm install
+RUN npm ci
 ARG VITE_API_BASE=/api
 ENV VITE_API_BASE=${VITE_API_BASE}
 RUN npm run build

@@ -1,0 +1,3199 @@
+{
+  "schema_version": "1.0",
+  "run_id": "2026-10-23-211dcfd2",
+  "created_at": "2026-10-25T14:20:28.219561Z",
+  "as_of": "2026-10-23",
+  "data_mode": "REPLAY",
+  "sample_mode": true,
+  "horizon_days": 5,
+  "request": {
+    "as_of": "2026-10-23",
+    "pools": [
+      "eu_equity"
+    ],
+    "tickers": [],
+    "horizon_days": 5,
+    "top_k": 1
+  },
+  "pools": [
+    {
+      "pool": "eu_equity",
+      "label": "European equities",
+      "benchmark": "^STOXX50E",
+      "n_members": 55,
+      "n_ranked": 0,
+      "composite_ic": -0.016662,
+      "regime_state": "normal",
+      "as_of_close": "2026-10-23"
+    }
+  ],
+  "recommendations": [
+    {
+      "pool": "eu_equity",
+      "symbol": "ABI.BR",
+      "name": "Anheuser-Busch InBev",
+      "sector": "Consumer Staples",
+      "rank": 1,
+      "percentile": 1.0,
+      "score": 0.0,
+      "coverage": 0.0,
+      "tier": "NO_CALL",
+      "expected_alpha_bps": null,
+      "cost_bps_round_trip": 16.0,
+      "net_edge_bps": null,
+      "horizon_days": 5,
+      "contributions": [],
+      "valuation_pctile": null,
+      "regime_adjusted": false,
+      "invalidation": [
+        "No stance: insufficient factor coverage or composite skill"
+      ],
+      "what_to_watch": [
+        "Moves in linked names",
+        "Pool regime state"
+      ],
+      "explanation_id": null,
+      "last_close": 75.4000015258789,
+      "ret_1d": -0.005539411377417647
+    },
+    {
+      "pool": "eu_equity",
+      "symbol": "AD.AS",
+      "name": "Ahold Delhaize",
+      "sector": "Consumer Staples",
+      "rank": 2,
+      "percentile": 0.9818181818181818,
+      "score": 0.0,
+      "coverage": 0.0,
+      "tier": "NO_CALL",
+      "expected_alpha_bps": null,
+      "cost_bps_round_trip": 16.0,
+      "net_edge_bps": null,
+      "horizon_days": 5,
+      "contributions": [],
+      "valuation_pctile": null,
+      "regime_adjusted": false,
+      "invalidation": [
+        "No stance: insufficient factor coverage or composite skill"
+      ],
+      "what_to_watch": [
+        "Moves in linked names",
+        "Pool regime state"
+      ],
+      "explanation_id": null,
+      "last_close": 33.13999938964844,
+      "ret_1d": 0.006988743339493286
+    },
+    {
+      "pool": "eu_equity",
+      "symbol": "ADS.DE",
+      "name": "Adidas",
+      "sector": "Consumer Discretionary",
+      "rank": 3,
+      "percentile": 0.9636363636363636,
+      "score": 0.0,
+      "coverage": 0.0,
+      "tier": "NO_CALL",
+      "expected_alpha_bps": null,
+      "cost_bps_round_trip": 16.0,
+      "net_edge_bps": null,
+      "horizon_days": 5,
+      "contributions": [],
+      "valuation_pctile": null,
+      "regime_adjusted": false,
+      "invalidation": [
+        "No stance: insufficient factor coverage or composite skill"
+      ],
+      "what_to_watch": [
+        "Moves in linked names",
+        "Pool regime state"
+      ],
+      "explanation_id": null,
+      "last_close": 157.5,
+      "ret_1d": -0.009433962264150941
+    },
+    {
+      "pool": "eu_equity",
+      "symbol": "ADYEN.AS",
+      "name": "Adyen",
+      "sector": "Financials",
+      "rank": 4,
+      "percentile": 0.9454545454545454,
+      "score": 0.0,
+      "coverage": 0.0,
+      "tier": "NO_CALL",
+      "expected_alpha_bps": null,
+      "cost_bps_round_trip": 16.0,
+      "net_edge_bps": null,
+      "horizon_days": 5,
+      "contributions": [],
+      "valuation_pctile": null,
+      "regime_adjusted": false,
+      "invalidation": [
+        "No stance: insufficient factor coverage or composite skill"
+      ],
+      "what_to_watch": [
+        "Moves in linked names",
+        "Pool regime state"
+      ],
+      "explanation_id": null,
+      "last_close": 945.4000244140625,
+      "ret_1d": -0.00943000814100503
+    },
+    {
+      "pool": "eu_equity",
+      "symbol": "AI.PA",
+      "name": "Air Liquide",
+      "sector": "Materials",
+      "rank": 5,
+      "percentile": 0.9272727272727272,
+      "score": 0.0,
+      "coverage": 0.0,
+      "tier": "NO_CALL",
+      "expected_alpha_bps": null,
+      "cost_bps_round_trip": 16.0,
+      "net_edge_bps": null,
+      "horizon_days": 5,
+      "contributions": [],
+      "valuation_pctile": null,
+      "regime_adjusted": false,
+      "invalidation": [
+        "No stance: insufficient factor coverage or composite skill"
+      ],
+      "what_to_watch": [
+        "Moves in linked names",
+        "Pool regime state"
+      ],
+      "explanation_id": null,
+      "last_close": 174.67999267578125,
+      "ret_1d": 0.0063370828040270055
+    },
+    {
+      "pool": "eu_equity",
+      "symbol": "AIR.PA",
+      "name": "Airbus",
+      "sector": "Industrials",
+      "rank": 6,
+      "percentile": 0.9090909090909091,
+      "score": 0.0,
+      "coverage": 0.0,
+      "tier": "NO_CALL",
+      "expected_alpha_bps": null,
+      "cost_bps_round_trip": 16.0,
+      "net_edge_bps": null,
+      "horizon_days": 5,
+      "contributions": [],
+      "valuation_pctile": null,
+      "regime_adjusted": false,
+      "invalidation": [
+        "No stance: insufficient factor coverage or composite skill"
+      ],
+      "what_to_watch": [
+        "Moves in linked names",
+        "Pool regime state"
+      ],
+      "explanation_id": null,
+      "last_close": 192.4600067138672,
+      "ret_1d": -0.011910833144929023
+    },
+    {
+      "pool": "eu_equity",
+      "symbol": "AIXA.DE",
+      "name": "Aixtron",
+      "sector": "Information Technology",
+      "rank": 7,
+      "percentile": 0.8909090909090909,
+      "score": 0.0,
+      "coverage": 0.0,
+      "tier": "NO_CALL",
+      "expected_alpha_bps": null,
+      "cost_bps_round_trip": 16.0,
+      "net_edge_bps": null,
+      "horizon_days": 5,
+      "contributions": [],
+      "valuation_pctile": null,
+      "regime_adjusted": false,
+      "invalidation": [
+        "No stance: insufficient factor coverage or composite skill"
+      ],
+      "what_to_watch": [
+        "Moves in linked names",
+        "Pool regime state"
+      ],
+      "explanation_id": null,
+      "last_close": 28.450000762939453,
+      "ret_1d": -0.016591757247595096
+    },
+    {
+      "pool": "eu_equity",
+      "symbol": "ALV.DE",
+      "name": "Allianz",
+      "sector": "Financials",
+      "rank": 8,
+      "percentile": 0.8727272727272727,
+      "score": 0.0,
+      "coverage": 0.0,
+      "tier": "NO_CALL",
+      "expected_alpha_bps": null,
+      "cost_bps_round_trip": 16.0,
+      "net_edge_bps": null,
+      "horizon_days": 5,
+      "contributions": [],
+      "valuation_pctile": null,
+      "regime_adjusted": false,
+      "invalidation": [
+        "No stance: insufficient factor coverage or composite skill"
+      ],
+      "what_to_watch": [
+        "Moves in linked names",
+        "Pool regime state"
+      ],
+      "explanation_id": null,
+      "last_close": 427.8999938964844,
+      "ret_1d": -0.010864568055291679
+    },
+    {
+      "pool": "eu_equity",
+      "symbol": "ARGX.BR",
+      "name": "Argenx",
+      "sector": "Health Care",
+      "rank": 9,
+      "percentile": 0.8545454545454545,
+      "score": 0.0,
+      "coverage": 0.0,
+      "tier": "NO_CALL",
+      "expected_alpha_bps": null,
+      "cost_bps_round_trip": 16.0,
+      "net_edge_bps": null,
+      "horizon_days": 5,
+      "contributions": [],
+      "valuation_pctile": null,
+      "regime_adjusted": false,
+      "invalidation": [
+        "No stance: insufficient factor coverage or composite skill"
+      ],
+      "what_to_watch": [
+        "Moves in linked names",
+        "Pool regime state"
+      ],
+      "explanation_id": null,
+      "last_close": 782.2000122070312,
+      "ret_1d": -0.0015318000633568474
+    },
+    {
+      "pool": "eu_equity",
+      "symbol": "ASM.AS",
+      "name": "ASM International",
+      "sector": "Information Technology",
+      "rank": 10,
+      "percentile": 0.8363636363636363,
+      "score": 0.0,
+      "coverage": 0.0,
+      "tier": "NO_CALL",
+      "expected_alpha_bps": null,
+      "cost_bps_round_trip": 16.0,
+      "net_edge_bps": null,
+      "horizon_days": 5,
+      "contributions": [],
+      "valuation_pctile": null,
+      "regime_adjusted": false,
+      "invalidation": [
+        "No stance: insufficient factor coverage or composite skill"
+      ],
+      "what_to_watch": [
+        "Moves in linked names",
+        "Pool regime state"
+      ],
+      "explanation_id": null,
+      "last_close": 699.7999877929688,
+      "ret_1d": -0.013254405319043427
+    },
+    {
+      "pool": "eu_equity",
+      "symbol": "ASML.AS",
+      "name": "ASML Holding",
+      "sector": "Information Technology",
+      "rank": 11,
+      "percentile": 0.8181818181818182,
+      "score": 0.0,
+      "coverage": 0.0,
+      "tier": "NO_CALL",
+      "expected_alpha_bps": null,
+      "cost_bps_round_trip": 16.0,
+      "net_edge_bps": null,
+      "horizon_days": 5,
+      "contributions": [],
+      "valuation_pctile": null,
+      "regime_adjusted": false,
+      "invalidation": [
+        "No stance: insufficient factor coverage or composite skill"
+      ],
+      "what_to_watch": [
+        "Moves in linked names",
+        "Pool regime state"
+      ],
+      "explanation_id": null,
+      "last_close": 1407.199951171875,
+      "ret_1d": -0.008734872236768276
+    },
+    {
+      "pool": "eu_equity",
+      "symbol": "BAS.DE",
+      "name": "BASF",
+      "sector": "Materials",
+      "rank": 12,
+      "percentile": 0.8,
+      "score": 0.0,
+      "coverage": 0.0,
+      "tier": "NO_CALL",
+      "expected_alpha_bps": null,
+      "cost_bps_round_trip": 16.0,
+      "net_edge_bps": null,
+      "horizon_days": 5,
+      "contributions": [],
+      "valuation_pctile": null,
+      "regime_adjusted": false,
+      "invalidation": [
+        "No stance: insufficient factor coverage or composite skill"
+      ],
+      "what_to_watch": [
+        "Moves in linked names",
+        "Pool regime state"
+      ],
+      "explanation_id": null,
+      "last_close": 52.45000076293945,
+      "ret_1d": 0.001527627127866582
+    },
+    {
+      "pool": "eu_equity",
+      "symbol": "BAYN.DE",
+      "name": "Bayer",
+      "sector": "Health Care",
+      "rank": 13,
+      "percentile": 0.7818181818181819,
+      "score": 0.0,
+      "coverage": 0.0,
+      "tier": "NO_CALL",
+      "expected_alpha_bps": null,
+      "cost_bps_round_trip": 16.0,
+      "net_edge_bps": null,
+      "horizon_days": 5,
+      "contributions": [],
+      "valuation_pctile": null,
+      "regime_adjusted": false,
+      "invalidation": [
+        "No stance: insufficient factor coverage or composite skill"
+      ],
+      "what_to_watch": [
+        "Moves in linked names",
+        "Pool regime state"
+      ],
+      "explanation_id": null,
+      "last_close": 43.97999954223633,
+      "ret_1d": -0.005202432639658361
+    },
+    {
+      "pool": "eu_equity",
+      "symbol": "BBVA.MC",
+      "name": "BBVA",
+      "sector": "Financials",
+      "rank": 14,
+      "percentile": 0.7636363636363637,
+      "score": 0.0,
+      "coverage": 0.0,
+      "tier": "NO_CALL",
+      "expected_alpha_bps": null,
+      "cost_bps_round_trip": 16.0,
+      "net_edge_bps": null,
+      "horizon_days": 5,
+      "contributions": [],
+      "valuation_pctile": null,
+      "regime_adjusted": false,
+      "invalidation": [
+        "No stance: insufficient factor coverage or composite skill"
+      ],
+      "what_to_watch": [
+        "Moves in linked names",
+        "Pool regime state"
+      ],
+      "explanation_id": null,
+      "last_close": 22.229999542236328,
+      "ret_1d": 0.0018025690498437719
+    },
+    {
+      "pool": "eu_equity",
+      "symbol": "BESI.AS",
+      "name": "BE Semiconductor Industries",
+      "sector": "Information Technology",
+      "rank": 15,
+      "percentile": 0.7454545454545455,
+      "score": 0.0,
+      "coverage": 0.0,
+      "tier": "NO_CALL",
+      "expected_alpha_bps": null,
+      "cost_bps_round_trip": 16.0,
+      "net_edge_bps": null,
+      "horizon_days": 5,
+      "contributions": [],
+      "valuation_pctile": null,
+      "regime_adjusted": false,
+      "invalidation": [
+        "No stance: insufficient factor coverage or composite skill"
+      ],
+      "what_to_watch": [
+        "Moves in linked names",
+        "Pool regime state"
+      ],
+      "explanation_id": "exp-eu_equity-besi-as",
+      "last_close": 145.10000610351562,
+      "ret_1d": -0.07726546198082274
+    },
+    {
+      "pool": "eu_equity",
+      "symbol": "BMW.DE",
+      "name": "BMW",
+      "sector": "Consumer Discretionary",
+      "rank": 16,
+      "percentile": 0.7272727272727273,
+      "score": 0.0,
+      "coverage": 0.0,
+      "tier": "NO_CALL",
+      "expected_alpha_bps": null,
+      "cost_bps_round_trip": 16.0,
+      "net_edge_bps": null,
+      "horizon_days": 5,
+      "contributions": [],
+      "valuation_pctile": null,
+      "regime_adjusted": false,
+      "invalidation": [
+        "No stance: insufficient factor coverage or composite skill"
+      ],
+      "what_to_watch": [
+        "Moves in linked names",
+        "Pool regime state"
+      ],
+      "explanation_id": null,
+      "last_close": 57.41999816894531,
+      "ret_1d": -0.001043865236062258
+    },
+    {
+      "pool": "eu_equity",
+      "symbol": "BN.PA",
+      "name": "Danone",
+      "sector": "Consumer Staples",
+      "rank": 17,
+      "percentile": 0.7090909090909091,
+      "score": 0.0,
+      "coverage": 0.0,
+      "tier": "NO_CALL",
+      "expected_alpha_bps": null,
+      "cost_bps_round_trip": 16.0,
+      "net_edge_bps": null,
+      "horizon_days": 5,
+      "contributions": [],
+      "valuation_pctile": null,
+      "regime_adjusted": false,
+      "invalidation": [
+        "No stance: insufficient factor coverage or composite skill"
+      ],
+      "what_to_watch": [
+        "Moves in linked names",
+        "Pool regime state"
+      ],
+      "explanation_id": null,
+      "last_close": 62.2400016784668,
+      "ret_1d": -0.0022442992505813386
+    },
+    {
+      "pool": "eu_equity",
+      "symbol": "BNP.PA",
+      "name": "BNP Paribas",
+      "sector": "Financials",
+      "rank": 18,
+      "percentile": 0.6909090909090909,
+      "score": 0.0,
+      "coverage": 0.0,
+      "tier": "NO_CALL",
+      "expected_alpha_bps": null,
+      "cost_bps_round_trip": 16.0,
+      "net_edge_bps": null,
+      "horizon_days": 5,
+      "contributions": [],
+      "valuation_pctile": null,
+      "regime_adjusted": false,
+      "invalidation": [
+        "No stance: insufficient factor coverage or composite skill"
+      ],
+      "what_to_watch": [
+        "Moves in linked names",
+        "Pool regime state"
+      ],
+      "explanation_id": null,
+      "last_close": 83.5199966430664,
+      "ret_1d": 0.011505352449477257
+    },
+    {
+      "pool": "eu_equity",
+      "symbol": "CS.PA",
+      "name": "Axa",
+      "sector": "Financials",
+      "rank": 19,
+      "percentile": 0.6727272727272727,
+      "score": 0.0,
+      "coverage": 0.0,
+      "tier": "NO_CALL",
+      "expected_alpha_bps": null,
+      "cost_bps_round_trip": 16.0,
+      "net_edge_bps": null,
+      "horizon_days": 5,
+      "contributions": [],
+      "valuation_pctile": null,
+      "regime_adjusted": false,
+      "invalidation": [
+        "No stance: insufficient factor coverage or composite skill"
+      ],
+      "what_to_watch": [
+        "Moves in linked names",
+        "Pool regime state"
+      ],
+      "explanation_id": null,
+      "last_close": 41.709999084472656,
+      "ret_1d": -0.007377471916084621
+    },
+    {
+      "pool": "eu_equity",
+      "symbol": "DB1.DE",
+      "name": "Deutsche Börse",
+      "sector": "Financials",
+      "rank": 20,
+      "percentile": 0.6545454545454545,
+      "score": 0.0,
+      "coverage": 0.0,
+      "tier": "NO_CALL",
+      "expected_alpha_bps": null,
+      "cost_bps_round_trip": 16.0,
+      "net_edge_bps": null,
+      "horizon_days": 5,
+      "contributions": [],
+      "valuation_pctile": null,
+      "regime_adjusted": false,
+      "invalidation": [
+        "No stance: insufficient factor coverage or composite skill"
+      ],
+      "what_to_watch": [
+        "Moves in linked names",
+        "Pool regime state"
+      ],
+      "explanation_id": null,
+      "last_close": 314.1000061035156,
+      "ret_1d": -0.009773032737124598
+    },
+    {
+      "pool": "eu_equity",
+      "symbol": "DBK.DE",
+      "name": "Deutsche Bank",
+      "sector": "Financials",
+      "rank": 21,
+      "percentile": 0.6363636363636364,
+      "score": 0.0,
+      "coverage": 0.0,
+      "tier": "NO_CALL",
+      "expected_alpha_bps": null,
+      "cost_bps_round_trip": 16.0,
+      "net_edge_bps": null,
+      "horizon_days": 5,
+      "contributions": [],
+      "valuation_pctile": null,
+      "regime_adjusted": false,
+      "invalidation": [
+        "No stance: insufficient factor coverage or composite skill"
+      ],
+      "what_to_watch": [
+        "Moves in linked names",
+        "Pool regime state"
+      ],
+      "explanation_id": null,
+      "last_close": 27.924999237060547,
+      "ret_1d": -0.002856630105461
+    },
+    {
+      "pool": "eu_equity",
+      "symbol": "DG.PA",
+      "name": "Vinci SA",
+      "sector": "Industrials",
+      "rank": 22,
+      "percentile": 0.6181818181818182,
+      "score": 0.0,
+      "coverage": 0.0,
+      "tier": "NO_CALL",
+      "expected_alpha_bps": null,
+      "cost_bps_round_trip": 16.0,
+      "net_edge_bps": null,
+      "horizon_days": 5,
+      "contributions": [],
+      "valuation_pctile": null,
+      "regime_adjusted": false,
+      "invalidation": [
+        "No stance: insufficient factor coverage or composite skill"
+      ],
+      "what_to_watch": [
+        "Moves in linked names",
+        "Pool regime state"
+      ],
+      "explanation_id": null,
+      "last_close": 106.44999694824219,
+      "ret_1d": 0.004719207309125784
+    },
+    {
+      "pool": "eu_equity",
+      "symbol": "DHL.DE",
+      "name": "Deutsche Post",
+      "sector": "Industrials",
+      "rank": 23,
+      "percentile": 0.6,
+      "score": 0.0,
+      "coverage": 0.0,
+      "tier": "NO_CALL",
+      "expected_alpha_bps": null,
+      "cost_bps_round_trip": 16.0,
+      "net_edge_bps": null,
+      "horizon_days": 5,
+      "contributions": [],
+      "valuation_pctile": null,
+      "regime_adjusted": false,
+      "invalidation": [
+        "No stance: insufficient factor coverage or composite skill"
+      ],
+      "what_to_watch": [
+        "Moves in linked names",
+        "Pool regime state"
+      ],
+      "explanation_id": null,
+      "last_close": 57.279998779296875,
+      "ret_1d": 0.0028011178292022265
+    },
+    {
+      "pool": "eu_equity",
+      "symbol": "DTE.DE",
+      "name": "Deutsche Telekom",
+      "sector": "Communication",
+      "rank": 24,
+      "percentile": 0.5818181818181818,
+      "score": 0.0,
+      "coverage": 0.0,
+      "tier": "NO_CALL",
+      "expected_alpha_bps": null,
+      "cost_bps_round_trip": 16.0,
+      "net_edge_bps": null,
+      "horizon_days": 5,
+      "contributions": [],
+      "valuation_pctile": null,
+      "regime_adjusted": false,
+      "invalidation": [
+        "No stance: insufficient factor coverage or composite skill"
+      ],
+      "what_to_watch": [
+        "Moves in linked names",
+        "Pool regime state"
+      ],
+      "explanation_id": null,
+      "last_close": 25.350000381469727,
+      "ret_1d": -0.03170358724334943
+    },
+    {
+      "pool": "eu_equity",
+      "symbol": "EL.PA",
+      "name": "EssilorLuxottica",
+      "sector": "Health Care",
+      "rank": 25,
+      "percentile": 0.5636363636363636,
+      "score": 0.0,
+      "coverage": 0.0,
+      "tier": "NO_CALL",
+      "expected_alpha_bps": null,
+      "cost_bps_round_trip": 16.0,
+      "net_edge_bps": null,
+      "horizon_days": 5,
+      "contributions": [],
+      "valuation_pctile": null,
+      "regime_adjusted": false,
+      "invalidation": [
+        "No stance: insufficient factor coverage or composite skill"
+      ],
+      "what_to_watch": [
+        "Moves in linked names",
+        "Pool regime state"
+      ],
+      "explanation_id": null,
+      "last_close": 181.1999969482422,
+      "ret_1d": 0.02286199938637523
+    },
+    {
+      "pool": "eu_equity",
+      "symbol": "ENEL.MI",
+      "name": "Enel",
+      "sector": "Utilities",
+      "rank": 26,
+      "percentile": 0.5454545454545454,
+      "score": 0.0,
+      "coverage": 0.0,
+      "tier": "NO_CALL",
+      "expected_alpha_bps": null,
+      "cost_bps_round_trip": 16.0,
+      "net_edge_bps": null,
+      "horizon_days": 5,
+      "contributions": [],
+      "valuation_pctile": null,
+      "regime_adjusted": false,
+      "invalidation": [
+        "No stance: insufficient factor coverage or composite skill"
+      ],
+      "what_to_watch": [
+        "Moves in linked names",
+        "Pool regime state"
+      ],
+      "explanation_id": null,
+      "last_close": 9.218000411987305,
+      "ret_1d": 0.002283447118564652
+    },
+    {
+      "pool": "eu_equity",
+      "symbol": "ENGI.PA",
+      "name": "Engie",
+      "sector": "Utilities",
+      "rank": 27,
+      "percentile": 0.5272727272727272,
+      "score": 0.0,
+      "coverage": 0.0,
+      "tier": "NO_CALL",
+      "expected_alpha_bps": null,
+      "cost_bps_round_trip": 16.0,
+      "net_edge_bps": null,
+      "horizon_days": 5,
+      "contributions": [],
+      "valuation_pctile": null,
+      "regime_adjusted": false,
+      "invalidation": [
+        "No stance: insufficient factor coverage or composite skill"
+      ],
+      "what_to_watch": [
+        "Moves in linked names",
+        "Pool regime state"
+      ],
+      "explanation_id": null,
+      "last_close": 22.809999465942383,
+      "ret_1d": -0.012981442513454566
+    },
+    {
+      "pool": "eu_equity",
+      "symbol": "ENI.MI",
+      "name": "Eni",
+      "sector": "Energy",
+      "rank": 28,
+      "percentile": 0.509090909090909,
+      "score": 0.0,
+      "coverage": 0.0,
+      "tier": "NO_CALL",
+      "expected_alpha_bps": null,
+      "cost_bps_round_trip": 16.0,
+      "net_edge_bps": null,
+      "horizon_days": 5,
+      "contributions": [],
+      "valuation_pctile": null,
+      "regime_adjusted": false,
+      "invalidation": [
+        "No stance: insufficient factor coverage or composite skill"
+      ],
+      "what_to_watch": [
+        "Moves in linked names",
+        "Pool regime state"
+      ],
+      "explanation_id": "exp-eu_equity-eni-mi",
+      "last_close": 27.649999618530273,
+      "ret_1d": 0.05817070442336281
+    },
+    {
+      "pool": "eu_equity",
+      "symbol": "ENR.DE",
+      "name": "Siemens Energy",
+      "sector": "Industrials",
+      "rank": 29,
+      "percentile": 0.4909090909090909,
+      "score": 0.0,
+      "coverage": 0.0,
+      "tier": "NO_CALL",
+      "expected_alpha_bps": null,
+      "cost_bps_round_trip": 16.0,
+      "net_edge_bps": null,
+      "horizon_days": 5,
+      "contributions": [],
+      "valuation_pctile": null,
+      "regime_adjusted": false,
+      "invalidation": [
+        "No stance: insufficient factor coverage or composite skill"
+      ],
+      "what_to_watch": [
+        "Moves in linked names",
+        "Pool regime state"
+      ],
+      "explanation_id": null,
+      "last_close": 118.68000030517578,
+      "ret_1d": -0.028805210564426642
+    },
+    {
+      "pool": "eu_equity",
+      "symbol": "IBE.MC",
+      "name": "Iberdrola",
+      "sector": "Utilities",
+      "rank": 30,
+      "percentile": 0.4727272727272727,
+      "score": 0.0,
+      "coverage": 0.0,
+      "tier": "NO_CALL",
+      "expected_alpha_bps": null,
+      "cost_bps_round_trip": 16.0,
+      "net_edge_bps": null,
+      "horizon_days": 5,
+      "contributions": [],
+      "valuation_pctile": null,
+      "regime_adjusted": false,
+      "invalidation": [
+        "No stance: insufficient factor coverage or composite skill"
+      ],
+      "what_to_watch": [
+        "Moves in linked names",
+        "Pool regime state"
+      ],
+      "explanation_id": null,
+      "last_close": 21.899999618530273,
+      "ret_1d": 0.00735969867049735
+    },
+    {
+      "pool": "eu_equity",
+      "symbol": "IFX.DE",
+      "name": "Infineon Technologies",
+      "sector": "Information Technology",
+      "rank": 31,
+      "percentile": 0.45454545454545453,
+      "score": 0.0,
+      "coverage": 0.0,
+      "tier": "NO_CALL",
+      "expected_alpha_bps": null,
+      "cost_bps_round_trip": 16.0,
+      "net_edge_bps": null,
+      "horizon_days": 5,
+      "contributions": [],
+      "valuation_pctile": null,
+      "regime_adjusted": false,
+      "invalidation": [
+        "No stance: insufficient factor coverage or composite skill"
+      ],
+      "what_to_watch": [
+        "Moves in linked names",
+        "Pool regime state"
+      ],
+      "explanation_id": null,
+      "last_close": 48.66999816894531,
+      "ret_1d": -0.024356022721633064
+    },
+    {
+      "pool": "eu_equity",
+      "symbol": "INGA.AS",
+      "name": "ING Group",
+      "sector": "Financials",
+      "rank": 32,
+      "percentile": 0.43636363636363634,
+      "score": 0.0,
+      "coverage": 0.0,
+      "tier": "NO_CALL",
+      "expected_alpha_bps": null,
+      "cost_bps_round_trip": 16.0,
+      "net_edge_bps": null,
+      "horizon_days": 5,
+      "contributions": [],
+      "valuation_pctile": null,
+      "regime_adjusted": false,
+      "invalidation": [
+        "No stance: insufficient factor coverage or composite skill"
+      ],
+      "what_to_watch": [
+        "Moves in linked names",
+        "Pool regime state"
+      ],
+      "explanation_id": null,
+      "last_close": 28.459999084472656,
+      "ret_1d": -0.011462376539095764
+    },
+    {
+      "pool": "eu_equity",
+      "symbol": "ISP.MI",
+      "name": "Intesa Sanpaolo",
+      "sector": "Financials",
+      "rank": 33,
+      "percentile": 0.41818181818181815,
+      "score": 0.0,
+      "coverage": 0.0,
+      "tier": "NO_CALL",
+      "expected_alpha_bps": null,
+      "cost_bps_round_trip": 16.0,
+      "net_edge_bps": null,
+      "horizon_days": 5,
+      "contributions": [],
+      "valuation_pctile": null,
+      "regime_adjusted": false,
+      "invalidation": [
+        "No stance: insufficient factor coverage or composite skill"
+      ],
+      "what_to_watch": [
+        "Moves in linked names",
+        "Pool regime state"
+      ],
+      "explanation_id": null,
+      "last_close": 5.860000133514404,
+      "ret_1d": 0.003596490432918875
+    },
+    {
+      "pool": "eu_equity",
+      "symbol": "ITX.MC",
+      "name": "Inditex",
+      "sector": "Consumer Discretionary",
+      "rank": 34,
+      "percentile": 0.4,
+      "score": 0.0,
+      "coverage": 0.0,
+      "tier": "NO_CALL",
+      "expected_alpha_bps": null,
+      "cost_bps_round_trip": 16.0,
+      "net_edge_bps": null,
+      "horizon_days": 5,
+      "contributions": [],
+      "valuation_pctile": null,
+      "regime_adjusted": false,
+      "invalidation": [
+        "No stance: insufficient factor coverage or composite skill"
+      ],
+      "what_to_watch": [
+        "Moves in linked names",
+        "Pool regime state"
+      ],
+      "explanation_id": null,
+      "last_close": 56.7400016784668,
+      "ret_1d": 0.008890469151451752
+    },
+    {
+      "pool": "eu_equity",
+      "symbol": "MBG.DE",
+      "name": "Mercedes-Benz Group",
+      "sector": "Consumer Discretionary",
+      "rank": 35,
+      "percentile": 0.38181818181818183,
+      "score": 0.0,
+      "coverage": 0.0,
+      "tier": "NO_CALL",
+      "expected_alpha_bps": null,
+      "cost_bps_round_trip": 16.0,
+      "net_edge_bps": null,
+      "horizon_days": 5,
+      "contributions": [],
+      "valuation_pctile": null,
+      "regime_adjusted": false,
+      "invalidation": [
+        "No stance: insufficient factor coverage or composite skill"
+      ],
+      "what_to_watch": [
+        "Moves in linked names",
+        "Pool regime state"
+      ],
+      "explanation_id": null,
+      "last_close": 40.7400016784668,
+      "ret_1d": -0.018786097560146486
+    },
+    {
+      "pool": "eu_equity",
+      "symbol": "MC.PA",
+      "name": "LVMH Moët Hennessy Louis Vuitton",
+      "sector": "Consumer Discretionary",
+      "rank": 36,
+      "percentile": 0.36363636363636365,
+      "score": 0.0,
+      "coverage": 0.0,
+      "tier": "NO_CALL",
+      "expected_alpha_bps": null,
+      "cost_bps_round_trip": 16.0,
+      "net_edge_bps": null,
+      "horizon_days": 5,
+      "contributions": [],
+      "valuation_pctile": null,
+      "regime_adjusted": false,
+      "invalidation": [
+        "No stance: insufficient factor coverage or composite skill"
+      ],
+      "what_to_watch": [
+        "Moves in linked names",
+        "Pool regime state"
+      ],
+      "explanation_id": null,
+      "last_close": 383.0,
+      "ret_1d": -0.012377483094536013
+    },
+    {
+      "pool": "eu_equity",
+      "symbol": "MUV2.DE",
+      "name": "Munich Re",
+      "sector": "Financials",
+      "rank": 37,
+      "percentile": 0.34545454545454546,
+      "score": 0.0,
+      "coverage": 0.0,
+      "tier": "NO_CALL",
+      "expected_alpha_bps": null,
+      "cost_bps_round_trip": 16.0,
+      "net_edge_bps": null,
+      "horizon_days": 5,
+      "contributions": [],
+      "valuation_pctile": null,
+      "regime_adjusted": false,
+      "invalidation": [
+        "No stance: insufficient factor coverage or composite skill"
+      ],
+      "what_to_watch": [
+        "Moves in linked names",
+        "Pool regime state"
+      ],
+      "explanation_id": null,
+      "last_close": 556.5999755859375,
+      "ret_1d": 0.0
+    },
+    {
+      "pool": "eu_equity",
+      "symbol": "NDA-FI.HE",
+      "name": "Nordea",
+      "sector": "Financials",
+      "rank": 38,
+      "percentile": 0.32727272727272727,
+      "score": 0.0,
+      "coverage": 0.0,
+      "tier": "NO_CALL",
+      "expected_alpha_bps": null,
+      "cost_bps_round_trip": 16.0,
+      "net_edge_bps": null,
+      "horizon_days": 5,
+      "contributions": [],
+      "valuation_pctile": null,
+      "regime_adjusted": false,
+      "invalidation": [
+        "No stance: insufficient factor coverage or composite skill"
+      ],
+      "what_to_watch": [
+        "Moves in linked names",
+        "Pool regime state"
+      ],
+      "explanation_id": null,
+      "last_close": 15.270000457763672,
+      "ret_1d": -0.0003272773087691361
+    },
+    {
+      "pool": "eu_equity",
+      "symbol": "NOKIA.HE",
+      "name": "Nokia",
+      "sector": "Information Technology",
+      "rank": 39,
+      "percentile": 0.3090909090909091,
+      "score": 0.0,
+      "coverage": 0.0,
+      "tier": "NO_CALL",
+      "expected_alpha_bps": null,
+      "cost_bps_round_trip": 16.0,
+      "net_edge_bps": null,
+      "horizon_days": 5,
+      "contributions": [],
+      "valuation_pctile": null,
+      "regime_adjusted": false,
+      "invalidation": [
+        "No stance: insufficient factor coverage or composite skill"
+      ],
+      "what_to_watch": [
+        "Moves in linked names",
+        "Pool regime state"
+      ],
+      "explanation_id": null,
+      "last_close": 7.369999885559082,
+      "ret_1d": -0.008342340328527431
+    },
+    {
+      "pool": "eu_equity",
+      "symbol": "OR.PA",
+      "name": "L'Oréal",
+      "sector": "Consumer Staples",
+      "rank": 40,
+      "percentile": 0.2909090909090909,
+      "score": 0.0,
+      "coverage": 0.0,
+      "tier": "NO_CALL",
+      "expected_alpha_bps": null,
+      "cost_bps_round_trip": 16.0,
+      "net_edge_bps": null,
+      "horizon_days": 5,
+      "contributions": [],
+      "valuation_pctile": null,
+      "regime_adjusted": false,
+      "invalidation": [
+        "No stance: insufficient factor coverage or composite skill"
+      ],
+      "what_to_watch": [
+        "Moves in linked names",
+        "Pool regime state"
+      ],
+      "explanation_id": null,
+      "last_close": 436.29998779296875,
+      "ret_1d": 0.05641643533406482
+    },
+    {
+      "pool": "eu_equity",
+      "symbol": "PRX.AS",
+      "name": "Prosus",
+      "sector": "Consumer Discretionary",
+      "rank": 41,
+      "percentile": 0.2727272727272727,
+      "score": 0.0,
+      "coverage": 0.0,
+      "tier": "NO_CALL",
+      "expected_alpha_bps": null,
+      "cost_bps_round_trip": 16.0,
+      "net_edge_bps": null,
+      "horizon_days": 5,
+      "contributions": [],
+      "valuation_pctile": null,
+      "regime_adjusted": false,
+      "invalidation": [
+        "No stance: insufficient factor coverage or composite skill"
+      ],
+      "what_to_watch": [
+        "Moves in linked names",
+        "Pool regime state"
+      ],
+      "explanation_id": null,
+      "last_close": 34.16999816894531,
+      "ret_1d": 0.007073323360180517
+    },
+    {
+      "pool": "eu_equity",
+      "symbol": "RACE.MI",
+      "name": "Ferrari",
+      "sector": "Consumer Discretionary",
+      "rank": 42,
+      "percentile": 0.2545454545454545,
+      "score": 0.0,
+      "coverage": 0.0,
+      "tier": "NO_CALL",
+      "expected_alpha_bps": null,
+      "cost_bps_round_trip": 16.0,
+      "net_edge_bps": null,
+      "horizon_days": 5,
+      "contributions": [],
+      "valuation_pctile": null,
+      "regime_adjusted": false,
+      "invalidation": [
+        "No stance: insufficient factor coverage or composite skill"
+      ],
+      "what_to_watch": [
+        "Moves in linked names",
+        "Pool regime state"
+      ],
+      "explanation_id": null,
+      "last_close": 349.5,
+      "ret_1d": -0.012851258155188394
+    },
+    {
+      "pool": "eu_equity",
+      "symbol": "RHM.DE",
+      "name": "Rheinmetall",
+      "sector": "Industrials",
+      "rank": 43,
+      "percentile": 0.23636363636363636,
+      "score": 0.0,
+      "coverage": 0.0,
+      "tier": "NO_CALL",
+      "expected_alpha_bps": null,
+      "cost_bps_round_trip": 16.0,
+      "net_edge_bps": null,
+      "horizon_days": 5,
+      "contributions": [],
+      "valuation_pctile": null,
+      "regime_adjusted": false,
+      "invalidation": [
+        "No stance: insufficient factor coverage or composite skill"
+      ],
+      "what_to_watch": [
+        "Moves in linked names",
+        "Pool regime state"
+      ],
+      "explanation_id": null,
+      "last_close": 1019.0,
+      "ret_1d": 0.003940886699507429
+    },
+    {
+      "pool": "eu_equity",
+      "symbol": "RMS.PA",
+      "name": "Hermès",
+      "sector": "Consumer Discretionary",
+      "rank": 44,
+      "percentile": 0.21818181818181817,
+      "score": 0.0,
+      "coverage": 0.0,
+      "tier": "NO_CALL",
+      "expected_alpha_bps": null,
+      "cost_bps_round_trip": 16.0,
+      "net_edge_bps": null,
+      "horizon_days": 5,
+      "contributions": [],
+      "valuation_pctile": null,
+      "regime_adjusted": false,
+      "invalidation": [
+        "No stance: insufficient factor coverage or composite skill"
+      ],
+      "what_to_watch": [
+        "Moves in linked names",
+        "Pool regime state"
+      ],
+      "explanation_id": null,
+      "last_close": 1238.5,
+      "ret_1d": -0.03955021326095387
+    },
+    {
+      "pool": "eu_equity",
+      "symbol": "SAF.PA",
+      "name": "Safran",
+      "sector": "Industrials",
+      "rank": 45,
+      "percentile": 0.2,
+      "score": 0.0,
+      "coverage": 0.0,
+      "tier": "NO_CALL",
+      "expected_alpha_bps": null,
+      "cost_bps_round_trip": 16.0,
+      "net_edge_bps": null,
+      "horizon_days": 5,
+      "contributions": [],
+      "valuation_pctile": null,
+      "regime_adjusted": false,
+      "invalidation": [
+        "No stance: insufficient factor coverage or composite skill"
+      ],
+      "what_to_watch": [
+        "Moves in linked names",
+        "Pool regime state"
+      ],
+      "explanation_id": "exp-eu_equity-saf-pa",
+      "last_close": 271.79998779296875,
+      "ret_1d": -0.10000004042063326
+    },
+    {
+      "pool": "eu_equity",
+      "symbol": "SAN.MC",
+      "name": "Banco Santander",
+      "sector": "Financials",
+      "rank": 46,
+      "percentile": 0.18181818181818182,
+      "score": 0.0,
+      "coverage": 0.0,
+      "tier": "NO_CALL",
+      "expected_alpha_bps": null,
+      "cost_bps_round_trip": 16.0,
+      "net_edge_bps": null,
+      "horizon_days": 5,
+      "contributions": [],
+      "valuation_pctile": null,
+      "regime_adjusted": false,
+      "invalidation": [
+        "No stance: insufficient factor coverage or composite skill"
+      ],
+      "what_to_watch": [
+        "Moves in linked names",
+        "Pool regime state"
+      ],
+      "explanation_id": null,
+      "last_close": 11.510000228881836,
+      "ret_1d": 0.0022640214578377726
+    },
+    {
+      "pool": "eu_equity",
+      "symbol": "SAN.PA",
+      "name": "Sanofi",
+      "sector": "Health Care",
+      "rank": 47,
+      "percentile": 0.16363636363636364,
+      "score": 0.0,
+      "coverage": 0.0,
+      "tier": "NO_CALL",
+      "expected_alpha_bps": null,
+      "cost_bps_round_trip": 16.0,
+      "net_edge_bps": null,
+      "horizon_days": 5,
+      "contributions": [],
+      "valuation_pctile": null,
+      "regime_adjusted": false,
+      "invalidation": [
+        "No stance: insufficient factor coverage or composite skill"
+      ],
+      "what_to_watch": [
+        "Moves in linked names",
+        "Pool regime state"
+      ],
+      "explanation_id": null,
+      "last_close": 74.12000274658203,
+      "ret_1d": -0.011073972454372805
+    },
+    {
+      "pool": "eu_equity",
+      "symbol": "SAP.DE",
+      "name": "SAP",
+      "sector": "Information Technology",
+      "rank": 48,
+      "percentile": 0.14545454545454545,
+      "score": 0.0,
+      "coverage": 0.0,
+      "tier": "NO_CALL",
+      "expected_alpha_bps": null,
+      "cost_bps_round_trip": 16.0,
+      "net_edge_bps": null,
+      "horizon_days": 5,
+      "contributions": [],
+      "valuation_pctile": null,
+      "regime_adjusted": false,
+      "invalidation": [
+        "No stance: insufficient factor coverage or composite skill"
+      ],
+      "what_to_watch": [
+        "Moves in linked names",
+        "Pool regime state"
+      ],
+      "explanation_id": null,
+      "last_close": 214.39999389648438,
+      "ret_1d": -0.004411479824034004
+    },
+    {
+      "pool": "eu_equity",
+      "symbol": "SGO.PA",
+      "name": "Saint-Gobain",
+      "sector": "Industrials",
+      "rank": 49,
+      "percentile": 0.12727272727272726,
+      "score": 0.0,
+      "coverage": 0.0,
+      "tier": "NO_CALL",
+      "expected_alpha_bps": null,
+      "cost_bps_round_trip": 16.0,
+      "net_edge_bps": null,
+      "horizon_days": 5,
+      "contributions": [],
+      "valuation_pctile": null,
+      "regime_adjusted": false,
+      "invalidation": [
+        "No stance: insufficient factor coverage or composite skill"
+      ],
+      "what_to_watch": [
+        "Moves in linked names",
+        "Pool regime state"
+      ],
+      "explanation_id": null,
+      "last_close": 66.91999816894531,
+      "ret_1d": 0.007831274565012425
+    },
+    {
+      "pool": "eu_equity",
+      "symbol": "SIE.DE",
+      "name": "Siemens",
+      "sector": "Industrials",
+      "rank": 50,
+      "percentile": 0.10909090909090909,
+      "score": 0.0,
+      "coverage": 0.0,
+      "tier": "NO_CALL",
+      "expected_alpha_bps": null,
+      "cost_bps_round_trip": 16.0,
+      "net_edge_bps": null,
+      "horizon_days": 5,
+      "contributions": [],
+      "valuation_pctile": null,
+      "regime_adjusted": false,
+      "invalidation": [
+        "No stance: insufficient factor coverage or composite skill"
+      ],
+      "what_to_watch": [
+        "Moves in linked names",
+        "Pool regime state"
+      ],
+      "explanation_id": null,
+      "last_close": 256.79998779296875,
+      "ret_1d": 0.004301880554770765
+    },
+    {
+      "pool": "eu_equity",
+      "symbol": "SOI.PA",
+      "name": "Soitec",
+      "sector": "Information Technology",
+      "rank": 51,
+      "percentile": 0.09090909090909091,
+      "score": 0.0,
+      "coverage": 0.0,
+      "tier": "NO_CALL",
+      "expected_alpha_bps": null,
+      "cost_bps_round_trip": 16.0,
+      "net_edge_bps": null,
+      "horizon_days": 5,
+      "contributions": [],
+      "valuation_pctile": null,
+      "regime_adjusted": false,
+      "invalidation": [
+        "No stance: insufficient factor coverage or composite skill"
+      ],
+      "what_to_watch": [
+        "Moves in linked names",
+        "Pool regime state"
+      ],
+      "explanation_id": null,
+      "last_close": 111.6500015258789,
+      "ret_1d": -0.026591068034113152
+    },
+    {
+      "pool": "eu_equity",
+      "symbol": "STMPA.PA",
+      "name": "STMicroelectronics",
+      "sector": "Information Technology",
+      "rank": 52,
+      "percentile": 0.07272727272727272,
+      "score": 0.0,
+      "coverage": 0.0,
+      "tier": "NO_CALL",
+      "expected_alpha_bps": null,
+      "cost_bps_round_trip": 16.0,
+      "net_edge_bps": null,
+      "horizon_days": 5,
+      "contributions": [],
+      "valuation_pctile": null,
+      "regime_adjusted": false,
+      "invalidation": [
+        "No stance: insufficient factor coverage or composite skill"
+      ],
+      "what_to_watch": [
+        "Moves in linked names",
+        "Pool regime state"
+      ],
+      "explanation_id": null,
+      "last_close": 39.46500015258789,
+      "ret_1d": -0.01238736094158488
+    },
+    {
+      "pool": "eu_equity",
+      "symbol": "SU.PA",
+      "name": "Schneider Electric",
+      "sector": "Industrials",
+      "rank": 53,
+      "percentile": 0.05454545454545454,
+      "score": 0.0,
+      "coverage": 0.0,
+      "tier": "NO_CALL",
+      "expected_alpha_bps": null,
+      "cost_bps_round_trip": 16.0,
+      "net_edge_bps": null,
+      "horizon_days": 5,
+      "contributions": [],
+      "valuation_pctile": null,
+      "regime_adjusted": false,
+      "invalidation": [
+        "No stance: insufficient factor coverage or composite skill"
+      ],
+      "what_to_watch": [
+        "Moves in linked names",
+        "Pool regime state"
+      ],
+      "explanation_id": null,
+      "last_close": 231.39999389648438,
+      "ret_1d": -0.018451775624668598
+    },
+    {
+      "pool": "eu_equity",
+      "symbol": "TTE.PA",
+      "name": "TotalEnergies",
+      "sector": "Energy",
+      "rank": 54,
+      "percentile": 0.03636363636363636,
+      "score": 0.0,
+      "coverage": 0.0,
+      "tier": "NO_CALL",
+      "expected_alpha_bps": null,
+      "cost_bps_round_trip": 16.0,
+      "net_edge_bps": null,
+      "horizon_days": 5,
+      "contributions": [],
+      "valuation_pctile": null,
+      "regime_adjusted": false,
+      "invalidation": [
+        "No stance: insufficient factor coverage or composite skill"
+      ],
+      "what_to_watch": [
+        "Moves in linked names",
+        "Pool regime state"
+      ],
+      "explanation_id": null,
+      "last_close": 83.44999694824219,
+      "ret_1d": 0.0433857645119462
+    },
+    {
+      "pool": "eu_equity",
+      "symbol": "UCG.MI",
+      "name": "UniCredit",
+      "sector": "Financials",
+      "rank": 55,
+      "percentile": 0.01818181818181818,
+      "score": 0.0,
+      "coverage": 0.0,
+      "tier": "NO_CALL",
+      "expected_alpha_bps": null,
+      "cost_bps_round_trip": 16.0,
+      "net_edge_bps": null,
+      "horizon_days": 5,
+      "contributions": [],
+      "valuation_pctile": null,
+      "regime_adjusted": false,
+      "invalidation": [
+        "No stance: insufficient factor coverage or composite skill"
+      ],
+      "what_to_watch": [
+        "Moves in linked names",
+        "Pool regime state"
+      ],
+      "explanation_id": null,
+      "last_close": 72.04000091552734,
+      "ret_1d": 0.0054431176740110665
+    }
+  ],
+  "factor_cards": [
+    {
+      "factor": "att_pageviews",
+      "pool": "eu_equity",
+      "title": "Wikipedia attention",
+      "measures": "abnormal public attention not explained by price-volume",
+      "definition": "log1p(7d mean views) - log1p(83d base), residualised on |5d return|, volume z, low vol",
+      "sources": [
+        "pageview",
+        "price_bar"
+      ],
+      "availability": "day t-1",
+      "status": "INSUFFICIENT_DATA",
+      "weight": 0.0,
+      "coverage": 0.45822,
+      "gates": [
+        {
+          "gate": "G1",
+          "name": "measure",
+          "passed": false,
+          "value": 0.4582204477399116,
+          "threshold": 0.6,
+          "note": "coverage 0.4582204477399116; minimum 0.6; specification complete"
+        },
+        {
+          "gate": "G2",
+          "name": "incremental",
+          "passed": null,
+          "value": null,
+          "threshold": 2.0,
+          "note": "not evaluated"
+        },
+        {
+          "gate": "G3",
+          "name": "predictive",
+          "passed": null,
+          "value": null,
+          "threshold": 0.0,
+          "note": "not evaluated"
+        },
+        {
+          "gate": "G4",
+          "name": "net_of_cost",
+          "passed": null,
+          "value": null,
+          "threshold": 0.5,
+          "note": "not evaluated"
+        },
+        {
+          "gate": "G5",
+          "name": "consistency",
+          "passed": null,
+          "value": null,
+          "threshold": null,
+          "note": "not evaluated"
+        }
+      ],
+      "ic_decay": [
+        {
+          "horizon_days": 1,
+          "mean_ic": -0.010198102833502462,
+          "t_stat": -0.8705560436829949,
+          "n": 254
+        },
+        {
+          "horizon_days": 5,
+          "mean_ic": -0.06094358974358974,
+          "t_stat": -2.5580222206768832,
+          "n": 50
+        },
+        {
+          "horizon_days": 20,
+          "mean_ic": -0.09891025641025641,
+          "t_stat": -2.806946778432908,
+          "n": 12
+        }
+      ],
+      "same_day_ic": -0.001582188135922914,
+      "mostly_descriptive": false,
+      "long_short": {
+        "gross_ann_return": -0.48577252588828435,
+        "net_ann_return": -0.5744765258882842,
+        "net_sharpe": -4.580125378089078,
+        "turnover_per_rebalance": 2.2,
+        "max_drawdown": -0.43852695774443706
+      },
+      "evaluation_mode": "in_sample_research",
+      "window": {
+        "start": "2025-10-23",
+        "end": "2026-10-23"
+      }
+    },
+    {
+      "factor": "earn_demand_language",
+      "pool": "eu_equity",
+      "title": "Demand language",
+      "measures": "management says demand exceeds supply",
+      "definition": "signed demand-signal intensity from 8-K EX-99.1, held 60 rows",
+      "sources": [
+        "filing_text"
+      ],
+      "availability": "filing acceptance + 1 row",
+      "status": "INSUFFICIENT_DATA",
+      "weight": 0.0,
+      "coverage": 0.0,
+      "gates": [
+        {
+          "gate": "G1",
+          "name": "measure",
+          "passed": false,
+          "value": 0.0,
+          "threshold": 0.6,
+          "note": "coverage 0.0; minimum 0.6; specification complete"
+        },
+        {
+          "gate": "G2",
+          "name": "incremental",
+          "passed": null,
+          "value": null,
+          "threshold": 2.0,
+          "note": "not evaluated"
+        },
+        {
+          "gate": "G3",
+          "name": "predictive",
+          "passed": null,
+          "value": null,
+          "threshold": 0.0,
+          "note": "not evaluated"
+        },
+        {
+          "gate": "G4",
+          "name": "net_of_cost",
+          "passed": null,
+          "value": null,
+          "threshold": 0.5,
+          "note": "not evaluated"
+        },
+        {
+          "gate": "G5",
+          "name": "consistency",
+          "passed": null,
+          "value": null,
+          "threshold": null,
+          "note": "not evaluated"
+        }
+      ],
+      "ic_decay": [
+        {
+          "horizon_days": 1,
+          "mean_ic": null,
+          "t_stat": null,
+          "n": 0
+        },
+        {
+          "horizon_days": 5,
+          "mean_ic": null,
+          "t_stat": null,
+          "n": 0
+        },
+        {
+          "horizon_days": 20,
+          "mean_ic": null,
+          "t_stat": null,
+          "n": 0
+        }
+      ],
+      "same_day_ic": null,
+      "mostly_descriptive": false,
+      "long_short": {
+        "gross_ann_return": null,
+        "net_ann_return": null,
+        "net_sharpe": null,
+        "turnover_per_rebalance": null,
+        "max_drawdown": null
+      },
+      "evaluation_mode": "in_sample_research",
+      "window": {
+        "start": "2025-10-23",
+        "end": "2026-10-23"
+      }
+    },
+    {
+      "factor": "earn_sue",
+      "pool": "eu_equity",
+      "title": "Earnings surprise (SUE)",
+      "measures": "standardised unexpected diluted EPS",
+      "definition": "seasonal random-walk SUE, first-reported values, held 60 rows",
+      "sources": [
+        "fundamental_fact"
+      ],
+      "availability": "filing acceptance + 1 row",
+      "status": "INSUFFICIENT_DATA",
+      "weight": 0.0,
+      "coverage": 0.0,
+      "gates": [
+        {
+          "gate": "G1",
+          "name": "measure",
+          "passed": false,
+          "value": 0.0,
+          "threshold": 0.6,
+          "note": "coverage 0.0; minimum 0.6; specification complete"
+        },
+        {
+          "gate": "G2",
+          "name": "incremental",
+          "passed": null,
+          "value": null,
+          "threshold": 2.0,
+          "note": "not evaluated"
+        },
+        {
+          "gate": "G3",
+          "name": "predictive",
+          "passed": null,
+          "value": null,
+          "threshold": 0.0,
+          "note": "not evaluated"
+        },
+        {
+          "gate": "G4",
+          "name": "net_of_cost",
+          "passed": null,
+          "value": null,
+          "threshold": 0.5,
+          "note": "not evaluated"
+        },
+        {
+          "gate": "G5",
+          "name": "consistency",
+          "passed": null,
+          "value": null,
+          "threshold": null,
+          "note": "not evaluated"
+        }
+      ],
+      "ic_decay": [
+        {
+          "horizon_days": 1,
+          "mean_ic": null,
+          "t_stat": null,
+          "n": 0
+        },
+        {
+          "horizon_days": 5,
+          "mean_ic": null,
+          "t_stat": null,
+          "n": 0
+        },
+        {
+          "horizon_days": 20,
+          "mean_ic": null,
+          "t_stat": null,
+          "n": 0
+        }
+      ],
+      "same_day_ic": null,
+      "mostly_descriptive": false,
+      "long_short": {
+        "gross_ann_return": null,
+        "net_ann_return": null,
+        "net_sharpe": null,
+        "turnover_per_rebalance": null,
+        "max_drawdown": null
+      },
+      "evaluation_mode": "in_sample_research",
+      "window": {
+        "start": "2025-10-23",
+        "end": "2026-10-23"
+      }
+    },
+    {
+      "factor": "evt_drift",
+      "pool": "eu_equity",
+      "title": "Event drift",
+      "measures": "post-event drift after 8-K events",
+      "definition": "sum prior(type) * direction * exp(-(t-d)/10), rows 1..20 after the event",
+      "sources": [
+        "filing",
+        "filing_text"
+      ],
+      "availability": "filing acceptance + 1 row",
+      "status": "INSUFFICIENT_DATA",
+      "weight": 0.0,
+      "coverage": 0.0,
+      "gates": [
+        {
+          "gate": "G1",
+          "name": "measure",
+          "passed": false,
+          "value": 0.0,
+          "threshold": 0.6,
+          "note": "coverage 0.0; minimum 0.6; specification complete"
+        },
+        {
+          "gate": "G2",
+          "name": "incremental",
+          "passed": null,
+          "value": null,
+          "threshold": 2.0,
+          "note": "not evaluated"
+        },
+        {
+          "gate": "G3",
+          "name": "predictive",
+          "passed": null,
+          "value": null,
+          "threshold": 0.0,
+          "note": "not evaluated"
+        },
+        {
+          "gate": "G4",
+          "name": "net_of_cost",
+          "passed": null,
+          "value": null,
+          "threshold": 0.5,
+          "note": "not evaluated"
+        },
+        {
+          "gate": "G5",
+          "name": "consistency",
+          "passed": null,
+          "value": null,
+          "threshold": null,
+          "note": "not evaluated"
+        }
+      ],
+      "ic_decay": [
+        {
+          "horizon_days": 1,
+          "mean_ic": null,
+          "t_stat": null,
+          "n": 0
+        },
+        {
+          "horizon_days": 5,
+          "mean_ic": null,
+          "t_stat": null,
+          "n": 0
+        },
+        {
+          "horizon_days": 20,
+          "mean_ic": null,
+          "t_stat": null,
+          "n": 0
+        }
+      ],
+      "same_day_ic": null,
+      "mostly_descriptive": false,
+      "long_short": {
+        "gross_ann_return": null,
+        "net_ann_return": null,
+        "net_sharpe": null,
+        "turnover_per_rebalance": null,
+        "max_drawdown": null
+      },
+      "evaluation_mode": "in_sample_research",
+      "window": {
+        "start": "2025-10-23",
+        "end": "2026-10-23"
+      }
+    },
+    {
+      "factor": "pv_dist_52w_high",
+      "pool": "eu_equity",
+      "title": "Distance to 52-week high",
+      "measures": "anchoring to the 52-week high",
+      "definition": "P[t]/max(P[t-y+1..t]) - 1",
+      "sources": [
+        "price_bar"
+      ],
+      "availability": "close t",
+      "status": "INSUFFICIENT_DATA",
+      "weight": 0.0,
+      "coverage": 0.565806,
+      "gates": [
+        {
+          "gate": "G1",
+          "name": "measure",
+          "passed": false,
+          "value": 0.5658063596178525,
+          "threshold": 0.6,
+          "note": "coverage 0.5658063596178525; minimum 0.6; specification complete"
+        },
+        {
+          "gate": "G2",
+          "name": "incremental",
+          "passed": null,
+          "value": null,
+          "threshold": 2.0,
+          "note": "not evaluated"
+        },
+        {
+          "gate": "G3",
+          "name": "predictive",
+          "passed": null,
+          "value": null,
+          "threshold": 0.0,
+          "note": "not evaluated"
+        },
+        {
+          "gate": "G4",
+          "name": "net_of_cost",
+          "passed": null,
+          "value": null,
+          "threshold": 0.5,
+          "note": "not evaluated"
+        },
+        {
+          "gate": "G5",
+          "name": "consistency",
+          "passed": null,
+          "value": null,
+          "threshold": null,
+          "note": "not evaluated"
+        }
+      ],
+      "ic_decay": [
+        {
+          "horizon_days": 1,
+          "mean_ic": 0.04019973697038381,
+          "t_stat": 2.991827141945476,
+          "n": 254
+        },
+        {
+          "horizon_days": 5,
+          "mean_ic": 0.04634199686320395,
+          "t_stat": 1.6568912797279496,
+          "n": 50
+        },
+        {
+          "horizon_days": 20,
+          "mean_ic": 0.11593432016442069,
+          "t_stat": 2.7394206264181182,
+          "n": 12
+        }
+      ],
+      "same_day_ic": 0.10689810804377918,
+      "mostly_descriptive": false,
+      "long_short": {
+        "gross_ann_return": 0.0198602959868003,
+        "net_ann_return": -0.011320504013199655,
+        "net_sharpe": -0.04785676183883881,
+        "turnover_per_rebalance": 0.7733333333333333,
+        "max_drawdown": -0.26206751586215526
+      },
+      "evaluation_mode": "in_sample_research",
+      "window": {
+        "start": "2025-10-23",
+        "end": "2026-10-23"
+      }
+    },
+    {
+      "factor": "pv_lowvol_20d",
+      "pool": "eu_equity",
+      "title": "Low volatility",
+      "measures": "low-volatility premium",
+      "definition": "-std(r[t-19..t]) * sqrt(rows_per_year)",
+      "sources": [
+        "price_bar"
+      ],
+      "availability": "close t",
+      "status": "MEASURED_ONLY",
+      "weight": 0.0,
+      "coverage": 0.956367,
+      "gates": [
+        {
+          "gate": "G1",
+          "name": "measure",
+          "passed": true,
+          "value": 0.9563667474689862,
+          "threshold": 0.6,
+          "note": "coverage 0.9563667474689862; minimum 0.6; specification complete"
+        },
+        {
+          "gate": "G2",
+          "name": "incremental",
+          "passed": false,
+          "value": 0.6373237949819028,
+          "threshold": 2.0,
+          "note": "best residual IC t-stat 0.6373237949819028; minimum 2.0"
+        },
+        {
+          "gate": "G3",
+          "name": "predictive",
+          "passed": false,
+          "value": -0.0030435178659254203,
+          "threshold": 0.0,
+          "note": "primary IC -0.0030435178659254203; must be positive"
+        },
+        {
+          "gate": "G4",
+          "name": "net_of_cost",
+          "passed": false,
+          "value": 0.13705440814386646,
+          "threshold": 0.5,
+          "note": "net Sharpe 0.13705440814386646; minimum 0.5"
+        },
+        {
+          "gate": "G5",
+          "name": "consistency",
+          "passed": false,
+          "value": null,
+          "threshold": null,
+          "note": "half-window signs do not agree or are unavailable"
+        }
+      ],
+      "ic_decay": [
+        {
+          "horizon_days": 1,
+          "mean_ic": 0.006233853252088301,
+          "t_stat": 0.6373237949819028,
+          "n": 254
+        },
+        {
+          "horizon_days": 5,
+          "mean_ic": -0.0030435178659254203,
+          "t_stat": -0.11612540979914224,
+          "n": 50
+        },
+        {
+          "horizon_days": 20,
+          "mean_ic": -0.03185307812158706,
+          "t_stat": -0.5458621786481976,
+          "n": 12
+        }
+      ],
+      "same_day_ic": 0.0025266170512360953,
+      "mostly_descriptive": false,
+      "long_short": {
+        "gross_ann_return": 0.07140740472666782,
+        "net_ann_return": 0.02792045199939513,
+        "net_sharpe": 0.13705440814386646,
+        "turnover_per_rebalance": 1.0785454545454545,
+        "max_drawdown": -0.17587691330514088
+      },
+      "evaluation_mode": "in_sample_research",
+      "window": {
+        "start": "2025-10-23",
+        "end": "2026-10-23"
+      }
+    },
+    {
+      "factor": "pv_mom_12_1",
+      "pool": "eu_equity",
+      "title": "12-1 month momentum",
+      "measures": "12-month trend, skipping the last month",
+      "definition": "P[t-m]/P[t-y] - 1",
+      "sources": [
+        "price_bar"
+      ],
+      "availability": "close t",
+      "status": "MEASURED_ONLY",
+      "weight": 0.0,
+      "coverage": 0.995651,
+      "gates": [
+        {
+          "gate": "G1",
+          "name": "measure",
+          "passed": true,
+          "value": 0.9956509339797519,
+          "threshold": 0.6,
+          "note": "coverage 0.9956509339797519; minimum 0.6; specification complete"
+        },
+        {
+          "gate": "G2",
+          "name": "incremental",
+          "passed": true,
+          "value": 2.518400617534815,
+          "threshold": 2.0,
+          "note": "best residual IC t-stat 2.518400617534815; minimum 2.0"
+        },
+        {
+          "gate": "G3",
+          "name": "predictive",
+          "passed": true,
+          "value": 0.02406607212882831,
+          "threshold": 0.0,
+          "note": "primary IC 0.02406607212882831; must be positive"
+        },
+        {
+          "gate": "G4",
+          "name": "net_of_cost",
+          "passed": true,
+          "value": 0.7171162978374075,
+          "threshold": 0.5,
+          "note": "net Sharpe 0.7171162978374075; minimum 0.5"
+        },
+        {
+          "gate": "G5",
+          "name": "consistency",
+          "passed": false,
+          "value": null,
+          "threshold": null,
+          "note": "half-window signs do not agree or are unavailable"
+        }
+      ],
+      "ic_decay": [
+        {
+          "horizon_days": 1,
+          "mean_ic": 0.019296074244224748,
+          "t_stat": 1.4567633285271098,
+          "n": 254
+        },
+        {
+          "horizon_days": 5,
+          "mean_ic": 0.02406607212882831,
+          "t_stat": 0.8646592701955694,
+          "n": 50
+        },
+        {
+          "horizon_days": 20,
+          "mean_ic": 0.08427267231789341,
+          "t_stat": 2.518400617534815,
+          "n": 12
+        }
+      ],
+      "same_day_ic": 0.017923385008591353,
+      "mostly_descriptive": false,
+      "long_short": {
+        "gross_ann_return": 0.1667355512669289,
+        "net_ann_return": 0.1462090058123834,
+        "net_sharpe": 0.7171162978374075,
+        "turnover_per_rebalance": 0.5090909090909091,
+        "max_drawdown": -0.15695384091433962
+      },
+      "evaluation_mode": "in_sample_research",
+      "window": {
+        "start": "2025-10-23",
+        "end": "2026-10-23"
+      }
+    },
+    {
+      "factor": "pv_mom_1m",
+      "pool": "eu_equity",
+      "title": "1-month momentum",
+      "measures": "1-month trend",
+      "definition": "P[t]/P[t-m] - 1",
+      "sources": [
+        "price_bar"
+      ],
+      "availability": "close t",
+      "status": "MEASURED_ONLY",
+      "weight": 0.0,
+      "coverage": 0.99615,
+      "gates": [
+        {
+          "gate": "G1",
+          "name": "measure",
+          "passed": true,
+          "value": 0.9961500071296164,
+          "threshold": 0.6,
+          "note": "coverage 0.9961500071296164; minimum 0.6; specification complete"
+        },
+        {
+          "gate": "G2",
+          "name": "incremental",
+          "passed": false,
+          "value": 1.4465521879729228,
+          "threshold": 2.0,
+          "note": "best residual IC t-stat 1.4465521879729228; minimum 2.0"
+        },
+        {
+          "gate": "G3",
+          "name": "predictive",
+          "passed": true,
+          "value": 0.032725908349199535,
+          "threshold": 0.0,
+          "note": "primary IC 0.032725908349199535; must be positive"
+        },
+        {
+          "gate": "G4",
+          "name": "net_of_cost",
+          "passed": true,
+          "value": 1.9803336839794683,
+          "threshold": 0.5,
+          "note": "net Sharpe 1.9803336839794683; minimum 0.5"
+        },
+        {
+          "gate": "G5",
+          "name": "consistency",
+          "passed": true,
+          "value": null,
+          "threshold": null,
+          "note": "half-window signs agree"
+        }
+      ],
+      "ic_decay": [
+        {
+          "horizon_days": 1,
+          "mean_ic": 0.010241111397530624,
+          "t_stat": 0.9604492415095667,
+          "n": 254
+        },
+        {
+          "horizon_days": 5,
+          "mean_ic": 0.032725908349199535,
+          "t_stat": 1.4465521879729228,
+          "n": 50
+        },
+        {
+          "horizon_days": 20,
+          "mean_ic": 0.04205028204884686,
+          "t_stat": 0.8819053115685257,
+          "n": 12
+        }
+      ],
+      "same_day_ic": 0.14843585573331325,
+      "mostly_descriptive": true,
+      "long_short": {
+        "gross_ann_return": 0.39439663168843625,
+        "net_ann_return": 0.3375674244157089,
+        "net_sharpe": 1.9803336839794683,
+        "turnover_per_rebalance": 1.4094545454545453,
+        "max_drawdown": -0.06160925621888913
+      },
+      "evaluation_mode": "in_sample_research",
+      "window": {
+        "start": "2025-10-23",
+        "end": "2026-10-23"
+      }
+    },
+    {
+      "factor": "pv_rev_5d",
+      "pool": "eu_equity",
+      "title": "5-day reversal",
+      "measures": "short-term reversal",
+      "definition": "-(P[t]/P[t-5] - 1)",
+      "sources": [
+        "price_bar"
+      ],
+      "availability": "close t",
+      "status": "MEASURED_ONLY",
+      "weight": 0.0,
+      "coverage": 0.99615,
+      "gates": [
+        {
+          "gate": "G1",
+          "name": "measure",
+          "passed": true,
+          "value": 0.9961500071296164,
+          "threshold": 0.6,
+          "note": "coverage 0.9961500071296164; minimum 0.6; specification complete"
+        },
+        {
+          "gate": "G2",
+          "name": "incremental",
+          "passed": false,
+          "value": 0.96348405701369,
+          "threshold": 2.0,
+          "note": "best residual IC t-stat 0.96348405701369; minimum 2.0"
+        },
+        {
+          "gate": "G3",
+          "name": "predictive",
+          "passed": false,
+          "value": -0.017546809492216636,
+          "threshold": 0.0,
+          "note": "primary IC -0.017546809492216636; must be positive"
+        },
+        {
+          "gate": "G4",
+          "name": "net_of_cost",
+          "passed": false,
+          "value": -1.1681778815553723,
+          "threshold": 0.5,
+          "note": "net Sharpe -1.1681778815553723; minimum 0.5"
+        },
+        {
+          "gate": "G5",
+          "name": "consistency",
+          "passed": false,
+          "value": null,
+          "threshold": null,
+          "note": "half-window signs do not agree or are unavailable"
+        }
+      ],
+      "ic_decay": [
+        {
+          "horizon_days": 1,
+          "mean_ic": 0.011178946373443797,
+          "t_stat": 0.9626333188534613,
+          "n": 254
+        },
+        {
+          "horizon_days": 5,
+          "mean_ic": -0.017546809492216636,
+          "t_stat": -0.8058833444335042,
+          "n": 50
+        },
+        {
+          "horizon_days": 20,
+          "mean_ic": 0.04025370139949809,
+          "t_stat": 0.96348405701369,
+          "n": 12
+        }
+      ],
+      "same_day_ic": -0.29078809543143874,
+      "mostly_descriptive": true,
+      "long_short": {
+        "gross_ann_return": -0.05460223526564606,
+        "net_ann_return": -0.17760022799291875,
+        "net_sharpe": -1.1681778815553723,
+        "turnover_per_rebalance": 3.0505454545454547,
+        "max_drawdown": -0.19976244273569588
+      },
+      "evaluation_mode": "in_sample_research",
+      "window": {
+        "start": "2025-10-23",
+        "end": "2026-10-23"
+      }
+    },
+    {
+      "factor": "pv_volume_z",
+      "pool": "eu_equity",
+      "title": "Volume z-score",
+      "measures": "abnormal trading activity",
+      "definition": "(log V[t] - mean(log V[t-60..t-1])) / std(...)",
+      "sources": [
+        "price_bar"
+      ],
+      "availability": "close t",
+      "status": "MEASURED_ONLY",
+      "weight": 0.0,
+      "coverage": 0.831385,
+      "gates": [
+        {
+          "gate": "G1",
+          "name": "measure",
+          "passed": true,
+          "value": 0.8313845715100527,
+          "threshold": 0.6,
+          "note": "coverage 0.8313845715100527; minimum 0.6; specification complete"
+        },
+        {
+          "gate": "G2",
+          "name": "incremental",
+          "passed": false,
+          "value": 0.367862676959644,
+          "threshold": 2.0,
+          "note": "best residual IC t-stat 0.367862676959644; minimum 2.0"
+        },
+        {
+          "gate": "G3",
+          "name": "predictive",
+          "passed": false,
+          "value": -0.017087036341139065,
+          "threshold": 0.0,
+          "note": "primary IC -0.017087036341139065; must be positive"
+        },
+        {
+          "gate": "G4",
+          "name": "net_of_cost",
+          "passed": false,
+          "value": -1.217486368787385,
+          "threshold": 0.5,
+          "note": "net Sharpe -1.217486368787385; minimum 0.5"
+        },
+        {
+          "gate": "G5",
+          "name": "consistency",
+          "passed": true,
+          "value": null,
+          "threshold": null,
+          "note": "half-window signs agree"
+        }
+      ],
+      "ic_decay": [
+        {
+          "horizon_days": 1,
+          "mean_ic": 0.0033093779536604957,
+          "t_stat": 0.367862676959644,
+          "n": 254
+        },
+        {
+          "horizon_days": 5,
+          "mean_ic": -0.017087036341139065,
+          "t_stat": -0.7072198541958189,
+          "n": 50
+        },
+        {
+          "horizon_days": 20,
+          "mean_ic": -0.04183680896286158,
+          "t_stat": -1.504679865401021,
+          "n": 12
+        }
+      ],
+      "same_day_ic": -0.004659467947267079,
+      "mostly_descriptive": false,
+      "long_short": {
+        "gross_ann_return": -0.14204100248866697,
+        "net_ann_return": -0.259506602488667,
+        "net_sharpe": -1.217486368787385,
+        "turnover_per_rebalance": 2.9133333333333336,
+        "max_drawdown": -0.30057752370444346
+      },
+      "evaluation_mode": "in_sample_research",
+      "window": {
+        "start": "2025-10-23",
+        "end": "2026-10-23"
+      }
+    },
+    {
+      "factor": "rel_spillover",
+      "pool": "eu_equity",
+      "title": "Relational spillover",
+      "measures": "shocks at linked companies not yet priced",
+      "definition": "weighted 5-day residual-return shock of validated graph neighbours, lagged 1 row",
+      "sources": [
+        "price_bar",
+        "graph"
+      ],
+      "availability": "close t-1",
+      "status": "INSUFFICIENT_DATA",
+      "weight": 0.0,
+      "coverage": 0.0,
+      "gates": [
+        {
+          "gate": "G1",
+          "name": "measure",
+          "passed": false,
+          "value": 0.0,
+          "threshold": 0.6,
+          "note": "coverage 0.0; minimum 0.6; specification complete"
+        },
+        {
+          "gate": "G2",
+          "name": "incremental",
+          "passed": null,
+          "value": null,
+          "threshold": 2.0,
+          "note": "not evaluated"
+        },
+        {
+          "gate": "G3",
+          "name": "predictive",
+          "passed": null,
+          "value": null,
+          "threshold": 0.0,
+          "note": "not evaluated"
+        },
+        {
+          "gate": "G4",
+          "name": "net_of_cost",
+          "passed": null,
+          "value": null,
+          "threshold": 0.5,
+          "note": "not evaluated"
+        },
+        {
+          "gate": "G5",
+          "name": "consistency",
+          "passed": null,
+          "value": null,
+          "threshold": null,
+          "note": "not evaluated"
+        }
+      ],
+      "ic_decay": [
+        {
+          "horizon_days": 1,
+          "mean_ic": null,
+          "t_stat": null,
+          "n": 0
+        },
+        {
+          "horizon_days": 5,
+          "mean_ic": null,
+          "t_stat": null,
+          "n": 0
+        },
+        {
+          "horizon_days": 20,
+          "mean_ic": null,
+          "t_stat": null,
+          "n": 0
+        }
+      ],
+      "same_day_ic": null,
+      "mostly_descriptive": false,
+      "long_short": {
+        "gross_ann_return": null,
+        "net_ann_return": null,
+        "net_sharpe": null,
+        "turnover_per_rebalance": null,
+        "max_drawdown": null
+      },
+      "evaluation_mode": "in_sample_research",
+      "window": {
+        "start": "2025-10-23",
+        "end": "2026-10-23"
+      }
+    }
+  ],
+  "regimes": [
+    {
+      "pool": "eu_equity",
+      "as_of": "2026-10-23",
+      "points": 1,
+      "state": "normal",
+      "indicators": [
+        {
+          "name": "trend",
+          "value": 0.9941752291031879,
+          "threshold": 1.0,
+          "triggered": true,
+          "note": "^STOXX50E close / 200-day MA (triggers below 1)"
+        },
+        {
+          "name": "volatility",
+          "value": 0.9497070897305107,
+          "threshold": 1.0,
+          "triggered": false,
+          "note": "VIX / VIX3M term structure (triggers above 1 = inversion)"
+        },
+        {
+          "name": "correlation",
+          "value": 0.6150793650793651,
+          "threshold": 0.9,
+          "triggered": false,
+          "note": "20d mean pairwise correlation, 1-year percentile"
+        },
+        {
+          "name": "breadth",
+          "value": 0.4528301886792453,
+          "threshold": 0.4,
+          "triggered": false,
+          "note": "share of pool above its 200-day MA (triggers below threshold)"
+        },
+        {
+          "name": "credit",
+          "value": 60.00000000000001,
+          "threshold": 75.0,
+          "triggered": false,
+          "note": "20-day change in US high-yield OAS, basis points"
+        }
+      ],
+      "history": [
+        {
+          "date": "2026-08-03",
+          "points": 0,
+          "state": "normal"
+        },
+        {
+          "date": "2026-08-04",
+          "points": 0,
+          "state": "normal"
+        },
+        {
+          "date": "2026-08-05",
+          "points": 0,
+          "state": "normal"
+        },
+        {
+          "date": "2026-08-06",
+          "points": 0,
+          "state": "normal"
+        },
+        {
+          "date": "2026-08-07",
+          "points": 0,
+          "state": "normal"
+        },
+        {
+          "date": "2026-08-10",
+          "points": 0,
+          "state": "normal"
+        },
+        {
+          "date": "2026-08-11",
+          "points": 0,
+          "state": "normal"
+        },
+        {
+          "date": "2026-08-12",
+          "points": 0,
+          "state": "normal"
+        },
+        {
+          "date": "2026-08-13",
+          "points": 0,
+          "state": "normal"
+        },
+        {
+          "date": "2026-08-14",
+          "points": 0,
+          "state": "normal"
+        },
+        {
+          "date": "2026-08-17",
+          "points": 0,
+          "state": "normal"
+        },
+        {
+          "date": "2026-08-18",
+          "points": 0,
+          "state": "normal"
+        },
+        {
+          "date": "2026-08-19",
+          "points": 0,
+          "state": "normal"
+        },
+        {
+          "date": "2026-08-20",
+          "points": 0,
+          "state": "normal"
+        },
+        {
+          "date": "2026-08-21",
+          "points": 0,
+          "state": "normal"
+        },
+        {
+          "date": "2026-08-24",
+          "points": 0,
+          "state": "normal"
+        },
+        {
+          "date": "2026-08-25",
+          "points": 0,
+          "state": "normal"
+        },
+        {
+          "date": "2026-08-26",
+          "points": 0,
+          "state": "normal"
+        },
+        {
+          "date": "2026-08-27",
+          "points": 0,
+          "state": "normal"
+        },
+        {
+          "date": "2026-08-28",
+          "points": 0,
+          "state": "normal"
+        },
+        {
+          "date": "2026-08-31",
+          "points": 0,
+          "state": "normal"
+        },
+        {
+          "date": "2026-09-01",
+          "points": 0,
+          "state": "normal"
+        },
+        {
+          "date": "2026-09-02",
+          "points": 0,
+          "state": "normal"
+        },
+        {
+          "date": "2026-09-03",
+          "points": 0,
+          "state": "normal"
+        },
+        {
+          "date": "2026-09-04",
+          "points": 0,
+          "state": "normal"
+        },
+        {
+          "date": "2026-09-07",
+          "points": 0,
+          "state": "normal"
+        },
+        {
+          "date": "2026-09-08",
+          "points": 0,
+          "state": "normal"
+        },
+        {
+          "date": "2026-09-09",
+          "points": 0,
+          "state": "normal"
+        },
+        {
+          "date": "2026-09-10",
+          "points": 0,
+          "state": "normal"
+        },
+        {
+          "date": "2026-09-11",
+          "points": 0,
+          "state": "normal"
+        },
+        {
+          "date": "2026-09-14",
+          "points": 0,
+          "state": "normal"
+        },
+        {
+          "date": "2026-09-15",
+          "points": 0,
+          "state": "normal"
+        },
+        {
+          "date": "2026-09-16",
+          "points": 0,
+          "state": "normal"
+        },
+        {
+          "date": "2026-09-17",
+          "points": 0,
+          "state": "normal"
+        },
+        {
+          "date": "2026-09-18",
+          "points": 0,
+          "state": "normal"
+        },
+        {
+          "date": "2026-09-21",
+          "points": 0,
+          "state": "normal"
+        },
+        {
+          "date": "2026-09-22",
+          "points": 0,
+          "state": "normal"
+        },
+        {
+          "date": "2026-09-23",
+          "points": 0,
+          "state": "normal"
+        },
+        {
+          "date": "2026-09-24",
+          "points": 0,
+          "state": "normal"
+        },
+        {
+          "date": "2026-09-25",
+          "points": 0,
+          "state": "normal"
+        },
+        {
+          "date": "2026-09-28",
+          "points": 0,
+          "state": "normal"
+        },
+        {
+          "date": "2026-09-29",
+          "points": 0,
+          "state": "normal"
+        },
+        {
+          "date": "2026-09-30",
+          "points": 0,
+          "state": "normal"
+        },
+        {
+          "date": "2026-10-01",
+          "points": 0,
+          "state": "normal"
+        },
+        {
+          "date": "2026-10-02",
+          "points": 0,
+          "state": "normal"
+        },
+        {
+          "date": "2026-10-05",
+          "points": 0,
+          "state": "normal"
+        },
+        {
+          "date": "2026-10-06",
+          "points": 0,
+          "state": "normal"
+        },
+        {
+          "date": "2026-10-07",
+          "points": 0,
+          "state": "normal"
+        },
+        {
+          "date": "2026-10-08",
+          "points": 0,
+          "state": "normal"
+        },
+        {
+          "date": "2026-10-09",
+          "points": 0,
+          "state": "normal"
+        },
+        {
+          "date": "2026-10-12",
+          "points": 0,
+          "state": "normal"
+        },
+        {
+          "date": "2026-10-13",
+          "points": 0,
+          "state": "normal"
+        },
+        {
+          "date": "2026-10-14",
+          "points": 0,
+          "state": "normal"
+        },
+        {
+          "date": "2026-10-15",
+          "points": 0,
+          "state": "normal"
+        },
+        {
+          "date": "2026-10-16",
+          "points": 0,
+          "state": "normal"
+        },
+        {
+          "date": "2026-10-19",
+          "points": 0,
+          "state": "normal"
+        },
+        {
+          "date": "2026-10-20",
+          "points": 0,
+          "state": "normal"
+        },
+        {
+          "date": "2026-10-21",
+          "points": 0,
+          "state": "normal"
+        },
+        {
+          "date": "2026-10-22",
+          "points": 1,
+          "state": "normal"
+        },
+        {
+          "date": "2026-10-23",
+          "points": 1,
+          "state": "normal"
+        }
+      ],
+      "lift": {
+        "drawdown_threshold": 0.07,
+        "horizon_days": 20,
+        "lift_elevated": 0.0,
+        "lift_stressed": null,
+        "n_days": 236
+      }
+    }
+  ],
+  "explanations": [
+    {
+      "explanation_id": "exp-eu_equity-saf-pa",
+      "pool": "eu_equity",
+      "symbol": "SAF.PA",
+      "verdict": "abstained",
+      "summary": "Insufficient verified evidence; no explanation is offered.",
+      "claims": [],
+      "counter_case": [],
+      "ruled_out": [],
+      "models": {
+        "analyst": "unavailable",
+        "skeptic": "unavailable"
+      },
+      "retries": 2
+    },
+    {
+      "explanation_id": "exp-eu_equity-besi-as",
+      "pool": "eu_equity",
+      "symbol": "BESI.AS",
+      "verdict": "abstained",
+      "summary": "Insufficient verified evidence; no explanation is offered.",
+      "claims": [],
+      "counter_case": [],
+      "ruled_out": [],
+      "models": {
+        "analyst": "unavailable",
+        "skeptic": "unavailable"
+      },
+      "retries": 2
+    },
+    {
+      "explanation_id": "exp-eu_equity-eni-mi",
+      "pool": "eu_equity",
+      "symbol": "ENI.MI",
+      "verdict": "abstained",
+      "summary": "Insufficient verified evidence; no explanation is offered.",
+      "claims": [],
+      "counter_case": [],
+      "ruled_out": [],
+      "models": {
+        "analyst": "unavailable",
+        "skeptic": "unavailable"
+      },
+      "retries": 2
+    }
+  ],
+  "track_record": {
+    "mode": "walk_forward",
+    "window": {
+      "start": "2025-10-23",
+      "end": "2026-10-23"
+    },
+    "settled_count": 1430,
+    "pending_count": 110,
+    "by_tier": [
+      {
+        "pool": "eu_equity",
+        "tier": "AVOID",
+        "n": 32,
+        "hit_rate": 0.46875,
+        "mean_excess_bps": 22.846450500001378
+      },
+      {
+        "pool": "eu_equity",
+        "tier": "NEUTRAL",
+        "n": 503,
+        "hit_rate": null,
+        "mean_excess_bps": 20.646019567051802
+      },
+      {
+        "pool": "eu_equity",
+        "tier": "NO_CALL",
+        "n": 562,
+        "hit_rate": null,
+        "mean_excess_bps": -17.436890074050797
+      },
+      {
+        "pool": "eu_equity",
+        "tier": "OVERWEIGHT",
+        "n": 142,
+        "hit_rate": 0.5070422535211268,
+        "mean_excess_bps": 8.982394898597757
+      },
+      {
+        "pool": "eu_equity",
+        "tier": "STRONG_OVERWEIGHT",
+        "n": 47,
+        "hit_rate": 0.425531914893617,
+        "mean_excess_bps": -20.687708069869487
+      },
+      {
+        "pool": "eu_equity",
+        "tier": "UNDERWEIGHT",
+        "n": 144,
+        "hit_rate": 0.5,
+        "mean_excess_bps": -17.479623687434373
+      }
+    ],
+    "calibration": [
+      {
+        "bucket_low": 0.0,
+        "bucket_high": 0.2,
+        "n": 260,
+        "predicted": 0.1,
+        "observed": 0.49230769230769234
+      },
+      {
+        "bucket_low": 0.2,
+        "bucket_high": 0.4,
+        "n": 286,
+        "predicted": 0.2909090909090909,
+        "observed": 0.493006993006993
+      },
+      {
+        "bucket_low": 0.4,
+        "bucket_high": 0.6,
+        "n": 286,
+        "predicted": 0.4909090909090909,
+        "observed": 0.4965034965034965
+      },
+      {
+        "bucket_low": 0.6,
+        "bucket_high": 0.8,
+        "n": 286,
+        "predicted": 0.6909090909090909,
+        "observed": 0.46503496503496505
+      },
+      {
+        "bucket_low": 0.8,
+        "bucket_high": 1.0,
+        "n": 312,
+        "predicted": 0.9,
+        "observed": 0.4935897435897436
+      }
+    ],
+    "composite_ic_series": [
+      {
+        "date": "2026-04-16",
+        "pool": "eu_equity",
+        "ic": -0.03080808080808081
+      },
+      {
+        "date": "2026-04-23",
+        "pool": "eu_equity",
+        "ic": -0.15772005772005773
+      },
+      {
+        "date": "2026-04-30",
+        "pool": "eu_equity",
+        "ic": 0.24603174603174602
+      },
+      {
+        "date": "2026-05-08",
+        "pool": "eu_equity",
+        "ic": -0.09862914862914864
+      },
+      {
+        "date": "2026-05-15",
+        "pool": "eu_equity",
+        "ic": null
+      },
+      {
+        "date": "2026-05-22",
+        "pool": "eu_equity",
+        "ic": null
+      },
+      {
+        "date": "2026-05-29",
+        "pool": "eu_equity",
+        "ic": null
+      },
+      {
+        "date": "2026-06-05",
+        "pool": "eu_equity",
+        "ic": null
+      },
+      {
+        "date": "2026-06-12",
+        "pool": "eu_equity",
+        "ic": 0.30043541364296084
+      },
+      {
+        "date": "2026-06-19",
+        "pool": "eu_equity",
+        "ic": -0.11017316017316017
+      },
+      {
+        "date": "2026-06-26",
+        "pool": "eu_equity",
+        "ic": 0.014646464646464647
+      },
+      {
+        "date": "2026-07-03",
+        "pool": "eu_equity",
+        "ic": -0.2971139971139971
+      },
+      {
+        "date": "2026-07-10",
+        "pool": "eu_equity",
+        "ic": -0.26255411255411254
+      },
+      {
+        "date": "2026-07-17",
+        "pool": "eu_equity",
+        "ic": 0.13463203463203463
+      },
+      {
+        "date": "2026-07-24",
+        "pool": "eu_equity",
+        "ic": -0.15512265512265513
+      },
+      {
+        "date": "2026-07-31",
+        "pool": "eu_equity",
+        "ic": -0.016305916305916306
+      },
+      {
+        "date": "2026-08-07",
+        "pool": "eu_equity",
+        "ic": -0.004906204906204906
+      },
+      {
+        "date": "2026-08-14",
+        "pool": "eu_equity",
+        "ic": 0.003968253968253968
+      },
+      {
+        "date": "2026-08-21",
+        "pool": "eu_equity",
+        "ic": 0.09978354978354978
+      },
+      {
+        "date": "2026-08-28",
+        "pool": "eu_equity",
+        "ic": 0.06724386724386724
+      },
+      {
+        "date": "2026-09-04",
+        "pool": "eu_equity",
+        "ic": null
+      },
+      {
+        "date": "2026-09-11",
+        "pool": "eu_equity",
+        "ic": null
+      },
+      {
+        "date": "2026-09-18",
+        "pool": "eu_equity",
+        "ic": null
+      },
+      {
+        "date": "2026-09-25",
+        "pool": "eu_equity",
+        "ic": null
+      },
+      {
+        "date": "2026-10-02",
+        "pool": "eu_equity",
+        "ic": null
+      },
+      {
+        "date": "2026-10-09",
+        "pool": "eu_equity",
+        "ic": null
+      }
+    ]
+  },
+  "warnings": [
+    "The valuation constraint is not applied in this run.",
+    "Ranking uses walk-forward weights and out-of-sample composite IC; factor cards show in-sample research statistics over the window.",
+    "Walk-forward excludes evt_drift and rel_spillover because their priors and edges are fitted in-sample.",
+    "Graph edges are validated on the same window they are used in (in-sample).",
+    "3 explanation(s) abstained because a model answer was unavailable."
+  ],
+  "trace_path": "examples/eu_equity/trace.jsonl",
+  "disclaimer": "Research and education only. Tiers are research stances, not orders or investment advice. TradePulse places no trades. Past performance does not predict future results."
+}

@@ -1,6 +1,6 @@
 # Sponsor integration and evidence status
 
-Status: 24 October 2026. This is an evidence-tracking draft, not a claim that all sponsor
+Status: 25 October 2026. This is an evidence-tracking draft, not a claim that all sponsor
 requirements are complete. See [project status](STATUS.md) and
 [Member D's acceptance checklist](../integrations/ACCEPTANCE.md).
 
@@ -16,6 +16,8 @@ unimplemented. DuckDB tests are evidence for the offline path, not proof of Zeta
 Required evidence: AWS deployment and Europe smoke test, table registration, a sanitized
 real response, every-template hash parity, pagination, and one out-of-universe EDGAR lookup.
 D owns these items. No deployment endpoint or credential is published here.
+D reports using AWS Ohio (`us-east-2`) after unsuccessful EU/N. Virginia attempts. The lead
+accepts that region fallback; it does not establish deployment or European access acceptance.
 
 ## Meterless
 

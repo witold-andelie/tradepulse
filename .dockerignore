@@ -1,11 +1,22 @@
 .git
+.agent-handoff
+.agents
+.codex
+.aws
+.scratch
+.work
 .env
 .env.*
+**/*.pem
+**/*.key
+*.zip
 data/lake
 data/cache
 # Keep web/ sources and contracts/ in the build context; exclude generated files.
 web/node_modules
+**/node_modules
 web/dist
+web/.qa-output
 logs
 runs
 **/__pycache__

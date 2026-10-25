@@ -64,18 +64,21 @@ export function contributionsSorted(rec) {
 }
 
 /**
- * Banner for the run's data_mode:
+ * Banner for the run's data_mode. Pass the run for current UI provenance wording.
+ * The one-argument form retains the original shared-helper compatibility contract:
  * SYNTHETIC -> { show: true, tone: "warning", text: "SYNTHETIC FIXTURE — fictional instruments, generated numbers. Not results." }
  * REPLAY    -> { show: true, tone: "info", text: "REPLAY — sample data with recorded model answers." }
  * REAL      -> { show: false, tone: "none", text: "" }
  * Anything else throws.
  */
-export function dataModeBanner(dataMode) {
+export function dataModeBanner(dataMode, run) {
   switch (dataMode) {
     case 'SYNTHETIC':
       return { show: true, tone: 'warning', text: 'SYNTHETIC FIXTURE — fictional instruments, generated numbers. Not results.' };
     case 'REPLAY':
-      return { show: true, tone: 'info', text: 'REPLAY — sample data with recorded model answers.' };
+      return { show: true, tone: 'info', text: run
+        ? 'REPLAY — sample snapshot. See Run limitations for model availability.'
+        : 'REPLAY — sample data with recorded model answers.' };
     case 'REAL':
       return { show: false, tone: 'none', text: '' };
     default:

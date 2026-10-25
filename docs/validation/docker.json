@@ -1,0 +1,40 @@
+{
+  "checked_at": "2026-10-25T15:25:53.642698+00:00",
+  "project": "tradepulse-acceptance-20261025",
+  "fresh_named_volumes": true,
+  "build_and_first_boot": "PASS",
+  "core_healthcheck": "healthy",
+  "proxy_health_response": {
+    "status": "ok",
+    "sample_mode": true
+  },
+  "run_id": "2026-10-23-b1f85a23",
+  "as_of": "2026-10-23",
+  "data_mode": "REPLAY",
+  "recommendations": 616,
+  "factor_cards": 33,
+  "tiers": {
+    "NO_CALL": 616
+  },
+  "explanations": {
+    "abstained": 9
+  },
+  "api_payload_sha256": "e601b34b4769327e2e568c5e21e4dd2528076cd738cc5ff494418c295130c9ff",
+  "containers": [
+    {
+      "name": "/tradepulse-acceptance-20261025-core-1",
+      "memory_limit_bytes": 3221225472,
+      "user": "tradepulse",
+      "image_id": "sha256:99be215087e4b67115af02abd2bf6239e77b17057a12c1d073e5b1016ae96e9d",
+      "status": "running"
+    },
+    {
+      "name": "/tradepulse-acceptance-20261025-web-1",
+      "memory_limit_bytes": 268435456,
+      "user": "",
+      "image_id": "sha256:10ad98d4d72a9e579308aa879502c766424c6e901985f4f2fb30be0a4d4966be",
+      "status": "running"
+    }
+  ],
+  "scope": "Actual core/web build, empty-volume bootstrap, non-root core writes, nginx proxy and browser checks; engines/hosted models excluded."
+}

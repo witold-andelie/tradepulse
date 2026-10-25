@@ -3,6 +3,12 @@
 Huyin's detailed current assignment is [HUYIN_NEXT_STEPS.md](HUYIN_NEXT_STEPS.md).
 It supersedes the earlier message asking for three new placeholder implementations.
 
+Lead QA update, 25 October: fresh real-sample API and container journeys now pass nine browser
+groups in Simple/Pro at 1440/320 px. Frontend tests: 89 passed; original tests unchanged.
+REPLAY is an execution mode, not proof that model recordings exist. The UI keeps this
+distinction explicit. See `../docs/validation/README.md`; the new guide's actual screen-reader
+and audible voice checks remain pending. No page rebuild is required.
+
 > **Main baseline (2026-10-24): Huyin has already implemented B1–B10.** Integration `aaf3b5f`
 > preserves her original commits, six business pages, Discover, Simple/Pro presentation,
 > keyboard interactions, numeric chart alternatives and accessibility work. The pages are

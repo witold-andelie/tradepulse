@@ -26,7 +26,7 @@ function Layout() {
     const title = location.pathname.startsWith('/pool/') ? 'Leaderboard' : location.pathname.startsWith('/ticker/') ? 'Instrument Research' : location.pathname === '/discover' ? 'Discover' : links.find(([path]) => path === location.pathname)?.[1] || 'Not Found';
     document.title = `${title} · TradePulse`;
   }, [location.pathname, loading]);
-  const banner = data ? dataModeBanner(data.data_mode) : null;
+  const banner = data ? dataModeBanner(data.data_mode, data) : null;
   const researchTools = data && (<div className="workspace-tools">{data.warnings.length > 0 && <details className="run-warnings"><summary>Run limitations · {number(data.warnings.length)} notice(s)</summary><ul>{data.warnings.map((warning, i) => <li key={i}>{warning}</li>)}</ul></details>}<ResearchGuide /></div>);
   return <div className="app"><a className="skip-link" href="#main-content">Skip to main content</a>
     <aside className="sidebar" onKeyDown={(event) => { if (open && event.key === 'Escape') { setOpen(false); menuRef.current?.focus(); } }}><Link className="brand" to="/discover"><span className="brand-mark" aria-hidden="true">⌁</span><span>TradePulse<small>AGENT RESEARCH</small></span></Link>

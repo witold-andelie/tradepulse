@@ -15,12 +15,12 @@ The lead approved that guide-only UI exception and took over the two follow-up r
 
 | Area | Implemented | Remaining |
 |---|---|---|
-| Core / lead | Research gates, ranking, regime, walk-forward, grounded extraction, LangGraph explanation/verifier, reports, API and traces | Engine wiring, real artifact/service acceptance and delivery materials |
+| Core / lead | Research gates, ranking, regime, walk-forward, grounded extraction, LangGraph explanation/verifier, reports, API/traces, hash-verified fresh sample launcher and three genuine examples | Engine wiring after D, complete model replay and final delivery media |
 | A / ingest, lead follow-up | Real seven-table lake/sample for 2026-10-23, crypto CSV/provenance, source checks, accepted source exceptions, offline execution and reproducible private full-lake package/verification | Actual S3 upload awaits D's destination/access; model recordings are D's separate dependency |
-| B / Huyin | Six business pages, Discover, Simple/Pro, filtering, evidence drill-down, responsive design, accessibility interactions and localized research guide with optional speech | Visual/interaction review and remaining manual acceptance, including new guide controls and native speech |
-| C / Tanhao | C1–C7 math, 235 C9 property cases, B7–B9 review fixes and recorded fixture accessibility acceptance | Regression against delivered real API outputs |
+| B / Huyin | Six business pages, Discover, Simple/Pro, evidence drill-down, responsive/accessibility interactions, localized guide, independent Lighthouse/axe/native zoom and real-API journeys | New guide's actual NVDA/VoiceOver check, native-speaker editing and audible voice quality |
+| C / Tanhao | C1–C7 math, 235 C9 property cases, B7–B9 fixes, fixture accessibility acceptance and real-API regressions completed by the lead | Recheck after D supplies fully explained real outputs |
 | D / integrations | SQL templates, DuckDB adapter, registration runner, hosted NIM record/replay client and Python engines client | Zetaris deployment/registration/live client/parity, recorded cassette and TypeScript engines sidecar |
-| Docker | Core and web definitions, nginx API proxy and memory limits | Runtime validation; engines service remains commented out |
+| Docker | Actual core/web builds, empty-volume startup, non-root core, health ordering, nginx proxy, memory limits and nine passing real-API browser groups | Engines service remains commented out; hosted sponsor acceptance |
 
 Do not ask Huyin or Tanhao to recreate pages already supplied by the integration.
 Existing page adapters preserve the agreed `*Page` prop interfaces; shared hook paths use
@@ -48,9 +48,15 @@ was fabricated. Full explained replay and sponsor acceptance remain incomplete.
 
 The checkout lacks `integrations/ACCESS.md`, deployed-service evidence, engines server/vendor
 files, a committed LLM cassette and live parity/model smoke evidence. The standalone frontend
-still defaults to synthetic fixtures; API mode needs a generated/saved run. Cloud upload is
+still defaults to synthetic fixtures. `serve.py` now generates a saved run on a fresh sample
+checkout; the actual API-backed frontend and container stack are verified. Cloud upload is
 pending D's private destination and access method. The verified local full-lake ZIP and A1–A9
 closure matrix are in [A delivery](../ingest/DELIVERY.md); no upload has occurred.
+
+D reports proceeding in AWS US East (Ohio), `us-east-2`, after unsuccessful EU and N. Virginia
+attempts. Ohio is accepted as a documented region fallback; the reason for those failures,
+service deployment and access from Europe are not independently verified yet. D must record
+the actual region in `DEPLOY.md` and supply the HTTPS endpoints/smoke instructions in `ACCESS.md`.
 
 ## Remaining sequence and owners
 
@@ -63,10 +69,16 @@ closure matrix are in [A delivery](../ingest/DELIVERY.md); no upload has occurre
 3. **Lead:** connect engines, verify hosted access from Europe, and run offline SAMPLE_MODE
    with networking disabled after recording models. Offline data loading, pipeline execution,
    API contract and abstention behavior have already passed; model replay is still pending.
-4. **B and C / lead QA:** review the integrated pages against those real outputs and fix specific
-   findings. B7–B9 fixture acceptance is recorded; other-page and real-output acceptance remains.
-5. **Lead:** finalize sponsor evidence, honest limitations, three or more genuine sample
-   input/output pairs, demo script, slides, video and submission.
+4. **B and C / lead QA:** the current real-output regression is complete. Repeat it after D's
+   cassette supplies genuinely explained outputs. The new guide still needs actual NVDA/VoiceOver,
+   native-speaker editing and audible voice checks; automated tools do not certify those.
+5. **Lead:** three genuine input/output/trace pairs and the demo/slide content are prepared.
+   Finalize cloud-service scenes, sponsor evidence, the rendered deck/video and submission.
+   Confirm one primary track, roster, Cursor usage and pre-existing component declarations.
+6. **Maintenance:** the 25 October npm audit reported 15 dependency findings (two critical,
+   five high, eight moderate). Version migration needs its own browser regression; do not run
+   `npm audit fix --force` or describe dependency security as certified. The existing Ruff
+   maintenance item and lead-reviewed source timestamp documentation sync also remain open.
 
 Team planning dates remain: B's hard limit 25 October 23:59 UTC; D's hard limit
 26 October 03:59 UTC (25 October 23:59 US Eastern); submission 27 October 23:45 UTC.
@@ -74,7 +86,7 @@ These are the recorded project deadlines, not a live check of organizer announce
 
 ## Verified checks
 
-- Full offline Python suite on the collector after private-handoff completion, with real lake and delivered sample: **603 passed, none skipped**,
+- Full offline Python suite on the collector after fresh-start completion, with real lake and delivered sample: **609 passed, none skipped**,
   with 19 existing BeautifulSoup/lxml deprecation warnings.
   All seven lake cases and the sample case execute. Passing these tests does not override the
   separate strict completeness failure for the 35 verified source exceptions.
@@ -98,6 +110,17 @@ These are the recorded project deadlines, not a live check of organizer announce
   guide browser suite and additional summary/pause-preserving browser regressions passed.
   See [guide acceptance scope](../web/AGENT_ACCESSIBILITY_DEMO.md); its native/manual checks
   remain separate from the earlier B7–B9 fixture acceptance.
+- Fresh-start/provenance follow-up: **609 Python tests** and **89 frontend tests across 15 files**
+  pass. Contracts and build pass; largest chunk remains **627.84 kB**. All original assertions
+  are preserved. The UI now distinguishes REPLAY mode from actual model-answer availability.
+- First-start computation with an empty store and networking blocked passed in **32.26 seconds**;
+  cached startup reused the same run in **0.12 seconds**, with zero network attempts.
+  Three separately computed pool examples include original traces and verified hashes.
+- Actual local API browser acceptance passed **9/9 groups**: nine routes in Simple/Pro at
+  1440/320 px, data-derived counts, filters, keyboard detail navigation, factor/trace states
+  and an intentional 503 without fixture fallback. The same nine groups passed through the
+  freshly built core/web container stack after correcting the REPLAY disclosure. Normal
+  browser journeys had no console errors or fixture chunk requests. See [runtime evidence](validation/README.md).
 - Independent Ticker Detail acceptance: Lighthouse 13.5.0 scores **100 desktop / 100 at 320 px**;
   **28 axe-core 4.14.0 cases have zero violations** after fixing the brand name and Run context
   landmark; **18 native Chrome zoom cases passed**, including 200% at 320 CSS px. Original
@@ -140,3 +163,5 @@ proves live services work, or establishes predictive investment performance.
 - [Core implementation](../tradepulse/README.md), [architecture](architecture/README.md),
   [decisions](architecture/decisions.md)
 - [Honest limitations](honest-limitations.md) and [sponsor evidence status](sponsors.md)
+- [Clean sample startup and API](RUNNING.md), [runtime evidence](validation/README.md),
+  [computed examples](../examples/README.md) and [submission preparation](submission/README.md)

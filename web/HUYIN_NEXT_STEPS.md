@@ -21,6 +21,13 @@ guide labels are approved; the rest of the application stays in English. Continu
 and help with the remaining native/accessibility acceptance in `AGENT_ACCESSIBILITY_DEMO.md`.
 Do not rebuild the guide or the existing pages.
 
+The lead has now also completed Lighthouse/axe, native browser zoom and real API/container
+regressions; see `ACCESSIBILITY_ACCEPTANCE.md` and `../docs/validation/README.md`. Remaining
+guide help is an actual NVDA/VoiceOver walkthrough, native-speaker editing and audible voice
+quality. Do not repeat the completed suites or change research gates to create a directional
+stance. The current real sample legitimately has no ACTIVE factor and unavailable-model
+abstentions. The lead corrected the REPLAY wording without changing your source records.
+
 ## 1. Start from the current main baseline
 
 First run `git status` in your existing checkout.

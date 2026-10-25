@@ -14,7 +14,7 @@ export function ResearchGuide() {
     <section><h2>Expected is not realized</h2><p>Expected alpha and net edge are model estimates in basis points, not earned returns. One basis point is one hundredth of a percentage point. Recorded evaluation is separate from future performance.</p></section>
     <section><h2>Evidence can fail</h2><p>Verified and rejected are recorded verifier outcomes, not guarantees. An abstained explanation does not establish a supported explanation. No call means the run records no directional stance; the exact reason may not be supplied.</p></section>
     <section><h2>Factors and rank IC</h2><p>A factor measures a defined property. Rank IC is a rank correlation used to evaluate predictive information. Measure, incremental information, prediction, net cost and consistency are separate research gates.</p></section>
-    <section><h2>Data and time</h2><p>The as-of date is the decision context, not today's date. SYNTHETIC means fictional instruments and generated numbers. REPLAY uses sample data and recorded model answers. REAL identifies source-reported live data and calls.</p></section>
+    <section><h2>Data and time</h2><p>The as-of date is the decision context, not today's date. SYNTHETIC means fictional instruments and generated numbers. REPLAY uses a sample snapshot; unavailable model recordings can produce abstentions. Check Run limitations and the original explanation. REAL identifies source-reported live data and calls.</p></section>
   </div></details>;
 }
 export function ViewIntro({ children }) {

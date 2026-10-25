@@ -57,11 +57,13 @@ On the team's Windows machines, set `npm_config_cache` to a folder on D: before 
 
 ```powershell
 py -3 -m pip install -e ".[ingest,agent,dev]"
-py -3 run.py --serve
+py -3 serve.py
 ```
 
-The API listens on `0.0.0.0:8000`. The health endpoint can work before a run exists;
-`GET /runs/latest` returns 404 until an output has been generated and saved.
+The managed launcher listens on `127.0.0.1:8000`. On a fresh SAMPLE_MODE checkout it verifies
+the frozen sample and generates a saved run before starting the API; subsequent starts reuse
+it. It does not automatically call or record live models. The lower-level `run.py --serve`
+command still exposes only the HTTP service. See [running instructions](docs/RUNNING.md).
 
 The real snapshot is under `data/sample/`. Use its decision date:
 
@@ -118,8 +120,8 @@ npm run check:contracts
 npm run build
 ```
 
-The collector's latest checks are **603 Python tests passed, none skipped**. The research-guide
-follow-up has **84 frontend tests passed**, valid contract fixtures and a successful production build. Existing browser suites
+The collector's latest checks are **609 Python tests passed, none skipped**. The research-guide
+and provenance follow-up has **89 frontend tests passed**, valid contract fixtures and a successful production build. Existing browser suites
 passed 17/17 and 18/18 groups. See [status](docs/STATUS.md) for scope and outstanding manual QA.
 The full production lake is ignored rather than committed; its seven lake cases require local
 collection or the private handoff. At the initial real-sample release, a clean export passed **588 tests with 7 expected
@@ -131,6 +133,8 @@ Independent Ticker Detail checks now include Lighthouse 100 desktop/mobile, 28 a
 cases without violations and 18 native zoom cases. See [actual scope and remaining reader
 acceptance](web/ACCESSIBILITY_ACCEPTANCE.md). A's [private full-lake handoff](ingest/DELIVERY.md)
 is built and locally verified; actual S3 upload still awaits a supplied destination/access.
+Three [computed real-data examples](examples/README.md) include inputs, outputs and original
+traces, with explicit unavailable-model abstention and zero network attempts.
 
 ## Docker
 
@@ -139,12 +143,20 @@ docker compose up --build
 ```
 
 The configuration defines core (3 GB) and web (256 MB); the engines service is still commented
-out. The web server is on http://localhost:8080 and proxies `/api` to core. It uses API mode,
-so it requires a saved backend run; it does not present the standalone fixture demo on failure.
+out. The web server is on http://localhost:8080 and proxies `/api` to core. On a fresh sample
+startup the core computes and saves a run; web waits for its health check. Named volumes retain
+the runs and traces. An API error stays visible instead of switching to fixture data.
 Default `SAMPLE_MODE=true` uses the delivered snapshot but does not supply its missing model cassette. Hosted Zetaris is
 an external service, not part of this Compose stack.
 
-Docker configuration exists but was not built or exercised in the frontend integration review.
+The actual core/web images were built and started with fresh volumes in an isolated local
+Compose project. All nine real-API browser groups passed through nginx, including 320 px
+reflow and the deliberate failure case. See [runtime evidence](docs/validation/README.md).
+The engines service and hosted sponsor acceptance are still pending.
+
+The [submission preparation pack](docs/submission/README.md) contains a three-minute demo
+script, an eight-slide outline and actual product captures. Its cloud-service scenes and
+submission declarations remain drafts until their underlying evidence is supplied.
 
 ## License
 

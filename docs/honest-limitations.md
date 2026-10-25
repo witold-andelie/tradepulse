@@ -19,8 +19,9 @@ Status: 25 October 2026. See [project status](STATUS.md) for verified checks and
   and model smoke-test evidence are pending.
 - The Meterless engines client exists, but the engines server/vendor implementation and
   pipeline integration do not. No persistent H-MEM settlement or World Model use is claimed.
-- Docker core/web configuration exists. A complete Docker run and the engines service have
-  not been validated in this integration.
+- Core/web images were built and validated with fresh named volumes, a non-root core,
+  health ordering and nginx-backed real API browser checks. The engines service and hosted
+  sponsor integrations have not been validated.
 
 ## Research scope
 
@@ -68,6 +69,13 @@ Status: 25 October 2026. See [project status](STATUS.md) for verified checks and
 Focused Chromium, keyboard, reflow and contrast checks passed. PR #4 records Lighthouse 100,
 axe zero critical/serious, keyboard, native NVDA, 200% zoom and reduced-motion acceptance for
 Regime, Track Record and Run Trace on the synthetic fixture. These results do not complete
-other-page or real-backend acceptance. Full product testing with delivered artifacts remains pending.
+other-page acceptance. The current real API and container frontend passed nine browser groups
+with no normal console errors or fixture requests. New guide acceptance includes Lighthouse
+100 desktop/mobile, 28 axe cases without violations and 18 native zoom cases; actual NVDA/
+VoiceOver on that guide, native-speaker editing and audible voice quality remain pending.
+Repeat real-output checks when genuine model recordings are supplied.
+
+The 25 October npm audit returned 15 dependency findings (two critical, five high, eight
+moderate). This delivery does not claim a completed dependency-security migration.
 
 No real orders are placed, routed or sized. Research stances are not execution instructions.

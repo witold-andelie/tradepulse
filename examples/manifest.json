@@ -1,0 +1,92 @@
+{
+  "as_of": "2026-10-23",
+  "generated_at": "2026-10-25T14:20:33.064631+00:00",
+  "source": "Frozen real public-data snapshot; not synthetic fixture results.",
+  "models_recorded": false,
+  "network_blocked": true,
+  "network_attempts": 0,
+  "cases": [
+    {
+      "pool": "us_equity",
+      "run_id": "2026-10-23-b5de8848",
+      "recommendations": 523,
+      "factor_cards": 11,
+      "explanations": {
+        "abstained": 3
+      },
+      "tiers": {
+        "NO_CALL": 523
+      },
+      "original_trace_path": "logs\\trace-2026-10-23-b5de8848.jsonl",
+      "files": {
+        "input.json": {
+          "bytes": 114,
+          "sha256": "144e73ac999dd6ed30c6affcb35cb285ceef741a846cb3a3e09ea27259058ffb"
+        },
+        "output.json": {
+          "bytes": 457376,
+          "sha256": "b4b0d5b630b57fede139c81dbe3a789fae486caff2a56aa6c952280595be3a45"
+        },
+        "trace.jsonl": {
+          "bytes": 22227,
+          "sha256": "53f5c8ced4a8f952b08ced4bb6664bb396cdaa958a3d524e38689b4f5951f567"
+        }
+      }
+    },
+    {
+      "pool": "eu_equity",
+      "run_id": "2026-10-23-211dcfd2",
+      "recommendations": 55,
+      "factor_cards": 11,
+      "explanations": {
+        "abstained": 3
+      },
+      "tiers": {
+        "NO_CALL": 55
+      },
+      "original_trace_path": "logs\\trace-2026-10-23-211dcfd2.jsonl",
+      "files": {
+        "input.json": {
+          "bytes": 114,
+          "sha256": "9f9927e1e740b6b3b735b42f22f2723b6dd0209a3a94c8f526da02e891a2fe0a"
+        },
+        "output.json": {
+          "bytes": 84052,
+          "sha256": "d237d7d6f597c9ad75ebba4cf011fc360ab58ebbf1fd9cab596211fc94180c35"
+        },
+        "trace.jsonl": {
+          "bytes": 21450,
+          "sha256": "19f2f592edd7f6f8c54bc0916d81925ab0d9601c59ac7d951d10c7d6d241b7a0"
+        }
+      }
+    },
+    {
+      "pool": "crypto",
+      "run_id": "2026-10-23-a53d030f",
+      "recommendations": 38,
+      "factor_cards": 11,
+      "explanations": {
+        "abstained": 3
+      },
+      "tiers": {
+        "NO_CALL": 38
+      },
+      "original_trace_path": "logs\\trace-2026-10-23-a53d030f.jsonl",
+      "files": {
+        "input.json": {
+          "bytes": 111,
+          "sha256": "3984a07657089ae1987ee955e764b4bcd8a4de068a3ed8c96673a0c3e3d9ee05"
+        },
+        "output.json": {
+          "bytes": 72708,
+          "sha256": "e578dd6df5ba479bd62a581c40e79b8e2855fdbdb67fdbf14bb27873775fa9fc"
+        },
+        "trace.jsonl": {
+          "bytes": 21545,
+          "sha256": "6476f05b91eb92bbae341e86d54aee9245128431825580a3dee7a1c641b641e7"
+        }
+      }
+    }
+  ],
+  "trace_policy": "Original trace bytes retained; only output trace_path relocated to the packaged trace."
+}

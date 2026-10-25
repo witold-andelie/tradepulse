@@ -1,0 +1,21 @@
+{
+  "empty_store_first_run": true,
+  "as_of": "2026-10-23",
+  "run_id": "2026-10-23-1f7c77b1",
+  "data_mode": "REPLAY",
+  "recommendations": 616,
+  "factor_cards": 33,
+  "explanations": {
+    "abstained": 9
+  },
+  "tiers": {
+    "NO_CALL": 616
+  },
+  "first_run_seconds": 32.26383999999962,
+  "cached_startup_seconds": 0.11691629999950237,
+  "same_run_reused": true,
+  "network_attempts": 0,
+  "contract_valid": true,
+  "trace_path": "logs\\trace-2026-10-23-1f7c77b1.jsonl",
+  "models_recorded": false
+}

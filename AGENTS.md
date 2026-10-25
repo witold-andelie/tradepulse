@@ -31,5 +31,7 @@ These rules apply everywhere. A folder's own `AGENTS.md` adds rules for that fol
   Member B reviews that implementation; Member C extends its existing B7–B9 pages.
 - Keep original contributor history and given test assertions. The integration preserves
   both original frontend test suites and unchanged API/table schemas.
-- The standalone fixture frontend runs now. Full SAMPLE_MODE, hosted sponsor services and
-  native accessibility acceptance remain incomplete; never describe them as verified.
+- The standalone fixture frontend and actual API-backed sample now run. Fresh offline startup,
+  core/web containers and real-output browser journeys are verified in `docs/validation/`.
+  Complete model replay, hosted sponsor services and the new guide's native screen-reader
+  acceptance remain incomplete; never describe them as verified.

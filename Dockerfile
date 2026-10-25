@@ -10,4 +10,4 @@ RUN pip install --no-cache-dir ".[agent]" \
 USER tradepulse
 ENV SAMPLE_MODE=true
 EXPOSE 8000
-CMD ["uvicorn", "tradepulse.api:app", "--host", "0.0.0.0", "--port", "8000"]
+CMD ["python", "serve.py", "--host", "0.0.0.0", "--port", "8000"]

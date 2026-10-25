@@ -107,6 +107,12 @@ setup does not count.
 - **Region:** use an EU region, `eu-central-1` (Frankfurt) or `eu-west-1` (Ireland), because four of
   five members are in Europe. If the Zetaris AWS install does not support EU regions, use
   `us-east-1` and say so in `DEPLOY.md`.
+  - **Recorded fallback, 25 October:** D reports that the EU regions and N. Virginia were
+    unavailable and is proceeding with **US East (Ohio), `us-east-2`**. The lead accepts Ohio
+    as the deployment-region fallback. Record the actual region and observed restriction in
+    `DEPLOY.md`; the cause of the failed attempts has not been independently verified.
+    Compatibility, cost checks and successful HTTPS smoke tests from Europe still apply.
+    This records a region choice, not a completed deployment.
 - **Zetaris:** install it on AWS following the Zetaris AWS guide. Verify current account credits
   and deployment pricing before provisioning; earlier planning estimates are not a quote.
   - Stop the instance when nobody is working.

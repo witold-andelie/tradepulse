@@ -1,0 +1,56 @@
+{
+  "captured_at": "2026-10-25T16:30:34.110Z",
+  "browser": "156.0.8078.47",
+  "run_id": "2026-10-23-b1f85a23",
+  "as_of": "2026-10-23",
+  "data_mode": "REPLAY",
+  "api_payload_sha256": "e601b34b4769327e2e568c5e21e4dd2528076cd738cc5ff494418c295130c9ff",
+  "capture": "Actual local container API-backed UI; no interception. Reduced motion enabled.",
+  "model_acceptance": "Model recording absent; actual explanations abstain. Images do not prove successful hosted models.",
+  "images": [
+    {
+      "file": "leaderboard-real-api.png",
+      "route": "/pool/us_equity",
+      "view": "Pro",
+      "focus": ".table-card",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "sha256": "1b5167195f7278690ee9d7dc71ac2e835ea7a2a6c765c937ebb105c4d433f41e"
+    },
+    {
+      "file": "ticker-real-api.png",
+      "route": "/ticker/us_equity/BE",
+      "view": "Pro",
+      "focus": "#explanation",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "sha256": "ec75fc3675b0fcfeab38eb2587840aaf6fe835846c05f739ebb1cbea52ebf018"
+    },
+    {
+      "file": "factors-real-api.png",
+      "route": "/factors",
+      "view": "Pro",
+      "focus": ".factor-card",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "sha256": "049327959d2870321048d695d632882bb78cebd6419a458f35fa2f054c2350b2"
+    },
+    {
+      "file": "trace-real-api.png",
+      "route": "/trace",
+      "view": "Pro",
+      "focus": ".trace-event-disclosure",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "sha256": "532f78f9316a389fe2b06c1e460703f7f3bbb63edd4cd916b594c1b9d7d3b10c"
+    }
+  ]
+}

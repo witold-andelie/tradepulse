@@ -7,6 +7,7 @@ export function buildGuide(record, run) {
   const claims = explanation?.claims || [];
   const failed = claims.flatMap((claim) => claim.checks.filter((check) => check.passed === false)
     .map((check) => ({ claim, check })));
+  const sourceSummary = explanation?.summary?.trim() ? explanation.summary : null;
   const top = contributionsSorted(row)[0];
   const field = (label, value) => ({ label, value: value == null ? null : String(value) });
   const counts = ['verified', 'rejected'].map((status) => field(status, explanation
@@ -40,6 +41,7 @@ export function buildGuide(record, run) {
       },
       {
         key: 'abstain', fields: [field('verdict', explanation?.verdict)],
+        sourceSummary: explanation?.verdict === 'abstained' ? sourceSummary : null,
         notes: !explanation ? ['noExplanation'] : explanation.verdict === 'abstained'
           ? ['abstained', ...(failed.length ? [] : ['noReason'])] : ['noAbstention'],
         failed,

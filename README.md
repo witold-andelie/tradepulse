@@ -18,6 +18,9 @@ Unsupported explanations abstain.
 The quantitative core, pipeline, HTTP API and complete fixture-backed frontend are implemented.
 Huyin's original B1–B10 and accessibility commits are preserved in the integration history,
 including six business pages, Discover and Simple/Pro presentation.
+Ticker Detail also includes a localized research guide and optional browser speech. Its
+guide-only language exception is approved; source narratives and financial values are preserved.
+See [guide scope and remaining acceptance](web/AGENT_ACCESSIBILITY_DEMO.md).
 
 The real seven-table sample for **2026-10-23** and verified crypto configuration are prepared.
 The sample is below 25 MB and includes hashes, source-exception evidence and offline validation.
@@ -115,8 +118,8 @@ npm run check:contracts
 npm run build
 ```
 
-The collector's latest checks are **595 Python tests passed, none skipped**, and **68 frontend
-tests passed** for PR #4, valid contract fixtures and a successful production build. Existing browser suites
+The collector's latest checks are **595 Python tests passed, none skipped**. The research-guide
+follow-up has **84 frontend tests passed**, valid contract fixtures and a successful production build. Existing browser suites
 passed 17/17 and 18/18 groups. See [status](docs/STATUS.md) for scope and outstanding manual QA.
 The full production lake is ignored rather than committed; its seven lake cases require local
 collection or the private handoff. A clean repository export passed **588 tests with 7 expected

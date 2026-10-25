@@ -15,6 +15,12 @@ Your remaining assignment is to review the integrated result, identify concrete 
 make focused fixes where needed. Your existing implementation remains credited regardless of
 whether this review finds additional changes.
 
+Update, 25 October: your scoped multilingual research-guide experiment (`b64ef94`) is preserved
+in merge `9a0d76d`. The lead owns the subsequent summary/pause-state review fixes. The localized
+guide labels are approved; the rest of the application stays in English. Continue from main
+and help with the remaining native/accessibility acceptance in `AGENT_ACCESSIBILITY_DEMO.md`.
+Do not rebuild the guide or the existing pages.
+
 ## 1. Start from the current main baseline
 
 First run `git status` in your existing checkout.

@@ -19,7 +19,9 @@ its existing B7–B9 pages. Read `docs/STATUS.md` and `web/INTEGRATION.md`; do n
    functions; legacy named transport functions remain for compatibility, not as a way to
    bypass schema validation. Keep the existing `*Page` adapters and both hook import paths.
 7. Run `npm test` and `npm run build` after every change. Fix every console error.
-8. Write code, comments and UI text in English.
+8. Write code, comments and UI text in English. The lead-approved exception is localized labels
+   inside `src/components/agentResearch/` only. Keep source narratives and financial values
+   unchanged; the rest of the application stays in English. See `AGENT_ACCESSIBILITY_DEMO.md`.
 9. Follow the "Accessibility (WCAG 2.2 AA)" section of `web/TASK.md` on every page: semantic
    markup, keyboard operability, visible focus, text alternatives for charts, no colour-only
    signals, sufficient contrast, reduced-motion support.

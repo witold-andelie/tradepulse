@@ -38,6 +38,7 @@ export default function GuidedResearch({ record, run }) {
       <summary>{t(section.key)}</summary><div className={styles.answer}>
         {!!section.fields.length && <dl className={styles.facts}>{section.fields.map((field) => <div key={field.label}><dt>{t(field.label)}</dt><dd>{field.value == null ? t('missing') : <Identifier>{field.label === 'verdict' ? JSON.stringify(field.value) : field.value}</Identifier>}</dd></div>)}</dl>}
         {section.notes.map((note) => <p key={note} className={styles.note}>{t(note)}</p>)}
+        {section.sourceSummary != null && <Original label={t('source')}><p>{section.sourceSummary}</p></Original>}
         {section.claims?.map((claim) => <div key={claim.claim_id}>
           <p>{claim.status === 'verified' ? '✓ ' : '✗ '}{t(claim.status)} · <Identifier>{claim.status}</Identifier></p>
           <Original label={t('source')}><p>{claim.text}</p></Original>

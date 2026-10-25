@@ -8,6 +8,8 @@ Tanhao's B7–B9 fixes and C9 properties were preserved in PR #4 (`f5652c9`) and
 (`d119be1`). Member A's ingestion branch was preserved in PR #5 (`af229b4`) as an
 implementation integration, with follow-up fixes and remaining data acceptance taken over
 by the lead. These merges retain the original contributor commits.
+Huyin's scoped multilingual research guide (`b64ef94`) is preserved in merge `9a0d76d`.
+The lead approved that guide-only UI exception and took over the two follow-up review fixes.
 
 ## Current implementation
 
@@ -15,7 +17,7 @@ by the lead. These merges retain the original contributor commits.
 |---|---|---|
 | Core / lead | Research gates, ranking, regime, walk-forward, grounded extraction, LangGraph explanation/verifier, reports, API and traces | Engine wiring, real artifact/service acceptance and delivery materials |
 | A / ingest, lead follow-up | Real seven-table lake/sample for 2026-10-23, crypto CSV/provenance, source checks, lead-accepted source exceptions and offline execution | D's private S3 destination and matching model recordings |
-| B / Huyin | Six business pages, Discover, Simple/Pro, filtering, evidence drill-down, responsive design and accessibility interactions | Visual/interaction review, concrete findings and remaining manual acceptance |
+| B / Huyin | Six business pages, Discover, Simple/Pro, filtering, evidence drill-down, responsive design, accessibility interactions and localized research guide with optional speech | Visual/interaction review and remaining manual acceptance, including new guide controls and native speech |
 | C / Tanhao | C1–C7 math, 235 C9 property cases, B7–B9 review fixes and recorded fixture accessibility acceptance | Regression against delivered real API outputs |
 | D / integrations | SQL templates, DuckDB adapter, registration runner, hosted NIM record/replay client and Python engines client | Zetaris deployment/registration/live client/parity, recorded cassette and TypeScript engines sidecar |
 | Docker | Core and web definitions, nginx API proxy and memory limits | Runtime validation; engines service remains commented out |
@@ -89,6 +91,12 @@ These are the recorded project deadlines, not a live check of organizer announce
   `noqa` at `quant/tests/test_evaluation.py:87` remains a separate maintenance item.
 - Frontend, last checked for PR #4: **68 tests passed** across 12 files; fixtures and all 19 trace lines validate;
   production build passes, largest chunk **627.84 kB**.
+- Research-guide follow-up on main: **84 tests passed across 14 files**, contracts and build
+  passed, largest chunk still **627.84 kB**. Four new regression cases caught the summary and
+  paused-engine issues before the fixes; existing tests were unchanged. The original 15-group
+  guide browser suite and additional summary/pause-preserving browser regressions passed.
+  See [guide acceptance scope](../web/AGENT_ACCESSIBILITY_DEMO.md); its native/manual checks
+  remain separate from the earlier B7–B9 fixture acceptance.
 - Huyin's unchanged original browser suite: **17/17 groups passed**.
 - Her unchanged redesign/accessibility journeys: **18/18 groups passed**, including 320 CSS
   pixel reflow and 200% text enlargement.

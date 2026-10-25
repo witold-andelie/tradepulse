@@ -75,7 +75,9 @@ npm run check:contracts   # validates the fixtures against the schema
 4. **Colour is never the only signal.** Each tier badge shows its label text, and gate results show
    ✓ / ✗ / – plus text.
 5. **No secrets, no tracking scripts, no external fonts or CDNs.** Everything is bundled.
-6. **English only.**
+6. **English only**, except localized labels in the Ticker Detail research guide approved by
+   the lead on 2026-10-25. Its original source narratives, financial values and enums stay
+   unchanged; this is not application-wide localization. See `AGENT_ACCESSIBILITY_DEMO.md`.
 
 ## Accessibility (WCAG 2.2 AA) — applies to every page
 

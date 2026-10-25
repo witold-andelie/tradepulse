@@ -71,7 +71,9 @@ These need no extra packages. They use Chrome DevTools and the free axe DevTools
 - [ ] No `console.log` left in components. The browser console shows no errors or warnings on any
   page.
 - [ ] No secrets, external fonts, analytics or CDN links.
-- [ ] Everything is in English.
+- [ ] Everything is in English except the lead-approved localized research-guide labels.
+  Original source narratives, financial values and enums remain unchanged. The guide still
+  needs its own accessibility acceptance; previous-page results do not certify new controls.
 
 ## PR checklist (copy into the PR description)
 

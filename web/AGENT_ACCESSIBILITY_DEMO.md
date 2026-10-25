@@ -1,20 +1,26 @@
 # Agent research accessibility experiment
 
+Current status, 25 October 2026: the lead explicitly approved merging the experiment and
+fixing review findings afterwards. Merge `9a0d76d` preserves original commit `b64ef94`.
+The guide-only multilingual exception is approved; native/accessibility acceptance below
+remains outstanding. Lead follow-up results are recorded separately from the author's checks.
+
 Baseline: `origin/main` at `8a2aa1cd797cc56d22cbf44b4b76a46ed8ebf95a`, independently
 matched to the remote main ref before creating `b/agent-accessibility-demo-20261025`.
 The original `b/agent-accessible-ui` checkout is preserved in its own worktree.
 
-## Proposed exception and merge boundary
+## Approved exception and merge boundary
 
-This branch proposes an exception to the English-only UI rule **only for the new research
-guide**. The lead must approve that exception before a merge. Main's instructions are
-unchanged. Code comments, documentation, original page copy and source narratives stay
+The lead approved an exception to the English-only UI rule **only for the new research
+guide** on 25 October. The root and web instructions record that narrow scope.
+Code comments, documentation, original page copy and source narratives stay
 in English or their supplied original language. This is not full-application localization.
 
 Only `web/` changes. No dependency, contract, fixture, backend, score, ranking or verifier
 changes. No changes to App, shell, providers, global navigation, API client, global CSS,
 Discover, ResearchGuide, Factor Lab or Member C's pages. No existing test assertions change.
-There is no push, PR, merge or deployment in this delivery.
+The author's initial delivery did not include a push, PR, merge or deployment. The subsequent
+lead merge and follow-up are recorded here; no deployment is claimed.
 
 Exact changed files:
 
@@ -96,7 +102,7 @@ Native no-voice behavior was inspected. Playback and cancellation were tested us
 injected browser API double and unit tests, not audible native speech. Real voice quality,
 pronunciation, pause behavior and platform differences need independent desktop/mobile review.
 
-## Local validation
+## Author validation before the lead merge
 
 - Baseline `npm test`: 68/68 passed before implementation.
 - Feature `npm test`: 80/80 passed across 13 files, including 12 new focused tests; exit 0.
@@ -137,8 +143,8 @@ TRADEPULSE_QA_DIR=/tmp/tradepulse-agent-review node web/scripts/agent-research-a
 
 ## Remaining acceptance and merge attention
 
-Ready for independent review as an experiment, not cleared for merge. Pending: lead approval
-of the scoped multilingual exception, native-speaker review, audible native speech in browsers
+The lead merged the experiment with the scoped multilingual exception approved. Pending:
+native-speaker review, audible native speech in browsers
 with installed voices, NVDA/VoiceOver, native browser zoom and cross-browser checks. Lighthouse
 and axe are not installed in this environment and were not run. No accessibility certification
 or production backend acceptance is claimed. Existing synthetic provenance gaps remain.
@@ -147,3 +153,27 @@ Only `Detail.jsx` touches existing application source. Review that small integra
 if another contributor changes the original evidence panel. New CSS is a component module
 using existing tokens; the speech hook and dictionaries are local to this feature, not shared
 providers. No teammate needs to implement an API or translate generated Agent prose.
+
+## Lead follow-up, 25 October 2026
+
+- Abstained explanations retain their original `summary` verbatim in the guide, including
+  records with no claims. The legacy `noReason` message key now describes missing failed-check
+  details in all eleven dictionaries; it never asserts that the source summary has no reason.
+  Source prose remains untranslated and excluded from synthesized speech.
+- A new playback explicitly resumes a paused synthesis engine before queuing its utterance.
+  This covers Stop/replay and navigation from a paused page even when `cancel()` preserves
+  the engine's global paused state. Native Chrome can mask this portability issue.
+- Four new regression tests failed against the merged implementation and passed after the
+  fixes. All existing test files and assertions remain unchanged. Full frontend suite:
+  **84/84 tests passed across 14 files**. Contract fixtures and all 19 trace lines validate;
+  production build passes, largest chunk **627.84 kB**.
+- The original 15-group guide browser suite passed on Chrome **156.0.8078.47** after the fixes.
+  Additional browser checks used an explicitly synthetic diagnostic record with a supplied
+  reason and no claims. Its original summary remained visible across all eleven locales;
+  English, Chinese and Arabic captures at 1440, 768 and 320 px had no page overflow.
+  A pause-preserving API double verified Stop/replay and paused navigation/replay, with no
+  console errors. These checks do not certify audible native speech or assistive technology.
+- Lead evidence is local under `D:/AI_Models/hackson/.work/agent-guide-followup-20261025/`.
+  The original branch's validation paths and pending acceptance above remain historical and
+  are not uploaded attachments. Lighthouse, axe, NVDA/VoiceOver, native browser zoom,
+  native-speaker editing and broader native speech/browser acceptance are still pending.

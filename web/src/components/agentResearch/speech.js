@@ -54,6 +54,8 @@ export function createSpeechController(synth, Utterance, notify, timers = global
         utterance.onerror = () => { if (token === generation) { clearTimer(); current = null; update('error'); } };
         update('speaking');
         watchStart(token);
+        // cancel() preserves the engine's global pause state across playback and navigation.
+        if (synth.paused) synth.resume();
         synth.speak(utterance);
       } catch { cancel(false); update('error'); }
     },

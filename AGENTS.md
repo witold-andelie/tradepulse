@@ -18,7 +18,10 @@ These rules apply everywhere. A folder's own `AGENTS.md` adds rules for that fol
    research stances.
 8. **Bounded work.** Every loop and retry has an explicit limit. Every network call has a timeout.
 9. **Python** runs as `py -3` on the team's Windows machines. Tests: `py -3 -m pytest -q`.
-10. **English only** for code, comments, docs, UI text and commit messages.
+10. **English only** for code, comments, docs, UI text and commit messages. The lead approved
+    localized labels only inside the Ticker Detail research guide on 2026-10-25. That scoped UI
+    exception preserves source narratives, financial values and enums; it does not authorize
+    localization of the rest of the application. See `web/AGENT_ACCESSIBILITY_DEMO.md`.
 
 ## Current implementation baseline
 

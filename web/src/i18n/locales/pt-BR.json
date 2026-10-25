@@ -594,5 +594,7 @@
   "{value1} / {value2} days": "{value1} / {value2} dias",
   "{value1} ms": "{value1} ms",
   "{value1} of {value2}": "{value1} de {value2}",
-  "Higher": "Maior"
+  "Higher": "Maior",
+  "Horizontal axis": "Eixo horizontal",
+  "Vertical axis": "Eixo vertical"
 }

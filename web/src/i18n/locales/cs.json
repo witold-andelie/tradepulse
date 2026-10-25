@@ -594,5 +594,7 @@
   "{value1} / {value2} days": "{value1} / {value2} dní",
   "{value1} ms": "{value1} ms",
   "{value1} of {value2}": "{value1} z {value2}",
-  "Higher": "Vyšší"
+  "Higher": "Vyšší",
+  "Horizontal axis": "Vodorovná osa",
+  "Vertical axis": "Svislá osa"
 }

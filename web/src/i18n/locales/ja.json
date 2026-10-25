@@ -594,5 +594,7 @@
   "{value1} / {value2} days": "{value1}／{value2}日",
   "{value1} ms": "{value1} ms",
   "{value1} of {value2}": "{value1}／{value2}",
-  "Higher": "高い"
+  "Higher": "高い",
+  "Horizontal axis": "横軸",
+  "Vertical axis": "縦軸"
 }

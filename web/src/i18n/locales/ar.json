@@ -594,5 +594,7 @@
   "{value1} / {value2} days": "{value1} / {value2} يوم",
   "{value1} ms": "{value1} ms",
   "{value1} of {value2}": "{value1} من {value2}",
-  "Higher": "أعلى"
+  "Higher": "أعلى",
+  "Horizontal axis": "المحور الأفقي",
+  "Vertical axis": "المحور الرأسي"
 }

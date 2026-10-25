@@ -406,3 +406,9 @@ h1, h2, h3, h4, p, dt, dd { overflow-wrap: anywhere; }
 .brand { min-width: 0; max-width: 100%; }
 .brand > span:last-child { min-width: 0; overflow-wrap: anywhere; }
 html[dir=rtl] .tier-filters legend { float: right; margin-right: 0; margin-left: .75rem; }
+
+/* Keep full localized axis descriptions readable outside the canvas at any width. */
+.chart-axis-labels { display: flex; flex-wrap: wrap; gap: .35rem 1rem; margin: .5rem 0; color: var(--muted); font-size: .875rem; }
+.chart-axis-labels > div { display: flex; flex-wrap: wrap; gap: .35rem; min-width: 0; }
+.chart-axis-labels dt { font-weight: 600; }
+.chart-axis-labels dd { margin: 0; }

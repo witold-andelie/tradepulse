@@ -10,6 +10,11 @@ export default function ChartFigure({ title, summary, label, columns, rows, heig
   const tableId = useId();
   const description = summary || label;
   const tableProvided = Array.isArray(columns) && Array.isArray(rows);
+  // Long translated axis names wrap as real text instead of being clipped by canvas.
+  const axisNames = [
+    { label: t('Horizontal axis'), axes: props.option?.xAxis },
+    { label: t('Vertical axis'), axes: props.option?.yAxis },
+  ].flatMap(({ label, axes }) => (Array.isArray(axes) ? axes : [axes]).filter((axis) => axis?.name).map((axis) => ({ label, name: axis.name })));
   return <figure className="chart-figure">
     {title && <h3>{t(title)}</h3>}
     <div role="img" aria-label={[t(title || ''), description].filter(Boolean).join('. ')}>
@@ -17,6 +22,7 @@ export default function ChartFigure({ title, summary, label, columns, rows, heig
         <ChartEngine {...props} height={height} />
       </Suspense>
     </div>
+    {!!axisNames.length && <dl className="chart-axis-labels">{axisNames.map((axis, index) => <div key={index}><dt>{axis.label}:</dt><dd>{axis.name}</dd></div>)}</dl>}
     <figcaption>{description}{!tableProvided && t(" Exact values are available in the adjacent table or measurement disclosure.")}</figcaption>
     {tableProvided && <>
       <button className="button" type="button" aria-expanded={showTable} aria-controls={tableId}

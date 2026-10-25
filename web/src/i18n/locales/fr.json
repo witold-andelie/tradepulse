@@ -594,5 +594,7 @@
   "{value1} / {value2} days": "{value1} / {value2} jours",
   "{value1} ms": "{value1} ms",
   "{value1} of {value2}": "{value1} sur {value2}",
-  "Higher": "Plus élevé"
+  "Higher": "Plus élevé",
+  "Horizontal axis": "Axe horizontal",
+  "Vertical axis": "Axe vertical"
 }

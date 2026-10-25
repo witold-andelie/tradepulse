@@ -11,8 +11,8 @@ exception and shared presentation changes.** No publication, PR, merge or deploy
   `b64ef94abb79e58a12742aba0f4fd1fbfaa107be`.
 - Its single feature commit was cherry-picked without conflicts as
   `e2644d296265947efbae9ed656c5effe84c328fe` onto verified main. The existing branch was not rewritten.
-- This report belongs to the final local correction commit immediately after `e2644d2`.
-  Obtain its immutable SHA with `git rev-parse HEAD`; it is also recorded in the delivery response.
+- This report belongs to the local correction and final chart-label fix after `e2644d2`.
+  Obtain the final immutable SHA with `git rev-parse HEAD`; it is also recorded in the delivery response.
 - The old `AGENT_ACCESSIBILITY_DEMO.md` is preserved as the historical guide-only report;
   this report supersedes its localization scope and language-selector acceptance.
 
@@ -23,9 +23,9 @@ Backend, schema, fixtures, ingestion, financial algorithms, API client and depen
 ## Source inventory and boundaries
 
 The initial source audit recorded 598 raw occurrences before separating authored messages from
-runtime records. The final machine check covers 596 authored application messages, 521 explicit
+runtime records. The final machine check covers 598 authored application messages, 523 explicit
 source sites, known structured vocabularies and the existing 52 guide messages. Each of 11 locales
-has 648 app/guide messages, no empty entries and identical named placeholders. Only explicit authored
+has 650 app/guide messages, no empty entries and identical named placeholders. Only explicit authored
 message sites are translated: there is no DOM text replacement, translation service or inference.
 
 | Surface | Application-authored localization | Original records retained |
@@ -96,14 +96,14 @@ All commands below exited 0 on the final source:
 | --- | --- |
 | `npm test` | 93/93 tests, 14/14 files; includes 13 new localization tests, existing assertions retained |
 | `npm run check:contracts` | RunOutput plus all 19 trace records valid |
-| `node scripts/check-i18n.cjs` | 596 app keys in 11 locales, 521 explicit source sites, no empty values or placeholder mismatch |
-| `npm run build` | Production build passed; largest entry chunk about 981 kB (348 kB gzip), below existing 1 MB warning threshold |
+| `node scripts/check-i18n.cjs` | 598 app keys in 11 locales, 523 explicit source sites, no empty values or placeholder mismatch |
+| `npm run build` | Production build passed; largest entry chunk about 982 kB (348 kB gzip), below existing 1 MB warning threshold |
 | `git diff --check` | Passed; final staged scope checked separately before commit |
 | Existing original browser suite | 17/17 groups passed, English Pro compatibility |
 | Existing redesign browser suite | 18/18 groups passed, both views, keyboard, charts and reflow |
 | New global browser suite | 84/84 groups passed; 77 locale-route cases and seven shared behavior groups |
 | API simulation suite | 5/5 groups passed; loading, errors, empty records, root recovery, request counts |
-| Existing focused accessibility script | 14 view-route combinations; 4,550 text nodes; zero contrast, small-target or unnamed-control findings |
+| Existing focused accessibility script | 14 view-route combinations; 4,678 text nodes; zero contrast, small-target or unnamed-control findings |
 
 The focused contrast check reports minimum text contrast 5.66:1 and control border contrast 3.64:1.
 It is not axe, a complete WCAG audit or certification. The new selector is additionally checked at
@@ -151,7 +151,7 @@ while a browser suite is using it.
 
 During development, precise role selectors resolved ambiguity when singular/plural labels translated
 identically. New tests also wait for React state before checking speech errors and compare raw numeric
-values rather than translated units. An initial text-enlargement overflow in the brand was fixed. Native-width visual review also found a crowded calibration legend, edge-clipped date ticks and dense trace ticks; vertical legend layout, boundary-label suppression and overlapping-tick suppression resolve them. Arabic interpolation isolates canonical ASCII parameters in canvas/ARIA sentences as well as DOM rich text.
+values rather than translated units. An initial text-enlargement overflow in the brand was fixed. Native-width visual review also found a crowded calibration legend, edge-clipped date ticks and dense trace ticks; vertical legend layout, boundary-label suppression and overlapping-tick suppression resolve them. Supplemental Spanish visual review found longer axis names still clipped by canvas; all full axis names now render as localized, wrapping DOM text in the shared figure, while ticks and values stay in the chart. Arabic interpolation isolates canonical ASCII parameters in canvas/ARIA sentences as well as DOM rich text.
 A supplemental screenshot attempt overlapped a rebuild; it was rerun after the build completed.
 No existing assertions were weakened. The historical guide-only browser suite expects the deliberately
 removed local selector and is superseded by the global suite, rather than edited to conceal that change.
@@ -185,8 +185,8 @@ removed local selector and is superseded by the global suite, rather than edited
   existing data/view providers and routes are preserved.
 - `components/ui.jsx`, `State.jsx`: shared labels/statuses/errors and original-source boundaries.
 - `components/ResearchGuide.jsx`, `CandidateCard.jsx`: authored educational text and structured display labels.
-- `components/ChartFigure.jsx`: localized figure/table controls, captions and headers; same numerical data.
-- `components/ChartEngine.jsx`: an explicit LTR chart boundary and overlapping-tick suppression, preserving axes and signs in RTL.
+- `components/ChartFigure.jsx`: localized figure/table controls, captions, headers and wrapping full axis names; same numerical data.
+- `components/ChartEngine.jsx`: an explicit LTR chart boundary and overlapping-tick suppression, preserving tick values, axis order and signs in RTL; full names move to the figure text.
 - `components/agentResearch/GuidedResearch.jsx`, `summary.js`: global locale consumption and optional
   display-field narration callback; existing four-question model and original values remain intact.
 - `lib/figureSummaries.js`: optional translator for complete accessible sentences; existing computations

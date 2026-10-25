@@ -60,7 +60,8 @@ jobs:
         with:
           name: python-results
           path: .ci-output/
-          if-no-files-found: ignore
+          include-hidden-files: true # Only this dedicated report directory is uploaded.
+          if-no-files-found: error
           retention-days: 7
 
   web:
@@ -114,5 +115,6 @@ jobs:
         with:
           name: web-results-node-${{ matrix.node }}
           path: .ci-output/
-          if-no-files-found: ignore
+          include-hidden-files: true # Only this dedicated report directory is uploaded.
+          if-no-files-found: error
           retention-days: 7

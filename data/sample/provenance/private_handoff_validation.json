@@ -1,0 +1,58 @@
+{
+  "bytes": 25772991,
+  "sha256": "6c2104111d69c1ed901f2344096b2ffe1d1a961e0796d35eb73b6a5650f907da",
+  "as_of": "2026-10-23",
+  "tables": {
+    "filing": {
+      "path": "data/lake/filing.parquet",
+      "bytes": 312269,
+      "sha256": "7a2b23b8e3516ad629225d1271923cbb5a9fcbf670c354db6fb29b731b3d909d",
+      "rows": 9005
+    },
+    "filing_text": {
+      "path": "data/lake/filing_text.parquet",
+      "bytes": 14991533,
+      "sha256": "a897ce0e818a37a21850c0204c6dcf1cb82ad475160bee24b2ff2cd1fc6d9b0c",
+      "rows": 2155
+    },
+    "fundamental_fact": {
+      "path": "data/lake/fundamental_fact.parquet",
+      "bytes": 2242092,
+      "sha256": "dc2ce2c2af7d1a85344899720b7099b8016b1f498a46433aa786219d2046b04d",
+      "rows": 250968
+    },
+    "macro_point": {
+      "path": "data/lake/macro_point.parquet",
+      "bytes": 13106,
+      "sha256": "06f8852d10e198572ba96b0a21562b1b01660eea374584d42402c3c5b6df3ef7",
+      "rows": 564
+    },
+    "pageview": {
+      "path": "data/lake/pageview.parquet",
+      "bytes": 986476,
+      "sha256": "212d3b7ed9c2e3a14f2657de7ef10f1d048152b83393343b3416ee76aa28f39b",
+      "rows": 463068
+    },
+    "price_bar": {
+      "path": "data/lake/price_bar.parquet",
+      "bytes": 7553889,
+      "sha256": "74c97673f8315cde7169b3dff869f459227d7533209e19a8fa7256911edae121",
+      "rows": 342804
+    },
+    "universe_member": {
+      "path": "data/lake/universe_member.parquet",
+      "bytes": 24671,
+      "sha256": "b416bada4a50c4999ac117156ec17202939487c23305c9a3f0a39006125fb558",
+      "rows": 616
+    }
+  },
+  "strict_acceptance_passed": false,
+  "source_exception_release": true,
+  "verified": true,
+  "uploaded": false,
+  "archive_filename": "tradepulse-lake-2026-10-23-20261025T122858Z.zip",
+  "verified_at": "2026-10-25T12:31:42.207263+00:00",
+  "network_attempts": 0,
+  "extraction_performed": false,
+  "external_dependency": "No S3 destination or access delivery has been received from Member D; no cloud resources were created."
+}

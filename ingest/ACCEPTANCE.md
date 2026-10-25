@@ -13,6 +13,9 @@ The lead explicitly merged PR #5 as an implementation integration and took over 
 fixes. A new sample, crypto CSV and independent source verification are now delivered. The lead
 accepted the 35 verified source exceptions for release on 2026-10-25; strict completeness
 remains false. Matching model recordings and private upload remain separate.
+`DELIVERY.md` maps all A1–A9 requirements to measured evidence. The local private full-lake
+package is built and verified; D has supplied no S3 destination/access delivery, so cloud
+upload is still not completed. The 14 pageview gaps are listed in the sample provenance.
 
 ## Automated (must pass)
 
@@ -22,6 +25,8 @@ py -3 -m ingest all --as-of 2026-10-23       # live run; ends with "all tables v
 py -3 -m pytest ingest -q -m lake            # lake tests run (not skipped) and pass
 py -3 -m pytest ingest/tests/test_lake_and_sample.py::test_sample_snapshot_is_complete_and_valid -q
 # sample snapshot exists and passes; this case must NOT skip
+py -3 -m ingest verify-package --archive "<private ZIP path from DELIVERY.md>"
+# checks seven full tables and provenance locally; never claims an upload
 ```
 
 ## Data checks (paste numbers in the PR)

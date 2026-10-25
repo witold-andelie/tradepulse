@@ -6,6 +6,8 @@ import argparse
 import datetime as dt
 import logging
 import sys
+from pathlib import Path
+from zipfile import BadZipFile
 
 from tradepulse.contracts import table_names, validate_table
 
@@ -47,6 +49,8 @@ def main(argv: list[str] | None = None) -> int:
             "sample",
             "audit",
             "handoff",
+            "package",
+            "verify-package",
             "config",
             "smoke",
             "diagnose",
@@ -63,9 +67,32 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--as-of", type=dt.date.fromisoformat, default=None)
     parser.add_argument("--provider", choices=["wikipedia", "sec", "wikimedia", "yahoo", "fred"])
     parser.add_argument("--symbol", choices=["NVDA", "AMD", "COHR"])
+    parser.add_argument("--output", type=Path, help="New private ZIP destination for package")
+    parser.add_argument("--archive", type=Path, help="Existing private ZIP for verify-package")
+    parser.add_argument("--allow-source-exceptions", action="store_true")
     args = parser.parse_args(argv)
     as_of = args.as_of or dt.datetime.now(dt.UTC).date()
     logging.basicConfig(level=logging.INFO, format="%(levelname)s %(message)s")
+
+    if args.command in ("package", "verify-package"):
+        import json
+
+        from ingest.handoff import package_lake, verify_package
+
+        if args.command == "package" and (args.output is None or args.as_of is None):
+            parser.error("package requires --as-of and --output")
+        if args.command == "verify-package" and args.archive is None:
+            parser.error("verify-package requires --archive")
+        try:
+            result = (
+                package_lake(as_of, args.output, allow_source_exceptions=args.allow_source_exceptions)
+                if args.command == "package" else verify_package(args.archive)
+            )
+        except (OSError, ValueError, KeyError, BadZipFile) as exc:
+            print(f"[FAIL] private handoff: {type(exc).__name__}; no upload occurred")
+            return 1
+        print(json.dumps(result, indent=2))
+        return 0
 
     from ingest import edgar, macro, pageviews, prices, sample, universe
 

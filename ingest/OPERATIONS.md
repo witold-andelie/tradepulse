@@ -106,7 +106,27 @@ three-pool product load were verified with networking blocked. The run produced 
 records and nine abstained explanations; no ACTIVE factor or model answer was invented.
 Fully explained product replay additionally needs D's cassette recorded against the exact
 delivered text hashes and core integration acceptance.
-S3 upload follows only when D supplies a private destination and access method.
+The reproducible private package is ready; see `DELIVERY.md` and
+`data/sample/provenance/private_handoff_validation.json`. D has supplied no S3 destination
+or access delivery, so no upload has occurred. S3 upload follows only when the actual private
+destination and permitted access method are supplied.
+
+## Private full-lake packaging and verification
+
+```powershell
+py -3 -m ingest package --as-of 2026-10-23 --output "D:\AI_Models\hackson\.work\tradepulse-lake-new.zip" --allow-source-exceptions
+py -3 -m ingest verify-package --archive "D:\AI_Models\hackson\.work\tradepulse-lake-new.zip"
+```
+
+`package` audits a stable source snapshot, requires all failures other than the documented
+earnings-source exception to be resolved, checks source/sample identity and contact-address
+privacy, then includes only seven full table files and allowlisted provenance. It refuses
+to overwrite an existing destination or put the private archive in the public sample folder.
+`--allow-source-exceptions` is an explicit opt-in; it preserves strict completeness as false.
+The package is verified before a successful command result is printed. `verify-package`
+independently checks bounded archive membership, hashes, rows, contracts and date bounds
+without extracting data or contacting any provider. Neither command uploads or registers data.
+Match the archive's SHA-256 to the separately supplied receipt before sharing or consuming it.
 
 ## Local artifacts and sharing
 
@@ -119,6 +139,8 @@ S3 upload follows only when D supplies a private destination and access method.
 Member D must supply a private destination/access method before an authorized upload. Keep
 credentials in local configuration. No service registration or upload has been executed.
 Original lake bodies, logs, cache, environment files and complete backups must stay local.
+The prepared full-lake ZIP also remains private/local; only its safe validation receipt is
+committed. A model cassette recorded for another text snapshot is not interchangeable.
 
 ## Provider and data policies
 

@@ -64,3 +64,22 @@ Use [OPERATIONS.md](OPERATIONS.md). Select `YAHOO_TRANSPORT=public_chart` for th
 The published manifest freezes table hashes. A changed source snapshot requires a fresh destination and refreshed provenance/model recordings; recutting different tables into the published destination is rejected.
 
 No credentials, contact identities, original HTML bodies or production caches are included in the sample.
+
+## Private handoff closure, 25 October
+
+The complete production lake was packaged locally with reproducible `package` and
+`verify-package` commands. The ZIP is **25,772,991 bytes** with SHA-256
+`6c2104111d69c1ed901f2344096b2ffe1d1a961e0796d35eb73b6a5650f907da`.
+All seven table payloads, allowlisted provenance, row counts, contracts and as-of bounds
+were checked without extraction; a second verification blocked networking and observed
+zero attempted connections. The archive preserves strict completeness as false and records
+the source-qualified release. See [the safe receipt](../data/sample/provenance/private_handoff_validation.json)
+and [A1–A9 closure map](DELIVERY.md).
+
+The ingestion suite now has **128 passed**, with eight new offline handoff-policy/tampering
+regressions and the same 19 parser deprecation warnings. All given tests are unchanged.
+The seven published sample table hashes are unchanged. Its 14 pageview gaps are explicitly
+listed in [gap provenance](../data/sample/provenance/pageview_gaps.csv).
+
+No S3 destination or access delivery has been received from D. The ZIP remains private on
+the collector; no cloud resources, upload, hosted query or model recording is claimed.

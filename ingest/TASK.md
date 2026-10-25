@@ -8,7 +8,8 @@
 > the delivered sample uses redacted text and keeps all share classes of 300 selected documents.
 > See `REAL_DATA_EVIDENCE.md` for hashes, 31/32 strict checks and 35 verified source exceptions.
 > The lead accepted the 35 verified source exceptions for release on 2026-10-25; strict completeness remains false.
-> Remaining work is D's model cassette and private S3 handoff.
+> A's reproducible private full-lake package and verification CLI are now delivered; see `DELIVERY.md`.
+> D has supplied no S3 destination/access delivery, so upload is not done. D's model cassette is separate.
 > The original task catalogue below remains the acceptance specification, not work to repeat:
 >
 > 1. **First live run.** Put a real contact e-mail in your `.env` (`SEC_USER_AGENT`,

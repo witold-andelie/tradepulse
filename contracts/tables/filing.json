@@ -11,7 +11,7 @@
     {"name": "form", "dtype": "string", "nullable": false, "enum": ["8-K", "8-K/A", "10-Q", "10-Q/A", "10-K", "10-K/A"], "description": "Form type."},
     {"name": "items", "dtype": "string", "nullable": true, "description": "8-K items, comma-separated, e.g. 2.02,9.01; null for other forms."},
     {"name": "filing_date", "dtype": "date", "nullable": false, "description": "EDGAR filing date."},
-    {"name": "acceptance_datetime", "dtype": "datetime", "nullable": false, "description": "Acceptance time converted to UTC (see data-sources.md: the raw field is US/Eastern clock time)."},
+    {"name": "acceptance_datetime", "dtype": "datetime", "nullable": false, "description": "Acceptance time in UTC, derived from the SEC filing index page's Accepted clock localized to America/New_York. See docs/architecture/data-sources.md for source verification and the legacy helper distinction."},
     {"name": "report_date", "dtype": "date", "nullable": true, "description": "Period of report, when given."},
     {"name": "primary_document", "dtype": "string", "nullable": false, "description": "File name of the main document."},
     {"name": "primary_doc_url", "dtype": "string", "nullable": false, "description": "https://www.sec.gov/Archives/edgar/data/{cik_int}/{accession_no_dashes}/{primary_document}"}

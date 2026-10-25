@@ -63,7 +63,7 @@ def fetch_diagnostics(as_of):
                     (cache / (name + ".json")).write_text(json.dumps(payload), encoding="utf-8")
                     row["detail"] = f"{len(payload)} items"
                 results.append(row)
-            except Exception as exc:  # noqa: BLE001 -- expose only error category and status
+            except Exception as exc:  # Expose only error category and status.
                 results.append(
                     {
                         "source": name,

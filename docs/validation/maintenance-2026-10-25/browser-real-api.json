@@ -1,0 +1,51 @@
+{
+  "run_id": "2026-10-23-b1f85a23",
+  "as_of": "2026-10-23",
+  "data_mode": "REPLAY",
+  "source_sha256": "e601b34b4769327e2e568c5e21e4dd2528076cd738cc5ff494418c295130c9ff",
+  "browser": "156.0.8078.47",
+  "results": [
+    {
+      "name": "real API routes, disclosures and reflow: Simple at 1440px",
+      "status": "PASS"
+    },
+    {
+      "name": "real API routes, disclosures and reflow: Pro at 1440px",
+      "status": "PASS"
+    },
+    {
+      "name": "real API routes, disclosures and reflow: Simple at 320px",
+      "status": "PASS"
+    },
+    {
+      "name": "real API routes, disclosures and reflow: Pro at 320px",
+      "status": "PASS"
+    },
+    {
+      "name": "real instruments support combined filters and keyboard detail navigation",
+      "status": "PASS"
+    },
+    {
+      "name": "all real factor cards preserve insufficient-data and zero-active states",
+      "status": "PASS"
+    },
+    {
+      "name": "actual trace events support node and kind filters together",
+      "status": "PASS"
+    },
+    {
+      "name": "normal real API journeys have no console errors or fixture requests",
+      "status": "PASS"
+    },
+    {
+      "name": "API failures are visible and never fall back to synthetic fixtures",
+      "status": "PASS"
+    }
+  ],
+  "fixtureRequests": [],
+  "normal_console_errors": [],
+  "expected_failure_messages": [
+    "Failed to load resource: the server responded with a status of 503 (Service Unavailable)"
+  ],
+  "models": "Uses the actual saved run, including its unavailable-model abstentions; does not certify NIM or hosted sponsors."
+}

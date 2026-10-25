@@ -1,0 +1,31 @@
+{
+  "data_mode": "SYNTHETIC",
+  "source_fixture_sha256": "0b50b66b8c8f58ee215112d9a35db08ce34804fdbd967ad222393c97631e304d",
+  "scope": "Actual rendered chart figures from the labelled synthetic fixture. Not real market results. Final timeline offsets are transparent.",
+  "images": [
+    {
+      "file": "contributions.png",
+      "sha256": "32afb26af3896707002df5ece72ce931fd0c73bb96980719b5487ea552c8a0bc"
+    },
+    {
+      "file": "evaluation.png",
+      "sha256": "324c6053d36c57f8abb1ad9ca9e948b219590dab761e0740f0e2fcceac2caa43"
+    },
+    {
+      "file": "factor.png",
+      "sha256": "d9d5773d589b626a81351f9e05a7b3b2871bde026ba78ec41274eecffdc1fc11"
+    },
+    {
+      "file": "regime.png",
+      "sha256": "057abc36d26a813fcd2a82202ebd1a3a440f2ad0b120a3af079d86a481e62f55"
+    },
+    {
+      "file": "sector.png",
+      "sha256": "b5dba315c56f3dd4dd362071d0f7c22ed7b37f870b844c078fe6b0df09860f2a"
+    },
+    {
+      "file": "timeline.png",
+      "sha256": "b60e0f92cd78f78ac7e960ee9856737ce291f87cd12694f69e1f14769cdeb130"
+    }
+  ]
+}

@@ -50,7 +50,7 @@ acceptance includes Lighthouse 100 desktop/mobile, 28 axe cases with zero violat
 | NVIDIA use | Keep hosted NIM; agree model families and record genuine calls for this snapshot, then verify offline replay |
 | Cursor use | Team must confirm actual development use and supply its description; do not infer it from generated code |
 | Native guide acceptance | Actual NVDA/VoiceOver walkthrough, native-speaker editing and audible voice check are pending |
-| Dependency maintenance | npm audit reported 15 findings on 25 October; no completed security migration is claimed |
+| Dependency maintenance | Completed on 25 October: official npm audit 15 → 0; Ruff policy and SEC timestamp documentation synchronized; regression evidence recorded |
 | Primary track and roster | Lead must confirm exactly one track and final participants before creating the first submission |
 | Pre-existing components | Confirm third-party and any prior product/data components; Git history alone is insufficient |
 | Deck and video | Complete the draft media with genuine sponsor scenes; review length, legibility and disclosures before upload |

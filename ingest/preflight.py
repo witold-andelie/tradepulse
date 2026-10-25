@@ -151,7 +151,7 @@ def smoke(as_of: dt.date, root: Path | None = None, provider: str | None = None)
             row.update(status="PASS", rows=count, detail="parsed_nonempty_response")
         except ConfigurationError:
             pass
-        except Exception as exc:  # noqa: BLE001 -- continue independent probes without leaking headers
+        except Exception as exc:  # Continue independent probes without leaking headers.
             detail = type(exc).__name__
             if isinstance(exc, IngestHTTPError) and exc.status_code is not None:
                 detail += f":HTTP_{exc.status_code}"

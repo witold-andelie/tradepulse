@@ -29,3 +29,8 @@ The latest Python suite has 609 passing cases and 19 existing lxml warnings; the
 89 passing cases, valid contract fixtures and a successful build. All original test
 assertions and table/API schemas remain unchanged. Accessibility evidence and its separate
 native-screen-reader limitation are in [the web report](../../web/ACCESSIBILITY_ACCEPTANCE.md).
+
+[Security/tool maintenance](maintenance-2026-10-25/README.md) records the later dependency
+upgrade, official npm audit 15 → 0, stable Ruff policy and SEC timestamp documentation sync.
+It supersedes dependency versions/build sizes from the initial runtime check while retaining
+that original evidence. Final production chunks remain below 1 MB (largest: 672.22 kB).

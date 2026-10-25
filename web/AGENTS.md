@@ -9,7 +9,8 @@ its existing B7–B9 pages. Read `docs/STATUS.md` and `web/INTEGRATION.md`; do n
 2. Edit only files under `web/`. Never edit `contracts/`, Python code, or the given tests
    `web/src/lib/*.test.js`.
 3. Use only the stack in `TASK.md`: React 18 with plain JavaScript (.jsx and .js, no TypeScript),
-   Vite, React Router 6, Tailwind CSS, TanStack Table v8, ECharts via echarts-for-react, Vitest.
+   Vite, React Router 7, Tailwind CSS 3, TanStack Table v8, ECharts via echarts-for-react, Vitest.
+   Security maintenance on 2026-10-25 upgraded existing libraries; see `DEPENDENCIES.md`.
    Do not add dependencies without the team lead's approval.
 4. Every number, ticker and sentence that describes a result must come from the run data. Never
    hard-code results.

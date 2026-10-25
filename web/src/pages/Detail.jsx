@@ -7,6 +7,8 @@ import { formatBps, formatPct, formatScore } from '../lib/format.js';
 import { Badge, Empty, Gate, Metrics, NotFound, number, PageTitle, TableScroll, TextList, Tier } from '../components/ui.jsx';
 import { StanceMeaning } from '../components/ResearchGuide.jsx';
 import Chart from '../components/Chart.jsx';
+import GuidedResearch from '../components/agentResearch/GuidedResearch.jsx';
+import { lookupMessage } from '../components/agentResearch/messages.js';
 
 function Evidence({ evidence }) {
   const safeUrl = evidence.url && /^https?:\/\//i.test(evidence.url) ? evidence.url : null;
@@ -17,23 +19,25 @@ function Evidence({ evidence }) {
     <dt>Rows SHA-256</dt><dd className="hash">{evidence.rows_sha256}</dd>
     <dt>Source table</dt><dd>{evidence.source_table}</dd>
     <dt>As of</dt><dd>{evidence.as_of}</dd>
-    {safeUrl && <><dt>Reference</dt><dd><a className="text-link" href={safeUrl} target="_blank" rel="noreferrer noopener">Open source ↗</a></dd></>}
+    <dt>Reference</dt><dd>{safeUrl ? <a className="text-link" href={safeUrl} target="_blank" rel="noreferrer noopener">Open source ↗</a> : 'No source link supplied.'}</dd>
   </dl>;
 }
 function Claim({ claim }) {
   return <details className={`claim ${claim.status}`}>
     <summary><Badge tone={claim.status === 'verified' ? 'positive' : 'negative'}>{claim.status === 'verified' ? '✓ Verified' : '✗ Rejected'}</Badge><span>{claim.text}</span><span className="muted" aria-hidden="true">＋</span></summary>
-    <div className="claim-body"><p className="caption">{claim.claim_id} · {claim.kind}</p><h4 className="font-semibold">Deterministic checks</h4>
+    <div className="claim-body"><p className="caption">{claim.claim_id} · {claim.kind}</p><h4 className="font-semibold">Recorded checks</h4>
       <ul className="check-list">{claim.checks.map((check, i) => <li key={i}><Gate value={check.passed} /><strong>{check.name}</strong><span>{check.detail}</span></li>)}</ul>
+      {claim.checks.some((check) => check.name === 'cause_before_move') && <p className="caption">{lookupMessage('en', 'temporal').text}</p>}
       <h4 className="font-semibold">Source evidence</h4>{claim.evidence.length ? claim.evidence.map((item) => <Evidence key={item.evidence_id} evidence={item} />) : <p className="muted">No evidence reference supplied.</p>}
     </div>
   </details>;
 }
-function ExplanationPanel({ explanation, row }) {
+function ExplanationPanel({ explanation, row, synthetic }) {
   return <section className="card" id="explanation" tabIndex={-1} aria-labelledby="explanation-title">
     <div className="section-heading"><div><p className="eyebrow">Recorded Analyst → Skeptic → Verifier output</p><h2 id="explanation-title">Decision explanation</h2></div>{explanation && <Badge tone={explanation.verdict}>{explanation.verdict}</Badge>}</div>
     {explanation ? <>
       <p className="explanation-summary">{explanation.summary}</p>
+      {synthetic && <p className="caption">{lookupMessage('en', 'synthetic').text}</p>}
       <p className="section-description">These are the original recorded claims and checks. A verified claim is not a guarantee of future returns. Rejected claims remain visible and must not be treated as supporting evidence.</p>
       {explanation.verdict === 'abstained' && <p className="notice">The explanation abstained. Rejected claims are retained below for inspection; they are not supporting evidence. The explanation verdict and the original research tier are separate recorded fields.</p>}
       <div className="claims">{[['verified', 'Supporting claims recorded as verified'], ['rejected', 'Rejected claims — not supporting evidence']].map(([status, heading]) => <section key={status}><h3 className="evidence-group-title">{heading}</h3>{explanation.claims.some((claim) => claim.status === status) ? explanation.claims.filter((claim) => claim.status === status).map((claim) => <Claim key={claim.claim_id} claim={claim} />) : <p className="caption">None recorded.</p>}</section>)}</div>
@@ -74,7 +78,7 @@ export default function Detail({ run, pool: selectedPool, symbol: selectedSymbol
     <details className="research-details"><summary>View contribution measurements</summary><TableScroll label="Underlying contribution values"><table><thead><tr><th scope="col">Factor</th><th scope="col">Z-score</th><th scope="col">Weight</th><th scope="col">Contribution</th></tr></thead><tbody>{contributions.map((item) => <tr key={item.factor}><th scope="row">{factorTitle(item.factor)}<small className="block muted">{item.factor}</small></th><td>{formatScore(item.z)}</td><td>{formatPct(item.weight)}</td><td>{formatScore(item.contribution)}</td></tr>)}</tbody></table></TableScroll></details>
     <details className="research-details" open={isPro}><summary>All original instrument metrics</summary>{metrics}<p className="caption">Expected alpha and net edge are estimates in basis points, not realized returns. Score is unitless. Rank is within this pool.</p></details>
   </section>;
-  const explanationPanel = <ExplanationPanel key="explanation" explanation={explanation} row={row} />;
+  const explanationPanel = <ExplanationPanel key="explanation" explanation={explanation} row={row} synthetic={data.data_mode === 'SYNTHETIC'} />;
   const risks = <section className="card" id="risks" tabIndex={-1} key="risks" aria-labelledby="risk-title"><div className="section-heading"><div><p className="eyebrow">Limits of the research</p><h2 id="risk-title">What could invalidate this stance?</h2></div></div><div className="two-column"><TextList title="Invalidation conditions" items={row.invalidation} /><TextList title="What to watch" items={row.what_to_watch} /></div><p className="caption">These are the conditions recorded by the source. They are not a complete assessment of suitability or investment risk. {data.data_mode === 'SYNTHETIC' ? 'This is a fictional instrument with generated research records.' : 'Inspect the original source and its timing before drawing a conclusion.'}</p></section>;
   return <>
     <Link className="text-link" to={back}>← Back to {poolSummary?.label || 'leaderboard'}</Link>
@@ -83,6 +87,7 @@ export default function Detail({ run, pool: selectedPool, symbol: selectedSymbol
     {row.tier === 'NO_CALL' && <div className="notice">No call — the source run records no directional research stance. No specific reason code is supplied for this instrument. Inspect coverage, pool IC and the available explanation; no stance has been inferred.</div>}
     {isPro ? metrics : <Metrics items={[["Pool rank", `${number(row.rank)} of ${number(data.recommendations.filter((item) => item.pool === pool).length)}`], ['Composite score', formatScore(row.score)]]} />}
     <nav className="detail-sections" aria-label="Instrument research sections"><a className="text-link" href="#explanation">Evidence and counter-case ↓</a><a className="text-link" href="#risks">Risks and invalidation ↓</a><a className="text-link" href="#measurements">Original measurements ↓</a></nav>
+    <GuidedResearch key={`${data.run_id}:${pool}:${symbol}`} record={record} run={data} />
     {isPro ? [contributionPanel, explanationPanel, risks] : [explanationPanel, risks, contributionPanel]}
     <div className="hero-actions"><Link className="button" to="/trace">Inspect run trace →</Link><Link className="text-link" to="/discover">Return to Discover</Link></div>
   </>;

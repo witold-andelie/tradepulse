@@ -1,0 +1,21 @@
+.guide { min-width: 0; text-align: start; }
+.toolbar { display: flex; flex-wrap: wrap; gap: 1rem; align-items: end; margin-block: 1rem; }
+.control { display: grid; gap: .35rem; min-width: 0; max-width: 100%; font-weight: 600; }
+.control select { max-width: 100%; min-width: 0; min-height: 2.75rem; border: 1px solid var(--control-line); border-radius: .45rem; padding: .5rem; background: white; color: var(--text); }
+.guide details { margin-block: .75rem; }
+.guide summary { text-align: start; overflow-wrap: anywhere; }
+.answer { padding: 1rem; border-block-start: 1px solid var(--line); }
+.facts { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 14rem), 1fr)); gap: .75rem; margin-block: 0 1rem; }
+.facts > div { min-width: 0; padding: .65rem; background: var(--cloud); border-radius: .4rem; }
+.facts dt { color: var(--muted); font-size: .875rem; }
+.facts dd { margin: .25rem 0 0; font-weight: 600; overflow-wrap: anywhere; }
+.original { border-inline-start: 3px solid var(--control-line); padding-inline-start: .9rem; margin-block: .75rem; overflow-wrap: anywhere; }
+.original ul { padding-inline-start: 1.4rem; }
+.identifier { unicode-bidi: isolate; overflow-wrap: anywhere; }
+.speech { border-block-start: 1px solid var(--line); padding-block-start: 1rem; margin-block-start: 1rem; }
+.buttons { display: flex; flex-wrap: wrap; gap: .65rem; margin-block: .75rem; }
+.buttons button { min-height: 2.75rem; max-width: 100%; white-space: normal; overflow-wrap: anywhere; }
+.status { min-height: 1.75rem; }
+.sourceLabel { font-size: .875rem; color: var(--muted); margin-block-end: .35rem; }
+.note { margin-block: .75rem; }
+.guide a { overflow-wrap: anywhere; }

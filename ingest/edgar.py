@@ -13,6 +13,7 @@ from bs4 import BeautifulSoup
 from ingest.common import before_cutoff, environment, frame, report, showcase
 from ingest.lake import read_table, write_table
 from ingest.net import IngestHTTPError, RateLimiter, build_session, fetch_response
+from ingest.privacy import sanitize_filing_texts
 from tradepulse.config import load_config
 from tradepulse.contracts import REPO_ROOT, load_table_spec
 
@@ -479,7 +480,7 @@ def run_texts(as_of: dt.date, root: Path | None = None) -> pd.DataFrame:
         root,
     )
     report(pd.DataFrame(sources), "filing_text_normalization.csv", root)
-    result = frame(rows, "filing_text")
+    result = sanitize_filing_texts(frame(rows, "filing_text"))
     write_table(result, "filing_text", root, as_of)
     return result
 

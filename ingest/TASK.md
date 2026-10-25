@@ -1,11 +1,15 @@
 # Member A — Data ingestion (`ingest/`)
 
-> **Status (2026-10-24): A1–A7 and A9 code is implemented and merged.** Do not rebuild it.
+> **Status (2026-10-25): implementation and real sample are delivered.** Do not rebuild them.
 > Member A's provider fixes and local evidence were preserved in PR #5 (merge `af229b4`).
 > The lead has taken over follow-up fixes and remaining delivery; Member A is not assigned
-> more implementation work. No lake or sample snapshot is present in the publication checkout,
-> and the curated crypto CSV was excluded from #5. See `docs/STATUS.md` for dependencies.
-> The following requirements remain owned by the lead, with Member D handling the upload destination:
+> more implementation work. The lead collected and verified a new seven-table sample and
+> crypto configuration for 2026-10-23. The original #5 artifacts remain historical evidence;
+> the delivered sample uses redacted text and keeps all share classes of 300 selected documents.
+> See `REAL_DATA_EVIDENCE.md` for hashes, 31/32 strict checks and 35 verified source exceptions.
+> The lead accepted the 35 verified source exceptions for release on 2026-10-25; strict completeness remains false.
+> Remaining work is D's model cassette and private S3 handoff.
+> The original task catalogue below remains the acceptance specification, not work to repeat:
 >
 > 1. **First live run.** Put a real contact e-mail in your `.env` (`SEC_USER_AGENT`,
 >    `WIKIMEDIA_USER_AGENT`), then run `py -3 -m ingest all --as-of <latest trading day>`. Fix every
@@ -56,7 +60,7 @@ issue for the team lead.
 ```
 py -3 -m pip install -e ".[ingest,dev]"
 copy .env.example .env      # then put a real contact e-mail into SEC_USER_AGENT and WIKIMEDIA_USER_AGENT
-py -3 -m pytest ingest -q   # offline tests; absent lake/sample cases skip until delivery
+py -3 -m pytest ingest -q   # includes all eight real lake/sample cases; none should skip
 ```
 
 ## Global rules
@@ -144,12 +148,13 @@ py -3 -m pytest ingest -q   # offline tests; absent lake/sample cases skip until
 - Facts: `https://data.sec.gov/api/xbrl/companyfacts/CIK{cik10}.json`. Keep only the 4 tags listed
   in `contracts/tables/fundamental_fact.json`.
 - **Timezone check (required):** the `acceptanceDateTime` field ends in `Z` but is believed to be
-  US/Eastern clock time.
-  - Open the filing index page of 3 filings and compare the times. The index page shows
-    "Accepted" in Eastern time.
-  - Write the result in the PR description.
-  - `acceptance_to_utc()` implements the Eastern interpretation. If your check disproves it,
-    tell the team lead before changing the test.
+  US/Eastern clock time in the original hypothesis. The real source comparison disproved that
+  hypothesis. Live persistence uses each SEC index page's Accepted time, interpreted in
+  America/New_York and converted to UTC. Three saved filings match their source indexes.
+  - Preserve the given legacy parser tests and public helper signature.
+  - `acceptance_to_utc()` remains a legacy compatibility helper, not the canonical live policy.
+  - Preserve the source-index verification record and disclose the old shared-policy wording
+    until its lead-reviewed documentation correction is complete.
 
 ### A5 · Filing texts (`edgar.py`) → `filing_text`
 

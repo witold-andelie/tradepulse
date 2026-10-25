@@ -120,7 +120,7 @@ def fetch_news_probe(as_of, selected_symbol=None):
     if len(selected) == 1 and existing.exists():
         prior = pd.read_csv(existing)
         result = pd.concat([prior[~prior.symbol.isin(result.symbol)], result], ignore_index=True)
-    report(result, "gdelt_probe.csv")
+    report(result, "gdelt_probe.csv", REPO_ROOT)
     return summarize_news_probe(as_of)
 
 
@@ -128,6 +128,15 @@ def summarize_news_probe(as_of):
     """Distinguish daily observations with gaps from complete calendar-day coverage."""
     path = REPO_ROOT / "data/lake/_reports/gdelt_probe.csv"
     result = pd.read_csv(path)
+    for column, dtype in (
+        ("calendar_day_coverage", "Float64"),
+        ("missing_calendar_days", "Int64"),
+        ("daily_observations", "boolean"),
+    ):
+        if column not in result:
+            result[column] = pd.Series(pd.NA, index=result.index, dtype=dtype)
+        else:
+            result[column] = result[column].astype(dtype)
     start, end = as_of - dt.timedelta(days=365), as_of - dt.timedelta(days=1)
     for index, row in result.iterrows():
         source = REPO_ROOT / "data/cache/gdelt" / f"{row.symbol}.json"
@@ -154,5 +163,5 @@ def summarize_news_probe(as_of):
             if daily and spans
             else "window_or_resolution_not_verified"
         )
-    report(result, "gdelt_probe.csv")
+    report(result, "gdelt_probe.csv", REPO_ROOT)
     return result

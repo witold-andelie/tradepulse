@@ -3,18 +3,22 @@
 The team lead merges a PR only when every item that applies is true. Paste the command output
 into the PR description.
 
-The implementation exists. The data-dependent checks below remain incomplete while the
-lake/sample are absent; skipped tests do not complete data delivery. See `../docs/STATUS.md`.
+On the collector, the real lake/sample checks now execute without skips. A clean repository
+export passes the sample check and skips only the seven absent production-lake cases.
+See `REAL_DATA_EVIDENCE.md` and
+`../docs/STATUS.md`. The strict audit remains 31/32 because 35 source filings have no permitted
+exhibit. Their verified index evidence is delivered; this does not turn strict completeness true.
 
 The lead explicitly merged PR #5 as an implementation integration and took over its review
-fixes. This does not complete the real-data checks below. The sample, curated crypto CSV,
-independent source verification and upload remain separate delivery requirements.
+fixes. A new sample, crypto CSV and independent source verification are now delivered. The lead
+accepted the 35 verified source exceptions for release on 2026-10-25; strict completeness
+remains false. Matching model recordings and private upload remain separate.
 
 ## Automated (must pass)
 
 ```
 py -3 -m pytest ingest -q                    # offline unit tests: 0 failed
-py -3 -m ingest all --as-of 2026-10-21       # live run; ends with "all tables valid"
+py -3 -m ingest all --as-of 2026-10-23       # live run; ends with "all tables valid"
 py -3 -m pytest ingest -q -m lake            # lake tests run (not skipped) and pass
 py -3 -m pytest ingest/tests/test_lake_and_sample.py::test_sample_snapshot_is_complete_and_valid -q
 # sample snapshot exists and passes; this case must NOT skip

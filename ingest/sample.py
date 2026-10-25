@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+import hashlib
+import json
 import os
 import tempfile
 from pathlib import Path
@@ -63,6 +65,17 @@ def cut_sample(
         )
         if size >= MAX_SAMPLE_MB * 1024 * 1024:
             raise RuntimeError(f"Sample exceeds size limit: {size} bytes")
+        manifest_path = sample_root / "manifest.json"
+        if manifest_path.exists():
+            published = json.loads(manifest_path.read_text(encoding="utf-8"))
+            for name in table_names():
+                expected_hash = published.get("tables", {}).get(name, {}).get("sha256")
+                staged_hash = hashlib.sha256(table_path(name, staging).read_bytes()).hexdigest()
+                if expected_hash != staged_hash:
+                    raise ValueError(
+                        "Refusing to replace a published snapshot with different table hashes; "
+                        "use a fresh sample destination and refresh its provenance/model recordings"
+                    )
         for name in table_names():
             destination = table_path(name, sample_root)
             destination.parent.mkdir(parents=True, exist_ok=True)

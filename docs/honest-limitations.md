@@ -1,16 +1,20 @@
 # Honest limitations
 
-Status: 24 October 2026. See [project status](STATUS.md) for verified checks and owners.
+Status: 25 October 2026. See [project status](STATUS.md) for verified checks and owners.
 
 ## Data and deployment
 
 - The committed browser demonstration uses fictional instruments and generated numbers,
   labeled SYNTHETIC. It does not establish performance on real instruments.
-- The publication checkout has no validated lake/sample or matching LLM cassette. The
-  complete credential-free SAMPLE_MODE acceptance is pending.
-- PR #5 preserves Member A's ingestion code and local evidence, but excludes the reported
-  sample and curated crypto CSV. The lead owns their delivery and independent acceptance;
-  code integration does not approve the 35 reported missing-exhibit exceptions.
+- A real seven-table sample for 2026-10-23 and verified crypto CSV/provenance are delivered.
+  Strict data acceptance is 31/32: 35 filings have no permitted exhibit on verified source
+  indexes. The lead accepted these source exceptions for release on 2026-10-25. The missing
+  rows remain missing and strict completeness remains false.
+- PR #5's sample was excluded. The lead independently rebuilt the delivered snapshot, whose
+  redacted text hashes and full share-class document selection supersede that old artifact.
+- A full offline three-pool run passed loading and API-contract checks, but the matching model
+  cassette is absent and all nine explanations abstained. Complete explained replay is pending.
+- Private S3 upload is pending D's destination/access method; production lake/cache/logs stay local.
 - ZetarisClient and ZetarisAdapter live methods are stubs. Hosted service access, query parity
   and model smoke-test evidence are pending.
 - The Meterless engines client exists, but the engines server/vendor implementation and
@@ -24,6 +28,8 @@ Status: 24 October 2026. See [project status](STATUS.md) for verified checks and
   survivorship bias, and short histories provide few stress episodes.
 - Factor cards are in-sample diagnostics. Rankings use walk-forward weights and out-of-sample
   composite IC; these are separate measurements.
+- The recorded real-data run has no ACTIVE factor: 20 cards are MEASURED_ONLY and 13 have
+  INSUFFICIENT_DATA; all 616 records are NO_CALL. Gates were not relaxed to produce an output.
 - Event priors and seed-edge validation are currently fitted in-sample. Event drift and
   relational spillover are excluded from walk-forward ranking.
 - The pipeline does not apply the US valuation constraint. Filing-based inputs are unavailable
@@ -34,10 +40,13 @@ Status: 24 October 2026. See [project status](STATUS.md) for verified checks and
   not forecast black-swan dates.
 - The current pipeline anchors the decision date to the latest SPY session. Independent
   weekend crypto decisions and cross-market timing need further review.
-- Historical fundamental restatements, EDGAR acceptance-time interpretation and revised
-  macro series require explicit point-in-time review. A reports index Accepted comparisons,
-  but the source artifacts are excluded and the shared timestamp description still needs
-  lead-reviewed synchronization with live ingestion's index-based policy.
+- Historical fundamental restatements, revised macro series and market-close availability
+  remain point-in-time limitations. Three persisted EDGAR timestamps match original index
+  Accepted times; the older shared raw-field hypothesis still needs documentation correction.
+- Three crypto article titles are missing and some mapped titles describe a platform or issuer.
+  The curated pool meets the 90% title threshold but is not an exact top-40 market-cap index.
+- GDELT returned year-spanning daily observations for three probe names, with 20 missing dates
+  each. Those gaps were not imputed and no validated news factor is claimed.
 - Arbitrary out-of-universe ticker lookup and iterative model-proposed graph expansion are
   target features, not completed end-to-end behavior.
 

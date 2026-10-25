@@ -1,0 +1,176 @@
+{
+  "schema_version": "1.0",
+  "as_of": "2026-10-23",
+  "generated_at": "2026-10-25T06:04:56.054204+00:00",
+  "data_origin": "Real public provider data; not a synthetic fixture.",
+  "tables": {
+    "filing": {
+      "path": "data/lake/filing.parquet",
+      "rows": 9005,
+      "bytes": 312269,
+      "sha256": "7a2b23b8e3516ad629225d1271923cbb5a9fcbf670c354db6fb29b731b3d909d"
+    },
+    "filing_text": {
+      "path": "data/lake/filing_text.parquet",
+      "rows": 321,
+      "bytes": 4209242,
+      "sha256": "63444f64d2f13f86873a6b9e11f488671b57163c45f9611dff6da8119ab88033"
+    },
+    "fundamental_fact": {
+      "path": "data/lake/fundamental_fact.parquet",
+      "rows": 250968,
+      "bytes": 2242092,
+      "sha256": "dc2ce2c2af7d1a85344899720b7099b8016b1f498a46433aa786219d2046b04d"
+    },
+    "macro_point": {
+      "path": "data/lake/macro_point.parquet",
+      "rows": 564,
+      "bytes": 13106,
+      "sha256": "06f8852d10e198572ba96b0a21562b1b01660eea374584d42402c3c5b6df3ef7"
+    },
+    "pageview": {
+      "path": "data/lake/pageview.parquet",
+      "rows": 463068,
+      "bytes": 986476,
+      "sha256": "212d3b7ed9c2e3a14f2657de7ef10f1d048152b83393343b3416ee76aa28f39b"
+    },
+    "price_bar": {
+      "path": "data/lake/price_bar.parquet",
+      "rows": 342804,
+      "bytes": 7553889,
+      "sha256": "74c97673f8315cde7169b3dff869f459227d7533209e19a8fa7256911edae121"
+    },
+    "universe_member": {
+      "path": "data/lake/universe_member.parquet",
+      "rows": 616,
+      "bytes": 24671,
+      "sha256": "b416bada4a50c4999ac117156ec17202939487c23305c9a3f0a39006125fb558"
+    }
+  },
+  "table_bytes": 15341745,
+  "budget_bytes": 25000000,
+  "sample_earnings_documents": 300,
+  "sample_earnings_rows": 302,
+  "sample_annual_rows": 19,
+  "pools": {
+    "crypto": {
+      "members": 38,
+      "members_with_titles": 35,
+      "members_meeting_95_percent_price_coverage": 38
+    },
+    "eu_equity": {
+      "members": 55,
+      "members_with_titles": 50,
+      "members_meeting_95_percent_price_coverage": 55
+    },
+    "us_equity": {
+      "members": 523,
+      "members_with_titles": 517,
+      "members_meeting_95_percent_price_coverage": 523
+    }
+  },
+  "strict_acceptance_passed": false,
+  "checks_passed": 31,
+  "checks_total": 32,
+  "failed_checks": [
+    {
+      "check": "texts.earnings_complete",
+      "actual": "35 missing"
+    }
+  ],
+  "source_exceptions": {
+    "count": 35,
+    "all_verified_against_source_indexes": true,
+    "disposition": "Accepted by the team lead for a source-qualified release on 2026-10-25; strict completeness remains false.",
+    "evidence": "provenance/source_exception_verification.csv"
+  },
+  "offline_table_validation": {
+    "network_attempts": 0,
+    "contact_address_matches": 0
+  },
+  "offline_product_validation": {
+    "as_of": "2026-10-23",
+    "data_mode": "REPLAY",
+    "sample_mode": true,
+    "network_attempts": 0,
+    "run_id": "2026-10-23-7560d397",
+    "recommendations": 616,
+    "factor_cards": 33,
+    "explanations": 9,
+    "explained": 0,
+    "abstained": 9,
+    "matching_llm_cassette_present": false,
+    "output_path": "runs\\2026-10-23-7560d397\\output.json",
+    "trace_path": "logs\\trace-2026-10-23-7560d397.jsonl",
+    "factor_status_counts": {
+      "MEASURED_ONLY": 20,
+      "INSUFFICIENT_DATA": 13
+    },
+    "tier_counts": {
+      "NO_CALL": 616
+    }
+  },
+  "source_policies": {
+    "prices": "Yahoo public daily chart; source adjusted closes, exchange-local session dates; bounded requests and cache.",
+    "sec_timestamps": "Index Accepted interpreted in America/New_York and converted to UTC; pure legacy raw-field parser is not canonical.",
+    "filing_text": "Public contact addresses redacted before canonical text length and SHA-256; original provider bodies remain in ignored collector caches.",
+    "membership": "Current constituents; historical membership is not reconstructed.",
+    "macro": "Latest FRED CSV; original vintages are not reconstructed.",
+    "availability": "Availability dates/timestamps are checked against the decision date; a universal market-close cutoff is not claimed.",
+    "earnings_exhibit_types": "EX-99 and EX-99.01 earnings documents are normalized to the existing EX-99.1 kind only after index/body checks. Original types, URLs and canonical hashes are retained in provenance/filing_text_normalization.csv."
+  },
+  "delivery_limits": [
+    "Matching model cassette is absent; offline model explanations abstain.",
+    "Three crypto article titles are unavailable; some mapped articles measure platform or issuer attention.",
+    "Source exhibit completeness has verified exceptions.",
+    "Private S3 upload is not completed."
+  ],
+  "gdelt_probe": [
+    {
+      "symbol": "NVDA",
+      "status": "YES",
+      "rows": 345,
+      "first": "2025-10-23",
+      "last": "2026-10-22",
+      "calendar_day_coverage": 0.9452054794520548,
+      "missing_calendar_days": 20
+    },
+    {
+      "symbol": "AMD",
+      "status": "YES",
+      "rows": 345,
+      "first": "2025-10-23",
+      "last": "2026-10-22",
+      "calendar_day_coverage": 0.9452054794520548,
+      "missing_calendar_days": 20
+    },
+    {
+      "symbol": "COHR",
+      "status": "YES",
+      "rows": 345,
+      "first": "2025-10-23",
+      "last": "2026-10-22",
+      "calendar_day_coverage": 0.9452054794520548,
+      "missing_calendar_days": 20
+    }
+  ],
+  "earnings_exhibit_type_counts": {
+    "EX-99": 175,
+    "EX-99.01": 24
+  },
+  "python_validation": {
+    "tests": 595,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "clean_checkout_validation": {
+    "evidence": "provenance/clean_checkout_validation.json",
+    "external_network_attempts": 0,
+    "tests": 595,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 7,
+    "passed": 588
+  }
+}

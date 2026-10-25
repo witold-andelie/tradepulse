@@ -1,0 +1,761 @@
+{
+  "source_url": "https://api.coingecko.com/api/v3/coins/markets",
+  "reviewed_at": "2026-10-25T05:04:47.212596+00:00",
+  "selection": "Original task assets plus largest Yahoo-supported candidates with verifiable articles; not an exact top-40 market-cap index",
+  "assets": [
+    {
+      "symbol": "BTC-USD",
+      "id": "bitcoin",
+      "market_cap_rank": 1,
+      "excluded_type": false,
+      "yahoo_verified": true,
+      "identity_source": "https://api.coingecko.com/api/v3/coins/markets",
+      "classification_review": "Curated identity review: native coins or project tokens, not stablecoins, wrapped assets or staked receipt tokens.",
+      "supplemental_source_categories": [
+        "Smart Contract Platform",
+        "Layer 1 (L1)",
+        "FTX Holdings",
+        "Proof of Work (PoW)",
+        "Bitcoin Ecosystem",
+        "GMCI 30 Index",
+        "GMCI Index",
+        "Coinbase 50 Index"
+      ],
+      "supplemental_source_sha256": "9106ef5d38e2b180078593f3075b028aa266c61c073b52b200fdc18ca64f482f",
+      "classification_sources": [
+        {
+          "url": "https://en.wikipedia.org/wiki/Bitcoin",
+          "page_id": 28249265,
+          "intro_sha256": "a3d417c6d8276735549af9d53fac0bda909913722c524384bd10650060ff0734"
+        }
+      ]
+    },
+    {
+      "symbol": "ETH-USD",
+      "id": "ethereum",
+      "market_cap_rank": 2,
+      "excluded_type": false,
+      "yahoo_verified": true,
+      "identity_source": "https://api.coingecko.com/api/v3/coins/markets",
+      "classification_review": "Curated identity review: native coins or project tokens, not stablecoins, wrapped assets or staked receipt tokens.",
+      "supplemental_source_categories": [
+        "Smart Contract Platform",
+        "Layer 1 (L1)",
+        "Ethereum Ecosystem",
+        "FTX Holdings",
+        "Multicoin Capital Portfolio",
+        "Proof of Stake (PoS)",
+        "Alameda Research Portfolio",
+        "Andreessen Horowitz (a16z) Portfolio",
+        "GMCI Layer 1 Index",
+        "GMCI 30 Index",
+        "Delphi Ventures Portfolio",
+        "Galaxy Digital Portfolio",
+        "GMCI Index",
+        "World Liberty Financial Portfolio",
+        "Coinbase 50 Index"
+      ],
+      "supplemental_source_sha256": "2e7704499a3b13093d1eef2006f011c924dd8ce14fff20d9b4d5b6c92b09f64d",
+      "classification_sources": [
+        {
+          "url": "https://en.wikipedia.org/wiki/Ethereum",
+          "page_id": 41754003,
+          "intro_sha256": "dbfdaa67030024809c4529e66c910699a794ca373beffea52829c70fc9756ec9"
+        }
+      ]
+    },
+    {
+      "symbol": "BNB-USD",
+      "id": "binancecoin",
+      "market_cap_rank": 4,
+      "excluded_type": false,
+      "yahoo_verified": true,
+      "identity_source": "https://api.coingecko.com/api/v3/coins/markets",
+      "classification_review": "Curated identity review: native coins or project tokens, not stablecoins, wrapped assets or staked receipt tokens.",
+      "supplemental_source_categories": [
+        "Smart Contract Platform",
+        "Exchange-based Tokens",
+        "BNB Chain Ecosystem",
+        "Centralized Exchange (CEX) Token",
+        "Layer 1 (L1)",
+        "Ethereum Ecosystem",
+        "Alleged SEC Securities",
+        "FTX Holdings",
+        "Proof of Stake (PoS)",
+        "GMCI Layer 1 Index",
+        "GMCI 30 Index",
+        "GMCI Index",
+        "Made in China"
+      ],
+      "supplemental_source_sha256": "a8312000cf2a61e6dca0794593f63f01cf377de98d7e45b4f92cf1cf32b1df16",
+      "classification_sources": [
+        {
+          "url": "https://en.wikipedia.org/wiki/BNB_Smart_Chain_(blockchain_platform)",
+          "page_id": 81289832,
+          "intro_sha256": "57907ab056238dd4ca4036445e6f31d66c05f8d4f7815ba99eb6b1a1f6ef1b0f"
+        }
+      ]
+    },
+    {
+      "symbol": "XRP-USD",
+      "id": "ripple",
+      "market_cap_rank": 5,
+      "excluded_type": false,
+      "yahoo_verified": true,
+      "identity_source": "https://api.coingecko.com/api/v3/coins/markets",
+      "classification_review": "Curated identity review: native coins or project tokens, not stablecoins, wrapped assets or staked receipt tokens.",
+      "supplemental_source_categories": [
+        "Smart Contract Platform",
+        "Layer 1 (L1)",
+        "FTX Holdings",
+        "Pantera Capital Portfolio",
+        "Andreessen Horowitz (a16z) Portfolio",
+        "XRP Ledger Ecosystem",
+        "GMCI 30 Index",
+        "Blockchain Capital Portfolio",
+        "GMCI Index",
+        "Made in USA",
+        "Coinbase 50 Index"
+      ],
+      "supplemental_source_sha256": "5ef3d6086ff0f8493fe91d02ae63f5011fb8a20b519611ab21c20316b2bc515a",
+      "classification_sources": [
+        {
+          "url": "https://en.wikipedia.org/wiki/XRP_Ledger",
+          "page_id": 37194754,
+          "intro_sha256": "ab26f3941e9af727202152630c799d8c3b003b8754ed6630b31e950b39368db0"
+        }
+      ]
+    },
+    {
+      "symbol": "SOL-USD",
+      "id": "solana",
+      "market_cap_rank": 7,
+      "excluded_type": false,
+      "yahoo_verified": true,
+      "identity_source": "https://api.coingecko.com/api/v3/coins/markets",
+      "classification_review": "Curated identity review: native coins or project tokens, not stablecoins, wrapped assets or staked receipt tokens.",
+      "supplemental_source_categories": [
+        "Smart Contract Platform",
+        "Solana Ecosystem",
+        "Layer 1 (L1)",
+        "FTX Holdings",
+        "Multicoin Capital Portfolio",
+        "Proof of Stake (PoS)",
+        "Alameda Research Portfolio",
+        "Andreessen Horowitz (a16z) Portfolio",
+        "GMCI Layer 1 Index",
+        "GMCI 30 Index",
+        "Delphi Ventures Portfolio",
+        "GMCI Index",
+        "Polychain Capital Portfolio",
+        "Made in USA",
+        "Coinbase 50 Index",
+        "CoinList Launchpad"
+      ],
+      "supplemental_source_sha256": "ef6e825f5907c54af7b1ab43d6f6e55b0d6678bfe598545570d4a1d1f602626c",
+      "classification_sources": [
+        {
+          "url": "https://en.wikipedia.org/wiki/Solana_(blockchain_platform)",
+          "page_id": 68695418,
+          "intro_sha256": "f81132ea56319dc2b5a303a51edfbc11feccb83c83978b09ca3f2f739ab092be"
+        }
+      ]
+    },
+    {
+      "symbol": "TRX-USD",
+      "id": "tron",
+      "market_cap_rank": 8,
+      "excluded_type": false,
+      "yahoo_verified": true,
+      "identity_source": "https://api.coingecko.com/api/v3/coins/markets",
+      "classification_review": "Curated identity review: native coins or project tokens, not stablecoins, wrapped assets or staked receipt tokens.",
+      "supplemental_source_categories": [
+        "Smart Contract Platform",
+        "Layer 1 (L1)",
+        "Alleged SEC Securities",
+        "FTX Holdings",
+        "DWF Labs Portfolio",
+        "Tron Ecosystem",
+        "Proof of Stake (PoS)",
+        "GMCI Layer 1 Index",
+        "GMCI 30 Index",
+        "GMCI Index",
+        "World Liberty Financial Portfolio",
+        "Made in China"
+      ],
+      "supplemental_source_sha256": "2f944a7a289b4e3fb264ecfc12487cfa3baa06919ba97d225e56fd12fe25e79a",
+      "classification_sources": [
+        {
+          "url": "https://en.wikipedia.org/wiki/Tron_(blockchain)",
+          "page_id": 61565140,
+          "intro_sha256": "7761800c7ba84b3a72c9e28b24d5fd8e43d6105cbdc53ac089e060d5d6453163"
+        }
+      ]
+    },
+    {
+      "symbol": "ZEC-USD",
+      "id": "zcash",
+      "market_cap_rank": 10,
+      "excluded_type": false,
+      "yahoo_verified": true,
+      "identity_source": "https://api.coingecko.com/api/v3/coins/markets",
+      "classification_review": "Curated identity review: native coins or project tokens, not stablecoins, wrapped assets or staked receipt tokens.",
+      "supplemental_source_categories": [
+        "Smart Contract Platform",
+        "Privacy Coins",
+        "Layer 1 (L1)",
+        "Zero Knowledge (ZK)",
+        "Proof of Work (PoW)",
+        "Pantera Capital Portfolio",
+        "Made in USA",
+        "Coinbase 50 Index",
+        "Quantum-Resistant",
+        "Privacy"
+      ],
+      "supplemental_source_sha256": "fc13123b929754b042bd1c8caa58c0f518d40260d1a24db83a2019a362af2e2c",
+      "classification_sources": [
+        {
+          "url": "https://en.wikipedia.org/wiki/Zcash",
+          "page_id": 51849458,
+          "intro_sha256": "4fd57f2ef468aaeccfa8d407df84d771e931c1d6a48b4086e685cb2ca29ca63e"
+        }
+      ]
+    },
+    {
+      "symbol": "HYPE32196-USD",
+      "id": "hyperliquid",
+      "market_cap_rank": 11,
+      "excluded_type": false,
+      "yahoo_verified": true,
+      "identity_source": "https://api.coingecko.com/api/v3/coins/markets",
+      "classification_review": "Curated identity review: native coins or project tokens, not stablecoins, wrapped assets or staked receipt tokens.",
+      "supplemental_source_categories": [
+        "Decentralized Exchange (DEX)",
+        "Smart Contract Platform",
+        "Exchange-based Tokens",
+        "Decentralized Finance (DeFi)",
+        "Derivatives",
+        "Perpetuals",
+        "Layer 1 (L1)",
+        "Proof of Stake (PoS)",
+        "Hyperliquid Ecosystem",
+        "Governance"
+      ],
+      "supplemental_source_sha256": "10d311b32f4c4e5b99b0ae74b60d84d15bf906fa896cdb21a3a43f28826e663e",
+      "classification_sources": [
+        {
+          "url": "https://hyperfoundation.org/",
+          "kind": "project identity and token description"
+        }
+      ]
+    },
+    {
+      "symbol": "DOGE-USD",
+      "id": "dogecoin",
+      "market_cap_rank": 12,
+      "excluded_type": false,
+      "yahoo_verified": true,
+      "identity_source": "https://api.coingecko.com/api/v3/coins/markets",
+      "classification_review": "Curated identity review: native coins or project tokens, not stablecoins, wrapped assets or staked receipt tokens.",
+      "supplemental_source_categories": [
+        "Smart Contract Platform",
+        "Meme",
+        "Dog-Themed",
+        "Elon Musk-Inspired",
+        "Proof of Work (PoW)",
+        "GMCI Meme Index",
+        "GMCI 30 Index",
+        "GMCI Index",
+        "Coinbase 50 Index",
+        "4chan-Themed"
+      ],
+      "supplemental_source_sha256": "0b3569662febf9f54626fe3bc1ab2649f437db465dd9d3067382c7d0cac517f1",
+      "classification_sources": [
+        {
+          "url": "https://en.wikipedia.org/wiki/Dogecoin",
+          "page_id": 41360413,
+          "intro_sha256": "10f5030845474067865c3cd9a04ce0810e09d3cde52e5d0bf6890b139c94acec"
+        }
+      ]
+    },
+    {
+      "symbol": "XMR-USD",
+      "id": "monero",
+      "market_cap_rank": 13,
+      "excluded_type": false,
+      "yahoo_verified": true,
+      "identity_source": "https://api.coingecko.com/api/v3/coins/markets",
+      "classification_review": "Curated identity review: native coins or project tokens, not stablecoins, wrapped assets or staked receipt tokens.",
+      "supplemental_source_categories": [
+        "Smart Contract Platform",
+        "Privacy Coins",
+        "Layer 1 (L1)",
+        "Proof of Work (PoW)",
+        "Galaxy Digital Portfolio",
+        "Privacy"
+      ],
+      "supplemental_source_sha256": "db701b8fd135d1f2874168c53e98e3d13b7232f09d95c8e2b5a2c3a1cd23ba68",
+      "classification_sources": [
+        {
+          "url": "https://en.wikipedia.org/wiki/Monero",
+          "page_id": 45714713,
+          "intro_sha256": "5c578c6c8e396110847c66eca16ad58674fb37b873c3753e27c904364c47ec8c"
+        }
+      ]
+    },
+    {
+      "symbol": "LINK-USD",
+      "id": "chainlink",
+      "market_cap_rank": 16,
+      "excluded_type": false,
+      "yahoo_verified": true,
+      "identity_source": "https://api.coingecko.com/api/v3/coins/markets",
+      "classification_review": "Curated identity review: native coins or project tokens, not stablecoins, wrapped assets or staked receipt tokens.",
+      "classification_sources": [
+        {
+          "url": "https://en.wikipedia.org/wiki/Chainlink_(blockchain_oracle)",
+          "page_id": 67444790,
+          "intro_sha256": "12357da8286ea80907d1930e525b59abef26266ed86e0df9ecf97b888e6eaae9"
+        }
+      ]
+    },
+    {
+      "symbol": "ADA-USD",
+      "id": "cardano",
+      "market_cap_rank": 18,
+      "excluded_type": false,
+      "yahoo_verified": true,
+      "identity_source": "https://api.coingecko.com/api/v3/coins/markets",
+      "classification_review": "Curated identity review: native coins or project tokens, not stablecoins, wrapped assets or staked receipt tokens.",
+      "classification_sources": [
+        {
+          "url": "https://en.wikipedia.org/wiki/Cardano_(blockchain_platform)",
+          "page_id": 52920286,
+          "intro_sha256": "659e051a5089a096835dcff0a84b09c010c0954661891ee56002ace05f923eba"
+        }
+      ]
+    },
+    {
+      "symbol": "XLM-USD",
+      "id": "stellar",
+      "market_cap_rank": 19,
+      "excluded_type": false,
+      "yahoo_verified": true,
+      "identity_source": "https://api.coingecko.com/api/v3/coins/markets",
+      "classification_review": "Curated identity review: native coins or project tokens, not stablecoins, wrapped assets or staked receipt tokens.",
+      "classification_sources": [
+        {
+          "url": "https://en.wikipedia.org/wiki/Stellar_(payment_network)",
+          "page_id": 43737395,
+          "intro_sha256": "cf6b1a3aa20912aa1c9117fa8f202dc9984d916bc5d260c58aba23a870395c40"
+        }
+      ]
+    },
+    {
+      "symbol": "NEAR-USD",
+      "id": "near",
+      "market_cap_rank": 20,
+      "excluded_type": false,
+      "yahoo_verified": true,
+      "identity_source": "https://api.coingecko.com/api/v3/coins/markets",
+      "classification_review": "Curated identity review: native coins or project tokens, not stablecoins, wrapped assets or staked receipt tokens.",
+      "classification_sources": [
+        {
+          "url": "https://en.wikipedia.org/wiki/NEAR_(blockchain_platform)",
+          "page_id": 81331455,
+          "intro_sha256": "56424d8832cf55230ccfab49c4ab5e48b70db8471e41044662acb34cbebabf0e"
+        }
+      ]
+    },
+    {
+      "symbol": "BCH-USD",
+      "id": "bitcoin-cash",
+      "market_cap_rank": 22,
+      "excluded_type": false,
+      "yahoo_verified": true,
+      "identity_source": "https://api.coingecko.com/api/v3/coins/markets",
+      "classification_review": "Curated identity review: native coins or project tokens, not stablecoins, wrapped assets or staked receipt tokens.",
+      "classification_sources": [
+        {
+          "url": "https://en.wikipedia.org/wiki/Bitcoin_Cash",
+          "page_id": 54679407,
+          "intro_sha256": "3ed2e59fe3aad655a8c7bc42f344d8bfeea89112482721b9af6521b2837e500d"
+        }
+      ]
+    },
+    {
+      "symbol": "LTC-USD",
+      "id": "litecoin",
+      "market_cap_rank": 25,
+      "excluded_type": false,
+      "yahoo_verified": true,
+      "identity_source": "https://api.coingecko.com/api/v3/coins/markets",
+      "classification_review": "Curated identity review: native coins or project tokens, not stablecoins, wrapped assets or staked receipt tokens.",
+      "classification_sources": [
+        {
+          "url": "https://en.wikipedia.org/wiki/Litecoin",
+          "page_id": 37395085,
+          "intro_sha256": "76f9d0eb2da366e7d3dab04fcd82c4f6c4e64faa414157fcb206e5db8ff8e82e"
+        }
+      ]
+    },
+    {
+      "symbol": "UNI7083-USD",
+      "id": "uniswap",
+      "market_cap_rank": 26,
+      "excluded_type": false,
+      "yahoo_verified": true,
+      "identity_source": "https://api.coingecko.com/api/v3/coins/markets",
+      "classification_review": "Curated identity review: native coins or project tokens, not stablecoins, wrapped assets or staked receipt tokens.",
+      "classification_sources": [
+        {
+          "url": "https://en.wikipedia.org/wiki/Uniswap",
+          "page_id": 65962534,
+          "intro_sha256": "135c52031178e00e5cd62d267f4b38abb804710e12bd473f614e1908072e20ef"
+        }
+      ]
+    },
+    {
+      "symbol": "AVAX-USD",
+      "id": "avalanche-2",
+      "market_cap_rank": 28,
+      "excluded_type": false,
+      "yahoo_verified": true,
+      "identity_source": "https://api.coingecko.com/api/v3/coins/markets",
+      "classification_review": "Curated identity review: native coins or project tokens, not stablecoins, wrapped assets or staked receipt tokens.",
+      "classification_sources": [
+        {
+          "url": "https://en.wikipedia.org/wiki/Avalanche_(blockchain_platform)",
+          "page_id": 64064664,
+          "intro_sha256": "be14a02c2a49fd69f7b31219ed340abcf7c9e361155a2b0bb8bb7ca3c0d6a38b"
+        }
+      ]
+    },
+    {
+      "symbol": "SUI20947-USD",
+      "id": "sui",
+      "market_cap_rank": 30,
+      "excluded_type": false,
+      "yahoo_verified": true,
+      "identity_source": "https://api.coingecko.com/api/v3/coins/markets",
+      "classification_review": "Curated identity review: native coins or project tokens, not stablecoins, wrapped assets or staked receipt tokens.",
+      "classification_sources": [
+        {
+          "url": "https://en.wikipedia.org/wiki/Sui_(blockchain_platform)",
+          "page_id": 83425352,
+          "intro_sha256": "903558b1a884829cca0bac7212e8f10b8a9d763d9f808187a468b7dd2dd1d4c0"
+        }
+      ]
+    },
+    {
+      "symbol": "GRAM-USD",
+      "id": "the-open-network",
+      "market_cap_rank": 31,
+      "excluded_type": false,
+      "yahoo_verified": true,
+      "identity_source": "https://api.coingecko.com/api/v3/coins/markets",
+      "classification_review": "Curated identity review: native coins or project tokens, not stablecoins, wrapped assets or staked receipt tokens.",
+      "classification_sources": [
+        {
+          "url": "https://en.wikipedia.org/wiki/TON_(blockchain)",
+          "page_id": 57402478,
+          "intro_sha256": "5c73d79b333d7fcfb7f01d0e00f92d3822a89c066a66b3584460d889603f4cca"
+        }
+      ]
+    },
+    {
+      "symbol": "HBAR-USD",
+      "id": "hedera-hashgraph",
+      "market_cap_rank": 32,
+      "excluded_type": false,
+      "yahoo_verified": true,
+      "identity_source": "https://api.coingecko.com/api/v3/coins/markets",
+      "classification_review": "Curated identity review: native coins or project tokens, not stablecoins, wrapped assets or staked receipt tokens.",
+      "classification_sources": [
+        {
+          "url": "https://en.wikipedia.org/wiki/Hedera_(distributed_ledger)",
+          "page_id": 56941030,
+          "intro_sha256": "ca7250f2373dc966e21fafa945199196c9a63330a7b182af414e87223a86da04"
+        }
+      ]
+    },
+    {
+      "symbol": "SHIB-USD",
+      "id": "shiba-inu",
+      "market_cap_rank": 36,
+      "excluded_type": false,
+      "yahoo_verified": true,
+      "identity_source": "https://api.coingecko.com/api/v3/coins/markets",
+      "classification_review": "Curated identity review: native coins or project tokens, not stablecoins, wrapped assets or staked receipt tokens.",
+      "classification_sources": [
+        {
+          "url": "https://en.wikipedia.org/wiki/Shiba_Inu_(cryptocurrency)",
+          "page_id": 67654959,
+          "intro_sha256": "ad016d7a6b6413ddd6d7eaaf55ace0329f472e8729bd608f3a4b6116fa5ce478"
+        }
+      ]
+    },
+    {
+      "symbol": "CRO-USD",
+      "id": "crypto-com-chain",
+      "market_cap_rank": 38,
+      "excluded_type": false,
+      "yahoo_verified": true,
+      "identity_source": "https://api.coingecko.com/api/v3/coins/markets",
+      "classification_review": "Curated identity review: native coins or project tokens, not stablecoins, wrapped assets or staked receipt tokens.",
+      "classification_sources": [
+        {
+          "url": "https://en.wikipedia.org/wiki/Crypto.com",
+          "page_id": 69292168,
+          "intro_sha256": "ea8a5b429906cd8599486a44dbad2ef650d3b1f365f42c047812872faf6e1db6"
+        }
+      ]
+    },
+    {
+      "symbol": "OKB-USD",
+      "id": "okb",
+      "market_cap_rank": 45,
+      "excluded_type": false,
+      "yahoo_verified": true,
+      "identity_source": "https://api.coingecko.com/api/v3/coins/markets",
+      "classification_review": "Curated identity review: native coins or project tokens, not stablecoins, wrapped assets or staked receipt tokens.",
+      "classification_sources": [
+        {
+          "url": "https://en.wikipedia.org/wiki/OKX",
+          "page_id": 56724345,
+          "intro_sha256": "9fe505f7885d1994ffef4ab71f853732522eaa4a62559fbe451559c69968829e"
+        }
+      ]
+    },
+    {
+      "symbol": "AAVE-USD",
+      "id": "aave",
+      "market_cap_rank": 47,
+      "excluded_type": false,
+      "yahoo_verified": true,
+      "identity_source": "https://api.coingecko.com/api/v3/coins/markets",
+      "classification_review": "Curated identity review: native coins or project tokens, not stablecoins, wrapped assets or staked receipt tokens.",
+      "classification_sources": [
+        {
+          "url": "https://en.wikipedia.org/wiki/Aave",
+          "page_id": 78346135,
+          "intro_sha256": "f42b17264bd4a2b3f5412df6390626300121a55cf935f8f575f1617d9eb8c6a8"
+        }
+      ]
+    },
+    {
+      "symbol": "PEPE24478-USD",
+      "id": "pepe",
+      "market_cap_rank": 51,
+      "excluded_type": false,
+      "yahoo_verified": true,
+      "identity_source": "https://api.coingecko.com/api/v3/coins/markets",
+      "classification_review": "Curated identity review: native coins or project tokens, not stablecoins, wrapped assets or staked receipt tokens.",
+      "classification_sources": [
+        {
+          "url": "https://www.pepe.vip/",
+          "kind": "project identity and token description"
+        }
+      ]
+    },
+    {
+      "symbol": "DOT-USD",
+      "id": "polkadot",
+      "market_cap_rank": 55,
+      "excluded_type": false,
+      "yahoo_verified": true,
+      "identity_source": "https://api.coingecko.com/api/v3/coins/markets",
+      "classification_review": "Curated identity review: native coins or project tokens, not stablecoins, wrapped assets or staked receipt tokens.",
+      "classification_sources": [
+        {
+          "url": "https://en.wikipedia.org/wiki/Polkadot_(blockchain_platform)",
+          "page_id": 56086757,
+          "intro_sha256": "524a28133caa1a529eae0081539e42ccd9ece9c9952ddad84fa6a5eee91dca3e"
+        }
+      ]
+    },
+    {
+      "symbol": "WLD-USD",
+      "id": "worldcoin-wld",
+      "market_cap_rank": 58,
+      "excluded_type": false,
+      "yahoo_verified": true,
+      "identity_source": "https://api.coingecko.com/api/v3/coins/markets",
+      "classification_review": "Curated identity review: native coins or project tokens, not stablecoins, wrapped assets or staked receipt tokens.",
+      "classification_sources": [
+        {
+          "url": "https://en.wikipedia.org/wiki/World_(blockchain)",
+          "page_id": 73548731,
+          "intro_sha256": "d5eb9bdda283b1b489f6f0d7c95734fa51885eb9f9588cb672b547592a04a1a1"
+        }
+      ]
+    },
+    {
+      "symbol": "ICP-USD",
+      "id": "internet-computer",
+      "market_cap_rank": 64,
+      "excluded_type": false,
+      "yahoo_verified": true,
+      "identity_source": "https://api.coingecko.com/api/v3/coins/markets",
+      "classification_review": "Curated identity review: native coins or project tokens, not stablecoins, wrapped assets or staked receipt tokens.",
+      "classification_sources": [
+        {
+          "url": "https://legacy.internetcomputer.org/docs/building-apps/getting-started/tokens-and-cycles",
+          "kind": "project identity and token description"
+        }
+      ]
+    },
+    {
+      "symbol": "BGB-USD",
+      "id": "bitget-token",
+      "market_cap_rank": 67,
+      "excluded_type": false,
+      "yahoo_verified": true,
+      "identity_source": "https://api.coingecko.com/api/v3/coins/markets",
+      "classification_review": "Curated identity review: native coins or project tokens, not stablecoins, wrapped assets or staked receipt tokens.",
+      "classification_sources": [
+        {
+          "url": "https://en.wikipedia.org/wiki/Bitget",
+          "page_id": 82029832,
+          "intro_sha256": "45b406b937ecc6a9fd526b1ba1d2113400a28f1edd203280f0fb95659058ebf0"
+        }
+      ]
+    },
+    {
+      "symbol": "ETC-USD",
+      "id": "ethereum-classic",
+      "market_cap_rank": 70,
+      "excluded_type": false,
+      "yahoo_verified": true,
+      "identity_source": "https://api.coingecko.com/api/v3/coins/markets",
+      "classification_review": "Curated identity review: native coins or project tokens, not stablecoins, wrapped assets or staked receipt tokens.",
+      "classification_sources": [
+        {
+          "url": "https://en.wikipedia.org/wiki/Ethereum_Classic",
+          "page_id": 51159152,
+          "intro_sha256": "6cb9596d4290371baae54dcb087e832fdfa2c083a5a6367cae1e6fc3bb22af5a"
+        }
+      ]
+    },
+    {
+      "symbol": "KCS-USD",
+      "id": "kucoin-shares",
+      "market_cap_rank": 74,
+      "excluded_type": false,
+      "yahoo_verified": true,
+      "identity_source": "https://api.coingecko.com/api/v3/coins/markets",
+      "classification_review": "Curated identity review: native coins or project tokens, not stablecoins, wrapped assets or staked receipt tokens.",
+      "classification_sources": [
+        {
+          "url": "https://en.wikipedia.org/wiki/KuCoin",
+          "page_id": 76584727,
+          "intro_sha256": "c212eb81ba499fd709e58d3c1127dd9c93dcbfdab6d002160ca8a91453317894"
+        }
+      ]
+    },
+    {
+      "symbol": "KAS-USD",
+      "id": "kaspa",
+      "market_cap_rank": 75,
+      "excluded_type": false,
+      "yahoo_verified": true,
+      "identity_source": "https://api.coingecko.com/api/v3/coins/markets",
+      "classification_review": "Curated identity review: native coins or project tokens, not stablecoins, wrapped assets or staked receipt tokens.",
+      "classification_sources": [
+        {
+          "url": "https://en.wikipedia.org/wiki/Kaspa",
+          "page_id": 61836025,
+          "intro_sha256": "612a0796717504b9b501e7b3d55b4dce3f61b9107e87460ea2965aea43f39cd0"
+        }
+      ]
+    },
+    {
+      "symbol": "ALGO-USD",
+      "id": "algorand",
+      "market_cap_rank": 78,
+      "excluded_type": false,
+      "yahoo_verified": true,
+      "identity_source": "https://api.coingecko.com/api/v3/coins/markets",
+      "classification_review": "Curated identity review: native coins or project tokens, not stablecoins, wrapped assets or staked receipt tokens.",
+      "classification_sources": [
+        {
+          "url": "https://en.wikipedia.org/wiki/Algorand",
+          "page_id": 67291815,
+          "intro_sha256": "adcddcf85db6e01aaa40772f383fb52cd2f98e17f680272677aaa569867a06eb"
+        }
+      ]
+    },
+    {
+      "symbol": "ATOM-USD",
+      "id": "cosmos",
+      "market_cap_rank": 80,
+      "excluded_type": false,
+      "yahoo_verified": true,
+      "identity_source": "https://api.coingecko.com/api/v3/coins/markets",
+      "classification_review": "Curated identity review: native coins or project tokens, not stablecoins, wrapped assets or staked receipt tokens.",
+      "classification_sources": [
+        {
+          "url": "https://en.wikipedia.org/wiki/Cosmos_(network)",
+          "page_id": 82917842,
+          "intro_sha256": "24fbd9b0a631d94959439d7577e86491f68f49aafd8642cf3a69d5d924dacf63"
+        }
+      ]
+    },
+    {
+      "symbol": "NEXO-USD",
+      "id": "nexo",
+      "market_cap_rank": 83,
+      "excluded_type": false,
+      "yahoo_verified": true,
+      "identity_source": "https://api.coingecko.com/api/v3/coins/markets",
+      "classification_review": "Curated identity review: native coins or project tokens, not stablecoins, wrapped assets or staked receipt tokens.",
+      "classification_sources": [
+        {
+          "url": "https://en.wikipedia.org/wiki/Nexo_(company)",
+          "page_id": 83229400,
+          "intro_sha256": "df3565db4273f5cc7a192c7ec0e2828ea28e972f4103367b3f6493a2031e36d6"
+        }
+      ]
+    },
+    {
+      "symbol": "FIL-USD",
+      "id": "filecoin",
+      "market_cap_rank": 85,
+      "excluded_type": false,
+      "yahoo_verified": true,
+      "identity_source": "https://api.coingecko.com/api/v3/coins/markets",
+      "classification_review": "Curated identity review: native coins or project tokens, not stablecoins, wrapped assets or staked receipt tokens.",
+      "classification_sources": [
+        {
+          "url": "https://en.wikipedia.org/wiki/Filecoin",
+          "page_id": 54859253,
+          "intro_sha256": "6182b9fa65df62684cb6b6e225b3139a23e25757ad95458fc68d0f620d01e9e3"
+        }
+      ]
+    },
+    {
+      "symbol": "APT21794-USD",
+      "id": "aptos",
+      "market_cap_rank": 96,
+      "excluded_type": false,
+      "yahoo_verified": true,
+      "identity_source": "https://api.coingecko.com/api/v3/coins/markets",
+      "classification_review": "Curated identity review: native coins or project tokens, not stablecoins, wrapped assets or staked receipt tokens.",
+      "classification_sources": [
+        {
+          "url": "https://en.wikipedia.org/wiki/Aptos_Labs",
+          "page_id": 78444053,
+          "intro_sha256": "74f4f8cdbe4334ac9b90e0f8ccfd8afcbea2d9d90138b8597736f671e8fe2383"
+        }
+      ]
+    }
+  ],
+  "classification_reviewed_at": "2026-10-25T05:38:01.342813+00:00",
+  "taxonomy_api_limit": "Supplemental CoinGecko detail collection stopped on HTTP 429; missing detail responses are not claimed as verified.",
+  "wikipedia_missing": [
+    "HYPE32196-USD",
+    "PEPE24478-USD",
+    "ICP-USD"
+  ],
+  "attention_proxy_notice": "Some article titles refer to the issuing platform or company, rather than the token alone."
+}

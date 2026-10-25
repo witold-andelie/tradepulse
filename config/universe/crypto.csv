@@ -1,26 +1,39 @@
 symbol,name,category,wikipedia_title,notes
-BTC-USD,Bitcoin,layer-1,,
-ETH-USD,Ethereum,layer-1,,
-XRP-USD,XRP,payments,,
-BNB-USD,BNB,exchange-token,,
-SOL-USD,Solana,layer-1,,
-DOGE-USD,Dogecoin,meme,,
-ADA-USD,Cardano,layer-1,,
-TRX-USD,TRON,layer-1,,
-AVAX-USD,Avalanche,layer-1,,
-LINK-USD,Chainlink,oracle,,
-XLM-USD,Stellar,payments,,
-BCH-USD,Bitcoin Cash,payments,,
-LTC-USD,Litecoin,payments,,
-DOT-USD,Polkadot,layer-1,,
-HBAR-USD,Hedera,layer-1,,
-SHIB-USD,Shiba Inu,meme,,
-NEAR-USD,NEAR Protocol,layer-1,,
-ICP-USD,Internet Computer,layer-1,,
-ETC-USD,Ethereum Classic,layer-1,,
-AAVE-USD,Aave,defi,,
-,Toncoin,layer-1,,TODO(A): find the Yahoo symbol (may carry a numeric suffix)
-,Sui,layer-1,,TODO(A): find the Yahoo symbol (may carry a numeric suffix)
-,Uniswap,defi,,TODO(A): find the Yahoo symbol (may carry a numeric suffix)
-,Aptos,layer-1,,TODO(A): find the Yahoo symbol (may carry a numeric suffix)
-,Pepe,meme,,TODO(A): find the Yahoo symbol (may carry a numeric suffix)
+BTC-USD,Bitcoin,layer-1,Bitcoin,CoinGecko id=bitcoin; market-cap rank=1; decision as_of=2026-10-23
+ETH-USD,Ethereum,layer-1,Ethereum,CoinGecko id=ethereum; market-cap rank=2; decision as_of=2026-10-23
+BNB-USD,BNB,exchange-token,BNB_Smart_Chain_(blockchain_platform),CoinGecko id=binancecoin; market-cap rank=4; decision as_of=2026-10-23
+XRP-USD,XRP,payments,XRP_Ledger,CoinGecko id=ripple; market-cap rank=5; decision as_of=2026-10-23
+SOL-USD,Solana,layer-1,Solana_(blockchain_platform),CoinGecko id=solana; market-cap rank=7; decision as_of=2026-10-23
+TRX-USD,TRON,layer-1,Tron_(blockchain),CoinGecko id=tron; market-cap rank=8; decision as_of=2026-10-23
+ZEC-USD,Zcash,privacy,Zcash,CoinGecko id=zcash; market-cap rank=10; decision as_of=2026-10-23
+HYPE32196-USD,Hyperliquid,defi,,CoinGecko id=hyperliquid; market-cap rank=11; decision as_of=2026-10-23
+DOGE-USD,Dogecoin,meme,Dogecoin,CoinGecko id=dogecoin; market-cap rank=12; decision as_of=2026-10-23
+XMR-USD,Monero,privacy,Monero,CoinGecko id=monero; market-cap rank=13; decision as_of=2026-10-23
+LINK-USD,Chainlink,oracle,Chainlink_(blockchain_oracle),CoinGecko id=chainlink; market-cap rank=16; decision as_of=2026-10-23
+ADA-USD,Cardano,layer-1,Cardano_(blockchain_platform),CoinGecko id=cardano; market-cap rank=18; decision as_of=2026-10-23
+XLM-USD,Stellar,payments,Stellar_(payment_network),CoinGecko id=stellar; market-cap rank=19; decision as_of=2026-10-23
+NEAR-USD,NEAR Protocol,layer-1,NEAR_(blockchain_platform),CoinGecko id=near; market-cap rank=20; decision as_of=2026-10-23
+BCH-USD,Bitcoin Cash,payments,Bitcoin_Cash,CoinGecko id=bitcoin-cash; market-cap rank=22; decision as_of=2026-10-23
+LTC-USD,Litecoin,payments,Litecoin,CoinGecko id=litecoin; market-cap rank=25; decision as_of=2026-10-23
+UNI7083-USD,Uniswap,defi,Uniswap,CoinGecko id=uniswap; market-cap rank=26; decision as_of=2026-10-23
+AVAX-USD,Avalanche,layer-1,Avalanche_(blockchain_platform),CoinGecko id=avalanche-2; market-cap rank=28; decision as_of=2026-10-23
+SUI20947-USD,Sui,layer-1,Sui_(blockchain_platform),CoinGecko id=sui; market-cap rank=30; decision as_of=2026-10-23
+GRAM-USD,Gram (prev. Toncoin),layer-1,TON_(blockchain),CoinGecko id=the-open-network; market-cap rank=31; decision as_of=2026-10-23
+HBAR-USD,Hedera,layer-1,Hedera_(distributed_ledger),CoinGecko id=hedera-hashgraph; market-cap rank=32; decision as_of=2026-10-23
+SHIB-USD,Shiba Inu,meme,Shiba_Inu_(cryptocurrency),CoinGecko id=shiba-inu; market-cap rank=36; decision as_of=2026-10-23
+CRO-USD,Cronos,exchange-token,Crypto.com,CoinGecko id=crypto-com-chain; market-cap rank=38; decision as_of=2026-10-23
+OKB-USD,OKB,exchange-token,OKX,CoinGecko id=okb; market-cap rank=45; decision as_of=2026-10-23
+AAVE-USD,Aave,defi,Aave,CoinGecko id=aave; market-cap rank=47; decision as_of=2026-10-23
+PEPE24478-USD,Pepe,meme,,CoinGecko id=pepe; market-cap rank=51; decision as_of=2026-10-23
+DOT-USD,Polkadot,layer-1,Polkadot_(blockchain_platform),CoinGecko id=polkadot; market-cap rank=55; decision as_of=2026-10-23
+WLD-USD,Worldcoin,identity,World_(blockchain),CoinGecko id=worldcoin-wld; market-cap rank=58; decision as_of=2026-10-23
+ICP-USD,Internet Computer,layer-1,,CoinGecko id=internet-computer; market-cap rank=64; decision as_of=2026-10-23
+BGB-USD,Bitget Token,exchange-token,Bitget,CoinGecko id=bitget-token; market-cap rank=67; decision as_of=2026-10-23
+ETC-USD,Ethereum Classic,layer-1,Ethereum_Classic,CoinGecko id=ethereum-classic; market-cap rank=70; decision as_of=2026-10-23
+KCS-USD,KuCoin,exchange-token,KuCoin,CoinGecko id=kucoin-shares; market-cap rank=74; decision as_of=2026-10-23
+KAS-USD,Kaspa,layer-1,Kaspa,CoinGecko id=kaspa; market-cap rank=75; decision as_of=2026-10-23
+ALGO-USD,Algorand,layer-1,Algorand,CoinGecko id=algorand; market-cap rank=78; decision as_of=2026-10-23
+ATOM-USD,Cosmos Hub,layer-1,Cosmos_(network),CoinGecko id=cosmos; market-cap rank=80; decision as_of=2026-10-23
+NEXO-USD,NEXO,defi,Nexo_(company),CoinGecko id=nexo; market-cap rank=83; decision as_of=2026-10-23
+FIL-USD,Filecoin,storage,Filecoin,CoinGecko id=filecoin; market-cap rank=85; decision as_of=2026-10-23
+APT21794-USD,Aptos,layer-1,Aptos_Labs,CoinGecko id=aptos; market-cap rank=96; decision as_of=2026-10-23

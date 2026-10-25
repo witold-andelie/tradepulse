@@ -128,7 +128,7 @@ def fetch_crypto_research(as_of):
                     options = [q["title"] for q in payload.get("query", {}).get("search", [])]
                 record[source + "_candidates"] = json.dumps(options, ensure_ascii=True)
             rows.append(record)
-            report(pd.DataFrame(rows), "crypto_candidates.csv")
+            report(pd.DataFrame(rows), "crypto_candidates.csv", REPO_ROOT)
             print(f"Crypto candidate {len(rows)}/{len(candidates)}: {ident}", flush=True)
     return pd.DataFrame(rows)
 
@@ -348,7 +348,11 @@ def fetch_crypto_verification(as_of):
         removed.append(
             {"id": remove["id"], "reason": "No verifiable English article; optional candidate"}
         )
-    report(pd.DataFrame(removed, columns=["id", "reason"]), "crypto_selection_exceptions.csv")
+    report(
+        pd.DataFrame(removed, columns=["id", "reason"]),
+        "crypto_selection_exceptions.csv",
+        REPO_ROOT,
+    )
     selected.sort(key=lambda r: r["market_cap_rank"])
     if not selected:
         raise ValueError("No verified Yahoo crypto candidates; see crypto_candidates.csv")

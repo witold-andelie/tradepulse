@@ -2,8 +2,9 @@
 
 You are helping Member A implement the data-ingestion module of TradePulse.
 
-The acquisition code is already implemented. Read `docs/STATUS.md`; focus on real collection,
-data quality and the missing validated sample rather than rebuilding the module.
+The acquisition code and real 2026-10-23 sample are implemented. Read `docs/STATUS.md` and
+`ingest/REAL_DATA_EVIDENCE.md`; preserve the published hashes, source exceptions and contributor
+history. Follow-up work is owned by the lead, not a new assignment for Member A.
 
 1. Read `ingest/TASK.md` and `ingest/ACCEPTANCE.md` before writing code. Read the contract file in
    `contracts/tables/` for any table you touch.

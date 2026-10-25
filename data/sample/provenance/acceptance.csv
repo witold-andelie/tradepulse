@@ -1,0 +1,33 @@
+check,passed,actual
+filing.contract,True,9005 rows
+filing_text.contract,True,2155 rows
+fundamental_fact.contract,True,250968 rows
+macro_point.contract,True,564 rows
+pageview.contract,True,463068 rows
+price_bar.contract,True,342804 rows
+universe_member.contract,True,616 rows
+us_equity.size,True,523
+us_equity.titles,True,0.988527724665392
+us_equity.pageview_members,True,0.988527724665392
+eu_equity.size,True,55
+eu_equity.titles,True,0.9090909090909091
+eu_equity.pageview_members,True,0.9090909090909091
+crypto.size,True,38
+crypto.titles,True,0.9210526315789473
+crypto.pageview_members,True,0.9210526315789473
+us.cik,True,0
+prices.references,True,"['BTC-USD', 'SPY', '^STOXX50E', '^VIX', '^VIX3M']"
+us_equity.price_coverage,True,1.0
+eu_equity.price_coverage,True,1.0
+crypto.price_coverage,True,1.0
+filings.earnings_members,True,513
+facts.eps_members,True,511
+texts.hashes,True,0
+texts.lengths,True,2155
+texts.exhibit_size,True,2136
+texts.earnings_complete,False,35 missing
+texts.earnings_accounted_with_approved_exceptions,True,35 missing; 35 approved source exceptions; 0 unresolved
+edgar.timezone,True,3
+crypto.curated_review,True,Review evidence present
+sample.complete,True,Seven nonempty valid tables required
+sample.size,True,15341745

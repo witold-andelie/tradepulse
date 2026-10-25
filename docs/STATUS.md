@@ -1,4 +1,4 @@
-# Project status — 24 October 2026
+# Project status — 25 October 2026
 
 This is the current implementation and ownership index. Detailed task catalogues remain
 requirements, not evidence of completed deployment or historical market performance.
@@ -14,11 +14,11 @@ by the lead. These merges retain the original contributor commits.
 | Area | Implemented | Remaining |
 |---|---|---|
 | Core / lead | Research gates, ranking, regime, walk-forward, grounded extraction, LangGraph explanation/verifier, reports, API and traces | Engine wiring, real artifact/service acceptance and delivery materials |
-| A / ingest, lead follow-up | Provider fixes, local-evidence documentation, lake/sample code, current-bar coverage auditing and offline regressions | Lead: collect real artifacts/crypto CSV from sources, independently accept data and source policies, publish sample and arrange S3 upload with D |
+| A / ingest, lead follow-up | Real seven-table lake/sample for 2026-10-23, crypto CSV/provenance, source checks, lead-accepted source exceptions and offline execution | D's private S3 destination and matching model recordings |
 | B / Huyin | Six business pages, Discover, Simple/Pro, filtering, evidence drill-down, responsive design and accessibility interactions | Visual/interaction review, concrete findings and remaining manual acceptance |
 | C / Tanhao | C1–C7 math, 235 C9 property cases, B7–B9 review fixes and recorded fixture accessibility acceptance | Regression against delivered real API outputs |
 | D / integrations | SQL templates, DuckDB adapter, registration runner, hosted NIM record/replay client and Python engines client | Zetaris deployment/registration/live client/parity, recorded cassette and TypeScript engines sidecar |
-| Docker | Core and web definitions, nginx API proxy and memory limits | Runtime validation after sample artifacts arrive; engines service remains commented out |
+| Docker | Core and web definitions, nginx API proxy and memory limits | Runtime validation; engines service remains commented out |
 
 Do not ask Huyin or Tanhao to recreate pages already supplied by the integration.
 Existing page adapters preserve the agreed `*Page` prop interfaces; shared hook paths use
@@ -26,32 +26,40 @@ one provider and all charts delegate to the shared figure/modular renderer.
 
 ## Artifact and service availability
 
-The publication checkout has no `data/lake/`, `data/sample/`, saved `runs/` or real `logs/`.
-It also lacks `integrations/ACCESS.md`, a deployed-service evidence record, engines server
-source/vendor files, a committed LLM cassette and live parity/model smoke-test evidence.
-PR #5's sample hashes, coverage figures and SEC comparisons describe the author's excluded
-local artifacts. They do not deliver those artifacts or independently establish acceptance.
-The lead follow-up fixes stale coverage-report acceptance, missing crypto article lookup and
-sample document selection without changing schemas or original tests. The 35 reported exhibit
-exceptions and SEC timestamp-policy synchronization still require explicit lead disposition.
-No existing real artifact delivery is available; the lead is preparing fresh collection for
-2026-10-23. The local contact User-Agent settings are not yet configured, so provider requests
-have not started. The ignored .env template is ready for local completion.
+The real sample and crypto configuration were independently rebuilt from public sources for
+2026-10-23. Seven table files occupy 15,341,745 bytes; the complete package remains below
+25 MB. It includes source-index evidence, hashes, privacy normalization and offline checks.
+See [real-data evidence](../ingest/REAL_DATA_EVIDENCE.md) and
+[the sample manifest](../data/sample/manifest.json). The collector's full lake, caches, saved
+run and genuine traces remain local/ignored. PR #5's older excluded sample is historical evidence.
 
-The standalone web preview works with synthetic fixtures. Full SAMPLE_MODE is not yet an
-accepted offline delivery. Docker's API-mode web build needs a saved backend output and will
-show a visible API error when one is missing.
+Strict data audit: 31/32 checks pass. The remaining completeness check truthfully reports
+35 missing exhibits; every source index was independently verified to have no permitted
+candidate. The lead accepted these exceptions for a source-qualified release on 2026-10-25;
+the strict completeness flag remains false. Source
+timestamp descriptions still need lead-reviewed synchronization with verified index-based UTC.
+
+A complete three-pool run finished with networking blocked and a contract-valid RunOutput:
+616 NO_CALL records, 33 factor cards (20 MEASURED_ONLY, 13 INSUFFICIENT_DATA), and nine abstained
+explanations because the matching model cassette is absent. No ACTIVE factor or model answer
+was fabricated. Full explained replay and sponsor acceptance remain incomplete.
+
+The checkout lacks `integrations/ACCESS.md`, deployed-service evidence, engines server/vendor
+files, a committed LLM cassette and live parity/model smoke evidence. The standalone frontend
+still defaults to synthetic fixtures; API mode needs a generated/saved run. Cloud upload is
+pending D's private destination and access method.
 
 ## Remaining sequence and owners
 
-1. **Lead, taking over A's delivery:** collect the lake, curated crypto CSV and source reports
-   from the providers for the fixed decision date. Independently validate them,
-   publish the snapshot/decision date and arrange upload to D's private location. Existing
-   coverage and point-in-time acceptance thresholds remain in force. Do not assign A more fixes.
+1. **Lead, taking over A's delivery:** arrange upload to D's private location. Source exceptions
+   were accepted for release on 2026-10-25. Preserve the delivered sample and hashes; do not
+   replace measured gaps with invented rows or assign A more fixes.
 2. **D:** finish Zetaris client/deployment/parity; agree the NIM models with the lead; record
-   model answers for A's exact snapshot/date; implement and test the Meterless engines sidecar.
+   model answers for the delivered snapshot/date and redacted text hashes; implement and test
+   the Meterless engines sidecar. The earlier excluded sample is not cassette-compatible.
 3. **Lead:** connect engines, verify hosted access from Europe, and run offline SAMPLE_MODE
-   with networking disabled. Inspect actual reports, data provenance and JSONL traces.
+   with networking disabled after recording models. Offline data loading, pipeline execution,
+   API contract and abstention behavior have already passed; model replay is still pending.
 4. **B and C / lead QA:** review the integrated pages against those real outputs and fix specific
    findings. B7–B9 fixture acceptance is recorded; other-page and real-output acceptance remains.
 5. **Lead:** finalize sponsor evidence, honest limitations, three or more genuine sample
@@ -63,15 +71,19 @@ These are the recorded project deadlines, not a live check of organizer announce
 
 ## Verified checks
 
-- Full offline Python suite after PRs #3–#5, ingestion fixes and collection readiness: **576 passed, 8 skipped**,
+- Full offline Python suite on the collector, with real lake and delivered sample: **595 passed, none skipped**,
   with 19 existing BeautifulSoup/lxml deprecation warnings.
-  The skips are seven lake-table cases and the sample snapshot case; absent real artifacts
-  still block A's acceptance.
+  All seven lake cases and the sample case execute. Passing these tests does not override the
+  separate strict completeness failure for the 35 verified source exceptions.
+  A clean repository export without credentials/caches passed **588 tests with 7 expected
+  production-lake skips** and zero attempted external network connections. The sample test
+  passed. Its seven production-lake cases require local collection/private handoff.
 - Eleven new ingestion regression cases passed; eight failed against the merged implementation
   before the fixes, covering stale/missing coverage evidence, absent crypto article mappings
   and multi-share-class sample selection. No original test was edited.
-- Nine further collection-readiness cases cover absent Yahoo candidates and source-date
-  validation before sample publication. Ingest alone: **101 passed, 8 skipped**.
+- Nine collection-readiness cases cover absent Yahoo candidates and source-date validation.
+  Public Yahoo transport, privacy normalization and blocked-news reporting have new offline
+  regressions. No given test assertion was changed.
 - Changed ingestion files and new regression files pass Ruff **0.17.2** with `--no-cache`.
   Full-repository Ruff 0.17.2 acceptance is not claimed: the previously identified unused
   `noqa` at `quant/tests/test_evaluation.py:87` remains a separate maintenance item.
@@ -88,9 +100,14 @@ These are the recorded project deadlines, not a live check of organizer announce
   Lighthouse 100 on each page, axe zero critical/serious, keyboard, 200% zoom, 320px reflow,
   NVDA 2026.2 and native reduced motion. The lead independently checked all eight chart tables
   at 320px, indicator row headers, emulated reduced motion and a clean production console.
+- Real sample DuckDB queries and a complete three-pool pipeline run passed with network
+  connections blocked and zero attempted connections. These are data/contract/load checks,
+  not claims of successful model inference or predictive performance.
+- GDELT probes returned 345 daily observations each for NVDA, AMD and COHR over the requested
+  year, with 20 missing dates per series. No missing dates were filled and no news factor was added.
 
 Original browser/contrast checks above belong to the Huyin integration; the PR #4 checks are
-identified separately. Python and changed-file Ruff were rerun for the lead ingestion follow-up.
+identified separately. Python and changed-file Ruff were rerun for the real-data delivery.
 Local browser evidence is outside Git under
 `D:/AI_Models/hackson/.work/huyin-integration/`. No automated result certifies WCAG conformance,
 proves live services work, or establishes predictive investment performance.
@@ -102,6 +119,8 @@ proves live services work, or establishes predictive investment performance.
 - [Detailed current instructions for Huyin](../web/HUYIN_NEXT_STEPS.md)
 - [Ingest](../ingest/TASK.md), [quant/C review](../quant/TASK.md),
   [sponsor integration tasks](../integrations/TASK.md)
+- [Real collection evidence](../ingest/REAL_DATA_EVIDENCE.md),
+  [portable sample](../data/sample/README.md) and [sample hashes](../data/sample/manifest.json)
 - [Core implementation](../tradepulse/README.md), [architecture](architecture/README.md),
   [decisions](architecture/decisions.md)
 - [Honest limitations](honest-limitations.md) and [sponsor evidence status](sponsors.md)

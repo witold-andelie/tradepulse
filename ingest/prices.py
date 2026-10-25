@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import datetime as dt
+import os
 import time
 from pathlib import Path
 
@@ -108,6 +109,13 @@ def _yahoo_session():
 
 
 def fetch_prices(symbols: list[str], start: dt.date, end: dt.date) -> pd.DataFrame:
+    transport = os.environ.get("YAHOO_TRANSPORT", "yfinance")
+    if transport == "public_chart":
+        from ingest.yahoo_chart import fetch_public_prices
+
+        return fetch_public_prices(symbols, start, end)
+    if transport != "yfinance":
+        raise ValueError("YAHOO_TRANSPORT must be yfinance or public_chart")
     import yfinance as yf
 
     cache = REPO_ROOT / "data/cache/yfinance"

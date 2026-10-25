@@ -13,16 +13,22 @@ Unsupported explanations abstain.
 > Research and education only. Tiers are research stances, never orders. TradePulse places no
 > trades. Synthetic fixtures and historical evaluation are not live investment performance.
 
-## Current status — 24 October 2026
+## Current status — 25 October 2026
 
 The quantitative core, pipeline, HTTP API and complete fixture-backed frontend are implemented.
 Huyin's original B1–B10 and accessibility commits are preserved in the integration history,
 including six business pages, Discover and Simple/Pro presentation.
 
-The real-data delivery is still pending: this checkout has no lake/sample snapshot or recorded
-LLM cassette. Zetaris live access and the Meterless engines sidecar are not complete. A green
-offline suite does not establish that the hosted services or a credential-free SAMPLE_MODE run
-have passed acceptance.
+The real seven-table sample for **2026-10-23** and verified crypto configuration are prepared.
+The sample is below 25 MB and includes hashes, source-exception evidence and offline validation.
+The strict data audit passes 31 of 32 checks: 35 filings have no permitted exhibit on their
+source index pages. The lead accepted these verified source exceptions for release; strict
+completeness remains false. See [real-data evidence](ingest/REAL_DATA_EVIDENCE.md).
+
+A full three-pool run completed with networking blocked. Without D's matching model cassette,
+its nine explanations abstained; the unchanged research gates yielded no ACTIVE factors and
+all 616 records were NO_CALL. These results are preserved rather than replaced with invented
+outputs. Hosted Zetaris, Meterless engines and model acceptance remain incomplete.
 
 Read [project status and remaining owners](docs/STATUS.md),
 [frontend integration](web/INTEGRATION.md), and [honest limitations](docs/honest-limitations.md).
@@ -54,13 +60,22 @@ py -3 run.py --serve
 The API listens on `0.0.0.0:8000`. The health endpoint can work before a run exists;
 `GET /runs/latest` returns 404 until an output has been generated and saved.
 
-A full sample run requires A's validated snapshot under `data/sample/` and D's matching
-`llm_cassette.jsonl` and `extraction_cache.jsonl`. These artifacts are not yet in this checkout.
-Use the snapshot's decision date when invoking `run.py --as-of`. SAMPLE_MODE uses DuckDB and
-recorded model answers; it never silently falls back to hosted services.
+The real snapshot is under `data/sample/`. Use its decision date:
 
-For direct Python execution, set configuration variables in the process environment.
-Python does not automatically load the root `.env`. Docker Compose reads `.env` explicitly.
+```powershell
+$env:SAMPLE_MODE = "true"
+$env:RECORD_LLM = "false"
+py -3 run.py --as-of 2026-10-23
+```
+
+SAMPLE_MODE uses DuckDB and recorded model answers; it never silently falls back to hosted
+services. The matching `llm_cassette.jsonl` and model extraction cache are not delivered yet,
+so unavailable model answers lead to abstention. Record them against this exact redacted-text
+snapshot, not the earlier excluded artifact described in PR #5.
+
+For the core and integrations, set configuration variables in the process environment.
+Ingestion explicitly reads its contact settings from the ignored root `.env`; this does not
+load all core/provider settings into the process. Docker Compose reads `.env` explicitly.
 The frontend reads `web/.env.local`; set `VITE_API_BASE=http://localhost:8000` there only after
 a backend run is available. Configured API failures remain visible instead of loading fixtures.
 
@@ -84,7 +99,7 @@ The current request guard itself is deterministic.
 | [contracts](contracts/README.md) | Unchanged table/API schemas and synthetic fixtures | Lead |
 | `config/` | Parameters, universe extras and seed-edge hypotheses | Lead |
 | [tradepulse](tradepulse/README.md) | Core pipeline, research, ranking, explanation and API | Lead |
-| [ingest](ingest/TASK.md) | Live collection, data quality, sample snapshot and S3 upload | A |
+| [ingest](ingest/TASK.md) | Preserved A implementation; real collection, sample and remaining source/upload acceptance | Lead, taking over A |
 | [web](web/TASK.md) | Existing complete frontend, visual/interaction review and acceptance | B / Huyin |
 | [quant](quant/TASK.md) | Existing math library, C9 properties, review of existing B7–B9 pages | C / Tanhao |
 | [integrations](integrations/TASK.md) | Zetaris, NIM recording and Meterless engines | D |
@@ -100,9 +115,12 @@ npm run check:contracts
 npm run build
 ```
 
-The latest recorded checks are 282 Python tests passed with 8 data-dependent skips, 56 frontend
-tests passed, valid contract fixtures and a successful production build. Existing browser suites
+The collector's latest checks are **595 Python tests passed, none skipped**, and **68 frontend
+tests passed** for PR #4, valid contract fixtures and a successful production build. Existing browser suites
 passed 17/17 and 18/18 groups. See [status](docs/STATUS.md) for scope and outstanding manual QA.
+The full production lake is ignored rather than committed; its seven lake cases require local
+collection or the private handoff. A clean repository export passed **588 tests with 7 expected
+production-lake skips**, including the committed sample test, with no external network attempts.
 Keep Python temporary files on D: with `--basetemp`. Re-render changed OPM diagrams using
 `py -3 scripts/render_opm.py`.
 
@@ -115,7 +133,7 @@ docker compose up --build
 The configuration defines core (3 GB) and web (256 MB); the engines service is still commented
 out. The web server is on http://localhost:8080 and proxies `/api` to core. It uses API mode,
 so it requires a saved backend run; it does not present the standalone fixture demo on failure.
-Default `SAMPLE_MODE=true` does not supply the missing snapshot or cassette. Hosted Zetaris is
+Default `SAMPLE_MODE=true` uses the delivered snapshot but does not supply its missing model cassette. Hosted Zetaris is
 an external service, not part of this Compose stack.
 
 Docker configuration exists but was not built or exercised in the frontend integration review.

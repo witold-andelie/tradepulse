@@ -1,0 +1,16 @@
+{
+  "clean_checkout": true,
+  "env_present": false,
+  "production_lake_present": false,
+  "external_network_attempts": 0,
+  "local_ipc_connections": 14,
+  "sample_hashes_match": true,
+  "python_validation": {
+    "tests": 595,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 7,
+    "passed": 588
+  },
+  "skipped_scope": "Seven production-lake tests; production lake is intentionally not committed. The committed sample test passed."
+}

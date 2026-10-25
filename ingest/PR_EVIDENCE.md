@@ -3,7 +3,9 @@
 Integration note: PR #5 was merged as code integration in `af229b4` at the lead's explicit
 request. The lead owns subsequent fixes and outstanding artifact/source acceptance. This
 document preserves the author's local evidence; its reported results are not a new independent
-verification or a delivery of the excluded datasets. See `../docs/STATUS.md` for current checks.
+verification or a delivery of the excluded datasets. The lead's subsequent fresh collection
+and delivered sample are documented in `REAL_DATA_EVIDENCE.md`; their hashes supersede the
+historical artifact below. See `../docs/STATUS.md` for current checks.
 
 Review date: 2026-10-24. Dataset decision date: 2026-10-23.
 

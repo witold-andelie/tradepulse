@@ -1,0 +1,22 @@
+{
+  "as_of": "2026-10-23",
+  "data_mode": "REPLAY",
+  "sample_mode": true,
+  "network_attempts": 0,
+  "run_id": "2026-10-23-7560d397",
+  "recommendations": 616,
+  "factor_cards": 33,
+  "explanations": 9,
+  "explained": 0,
+  "abstained": 9,
+  "matching_llm_cassette_present": false,
+  "output_path": "runs\\2026-10-23-7560d397\\output.json",
+  "trace_path": "logs\\trace-2026-10-23-7560d397.jsonl",
+  "factor_status_counts": {
+    "MEASURED_ONLY": 20,
+    "INSUFFICIENT_DATA": 13
+  },
+  "tier_counts": {
+    "NO_CALL": 616
+  }
+}

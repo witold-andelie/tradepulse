@@ -357,6 +357,26 @@ h4 { color: var(--navy); font-size: 1rem; }
 h1#page-title:focus { outline: none; }
 .workspace-tools { display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1fr); gap: 1rem; align-items: start; }
 .workspace-tools details[open] { grid-column: 1 / -1; }
+.topbar-controls { display: flex; flex-wrap: wrap; align-items: center; justify-content: flex-end; gap: 1rem; min-width: 0; margin-inline-start: auto; }
+.language-selector { display: grid; gap: .3rem; font-size: .875rem; max-width: 100%; min-width: 0; }
+.language-selector select { min-height: 2.75rem; max-width: 100%; padding: .5rem .75rem; border: 1px solid var(--control-line); border-radius: .5rem; background: white; color: var(--text); }
+.source-label { display: inline; font-size: .8rem; color: var(--muted); }
+.original-source { overflow-wrap: anywhere; }
+bdi, code, pre, .hash, .numeric { unicode-bidi: isolate; }
+code, pre, .hash, .numeric { direction: ltr; }
+html[dir=rtl] .sidebar { left: auto; right: 0; }
+html[dir=rtl] .workspace { margin-left: 0; margin-right: 15rem; }
+html[dir=rtl] .nav-link.selected { box-shadow: inset -3px 0 #c1bcff; }
+html[dir=rtl] .view-caption { text-align: start; }
+html[dir=rtl] .check-list, html[dir=rtl] .text-list { padding-inline-start: 1.4rem; }
+html[dir=rtl] th, html[dir=rtl] td, html[dir=rtl] .page-title { text-align: start; }
+@media (max-width: 1100px) and (min-width: 901px) { html[dir=rtl] .workspace { margin-right: 13rem; } }
+@media (max-width: 900px) { html[dir=rtl] .workspace { margin-right: 0; } }
+@media (max-width: 600px) {
+  .topbar-controls { width: 100%; justify-content: flex-start; }
+  .language-selector { width: 100%; }
+  .topbar-controls .view-control { min-width: 0; }
+}
 .gate-explainer > summary, .trace-event-disclosure > summary { min-height: 2.75rem; padding-block: .65rem; font-weight: 600; color: var(--navy); cursor: pointer; }
 .trace-event-disclosure { min-width: 0; }
 .trace-event-disclosure[open] > summary { margin-bottom: 1rem; }
@@ -381,3 +401,8 @@ h1, h2, h3, h4, p, dt, dd { overflow-wrap: anywhere; }
 /* Keep the skip link available to keyboards without off-screen capture artifacts. */
 .skip-link { opacity: 0; pointer-events: none; }
 .skip-link:focus { opacity: 1; pointer-events: auto; }
+
+/* Long localized branding must also reflow when users enlarge text. */
+.brand { min-width: 0; max-width: 100%; }
+.brand > span:last-child { min-width: 0; overflow-wrap: anywhere; }
+html[dir=rtl] .tier-filters legend { float: right; margin-right: 0; margin-left: .75rem; }

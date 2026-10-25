@@ -1,42 +1,42 @@
-import { useMemo, useState } from 'react';
+import { useMemo } from 'react';
+import { useLocale } from '../../i18n/Locale.jsx';
+import { tierLabel } from '../../lib/tiers.js';
+import { enumName, factorName } from '../../i18n/labels.js';
 import { useLocation } from 'react-router-dom';
 import { formatCount } from '../../lib/format.js';
-import { localeRegistry, lookupMessage, normalizeLocale, readLocale, writeLocale } from './messages.js';
 import { buildGuide, guideSpeech } from './summary.js';
 import { useReadAloud } from './useReadAloud.js';
 import styles from './GuidedResearch.module.css';
 
-function initialLocale() {
-  try { return readLocale(window.localStorage); } catch { return 'en'; }
-}
 function Identifier({ children }) { return <bdi dir="ltr" lang="en" translate="no" className={styles.identifier}>{children}</bdi>; }
 function Original({ children, label }) {
   return <div className={styles.original}><p className={styles.sourceLabel}>{label}</p><div lang="" dir="auto" translate="no">{children}</div></div>;
 }
 export default function GuidedResearch({ record, run }) {
-  const [locale, setLocale] = useState(initialLocale);
+  const { locale, t: globalT } = useLocale();
   const location = useLocation();
-  const t = (key) => lookupMessage(locale, key).text;
+  const t = (key) => globalT(`guide.${key}`);
   const model = useMemo(() => buildGuide(record, run), [record, run]);
   const speech = useReadAloud(locale, location.key);
-  const chooseLocale = (value) => {
-    speech.stop();
-    setLocale(normalizeLocale(value));
-    try { writeLocale(window.localStorage, value); } catch { /* Research remains usable without storage. */ }
+  const fieldLabel = (field) => {
+    if (locale === 'en' || field.value == null) return null;
+    if (field.label === 'tier') return globalT(tierLabel(field.value));
+    if (field.label === 'verdict') return enumName(field.value, globalT);
+    if (field.label === 'largest') return factorName(field.value, globalT);
+    return null;
+  };
+  const describeField = (field) => {
+    const label = fieldLabel(field);
+    return label && label !== field.value ? `${label} (${field.value})` : field.value;
   };
   const active = ['speaking', 'paused'].includes(speech.status);
   return <section id="agent-research-guide" className={`card ${styles.guide}`} lang={locale} dir={locale === 'ar' ? 'rtl' : 'ltr'} aria-labelledby="agent-guide-title">
     <h2 id="agent-guide-title">{t('title')}</h2>
     <p>{t('intro')}</p>
-    <div className={styles.toolbar}><label className={styles.control} htmlFor="research-guide-language">{t('language')}
-      <select id="research-guide-language" value={locale} onChange={(event) => chooseLocale(event.target.value)}>
-        {localeRegistry.filter((item) => item.complete).map((item) => <option key={item.id} value={item.id} lang={item.id} dir={item.dir}>{item.name}</option>)}
-      </select>
-    </label><p className="caption">{t('scope')}</p></div>
     {model.synthetic && <p className="notice">{t('synthetic')}</p>}
     {model.sections.map((section) => <details key={section.key} className="research-details" open={section.key === 'why' ? true : undefined}>
       <summary>{t(section.key)}</summary><div className={styles.answer}>
-        {!!section.fields.length && <dl className={styles.facts}>{section.fields.map((field) => <div key={field.label}><dt>{t(field.label)}</dt><dd>{field.value == null ? t('missing') : <Identifier>{field.label === 'verdict' ? JSON.stringify(field.value) : field.value}</Identifier>}</dd></div>)}</dl>}
+        {!!section.fields.length && <dl className={styles.facts}>{section.fields.map((field) => <div key={field.label}><dt>{t(field.label)}</dt><dd>{field.value == null ? t('missing') : <>{fieldLabel(field) && fieldLabel(field) !== field.value && <span>{fieldLabel(field)} · </span>}<Identifier>{field.label === 'verdict' ? JSON.stringify(field.value) : field.value}</Identifier></>}</dd></div>)}</dl>}
         {section.notes.map((note) => <p key={note} className={styles.note}>{t(note)}</p>)}
         {section.claims?.map((claim) => <div key={claim.claim_id}>
           <p>{claim.status === 'verified' ? '✓ ' : '✗ '}{t(claim.status)} · <Identifier>{claim.status}</Identifier></p>
@@ -63,7 +63,7 @@ export default function GuidedResearch({ record, run }) {
           </select></label><button className="button" type="button" onClick={speech.refresh}>{t('refresh')}</button></div>
         {!speech.voice && <p>{t('voiceMissing')}</p>}
         <div className={styles.buttons} role="group" aria-label={t('speechTitle')}>
-          <button type="button" className="button primary" onClick={() => speech.play(guideSpeech(model, t))} disabled={!speech.voice || active}>{t('play')}</button>
+          <button type="button" className="button primary" onClick={() => speech.play(guideSpeech(model, t, describeField))} disabled={!speech.voice || active}>{t('play')}</button>
           <button type="button" className="button" onClick={speech.pause} disabled={speech.status !== 'speaking'}>{t('pause')}</button>
           <button type="button" className="button" onClick={speech.resume} disabled={speech.status !== 'paused'}>{t('resume')}</button>
           <button type="button" className="button" onClick={speech.stop} disabled={!active}>{t('stop')}</button>

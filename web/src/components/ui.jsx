@@ -1,3 +1,7 @@
+import { SourceText, Canonical } from '../i18n/Locale.jsx';
+import { enumName } from '../i18n/labels.js';
+import { errorSummary } from '../i18n/errors.js';
+import { useLocale, Message } from "../i18n/Locale.jsx";
 import { useEffect, useRef } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { tierLabel, tierTone } from '../lib/tiers.js';
@@ -12,10 +16,13 @@ const toneClasses = {
   ACTIVE: 'tone-ACTIVE', MEASURED_ONLY: 'tone-MEASURED_ONLY', INSUFFICIENT_DATA: 'tone-INSUFFICIENT_DATA',
   explained: 'tone-explained', abstained: 'tone-abstained',
 };
-export function Badge({ children, tone = 'muted' }) { return <span className={`badge ${toneClasses[tone] || toneClasses.muted}`}>{children}</span>; }
-export function Tier({ value }) { return <Badge tone={tierTone(value)}>{tierLabel(value)}</Badge>; }
-export function Gate({ value }) { return <span className={value === false ? 'negative' : value === true ? 'positive' : 'muted'}>{value == null ? '– Not evaluated' : value ? '✓ Passed' : '✗ Failed'}</span>; }
+export function Badge({ children, tone = 'muted' }) { const { t } = useLocale(); return <span className={`badge ${toneClasses[tone] || toneClasses.muted}`}>{typeof children === 'string' ? enumName(children, t) : children}</span>; }
+export function Tier({ value }) {
+  const { t, locale } = useLocale(); return <Badge tone={tierTone(value)}>{t(tierLabel(value))}</Badge>; }
+export function Gate({ value }) {
+  const { t, locale } = useLocale(); return <span className={value === false ? 'negative' : value === true ? 'positive' : 'muted'}>{value == null ? t("– Not evaluated") : value ? t("✓ Passed") : t("✗ Failed")}</span>; }
 export function PageTitle({ eyebrow = 'Research workspace', title, children, action }) {
+  const { t, locale } = useLocale();
   const titleRef = useRef(null);
   const location = useLocation();
   useEffect(() => {
@@ -29,12 +36,20 @@ export function PageTitle({ eyebrow = 'Research workspace', title, children, act
     });
     return () => cancelAnimationFrame(frame);
   }, [title, location.pathname, location.hash]);
-  return <div className="page-title"><div><p className="eyebrow">{eyebrow}</p><h1 ref={titleRef} tabIndex={-1} id="page-title">{title}</h1>{children && <div className="subtitle">{children}</div>}</div>{action}</div>;
+  return <div className="page-title"><div><p className="eyebrow">{typeof eyebrow === 'string' ? t(eyebrow) : eyebrow}</p><h1 ref={titleRef} tabIndex={-1} id="page-title">{title}</h1>{children && <div className="subtitle">{children}</div>}</div>{action}</div>;
 }
-export function Empty({ title = 'No data available', children, action }) { return <div className="empty"><span aria-hidden="true" className="empty-symbol">∅</span><h2>{title}</h2><div className="muted">{children}</div>{action}</div>; }
-export function NotFound({ title = 'Page not found', children }) { return <><PageTitle eyebrow="Unavailable destination" title={title} /><section className="card"><Empty title={title} action={<Link className="button primary" to="/">Return to leaderboard</Link>}>{children || 'This destination is not part of the current research run.'}</Empty></section></>; }
-export function Loading() { return <div aria-busy="true" role="status" className="space-y-5"><span className="muted">Loading research data…</span><div className="skeleton h-24" /><div className="grid grid-cols-2 gap-4"><div className="skeleton h-36" /><div className="skeleton h-36" /></div><div className="skeleton h-72" /></div>; }
-export function ErrorState({ error, retry }) { return <section className="card" role="alert"><Empty title="Research data is unavailable" action={<button className="button primary" onClick={retry}>Retry</button>}>{typeof error === 'string' ? error : error.message}</Empty></section>; }
-export function Metrics({ items }) { return <dl className="metrics">{items.map(([label, value]) => <div key={label}><dt>{label}</dt><dd>{value}</dd></div>)}</dl>; }
-export function TextList({ title, items }) { return <section><h3>{title}</h3>{items.length ? <ul className="text-list">{items.map((text, i) => <li key={i}>{text}</li>)}</ul> : <p className="muted">None recorded.</p>}</section>; }
-export function TableScroll({ children, label }) { return <div className="table-scroll" role="region" aria-label={label} tabIndex={0}>{children}</div>; }
+export function Empty({ title = 'No data available', children, action }) {
+  const { t, locale } = useLocale(); return <div className="empty"><span aria-hidden="true" className="empty-symbol">∅</span><h2>{t(title)}</h2><div className="muted">{children}</div>{action}</div>; }
+export function NotFound({ title = 'Page not found', children }) {
+  const { t, locale } = useLocale(); return <><PageTitle eyebrow={t("Unavailable destination")} title={t(title)} /><section className="card"><Empty title={t(title)} action={<Link className="button primary" to="/">{t("Return to leaderboard")}</Link>}>{children || t("This destination is not part of the current research run.")}</Empty></section></>; }
+export function Loading() {
+  const { t, locale } = useLocale(); return <div aria-busy="true" role="status" className="space-y-5"><span className="muted">{t("Loading research data…")}</span><div className="skeleton h-24" /><div className="grid grid-cols-2 gap-4"><div className="skeleton h-36" /><div className="skeleton h-36" /></div><div className="skeleton h-72" /></div>; }
+export function ErrorState({ error, retry }) {
+  const { t, locale } = useLocale(); const message = typeof error === 'string' ? error : error.message;
+  return <section className="card" role="alert"><Empty title={t("Research data is unavailable")} action={<button className="button primary" onClick={retry}>{t("Retry")}</button>}><p>{errorSummary(message, t)}</p>{locale !== 'en' && <details><summary>{t('Original technical diagnostic — not translated')}</summary><SourceText>{message}</SourceText></details>}</Empty></section>; }
+export function Metrics({ items }) {
+  const { t, locale } = useLocale(); return <dl className="metrics">{items.map(([label, value]) => <div key={label}><dt>{t(label)}</dt><dd><Canonical>{value}</Canonical></dd></div>)}</dl>; }
+export function TextList({ title, items }) {
+  const { t, locale } = useLocale(); return <section><h3>{t(title)}</h3>{items.length ? <ul className="text-list">{items.map((text, i) => <li key={i}><SourceText>{text}</SourceText></li>)}</ul> : <p className="muted">{t("None recorded.")}</p>}</section>; }
+export function TableScroll({ children, label }) {
+  const { t, locale } = useLocale(); return <div className="table-scroll" role="region" aria-label={t(label)} tabIndex={0}>{children}</div>; }

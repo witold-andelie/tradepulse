@@ -13,7 +13,15 @@ Unsupported explanations abstain.
 > Research and education only. Tiers are research stances, never orders. TradePulse places no
 > trades. Synthetic fixtures and historical evaluation are not live investment performance.
 
-## Current status — 25 October 2026
+## Hackathon track
+
+**Primary track: Track 2 — The Agent That Can Explain Why.** TradePulse is built around that
+problem: it combines market, filing, attention and relationship evidence; separates descriptive
+signals from predictive and cost-surviving ones; drafts claims through an analyst/skeptic flow;
+and verifies every explanation against query evidence. When the evidence or model answer is
+unavailable, it abstains instead of inventing a rationale.
+
+## Current status — 26 October 2026
 
 The quantitative core, pipeline, HTTP API and complete fixture-backed frontend are implemented.
 Huyin's original B1–B10 and accessibility commits are preserved in the integration history,
@@ -32,6 +40,22 @@ A full three-pool run completed with networking blocked. Without D's matching mo
 its nine explanations abstained; the unchanged research gates yielded no ACTIVE factors and
 all 616 records were NO_CALL. These results are preserved rather than replaced with invented
 outputs. Hosted Zetaris, Meterless engines and model acceptance remain incomplete.
+
+Outside that sponsor-service work, the required product path is implemented: reproducible
+ingestion and a committed real sample, point-in-time factor research, walk-forward ranking,
+regime overlays, grounded explanation and abstention, traceable API output, the responsive web
+experience, offline startup, containers and CI. The remaining non-sponsor items are acceptance
+or documented extensions rather than broken release paths:
+
+- the new Ticker Detail guide still needs a native NVDA/VoiceOver and audible-speech spot check;
+- the target US price-to-sales constraint is not yet connected to the pipeline;
+- arbitrary out-of-universe ticker lookup and an independent weekend crypto decision clock are
+  not implemented;
+- iterative model-proposed graph expansion remains future work.
+
+These gaps are not silently simulated. Current runs disclose the missing valuation constraint,
+the frontend exposes only loaded symbols, and the limitations document records the clock and
+graph scope. None depends on presentation slides, which are intentionally outside this status.
 
 Read [project status and remaining owners](docs/STATUS.md),
 [frontend integration](web/INTEGRATION.md), and [honest limitations](docs/honest-limitations.md).

@@ -1,4 +1,4 @@
-# Project status — 25 October 2026
+# Project status — 26 October 2026
 
 This is the current implementation and ownership index. Detailed task catalogues remain
 requirements, not evidence of completed deployment or historical market performance.
@@ -77,7 +77,9 @@ the actual region in `DEPLOY.md` and supply the HTTPS endpoints/smoke instructio
    native-speaker editing and audible voice checks; automated tools do not certify those.
 5. **Lead:** three genuine input/output/trace pairs and the demo/slide content are prepared.
    Finalize cloud-service scenes, sponsor evidence, the rendered deck/video and submission.
-   Confirm one primary track, roster, Cursor usage and pre-existing component declarations.
+   The primary track is confirmed as **Track 2 — The Agent That Can Explain Why**. Confirm the
+   roster and pre-existing component declarations before submission. Cursor is not part of the
+   current submission requirements or project claims.
 
 Completed maintenance, 25 October: existing libraries were upgraded and the official npm audit
 fell from 15 findings to zero. Ruff 0.17.2 and 0.15.20 pass the same explicit rule policy;

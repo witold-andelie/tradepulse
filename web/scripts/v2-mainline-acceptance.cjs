@@ -1,0 +1,28 @@
+// Schema-valid browser transport diagnostics, never a live backend or fabricated performance.
+const {chromium}=require('playwright');const assert=require('node:assert/strict');const fs=require('node:fs');const path=require('node:path');const cp=require('node:child_process');
+const root=path.resolve(__dirname,'../..');const fixture=require(path.join(root,'contracts/fixtures/run_output.fixture.json'));const trace=fs.readFileSync(path.join(root,'contracts/fixtures/trace.fixture.jsonl'),'utf8').trim().split('\n').map(JSON.parse);
+const base=process.env.TRADEPULSE_API_PREVIEW||'http://127.0.0.1:5239';const api=process.env.TRADEPULSE_TEST_API||'http://127.0.0.1:5196';const out=path.resolve(process.env.TRADEPULSE_QA_DIR||'/tmp/tradepulse-v2-mainline');fs.mkdirSync(out,{recursive:true});
+const locales=['en','zh-CN','zh-TW','es','fr','de','pt-BR','ja','ko','cs','ar'];const results=[];const dict=l=>require(path.join(root,'web/src/i18n',l==='en'?'en.json':`locales/${l}.json`));
+async function check(locale,name,fn){try{const evidence=await fn();results.push({locale,name,status:'PASS',evidence});console.log('PASS',locale,name)}catch(e){results.push({locale,name,status:'FAIL',error:e.stack});console.log('FAIL',locale,name,e.message)}}
+(async()=>{const b=await chromium.launch({executablePath:process.env.TRADEPULSE_CHROMIUM||'/usr/bin/chromium',args:['--no-sandbox']});try{
+for(const locale of locales){
+ for(const mode of['REPLAY','REAL'])await check(locale,`${mode} Run context and current-main provenance`,async()=>{
+  const run=structuredClone(fixture);run.data_mode=mode;run.warnings=[...fixture.warnings,'Synthetic transport diagnostic: recorded model unavailable.'];const calls=[];
+  const c=await b.newContext();await c.addInitScript(l=>localStorage.setItem('tradepulse.locale',l),locale);await c.route(api+'/**',route=>{calls.push(route.request().method());return route.fulfill({contentType:'application/json',headers:{'Access-Control-Allow-Origin':'*'},body:JSON.stringify(run)})});const p=await c.newPage();
+  await p.goto(base+'/discover');await p.locator('h1').waitFor();const region=p.getByRole('region',{name:dict(locale)['Run context'],exact:true});assert(await region.count());assert((await region.innerText()).includes(run.as_of));assert((await region.innerText()).includes(run.run_id));assert((await region.innerText()).includes(mode));
+  if(mode==='REPLAY')assert((await region.innerText()).includes(dict(locale)['REPLAY — sample snapshot. See Run limitations for model availability.']));else assert.equal(await p.locator('.mode-banner.warning,.mode-banner.info').count(),0);
+  await p.locator('.run-warnings > summary').click();assert((await p.locator('.run-warnings').innerText()).includes(run.warnings.at(-1)));
+  await p.goto(base+'/track-record');await p.locator('h1').waitFor();if(mode==='REPLAY')assert((await p.locator('main').innerText()).includes(dict(locale)['Replay evaluation uses the sample snapshot. Model availability is reported in Run limitations; REPLAY does not establish successful model inference or live investment performance.']));
+  assert((await p.locator('footer').innerText()).includes(run.disclaimer));assert(calls.every(x=>x==='GET'));await c.close();return{transport:'browser-mocked',dataMode:mode,canonicalSourceNumbersUnchanged:true};
+ });
+ await check(locale,'failed stage, timing discrepancy and event order survive localization',async()=>{
+  const events=structuredClone(trace);const start=events.find(x=>x.kind==='node_start');const end=events.find(x=>x.kind==='node_end'&&x.node===start.node);
+  end.kind='error';end.status='error';end.message='Synthetic transport diagnostic: stage failure.';
+  const c=await b.newContext();await c.addInitScript(l=>{localStorage.setItem('tradepulse.locale',l);localStorage.setItem('tradepulse.view','pro')},locale);await c.route(api+'/**',route=>route.fulfill({contentType:'application/json',headers:{'Access-Control-Allow-Origin':'*'},body:JSON.stringify(route.request().url().endsWith('/trace')?events:fixture)}));const p=await c.newPage();await p.goto(base+'/trace');await p.locator('.event-table').waitFor();
+  assert.equal(await p.locator('.event-error').count(),events.filter(x=>x.kind==='error'||x.status==='error').length);const seq=await p.locator('.event-table tbody td:first-child').allTextContents();assert.deepEqual(seq.map(x=>Number(x)),[...events].sort((a,b)=>a.seq-b.seq).map(x=>x.seq));
+  const paired=p.locator('.research-details').filter({hasText:dict(locale)['Paired timing measurements']});await paired.locator('summary').click();const cells=await paired.locator('tbody tr').allTextContents();assert(cells.some(x=>x.includes(start.ts)&&x.includes(end.ts)));assert((await p.locator('.chart-figure figcaption').first().innerText()).includes('1'));
+  assert((await p.locator('main').innerText()).includes(dict(locale)['Timing discrepancy: {value1} paired node(s) have a reported duration that differs from their timestamp interval by more than 5 ms and 1%. The timeline defaults to reported durations anchored at recorded start times. Select timestamp intervals to compare; neither value is overwritten.'].split('{value1}')[0]));
+  await c.close();return{transport:'browser-mocked',failedStage:start.node,start:start.ts,end:end.ts,reportedMs:end.duration_ms,sourceEventsNotReordered:true};
+ });
+}
+}finally{await b.close();fs.writeFileSync(path.join(out,'results.json'),JSON.stringify({revision:cp.execFileSync('git',['rev-parse','HEAD'],{cwd:root,encoding:'utf8'}).trim(),results},null,2))}console.log(results.filter(x=>x.status==='PASS').length+'/'+results.length);process.exitCode=results.some(x=>x.status==='FAIL')?1:0;})().catch(e=>{console.error(e);process.exitCode=1});

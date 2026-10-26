@@ -9,13 +9,18 @@ export function useReadAloud(locale, navigationKey) {
   const [status, setStatus] = useState('idle');
   const [voiceId, setVoiceId] = useState('');
   const refresh = useCallback(() => {
-    try { setVoices(supported ? synth.getVoices() : []); } catch { setVoices([]); }
+    try { setVoices(supported ? Array.from(synth.getVoices()) : []); } catch { setVoices([]); }
   }, [synth, supported]);
   const controller = useMemo(() => createSpeechController(synth, Utterance, setStatus), [synth, Utterance]);
   useEffect(() => {
-    refresh();
     synth?.addEventListener?.('voiceschanged', refresh);
-    return () => synth?.removeEventListener?.('voiceschanged', refresh);
+    refresh();
+    // Some engines enumerate late without an event. Retry a bounded number of times.
+    const timers = supported ? [250, 1000, 3000, 10000].map((delay) => setTimeout(refresh, delay)) : [];
+    return () => {
+      synth?.removeEventListener?.('voiceschanged', refresh);
+      timers.forEach(clearTimeout);
+    };
   }, [refresh, synth]);
   useEffect(() => {
     controller.stop();

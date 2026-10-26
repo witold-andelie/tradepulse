@@ -1,0 +1,190 @@
+{
+  "tested_commit": "cd2b610049424fd6b3b7c8c169a9e2e426acc1b1",
+  "baseline": "3d2ae4ff1a74837b9dd41bfe8d505ca2f0861584",
+  "original_test_commands_and_exit_codes": [
+    {
+      "name": "unit",
+      "command": [
+        "npm",
+        "test"
+      ],
+      "cwd": "/workspace/tradepulse-i18n-repair/web",
+      "exit": 0,
+      "log": "final-unit.log"
+    },
+    {
+      "name": "contracts",
+      "command": [
+        "npm",
+        "run",
+        "check:contracts"
+      ],
+      "cwd": "/workspace/tradepulse-i18n-repair/web",
+      "exit": 0,
+      "log": "final-contracts.log"
+    },
+    {
+      "name": "i18n",
+      "command": [
+        "node",
+        "scripts/check-i18n.cjs"
+      ],
+      "cwd": "/workspace/tradepulse-i18n-repair/web",
+      "exit": 0,
+      "log": "final-i18n.log"
+    },
+    {
+      "name": "build",
+      "command": [
+        "npm",
+        "run",
+        "build",
+        "--",
+        "--outDir",
+        "/workspace/work/tradepulse-full-locale-qa-20261026/verified-validation/validation-dist",
+        "--emptyOutDir"
+      ],
+      "cwd": "/workspace/tradepulse-i18n-repair/web",
+      "exit": 0,
+      "log": "final-build.log"
+    },
+    {
+      "name": "diff",
+      "command": [
+        "git",
+        "diff",
+        "HEAD^",
+        "HEAD",
+        "--check"
+      ],
+      "cwd": "/workspace/tradepulse-i18n-repair",
+      "exit": 0,
+      "log": "final-diff.log"
+    },
+    {
+      "name": "original",
+      "command": [
+        "node",
+        "--require",
+        "./web/scripts/pro-view-preload.cjs",
+        "web/scripts/browser-acceptance.cjs"
+      ],
+      "cwd": "/workspace/tradepulse-i18n-repair",
+      "exit": 0,
+      "log": "final-original.log"
+    },
+    {
+      "name": "redesign",
+      "command": [
+        "node",
+        "web/scripts/redesign-acceptance.cjs"
+      ],
+      "cwd": "/workspace/tradepulse-i18n-repair",
+      "exit": 0,
+      "log": "final-redesign.log"
+    },
+    {
+      "name": "global",
+      "command": [
+        "node",
+        "web/scripts/global-i18n-acceptance.cjs"
+      ],
+      "cwd": "/workspace/tradepulse-i18n-repair",
+      "exit": 0,
+      "log": "final-global.log"
+    },
+    {
+      "name": "api",
+      "command": [
+        "node",
+        "web/scripts/global-i18n-api-acceptance.cjs"
+      ],
+      "cwd": "/workspace/tradepulse-i18n-repair",
+      "exit": 0,
+      "log": "final-api.log"
+    },
+    {
+      "name": "agent",
+      "command": [
+        "node",
+        "web/scripts/agent-research-acceptance.cjs"
+      ],
+      "cwd": "/workspace/tradepulse-i18n-repair",
+      "exit": 0,
+      "log": "final-agent.log"
+    },
+    {
+      "name": "accessibility",
+      "command": [
+        "node",
+        "web/scripts/accessibility-check.cjs"
+      ],
+      "cwd": "/workspace/tradepulse-i18n-repair",
+      "exit": 0,
+      "log": "final-accessibility.log"
+    },
+    {
+      "name": "states",
+      "command": [
+        "node",
+        "web/scripts/full-locale-acceptance.cjs",
+        "states"
+      ],
+      "cwd": "/workspace/tradepulse-i18n-repair",
+      "exit": 0,
+      "log": "final-states.log"
+    },
+    {
+      "name": "parity",
+      "command": [
+        "node",
+        "/workspace/work/tradepulse-full-locale-qa-20261026/verified-validation/independent-parity.cjs"
+      ],
+      "cwd": "/workspace/tradepulse-i18n-repair",
+      "exit": 0,
+      "log": "final-parity.log"
+    },
+    {
+      "name": "supplemental",
+      "command": [
+        "node",
+        "/workspace/work/tradepulse-full-locale-qa-20261026/verified-validation/supplemental.cjs"
+      ],
+      "cwd": "/workspace/tradepulse-i18n-repair",
+      "exit": 0,
+      "log": "final-supplemental.log"
+    }
+  ],
+  "matrix_commands": [
+    {
+      "command": "node web/scripts/full-locale-acceptance.cjs matrix",
+      "environment": {
+        "TRADEPULSE_LOCALES": "en,es,pt-BR,cs",
+        "TRADEPULSE_PREVIEW_URL": "http://127.0.0.1:5215",
+        "TRADEPULSE_QA_DIR": "verified-matrix-a"
+      }
+    },
+    {
+      "command": "node web/scripts/full-locale-acceptance.cjs matrix",
+      "environment": {
+        "TRADEPULSE_LOCALES": "zh-CN,fr,ja,ar",
+        "TRADEPULSE_PREVIEW_URL": "http://127.0.0.1:5215",
+        "TRADEPULSE_QA_DIR": "verified-matrix-b"
+      }
+    },
+    {
+      "command": "node web/scripts/full-locale-acceptance.cjs matrix",
+      "environment": {
+        "TRADEPULSE_LOCALES": "zh-TW,de,ko",
+        "TRADEPULSE_PREVIEW_URL": "http://127.0.0.1:5215",
+        "TRADEPULSE_QA_DIR": "verified-matrix-c"
+      }
+    }
+  ],
+  "extra_evidence_scripts": [
+    "verified-tooltips.cjs",
+    "verified-detail-tooltips.cjs",
+    "verified-validation/factor-keyboard.cjs"
+  ],
+  "export_retests_executed": false
+}

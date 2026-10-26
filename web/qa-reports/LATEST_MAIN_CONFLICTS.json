@@ -1,0 +1,20 @@
+{
+  "main": "c69e3d7642295b609f7db22c2079769d5d2e4b82",
+  "repair": "cd2b610049424fd6b3b7c8c169a9e2e426acc1b1",
+  "merge_tree_exit": 1,
+  "conflict_files": [
+    "web/AGENT_ACCESSIBILITY_DEMO.md",
+    "web/scripts/agent-research-acceptance.cjs",
+    "web/src/App.jsx",
+    "web/src/components/ResearchGuide.jsx",
+    "web/src/components/agentResearch/GuidedResearch.jsx",
+    "web/src/components/agentResearch/messages.js",
+    "web/src/components/agentResearch/speech.js",
+    "web/src/components/agentResearch/summary.js",
+    "web/src/components/agentResearch/useReadAloud.js",
+    "web/src/pages/Detail.jsx",
+    "web/src/pages/Trace.jsx",
+    "web/src/pages/TrackRecord.jsx"
+  ],
+  "actual_merge_performed": false
+}

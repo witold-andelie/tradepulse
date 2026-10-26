@@ -1,0 +1,1194 @@
+{
+  "tested_commit": "cd2b610049424fd6b3b7c8c169a9e2e426acc1b1",
+  "implementation_baseline": "3d2ae4ff1a74837b9dd41bfe8d505ca2f0861584",
+  "documentation_branch": "b/i18n-qa-evidence-20261026",
+  "documentation_parent": "c69e3d7642295b609f7db22c2079769d5d2e4b82",
+  "publication_scope": "Small text documentation only; does not publish or integrate the tested implementation.",
+  "original_reports": [
+    {
+      "file": "MASTER_QA_ZH.md",
+      "bytes": 18751,
+      "sha256": "4a27d2c5989e74327e96165c5af2b9c2ad4f3b1624bdc41529824317943c8b02",
+      "copied_byte_for_byte": true
+    },
+    {
+      "file": "QA_en.md",
+      "bytes": 15446,
+      "sha256": "5f28d79b87b6bfb0810695472d518e6f6a59bf4f27f21795ccb56d203ac9ca14",
+      "copied_byte_for_byte": true
+    },
+    {
+      "file": "QA_zh-CN.md",
+      "bytes": 15588,
+      "sha256": "49d2bb39d8d5fe7f33b5fcc3180324343edbde56454016af031a7f90ef426122",
+      "copied_byte_for_byte": true
+    },
+    {
+      "file": "QA_zh-TW.md",
+      "bytes": 15558,
+      "sha256": "a674bf3a205ba2fac2efb56fa2534a41179a80af1a82b2fe0f41635088cd980f",
+      "copied_byte_for_byte": true
+    },
+    {
+      "file": "QA_es.md",
+      "bytes": 16024,
+      "sha256": "a4633ab1f4410d8b1cfd1cc5e696914eba433bbb4dde4823dfa050c0164eced2",
+      "copied_byte_for_byte": true
+    },
+    {
+      "file": "QA_fr.md",
+      "bytes": 15952,
+      "sha256": "45dea6dc9b70434ce0113865e6936f0566b1ba95ca243bd0e307d7cd33c37976",
+      "copied_byte_for_byte": true
+    },
+    {
+      "file": "QA_de.md",
+      "bytes": 15937,
+      "sha256": "ad9e815b61472861070c104b4af72722cf827e1975b67e22101eb9e420854319",
+      "copied_byte_for_byte": true
+    },
+    {
+      "file": "QA_pt-BR.md",
+      "bytes": 16517,
+      "sha256": "9a0363ed9274b4855e9650f046484b9c0231ba74fcad49d1eb2dbb608ff971f0",
+      "copied_byte_for_byte": true
+    },
+    {
+      "file": "QA_ja.md",
+      "bytes": 15639,
+      "sha256": "5cb666e0ace02290681883882f800d94d0f453bb5977dffd443e6e48dc136a7d",
+      "copied_byte_for_byte": true
+    },
+    {
+      "file": "QA_ko.md",
+      "bytes": 15544,
+      "sha256": "44abadc2a1c73a2a62b22c14fd35d01dae088bd4bd2da62d72517bf1a66f66d1",
+      "copied_byte_for_byte": true
+    },
+    {
+      "file": "QA_cs.md",
+      "bytes": 16444,
+      "sha256": "99c9d5af252369e77f668605fbaedff1e8cd238587d47ef845ba32a11aae0e01",
+      "copied_byte_for_byte": true
+    },
+    {
+      "file": "QA_ar.md",
+      "bytes": 16307,
+      "sha256": "a4e15a58e9ab7106a41b395a81ade5b18bf767d96fea452df35204f9cf36a3e4",
+      "copied_byte_for_byte": true
+    }
+  ],
+  "missing_requested_original_reports": [],
+  "recorded_checks": [
+    {
+      "name": "unit",
+      "command": [
+        "npm",
+        "test"
+      ],
+      "cwd_at_test_time": "/workspace/tradepulse-i18n-repair/web",
+      "exit_code": 0,
+      "raw_log_not_published": "final-unit.log"
+    },
+    {
+      "name": "contracts",
+      "command": [
+        "npm",
+        "run",
+        "check:contracts"
+      ],
+      "cwd_at_test_time": "/workspace/tradepulse-i18n-repair/web",
+      "exit_code": 0,
+      "raw_log_not_published": "final-contracts.log"
+    },
+    {
+      "name": "i18n",
+      "command": [
+        "node",
+        "scripts/check-i18n.cjs"
+      ],
+      "cwd_at_test_time": "/workspace/tradepulse-i18n-repair/web",
+      "exit_code": 0,
+      "raw_log_not_published": "final-i18n.log"
+    },
+    {
+      "name": "build",
+      "command": [
+        "npm",
+        "run",
+        "build",
+        "--",
+        "--outDir",
+        "/workspace/work/tradepulse-full-locale-qa-20261026/verified-validation/validation-dist",
+        "--emptyOutDir"
+      ],
+      "cwd_at_test_time": "/workspace/tradepulse-i18n-repair/web",
+      "exit_code": 0,
+      "raw_log_not_published": "final-build.log"
+    },
+    {
+      "name": "diff",
+      "command": [
+        "git",
+        "diff",
+        "HEAD^",
+        "HEAD",
+        "--check"
+      ],
+      "cwd_at_test_time": "/workspace/tradepulse-i18n-repair",
+      "exit_code": 0,
+      "raw_log_not_published": "final-diff.log"
+    },
+    {
+      "name": "original",
+      "command": [
+        "node",
+        "--require",
+        "./web/scripts/pro-view-preload.cjs",
+        "web/scripts/browser-acceptance.cjs"
+      ],
+      "cwd_at_test_time": "/workspace/tradepulse-i18n-repair",
+      "exit_code": 0,
+      "raw_log_not_published": "final-original.log"
+    },
+    {
+      "name": "redesign",
+      "command": [
+        "node",
+        "web/scripts/redesign-acceptance.cjs"
+      ],
+      "cwd_at_test_time": "/workspace/tradepulse-i18n-repair",
+      "exit_code": 0,
+      "raw_log_not_published": "final-redesign.log"
+    },
+    {
+      "name": "global",
+      "command": [
+        "node",
+        "web/scripts/global-i18n-acceptance.cjs"
+      ],
+      "cwd_at_test_time": "/workspace/tradepulse-i18n-repair",
+      "exit_code": 0,
+      "raw_log_not_published": "final-global.log"
+    },
+    {
+      "name": "api",
+      "command": [
+        "node",
+        "web/scripts/global-i18n-api-acceptance.cjs"
+      ],
+      "cwd_at_test_time": "/workspace/tradepulse-i18n-repair",
+      "exit_code": 0,
+      "raw_log_not_published": "final-api.log"
+    },
+    {
+      "name": "agent",
+      "command": [
+        "node",
+        "web/scripts/agent-research-acceptance.cjs"
+      ],
+      "cwd_at_test_time": "/workspace/tradepulse-i18n-repair",
+      "exit_code": 0,
+      "raw_log_not_published": "final-agent.log"
+    },
+    {
+      "name": "accessibility",
+      "command": [
+        "node",
+        "web/scripts/accessibility-check.cjs"
+      ],
+      "cwd_at_test_time": "/workspace/tradepulse-i18n-repair",
+      "exit_code": 0,
+      "raw_log_not_published": "final-accessibility.log"
+    },
+    {
+      "name": "states",
+      "command": [
+        "node",
+        "web/scripts/full-locale-acceptance.cjs",
+        "states"
+      ],
+      "cwd_at_test_time": "/workspace/tradepulse-i18n-repair",
+      "exit_code": 0,
+      "raw_log_not_published": "final-states.log"
+    },
+    {
+      "name": "parity",
+      "command": [
+        "node",
+        "/workspace/work/tradepulse-full-locale-qa-20261026/verified-validation/independent-parity.cjs"
+      ],
+      "cwd_at_test_time": "/workspace/tradepulse-i18n-repair",
+      "exit_code": 0,
+      "raw_log_not_published": "final-parity.log"
+    },
+    {
+      "name": "supplemental",
+      "command": [
+        "node",
+        "/workspace/work/tradepulse-full-locale-qa-20261026/verified-validation/supplemental.cjs"
+      ],
+      "cwd_at_test_time": "/workspace/tradepulse-i18n-repair",
+      "exit_code": 0,
+      "raw_log_not_published": "final-supplemental.log"
+    }
+  ],
+  "coverage": {
+    "locale_count": 11,
+    "route_families": 7,
+    "widths": [
+      1440,
+      768,
+      320
+    ],
+    "presentation_modes": [
+      "simple",
+      "pro"
+    ],
+    "standard_matrix_cases": 462,
+    "matrix_groups_including_text_enlargement_and_console": 476,
+    "state_groups": 176,
+    "independent_parity_groups": 57,
+    "supplemental_groups": 25,
+    "financial_row_presentations": 6820,
+    "explanation_presentations": 330,
+    "all_reported_results_pass": true
+  },
+  "per_locale": [
+    {
+      "locale": "en",
+      "matrix_cases": 42,
+      "states": [
+        {
+          "name": "initial load, persisted locale, navigation, filters and empty results",
+          "status": "PASS"
+        },
+        {
+          "name": "rapid Factor Lab pool and status changes retain both filters",
+          "status": "PASS"
+        },
+        {
+          "name": "SYN369 original verdict, source evidence, missing explanation and invalid ticker",
+          "status": "PASS"
+        },
+        {
+          "name": "keyboard Listen entry, all speech controls, stop recovery, error, route cancellation",
+          "status": "PASS"
+        },
+        {
+          "name": "reduced motion and keyboard disclosure/selector operability",
+          "status": "PASS"
+        },
+        {
+          "name": "voice availability {\"unsupported\":true}",
+          "status": "PASS"
+        },
+        {
+          "name": "voice availability {\"empty\":true}",
+          "status": "PASS"
+        },
+        {
+          "name": "voice availability {\"chineseOnly\":true}",
+          "status": "PASS"
+        },
+        {
+          "name": "voice availability {\"delayed\":true}",
+          "status": "PASS"
+        },
+        {
+          "name": "voice availability {\"delayed\":true,\"eventless\":true}",
+          "status": "PASS"
+        },
+        {
+          "name": "API loading",
+          "status": "PASS"
+        },
+        {
+          "name": "API HTTP503",
+          "status": "PASS"
+        },
+        {
+          "name": "API malformed",
+          "status": "PASS"
+        },
+        {
+          "name": "API empty",
+          "status": "PASS"
+        },
+        {
+          "name": "API missing-evidence",
+          "status": "PASS"
+        },
+        {
+          "name": "API summary-only-abstention",
+          "status": "PASS"
+        }
+      ],
+      "technical_status": "TECHNICAL PASS within measured browser scope",
+      "editorial_status": "EDITORIAL REVIEW PENDING",
+      "device_audio_status": "DEVICE AUDIO TEST PENDING",
+      "known_grammar_defect": null
+    },
+    {
+      "locale": "zh-CN",
+      "matrix_cases": 42,
+      "states": [
+        {
+          "name": "initial load, persisted locale, navigation, filters and empty results",
+          "status": "PASS"
+        },
+        {
+          "name": "rapid Factor Lab pool and status changes retain both filters",
+          "status": "PASS"
+        },
+        {
+          "name": "SYN369 original verdict, source evidence, missing explanation and invalid ticker",
+          "status": "PASS"
+        },
+        {
+          "name": "keyboard Listen entry, all speech controls, stop recovery, error, route cancellation",
+          "status": "PASS"
+        },
+        {
+          "name": "reduced motion and keyboard disclosure/selector operability",
+          "status": "PASS"
+        },
+        {
+          "name": "voice availability {\"unsupported\":true}",
+          "status": "PASS"
+        },
+        {
+          "name": "voice availability {\"empty\":true}",
+          "status": "PASS"
+        },
+        {
+          "name": "voice availability {\"chineseOnly\":true}",
+          "status": "PASS"
+        },
+        {
+          "name": "voice availability {\"delayed\":true}",
+          "status": "PASS"
+        },
+        {
+          "name": "voice availability {\"delayed\":true,\"eventless\":true}",
+          "status": "PASS"
+        },
+        {
+          "name": "API loading",
+          "status": "PASS"
+        },
+        {
+          "name": "API HTTP503",
+          "status": "PASS"
+        },
+        {
+          "name": "API malformed",
+          "status": "PASS"
+        },
+        {
+          "name": "API empty",
+          "status": "PASS"
+        },
+        {
+          "name": "API missing-evidence",
+          "status": "PASS"
+        },
+        {
+          "name": "API summary-only-abstention",
+          "status": "PASS"
+        }
+      ],
+      "technical_status": "TECHNICAL PASS within measured browser scope",
+      "editorial_status": "EDITORIAL REVIEW PENDING",
+      "device_audio_status": "DEVICE AUDIO TEST PENDING",
+      "known_grammar_defect": null
+    },
+    {
+      "locale": "zh-TW",
+      "matrix_cases": 42,
+      "states": [
+        {
+          "name": "initial load, persisted locale, navigation, filters and empty results",
+          "status": "PASS"
+        },
+        {
+          "name": "rapid Factor Lab pool and status changes retain both filters",
+          "status": "PASS"
+        },
+        {
+          "name": "SYN369 original verdict, source evidence, missing explanation and invalid ticker",
+          "status": "PASS"
+        },
+        {
+          "name": "keyboard Listen entry, all speech controls, stop recovery, error, route cancellation",
+          "status": "PASS"
+        },
+        {
+          "name": "reduced motion and keyboard disclosure/selector operability",
+          "status": "PASS"
+        },
+        {
+          "name": "voice availability {\"unsupported\":true}",
+          "status": "PASS"
+        },
+        {
+          "name": "voice availability {\"empty\":true}",
+          "status": "PASS"
+        },
+        {
+          "name": "voice availability {\"chineseOnly\":true}",
+          "status": "PASS"
+        },
+        {
+          "name": "voice availability {\"delayed\":true}",
+          "status": "PASS"
+        },
+        {
+          "name": "voice availability {\"delayed\":true,\"eventless\":true}",
+          "status": "PASS"
+        },
+        {
+          "name": "API loading",
+          "status": "PASS"
+        },
+        {
+          "name": "API HTTP503",
+          "status": "PASS"
+        },
+        {
+          "name": "API malformed",
+          "status": "PASS"
+        },
+        {
+          "name": "API empty",
+          "status": "PASS"
+        },
+        {
+          "name": "API missing-evidence",
+          "status": "PASS"
+        },
+        {
+          "name": "API summary-only-abstention",
+          "status": "PASS"
+        }
+      ],
+      "technical_status": "TECHNICAL PASS within measured browser scope",
+      "editorial_status": "EDITORIAL REVIEW PENDING",
+      "device_audio_status": "DEVICE AUDIO TEST PENDING",
+      "known_grammar_defect": null
+    },
+    {
+      "locale": "es",
+      "matrix_cases": 42,
+      "states": [
+        {
+          "name": "initial load, persisted locale, navigation, filters and empty results",
+          "status": "PASS"
+        },
+        {
+          "name": "rapid Factor Lab pool and status changes retain both filters",
+          "status": "PASS"
+        },
+        {
+          "name": "SYN369 original verdict, source evidence, missing explanation and invalid ticker",
+          "status": "PASS"
+        },
+        {
+          "name": "keyboard Listen entry, all speech controls, stop recovery, error, route cancellation",
+          "status": "PASS"
+        },
+        {
+          "name": "reduced motion and keyboard disclosure/selector operability",
+          "status": "PASS"
+        },
+        {
+          "name": "voice availability {\"unsupported\":true}",
+          "status": "PASS"
+        },
+        {
+          "name": "voice availability {\"empty\":true}",
+          "status": "PASS"
+        },
+        {
+          "name": "voice availability {\"chineseOnly\":true}",
+          "status": "PASS"
+        },
+        {
+          "name": "voice availability {\"delayed\":true}",
+          "status": "PASS"
+        },
+        {
+          "name": "voice availability {\"delayed\":true,\"eventless\":true}",
+          "status": "PASS"
+        },
+        {
+          "name": "API loading",
+          "status": "PASS"
+        },
+        {
+          "name": "API HTTP503",
+          "status": "PASS"
+        },
+        {
+          "name": "API malformed",
+          "status": "PASS"
+        },
+        {
+          "name": "API empty",
+          "status": "PASS"
+        },
+        {
+          "name": "API missing-evidence",
+          "status": "PASS"
+        },
+        {
+          "name": "API summary-only-abstention",
+          "status": "PASS"
+        }
+      ],
+      "technical_status": "TECHNICAL PASS within measured browser scope",
+      "editorial_status": "EDITORIAL REVIEW PENDING",
+      "device_audio_status": "DEVICE AUDIO TEST PENDING",
+      "known_grammar_defect": "E-count-01"
+    },
+    {
+      "locale": "fr",
+      "matrix_cases": 42,
+      "states": [
+        {
+          "name": "initial load, persisted locale, navigation, filters and empty results",
+          "status": "PASS"
+        },
+        {
+          "name": "rapid Factor Lab pool and status changes retain both filters",
+          "status": "PASS"
+        },
+        {
+          "name": "SYN369 original verdict, source evidence, missing explanation and invalid ticker",
+          "status": "PASS"
+        },
+        {
+          "name": "keyboard Listen entry, all speech controls, stop recovery, error, route cancellation",
+          "status": "PASS"
+        },
+        {
+          "name": "reduced motion and keyboard disclosure/selector operability",
+          "status": "PASS"
+        },
+        {
+          "name": "voice availability {\"unsupported\":true}",
+          "status": "PASS"
+        },
+        {
+          "name": "voice availability {\"empty\":true}",
+          "status": "PASS"
+        },
+        {
+          "name": "voice availability {\"chineseOnly\":true}",
+          "status": "PASS"
+        },
+        {
+          "name": "voice availability {\"delayed\":true}",
+          "status": "PASS"
+        },
+        {
+          "name": "voice availability {\"delayed\":true,\"eventless\":true}",
+          "status": "PASS"
+        },
+        {
+          "name": "API loading",
+          "status": "PASS"
+        },
+        {
+          "name": "API HTTP503",
+          "status": "PASS"
+        },
+        {
+          "name": "API malformed",
+          "status": "PASS"
+        },
+        {
+          "name": "API empty",
+          "status": "PASS"
+        },
+        {
+          "name": "API missing-evidence",
+          "status": "PASS"
+        },
+        {
+          "name": "API summary-only-abstention",
+          "status": "PASS"
+        }
+      ],
+      "technical_status": "TECHNICAL PASS within measured browser scope",
+      "editorial_status": "EDITORIAL REVIEW PENDING",
+      "device_audio_status": "DEVICE AUDIO TEST PENDING",
+      "known_grammar_defect": "E-count-01"
+    },
+    {
+      "locale": "de",
+      "matrix_cases": 42,
+      "states": [
+        {
+          "name": "initial load, persisted locale, navigation, filters and empty results",
+          "status": "PASS"
+        },
+        {
+          "name": "rapid Factor Lab pool and status changes retain both filters",
+          "status": "PASS"
+        },
+        {
+          "name": "SYN369 original verdict, source evidence, missing explanation and invalid ticker",
+          "status": "PASS"
+        },
+        {
+          "name": "keyboard Listen entry, all speech controls, stop recovery, error, route cancellation",
+          "status": "PASS"
+        },
+        {
+          "name": "reduced motion and keyboard disclosure/selector operability",
+          "status": "PASS"
+        },
+        {
+          "name": "voice availability {\"unsupported\":true}",
+          "status": "PASS"
+        },
+        {
+          "name": "voice availability {\"empty\":true}",
+          "status": "PASS"
+        },
+        {
+          "name": "voice availability {\"chineseOnly\":true}",
+          "status": "PASS"
+        },
+        {
+          "name": "voice availability {\"delayed\":true}",
+          "status": "PASS"
+        },
+        {
+          "name": "voice availability {\"delayed\":true,\"eventless\":true}",
+          "status": "PASS"
+        },
+        {
+          "name": "API loading",
+          "status": "PASS"
+        },
+        {
+          "name": "API HTTP503",
+          "status": "PASS"
+        },
+        {
+          "name": "API malformed",
+          "status": "PASS"
+        },
+        {
+          "name": "API empty",
+          "status": "PASS"
+        },
+        {
+          "name": "API missing-evidence",
+          "status": "PASS"
+        },
+        {
+          "name": "API summary-only-abstention",
+          "status": "PASS"
+        }
+      ],
+      "technical_status": "TECHNICAL PASS within measured browser scope",
+      "editorial_status": "EDITORIAL REVIEW PENDING",
+      "device_audio_status": "DEVICE AUDIO TEST PENDING",
+      "known_grammar_defect": "E-count-01"
+    },
+    {
+      "locale": "pt-BR",
+      "matrix_cases": 42,
+      "states": [
+        {
+          "name": "initial load, persisted locale, navigation, filters and empty results",
+          "status": "PASS"
+        },
+        {
+          "name": "rapid Factor Lab pool and status changes retain both filters",
+          "status": "PASS"
+        },
+        {
+          "name": "SYN369 original verdict, source evidence, missing explanation and invalid ticker",
+          "status": "PASS"
+        },
+        {
+          "name": "keyboard Listen entry, all speech controls, stop recovery, error, route cancellation",
+          "status": "PASS"
+        },
+        {
+          "name": "reduced motion and keyboard disclosure/selector operability",
+          "status": "PASS"
+        },
+        {
+          "name": "voice availability {\"unsupported\":true}",
+          "status": "PASS"
+        },
+        {
+          "name": "voice availability {\"empty\":true}",
+          "status": "PASS"
+        },
+        {
+          "name": "voice availability {\"chineseOnly\":true}",
+          "status": "PASS"
+        },
+        {
+          "name": "voice availability {\"delayed\":true}",
+          "status": "PASS"
+        },
+        {
+          "name": "voice availability {\"delayed\":true,\"eventless\":true}",
+          "status": "PASS"
+        },
+        {
+          "name": "API loading",
+          "status": "PASS"
+        },
+        {
+          "name": "API HTTP503",
+          "status": "PASS"
+        },
+        {
+          "name": "API malformed",
+          "status": "PASS"
+        },
+        {
+          "name": "API empty",
+          "status": "PASS"
+        },
+        {
+          "name": "API missing-evidence",
+          "status": "PASS"
+        },
+        {
+          "name": "API summary-only-abstention",
+          "status": "PASS"
+        }
+      ],
+      "technical_status": "TECHNICAL PASS within measured browser scope",
+      "editorial_status": "EDITORIAL REVIEW PENDING",
+      "device_audio_status": "DEVICE AUDIO TEST PENDING",
+      "known_grammar_defect": "E-count-01"
+    },
+    {
+      "locale": "ja",
+      "matrix_cases": 42,
+      "states": [
+        {
+          "name": "initial load, persisted locale, navigation, filters and empty results",
+          "status": "PASS"
+        },
+        {
+          "name": "rapid Factor Lab pool and status changes retain both filters",
+          "status": "PASS"
+        },
+        {
+          "name": "SYN369 original verdict, source evidence, missing explanation and invalid ticker",
+          "status": "PASS"
+        },
+        {
+          "name": "keyboard Listen entry, all speech controls, stop recovery, error, route cancellation",
+          "status": "PASS"
+        },
+        {
+          "name": "reduced motion and keyboard disclosure/selector operability",
+          "status": "PASS"
+        },
+        {
+          "name": "voice availability {\"unsupported\":true}",
+          "status": "PASS"
+        },
+        {
+          "name": "voice availability {\"empty\":true}",
+          "status": "PASS"
+        },
+        {
+          "name": "voice availability {\"chineseOnly\":true}",
+          "status": "PASS"
+        },
+        {
+          "name": "voice availability {\"delayed\":true}",
+          "status": "PASS"
+        },
+        {
+          "name": "voice availability {\"delayed\":true,\"eventless\":true}",
+          "status": "PASS"
+        },
+        {
+          "name": "API loading",
+          "status": "PASS"
+        },
+        {
+          "name": "API HTTP503",
+          "status": "PASS"
+        },
+        {
+          "name": "API malformed",
+          "status": "PASS"
+        },
+        {
+          "name": "API empty",
+          "status": "PASS"
+        },
+        {
+          "name": "API missing-evidence",
+          "status": "PASS"
+        },
+        {
+          "name": "API summary-only-abstention",
+          "status": "PASS"
+        }
+      ],
+      "technical_status": "TECHNICAL PASS within measured browser scope",
+      "editorial_status": "EDITORIAL REVIEW PENDING",
+      "device_audio_status": "DEVICE AUDIO TEST PENDING",
+      "known_grammar_defect": null
+    },
+    {
+      "locale": "ko",
+      "matrix_cases": 42,
+      "states": [
+        {
+          "name": "initial load, persisted locale, navigation, filters and empty results",
+          "status": "PASS"
+        },
+        {
+          "name": "rapid Factor Lab pool and status changes retain both filters",
+          "status": "PASS"
+        },
+        {
+          "name": "SYN369 original verdict, source evidence, missing explanation and invalid ticker",
+          "status": "PASS"
+        },
+        {
+          "name": "keyboard Listen entry, all speech controls, stop recovery, error, route cancellation",
+          "status": "PASS"
+        },
+        {
+          "name": "reduced motion and keyboard disclosure/selector operability",
+          "status": "PASS"
+        },
+        {
+          "name": "voice availability {\"unsupported\":true}",
+          "status": "PASS"
+        },
+        {
+          "name": "voice availability {\"empty\":true}",
+          "status": "PASS"
+        },
+        {
+          "name": "voice availability {\"chineseOnly\":true}",
+          "status": "PASS"
+        },
+        {
+          "name": "voice availability {\"delayed\":true}",
+          "status": "PASS"
+        },
+        {
+          "name": "voice availability {\"delayed\":true,\"eventless\":true}",
+          "status": "PASS"
+        },
+        {
+          "name": "API loading",
+          "status": "PASS"
+        },
+        {
+          "name": "API HTTP503",
+          "status": "PASS"
+        },
+        {
+          "name": "API malformed",
+          "status": "PASS"
+        },
+        {
+          "name": "API empty",
+          "status": "PASS"
+        },
+        {
+          "name": "API missing-evidence",
+          "status": "PASS"
+        },
+        {
+          "name": "API summary-only-abstention",
+          "status": "PASS"
+        }
+      ],
+      "technical_status": "TECHNICAL PASS within measured browser scope",
+      "editorial_status": "EDITORIAL REVIEW PENDING",
+      "device_audio_status": "DEVICE AUDIO TEST PENDING",
+      "known_grammar_defect": null
+    },
+    {
+      "locale": "cs",
+      "matrix_cases": 42,
+      "states": [
+        {
+          "name": "initial load, persisted locale, navigation, filters and empty results",
+          "status": "PASS"
+        },
+        {
+          "name": "rapid Factor Lab pool and status changes retain both filters",
+          "status": "PASS"
+        },
+        {
+          "name": "SYN369 original verdict, source evidence, missing explanation and invalid ticker",
+          "status": "PASS"
+        },
+        {
+          "name": "keyboard Listen entry, all speech controls, stop recovery, error, route cancellation",
+          "status": "PASS"
+        },
+        {
+          "name": "reduced motion and keyboard disclosure/selector operability",
+          "status": "PASS"
+        },
+        {
+          "name": "voice availability {\"unsupported\":true}",
+          "status": "PASS"
+        },
+        {
+          "name": "voice availability {\"empty\":true}",
+          "status": "PASS"
+        },
+        {
+          "name": "voice availability {\"chineseOnly\":true}",
+          "status": "PASS"
+        },
+        {
+          "name": "voice availability {\"delayed\":true}",
+          "status": "PASS"
+        },
+        {
+          "name": "voice availability {\"delayed\":true,\"eventless\":true}",
+          "status": "PASS"
+        },
+        {
+          "name": "API loading",
+          "status": "PASS"
+        },
+        {
+          "name": "API HTTP503",
+          "status": "PASS"
+        },
+        {
+          "name": "API malformed",
+          "status": "PASS"
+        },
+        {
+          "name": "API empty",
+          "status": "PASS"
+        },
+        {
+          "name": "API missing-evidence",
+          "status": "PASS"
+        },
+        {
+          "name": "API summary-only-abstention",
+          "status": "PASS"
+        }
+      ],
+      "technical_status": "TECHNICAL PASS within measured browser scope",
+      "editorial_status": "EDITORIAL REVIEW PENDING",
+      "device_audio_status": "DEVICE AUDIO TEST PENDING",
+      "known_grammar_defect": "E-count-01"
+    },
+    {
+      "locale": "ar",
+      "matrix_cases": 42,
+      "states": [
+        {
+          "name": "initial load, persisted locale, navigation, filters and empty results",
+          "status": "PASS"
+        },
+        {
+          "name": "rapid Factor Lab pool and status changes retain both filters",
+          "status": "PASS"
+        },
+        {
+          "name": "SYN369 original verdict, source evidence, missing explanation and invalid ticker",
+          "status": "PASS"
+        },
+        {
+          "name": "keyboard Listen entry, all speech controls, stop recovery, error, route cancellation",
+          "status": "PASS"
+        },
+        {
+          "name": "reduced motion and keyboard disclosure/selector operability",
+          "status": "PASS"
+        },
+        {
+          "name": "voice availability {\"unsupported\":true}",
+          "status": "PASS"
+        },
+        {
+          "name": "voice availability {\"empty\":true}",
+          "status": "PASS"
+        },
+        {
+          "name": "voice availability {\"chineseOnly\":true}",
+          "status": "PASS"
+        },
+        {
+          "name": "voice availability {\"delayed\":true}",
+          "status": "PASS"
+        },
+        {
+          "name": "voice availability {\"delayed\":true,\"eventless\":true}",
+          "status": "PASS"
+        },
+        {
+          "name": "API loading",
+          "status": "PASS"
+        },
+        {
+          "name": "API HTTP503",
+          "status": "PASS"
+        },
+        {
+          "name": "API malformed",
+          "status": "PASS"
+        },
+        {
+          "name": "API empty",
+          "status": "PASS"
+        },
+        {
+          "name": "API missing-evidence",
+          "status": "PASS"
+        },
+        {
+          "name": "API summary-only-abstention",
+          "status": "PASS"
+        }
+      ],
+      "technical_status": "TECHNICAL PASS within measured browser scope",
+      "editorial_status": "EDITORIAL REVIEW PENDING",
+      "device_audio_status": "DEVICE AUDIO TEST PENDING",
+      "known_grammar_defect": null
+    }
+  ],
+  "speech": {
+    "native_api_available": true,
+    "native_voices": [],
+    "actual_audio_heard": false,
+    "control_tests_use_explicit_API_mocks": true,
+    "real_Edge_root_cause_resolved": false
+  },
+  "evidence_integrity_references": [
+    {
+      "original_artifact": "verified-validation/suite-exits.json",
+      "bytes": 3219,
+      "sha256": "7be8adf151a79f5d3935168b5b2f95f74f890caf86684e56331470ed8525739e",
+      "artifact_published": false,
+      "reason_if_not_published": "Raw audit artifacts remain local; only this manifest and approved small-text summaries are published."
+    },
+    {
+      "original_artifact": "verified-validation/final-agent/results.json",
+      "bytes": 2043,
+      "sha256": "9805184a1eacc31e349bd91f7f3d01b03b239412eb689f4eed34b40334963d45",
+      "artifact_published": false,
+      "reason_if_not_published": "Raw audit artifacts remain local; only this manifest and approved small-text summaries are published."
+    },
+    {
+      "original_artifact": "verified-validation/final-states/states-results.json",
+      "bytes": 62017,
+      "sha256": "809dc4f2fb5aacd8fd834d7a1be710c9fa408418743db986e98af40fecc84a12",
+      "artifact_published": false,
+      "reason_if_not_published": "Raw audit artifacts remain local; only this manifest and approved small-text summaries are published."
+    },
+    {
+      "original_artifact": "verified-validation/independent-results.json",
+      "bytes": 1750054,
+      "sha256": "9fe6957b7fa70efa5fbcae2cf7328369dd4fdc63a69b1dde4b150b51567533d1",
+      "artifact_published": false,
+      "reason_if_not_published": "Raw audit artifacts remain local; only this manifest and approved small-text summaries are published."
+    },
+    {
+      "original_artifact": "verified-validation/supplemental-results.json",
+      "bytes": 11490,
+      "sha256": "645f2a61c1ead06ec27f445270370f2d529c118c66dcee1c4092cf43b8eca1cb",
+      "artifact_published": false,
+      "reason_if_not_published": "Raw audit artifacts remain local; only this manifest and approved small-text summaries are published."
+    },
+    {
+      "original_artifact": "verified-pixel-comparison.json",
+      "bytes": 222929,
+      "sha256": "333425e118b5bd41e4d51a550fced9affbe5ead53a0b7bfb5931c493e0ff64ae",
+      "artifact_published": false,
+      "reason_if_not_published": "Raw audit artifacts remain local; only this manifest and approved small-text summaries are published."
+    },
+    {
+      "original_artifact": "final-reviewed-sheets.json",
+      "bytes": 39299,
+      "sha256": "5c439eda639c953d2e4e3de81419daafc2d6846849bf0e85a03025d8fd7474b5",
+      "artifact_published": false,
+      "reason_if_not_published": "Raw audit artifacts remain local; only this manifest and approved small-text summaries are published."
+    },
+    {
+      "original_artifact": "verified-extra-image-manifest.json",
+      "bytes": 25460,
+      "sha256": "9244d22b4569856dc39dda216706b2a556d6a6cd153837935de00207162f7232",
+      "artifact_published": false,
+      "reason_if_not_published": "Raw audit artifacts remain local; only this manifest and approved small-text summaries are published."
+    },
+    {
+      "original_artifact": "original-reproductions.json",
+      "bytes": 788,
+      "sha256": "c0d53012fa3eaeb47f19dc37cda8fc8892f7695508a7fdce8684fbbcdef2a81d",
+      "artifact_published": false,
+      "reason_if_not_published": "Raw audit artifacts remain local; only this manifest and approved small-text summaries are published."
+    },
+    {
+      "original_artifact": "legacy-before/results.json",
+      "bytes": 3177,
+      "sha256": "8d186ddd1392720f7c66e062894f2d6f8d0d7f41bc7da5f991534e1ceaf03b42",
+      "artifact_published": false,
+      "reason_if_not_published": "Raw audit artifacts remain local; only this manifest and approved small-text summaries are published."
+    },
+    {
+      "original_artifact": "verified-main-conflicts.json",
+      "bytes": 720,
+      "sha256": "2c18de10246f54b72396d0e5134ac98df2152be67efdf7fb47f679d20264fa72",
+      "artifact_published": true,
+      "reason_if_not_published": "Raw audit artifacts remain local; only this manifest and approved small-text summaries are published."
+    },
+    {
+      "original_artifact": "verified-matrix-a/matrix-results.json",
+      "bytes": 767276,
+      "sha256": "5337d86d9c0f3eec4a067f1f1b020bd97918814d1531b4acf22e60a7e92f2b43",
+      "artifact_published": false,
+      "reason_if_not_published": "Raw audit artifacts remain local; only this manifest and approved small-text summaries are published."
+    },
+    {
+      "original_artifact": "verified-matrix-b/matrix-results.json",
+      "bytes": 795644,
+      "sha256": "fd7353ee953a4fdddb9b2566ad77696f50512270be649d58d37cf515b6498896",
+      "artifact_published": false,
+      "reason_if_not_published": "Raw audit artifacts remain local; only this manifest and approved small-text summaries are published."
+    },
+    {
+      "original_artifact": "verified-matrix-c/matrix-results.json",
+      "bytes": 565133,
+      "sha256": "3e083da2ce7b52eb23c4670337838cce0315647b180d4cc3ed384717beb9735c",
+      "artifact_published": false,
+      "reason_if_not_published": "Raw audit artifacts remain local; only this manifest and approved small-text summaries are published."
+    }
+  ],
+  "not_published": [
+    "screenshots",
+    "ZIP archives",
+    "raw logs",
+    "browser captures",
+    "build outputs",
+    "caches",
+    "application code",
+    "environment files",
+    "credentials",
+    "personal information"
+  ],
+  "tests_rerun_for_documentation_publication": false,
+  "release_approval": false
+}

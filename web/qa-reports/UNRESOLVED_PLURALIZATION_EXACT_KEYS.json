@@ -1,0 +1,132 @@
+[
+  {
+    "id": "E-count-01-es",
+    "severity": "Optional",
+    "status": "Unresolved at final tested commit",
+    "locale": "es",
+    "source_path": "web/src/i18n/locales/es.json",
+    "line": 169,
+    "call_site": "web/src/pages/Factors.jsx:35",
+    "exact_translation_key": "Horizon: {value1}d\nMean IC: {value2}\nt-stat: {value3}\nn: {value4}",
+    "exact_current_translation": "Horizonte: {value1} días\nIC medio: {value2}\nEstadístico t: {value3}\nn: {value4}",
+    "actual_one_day_phrase": "1 días",
+    "recommended_one_day_phrase": "1 día",
+    "recommended_singular_template": "Horizonte: {value1} día\nIC medio: {value2}\nEstadístico t: {value3}\nn: {value4}",
+    "implementation_recommendation": "Use locale-aware singular/plural selection without changing horizon_days, or consistently retain an approved technical d unit; do not replace all plural forms with the singular template. Czech additionally needs few/other forms. No change was implemented during export.",
+    "other_related_keys_to_review": {
+      "Horizon: {value1} days": "Horizonte: {value1} días",
+      "{value1} days": "{value1} días"
+    },
+    "reproduction": [
+      "Select es",
+      "Open Factor Lab (/factors)",
+      "Select Pro view",
+      "Hover first 1d IC-decay bar"
+    ],
+    "existing_screenshot": "verified-tooltip-review/es-factors.png"
+  },
+  {
+    "id": "E-count-01-fr",
+    "severity": "Optional",
+    "status": "Unresolved at final tested commit",
+    "locale": "fr",
+    "source_path": "web/src/i18n/locales/fr.json",
+    "line": 169,
+    "call_site": "web/src/pages/Factors.jsx:35",
+    "exact_translation_key": "Horizon: {value1}d\nMean IC: {value2}\nt-stat: {value3}\nn: {value4}",
+    "exact_current_translation": "Horizon : {value1} jours\nIC moyen : {value2}\nStatistique t : {value3}\nn : {value4}",
+    "actual_one_day_phrase": "1 jours",
+    "recommended_one_day_phrase": "1 jour",
+    "recommended_singular_template": "Horizon : {value1} jour\nIC moyen : {value2}\nStatistique t : {value3}\nn : {value4}",
+    "implementation_recommendation": "Use locale-aware singular/plural selection without changing horizon_days, or consistently retain an approved technical d unit; do not replace all plural forms with the singular template. Czech additionally needs few/other forms. No change was implemented during export.",
+    "other_related_keys_to_review": {
+      "Horizon: {value1} days": "Horizon : {value1} jours",
+      "{value1} days": "{value1} jours"
+    },
+    "reproduction": [
+      "Select fr",
+      "Open Factor Lab (/factors)",
+      "Select Pro view",
+      "Hover first 1d IC-decay bar"
+    ],
+    "existing_screenshot": "verified-tooltip-review/fr-factors.png"
+  },
+  {
+    "id": "E-count-01-de",
+    "severity": "Optional",
+    "status": "Unresolved at final tested commit",
+    "locale": "de",
+    "source_path": "web/src/i18n/locales/de.json",
+    "line": 169,
+    "call_site": "web/src/pages/Factors.jsx:35",
+    "exact_translation_key": "Horizon: {value1}d\nMean IC: {value2}\nt-stat: {value3}\nn: {value4}",
+    "exact_current_translation": "Horizont: {value1} Tage\nMittlerer IC: {value2}\nt-Statistik: {value3}\nn: {value4}",
+    "actual_one_day_phrase": "1 Tage",
+    "recommended_one_day_phrase": "1 Tag",
+    "recommended_singular_template": "Horizont: {value1} Tag\nMittlerer IC: {value2}\nt-Statistik: {value3}\nn: {value4}",
+    "implementation_recommendation": "Use locale-aware singular/plural selection without changing horizon_days, or consistently retain an approved technical d unit; do not replace all plural forms with the singular template. Czech additionally needs few/other forms. No change was implemented during export.",
+    "other_related_keys_to_review": {
+      "Horizon: {value1} days": "Horizont: {value1} Tage",
+      "{value1} days": "{value1} Tage"
+    },
+    "reproduction": [
+      "Select de",
+      "Open Factor Lab (/factors)",
+      "Select Pro view",
+      "Hover first 1d IC-decay bar"
+    ],
+    "existing_screenshot": "verified-tooltip-review/de-factors.png"
+  },
+  {
+    "id": "E-count-01-pt-BR",
+    "severity": "Optional",
+    "status": "Unresolved at final tested commit",
+    "locale": "pt-BR",
+    "source_path": "web/src/i18n/locales/pt-BR.json",
+    "line": 169,
+    "call_site": "web/src/pages/Factors.jsx:35",
+    "exact_translation_key": "Horizon: {value1}d\nMean IC: {value2}\nt-stat: {value3}\nn: {value4}",
+    "exact_current_translation": "Horizonte: {value1} dias\nIC médio: {value2}\nEstatística t: {value3}\nn: {value4}",
+    "actual_one_day_phrase": "1 dias",
+    "recommended_one_day_phrase": "1 dia",
+    "recommended_singular_template": "Horizonte: {value1} dia\nIC médio: {value2}\nEstatística t: {value3}\nn: {value4}",
+    "implementation_recommendation": "Use locale-aware singular/plural selection without changing horizon_days, or consistently retain an approved technical d unit; do not replace all plural forms with the singular template. Czech additionally needs few/other forms. No change was implemented during export.",
+    "other_related_keys_to_review": {
+      "Horizon: {value1} days": "Horizonte: {value1} dias",
+      "{value1} days": "{value1} dias"
+    },
+    "reproduction": [
+      "Select pt-BR",
+      "Open Factor Lab (/factors)",
+      "Select Pro view",
+      "Hover first 1d IC-decay bar"
+    ],
+    "existing_screenshot": "verified-tooltip-review/pt-BR-factors.png"
+  },
+  {
+    "id": "E-count-01-cs",
+    "severity": "Optional",
+    "status": "Unresolved at final tested commit",
+    "locale": "cs",
+    "source_path": "web/src/i18n/locales/cs.json",
+    "line": 169,
+    "call_site": "web/src/pages/Factors.jsx:35",
+    "exact_translation_key": "Horizon: {value1}d\nMean IC: {value2}\nt-stat: {value3}\nn: {value4}",
+    "exact_current_translation": "Horizont: {value1} dní\nPrůměrné IC: {value2}\nt-statistika: {value3}\nn: {value4}",
+    "actual_one_day_phrase": "1 dní",
+    "recommended_one_day_phrase": "1 den",
+    "recommended_singular_template": "Horizont: {value1} den\nPrůměrné IC: {value2}\nt-statistika: {value3}\nn: {value4}",
+    "implementation_recommendation": "Use locale-aware singular/plural selection without changing horizon_days, or consistently retain an approved technical d unit; do not replace all plural forms with the singular template. Czech additionally needs few/other forms. No change was implemented during export.",
+    "other_related_keys_to_review": {
+      "Horizon: {value1} days": "Horizont: {value1} dní",
+      "{value1} days": "{value1} dní"
+    },
+    "reproduction": [
+      "Select cs",
+      "Open Factor Lab (/factors)",
+      "Select Pro view",
+      "Hover first 1d IC-decay bar"
+    ],
+    "existing_screenshot": "verified-tooltip-review/cs-factors.png"
+  }
+]

@@ -82,11 +82,26 @@ Implemented: URL normalization, all-role routing, thread-safe record/replay, san
 checks, wrong-token/live network tests and a three-case acceptance runner. Responses retain
 provider/model metadata and hashes. The core already traces model calls and verification.
 
-Still required: open a supported Nightshift edition on the Mac, enable its endpoint and
-complete an actual model request, then the combined live cases. No successful Nightshift
-inference, specific model family, independent skeptic family or complete offline replay
-cassette is claimed yet. NIM remains an optional configured fallback in normal operation;
-it is not evidence of Nightshift use.
+New lead-reported evidence: Nightshift M1-M4 Edition 2026.10.25 (download page version 0.92.7)
+is installed on the M1 Mac. An actual Bearer-token API call at http://127.0.0.1:8088/v1
+returned HTTP 200 and "Hello." from webllm/Llama-3.2-1B-Instruct-q4f16_1-MLC. TradePulse's
+smoke check also returned status=ok and provider=meterless using that model ID. Configuration
+is in the ignored .env.nightshift.local and refers to an existing token file; no token was
+included in the report. Zetaris still returned 616 universe members. Memory pressure was
+green, with about 7.74 GB of existing swap usage. These observations were reported from the
+Mac and have not been independently repeated on the Windows development machine.
+
+This establishes a real text-provider connection, not yet a valid research JSON response,
+grounded filing extraction or the combined sponsor-connected cases. The client now checks
+the configured model against the actual runtime catalog, including concrete webllm IDs.
+Nightshift calls default to one concurrent request and a 768-token output cap, with the
+requested response schema included in the prompt. Live acceptance separately validates the
+JSON schema; a plain "Hello." cannot pass as an analyst or skeptic result.
+
+Still required: wrong-token enforcement, actual catalog validation, Zetaris template parity,
+Mac engine acceptance and the combined live cases. Independent skeptic-family routing and
+complete offline model replay remain unverified. NIM is an optional fallback in normal
+operation, not evidence of Nightshift use. Only Nightshift routes are allowed in live acceptance.
 
 Contract: [official hotspot guide](https://github.com/Meterless/Meterless/blob/main/docs/products/nightshift/hotspot.md).
 

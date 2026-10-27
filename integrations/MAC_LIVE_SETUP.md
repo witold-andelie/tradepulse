@@ -48,7 +48,7 @@ with ZETARIS_API_MODE=direct and ZETARIS_REST_URL, not by silently switching end
 To run parity with the same private environment file:
 
 ```sh
-python3 -c 'from pathlib import Path; from integrations.environment import load_private_env; from integrations.zetaris.parity import main; load_private_env(Path.home()/"getting-started/.env.local"); raise SystemExit(main())'
+python3 -m integrations.zetaris.parity --env-file ~/getting-started/.env.local
 ```
 
 Every template must return the same logical row hash as DuckDB over the unchanged sample.
@@ -86,8 +86,10 @@ export METERLESS_APP=tradepulse
 python3 -m integrations.preflight --service nightshift
 ```
 
-Use the actual endpoint shown in the installed app if it differs. Discovery must return
-Meterless routing IDs and the model request must return a text response. The smoke output
+Use the actual endpoint and model ID shown in the installed app. The lead's M1 edition has
+successfully used webllm/Llama-3.2-1B-Instruct-q4f16_1-MLC; it must not be rejected simply
+because the ID lacks a meterless/ prefix. The selected ID must appear in the runtime's
+actual model catalog. The request must return a text response. The smoke output
 includes provider, model, response length and SHA-256, never the bearer token. A response from
 NIM cannot satisfy this smoke check. When available, run the wrong-token network acceptance:
 
@@ -95,13 +97,49 @@ NIM cannot satisfy this smoke check. When available, run the wrong-token network
 python3 -m pytest integrations/tests/test_live_meterless.py -q -m network
 ```
 
-## 5. Generate the three live examples and traces
+The lead has already reported a successful smoke call using the ignored .env.nightshift.local.
+To reuse that file, without printing its contents:
+
+```sh
+python3 -m integrations.preflight --service nightshift --env-file .env.nightshift.local
+```
+
+The default runtime queue is serial across roles. METERLESS_MAX_CONCURRENCY can be 1-4;
+keep it at 1 on this M1. METERLESS_MAX_TOKENS defaults to 768 (allowed range 1-4096).
+The request and queue-wait limits are each 180 seconds. These limits do not certify that a
+small model follows research instructions; live acceptance checks its actual JSON reply.
+
+## 5. Start with a Crypto-only live case
+
+First check Zetaris parity and start the engine service above. Then:
+
+```sh
+export ZETARIS_API_MODE=proxy
+export ZETARIS_BASE_URL=http://localhost:3000
+export ENGINES_URL=http://127.0.0.1:8790
+export METERLESS_MAX_CONCURRENCY=1
+export METERLESS_MAX_TOKENS=768
+python3 -m integrations.live_acceptance \
+  --env-file ~/getting-started/.env.local \
+  --env-file .env.nightshift.local \
+  --pools crypto \
+  --output runs/live-sponsors-crypto-first
+```
+
+Crypto does not trigger the US filing extractor. A successful selected run reports
+status=selected_cases_ok and submission_complete=false. It is useful live-feature evidence,
+not completion of all three cases. Watch current memory pressure and swap growth during
+the test; an old swap-usage total alone is not a measurement of current paging activity.
+Do not run the full filing workload while diagnosing a slow or invalid small-model reply.
+
+## 6. Generate all three live examples and traces
 
 Once all three service checks pass:
 
 ```sh
 python3 -m integrations.live_acceptance \
   --env-file ~/getting-started/.env.local \
+  --env-file .env.nightshift.local \
   --output runs/live-sponsors-first
 ```
 
@@ -114,8 +152,10 @@ promise that the entire run finishes within one request timeout.
 
 Each pool directory contains input.json, output.json, the original trace and a console log.
 The root contains parity.json, queries.jsonl, models.jsonl, the live cassette, manifest.json
-and a computed README table. `status: ok` requires live analyst and skeptic answers and actual
-engine snapshot, recall and write operations. Missing models or services fail acceptance.
+and a computed README table. Full status=ok with submission_complete=true requires all three
+pools, schema-valid live analyst and skeptic answers and actual engine snapshot, recall
+and write operations. Missing models or services fail acceptance. Failure artifacts retain
+the original trace and contract-valid output where available, without claiming success.
 An evidence-checked abstention can still be an honest output; no tier or claimed result is
 changed to make the demo look better.
 

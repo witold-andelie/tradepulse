@@ -43,8 +43,9 @@ Then in integrations/engines:
 - [x] Official helper returns crypto 38, eu_equity 55 and us_equity 523 members.
 - [ ] TradePulse ZetarisClient and ZetarisAdapter live smoke succeed on the Mac.
 - [ ] Every template matches DuckDB rows_sha256 on the frozen sample.
-- [ ] The installed Nightshift edition exposes an authenticated endpoint with Meterless IDs.
-- [ ] Wrong token gets 401/403; a real token produces a response through TradePulse.
+- [x] The lead reports Nightshift M1-M4 Edition responding through its Bearer-token API.
+- [x] A real token produces a text response through TradePulse's smoke check (lead-reported).
+- [ ] Wrong token gets 401/403 and the configured model matches the advertised runtime catalog.
 - [ ] The engine image builds and runs on the Mac's actual architecture.
 
 Use [MAC_LIVE_SETUP.md](MAC_LIVE_SETUP.md). Never request, print or include raw credentials
@@ -52,7 +53,8 @@ in acceptance evidence.
 
 ## End-to-end submission evidence
 
-- [ ] integrations.live_acceptance completes all three pool cases with status=ok.
+- [ ] integrations.live_acceptance completes all three pool cases with status=ok and
+  submission_complete=true. A selected-pool run cannot satisfy the full submission check.
 - [ ] Every run queries Zetaris and receives live Nightshift analyst and skeptic answers.
 - [ ] Original traces show successful engine snapshot, recall and recommendation writes.
 - [ ] Three inputs, outputs, original traces and the computed README table are reviewed.

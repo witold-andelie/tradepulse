@@ -17,17 +17,34 @@ from collections import Counter
 from pathlib import Path
 from time import perf_counter
 
+from jsonschema import Draft202012Validator
+
 from ingest.privacy import CONTACT_ADDRESS
 from serve import verified_sample_request
 from tradepulse.contracts import REPO_ROOT, assert_payload
 from tradepulse.engines import configured_engines
 from tradepulse.pipeline import run_pipeline
+from tradepulse.agents.prompts import parse_json
 
 from .environment import load_private_env
 from .meterless.llm import Cassette, ChainClient, build_routes_from_env, read_token
 from .zetaris.adapter import DuckDBAdapter, ZetarisAdapter
 from .zetaris.client import ZetarisClient
 from .zetaris.parity import check_parity
+
+ALL_POOLS = ("crypto", "eu_equity", "us_equity")
+
+
+class ModelSchemaError(ValueError):
+    """A real provider replied, but its text does not satisfy the requested response schema."""
+
+
+def selection_result(cases: list[dict], pools: list[str]) -> dict:
+    complete = len(cases) == len(ALL_POOLS) and {item["pool"] for item in cases} == set(ALL_POOLS)
+    return {"status": "ok" if complete else "selected_cases_ok",
+            "submission_complete": complete, "selected_pools": pools,
+            "remaining_pools": [pool for pool in ALL_POOLS
+                                if pool not in {item["pool"] for item in cases}]}
 
 
 def digest(raw: bytes) -> str:
@@ -75,13 +92,19 @@ class AuditedLLM:
     def complete(self, role, messages, response_schema=None):
         started = perf_counter()
         result = self.client.complete(role, messages, response_schema)
+        parsed = parse_json(result.text) if response_schema is not None else None
+        schema_valid = (response_schema is None or parsed is not None and
+                        Draft202012Validator(response_schema).is_valid(parsed))
         receipt = {"role": role, "provider": result.provider, "model": result.model,
                    "replayed": result.replayed, "cassette_key": result.cassette_key,
                    "response_sha256": digest(result.text.encode("utf-8")),
                    "tokens_in": result.tokens_in, "tokens_out": result.tokens_out,
-                   "elapsed_ms": int((perf_counter() - started) * 1000)}
+                   "elapsed_ms": int((perf_counter() - started) * 1000),
+                   "schema_valid": schema_valid}
         with self._lock, self.path.open("a", encoding="utf-8") as stream:
             stream.write(json.dumps(receipt, sort_keys=True) + "\n")
+        if not schema_valid:
+            raise ModelSchemaError("Provider response did not satisfy the requested JSON schema")
         return result
 
 
@@ -120,7 +143,11 @@ def main(argv: list[str] | None = None) -> int:
                         help="ignored env file to load; may be supplied more than once")
     parser.add_argument("--output", type=Path, required=True,
                         help="new directory under the ignored runs/ directory")
+    parser.add_argument("--pools", nargs="+", choices=ALL_POOLS, default=list(ALL_POOLS),
+                        help="run selected pools first; only all three can complete submission acceptance")
     args = parser.parse_args(argv)
+    if len(set(args.pools)) != len(args.pools):
+        parser.error("Each pool may be selected only once")
     destination = args.output.resolve()
     if not destination.is_relative_to(REPO_ROOT / "runs"):
         raise ValueError("Choose an acceptance destination under runs/")
@@ -161,10 +188,14 @@ def main(argv: list[str] | None = None) -> int:
     started = perf_counter()
     manifest = {"status": "running", "as_of": request["as_of"],
                 "engines": health["engines"], "cases": cases,
+                "selected_pools": args.pools, "submission_complete": False,
                 "generated_at": dt.datetime.now(dt.UTC).isoformat()}
+    write_json(destination / "manifest.json", manifest, secrets)
     try:
         # Small pools provide the first end-to-end evidence before the filing workload.
-        for pool in ("crypto", "eu_equity", "us_equity"):
+        for pool in args.pools:
+            manifest["active_pool"] = pool
+            manifest["stage"] = "pipeline"
             case = {**request, "pools": [pool], "top_k": 1}
             assert_payload(case, "RunRequest")
             folder = destination / pool
@@ -179,12 +210,13 @@ def main(argv: list[str] | None = None) -> int:
             raw_trace = original_trace.read_bytes()
             check_public_bytes(raw_trace, secrets)
             events = [json.loads(line) for line in raw_trace.splitlines()]
-            checked = validate_case(output, events)
             # Keep the original trace file and bytes. The packaged reference is repo-relative.
             output["trace_path"] = original_trace.relative_to(REPO_ROOT).as_posix()
             files = {"input.json": write_json(folder / "input.json", case, secrets),
                      "output.json": write_json(folder / "output.json", output, secrets),
                      original_trace.name: {"bytes": len(raw_trace), "sha256": digest(raw_trace)}}
+            manifest["stage"] = "validate-case"
+            checked = validate_case(output, events)
             cases.append({"pool": pool, "run_id": output["run_id"], "files": files,
                           "recommendations": len(output["recommendations"]), **checked})
             write_json(destination / "manifest.json", manifest, secrets)
@@ -192,7 +224,8 @@ def main(argv: list[str] | None = None) -> int:
         check_public_bytes((destination / "llm_cassette.jsonl").read_bytes(), secrets)
         check_public_bytes((destination / "queries.jsonl").read_bytes(), secrets)
         check_public_bytes((destination / "models.jsonl").read_bytes(), secrets)
-        manifest.update({"status": "ok", "elapsed_s": round(perf_counter() - started, 2),
+        manifest.update({**selection_result(cases, args.pools), "stage": "complete",
+                         "elapsed_s": round(perf_counter() - started, 2),
                          "zetaris_queries": len(query.calls)})
         lines = ["# Live sponsor acceptance examples", "",
                  "Computed through Zetaris, Nightshift and the Meterless engines sidecar.", "",
@@ -202,6 +235,7 @@ def main(argv: list[str] | None = None) -> int:
             lines.append(f"| {item['pool']} | {item['recommendations']} | "
                          f"{item['nightshift_calls']} | {json.dumps(item['verdicts'])} |")
         lines += ["", "Each pool folder contains input.json, output.json and the original trace.",
+                  f"Submission acceptance complete: {manifest['submission_complete']}.",
                   "All tiers and verdicts are computed. Abstention remains a valid research result.",
                   "The current engine integration uses historical record counts, not prior accuracy.",
                   "Review model text and traces for privacy before publishing these artifacts."]
@@ -210,10 +244,12 @@ def main(argv: list[str] | None = None) -> int:
         manifest.update({"status": "failed", "failure_type": type(error).__name__})
         write_json(destination / "manifest.json", manifest, secrets)
         print(json.dumps({"status": "failed", "failure_type": type(error).__name__,
+                          "stage": manifest.get("stage"), "pool": manifest.get("active_pool"),
                           "completed_cases": len(cases)}), flush=True)
         return 1
     write_json(destination / "manifest.json", manifest, secrets)
-    print(json.dumps({"status": "ok", "cases": len(cases), "output": str(destination)}))
+    print(json.dumps({**selection_result(cases, args.pools),
+                      "cases": len(cases), "output": str(destination)}))
     return 0
 
 

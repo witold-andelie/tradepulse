@@ -12,7 +12,8 @@ import os
 
 import requests
 
-from .llm import ChainClient, build_routes_from_env, normalise_meterless_base_url, read_token
+from .llm import (ChainClient, build_routes_from_env, normalise_meterless_base_url, read_token,
+                  require_advertised_model)
 
 
 def main() -> None:
@@ -34,16 +35,11 @@ def main() -> None:
     if models_response.status_code != 200:
         raise SystemExit(f"Nightshift model discovery returned HTTP {models_response.status_code}.")
     try:
-        payload = models_response.json()
-        models = payload.get("data", []) if isinstance(payload, dict) else []
-        valid = isinstance(models, list) and any(
-            isinstance(item, dict) and str(item.get("id", "")).startswith("meterless/")
-            for item in models
+        require_advertised_model(
+            models_response.json(), os.environ.get("METERLESS_MODEL") or "meterless/auto",
         )
     except ValueError:
-        valid = False
-    if not valid:
-        raise SystemExit("The configured endpoint did not advertise Meterless routing IDs.")
+        raise SystemExit("Nightshift did not advertise the configured METERLESS_MODEL.") from None
 
     messages = [{
         "role": "user",

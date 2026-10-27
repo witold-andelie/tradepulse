@@ -95,6 +95,54 @@ def normalise_meterless_base_url(value: str) -> str:
     return urlunsplit((parsed.scheme, parsed.netloc, f"{path}/v1", "", ""))
 
 
+def advertised_model_ids(payload: object) -> list[str]:
+    """Read the actual endpoint catalog; M1 editions can expose concrete webllm model IDs."""
+    if not isinstance(payload, dict) or not isinstance(payload.get("data"), list):
+        raise ValueError("Nightshift model discovery requires a data list")
+    values = payload["data"]
+    if len(values) > 1000:
+        raise ValueError("Nightshift model catalog exceeds the work limit")
+    ids = []
+    for item in values:
+        if not isinstance(item, dict) or not isinstance(item.get("id"), str) or not item["id"]:
+            raise ValueError("Nightshift model catalog contains an invalid ID")
+        ids.append(item["id"])
+    if not ids:
+        raise ValueError("Nightshift did not advertise any models")
+    return ids
+
+
+def require_advertised_model(payload: object, selected: str) -> list[str]:
+    ids = advertised_model_ids(payload)
+    if selected not in ids:
+        raise ValueError("Configured METERLESS_MODEL is not in the runtime model catalog")
+    return ids
+
+
+def _bounded_setting(name: str, default: int, maximum: int) -> int:
+    try:
+        value = int(os.environ.get(name, str(default)))
+    except ValueError:
+        raise ValueError(f"{name} must be an integer") from None
+    if not 1 <= value <= maximum:
+        raise ValueError(f"{name} must be between 1 and {maximum}")
+    return value
+
+
+def _schema_messages(messages: list[dict], schema: dict | None) -> list[dict]:
+    """Make the existing schema visible to small models without requiring JSON-mode support."""
+    prepared = [dict(message) for message in messages]
+    if schema is None:
+        return prepared
+    instruction = ("\n\nRESPONSE SCHEMA:\n" + json.dumps(schema, ensure_ascii=False) +
+                   "\nReturn only one JSON object matching this schema. Keep text concise.")
+    if prepared and prepared[0].get("role") == "system":
+        prepared[0]["content"] = str(prepared[0].get("content", "")) + instruction
+    else:
+        prepared.insert(0, {"role": "system", "content": instruction.strip()})
+    return prepared
+
+
 def cassette_key(role: str, messages: list[dict], response_schema: dict | None) -> str:
     """sha256 hex of json.dumps({"role", "messages", "schema"}, sort_keys=True, ensure_ascii=False).
     Provider and model are NOT part of the key, so a replay works whichever provider answered."""
@@ -187,16 +235,23 @@ def build_routes_from_env() -> dict:
     roles, with optional NIM fallbacks. Without Nightshift, existing NIM settings still apply."""
     from openai import OpenAI
 
-    def caller(client):
+    def caller(client, *, concurrency=None, max_tokens=None):
         def call(messages: list[dict], model: str, schema: dict | None):
-            # No response_format: strict json_schema mode is not supported uniformly by
-            # OpenAI-compatible servers (Meterless, NIM). Prompts ask for JSON and the core parses
-            # replies tolerantly; malformed replies fail verification and are retried.
-            response = client.chat.completions.create(model=model, messages=messages)
-            text = response.choices[0].message.content
-            usage = response.usage
-            return (text, usage.prompt_tokens if usage else None,
-                    usage.completion_tokens if usage else None)
+            if concurrency is not None and not concurrency.acquire(timeout=180):
+                raise TimeoutError("Nightshift request queue wait exceeded 180 seconds")
+            try:
+                # No response_format: compatible runtimes vary in structured-output support.
+                options = {"max_tokens": max_tokens} if max_tokens is not None else {}
+                response = client.chat.completions.create(
+                    model=model, messages=_schema_messages(messages, schema), **options,
+                )
+                text = response.choices[0].message.content
+                usage = response.usage
+                return (text, usage.prompt_tokens if usage else None,
+                        usage.completion_tokens if usage else None)
+            finally:
+                if concurrency is not None:
+                    concurrency.release()
 
         return call
 
@@ -211,8 +266,12 @@ def build_routes_from_env() -> dict:
             default_headers={"meterless-app": os.environ.get("METERLESS_APP") or "tradepulse",
                              "meterless-scope": "user"},
         )
+        concurrency = threading.BoundedSemaphore(
+            _bounded_setting("METERLESS_MAX_CONCURRENCY", 1, 4)
+        )
         route = ("meterless", os.environ.get("METERLESS_MODEL") or "meterless/auto",
-                 caller(meterless))
+                 caller(meterless, concurrency=concurrency,
+                        max_tokens=_bounded_setting("METERLESS_MAX_TOKENS", 768, 4096)))
         for role in ROLES:
             routes[role] = [route]
 

@@ -3,7 +3,9 @@ import os
 import pytest
 import requests
 
-from integrations.meterless.llm import ChainClient, build_routes_from_env, normalise_meterless_base_url, read_token
+from integrations.meterless.llm import (ChainClient, build_routes_from_env,
+                                        normalise_meterless_base_url, read_token,
+                                        require_advertised_model)
 
 
 @pytest.mark.network
@@ -28,15 +30,15 @@ def test_nightshift_is_a_working_ai_provider():
         timeout=30,
     )
     assert accepted.status_code == 200
-    assert any(
-        isinstance(item, dict) and str(item.get("id", "")).startswith("meterless/")
-        for item in accepted.json().get("data", [])
-    )
+    selected = os.environ.get("METERLESS_MODEL") or "meterless/auto"
+    require_advertised_model(accepted.json(), selected)
 
-    reply = ChainClient(build_routes_from_env(), None, mode="live").complete(
+    routes = {role: [route for route in values if route[0] == "meterless"]
+              for role, values in build_routes_from_env().items()}
+    reply = ChainClient(routes, None, mode="live").complete(
         "analyst",
         [{"role": "user", "content": "Reply with one short sentence confirming readiness."}],
     )
     assert reply.provider == "meterless"
-    assert reply.model.startswith("meterless/")
+    assert reply.model == selected
     assert reply.text.strip()

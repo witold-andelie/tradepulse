@@ -8,6 +8,7 @@ from pathlib import Path
 
 from tradepulse.contracts import REPO_ROOT
 
+from integrations.environment import load_private_env
 from .adapter import DuckDBAdapter, ZetarisAdapter
 from .client import ZetarisClient
 from .templates import declared_params, list_templates
@@ -50,7 +51,10 @@ def check_parity(live, offline, as_of: str) -> list[dict]:
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--sample-root", type=Path, default=REPO_ROOT / "data" / "sample")
+    parser.add_argument("--env-file", type=Path, action="append", default=[])
     args = parser.parse_args(argv)
+    for path in args.env_file:
+        load_private_env(path.expanduser())
     manifest = json.loads((args.sample_root / "manifest.json").read_text(encoding="utf-8"))
     results = check_parity(
         ZetarisAdapter(ZetarisClient.from_env()), DuckDBAdapter(args.sample_root), manifest["as_of"],

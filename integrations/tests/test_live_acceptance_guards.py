@@ -4,8 +4,9 @@ from concurrent.futures import ThreadPoolExecutor
 import pytest
 
 from integrations.environment import load_private_env
-from integrations.live_acceptance import check_public_bytes, validate_case
-from integrations.meterless.llm import Cassette
+from integrations.live_acceptance import (AuditedLLM, ModelSchemaError, check_public_bytes,
+                                           selection_result, validate_case)
+from integrations.meterless.llm import Cassette, LLMResponse
 from tradepulse.contracts import REPO_ROOT
 
 
@@ -49,3 +50,46 @@ def test_offline_example_cannot_satisfy_live_acceptance():
                         .read_text(encoding="utf-8"))
     with pytest.raises(ValueError, match="REAL run"):
         validate_case(output, [])
+
+
+def test_crypto_stage_cannot_claim_complete_submission():
+    result = selection_result([{"pool": "crypto"}], ["crypto"])
+    assert result["status"] == "selected_cases_ok"
+    assert result["submission_complete"] is False
+    assert result["remaining_pools"] == ["eu_equity", "us_equity"]
+    assert selection_result([{"pool": pool} for pool in
+                             ("crypto", "eu_equity", "us_equity")],
+                            ["crypto", "eu_equity", "us_equity"])["submission_complete"] is True
+
+
+def test_hello_is_not_a_successful_structured_research_answer(tmp_path):
+    class Client:
+        def complete(self, *_args):
+            return LLMResponse("Hello.", "meterless", "webllm/test", 1, 1, "synthetic", False)
+
+    path = tmp_path / "models.jsonl"
+    client = AuditedLLM(Client(), path)
+    with pytest.raises(ModelSchemaError):
+        client.complete("analyst", [], {"type": "object", "required": ["summary"]})
+    receipt = json.loads(path.read_text(encoding="utf-8"))
+    assert receipt["schema_valid"] is False
+    assert receipt["provider"] == "meterless"
+
+
+@pytest.mark.parametrize(("text", "valid"), [
+    ('{"summary": "SYNTHETIC test response"}', True),
+    ('{"summary": 42}', False),
+])
+def test_research_response_schema_is_enforced_without_replacing_model_text(tmp_path, text, valid):
+    class Client:
+        def complete(self, *_args):
+            return LLMResponse(text, "meterless", "webllm/test", 1, 1, "synthetic", False)
+
+    audited = AuditedLLM(Client(), tmp_path / "models.jsonl")
+    schema = {"type": "object", "required": ["summary"],
+              "properties": {"summary": {"type": "string"}}}
+    if valid:
+        assert audited.complete("analyst", [], schema).text == text
+    else:
+        with pytest.raises(ModelSchemaError):
+            audited.complete("analyst", [], schema)

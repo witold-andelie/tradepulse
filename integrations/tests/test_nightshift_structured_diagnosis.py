@@ -242,3 +242,54 @@ def test_real_sdk_error_body_reaches_diagnostics_without_echoed_inputs(monkeypat
     assert diagnostics[0]["error_signals"]["parameters"] == ["response_format"]
     assert "unsupported" in diagnostics[0]["error_signals"]["message_signals"]
     assert "synthetic-private-value" not in json.dumps(diagnostics)
+
+
+def test_slow_local_model_has_explicit_bounded_request_and_queue_settings(monkeypatch, tmp_path):
+    captured, waits, diagnostics = [], [], []
+    token = tmp_path / "token"
+    token.write_text("synthetic-private-value", encoding="utf-8")
+    monkeypatch.setenv("METERLESS_TOKEN_FILE", str(token))
+    monkeypatch.setenv("METERLESS_TIMEOUT_SECONDS", "360")
+    monkeypatch.setenv("METERLESS_QUEUE_TIMEOUT_SECONDS", "1200")
+    monkeypatch.delenv("NVIDIA_API_KEY", raising=False)
+
+    def complete(**_kwargs):
+        return SimpleNamespace(choices=[SimpleNamespace(message=SimpleNamespace(content='{}'))],
+                               usage=None)
+
+    def client(**kwargs):
+        captured.append(kwargs)
+        return SimpleNamespace(chat=SimpleNamespace(completions=SimpleNamespace(create=complete)))
+
+    class Semaphore:
+        def __init__(self, _size):
+            pass
+
+        def acquire(self, *, timeout):
+            waits.append(timeout)
+            return True
+
+        def release(self):
+            pass
+
+    monkeypatch.setitem(sys.modules, "openai", SimpleNamespace(OpenAI=client))
+    monkeypatch.setattr("integrations.meterless.llm.threading.BoundedSemaphore", Semaphore)
+    route = build_routes_from_env(diagnostics=diagnostics.append)["analyst"][0][2]
+    route([], "webllm/test", ANALYST_SCHEMA)
+    assert captured[0]["timeout"] == 360
+    assert captured[0]["max_retries"] == 0
+    assert waits == [1200]
+    assert diagnostics[0]["request_timeout_seconds"] == 360
+    assert diagnostics[0]["queue_timeout_seconds"] == 1200
+
+
+@pytest.mark.parametrize(("setting", "value"), [
+    ("METERLESS_TIMEOUT_SECONDS", "0"), ("METERLESS_TIMEOUT_SECONDS", "601"),
+    ("METERLESS_TIMEOUT_SECONDS", "infinity"),
+    ("METERLESS_QUEUE_TIMEOUT_SECONDS", "1801"),
+])
+def test_unbounded_wait_configuration_is_rejected_before_call(monkeypatch, tmp_path, setting, value):
+    fake_runtime(monkeypatch, tmp_path, lambda **_: pytest.fail("Must not call a provider"))
+    monkeypatch.setenv(setting, value)
+    with pytest.raises(ValueError, match=setting):
+        build_routes_from_env()

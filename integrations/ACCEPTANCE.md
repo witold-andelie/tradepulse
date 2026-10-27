@@ -68,8 +68,11 @@ Nightshift code rejects structured formats for webllm providers. The next contro
 replaces the resident Llama 1B with Qwen2.5 3B q4f16, using prompt mode and one analyst request.
 The lead now reports Qwen downloaded and ready as the sole resident model, but its one prompt
 probe timed out after 180,153 ms with no reply. Model and Crypto acceptance remain incomplete.
-Inspect existing runtime job/log evidence and cancellation behavior before any new inference;
-see the diagnosis's current step.
+The lead then found its runtime completion after 267,437 ms, retaining a separate original
+export. The lane is idle, but the narrative includes an unsupported causal attribution.
+The next step is offline original-reply review, not another generation or Crypto run.
+Bounded request/queue timeout overrides are implemented; defaults remain 180 seconds.
+See the diagnosis's current step.
 
 ## End-to-end submission evidence
 

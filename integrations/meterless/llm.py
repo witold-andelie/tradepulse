@@ -10,7 +10,7 @@ Every provider is OpenAI-compatible (/v1/chat/completions). Meterless Runtime fa
   rejected by the runtime
 - headers meterless-app: <METERLESS_APP> and meterless-scope: user
 - status from GET /v1/models: 200 online, 401/403 unauthorized
-- 180 s timeout
+- 180 s default SDK timeout; explicit local overrides remain bounded
 
 SAMPLE_MODE uses mode="replay": answers come only from the cassette, and nothing touches the
 network. A missing answer is an error, never a silent live call. mode="record" calls providers
@@ -245,16 +245,21 @@ def build_routes_from_env(*, diagnostics: Callable[[dict], None] | None = None) 
     roles, with optional NIM fallbacks. Without Nightshift, existing NIM settings still apply."""
     from openai import OpenAI
 
-    def caller(client, *, concurrency=None, max_tokens=None, output_format="prompt"):
+    def caller(client, *, concurrency=None, max_tokens=None, output_format="prompt",
+               request_timeout=180, queue_timeout=180):
         def call(messages: list[dict], model: str, schema: dict | None):
             queued = perf_counter()
-            if concurrency is not None and not concurrency.acquire(timeout=180):
+            if concurrency is not None and not concurrency.acquire(timeout=queue_timeout):
                 if diagnostics is not None:
                     diagnostics({"stage": "queue", "error_type": "TimeoutError",
-                                 "response_format": output_format})
-                raise TimeoutError("Nightshift request queue wait exceeded 180 seconds")
+                                 "response_format": output_format,
+                                 "request_timeout_seconds": request_timeout,
+                                 "queue_timeout_seconds": queue_timeout})
+                raise TimeoutError(f"Nightshift request queue wait exceeded {queue_timeout} seconds")
             started = perf_counter()
             receipt = {"response_format": output_format,
+                       "request_timeout_seconds": request_timeout,
+                       "queue_timeout_seconds": queue_timeout,
                        "queue_ms": int((started - queued) * 1000)}
             try:
                 options = {"max_tokens": max_tokens} if max_tokens is not None else {}
@@ -297,11 +302,13 @@ def build_routes_from_env(*, diagnostics: Callable[[dict], None] | None = None) 
         output_format = os.environ.get("METERLESS_RESPONSE_FORMAT", "prompt")
         if output_format not in {"prompt", "json_object", "webllm_schema"}:
             raise ValueError("METERLESS_RESPONSE_FORMAT must be prompt, json_object or webllm_schema")
+        request_timeout = _bounded_setting("METERLESS_TIMEOUT_SECONDS", 180, 600)
+        queue_timeout = _bounded_setting("METERLESS_QUEUE_TIMEOUT_SECONDS", 180, 1800)
         meterless = OpenAI(
             base_url=normalise_meterless_base_url(
                 os.environ.get("METERLESS_BASE_URL") or "http://127.0.0.1:8088/v1"
             ),
-            api_key=read_token(token_file), timeout=180.0, max_retries=0,
+            api_key=read_token(token_file), timeout=float(request_timeout), max_retries=0,
             default_headers={"meterless-app": os.environ.get("METERLESS_APP") or "tradepulse",
                              "meterless-scope": "user"},
         )
@@ -311,7 +318,8 @@ def build_routes_from_env(*, diagnostics: Callable[[dict], None] | None = None) 
         route = ("meterless", os.environ.get("METERLESS_MODEL") or "meterless/auto",
                  caller(meterless, concurrency=concurrency,
                         max_tokens=_bounded_setting("METERLESS_MAX_TOKENS", 768, 4096),
-                        output_format=output_format))
+                        output_format=output_format, request_timeout=request_timeout,
+                        queue_timeout=queue_timeout))
         for role in ROLES:
             routes[role] = [route]
 

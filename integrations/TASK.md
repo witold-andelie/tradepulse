@@ -18,6 +18,13 @@ returned replies failed JSON/schema checks, and all three explanations abstained
 Diagnose the structured replies with [the one-request probe](meterless/STRUCTURED_DIAGNOSIS.md)
 before retrying the combined examples. Do not count the failed run as case acceptance.
 
+Latest Mac follow-up: Qwen 3B is downloaded and the sole resident model. Its first probe
+timed out at the client but completed later in Nightshift after about 267 seconds. A separate
+original export is preserved; its causal narrative remains unverified. Review that existing
+reply offline before any new inference. Request and queue timeouts are now independently
+configurable within explicit limits, retaining their 180-second defaults. See the diagnosis's
+current step; historical commands there are not instructions to repeat completed tests.
+
 Follow [MAC_LIVE_SETUP.md](MAC_LIVE_SETUP.md), [current acceptance](ACCEPTANCE.md),
 [engine measurements](engines/VALIDATION.md) and [sponsor evidence](../docs/sponsors.md).
 No AWS deployment, NIM model selection or outside-universe EDGAR source is on the minimum

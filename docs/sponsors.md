@@ -151,6 +151,16 @@ green during the request; this neither establishes nor rules out a runtime probl
 next step is inspection of the existing request/job, WebGPU and proxy evidence, including
 whether it continued after the HTTP client timed out. No successful Qwen/analyst case is claimed.
 
+That existing job was subsequently found completed in Nightshift after 267,437 ms, with
+684 input and 170 output tokens. Its receipt is marked unsigned. The lead preserved the
+original export separately and confirmed the lane idle; the timed-out client report remains
+failed. Inspection found max_tokens forwarding and a non-streaming WebLLM call, with no
+worker cancellation propagation in the inspected path. No internal per-stage timings were
+retained. Runtime completion does not establish an accepted explanation: the lead reports
+an unsupported investor-optimism attribution. Raw-reply grounding review is pending.
+Bounded request/queue timeout overrides now support measured slow local inference without
+changing the default 180-second values, retries, schemas or verification requirements.
+
 Still required: wrong-token enforcement, actual catalog validation and the combined live cases.
 Independent skeptic-family routing and
 complete offline model replay remain unverified. NIM is an optional fallback in normal

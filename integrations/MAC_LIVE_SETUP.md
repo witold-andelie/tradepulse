@@ -113,7 +113,14 @@ python3 -m integrations.preflight --service nightshift --env-file .env.nightshif
 
 The default runtime queue is serial across roles. METERLESS_MAX_CONCURRENCY can be 1-4;
 keep it at 1 on this M1. METERLESS_MAX_TOKENS defaults to 768 (allowed range 1-4096).
-The request and queue-wait limits are each 180 seconds. These limits do not certify that a
+The SDK request and local queue-wait timeouts each default to 180 seconds. For measured slow
+local inference, METERLESS_TIMEOUT_SECONDS accepts 1-600 and METERLESS_QUEUE_TIMEOUT_SECONDS
+accepts 1-1800, both integer seconds. They are independent: a serial multi-name call can
+wait behind another complete inference. SDK automatic retries remain disabled. These are
+HTTP-operation/queue bounds, not a whole-pipeline deadline or remote cancellation guarantee.
+The lead's Qwen request completed in Nightshift after about 267 seconds, beyond the default
+client timeout. Its original late reply still needs offline grounding review; do not rerun
+it merely because a longer wait is now configurable. These limits do not certify that a
 small model follows research instructions; live acceptance checks its actual JSON reply.
 METERLESS_RESPONSE_FORMAT defaults to prompt. The optional webllm_schema mode sends WebLLM's
 schema-string response_format, without automatic fallback. The installed Nightshift bridge
@@ -157,7 +164,8 @@ Choose a new output directory for each attempt. The command checks the frozen sa
 all-template Zetaris parity and engine health before running crypto, EU and US requests.
 It uses Nightshift only, with no cloud fallback or prerecorded answer. US extraction can be
 long-running: the normal pipeline allows up to 200 filing documents, plus bounded extraction
-and verification retries. The model-request timeout is 180 seconds per call. There is no
+and verification retries. The model SDK timeout defaults to 180 seconds and has the bounded
+local override above. There is no
 promise that the entire run finishes within one request timeout.
 
 Each pool directory contains input.json, output.json, the original trace and a console log.

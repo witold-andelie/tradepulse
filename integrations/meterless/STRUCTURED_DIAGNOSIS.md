@@ -3,7 +3,30 @@
 Updated 27 October 2026. Evidence below was supplied by the lead from the Mac, not generated
 by offline tests. The original failed run and its artifacts must be preserved.
 
-## Current next step: locate the Qwen timeout in existing runtime evidence
+## Current next step: offline review of the retained late response
+
+The lead located the existing Qwen job's late completion. It finished in the runtime after
+267,437 ms, versus the client's 180,153 ms timeout, an approximately 87.3-second difference.
+The lane is now ready/idle. Do not repeat a model request yet. Inspect the retained original
+reply for complete JSON, exact evidence references and supported descriptive statements.
+The lead reports an unsupported investor-optimism causal explanation; a correct price
+reference alone would not establish that cause. Full raw model text is still needed for
+the offline review. Do not repair it or mark it financially verified based on receipt success.
+
+The client now supports METERLESS_TIMEOUT_SECONDS (integer 1-600, default 180) and
+METERLESS_QUEUE_TIMEOUT_SECONDS (integer 1-1800, default 180). A future reviewed trial can
+explicitly use 360 seconds for the SDK timeout, based on the observed 267-second completion.
+Serial multi-name work may also need a longer queue budget (for example 1200 seconds) so
+waiting names do not fail before an earlier slow request finishes. These settings do not
+authorize a new trial or change any answer-quality gate; new inference awaits raw-reply review.
+
+The SDK timeout configures bounded HTTP operations, not a strict wall-clock deadline for an
+entire pipeline. Local queue wait is separate, and SDK automatic retries remain disabled.
+Both budgets are included in new request receipts. Defaults preserve the original behavior.
+Client timeout still does not certify remote cancellation; confirm runtime idle before any
+subsequent call. No late artifact may be inserted into the missing client reply.json.
+
+## Completed runtime investigation request (historical)
 
 The selected Qwen model is now downloaded, the only resident model, and reported ready at
 about 2.2 GB. Its single prompt probe timed out after 180,153 ms with APITimeoutError.
@@ -313,3 +336,32 @@ The original failed report remains in runs/nightshift-qwen3b-prompt-probe-1/ on 
 Memory pressure was briefly yellow during download and observed green after loading/during
 the request, without sustained red pressure. These readings do not prove an out-of-memory
 failure or establish that memory caused the timeout. No retry or Crypto run was reported.
+
+## Lead-reported late completion and proxy findings
+
+The lead located job_mvqgctxb02, session 4, turn 16, receipt rcpt_req_7tp6i4kq, marked unsigned
+in the UI. The runtime receipt records success, 684 input tokens, 170 output tokens and
+267,437 ms. The exported session timestamp is 2026-10-27T14:23:20.934Z. The separately
+preserved runtime-response.md has file SHA-256
+2afea4ffb8a7da07be986a7f3632ad8913e416811b65b06bd805217dbb3f089b;
+it is an exported-file hash, not a hash of an HTTP response received by TradePulse.
+Artifacts remain in runs/nightshift-qwen3b-late-runtime-1/ on the Mac. The original timed-out
+probe and missing client reply are unchanged. No cancellation was needed: the lane was idle.
+
+The lead inspected proxy.js, webllm-plane.js and webllm-worker.mjs in the installed app.
+max_tokens is passed through to WebLLM; the receipt itself does not record its actual value.
+The worker waits for queued model loading, then calls WebLLM with stream:false and waits for
+the complete result. The proxy creates an abort signal on disconnect, but this inspected
+worker path does not forward it or implement matching inference cancellation. Late completion
+is consistent with that finding; whether this exact disconnect event reached the proxy was
+not recorded. Do not patch the installed application as part of TradePulse's integration.
+
+There are no retained per-stage first-token/compile/prefill/decode timings for this request.
+Existing logs show WebGPU availability at startup but no associated GPU error or progress.
+Thus the 267-second duration cannot be assigned to a particular internal phase. The unsigned
+receipt's success status does not establish schema validity, grounding or case acceptance.
+
+The lead reports the response described about 19.74% appreciation and attributed it to
+investor optimism without causal evidence. That narrative is unverified and must not be
+published as a research conclusion. The current resource snapshot reported 41% system free
+and swap used 10,660 MB of 12,288 MB; the four Zetaris containers remained running.

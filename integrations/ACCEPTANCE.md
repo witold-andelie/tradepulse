@@ -10,6 +10,12 @@ Follow [HOSTED_ACCEPTANCE.md](HOSTED_ACCEPTANCE.md). The earlier all-Nightshift 
 still available, but does not block the explicitly selected GLM profile. This is engineering
 acceptance, not a claim that submission media and every event-rule check are complete.
 
+Current lead-reported progress: first hosted parity 12/12; Crypto accepted with six GLM
+calls and three explained names, all 38 stances NO_CALL. EU failed strict JSON on one
+skeptic reply; US had not started. The lead prioritizes US-only acceptance next, then its
+API/UI review. Do not wait for EU or rerun accepted Crypto. The immutable evidence assembler
+can combine separately accepted sources; a two-pool index remains incomplete.
+
 ## Code and local engine acceptance
 
 - [x] Offline integration tests pass; original given test assertions are preserved.

@@ -11,7 +11,8 @@ The lead's latest requirements supersede the dated AWS-only and NIM-only plan be
 
 The lead explicitly stops local-model diagnostics and chooses glm-5.3-flash through the
 supplied OpenCode Go endpoint. Follow [HOSTED_ACCEPTANCE.md](HOSTED_ACCEPTANCE.md) now:
-one real three-pool acceptance command, then API/UI review. Do not add a new smoke/probe loop.
+the pending-pool acceptance command in the lead's current priority order, then API/UI review.
+Preserve already accepted cases. Do not add a new smoke/probe loop.
 The original Nightshift-only profile remains available separately; it is not a prerequisite
 for the hosted profile and GLM responses must never be labelled Nightshift responses.
 
@@ -19,7 +20,14 @@ Implemented: GLM all-role routing, provider-specific audit/acceptance, the live 
 adapter, official engines sidecar and private-env API launcher. The lead reports real 12/12
 Zetaris parity and actual Mac engine operations. Nightshift already generated real replies,
 including a Qwen completion after the HTTP client timed out; its original evidence is retained.
-Those failed product cases are not relabelled successful. Hosted GLM live cases remain pending.
+Those failed product cases are not relabelled successful. Hosted GLM acceptance is now partial,
+with the current pool progress recorded below.
+
+Latest hosted result: Crypto now passed (six GLM calls, three explained names, 38 NO_CALL
+records) after 12/12 parity. EU stopped on one skeptic JSON failure; US never ran. The lead
+prioritizes US-only acceptance before EU diagnosis. Keep the accepted Crypto case and begin
+API/UI checks from accepted stored output without waiting for all pools. Follow the current
+priority section of HOSTED_ACCEPTANCE.md; do not repeat its historical full-suite command.
 
 Follow [MAC_LIVE_SETUP.md](MAC_LIVE_SETUP.md), [current acceptance](ACCEPTANCE.md),
 [engine measurements](engines/VALIDATION.md) and [sponsor evidence](../docs/sponsors.md).

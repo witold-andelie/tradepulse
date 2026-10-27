@@ -6,6 +6,57 @@ and failed client reports are retained as separate integration evidence. They ar
 rewritten into successful product cases. The pending request for more Nightshift reply text
 is no longer a prerequisite for this workflow.
 
+## Current priority: US equities first, preserve Crypto
+
+The lead reports the first hosted suite passed parity 12/12 and Crypto: six live GLM calls,
+three explained names, real engine snapshot/recall/remember, and 38 computed NO_CALL records.
+EU then failed because SAF.PA's skeptic reply did not pass strict JSON parsing; US never ran.
+The source directory is runs/hosted-glm-acceptance-1/. Preserve it unchanged. Do not repeat
+Crypto. Its NO_CALL stances are computed research outcomes, not a reason to alter gates.
+
+The lead now prioritizes US. Start its existing supported single-pool command immediately;
+do not wait for EU reply diagnosis, assembly tooling or another model probe:
+
+```sh
+export ZETARIS_API_MODE=proxy
+export ZETARIS_BASE_URL=http://localhost:3000
+export ENGINES_URL=http://127.0.0.1:8790
+python3 -m integrations.live_acceptance \
+  --llm-provider glm \
+  --env-file ~/getting-started/.env.local \
+  --env-file .env.glm.local \
+  --pools us_equity \
+  --output runs/hosted-glm-us-first-1
+```
+
+This retains US filing extraction and its existing bounds. A successful US-only run is
+selected_cases_ok with submission_complete=false; that means the selected case passed,
+not that US failed. Once it passes, prioritize its API/UI review. The already accepted Crypto
+result can also be reviewed now; neither browser workflow needs to wait for EU acceptance.
+The API launcher below does not start model generation merely by serving existing results.
+
+To index the accepted Crypto and US evidence without model calls or source rewrites:
+
+```sh
+python3 -m integrations.assemble_acceptance \
+  --source runs/hosted-glm-acceptance-1 \
+  --source runs/hosted-glm-us-first-1 \
+  --llm-provider glm \
+  --output runs/hosted-glm-accepted-index-1
+```
+
+The assembler verifies recorded file hashes, case identity, actual-provider trace requirements
+and engine operations using the same case validator. A failed overall source can contribute
+only its previously accepted case entries. The EU failed case is not silently reclassified.
+The index references original directories and retains their manifest hashes and statuses;
+it is not a standalone copy of the evidence. Preserve source model/query receipts, cassettes,
+parity files and original traces. Two pools remain partial acceptance. After a later accepted
+EU-only run, create a fresh three-source index; only three distinct accepted pools mark complete.
+
+EU raw-reply diagnosis is deferred behind US. Do not guess that it is a Markdown fence or
+repair its text before inspecting the existing raw response. Never fill missing schema fields,
+discard extra objects, weaken evidence checks or rerun accepted Crypto to work around it.
+
 ## Rule basis and scope
 
 The locally saved Official Rules section 8 permits any model, including paid APIs, while
@@ -65,7 +116,7 @@ its applicable service terms, without disguising research traffic or enabling ex
 If that subscription rejects the workload, the same adapter accepts another authorized
 OpenAI-compatible GLM base URL/key. Do not spoof OpenCode client identity to bypass restrictions.
 
-## One command for all three cases
+## Initial three-pool command (historical first attempt; do not repeat Crypto)
 
 From the updated checkout and activated environment:
 
@@ -95,7 +146,7 @@ providers. nightshift_calls is zero for these GLM cases. Do not copy Nightshift 
 them to imply a shared successful request. A refusal/abstention remains valid when evidence
 does not support an explanation; schema-invalid or unavailable calls do not pass the profile.
 
-## API and UI check after cases pass
+## API and UI check for any accepted case
 
 Start the existing API using the same private settings:
 
@@ -113,6 +164,7 @@ Factor Lab and Run Trace against the actual stored run. Check verified/rejected 
 no-call/abstention labels, source hashes, provider/model disclosure and browser console errors.
 Do not use synthetic fixtures as proof of GLM-backed results. Keep API keys off browser UI.
 
-If all checks pass, review the three case artifacts for privacy and link those exact artifacts
+The full three-case suite need not complete before reviewing an accepted stored case. If all
+checks pass, review the three case artifacts for privacy and link those exact artifacts
 in the final README/demo. Do not claim complete offline model replay until separately measured.
 Deck/video and final submission remain separate tasks; do not wait for another local-model trial.

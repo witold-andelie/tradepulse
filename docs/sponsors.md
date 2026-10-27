@@ -18,9 +18,18 @@ schema and evidence verification. Timeout/concurrency/token budgets remain bound
 The original all-Nightshift acceptance profile is preserved. The new explicit glm+zetaris+engines
 profile requires real model responses plus actual engine snapshot, recall and remember in
 the core trace; it does not pass a cloud response off as Nightshift. Live hosted acceptance
-has not yet run on the Mac. The saved event rules permit arbitrary models/paid APIs while
+has now run on the Mac with the partial result below. The saved event rules permit arbitrary models/paid APIs while
 requiring Zetaris and Meterless integration; a successful three-case engineering profile
 is not an attestation of every event rule, media item or submitted entry.
+
+First live hosted suite, reported by the lead: parity matched 12/12; Crypto passed with six
+GLM calls, three explained names and successful engine snapshot/recall/remember. All 38
+recommendations were computed NO_CALL stances. EU then failed at validate-case because the
+SAF.PA skeptic reply failed strict JSON parsing and was marked unavailable. US did not run.
+The original failed suite manifest remains submission_complete=false. US-only acceptance
+and US API/UI review now take priority; no Crypto rerun or local-model experiment is required.
+The new evidence-index tool revalidates and references existing accepted files by their
+recorded hashes, without issuing model/query/engine calls or changing failed source reports.
 
 ## Zetaris
 

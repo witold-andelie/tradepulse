@@ -59,8 +59,11 @@ The subsequent Crypto run failed at validate-case. Of 11 returned model replies,
 passed schema validation; all three explanations abstained. A further provider attempt
 failed without a response. Engine operations succeeded, but this does not pass the case.
 See [Nightshift diagnosis](meterless/STRUCTURED_DIAGNOSIS.md) before another full run.
-The first schema-format probe returned HTTP 400 without a model reply. Its exact rejection
-cause is unknown; a single json_object control is the next diagnostic, not case acceptance.
+The schema-format probe returned HTTP 400 without a model reply. Its exact rejection
+cause is unknown. The json_object control also returned HTTP 400 naming response_format.
+Prompt mode returned
+invalid JSON with a normal stop after 37 output tokens. All probes remain failed. The next
+step is the read-only model/resource inventory in the diagnosis, not another full run.
 
 ## End-to-end submission evidence
 

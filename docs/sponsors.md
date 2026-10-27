@@ -127,9 +127,16 @@ record stop reasons and sanitized error types/statuses, without raw credentials.
 
 The lead's first webllm_schema probe at 143386e queried 61 live price rows and then received
 HTTP 400 / BadRequestError in 328 ms, without a model reply. It remains failed with
-feature_acceptance=false. The specific rejected field is unknown. The next diagnostic is
-one explicit json_object control, with only the nested schema removed; it is not an automatic
+feature_acceptance=false. The specific rejected field was unknown. The next diagnostic was
+one explicit json_object control, with only the nested schema removed; it was not an automatic
 fallback or Crypto acceptance. Fixed-vocabulary error hints avoid publishing raw error bodies.
+
+Subsequent lead-reported probes: json_object also returned HTTP 400, naming response_format
+in the error hints. Plain prompt mode produced invalid JSON after 60,677 ms, stopping normally
+after 37 output tokens. Its claims value was a string, with required fields missing and an
+extra closing brace. No reference verification ran. These are failed diagnostics, not model
+acceptance. The next step is a read-only inventory of actual Nightshift models and current Mac
+resources before selecting another configuration; do not keep repeating the same request.
 
 Still required: wrong-token enforcement, actual catalog validation and the combined live cases.
 Independent skeptic-family routing and

@@ -3,6 +3,34 @@
 Updated 27 October 2026. Evidence below was supplied by the lead from the Mac, not generated
 by offline tests. The original failed run and its artifacts must be preserved.
 
+## Current next step: read-only model and resource inventory
+
+Both formatted probes were rejected. The plain-prompt probe then returned invalid JSON
+with finish_reason=stop after only 37 output tokens. Stop repeating the current full-schema
+request on the current 1B model. A higher token cap is not an evidence-based fix for this
+observed early stop. Historical probe commands below remain evidence of the diagnosis,
+not instructions to repeat them.
+
+On the Mac, inspect only:
+
+1. GET /v1/models once using the existing ignored configuration and token file, with a
+   30-second timeout and no retries. Report only status and actual model IDs, never the token,
+   request headers or complete raw body. Do not run nightshift_smoke: it makes a generation call.
+2. The installed Nightshift app's model selector/catalog. Distinguish loaded/installed models,
+   available downloads and routing aliases. A catalog entry does not prove the model is installed
+   or runnable on this Mac. Do not start a download or load a second model.
+3. Current macOS memory_pressure (without load-generating flags), sysctl vm.swapusage and
+   docker stats --no-stream. Report these as current readings; the older swap total does not
+   establish current paging activity.
+4. If readily available, the installed bridge's validation code or existing error logs for
+   response_format. Read locally and summarize the specific restriction after privacy review.
+   Do not modify the app or generate another failed request merely to recreate its body.
+
+Do not restart services, change Docker resources, weaken schemas/verifiers, repair generated
+claims or run another probe/pipeline. Use the actual inventory and memory measurements to
+choose the next model/provider configuration. Current evidence establishes failure of the
+tested model/prompt combination, not universal failure of all 1B models or every JSON format.
+
 ## Observations
 
 Zetaris parity passed all 12 templates after 6966b0c. Engine health and Crypto snapshot,
@@ -132,3 +160,20 @@ evidence. Do not automatically retry prompt mode, remove temperature, raise the 
 change models or run Crypto acceptance. Report the new report.json and, if generated and
 privacy-checked, original reply.json. If it succeeds where the schema mode failed, that
 implicates the nested schema handling; it does not prove all schema constraints are unsupported.
+
+## Reported control and plain-prompt outcomes
+
+The lead reports json_object returned HTTP 400 / BadRequestError in 154 ms. Its fixed-vocabulary
+error hints contain invalid_request_error and the parameter response_format. No reply was
+returned. This narrows investigation toward that parameter but does not establish the exact
+restriction; no raw rejection message was provided.
+
+The later prompt-mode request returned a reply in 60,677 ms with finish_reason=stop,
+655 input tokens and 37 output tokens. The response SHA-256 is
+7a6e937fabca7b1bdb7c79851a07eb03db1942b85e31cc771d9239ad0bc18544.
+It contains an extra closing brace, claims as a string rather than an array, and no summary
+or what_to_watch. It is not a successful analyst answer. No reference or causal validation
+was performed because strict JSON parsing failed. The original artifacts remain in
+runs/nightshift-json-object-probe-1/ and runs/nightshift-prompt-probe-1/ on the Mac.
+Both have feature_acceptance=false. No Crypto rerun, model change or service adjustment
+was reported. Do not repair the reply or treat a schema-shaped reconstruction as model output.

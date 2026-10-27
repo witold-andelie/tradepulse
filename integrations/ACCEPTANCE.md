@@ -42,17 +42,23 @@ Then in integrations/engines:
 - [x] Seven registered lake tables match the committed sample manifest row counts.
 - [x] Official helper returns crypto 38, eu_equity 55 and us_equity 523 members.
 - [x] The lead reports TradePulse ZetarisClient and ZetarisAdapter live smoke on the Mac.
-- [ ] Every template matches DuckDB rows_sha256 on the frozen sample.
+- [x] The lead reports real 12/12 template parity, with full rows and matching hashes.
 - [x] The lead reports Nightshift M1-M4 Edition responding through its Bearer-token API.
 - [x] A real token produces a text response through TradePulse's smoke check (lead-reported).
 - [ ] Wrong token gets 401/403 and the configured model matches the advertised runtime catalog.
-- [ ] The engine image builds and runs on the Mac's actual architecture.
+- [x] The lead reports Mac engine health and successful snapshot, recall and remember calls.
 
 Use [MAC_LIVE_SETUP.md](MAC_LIVE_SETUP.md). Never request, print or include raw credentials
 in acceptance evidence.
-The 6a2f71d parity run matched 6/12. The capped-result and timestamp regressions are now
-locally reproduced and fixed, but the live 12/12 rerun remains unchecked. See
-[the parity diagnosis](zetaris/PARITY_DIAGNOSIS.md).
+The initial 6a2f71d run matched 6/12. The lead reports the corrected 6966b0c run matched
+12/12; the Mac artifact is runs/zetaris-parity-fixed-1.json. See
+[the parity diagnosis](zetaris/PARITY_DIAGNOSIS.md). These Mac observations have not been
+independently repeated on Windows.
+
+The subsequent Crypto run failed at validate-case. Of 11 returned model replies, three
+passed schema validation; all three explanations abstained. A further provider attempt
+failed without a response. Engine operations succeeded, but this does not pass the case.
+See [Nightshift diagnosis](meterless/STRUCTURED_DIAGNOSIS.md) before another full run.
 
 ## End-to-end submission evidence
 

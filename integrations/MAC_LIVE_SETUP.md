@@ -1,8 +1,10 @@
 # Finish live sponsor acceptance on the Mac
 
-The lead's local Zetaris deployment has all seven sample tables registered. Its official
-query helper returned pool counts of crypto 38, EU equities 55 and US equities 523. Registration
-and helper success do not replace the TradePulse client/parity checks below.
+The lead reports all seven sample tables registered, real 12/12 Zetaris parity after
+6966b0c, and working Mac engine health/snapshot/recall/remember operations. The first Crypto
+case failed on model replies and remains unaccepted. Start with
+[the one-request Nightshift diagnostic](meterless/STRUCTURED_DIAGNOSIS.md); do not repeat
+the entire pipeline or US extraction while diagnosing that failure.
 
 Run these commands in macOS Terminal from the TradePulse checkout. This workflow uses the local
 Docker deployment; the historical AWS-only Member D plan is not a completed deployment claim.
@@ -24,8 +26,8 @@ python3 -m pip install -e '.[agent,dev]'
 ```
 
 Python 3.11 or later, Docker Desktop and Node 22.12 or later are required. The engine container
-is multi-architecture through the official Node image; the Apple Silicon build still needs
-verification on the actual Mac.
+is multi-architecture through the official Node image; the lead now reports a successful
+engine start and health check on the actual Mac.
 
 ## 2. Reuse the working Zetaris configuration
 
@@ -113,6 +115,9 @@ The default runtime queue is serial across roles. METERLESS_MAX_CONCURRENCY can 
 keep it at 1 on this M1. METERLESS_MAX_TOKENS defaults to 768 (allowed range 1-4096).
 The request and queue-wait limits are each 180 seconds. These limits do not certify that a
 small model follows research instructions; live acceptance checks its actual JSON reply.
+METERLESS_RESPONSE_FORMAT defaults to prompt. The optional webllm_schema mode sends WebLLM's
+schema-string response_format, without automatic fallback. The installed Nightshift bridge
+must be tested before relying on it. See the diagnostic above.
 
 ## 5. Start with a Crypto-only live case
 

@@ -17,17 +17,15 @@ from collections import Counter
 from pathlib import Path
 from time import perf_counter
 
-from jsonschema import Draft202012Validator
-
 from ingest.privacy import CONTACT_ADDRESS
 from serve import verified_sample_request
 from tradepulse.contracts import REPO_ROOT, assert_payload
 from tradepulse.engines import configured_engines
 from tradepulse.pipeline import run_pipeline
-from tradepulse.agents.prompts import parse_json
 
 from .environment import load_private_env
 from .meterless.llm import Cassette, ChainClient, build_routes_from_env, read_token
+from .meterless.reply_checks import inspect_reply
 from .zetaris.adapter import DuckDBAdapter, ZetarisAdapter
 from .zetaris.client import ZetarisClient
 from .zetaris.parity import check_parity
@@ -92,15 +90,14 @@ class AuditedLLM:
     def complete(self, role, messages, response_schema=None):
         started = perf_counter()
         result = self.client.complete(role, messages, response_schema)
-        parsed = parse_json(result.text) if response_schema is not None else None
-        schema_valid = (response_schema is None or parsed is not None and
-                        Draft202012Validator(response_schema).is_valid(parsed))
+        checked = inspect_reply(result.text, response_schema)
+        schema_valid = checked["schema_valid"]
         receipt = {"role": role, "provider": result.provider, "model": result.model,
                    "replayed": result.replayed, "cassette_key": result.cassette_key,
                    "response_sha256": digest(result.text.encode("utf-8")),
                    "tokens_in": result.tokens_in, "tokens_out": result.tokens_out,
                    "elapsed_ms": int((perf_counter() - started) * 1000),
-                   "schema_valid": schema_valid}
+                   "schema_valid": schema_valid, "schema_errors": checked["errors"]}
         with self._lock, self.path.open("a", encoding="utf-8") as stream:
             stream.write(json.dumps(receipt, sort_keys=True) + "\n")
         if not schema_valid:
@@ -160,8 +157,14 @@ def main(argv: list[str] | None = None) -> int:
         raise ValueError("Configure METERLESS_TOKEN_FILE before live acceptance")
     secrets = [read_token(token_file), os.environ.get("ZETARIS_API_KEY", ""),
                os.environ.get("ENGINES_TOKEN", ""), os.environ.get("NVIDIA_API_KEY", "")]
+    request_lock = threading.Lock()
+
+    def record_request(receipt):
+        with request_lock, (destination / "model_requests.jsonl").open("a", encoding="utf-8") as stream:
+            stream.write(json.dumps(receipt, sort_keys=True) + "\n")
+
     routes = {role: [route for route in values if route[0] == "meterless"]
-              for role, values in build_routes_from_env().items()}
+              for role, values in build_routes_from_env(diagnostics=record_request).items()}
     if any(not routes.get(role) for role in ("extractor", "analyst", "skeptic")):
         raise ValueError("Nightshift must be configured for extractor, analyst and skeptic")
 

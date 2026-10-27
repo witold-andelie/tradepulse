@@ -25,6 +25,7 @@ import os
 import threading
 from dataclasses import dataclass
 from pathlib import Path
+from time import perf_counter
 from typing import Callable
 from urllib.parse import urlsplit, urlunsplit
 
@@ -136,6 +137,13 @@ def _schema_messages(messages: list[dict], schema: dict | None) -> list[dict]:
         return prepared
     instruction = ("\n\nRESPONSE SCHEMA:\n" + json.dumps(schema, ensure_ascii=False) +
                    "\nReturn only one JSON object matching this schema. Keep text concise.")
+    if "claims" in schema.get("properties", {}):
+        instruction += (
+            " Prefer one short, well-supported claim. Copy evidence IDs exactly from the "
+            "brackets in EVIDENCE, without prefixes, suffixes or row numbers. Price evidence "
+            "alone cannot establish an event, relationship or cause of a ranking. If support "
+            "is insufficient, return no claims and explain the limitation. Never invent facts."
+        )
     if prepared and prepared[0].get("role") == "system":
         prepared[0]["content"] = str(prepared[0].get("content", "")) + instruction
     else:
@@ -230,34 +238,62 @@ class ChainClient:
         raise AllProvidersFailed("; ".join(failures) or f"No providers configured for {role}")
 
 
-def build_routes_from_env() -> dict:
+def build_routes_from_env(*, diagnostics: Callable[[dict], None] | None = None) -> dict:
     """Build bounded OpenAI-compatible routes. A configured Nightshift route is first for all
     roles, with optional NIM fallbacks. Without Nightshift, existing NIM settings still apply."""
     from openai import OpenAI
 
-    def caller(client, *, concurrency=None, max_tokens=None):
+    def caller(client, *, concurrency=None, max_tokens=None, output_format="prompt"):
         def call(messages: list[dict], model: str, schema: dict | None):
+            queued = perf_counter()
             if concurrency is not None and not concurrency.acquire(timeout=180):
+                if diagnostics is not None:
+                    diagnostics({"stage": "queue", "error_type": "TimeoutError",
+                                 "response_format": output_format})
                 raise TimeoutError("Nightshift request queue wait exceeded 180 seconds")
+            started = perf_counter()
+            receipt = {"response_format": output_format,
+                       "queue_ms": int((started - queued) * 1000)}
             try:
-                # No response_format: compatible runtimes vary in structured-output support.
                 options = {"max_tokens": max_tokens} if max_tokens is not None else {}
+                if schema is not None and output_format != "prompt":
+                    response_format = {"type": "json_object"}
+                    if output_format == "webllm_schema":
+                        response_format["schema"] = json.dumps(schema, ensure_ascii=False)
+                    options.update(response_format=response_format, temperature=0)
                 response = client.chat.completions.create(
                     model=model, messages=_schema_messages(messages, schema), **options,
                 )
                 text = response.choices[0].message.content
                 usage = response.usage
+                reason = getattr(response.choices[0], "finish_reason", None)
+                receipt.update({"finish_reason": reason if reason in
+                                {"stop", "length", "tool_calls", "abort", "content_filter"}
+                                else "unknown", "stage": "response",
+                                "response_sha256": hashlib.sha256((text or "").encode()).hexdigest()})
                 return (text, usage.prompt_tokens if usage else None,
                         usage.completion_tokens if usage else None)
+            except Exception as error:
+                receipt.update(stage="request", error_type=type(error).__name__)
+                status = getattr(error, "status_code", None)
+                if isinstance(status, int) and 100 <= status <= 599:
+                    receipt["http_status"] = status
+                raise
             finally:
                 if concurrency is not None:
                     concurrency.release()
+                if diagnostics is not None:
+                    receipt["request_ms"] = int((perf_counter() - started) * 1000)
+                    diagnostics(receipt)
 
         return call
 
     routes: dict[str, list] = {}
     token_file = os.environ.get("METERLESS_TOKEN_FILE")
     if token_file:
+        output_format = os.environ.get("METERLESS_RESPONSE_FORMAT", "prompt")
+        if output_format not in {"prompt", "json_object", "webllm_schema"}:
+            raise ValueError("METERLESS_RESPONSE_FORMAT must be prompt, json_object or webllm_schema")
         meterless = OpenAI(
             base_url=normalise_meterless_base_url(
                 os.environ.get("METERLESS_BASE_URL") or "http://127.0.0.1:8088/v1"
@@ -271,7 +307,8 @@ def build_routes_from_env() -> dict:
         )
         route = ("meterless", os.environ.get("METERLESS_MODEL") or "meterless/auto",
                  caller(meterless, concurrency=concurrency,
-                        max_tokens=_bounded_setting("METERLESS_MAX_TOKENS", 768, 4096)))
+                        max_tokens=_bounded_setting("METERLESS_MAX_TOKENS", 768, 4096),
+                        output_format=output_format))
         for role in ROLES:
             routes[role] = [route]
 

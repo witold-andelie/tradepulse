@@ -72,3 +72,10 @@ Re-run on the Mac before accepting the fix:
 Set ZETARIS_API_MODE=proxy first. Choose a fresh report filename. Expect 12/12 matches with
 full computed row counts, including 124,229 facts. Preserve failed reports and original source
 files. Do not lower the row counts, relax hash assertions or start later stages on a mismatch.
+
+## Lead-reported Mac follow-up at 6966b0c
+
+The lead reports real 12/12 parity after complete paging, with all row counts and hashes
+matching. The preserved Mac artifact is runs/zetaris-parity-fixed-1.json. This closes the
+reported parity blocker; it is not an independently repeated Windows live-service test.
+The later Crypto case reached model explanation and failed there, not during parity.

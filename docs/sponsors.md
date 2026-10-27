@@ -36,8 +36,9 @@ The source Parquet files were preserved. Separate microsecond-compatible copies 
 Spark's nanosecond error. The durable [conversion helper](../integrations/zetaris/prepare_parquet.py)
 checks safe casts, exact logical equality and read-back.
 
-Still required: every-template parity on the Mac and the combined core-to-Zetaris feature run.
-The actual project smoke has now passed as reported below. No AWS/S3 deployment,
+The lead now reports real 12/12 parity on the Mac, including complete large results, and
+actual Crypto core/evidence queries through Zetaris. The combined case remains failed
+because of model replies. No AWS/S3 deployment,
 public endpoint or outside-universe EDGAR feature is claimed.
 
 Follow-up reported at 6a2f71d: the actual project client/adapter smoke passed. Parity matched
@@ -46,7 +47,9 @@ mismatches were exactly reproduced locally by removing UTC timezone information 
 DuckDB result. Both adapters now enforce identical contract types before hashing. Verified
 ordinal paging protects the live adapter against capped responses and ambiguous API totals.
 All 12 frozen-snapshot templates matched through a simulated capped/string-valued API.
-The updated Mac live run is still required. See [diagnosis and scope](../integrations/zetaris/PARITY_DIAGNOSIS.md).
+The lead reports the updated real Mac run passed 12/12 at 6966b0c, preserved in
+runs/zetaris-parity-fixed-1.json on the Mac. See
+[diagnosis and scope](../integrations/zetaris/PARITY_DIAGNOSIS.md).
 
 Official contracts:
 [direct REST helper](https://github.com/zetaris/getting-started/blob/main/scripts/zetaris_sql.py),
@@ -72,6 +75,11 @@ Measured locally, with scope in [VALIDATION.md](../integrations/engines/VALIDATI
 - Three frozen-snapshot core runs used the actual container over HTTP. The first test took
   40.69 seconds and wrote 616 records. Restart preserved these and 619 H-MEM ledger entries.
   Models abstained because this test used an intentionally empty replay cassette.
+
+Mac follow-up reported by the lead: actual engine health passed. Crypto run
+2026-10-23-ba9fb487 recorded successful snapshot, three recall calls and remember.
+All 24 seed edges were rejected, so this still does not establish non-empty real World Model
+ingestion. H-MEM service operations succeeded even though model/case acceptance failed.
 
 The real-data test's World Model snapshot was empty. Synthetic service tests exercise
 non-empty event/graph behavior, not real model-extracted event success. The core uses dated
@@ -99,15 +107,26 @@ included in the report. Zetaris still returned 616 universe members. Memory pres
 green, with about 7.74 GB of existing swap usage. These observations were reported from the
 Mac and have not been independently repeated on the Windows development machine.
 
-This establishes a real text-provider connection, not yet a valid research JSON response,
-grounded filing extraction or the combined sponsor-connected cases. The client now checks
+This establishes a real text-provider connection. The later Crypto run returned 11 replies:
+three passed schema validation and eight did not. Of eight analyst replies, only one passed
+the schema, and all four of its claims failed evidence verification. A further analyst
+attempt failed with AllProvidersFailed. All three explanations abstained; validate-case
+failed, so no successful live case is claimed. Grounded filing extraction and combined
+sponsor-connected cases remain incomplete. The client checks
 the configured model against the actual runtime catalog, including concrete webllm IDs.
 Nightshift calls default to one concurrent request and a 768-token output cap, with the
 requested response schema included in the prompt. Live acceptance separately validates the
 JSON schema; a plain "Hello." cannot pass as an analyst or skeptic result.
 
-Still required: wrong-token enforcement, actual catalog validation, Zetaris template parity,
-Mac engine acceptance and the combined live cases. Independent skeptic-family routing and
+The supplied raw replies demonstrate incomplete JSON, omitted required claim kinds, invented
+evidence references and unsupported causal statements. Raising the token limit alone is
+not an established fix. A bounded, opt-in structured-output request and a one-request
+[diagnostic](../integrations/meterless/STRUCTURED_DIAGNOSIS.md) are implemented; actual
+Nightshift schema forwarding and factual reply quality remain unverified. New receipts
+record stop reasons and sanitized error types/statuses, without raw credentials.
+
+Still required: wrong-token enforcement, actual catalog validation and the combined live cases.
+Independent skeptic-family routing and
 complete offline model replay remain unverified. NIM is an optional fallback in normal
 operation, not evidence of Nightshift use. Only Nightshift routes are allowed in live acceptance.
 

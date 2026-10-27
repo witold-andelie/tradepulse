@@ -138,6 +138,13 @@ extra closing brace. No reference verification ran. These are failed diagnostics
 acceptance. The next step is a read-only inventory of actual Nightshift models and current Mac
 resources before selecting another configuration; do not keep repeating the same request.
 
+The lead subsequently completed that inventory: Llama 1B was the only resident model, while
+Qwen2.5 3B q4f16 appeared as an available download. Inspection of the installed Nightshift
+code found structured formats disabled for webllm providers before inference. The next trial
+selects Qwen2.5-3B-Instruct-q4f16_1-MLC in prompt mode, replacing rather than adding to the
+resident model, followed by one unchanged analyst probe. This selection is not a successful
+download, memory measurement or model acceptance; those results remain pending.
+
 Still required: wrong-token enforcement, actual catalog validation and the combined live cases.
 Independent skeptic-family routing and
 complete offline model replay remain unverified. NIM is an optional fallback in normal

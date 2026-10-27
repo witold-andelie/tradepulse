@@ -3,7 +3,58 @@
 Updated 27 October 2026. Evidence below was supplied by the lead from the Mac, not generated
 by offline tests. The original failed run and its artifacts must be preserved.
 
-## Current next step: read-only model and resource inventory
+## Current next step: replace the resident model, then one real probe
+
+The read-only inventory is complete. The lead selects
+webllm/Qwen2.5-3B-Instruct-q4f16_1-MLC for one controlled trial through the existing Nightshift
+app. Unload Llama 3.2 1B from memory first, preserving its downloaded files. Download/load
+only the selected Qwen model through Nightshift; keep a single resident model. Do not modify
+the app's structured-output capability flags or install a separate inference server.
+
+Rationale: the [official Qwen model card](https://huggingface.co/Qwen/Qwen2.5-3B-Instruct/raw/main/README.md)
+describes instruction-following and JSON-generation improvements. The
+[upstream WebLLM catalog](https://github.com/mlc-ai/web-llm/blob/main/src/config.ts) lists
+vram_required_MB=2504.76 for this exact quantization with a 4096 context override. This is
+an upstream planning estimate, not a measurement of total Nightshift process memory or a
+guarantee of capacity or answer quality on this Mac. The installed runtime remains 4K.
+
+Capture current memory pressure and swap before loading, after ready, and after the probe.
+Stop if there is sustained red memory pressure, allocation failure, a model crash or a
+timeout; do not automatically load another model or retry. Leave Zetaris, its data and Docker
+resource settings intact. Wait for the Qwen lane to report ready; do not trigger a separate
+chat or smoke generation. If the GUI does not expose the required unload/download/load
+controls, report that blocker rather than patching the application.
+
+In the existing activated TradePulse environment, override only the selected model:
+
+```sh
+export METERLESS_MODEL=webllm/Qwen2.5-3B-Instruct-q4f16_1-MLC
+export METERLESS_RESPONSE_FORMAT=prompt
+export METERLESS_MAX_CONCURRENCY=1
+export METERLESS_MAX_TOKENS=768
+export ZETARIS_API_MODE=proxy
+export ZETARIS_BASE_URL=http://localhost:3000
+python3 -m integrations.meterless.structured_probe \
+  --env-file ~/getting-started/.env.local \
+  --env-file .env.nightshift.local \
+  --case-output runs/live-sponsors-crypto-first/crypto/output.json \
+  --symbol WLD-USD \
+  --response-format prompt \
+  --output runs/nightshift-qwen3b-prompt-probe-1
+```
+
+Existing process values take precedence over private env files. Do not print or replace token
+contents. This keeps the same analyst task, evidence window, schema, prompt, output budget,
+serial route, no retries and 180-second request timeout as the last plain-prompt test; the
+selected model changes. Do not raise context length or rewrite the output to make it pass.
+
+Stop after this one analyst request. Report the loaded model ID, actual resident memory,
+resource snapshots, report.json and privacy-reviewed original reply.json if generated.
+Even reply_checks_ok is not Crypto acceptance: examine numeric statements against the fresh
+evidence and reject unsupported causal explanations. No automatic Crypto/US run is authorized
+by this diagnostic. If the trial fails, preserve the result instead of cycling through models.
+
+## Completed inventory request (historical)
 
 Both formatted probes were rejected. The plain-prompt probe then returned invalid JSON
 with finish_reason=stop after only 37 output tokens. Stop repeating the current full-schema
@@ -177,3 +228,25 @@ was performed because strict JSON parsing failed. The original artifacts remain 
 runs/nightshift-json-object-probe-1/ and runs/nightshift-prompt-probe-1/ on the Mac.
 Both have feature_acceptance=false. No Crypto rerun, model change or service adjustment
 was reported. Do not repair the reply or treat a schema-shaped reconstruction as model output.
+
+## Lead-reported inventory and installed bridge restriction
+
+GET /v1/models returned HTTP 200 without generation. The lead distinguished meterless routing
+aliases from concrete webllm model IDs. Only Llama 3.2 1B q4f16 was downloaded and resident,
+idle/ready at a UI-reported 922 MB and 4K context. Qwen2.5-3B-Instruct-q4f16_1-MLC is listed
+but its files were missing. Other advertised downloads include Llama 3.2 3B, Qwen2.5 1.5B,
+Qwen2.5 Coder 3B, Gemma 2 2B, Phi 3.5 Mini and SmolLM2 1.7B; none was loaded in that check.
+
+Resource snapshot: macOS memory_pressure reported 16 GiB and 46% system-wide free percentage.
+Swap usage was 9,977 MB of 11,264 MB. Container usage was engines 103.8 MiB, UI 279.6 MiB,
+API 1.15 GiB, driver 2.489 GiB and Postgres 120.1 MiB. This is a snapshot, not a paging-rate
+measurement or proof that the next model will fit.
+
+The lead inspected structured-output.js and web-config.js under
+/Applications/Nightshift M1-M4.app/Contents/Resources/web/. In that installed code, webllm
+models have no structured-output capability override; the provider defaults json_object and
+json_schema to unsupported and rejects such requests before inference. This is a concrete
+installed-code restriction consistent with the two HTTP 400 reports. The raw historic rejection
+bodies were not retained, so the exact branch taken by those historic requests is unproven.
+Keep METERLESS_RESPONSE_FORMAT=prompt for this build. Do not patch capability metadata to
+claim support that the app does not expose. No new model inference occurred during inventory.

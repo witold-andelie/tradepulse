@@ -63,7 +63,10 @@ The schema-format probe returned HTTP 400 without a model reply. Its exact rejec
 cause is unknown. The json_object control also returned HTTP 400 naming response_format.
 Prompt mode returned
 invalid JSON with a normal stop after 37 output tokens. All probes remain failed. The next
-step is the read-only model/resource inventory in the diagnosis, not another full run.
+step was the read-only model/resource inventory, now lead-reported complete. The installed
+Nightshift code rejects structured formats for webllm providers. The next controlled trial
+replaces the resident Llama 1B with Qwen2.5 3B q4f16, using prompt mode and one analyst request.
+The replacement is selected, not yet downloaded, run or accepted. See the diagnosis's current step.
 
 ## End-to-end submission evidence
 

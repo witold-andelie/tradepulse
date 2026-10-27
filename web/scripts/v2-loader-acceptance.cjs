@@ -110,6 +110,22 @@ async function context(browser, preference, legacy = false) {
       await selected(p,'en');await p.locator('#agent-research-guide[lang="en"]').waitFor();release();await p.waitForTimeout(150);
       assert.equal(await p.locator('html').getAttribute('lang'),'en');assert.equal(await p.locator('#agent-research-guide').getAttribute('lang'),'en');await c.close();
     });
+    await check('a previous guide failure cannot cancel a newer pending language',async()=>{
+      const c=await context(browser,'ja');const p=await c.newPage();let failGuide,releaseCatalog,seenCatalog;
+      const guideGate=new Promise(r=>failGuide=r),catalogGate=new Promise(r=>releaseCatalog=r),catalogSeen=new Promise(r=>seenCatalog=r);
+      await p.route('**'+guideAsset('ja'),async route=>{await guideGate;await route.abort('failed');});
+      await p.route('**'+appAsset('es'),async route=>{seenCatalog();await catalogGate;await route.continue();});
+      await p.goto(base+'/pool/us_equity');await p.waitForFunction(()=>document.documentElement.lang==='ja');
+      await p.locator('a[href="/ticker/us_equity/SYN369"]').first().click();
+      const ja=require(path.join(root,'web/src/i18n/locales/ja.json'));
+      await p.getByRole('status').filter({hasText:ja['Loading research data…']}).waitFor();
+      await p.locator('#app-language').selectOption('es');await catalogSeen;failGuide();
+      await p.getByRole('alert').filter({hasText:ja['Data could not be loaded. Please retry.']}).waitFor();
+      assert.equal(await p.locator('html').getAttribute('lang'),'ja');assert.equal(await p.locator('#app-language').inputValue(),'es');
+      assert.equal(await p.locator('#app-language').getAttribute('aria-busy'),'true');releaseCatalog();
+      await p.locator('#agent-research-guide[lang="es"]').waitFor();assert.equal(await p.locator('html').getAttribute('lang'),'es');
+      await c.close();return {previousLocale:'ja',latestLocale:'es',lateFailureIgnored:true};
+    });
     await check('blocked localStorage permits in-memory selection and no unauthorized requests',async()=>{
       const c=await context(browser);await c.addInitScript(()=>Object.defineProperty(window,'localStorage',{get(){throw new DOMException('Blocked','SecurityError')}}));
       const p=await c.newPage();const mutations=[];p.on('request',r=>{if(!['GET','HEAD'].includes(r.method()))mutations.push(r.method()+' '+r.url());});

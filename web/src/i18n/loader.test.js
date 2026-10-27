@@ -71,6 +71,16 @@ describe('latest-selection locale state machine', () => {
     await state.retry(); expect(state.getSnapshot()).toMatchObject({ locale: 'fr', phase: 'ready' });
     expect(store.values[LOCALE_KEY]).toBe('fr');
   });
+  it('ignores a prior guide failure while a newer locale is still loading', async () => {
+    const gate = deferred(); const store = storage({ [LOCALE_KEY]: 'ja' });
+    const state = createLocaleController({ storage: store, load: () => gate.promise, has: () => true });
+    const pending = state.chooseLocale('es');
+    state.reportFailure('ja');
+    expect(state.getSnapshot()).toMatchObject({ locale: 'ja', requestedLocale: 'es', phase: 'loading', failedLocale: null });
+    gate.resolve({}); await pending;
+    expect(state.getSnapshot()).toMatchObject({ locale: 'es', requestedLocale: 'es', phase: 'ready' });
+    expect(store.values[LOCALE_KEY]).toBe('es');
+  });
   it('tolerates blocked storage and keeps a successful in-memory choice', async () => {
     const blocked = { getItem() { throw Error('blocked'); }, setItem() { throw Error('blocked'); } };
     const state = createLocaleController({ storage: blocked, load: async () => ({}), has: () => true });

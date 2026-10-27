@@ -11,6 +11,8 @@ export function createLocaleController({ storage, load = loadCatalog, has = cata
   const listeners = new Set();
   const emit = (next) => { state = { ...state, ...next }; listeners.forEach((listener) => listener()); };
   function reportFailure(next) {
+    // An older route guide may fail while a newer locale selection is pending.
+    if (next !== state.requestedLocale) return;
     generation += 1;
     savePreference(storage, 'en');
     emit({ locale: 'en', requestedLocale: 'en', phase: 'error', initialComplete: true, failedLocale: next });

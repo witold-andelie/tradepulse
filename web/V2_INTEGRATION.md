@@ -80,6 +80,9 @@ fetch the same versioned, same-origin JSON asset with a bounded 10-second timeou
 same full-catalog validation. These fallback assets are not downloaded in successful normal
 navigation. This avoids a document reload and preserves URL filters, pagination and view state.
 No translation service, external TTS provider or new application dependency is introduced.
+A failed guide from an earlier route/locale also cannot cancel a newer language whose app
+catalog is still pending; the controller checks the requested locale before reporting failure.
+A red/green unit regression and blocked-module browser scenario reproduce this race.
 
 The guide route boundary prevents English financial caveats flashing before the selected
 guide translation loads. Source prose stays verbatim, marked as original content, outside

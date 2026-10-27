@@ -1,5 +1,11 @@
 # Fast product acceptance: hosted GLM, live Zetaris and Meterless Engines
 
+Latest organizer reminder supplied by the lead explicitly lists Nightshift as an AI provider.
+The GLM profile below is engineering acceptance, not proof of that organizer requirement.
+Nightshift was genuinely used by the earlier explanation flow; distinguish its historical
+evidence from the accepted GLM Crypto run. Follow [CRYPTO_VIDEO.md](CRYPTO_VIDEO.md) for the
+latest Crypto-only recording scope and latest-main frontend requirement. Main merging is paused.
+
 Current lead decision, 27 October 2026: stop local-model diagnostics and use the supplied
 GLM API for normal inference. Existing Nightshift attempts, late completion, original traces
 and failed client reports are retained as separate integration evidence. They are not

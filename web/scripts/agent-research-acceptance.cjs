@@ -31,7 +31,10 @@ function speechStub({ noApi = false, empty = false } = {}) {
 
 async function chooseLocale(page, locale) {
   await page.locator('#app-language').selectOption(locale);
-  await page.waitForFunction((value) => document.documentElement.lang === value && document.querySelector('#agent-research-guide')?.lang === value, locale);
+  await page.waitForFunction((value) => {
+    const guideReady = !location.pathname.startsWith('/ticker/') || document.querySelector('#agent-research-guide')?.lang === value;
+    return document.documentElement.lang === value && document.querySelector('#app-language')?.getAttribute('aria-busy') === 'false' && guideReady;
+  }, locale);
 }
 
 (async () => {

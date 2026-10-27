@@ -9,7 +9,8 @@ from __future__ import annotations
 import pandas as pd
 
 from tradepulse.agents.prompts import parse_json
-from tradepulse.extract.grounding import ExtractionCache, grounding_problems, make_event_id
+from tradepulse.extract.grounding import (ExtractionCache, ExtractionIdentityError,
+                                         grounding_problems, make_event_id)
 from tradepulse.guard import screen_text
 from tradepulse.ports import LLMPort
 from tradepulse.trace import Tracer
@@ -125,7 +126,7 @@ def run_extraction(docs: pd.DataFrame, llm: LLMPort, cache: ExtractionCache, *, 
                    tracer: Tracer | None = None) -> dict:
     """Process filing_text rows (columns per contract) newest first by available_at.
 
-    - Documents already in cache (by sha256) are not sent to the LLM; their cached events are used.
+    - Documents with matching cached source identity are not sent to the LLM.
     - At most max_docs uncached documents are processed; the rest are skipped and counted.
     - For each processed document: tradepulse.guard.screen_text(text) flags are recorded (the
       document is still processed), extract_document runs, and cache.put(sha256, grounded events)
@@ -145,8 +146,9 @@ def run_extraction(docs: pd.DataFrame, llm: LLMPort, cache: ExtractionCache, *, 
             if not docs.empty else [])
     for doc in rows:
         sha256 = doc["sha256"]
-        if cache.has(sha256):
-            events.extend(cache.get(sha256))
+        cached_events = cache.get_for_document(doc)
+        if cached_events is not None:
+            events.extend(cached_events)
             cached += 1
             continue
         if processed >= max_docs:
@@ -156,7 +158,7 @@ def run_extraction(docs: pd.DataFrame, llm: LLMPort, cache: ExtractionCache, *, 
         if flags:
             flagged.append(sha256)
         grounded, problems = extract_document(doc, llm)
-        cache.put(sha256, grounded)
+        cache.put_for_document(doc, grounded)
         events.extend(grounded)
         processed += 1
         rejected_problems += len(problems)
@@ -166,6 +168,17 @@ def run_extraction(docs: pd.DataFrame, llm: LLMPort, cache: ExtractionCache, *, 
                 message=f"{doc['symbol']} {doc['document_type']}: {len(grounded)} events",
                 payload={"sha256": sha256, "rejected": len(problems), "flags": flags},
             )
-    events.sort(key=lambda event: pd.Timestamp(event["available_at"]), reverse=True)
+    unique = {}
+    duplicate_events = 0
+    for event in events:
+        key = event["event_id"]
+        if key in unique:
+            if unique[key] != event:
+                raise ExtractionIdentityError("Conflicting grounded event identity")
+            duplicate_events += 1
+        else:
+            unique[key] = event
+    events = sorted(unique.values(), key=lambda event: pd.Timestamp(event["available_at"]), reverse=True)
     return {"events": events, "processed": processed, "cached": cached, "skipped": skipped,
-            "rejected_problems": rejected_problems, "flagged": flagged}
+            "rejected_problems": rejected_problems, "flagged": flagged,
+            "duplicate_events": duplicate_events}

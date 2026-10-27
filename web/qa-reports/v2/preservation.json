@@ -1,0 +1,66 @@
+{
+  "baseline": "eee913ad7b310e277b8b334ab6649e5cb0877bc4",
+  "implementation": "4e61b5009777985096a81b195e3371fa7616e5b1",
+  "files": [
+    {
+      "file": "web/AGENT_ACCESSIBILITY_DEMO.md",
+      "main_sha256": "3607e41db7816865691435402b690c8daa0eaf65ced7b50152b6b78ce2ffb979",
+      "implementation_sha256": "3607e41db7816865691435402b690c8daa0eaf65ced7b50152b6b78ce2ffb979"
+    },
+    {
+      "file": "web/scripts/agent-research-acceptance.cjs",
+      "main_sha256": "93eb14a212bf28250dee7ed74d748559d6b04e4fdcbd52a5e4c675a1d88668ae",
+      "implementation_sha256": "0ff80e5ea5397139b3c54621eab4ee979e0b79b9bf34064e1a69726bbcfeacbd"
+    },
+    {
+      "file": "web/src/App.jsx",
+      "main_sha256": "4e7cfc06a36c36b4824949bfb7c22fdbec211956e05869450ff12bd3eb215e74",
+      "implementation_sha256": "1bbcff7328267f13afdd3510c4c40744ee250dc4b0082d8d58d2a7107347292a"
+    },
+    {
+      "file": "web/src/components/ResearchGuide.jsx",
+      "main_sha256": "ebfd7e99594a1c9465f5e35d3c1a84560fa399ca10ed76b23ba7babaf1f94c8c",
+      "implementation_sha256": "65564992a8e3afdbbb765154a4bb402d70e4a3a16b39da0ec76debcc22a857f8"
+    },
+    {
+      "file": "web/src/components/agentResearch/GuidedResearch.jsx",
+      "main_sha256": "3dd0c2c9debc0d45bebb94c59712447687afcbbfc08e9f69956fd1ecf7d03138",
+      "implementation_sha256": "e48d9185f617185a770d6107949c313941762461619f7e36e59ebef3f54df537"
+    },
+    {
+      "file": "web/src/components/agentResearch/messages.js",
+      "main_sha256": "3466f14cca842aebd2a95123cfdac71c5d11f269bea591528a2cbc06afe1472d",
+      "implementation_sha256": "be483a8d29071e23187fba74a0e5342c8bd79ddb64c72a2b2afcb1dd22342333"
+    },
+    {
+      "file": "web/src/components/agentResearch/speech.js",
+      "main_sha256": "5cac2f732d56bda6cbd282130d89294bd33986b48e61012701348c87d836bae7",
+      "implementation_sha256": "a9842b33c3db336cfd4686fc0dab50ba07edc70faa71c80b42af2876cfc4d749"
+    },
+    {
+      "file": "web/src/components/agentResearch/summary.js",
+      "main_sha256": "cd250c7ed1a3c8a1f664db3793a7a5f2eb8e47b5fbfbee3aa213d9b78ff65280",
+      "implementation_sha256": "5a7f1692db34971c2ca6ff3930e8d528638c86704c2a26839cb72f7a71585299"
+    },
+    {
+      "file": "web/src/components/agentResearch/useReadAloud.js",
+      "main_sha256": "a3fdc528a5864aa7379d58edca27af6a35c086c8b14cf291c8acd6137369614e",
+      "implementation_sha256": "4cef3d8fa468b2c1075bf1b8b9bb3e9d18a9ebadbb4527b18a133f84e27b68b4"
+    },
+    {
+      "file": "web/src/pages/Detail.jsx",
+      "main_sha256": "5f36ff202a79b3c21796e9fed329a431008a018cfd3d382f2c3386a4927e0cae",
+      "implementation_sha256": "beccc711cac166e817a0000b0d9e83126f54d598c65bad546c4ac1f18a9b5ad2"
+    },
+    {
+      "file": "web/src/pages/Trace.jsx",
+      "main_sha256": "6742fe7d8ca3483e506cac78df294d4e8875bffc857ca5faa87f19f92d953ad5",
+      "implementation_sha256": "6225532629e9ea23977de29730b95e238d2207e82915774094718d40421eae4d"
+    },
+    {
+      "file": "web/src/pages/TrackRecord.jsx",
+      "main_sha256": "99d9dd6275278b6a34269f56403436734c940f447c7293a18d95bbbcd1ab16cf",
+      "implementation_sha256": "0b97267e6515ede96eb2e19b2c2be5885d9ffd81e7344a02ec494027b97a9974"
+    }
+  ]
+}

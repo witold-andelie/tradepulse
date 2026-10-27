@@ -1,0 +1,19 @@
+PASS fresh Simple default, original redirect and honest Discover
+PASS working guided research and actual abstention evidence
+PASS same-instrument metric, source, rejected evidence and risk parity
+PASS preference persistence and keyboard switch without focus loss
+PASS filter, sector, tier and sort survive view changes
+PASS pagination and market context survive detail and browser Back
+PASS blocked storage still supports both views and navigation
+PASS every chart family has keyboard-operable numerical equivalents
+PASS Simple trace describes only actual node pairs and preserves retries
+PASS no-call and insufficient data remain limitations
+PASS keyboard-only Discover, evidence, glossary, mobile menu and Escape
+PASS both-view reflow, provenance and screenshots at 1440 CSS pixels
+PASS both-view reflow, provenance and screenshots at 768 CSS pixels
+PASS both-view reflow, provenance and screenshots at 390 CSS pixels
+PASS both-view reflow, provenance and screenshots at 320 CSS pixels
+PASS 200% text enlargement at narrow viewport, plus 400% equivalent reflow
+PASS reduced motion and semantic accessibility names
+PASS no console errors or warnings in the new research journeys
+18/18 groups passed

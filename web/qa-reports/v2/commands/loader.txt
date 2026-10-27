@@ -1,0 +1,13 @@
+PASS production graph has twenty lazy catalogs and no eager non-English catalog
+PASS initial English requests neither non-English catalogs nor guides
+PASS saved non-English preference gates English UI and exposes selector during loading
+PASS rapid switching activates the final selection when earlier import finishes later
+PASS legacy guide preference migrates, reloads and preserves RTL
+PASS catalog import failure gives accessible English fallback and explicit retry
+PASS offline locale failure does not erase records and recovers after retry
+PASS guide chunks load only on detail, cache on reuse, and preserve source evidence
+PASS guide import failure preserves selector and falls back without English caveat flash
+PASS delayed guide does not flash English and cannot override a later locale selection
+PASS a previous guide failure cannot cancel a newer pending language
+PASS blocked localStorage permits in-memory selection and no unauthorized requests
+12/12 loader browser groups passed

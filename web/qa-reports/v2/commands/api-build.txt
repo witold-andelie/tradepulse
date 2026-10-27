@@ -1,0 +1,69 @@
+
+> tradepulse-web@0.1.0 build
+> vite build --manifest --outDir=${QA_ROOT}/final-4e61b50/api-dist
+
+vite v7.3.7 building client environment for production...
+transforming...
+✓ 915 modules transformed.
+
+(!) outDir ${QA_ROOT}/final-4e61b50/api-dist is not inside project root and will not be emptied.
+Use --emptyOutDir to override.
+
+rendering chunks...
+computing gzip size...
+../../work/tradepulse-v2-20261027/final-4e61b50/api-dist/index.html                               0.67 kB │ gzip:   0.43 kB
+../../work/tradepulse-v2-20261027/final-4e61b50/api-dist/assets/zh-CN-D88NUOAq.json               2.97 kB │ gzip:   1.59 kB
+../../work/tradepulse-v2-20261027/final-4e61b50/api-dist/assets/zh-TW-CuSUE9_7.json               3.00 kB │ gzip:   1.62 kB
+../../work/tradepulse-v2-20261027/final-4e61b50/api-dist/assets/cs-CUQ30gqY.json                  3.48 kB │ gzip:   1.64 kB
+../../work/tradepulse-v2-20261027/final-4e61b50/api-dist/assets/de-BJv_P4Rm.json                  3.64 kB │ gzip:   1.63 kB
+../../work/tradepulse-v2-20261027/final-4e61b50/api-dist/assets/pt-BR-CUrpkHzg.json               3.64 kB │ gzip:   1.52 kB
+../../work/tradepulse-v2-20261027/final-4e61b50/api-dist/assets/es-CeSdyNje.json                  3.75 kB │ gzip:   1.60 kB
+../../work/tradepulse-v2-20261027/final-4e61b50/api-dist/assets/fr-BUC1kGre.json                  3.78 kB │ gzip:   1.64 kB
+../../work/tradepulse-v2-20261027/final-4e61b50/api-dist/assets/ko-BwVAHMwA.json                  3.82 kB │ gzip:   1.71 kB
+../../work/tradepulse-v2-20261027/final-4e61b50/api-dist/assets/ja-zvNbdR1D.json                  3.83 kB │ gzip:   1.77 kB
+../../work/tradepulse-v2-20261027/final-4e61b50/api-dist/assets/ar-Cc3UEz7K.json                  4.62 kB │ gzip:   1.81 kB
+../../work/tradepulse-v2-20261027/final-4e61b50/api-dist/.vite/manifest.json                      8.16 kB │ gzip:   1.35 kB
+../../work/tradepulse-v2-20261027/final-4e61b50/api-dist/assets/zh-CN-pOCSQQGh.json              51.73 kB │ gzip:  19.11 kB
+../../work/tradepulse-v2-20261027/final-4e61b50/api-dist/assets/zh-TW-DUoI31Tx.json              51.76 kB │ gzip:  19.11 kB
+../../work/tradepulse-v2-20261027/final-4e61b50/api-dist/assets/cs-uzp4fJ2B.json                 54.71 kB │ gzip:  18.36 kB
+../../work/tradepulse-v2-20261027/final-4e61b50/api-dist/assets/de-JQ8vUeUN.json                 55.08 kB │ gzip:  17.95 kB
+../../work/tradepulse-v2-20261027/final-4e61b50/api-dist/assets/pt-BR-DYDILV90.json              55.50 kB │ gzip:  17.65 kB
+../../work/tradepulse-v2-20261027/final-4e61b50/api-dist/assets/es-DvKtYLEN.json                 55.51 kB │ gzip:  17.68 kB
+../../work/tradepulse-v2-20261027/final-4e61b50/api-dist/assets/ko-DHBKSHfW.json                 56.29 kB │ gzip:  18.71 kB
+../../work/tradepulse-v2-20261027/final-4e61b50/api-dist/assets/fr-BNl631P1.json                 56.52 kB │ gzip:  17.86 kB
+../../work/tradepulse-v2-20261027/final-4e61b50/api-dist/assets/ja-C9NLErAl.json                 58.07 kB │ gzip:  19.43 kB
+../../work/tradepulse-v2-20261027/final-4e61b50/api-dist/assets/ar-U96FOgqM.json                 65.10 kB │ gzip:  19.56 kB
+../../work/tradepulse-v2-20261027/final-4e61b50/api-dist/assets/TickerPage-BykVaY81.css           1.67 kB │ gzip:   0.62 kB
+../../work/tradepulse-v2-20261027/final-4e61b50/api-dist/assets/index-D4EWTEWJ.css               38.87 kB │ gzip:   8.75 kB
+../../work/tradepulse-v2-20261027/final-4e61b50/api-dist/assets/figureSummaries-BRQ9eDJG.js       3.65 kB │ gzip:   1.50 kB
+../../work/tradepulse-v2-20261027/final-4e61b50/api-dist/assets/zh-CN-CuXf-Whx.js                 3.65 kB │ gzip:   2.11 kB
+../../work/tradepulse-v2-20261027/final-4e61b50/api-dist/assets/zh-TW-DAznCG5C.js                 3.69 kB │ gzip:   2.14 kB
+../../work/tradepulse-v2-20261027/final-4e61b50/api-dist/assets/cs-CuD2xi73.js                    4.08 kB │ gzip:   2.10 kB
+../../work/tradepulse-v2-20261027/final-4e61b50/api-dist/assets/de-CkBLcE8n.js                    4.24 kB │ gzip:   2.08 kB
+../../work/tradepulse-v2-20261027/final-4e61b50/api-dist/assets/pt-BR-wemOmyJ3.js                 4.25 kB │ gzip:   2.00 kB
+../../work/tradepulse-v2-20261027/final-4e61b50/api-dist/assets/es-jAV22lnG.js                    4.36 kB │ gzip:   2.06 kB
+../../work/tradepulse-v2-20261027/final-4e61b50/api-dist/assets/fr-CzAnZt4F.js                    4.38 kB │ gzip:   2.11 kB
+../../work/tradepulse-v2-20261027/final-4e61b50/api-dist/assets/ko-1KGszlRY.js                    4.48 kB │ gzip:   2.23 kB
+../../work/tradepulse-v2-20261027/final-4e61b50/api-dist/assets/ja-DJjd2R1b.js                    4.49 kB │ gzip:   2.28 kB
+../../work/tradepulse-v2-20261027/final-4e61b50/api-dist/assets/ar-Cy4zbK23.js                    5.22 kB │ gzip:   2.30 kB
+../../work/tradepulse-v2-20261027/final-4e61b50/api-dist/assets/trace.fixture-BP1KLwvL.js         5.58 kB │ gzip:   0.67 kB
+../../work/tradepulse-v2-20261027/final-4e61b50/api-dist/assets/Discover-sjHsGNU0.js              6.46 kB │ gzip:   2.23 kB
+../../work/tradepulse-v2-20261027/final-4e61b50/api-dist/assets/RegimePage-Bp83gIBD.js            6.83 kB │ gzip:   2.55 kB
+../../work/tradepulse-v2-20261027/final-4e61b50/api-dist/assets/FactorLabPage-D2ADdLqi.js         9.14 kB │ gzip:   3.06 kB
+../../work/tradepulse-v2-20261027/final-4e61b50/api-dist/assets/TrackRecordPage-CVXZs-Ny.js      10.23 kB │ gzip:   3.42 kB
+../../work/tradepulse-v2-20261027/final-4e61b50/api-dist/assets/RunTracePage-C7fqQd0a.js         12.54 kB │ gzip:   4.29 kB
+../../work/tradepulse-v2-20261027/final-4e61b50/api-dist/assets/TickerPage-CiEd7t8r.js           22.52 kB │ gzip:   7.57 kB
+../../work/tradepulse-v2-20261027/final-4e61b50/api-dist/assets/zh-CN-DS8p9Zc_.js                51.12 kB │ gzip:  20.06 kB
+../../work/tradepulse-v2-20261027/final-4e61b50/api-dist/assets/zh-TW-B6YhdRYq.js                51.16 kB │ gzip:  20.07 kB
+../../work/tradepulse-v2-20261027/final-4e61b50/api-dist/assets/cs-CTrMSEGY.js                   53.61 kB │ gzip:  19.35 kB
+../../work/tradepulse-v2-20261027/final-4e61b50/api-dist/assets/de-Cops_B3m.js                   53.98 kB │ gzip:  18.91 kB
+../../work/tradepulse-v2-20261027/final-4e61b50/api-dist/assets/pt-BR-B_CfflLj.js                54.40 kB │ gzip:  18.60 kB
+../../work/tradepulse-v2-20261027/final-4e61b50/api-dist/assets/es-CYNlfpfG.js                   54.40 kB │ gzip:  18.65 kB
+../../work/tradepulse-v2-20261027/final-4e61b50/api-dist/assets/fr-_yFHF4ky.js                   55.42 kB │ gzip:  18.82 kB
+../../work/tradepulse-v2-20261027/final-4e61b50/api-dist/assets/ko-BTqOVGKE.js                   55.61 kB │ gzip:  19.70 kB
+../../work/tradepulse-v2-20261027/final-4e61b50/api-dist/assets/ja-v6-CTZoW.js                   57.31 kB │ gzip:  20.41 kB
+../../work/tradepulse-v2-20261027/final-4e61b50/api-dist/assets/ar-DzYhoUjG.js                   64.01 kB │ gzip:  20.50 kB
+../../work/tradepulse-v2-20261027/final-4e61b50/api-dist/assets/index-BNqLGGdt.js               563.21 kB │ gzip: 171.89 kB
+../../work/tradepulse-v2-20261027/final-4e61b50/api-dist/assets/run_output.fixture-DZva71sA.js  579.65 kB │ gzip:  53.39 kB
+../../work/tradepulse-v2-20261027/final-4e61b50/api-dist/assets/ChartEngine-CBXk3DX9.js         672.25 kB │ gzip: 227.42 kB
+✓ built in 4.86s

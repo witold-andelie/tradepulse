@@ -1,0 +1,9 @@
+{
+  "axe-core": "4.14.0",
+  "lighthouse": "13.5.0",
+  "node": "v24.19.0",
+  "npm": "11.9.0",
+  "chromium": "Chromium 154.0.8037.57 built on Debian GNU/Linux 13 (trixie)",
+  "platform": "Linux",
+  "testedCommit": "4e61b5009777985096a81b195e3371fa7616e5b1"
+}

@@ -1,0 +1,4746 @@
+{
+  "locale": "ar",
+  "testedCommit": "4e61b5009777985096a81b195e3371fa7616e5b1",
+  "technicalAssessment": "PASS",
+  "nativeFinancialEditorial": "NEEDS HUMAN REVIEW",
+  "matrix": {
+    "passed": 42,
+    "total": 42,
+    "routes": [
+      "discover",
+      "leaderboard",
+      "detail",
+      "factors",
+      "regime",
+      "track-record",
+      "trace"
+    ],
+    "widthsCssPx": [
+      1440,
+      768,
+      320
+    ],
+    "views": [
+      "simple",
+      "pro"
+    ]
+  },
+  "independentChecks": {
+    "states": 16,
+    "mainline": 3,
+    "data": 5,
+    "tooltips": 7,
+    "axe": 14,
+    "lighthouse": 2,
+    "native-zoom": 28
+  },
+  "dictionary": {
+    "applicationKeys": 614,
+    "guideKeys": 52,
+    "nonemptyAndPlaceholderValidation": "PASS"
+  },
+  "observedTerminology": {
+    "Elevated": "مرتفع",
+    "Hit rate": "نسبة تحقق النتيجة وفق المعيار المرجعي",
+    "Days (one)": "{count} يوم",
+    "Days (few)": "{count} أيام",
+    "Days (other)": "{count} يوم"
+  },
+  "aiEditorialAssessment": {
+    "finding": "Full RTL is active. Signed financial values use LTR isolation, with browser Range geometry checking sign order. The reconciliation notice says points out of five, avoiding a visually ambiguous slash fraction.",
+    "scope": "AI review of terminology, caveats and captured UI; not native financial-language approval.",
+    "remaining": "Native Arabic financial idiom and physical screen-reader reading order remain pending. Canvas axes retain their quantitative direction; the document remains RTL."
+  },
+  "accessibility": {
+    "axeCriticalSeriousViolations": 0,
+    "allAxeViolations": 0,
+    "incompleteRuleGroups": 14,
+    "lighthouseScores": [
+      100,
+      100
+    ],
+    "keyboardAndReducedMotion": "PASS in browser automation",
+    "native200PercentZoom": "PASS; actual Chrome settingsPrivate browser zoom, outer 1440/640 -> inner 720/320, DPR 2, root font 16px, visual scale 1",
+    "nativeScreenReader": "NOT TESTED"
+  },
+  "financialAndAgentParity": {
+    "instrumentRowsCompared": 620,
+    "explanationsCompared": 30,
+    "sourceVerdictsUnchanged": true,
+    "sourceNarrativesHashesDatesUnchanged": true,
+    "SYN369": {
+      "rank": "4/520",
+      "displayScore": "+1.39",
+      "tier": "STRONG_OVERWEIGHT",
+      "explanationVerdict": "abstained",
+      "verifiedClaim": "exp-us_equity-syn369-c1",
+      "rejectedClaim": "exp-us_equity-syn369-c2",
+      "eventAndMovementTimestamps": "NOT SUPPLIED"
+    }
+  },
+  "speech": {
+    "controlMocks": "PASS; explicit Play, pause/resume/stop, delayed/eventless voices, unavailable/empty/Chinese-only, error and cancellation",
+    "audioHeard": false,
+    "nativeInventory": {
+      "api": true,
+      "voices": []
+    },
+    "WindowsEdgeInventory": "NOT TESTED",
+    "pronunciation": "NOT TESTED"
+  },
+  "visualReview": {
+    "finalContact": "evidence/ar-review.jpg",
+    "scope": "AI inspected final Discover 1440 selector, detail Pro 768 and Factor Lab Pro 320 contact sheet. Prepublication 77 six-case route sheets were also inspected; final full 462 captures have automated geometry/semantic checks, not a human pixel-by-pixel or native-language sign-off.",
+    "screenshots": [
+      "evidence/ar-discover-1440-simple.png",
+      "evidence/ar-detail-768-pro.png",
+      "evidence/ar-leaderboard-320-pro.png",
+      "evidence/ar-one-day-tooltip.png"
+    ]
+  },
+  "results": {
+    "states": [
+      {
+        "locale": "ar",
+        "name": "initial load, persisted locale, navigation, filters and empty results",
+        "status": "PASS",
+        "evidence": {
+          "preference": "ar",
+          "searchAndFiltersPreserved": true
+        }
+      },
+      {
+        "locale": "ar",
+        "name": "rapid Factor Lab pool and status changes retain both filters",
+        "status": "PASS",
+        "evidence": {
+          "pool": "crypto",
+          "status": "ACTIVE",
+          "cards": 2
+        }
+      },
+      {
+        "locale": "ar",
+        "name": "SYN369 original verdict, source evidence, missing explanation and invalid ticker",
+        "status": "PASS",
+        "evidence": {
+          "originalVerdict": "abstained"
+        }
+      },
+      {
+        "locale": "ar",
+        "name": "keyboard Listen entry, all speech controls, stop recovery, error, route cancellation",
+        "status": "PASS",
+        "evidence": {
+          "mockVoice": "ar-SA",
+          "audioHeard": false,
+          "noAutoplay": true
+        }
+      },
+      {
+        "locale": "ar",
+        "name": "reduced motion and keyboard disclosure/selector operability",
+        "status": "PASS",
+        "evidence": {
+          "keyboard": true,
+          "reducedMotion": true
+        }
+      },
+      {
+        "locale": "ar",
+        "name": "voice availability {\"unsupported\":true}",
+        "status": "PASS",
+        "evidence": {
+          "mock": {
+            "unsupported": true
+          },
+          "voices": [],
+          "audioHeard": false
+        }
+      },
+      {
+        "locale": "ar",
+        "name": "voice availability {\"empty\":true}",
+        "status": "PASS",
+        "evidence": {
+          "mock": {
+            "empty": true
+          },
+          "voices": [],
+          "audioHeard": false
+        }
+      },
+      {
+        "locale": "ar",
+        "name": "voice availability {\"chineseOnly\":true}",
+        "status": "PASS",
+        "evidence": {
+          "mock": {
+            "chineseOnly": true
+          },
+          "voices": [
+            "zh-CN",
+            "zh-TW"
+          ],
+          "audioHeard": false
+        }
+      },
+      {
+        "locale": "ar",
+        "name": "voice availability {\"delayed\":true}",
+        "status": "PASS",
+        "evidence": {
+          "mock": {
+            "delayed": true
+          },
+          "voices": [
+            "en-US",
+            "zh-CN",
+            "zh-TW",
+            "es-ES",
+            "es-MX",
+            "fr-FR",
+            "de-DE",
+            "pt-BR",
+            "pt-PT",
+            "ja-JP",
+            "ko-KR",
+            "cs-CZ",
+            "ar-SA",
+            "ar-EG"
+          ],
+          "audioHeard": false
+        }
+      },
+      {
+        "locale": "ar",
+        "name": "voice availability {\"delayed\":true,\"eventless\":true}",
+        "status": "PASS",
+        "evidence": {
+          "mock": {
+            "delayed": true,
+            "eventless": true
+          },
+          "voices": [
+            "en-US",
+            "zh-CN",
+            "zh-TW",
+            "es-ES",
+            "es-MX",
+            "fr-FR",
+            "de-DE",
+            "pt-BR",
+            "pt-PT",
+            "ja-JP",
+            "ko-KR",
+            "cs-CZ",
+            "ar-SA",
+            "ar-EG"
+          ],
+          "audioHeard": false
+        }
+      },
+      {
+        "locale": "ar",
+        "name": "API loading",
+        "status": "PASS",
+        "evidence": {
+          "scenario": "loading",
+          "requests": [
+            {
+              "url": "http://127.0.0.1:5196/runs/latest",
+              "method": "GET"
+            }
+          ],
+          "simulated": true
+        }
+      },
+      {
+        "locale": "ar",
+        "name": "API HTTP503",
+        "status": "PASS",
+        "evidence": {
+          "scenario": "HTTP503",
+          "requests": [
+            {
+              "url": "http://127.0.0.1:5196/runs/latest",
+              "method": "GET"
+            }
+          ],
+          "simulated": true
+        }
+      },
+      {
+        "locale": "ar",
+        "name": "API malformed",
+        "status": "PASS",
+        "evidence": {
+          "scenario": "malformed",
+          "requests": [
+            {
+              "url": "http://127.0.0.1:5196/runs/latest",
+              "method": "GET"
+            }
+          ],
+          "simulated": true
+        }
+      },
+      {
+        "locale": "ar",
+        "name": "API empty",
+        "status": "PASS",
+        "evidence": {
+          "scenario": "empty",
+          "requests": [
+            {
+              "url": "http://127.0.0.1:5196/runs/latest",
+              "method": "GET"
+            },
+            {
+              "url": "http://127.0.0.1:5196/runs/latest",
+              "method": "GET"
+            },
+            {
+              "url": "http://127.0.0.1:5196/runs/latest",
+              "method": "GET"
+            },
+            {
+              "url": "http://127.0.0.1:5196/runs/latest",
+              "method": "GET"
+            },
+            {
+              "url": "http://127.0.0.1:5196/runs/latest",
+              "method": "GET"
+            },
+            {
+              "url": "http://127.0.0.1:5196/runs/synthetic-fixture-0001/trace",
+              "method": "GET"
+            }
+          ],
+          "simulated": true
+        }
+      },
+      {
+        "locale": "ar",
+        "name": "API missing-evidence",
+        "status": "PASS",
+        "evidence": {
+          "scenario": "missing-evidence",
+          "requests": [
+            {
+              "url": "http://127.0.0.1:5196/runs/latest",
+              "method": "GET"
+            }
+          ],
+          "simulated": true
+        }
+      },
+      {
+        "locale": "ar",
+        "name": "API summary-only-abstention",
+        "status": "PASS",
+        "evidence": {
+          "scenario": "summary-only-abstention",
+          "requests": [
+            {
+              "url": "http://127.0.0.1:5196/runs/latest",
+              "method": "GET"
+            }
+          ],
+          "simulated": true
+        }
+      }
+    ],
+    "mainline": [
+      {
+        "locale": "ar",
+        "name": "REPLAY Run context and current-main provenance",
+        "status": "PASS",
+        "evidence": {
+          "transport": "browser-mocked",
+          "dataMode": "REPLAY",
+          "canonicalSourceNumbersUnchanged": true
+        }
+      },
+      {
+        "locale": "ar",
+        "name": "REAL Run context and current-main provenance",
+        "status": "PASS",
+        "evidence": {
+          "transport": "browser-mocked",
+          "dataMode": "REAL",
+          "canonicalSourceNumbersUnchanged": true
+        }
+      },
+      {
+        "locale": "ar",
+        "name": "failed stage, timing discrepancy and event order survive localization",
+        "status": "PASS",
+        "evidence": {
+          "transport": "browser-mocked",
+          "failedStage": "guard_request",
+          "start": "2026-10-22T08:00:00Z",
+          "end": "2026-10-22T08:00:00.005000Z",
+          "reportedMs": 407,
+          "sourceEventsNotReordered": true
+        }
+      }
+    ],
+    "tooltips": [
+      {
+        "locale": "ar",
+        "name": "leaderboard",
+        "status": "PASS",
+        "evidence": {
+          "confine": true,
+          "renderMode": "richText",
+          "renderedTooltip": [
+            "",
+            "الأصول: —",
+            "متوسط الدرجة: —"
+          ],
+          "screenshot": "ar-leaderboard.png"
+        }
+      },
+      {
+        "locale": "ar",
+        "name": "detail",
+        "status": "PASS",
+        "evidence": {
+          "confine": true,
+          "renderMode": "richText",
+          "renderedTooltip": [
+            "زخم شهر واحد",
+            "",
+            "  ",
+            "+0.78"
+          ],
+          "screenshot": "ar-detail.png"
+        }
+      },
+      {
+        "locale": "ar",
+        "name": "factors",
+        "status": "PASS",
+        "evidence": {
+          "confine": true,
+          "renderMode": "richText",
+          "renderedTooltip": [
+            "الأفق: ⁦1⁩ يوم",
+            "متوسط IC: ⁦+0.02⁩",
+            "إحصاء t: ⁦2.85⁩",
+            "n: ⁦250⁩"
+          ],
+          "screenshot": "ar-factors.png"
+        }
+      },
+      {
+        "locale": "ar",
+        "name": "regime",
+        "status": "PASS",
+        "evidence": {
+          "confine": true,
+          "renderMode": "richText",
+          "renderedTooltip": [
+            "⁦2026-09-21⁩",
+            "⁦normal⁩",
+            "النقاط: ⁦0⁩ من 5"
+          ],
+          "screenshot": "ar-regime.png"
+        }
+      },
+      {
+        "locale": "ar",
+        "name": "track-record",
+        "status": "PASS",
+        "evidence": {
+          "confine": true,
+          "renderMode": "richText",
+          "renderedTooltip": [
+            "متوسط المئين: ⁦0.1⁩",
+            "نسبة التفوق على المؤشر: ⁦0.097⁩",
+            "n: ⁦44⁩",
+            "الفئة: ⁦0⁩–⁦0.2⁩"
+          ],
+          "screenshot": "ar-track-record.png"
+        }
+      },
+      {
+        "locale": "ar",
+        "name": "trace",
+        "status": "PASS",
+        "evidence": {
+          "confine": true,
+          "renderMode": "richText",
+          "renderedTooltip": [
+            "⁦guard_request⁩",
+            "البداية: ⁦2026-10-22T08:00:00Z⁩",
+            "النهاية: ⁦2026-10-22T08:00:00.005000Z⁩",
+            "الفاصل: ⁦5⁩ ms",
+            "المدة المبلّغ عنها: ⁦407⁩ ms"
+          ],
+          "screenshot": "ar-trace.png"
+        }
+      },
+      {
+        "locale": "ar",
+        "name": "signed-value visual geometry",
+        "status": "PASS",
+        "evidence": [
+          {
+            "text": "+0.18",
+            "direction": "ltr",
+            "signX": 895.25,
+            "digitX": 903.25
+          },
+          {
+            "text": "+0.13",
+            "direction": "ltr",
+            "signX": 895.25,
+            "digitX": 903.25
+          },
+          {
+            "text": "+0.06",
+            "direction": "ltr",
+            "signX": 895.25,
+            "digitX": 903.25
+          },
+          {
+            "text": "+0.04",
+            "direction": "ltr",
+            "signX": 895.25,
+            "digitX": 903.25
+          },
+          {
+            "text": "-0.01",
+            "direction": "ltr",
+            "signX": 898.75,
+            "digitX": 903.25
+          },
+          {
+            "text": "-0.02",
+            "direction": "ltr",
+            "signX": 898.75,
+            "digitX": 903.25
+          },
+          {
+            "text": "-0.04",
+            "direction": "ltr",
+            "signX": 898.75,
+            "digitX": 903.25
+          },
+          {
+            "text": "-0.05",
+            "direction": "ltr",
+            "signX": 898.75,
+            "digitX": 903.25
+          },
+          {
+            "text": "-0.08",
+            "direction": "ltr",
+            "signX": 898.75,
+            "digitX": 903.25
+          },
+          {
+            "text": "-0.09",
+            "direction": "ltr",
+            "signX": 898.75,
+            "digitX": 903.25
+          },
+          {
+            "text": "-0.10",
+            "direction": "ltr",
+            "signX": 898.75,
+            "digitX": 903.25
+          },
+          {
+            "text": "+2.18",
+            "direction": "ltr",
+            "signX": 327.28125,
+            "digitX": 335.28125
+          },
+          {
+            "text": "+1.73",
+            "direction": "ltr",
+            "signX": 327.28125,
+            "digitX": 335.28125
+          },
+          {
+            "text": "+1.47",
+            "direction": "ltr",
+            "signX": 327.28125,
+            "digitX": 335.28125
+          },
+          {
+            "text": "+1.39",
+            "direction": "ltr",
+            "signX": 327.28125,
+            "digitX": 335.28125
+          },
+          {
+            "text": "+1.36",
+            "direction": "ltr",
+            "signX": 327.28125,
+            "digitX": 335.28125
+          },
+          {
+            "text": "-1.70",
+            "direction": "ltr",
+            "signX": 69.046875,
+            "digitX": 73.546875
+          },
+          {
+            "text": "-1.68",
+            "direction": "ltr",
+            "signX": 69.046875,
+            "digitX": 73.546875
+          },
+          {
+            "text": "-1.63",
+            "direction": "ltr",
+            "signX": 69.046875,
+            "digitX": 73.546875
+          },
+          {
+            "text": "-1.45",
+            "direction": "ltr",
+            "signX": 69.046875,
+            "digitX": 73.546875
+          },
+          {
+            "text": "-1.44",
+            "direction": "ltr",
+            "signX": 69.046875,
+            "digitX": 73.546875
+          },
+          {
+            "text": "+2.18",
+            "direction": "ltr",
+            "signX": 494.703125,
+            "digitX": 502.703125
+          },
+          {
+            "text": "+59.5 bp",
+            "direction": "ltr",
+            "signX": 301.46875,
+            "digitX": 309.46875
+          },
+          {
+            "text": "+69.5 bp",
+            "direction": "ltr",
+            "signX": 131.078125,
+            "digitX": 139.078125
+          },
+          {
+            "text": "-0.5%",
+            "direction": "ltr",
+            "signX": -65,
+            "digitX": -60.5
+          }
+        ]
+      }
+    ],
+    "axe": [
+      {
+        "locale": "ar",
+        "name": "discover/simple/axe",
+        "status": "PASS",
+        "evidence": {
+          "version": "4.14.0",
+          "url": "http://127.0.0.1:5256/discover",
+          "timestamp": "2026-10-27T09:08:13.906Z",
+          "rawSha256": "33f61e15c2253085add591e667d0a0acd0b1991eaff6c1811b8a95a0829bdbad",
+          "violations": [],
+          "incomplete": [
+            {
+              "id": "color-contrast",
+              "impact": "serious",
+              "help": "Elements must meet minimum color contrast ratio thresholds",
+              "targets": [
+                [
+                  ".brand-mark"
+                ],
+                [
+                  ".mode-banner > span[aria-hidden=\"true\"]"
+                ],
+                [
+                  ".primary.button[href$=\"us_equity\"] > span[aria-hidden=\"true\"]"
+                ],
+                [
+                  "h3 > a[href$=\"us_equity\"][data-discover=\"true\"] > span[aria-hidden=\"true\"]"
+                ],
+                [
+                  ".journey-card:nth-child(2) > .journey-icon[aria-hidden=\"true\"]"
+                ],
+                [
+                  ".journey-card:nth-child(2) > h3 > a[data-discover=\"true\"] > span[aria-hidden=\"true\"]"
+                ],
+                [
+                  ".journey-card:nth-child(3) > .journey-icon[aria-hidden=\"true\"]"
+                ],
+                [
+                  ".journey-card:nth-child(3) > h3 > a[data-discover=\"true\"] > span[aria-hidden=\"true\"]"
+                ],
+                [
+                  ".journey-card:nth-child(4) > .journey-icon[aria-hidden=\"true\"]"
+                ],
+                [
+                  "h3 > a[href$=\"factors\"][data-discover=\"true\"] > span[aria-hidden=\"true\"]"
+                ],
+                [
+                  ".journey-card:nth-child(5) > .journey-icon[aria-hidden=\"true\"]"
+                ],
+                [
+                  "h3 > a[href$=\"trace\"][data-discover=\"true\"] > span[aria-hidden=\"true\"]"
+                ],
+                [
+                  "a[aria-label=\"لماذا هذا الموقف؟ ⁦SYN088⁩\"] > span[aria-hidden=\"true\"]"
+                ],
+                [
+                  "a[aria-label=\"لماذا هذا الموقف؟ ⁦SYE60.XX⁩\"] > span[aria-hidden=\"true\"]"
+                ],
+                [
+                  "a[aria-label=\"لماذا هذا الموقف؟ ⁦SYC15-USD⁩\"] > span[aria-hidden=\"true\"]"
+                ]
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "locale": "ar",
+        "name": "discover/pro/axe",
+        "status": "PASS",
+        "evidence": {
+          "version": "4.14.0",
+          "url": "http://127.0.0.1:5256/discover",
+          "timestamp": "2026-10-27T09:08:15.761Z",
+          "rawSha256": "be477dfe73a8af005335b95dc7431cf8eb9f635738e82f0dc8f3e28d56d40edf",
+          "violations": [],
+          "incomplete": [
+            {
+              "id": "color-contrast",
+              "impact": "serious",
+              "help": "Elements must meet minimum color contrast ratio thresholds",
+              "targets": [
+                [
+                  ".brand-mark"
+                ],
+                [
+                  ".mode-banner > span[aria-hidden=\"true\"]"
+                ],
+                [
+                  ".primary.button[href$=\"us_equity\"] > span[aria-hidden=\"true\"]"
+                ],
+                [
+                  "h3 > a[href$=\"us_equity\"][data-discover=\"true\"] > span[aria-hidden=\"true\"]"
+                ],
+                [
+                  ".journey-card:nth-child(2) > .journey-icon[aria-hidden=\"true\"]"
+                ],
+                [
+                  ".journey-card:nth-child(2) > h3 > a[data-discover=\"true\"] > span[aria-hidden=\"true\"]"
+                ],
+                [
+                  ".journey-card:nth-child(3) > .journey-icon[aria-hidden=\"true\"]"
+                ],
+                [
+                  ".journey-card:nth-child(3) > h3 > a[data-discover=\"true\"] > span[aria-hidden=\"true\"]"
+                ],
+                [
+                  ".journey-card:nth-child(4) > .journey-icon[aria-hidden=\"true\"]"
+                ],
+                [
+                  "h3 > a[href$=\"factors\"][data-discover=\"true\"] > span[aria-hidden=\"true\"]"
+                ],
+                [
+                  ".journey-card:nth-child(5) > .journey-icon[aria-hidden=\"true\"]"
+                ],
+                [
+                  "h3 > a[href$=\"trace\"][data-discover=\"true\"] > span[aria-hidden=\"true\"]"
+                ],
+                [
+                  "a[aria-label=\"لماذا هذا الموقف؟ ⁦SYN088⁩\"] > span[aria-hidden=\"true\"]"
+                ],
+                [
+                  "a[aria-label=\"لماذا هذا الموقف؟ ⁦SYE60.XX⁩\"] > span[aria-hidden=\"true\"]"
+                ],
+                [
+                  "a[aria-label=\"لماذا هذا الموقف؟ ⁦SYC15-USD⁩\"] > span[aria-hidden=\"true\"]"
+                ]
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "locale": "ar",
+        "name": "leaderboard/simple/axe",
+        "status": "PASS",
+        "evidence": {
+          "version": "4.14.0",
+          "url": "http://127.0.0.1:5256/pool/us_equity",
+          "timestamp": "2026-10-27T09:08:26.757Z",
+          "rawSha256": "e994e83f3287190013be63d8bd306aa600b60578e64d19f9669a29a668ec7d73",
+          "violations": [],
+          "incomplete": [
+            {
+              "id": "color-contrast",
+              "impact": "serious",
+              "help": "Elements must meet minimum color contrast ratio thresholds",
+              "targets": [
+                [
+                  ".brand-mark"
+                ],
+                [
+                  ".mode-banner > span[aria-hidden=\"true\"]"
+                ],
+                [
+                  "a[aria-label=\"لماذا هذا الموقف؟ ⁦SYN088⁩\"] > span[aria-hidden=\"true\"]"
+                ],
+                [
+                  "a[aria-label=\"لماذا هذا الموقف؟ ⁦SYN283⁩\"] > span[aria-hidden=\"true\"]"
+                ],
+                [
+                  "a[aria-label=\"لماذا هذا الموقف؟ ⁦SYN025⁩\"] > span[aria-hidden=\"true\"]"
+                ],
+                [
+                  "a[aria-label=\"لماذا هذا الموقف؟ ⁦SYN369⁩\"] > span[aria-hidden=\"true\"]"
+                ],
+                [
+                  "a[aria-label=\"لماذا هذا الموقف؟ ⁦SYN129⁩\"] > span[aria-hidden=\"true\"]"
+                ],
+                [
+                  "a[aria-label=\"لماذا هذا الموقف؟ ⁦SYN027⁩\"] > span[aria-hidden=\"true\"]"
+                ],
+                [
+                  "a[aria-label=\"لماذا هذا الموقف؟ ⁦SYN295⁩\"] > span[aria-hidden=\"true\"]"
+                ],
+                [
+                  "a[aria-label=\"لماذا هذا الموقف؟ ⁦SYN512⁩\"] > span[aria-hidden=\"true\"]"
+                ],
+                [
+                  "a[aria-label=\"لماذا هذا الموقف؟ ⁦SYN271⁩\"] > span[aria-hidden=\"true\"]"
+                ],
+                [
+                  "a[aria-label=\"لماذا هذا الموقف؟ ⁦SYN294⁩\"] > span[aria-hidden=\"true\"]"
+                ],
+                [
+                  "a[aria-label=\"لماذا هذا الموقف؟ ⁦SYN268⁩\"] > span[aria-hidden=\"true\"]"
+                ],
+                [
+                  "a[aria-label=\"لماذا هذا الموقف؟ ⁦SYN476⁩\"] > span[aria-hidden=\"true\"]"
+                ],
+                [
+                  "a[aria-label=\"لماذا هذا الموقف؟ ⁦SYN425⁩\"] > span[aria-hidden=\"true\"]"
+                ],
+                [
+                  "a[aria-label=\"لماذا هذا الموقف؟ ⁦SYN373⁩\"] > span[aria-hidden=\"true\"]"
+                ],
+                [
+                  "a[aria-label=\"لماذا هذا الموقف؟ ⁦SYN161⁩\"] > span[aria-hidden=\"true\"]"
+                ],
+                [
+                  "a[aria-label=\"لماذا هذا الموقف؟ ⁦SYN267⁩\"] > span[aria-hidden=\"true\"]"
+                ],
+                [
+                  "a[aria-label=\"لماذا هذا الموقف؟ ⁦SYN297⁩\"] > span[aria-hidden=\"true\"]"
+                ],
+                [
+                  "a[aria-label=\"لماذا هذا الموقف؟ ⁦SYN192⁩\"] > span[aria-hidden=\"true\"]"
+                ],
+                [
+                  "a[aria-label=\"لماذا هذا الموقف؟ ⁦SYN517⁩\"] > span[aria-hidden=\"true\"]"
+                ],
+                [
+                  "a[aria-label=\"لماذا هذا الموقف؟ ⁦SYN275⁩\"] > span[aria-hidden=\"true\"]"
+                ],
+                [
+                  "a[aria-label=\"لماذا هذا الموقف؟ ⁦SYN225⁩\"] > span[aria-hidden=\"true\"]"
+                ],
+                [
+                  "a[aria-label=\"لماذا هذا الموقف؟ ⁦SYN235⁩\"] > span[aria-hidden=\"true\"]"
+                ],
+                [
+                  "a[aria-label=\"لماذا هذا الموقف؟ ⁦SYN176⁩\"] > span[aria-hidden=\"true\"]"
+                ],
+                [
+                  "a[aria-label=\"لماذا هذا الموقف؟ ⁦SYN398⁩\"] > span[aria-hidden=\"true\"]"
+                ],
+                [
+                  "a[aria-label=\"لماذا هذا الموقف؟ ⁦SYN182⁩\"] > span[aria-hidden=\"true\"]"
+                ],
+                [
+                  "a[aria-label=\"لماذا هذا الموقف؟ ⁦SYN190⁩\"] > span[aria-hidden=\"true\"]"
+                ],
+                [
+                  "a[aria-label=\"لماذا هذا الموقف؟ ⁦SYN234⁩\"] > span[aria-hidden=\"true\"]"
+                ],
+                [
+                  "a[aria-label=\"لماذا هذا الموقف؟ ⁦SYN009⁩\"] > span[aria-hidden=\"true\"]"
+                ],
+                [
+                  "a[aria-label=\"لماذا هذا الموقف؟ ⁦SYN154⁩\"] > span[aria-hidden=\"true\"]"
+                ],
+                [
+                  "a[aria-label=\"لماذا هذا الموقف؟ ⁦SYN277⁩\"] > span[aria-hidden=\"true\"]"
+                ],
+                [
+                  "a[aria-label=\"لماذا هذا الموقف؟ ⁦SYN441⁩\"] > span[aria-hidden=\"true\"]"
+                ],
+                [
+                  "a[aria-label=\"لماذا هذا الموقف؟ ⁦SYN315⁩\"] > span[aria-hidden=\"true\"]"
+                ],
+                [
+                  "a[aria-label=\"لماذا هذا الموقف؟ ⁦SYN093⁩\"] > span[aria-hidden=\"true\"]"
+                ],
+                [
+                  "a[aria-label=\"لماذا هذا الموقف؟ ⁦SYN365⁩\"] > span[aria-hidden=\"true\"]"
+                ],
+                [
+                  "a[aria-label=\"لماذا هذا الموقف؟ ⁦SYN338⁩\"] > span[aria-hidden=\"true\"]"
+                ],
+                [
+                  "a[aria-label=\"لماذا هذا الموقف؟ ⁦SYN404⁩\"] > span[aria-hidden=\"true\"]"
+                ],
+                [
+                  "a[aria-label=\"لماذا هذا الموقف؟ ⁦SYN481⁩\"] > span[aria-hidden=\"true\"]"
+                ],
+                [
+                  "a[aria-label=\"لماذا هذا الموقف؟ ⁦SYN227⁩\"] > span[aria-hidden=\"true\"]"
+                ],
+                [
+                  "a[aria-label=\"لماذا هذا الموقف؟ ⁦SYN173⁩\"] > span[aria-hidden=\"true\"]"
+                ],
+                [
+                  "a[aria-label=\"لماذا هذا الموقف؟ ⁦SYN272⁩\"] > span[aria-hidden=\"true\"]"
+                ],
+                [
+                  "a[aria-label=\"لماذا هذا الموقف؟ ⁦SYN113⁩\"] > span[aria-hidden=\"true\"]"
+                ],
+                [
+                  "a[aria-label=\"لماذا هذا الموقف؟ ⁦SYN123⁩\"] > span[aria-hidden=\"true\"]"
+                ],
+                [
+                  "a[aria-label=\"لماذا هذا الموقف؟ ⁦SYN219⁩\"] > span[aria-hidden=\"true\"]"
+                ],
+                [
+                  "a[aria-label=\"لماذا هذا الموقف؟ ⁦SYN345⁩\"] > span[aria-hidden=\"true\"]"
+                ],
+                [
+                  "a[aria-label=\"لماذا هذا الموقف؟ ⁦SYN165⁩\"] > span[aria-hidden=\"true\"]"
+                ],
+                [
+                  "a[aria-label=\"لماذا هذا الموقف؟ ⁦SYN423⁩\"] > span[aria-hidden=\"true\"]"
+                ],
+                [
+                  "a[aria-label=\"لماذا هذا الموقف؟ ⁦SYN508⁩\"] > span[aria-hidden=\"true\"]"
+                ],
+                [
+                  "a[aria-label=\"لماذا هذا الموقف؟ ⁦SYN207⁩\"] > span[aria-hidden=\"true\"]"
+                ],
+                [
+                  "a[aria-label=\"لماذا هذا الموقف؟ ⁦SYN239⁩\"] > span[aria-hidden=\"true\"]"
+                ],
+                [
+                  "a[aria-label=\"لماذا هذا الموقف؟ ⁦SYN102⁩\"] > span[aria-hidden=\"true\"]"
+                ]
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "locale": "ar",
+        "name": "leaderboard/pro/axe",
+        "status": "PASS",
+        "evidence": {
+          "version": "4.14.0",
+          "url": "http://127.0.0.1:5256/pool/us_equity",
+          "timestamp": "2026-10-27T09:08:30.772Z",
+          "rawSha256": "c9c1e5167dde352ae16f6880cc0d47f376b6ed4a3abd3f898b51ed6e73ea02c5",
+          "violations": [],
+          "incomplete": [
+            {
+              "id": "color-contrast",
+              "impact": "serious",
+              "help": "Elements must meet minimum color contrast ratio thresholds",
+              "targets": [
+                [
+                  ".brand-mark"
+                ],
+                [
+                  ".mode-banner > span[aria-hidden=\"true\"]"
+                ],
+                [
+                  ".research-details > .table-scroll[role=\"region\"] > table > tbody > tr:nth-child(1) > td:nth-child(4)"
+                ],
+                [
+                  ".research-details > .table-scroll[role=\"region\"] > table > tbody > tr:nth-child(1) > td:nth-child(5)"
+                ],
+                [
+                  ".research-details > .table-scroll[role=\"region\"] > table > tbody > tr:nth-child(2) > td:nth-child(4)"
+                ],
+                [
+                  ".research-details > .table-scroll[role=\"region\"] > table > tbody > tr:nth-child(2) > td:nth-child(5)"
+                ],
+                [
+                  ".research-details > .table-scroll[role=\"region\"] > table > tbody > tr:nth-child(3) > td:nth-child(4)"
+                ],
+                [
+                  ".research-details > .table-scroll[role=\"region\"] > table > tbody > tr:nth-child(3) > td:nth-child(5)"
+                ],
+                [
+                  ".research-details > .table-scroll[role=\"region\"] > table > tbody > tr:nth-child(4) > td:nth-child(4)"
+                ],
+                [
+                  ".research-details > .table-scroll[role=\"region\"] > table > tbody > tr:nth-child(4) > td:nth-child(5)"
+                ],
+                [
+                  ".research-details > .table-scroll[role=\"region\"] > table > tbody > tr:nth-child(5) > td:nth-child(4)"
+                ],
+                [
+                  ".research-details > .table-scroll[role=\"region\"] > table > tbody > tr:nth-child(5) > td:nth-child(5)"
+                ],
+                [
+                  ".research-details > .table-scroll[role=\"region\"] > table > tbody > tr:nth-child(6) > td:nth-child(4)"
+                ],
+                [
+                  ".research-details > .table-scroll[role=\"region\"] > table > tbody > tr:nth-child(6) > td:nth-child(5)"
+                ],
+                [
+                  ".research-details > .table-scroll[role=\"region\"] > table > tbody > tr:nth-child(7) > td:nth-child(4)"
+                ],
+                [
+                  ".research-details > .table-scroll[role=\"region\"] > table > tbody > tr:nth-child(7) > td:nth-child(5)"
+                ],
+                [
+                  ".research-details > .table-scroll[role=\"region\"] > table > tbody > tr:nth-child(8) > td:nth-child(4)"
+                ],
+                [
+                  ".research-details > .table-scroll[role=\"region\"] > table > tbody > tr:nth-child(8) > td:nth-child(5)"
+                ],
+                [
+                  ".research-details > .table-scroll[role=\"region\"] > table > tbody > tr:nth-child(9) > td:nth-child(4)"
+                ],
+                [
+                  ".research-details > .table-scroll[role=\"region\"] > table > tbody > tr:nth-child(9) > td:nth-child(5)"
+                ],
+                [
+                  ".research-details > .table-scroll[role=\"region\"] > table > tbody > tr:nth-child(10) > td:nth-child(4)"
+                ],
+                [
+                  ".research-details > .table-scroll[role=\"region\"] > table > tbody > tr:nth-child(10) > td:nth-child(5)"
+                ],
+                [
+                  ".research-details > .table-scroll[role=\"region\"] > table > tbody > tr:nth-child(11) > td:nth-child(4)"
+                ],
+                [
+                  ".research-details > .table-scroll[role=\"region\"] > table > tbody > tr:nth-child(11) > td:nth-child(5)"
+                ],
+                [
+                  "th[aria-sort=\"ascending\"] > button > span[aria-hidden=\"true\"]"
+                ],
+                [
+                  "tr[aria-label=\"فتح بحث ⁦SYN088⁩\"] > td:nth-child(3)"
+                ],
+                [
+                  "tr[aria-label=\"فتح بحث ⁦SYN088⁩\"] > .numeric.positive[dir=\"ltr\"]:nth-child(5)"
+                ],
+                [
+                  "tr[aria-label=\"فتح بحث ⁦SYN088⁩\"] > .numeric.positive[dir=\"ltr\"]:nth-child(6)"
+                ],
+                [
+                  "tr[aria-label=\"فتح بحث ⁦SYN088⁩\"] > .numeric.positive[dir=\"ltr\"]:nth-child(7)"
+                ],
+                [
+                  "tr[aria-label=\"فتح بحث ⁦SYN088⁩\"] > td[dir=\"ltr\"]:nth-child(8)"
+                ],
+                [
+                  "tr[aria-label=\"فتح بحث ⁦SYN088⁩\"] > td[dir=\"ltr\"]:nth-child(9)"
+                ],
+                [
+                  "tr[aria-label=\"فتح بحث ⁦SYN283⁩\"] > .numeric.positive[dir=\"ltr\"]:nth-child(5)"
+                ],
+                [
+                  "tr[aria-label=\"فتح بحث ⁦SYN283⁩\"] > .numeric.positive[dir=\"ltr\"]:nth-child(6)"
+                ],
+                [
+                  "tr[aria-label=\"فتح بحث ⁦SYN283⁩\"] > .numeric.positive[dir=\"ltr\"]:nth-child(7)"
+                ],
+                [
+                  "tr[aria-label=\"فتح بحث ⁦SYN283⁩\"] > td[dir=\"ltr\"]:nth-child(8)"
+                ],
+                [
+                  "tr[aria-label=\"فتح بحث ⁦SYN283⁩\"] > td[dir=\"ltr\"]:nth-child(9)"
+                ],
+                [
+                  "tr[aria-label=\"فتح بحث ⁦SYN025⁩\"] > .numeric.positive[dir=\"ltr\"]:nth-child(5)"
+                ],
+                [
+                  "tr[aria-label=\"فتح بحث ⁦SYN025⁩\"] > .numeric.positive[dir=\"ltr\"]:nth-child(6)"
+                ],
+                [
+                  "tr[aria-label=\"فتح بحث ⁦SYN025⁩\"] > .numeric.positive[dir=\"ltr\"]:nth-child(7)"
+                ],
+                [
+                  "tr[aria-label=\"فتح بحث ⁦SYN025⁩\"] > td[dir=\"ltr\"]:nth-child(8)"
+                ],
+                [
+                  "tr[aria-label=\"فتح بحث ⁦SYN025⁩\"] > td[dir=\"ltr\"]:nth-child(9)"
+                ],
+                [
+                  "tr[aria-label=\"فتح بحث ⁦SYN369⁩\"] > .numeric.positive[dir=\"ltr\"]:nth-child(5)"
+                ],
+                [
+                  "tr[aria-label=\"فتح بحث ⁦SYN369⁩\"] > .numeric.positive[dir=\"ltr\"]:nth-child(6)"
+                ],
+                [
+                  "tr[aria-label=\"فتح بحث ⁦SYN369⁩\"] > .numeric.positive[dir=\"ltr\"]:nth-child(7)"
+                ],
+                [
+                  "tr[aria-label=\"فتح بحث ⁦SYN369⁩\"] > td[dir=\"ltr\"]:nth-child(8)"
+                ],
+                [
+                  "tr[aria-label=\"فتح بحث ⁦SYN369⁩\"] > td[dir=\"ltr\"]:nth-child(9)"
+                ],
+                [
+                  "tr[aria-label=\"فتح بحث ⁦SYN129⁩\"] > .numeric.positive[dir=\"ltr\"]:nth-child(5)"
+                ],
+                [
+                  "tr[aria-label=\"فتح بحث ⁦SYN129⁩\"] > .numeric.positive[dir=\"ltr\"]:nth-child(6)"
+                ],
+                [
+                  "tr[aria-label=\"فتح بحث ⁦SYN129⁩\"] > .numeric.positive[dir=\"ltr\"]:nth-child(7)"
+                ],
+                [
+                  "tr[aria-label=\"فتح بحث ⁦SYN129⁩\"] > td[dir=\"ltr\"]:nth-child(8)"
+                ],
+                [
+                  "tr[aria-label=\"فتح بحث ⁦SYN129⁩\"] > td[dir=\"ltr\"]:nth-child(9)"
+                ],
+                [
+                  "tr[aria-label=\"فتح بحث ⁦SYN027⁩\"] > .numeric.positive[dir=\"ltr\"]:nth-child(5)"
+                ],
+                [
+                  "tr[aria-label=\"فتح بحث ⁦SYN027⁩\"] > .numeric.positive[dir=\"ltr\"]:nth-child(6)"
+                ],
+                [
+                  "tr[aria-label=\"فتح بحث ⁦SYN027⁩\"] > .numeric.positive[dir=\"ltr\"]:nth-child(7)"
+                ],
+                [
+                  "tr[aria-label=\"فتح بحث ⁦SYN027⁩\"] > td[dir=\"ltr\"]:nth-child(8)"
+                ],
+                [
+                  "tr[aria-label=\"فتح بحث ⁦SYN027⁩\"] > td[dir=\"ltr\"]:nth-child(9)"
+                ],
+                [
+                  "tr[aria-label=\"فتح بحث ⁦SYN295⁩\"] > .numeric.positive[dir=\"ltr\"]:nth-child(5)"
+                ],
+                [
+                  "tr[aria-label=\"فتح بحث ⁦SYN295⁩\"] > .numeric.positive[dir=\"ltr\"]:nth-child(6)"
+                ],
+                [
+                  "tr[aria-label=\"فتح بحث ⁦SYN295⁩\"] > .numeric.positive[dir=\"ltr\"]:nth-child(7)"
+                ],
+                [
+                  "tr[aria-label=\"فتح بحث ⁦SYN295⁩\"] > td[dir=\"ltr\"]:nth-child(8)"
+                ],
+                [
+                  "tr[aria-label=\"فتح بحث ⁦SYN295⁩\"] > td[dir=\"ltr\"]:nth-child(9)"
+                ],
+                [
+                  "tr[aria-label=\"فتح بحث ⁦SYN512⁩\"] > .numeric.positive[dir=\"ltr\"]:nth-child(5)"
+                ],
+                [
+                  "tr[aria-label=\"فتح بحث ⁦SYN512⁩\"] > .numeric.positive[dir=\"ltr\"]:nth-child(6)"
+                ],
+                [
+                  "tr[aria-label=\"فتح بحث ⁦SYN512⁩\"] > .numeric.positive[dir=\"ltr\"]:nth-child(7)"
+                ],
+                [
+                  "tr[aria-label=\"فتح بحث ⁦SYN512⁩\"] > td[dir=\"ltr\"]:nth-child(8)"
+                ],
+                [
+                  "tr[aria-label=\"فتح بحث ⁦SYN512⁩\"] > td[dir=\"ltr\"]:nth-child(9)"
+                ],
+                [
+                  "tr[aria-label=\"فتح بحث ⁦SYN271⁩\"] > .numeric.positive[dir=\"ltr\"]:nth-child(5)"
+                ],
+                [
+                  "tr[aria-label=\"فتح بحث ⁦SYN271⁩\"] > .numeric.positive[dir=\"ltr\"]:nth-child(6)"
+                ],
+                [
+                  "tr[aria-label=\"فتح بحث ⁦SYN271⁩\"] > .numeric.positive[dir=\"ltr\"]:nth-child(7)"
+                ],
+                [
+                  "tr[aria-label=\"فتح بحث ⁦SYN271⁩\"] > td[dir=\"ltr\"]:nth-child(8)"
+                ],
+                [
+                  "tr[aria-label=\"فتح بحث ⁦SYN271⁩\"] > td[dir=\"ltr\"]:nth-child(9)"
+                ],
+                [
+                  "tr[aria-label=\"فتح بحث ⁦SYN294⁩\"] > .numeric.positive[dir=\"ltr\"]:nth-child(5)"
+                ],
+                [
+                  "tr[aria-label=\"فتح بحث ⁦SYN294⁩\"] > .numeric.positive[dir=\"ltr\"]:nth-child(6)"
+                ],
+                [
+                  "tr[aria-label=\"فتح بحث ⁦SYN294⁩\"] > .numeric.positive[dir=\"ltr\"]:nth-child(7)"
+                ],
+                [
+                  "tr[aria-label=\"فتح بحث ⁦SYN294⁩\"] > td[dir=\"ltr\"]:nth-child(8)"
+                ],
+                [
+                  "tr[aria-label=\"فتح بحث ⁦SYN294⁩\"] > td[dir=\"ltr\"]:nth-child(9)"
+                ],
+                [
+                  "tr[aria-label=\"فتح بحث ⁦SYN268⁩\"] > .numeric.positive[dir=\"ltr\"]:nth-child(5)"
+                ],
+                [
+                  "tr[aria-label=\"فتح بحث ⁦SYN268⁩\"] > .numeric.positive[dir=\"ltr\"]:nth-child(6)"
+                ],
+                [
+                  "tr[aria-label=\"فتح بحث ⁦SYN268⁩\"] > .numeric.positive[dir=\"ltr\"]:nth-child(7)"
+                ],
+                [
+                  "tr[aria-label=\"فتح بحث ⁦SYN268⁩\"] > td[dir=\"ltr\"]:nth-child(8)"
+                ],
+                [
+                  "tr[aria-label=\"فتح بحث ⁦SYN268⁩\"] > td[dir=\"ltr\"]:nth-child(9)"
+                ],
+                [
+                  "tr[aria-label=\"فتح بحث ⁦SYN476⁩\"] > .numeric.positive[dir=\"ltr\"]:nth-child(5)"
+                ],
+                [
+                  "tr[aria-label=\"فتح بحث ⁦SYN476⁩\"] > .numeric.positive[dir=\"ltr\"]:nth-child(6)"
+                ],
+                [
+                  "tr[aria-label=\"فتح بحث ⁦SYN476⁩\"] > .numeric.positive[dir=\"ltr\"]:nth-child(7)"
+                ],
+                [
+                  "tr[aria-label=\"فتح بحث ⁦SYN476⁩\"] > td[dir=\"ltr\"]:nth-child(8)"
+                ],
+                [
+                  "tr[aria-label=\"فتح بحث ⁦SYN476⁩\"] > td[dir=\"ltr\"]:nth-child(9)"
+                ],
+                [
+                  "tr[aria-label=\"فتح بحث ⁦SYN425⁩\"] > .numeric.positive[dir=\"ltr\"]:nth-child(5)"
+                ],
+                [
+                  "tr[aria-label=\"فتح بحث ⁦SYN425⁩\"] > .numeric.positive[dir=\"ltr\"]:nth-child(6)"
+                ],
+                [
+                  "tr[aria-label=\"فتح بحث ⁦SYN425⁩\"] > .numeric.positive[dir=\"ltr\"]:nth-child(7)"
+                ],
+                [
+                  "tr[aria-label=\"فتح بحث ⁦SYN425⁩\"] > td[dir=\"ltr\"]:nth-child(8)"
+                ],
+                [
+                  "tr[aria-label=\"فتح بحث ⁦SYN425⁩\"] > td[dir=\"ltr\"]:nth-child(9)"
+                ],
+                [
+                  "tr[aria-label=\"فتح بحث ⁦SYN373⁩\"] > .numeric.positive[dir=\"ltr\"]:nth-child(5)"
+                ],
+                [
+                  "tr[aria-label=\"فتح بحث ⁦SYN373⁩\"] > .numeric.positive[dir=\"ltr\"]:nth-child(6)"
+                ],
+                [
+                  "tr[aria-label=\"فتح بحث ⁦SYN373⁩\"] > .numeric.positive[dir=\"ltr\"]:nth-child(7)"
+                ],
+                [
+                  "tr[aria-label=\"فتح بحث ⁦SYN373⁩\"] > td[dir=\"ltr\"]:nth-child(8)"
+                ],
+                [
+                  "tr[aria-label=\"فتح بحث ⁦SYN373⁩\"] > td[dir=\"ltr\"]:nth-child(9)"
+                ],
+                [
+                  "tr[aria-label=\"فتح بحث ⁦SYN161⁩\"] > .numeric.positive[dir=\"ltr\"]:nth-child(5)"
+                ],
+                [
+                  "tr[aria-label=\"فتح بحث ⁦SYN161⁩\"] > .numeric.positive[dir=\"ltr\"]:nth-child(6)"
+                ],
+                [
+                  "tr[aria-label=\"فتح بحث ⁦SYN161⁩\"] > .numeric.positive[dir=\"ltr\"]:nth-child(7)"
+                ],
+                [
+                  "tr[aria-label=\"فتح بحث ⁦SYN161⁩\"] > td[dir=\"ltr\"]:nth-child(8)"
+                ],
+                [
+                  "tr[aria-label=\"فتح بحث ⁦SYN161⁩\"] > td[dir=\"ltr\"]:nth-child(9)"
+                ],
+                [
+                  "tr[aria-label=\"فتح بحث ⁦SYN267⁩\"] > .numeric.positive[dir=\"ltr\"]:nth-child(5)"
+                ],
+                [
+                  "tr[aria-label=\"فتح بحث ⁦SYN267⁩\"] > .numeric.positive[dir=\"ltr\"]:nth-child(6)"
+                ],
+                [
+                  "tr[aria-label=\"فتح بحث ⁦SYN267⁩\"] > .numeric.positive[dir=\"ltr\"]:nth-child(7)"
+                ],
+                [
+                  "tr[aria-label=\"فتح بحث ⁦SYN267⁩\"] > td[dir=\"ltr\"]:nth-child(8)"
+                ],
+                [
+                  "tr[aria-label=\"فتح بحث ⁦SYN267⁩\"] > td[dir=\"ltr\"]:nth-child(9)"
+                ],
+                [
+                  "tr[aria-label=\"فتح بحث ⁦SYN297⁩\"] > td:nth-child(3)"
+                ],
+                [
+                  "tr[aria-label=\"فتح بحث ⁦SYN297⁩\"] > .numeric.positive[dir=\"ltr\"]:nth-child(5)"
+                ],
+                [
+                  "tr[aria-label=\"فتح بحث ⁦SYN297⁩\"] > .numeric.positive[dir=\"ltr\"]:nth-child(6)"
+                ],
+                [
+                  "tr[aria-label=\"فتح بحث ⁦SYN297⁩\"] > .numeric.positive[dir=\"ltr\"]:nth-child(7)"
+                ],
+                [
+                  "tr[aria-label=\"فتح بحث ⁦SYN297⁩\"] > td[dir=\"ltr\"]:nth-child(8)"
+                ],
+                [
+                  "tr[aria-label=\"فتح بحث ⁦SYN297⁩\"] > td[dir=\"ltr\"]:nth-child(9)"
+                ],
+                [
+                  "tr[aria-label=\"فتح بحث ⁦SYN192⁩\"] > .numeric.positive[dir=\"ltr\"]:nth-child(5)"
+                ],
+                [
+                  "tr[aria-label=\"فتح بحث ⁦SYN192⁩\"] > .numeric.positive[dir=\"ltr\"]:nth-child(6)"
+                ],
+                [
+                  "tr[aria-label=\"فتح بحث ⁦SYN192⁩\"] > .numeric.positive[dir=\"ltr\"]:nth-child(7)"
+                ],
+                [
+                  "tr[aria-label=\"فتح بحث ⁦SYN192⁩\"] > td[dir=\"ltr\"]:nth-child(8)"
+                ],
+                [
+                  "tr[aria-label=\"فتح بحث ⁦SYN192⁩\"] > td[dir=\"ltr\"]:nth-child(9)"
+                ],
+                [
+                  "tr[aria-label=\"فتح بحث ⁦SYN517⁩\"] > td:nth-child(3)"
+                ],
+                [
+                  "tr[aria-label=\"فتح بحث ⁦SYN517⁩\"] > .numeric.positive[dir=\"ltr\"]:nth-child(5)"
+                ],
+                [
+                  "tr[aria-label=\"فتح بحث ⁦SYN517⁩\"] > .numeric.positive[dir=\"ltr\"]:nth-child(6)"
+                ],
+                [
+                  "tr[aria-label=\"فتح بحث ⁦SYN517⁩\"] > .numeric.positive[dir=\"ltr\"]:nth-child(7)"
+                ],
+                [
+                  "tr[aria-label=\"فتح بحث ⁦SYN517⁩\"] > td[dir=\"ltr\"]:nth-child(8)"
+                ],
+                [
+                  "tr[aria-label=\"فتح بحث ⁦SYN517⁩\"] > td[dir=\"ltr\"]:nth-child(9)"
+                ],
+                [
+                  "tr[aria-label=\"فتح بحث ⁦SYN275⁩\"] > td:nth-child(3)"
+                ],
+                [
+                  "tr[aria-label=\"فتح بحث ⁦SYN275⁩\"] > .numeric.positive[dir=\"ltr\"]:nth-child(5)"
+                ],
+                [
+                  "tr[aria-label=\"فتح بحث ⁦SYN275⁩\"] > .numeric.positive[dir=\"ltr\"]:nth-child(6)"
+                ],
+                [
+                  "tr[aria-label=\"فتح بحث ⁦SYN275⁩\"] > .numeric.positive[dir=\"ltr\"]:nth-child(7)"
+                ],
+                [
+                  "tr[aria-label=\"فتح بحث ⁦SYN275⁩\"] > td[dir=\"ltr\"]:nth-child(8)"
+                ],
+                [
+                  "tr[aria-label=\"فتح بحث ⁦SYN275⁩\"] > td[dir=\"ltr\"]:nth-child(9)"
+                ],
+                [
+                  "tr[aria-label=\"فتح بحث ⁦SYN225⁩\"] > .numeric.positive[dir=\"ltr\"]:nth-child(5)"
+                ],
+                [
+                  "tr[aria-label=\"فتح بحث ⁦SYN225⁩\"] > .numeric.positive[dir=\"ltr\"]:nth-child(6)"
+                ],
+                [
+                  "tr[aria-label=\"فتح بحث ⁦SYN225⁩\"] > .numeric.positive[dir=\"ltr\"]:nth-child(7)"
+                ],
+                [
+                  "tr[aria-label=\"فتح بحث ⁦SYN225⁩\"] > td[dir=\"ltr\"]:nth-child(8)"
+                ],
+                [
+                  "tr[aria-label=\"فتح بحث ⁦SYN225⁩\"] > td[dir=\"ltr\"]:nth-child(9)"
+                ],
+                [
+                  "tr[aria-label=\"فتح بحث ⁦SYN235⁩\"] > .numeric.positive[dir=\"ltr\"]:nth-child(5)"
+                ],
+                [
+                  "tr[aria-label=\"فتح بحث ⁦SYN235⁩\"] > .numeric.positive[dir=\"ltr\"]:nth-child(6)"
+                ],
+                [
+                  "tr[aria-label=\"فتح بحث ⁦SYN235⁩\"] > .numeric.positive[dir=\"ltr\"]:nth-child(7)"
+                ],
+                [
+                  "tr[aria-label=\"فتح بحث ⁦SYN235⁩\"] > td[dir=\"ltr\"]:nth-child(8)"
+                ],
+                [
+                  "tr[aria-label=\"فتح بحث ⁦SYN235⁩\"] > td[dir=\"ltr\"]:nth-child(9)"
+                ],
+                [
+                  "tr[aria-label=\"فتح بحث ⁦SYN176⁩\"] > td:nth-child(3)"
+                ],
+                [
+                  "tr[aria-label=\"فتح بحث ⁦SYN176⁩\"] > .numeric.positive[dir=\"ltr\"]:nth-child(5)"
+                ],
+                [
+                  "tr[aria-label=\"فتح بحث ⁦SYN176⁩\"] > .numeric.positive[dir=\"ltr\"]:nth-child(6)"
+                ],
+                [
+                  "tr[aria-label=\"فتح بحث ⁦SYN176⁩\"] > .numeric.positive[dir=\"ltr\"]:nth-child(7)"
+                ],
+                [
+                  "tr[aria-label=\"فتح بحث ⁦SYN176⁩\"] > td[dir=\"ltr\"]:nth-child(8)"
+                ],
+                [
+                  "tr[aria-label=\"فتح بحث ⁦SYN176⁩\"] > td[dir=\"ltr\"]:nth-child(9)"
+                ],
+                [
+                  "tr[aria-label=\"فتح بحث ⁦SYN398⁩\"] > .numeric.positive[dir=\"ltr\"]:nth-child(5)"
+                ],
+                [
+                  "tr[aria-label=\"فتح بحث ⁦SYN398⁩\"] > .numeric.positive[dir=\"ltr\"]:nth-child(6)"
+                ],
+                [
+                  "tr[aria-label=\"فتح بحث ⁦SYN398⁩\"] > .numeric.positive[dir=\"ltr\"]:nth-child(7)"
+                ],
+                [
+                  "tr[aria-label=\"فتح بحث ⁦SYN398⁩\"] > td[dir=\"ltr\"]:nth-child(8)"
+                ],
+                [
+                  "tr[aria-label=\"فتح بحث ⁦SYN398⁩\"] > td[dir=\"ltr\"]:nth-child(9)"
+                ],
+                [
+                  "tr[aria-label=\"فتح بحث ⁦SYN182⁩\"] > .numeric.positive[dir=\"ltr\"]:nth-child(5)"
+                ],
+                [
+                  "tr[aria-label=\"فتح بحث ⁦SYN182⁩\"] > .numeric.positive[dir=\"ltr\"]:nth-child(6)"
+                ],
+                [
+                  "tr[aria-label=\"فتح بحث ⁦SYN182⁩\"] > .numeric.positive[dir=\"ltr\"]:nth-child(7)"
+                ],
+                [
+                  "tr[aria-label=\"فتح بحث ⁦SYN182⁩\"] > td[dir=\"ltr\"]:nth-child(8)"
+                ],
+                [
+                  "tr[aria-label=\"فتح بحث ⁦SYN182⁩\"] > td[dir=\"ltr\"]:nth-child(9)"
+                ],
+                [
+                  "tr[aria-label=\"فتح بحث ⁦SYN190⁩\"] > .numeric.positive[dir=\"ltr\"]:nth-child(5)"
+                ],
+                [
+                  "tr[aria-label=\"فتح بحث ⁦SYN190⁩\"] > .numeric.positive[dir=\"ltr\"]:nth-child(6)"
+                ],
+                [
+                  "tr[aria-label=\"فتح بحث ⁦SYN190⁩\"] > .numeric.positive[dir=\"ltr\"]:nth-child(7)"
+                ],
+                [
+                  "tr[aria-label=\"فتح بحث ⁦SYN190⁩\"] > td[dir=\"ltr\"]:nth-child(8)"
+                ],
+                [
+                  "tr[aria-label=\"فتح بحث ⁦SYN190⁩\"] > td[dir=\"ltr\"]:nth-child(9)"
+                ],
+                [
+                  "tr[aria-label=\"فتح بحث ⁦SYN234⁩\"] > .numeric.positive[dir=\"ltr\"]:nth-child(5)"
+                ],
+                [
+                  "tr[aria-label=\"فتح بحث ⁦SYN234⁩\"] > .numeric.positive[dir=\"ltr\"]:nth-child(6)"
+                ],
+                [
+                  "tr[aria-label=\"فتح بحث ⁦SYN234⁩\"] > .numeric.positive[dir=\"ltr\"]:nth-child(7)"
+                ],
+                [
+                  "tr[aria-label=\"فتح بحث ⁦SYN234⁩\"] > td[dir=\"ltr\"]:nth-child(8)"
+                ],
+                [
+                  "tr[aria-label=\"فتح بحث ⁦SYN234⁩\"] > td[dir=\"ltr\"]:nth-child(9)"
+                ],
+                [
+                  "tr[aria-label=\"فتح بحث ⁦SYN009⁩\"] > .numeric.positive[dir=\"ltr\"]:nth-child(5)"
+                ],
+                [
+                  "tr[aria-label=\"فتح بحث ⁦SYN009⁩\"] > .numeric.positive[dir=\"ltr\"]:nth-child(6)"
+                ],
+                [
+                  "tr[aria-label=\"فتح بحث ⁦SYN009⁩\"] > .numeric.positive[dir=\"ltr\"]:nth-child(7)"
+                ],
+                [
+                  "tr[aria-label=\"فتح بحث ⁦SYN009⁩\"] > td[dir=\"ltr\"]:nth-child(8)"
+                ],
+                [
+                  "tr[aria-label=\"فتح بحث ⁦SYN009⁩\"] > td[dir=\"ltr\"]:nth-child(9)"
+                ],
+                [
+                  "tr[aria-label=\"فتح بحث ⁦SYN154⁩\"] > td:nth-child(3)"
+                ],
+                [
+                  "tr[aria-label=\"فتح بحث ⁦SYN154⁩\"] > .numeric.positive[dir=\"ltr\"]:nth-child(5)"
+                ],
+                [
+                  "tr[aria-label=\"فتح بحث ⁦SYN154⁩\"] > .numeric.positive[dir=\"ltr\"]:nth-child(6)"
+                ],
+                [
+                  "tr[aria-label=\"فتح بحث ⁦SYN154⁩\"] > .numeric.positive[dir=\"ltr\"]:nth-child(7)"
+                ],
+                [
+                  "tr[aria-label=\"فتح بحث ⁦SYN154⁩\"] > td[dir=\"ltr\"]:nth-child(8)"
+                ],
+                [
+                  "tr[aria-label=\"فتح بحث ⁦SYN154⁩\"] > td[dir=\"ltr\"]:nth-child(9)"
+                ],
+                [
+                  "tr[aria-label=\"فتح بحث ⁦SYN277⁩\"] > .numeric.positive[dir=\"ltr\"]:nth-child(5)"
+                ],
+                [
+                  "tr[aria-label=\"فتح بحث ⁦SYN277⁩\"] > .numeric.positive[dir=\"ltr\"]:nth-child(6)"
+                ],
+                [
+                  "tr[aria-label=\"فتح بحث ⁦SYN277⁩\"] > .numeric.positive[dir=\"ltr\"]:nth-child(7)"
+                ],
+                [
+                  "tr[aria-label=\"فتح بحث ⁦SYN277⁩\"] > td[dir=\"ltr\"]:nth-child(8)"
+                ],
+                [
+                  "tr[aria-label=\"فتح بحث ⁦SYN277⁩\"] > td[dir=\"ltr\"]:nth-child(9)"
+                ],
+                [
+                  "tr[aria-label=\"فتح بحث ⁦SYN441⁩\"] > .numeric.positive[dir=\"ltr\"]:nth-child(5)"
+                ],
+                [
+                  "tr[aria-label=\"فتح بحث ⁦SYN441⁩\"] > .numeric.positive[dir=\"ltr\"]:nth-child(6)"
+                ],
+                [
+                  "tr[aria-label=\"فتح بحث ⁦SYN441⁩\"] > .numeric.positive[dir=\"ltr\"]:nth-child(7)"
+                ],
+                [
+                  "tr[aria-label=\"فتح بحث ⁦SYN441⁩\"] > td[dir=\"ltr\"]:nth-child(8)"
+                ],
+                [
+                  "tr[aria-label=\"فتح بحث ⁦SYN441⁩\"] > td[dir=\"ltr\"]:nth-child(9)"
+                ],
+                [
+                  "tr[aria-label=\"فتح بحث ⁦SYN315⁩\"] > .numeric.positive[dir=\"ltr\"]:nth-child(5)"
+                ],
+                [
+                  "tr[aria-label=\"فتح بحث ⁦SYN315⁩\"] > .numeric.positive[dir=\"ltr\"]:nth-child(6)"
+                ],
+                [
+                  "tr[aria-label=\"فتح بحث ⁦SYN315⁩\"] > .numeric.positive[dir=\"ltr\"]:nth-child(7)"
+                ],
+                [
+                  "tr[aria-label=\"فتح بحث ⁦SYN315⁩\"] > td[dir=\"ltr\"]:nth-child(8)"
+                ],
+                [
+                  "tr[aria-label=\"فتح بحث ⁦SYN315⁩\"] > td[dir=\"ltr\"]:nth-child(9)"
+                ],
+                [
+                  "tr[aria-label=\"فتح بحث ⁦SYN093⁩\"] > .numeric.positive[dir=\"ltr\"]:nth-child(5)"
+                ],
+                [
+                  "tr[aria-label=\"فتح بحث ⁦SYN093⁩\"] > .numeric.positive[dir=\"ltr\"]:nth-child(6)"
+                ],
+                [
+                  "tr[aria-label=\"فتح بحث ⁦SYN093⁩\"] > .numeric.positive[dir=\"ltr\"]:nth-child(7)"
+                ],
+                [
+                  "tr[aria-label=\"فتح بحث ⁦SYN093⁩\"] > td[dir=\"ltr\"]:nth-child(8)"
+                ],
+                [
+                  "tr[aria-label=\"فتح بحث ⁦SYN093⁩\"] > td[dir=\"ltr\"]:nth-child(9)"
+                ],
+                [
+                  "tr[aria-label=\"فتح بحث ⁦SYN365⁩\"] > .numeric.positive[dir=\"ltr\"]:nth-child(5)"
+                ],
+                [
+                  "tr[aria-label=\"فتح بحث ⁦SYN365⁩\"] > .numeric.positive[dir=\"ltr\"]:nth-child(6)"
+                ],
+                [
+                  "tr[aria-label=\"فتح بحث ⁦SYN365⁩\"] > .numeric.positive[dir=\"ltr\"]:nth-child(7)"
+                ],
+                [
+                  "tr[aria-label=\"فتح بحث ⁦SYN365⁩\"] > td[dir=\"ltr\"]:nth-child(8)"
+                ],
+                [
+                  "tr[aria-label=\"فتح بحث ⁦SYN365⁩\"] > td[dir=\"ltr\"]:nth-child(9)"
+                ],
+                [
+                  "tr[aria-label=\"فتح بحث ⁦SYN338⁩\"] > .numeric.positive[dir=\"ltr\"]:nth-child(5)"
+                ],
+                [
+                  "tr[aria-label=\"فتح بحث ⁦SYN338⁩\"] > .numeric.positive[dir=\"ltr\"]:nth-child(6)"
+                ],
+                [
+                  "tr[aria-label=\"فتح بحث ⁦SYN338⁩\"] > .numeric.positive[dir=\"ltr\"]:nth-child(7)"
+                ],
+                [
+                  "tr[aria-label=\"فتح بحث ⁦SYN338⁩\"] > td[dir=\"ltr\"]:nth-child(8)"
+                ],
+                [
+                  "tr[aria-label=\"فتح بحث ⁦SYN338⁩\"] > td[dir=\"ltr\"]:nth-child(9)"
+                ],
+                [
+                  "tr[aria-label=\"فتح بحث ⁦SYN404⁩\"] > .numeric.positive[dir=\"ltr\"]:nth-child(5)"
+                ],
+                [
+                  "tr[aria-label=\"فتح بحث ⁦SYN404⁩\"] > .numeric.positive[dir=\"ltr\"]:nth-child(6)"
+                ],
+                [
+                  "tr[aria-label=\"فتح بحث ⁦SYN404⁩\"] > .numeric.positive[dir=\"ltr\"]:nth-child(7)"
+                ],
+                [
+                  "tr[aria-label=\"فتح بحث ⁦SYN404⁩\"] > td[dir=\"ltr\"]:nth-child(8)"
+                ],
+                [
+                  "tr[aria-label=\"فتح بحث ⁦SYN404⁩\"] > td[dir=\"ltr\"]:nth-child(9)"
+                ],
+                [
+                  "tr[aria-label=\"فتح بحث ⁦SYN481⁩\"] > .numeric.positive[dir=\"ltr\"]:nth-child(5)"
+                ],
+                [
+                  "tr[aria-label=\"فتح بحث ⁦SYN481⁩\"] > .numeric.positive[dir=\"ltr\"]:nth-child(6)"
+                ],
+                [
+                  "tr[aria-label=\"فتح بحث ⁦SYN481⁩\"] > .numeric.positive[dir=\"ltr\"]:nth-child(7)"
+                ],
+                [
+                  "tr[aria-label=\"فتح بحث ⁦SYN481⁩\"] > td[dir=\"ltr\"]:nth-child(8)"
+                ],
+                [
+                  "tr[aria-label=\"فتح بحث ⁦SYN481⁩\"] > td[dir=\"ltr\"]:nth-child(9)"
+                ],
+                [
+                  "tr[aria-label=\"فتح بحث ⁦SYN227⁩\"] > .numeric.positive[dir=\"ltr\"]:nth-child(5)"
+                ],
+                [
+                  "tr[aria-label=\"فتح بحث ⁦SYN227⁩\"] > .numeric.positive[dir=\"ltr\"]:nth-child(6)"
+                ],
+                [
+                  "tr[aria-label=\"فتح بحث ⁦SYN227⁩\"] > .numeric.positive[dir=\"ltr\"]:nth-child(7)"
+                ],
+                [
+                  "tr[aria-label=\"فتح بحث ⁦SYN227⁩\"] > td[dir=\"ltr\"]:nth-child(8)"
+                ],
+                [
+                  "tr[aria-label=\"فتح بحث ⁦SYN227⁩\"] > td[dir=\"ltr\"]:nth-child(9)"
+                ],
+                [
+                  "tr[aria-label=\"فتح بحث ⁦SYN173⁩\"] > .numeric.positive[dir=\"ltr\"]:nth-child(5)"
+                ],
+                [
+                  "tr[aria-label=\"فتح بحث ⁦SYN173⁩\"] > .numeric.positive[dir=\"ltr\"]:nth-child(6)"
+                ],
+                [
+                  "tr[aria-label=\"فتح بحث ⁦SYN173⁩\"] > .numeric.positive[dir=\"ltr\"]:nth-child(7)"
+                ],
+                [
+                  "tr[aria-label=\"فتح بحث ⁦SYN173⁩\"] > td[dir=\"ltr\"]:nth-child(8)"
+                ],
+                [
+                  "tr[aria-label=\"فتح بحث ⁦SYN173⁩\"] > td[dir=\"ltr\"]:nth-child(9)"
+                ],
+                [
+                  "tr[aria-label=\"فتح بحث ⁦SYN272⁩\"] > .numeric.positive[dir=\"ltr\"]:nth-child(5)"
+                ],
+                [
+                  "tr[aria-label=\"فتح بحث ⁦SYN272⁩\"] > .numeric.positive[dir=\"ltr\"]:nth-child(6)"
+                ],
+                [
+                  "tr[aria-label=\"فتح بحث ⁦SYN272⁩\"] > .numeric.positive[dir=\"ltr\"]:nth-child(7)"
+                ],
+                [
+                  "tr[aria-label=\"فتح بحث ⁦SYN272⁩\"] > td[dir=\"ltr\"]:nth-child(8)"
+                ],
+                [
+                  "tr[aria-label=\"فتح بحث ⁦SYN272⁩\"] > td[dir=\"ltr\"]:nth-child(9)"
+                ],
+                [
+                  "tr[aria-label=\"فتح بحث ⁦SYN113⁩\"] > .numeric.positive[dir=\"ltr\"]:nth-child(5)"
+                ],
+                [
+                  "tr[aria-label=\"فتح بحث ⁦SYN113⁩\"] > .numeric.positive[dir=\"ltr\"]:nth-child(6)"
+                ],
+                [
+                  "tr[aria-label=\"فتح بحث ⁦SYN113⁩\"] > .numeric.positive[dir=\"ltr\"]:nth-child(7)"
+                ],
+                [
+                  "tr[aria-label=\"فتح بحث ⁦SYN113⁩\"] > td[dir=\"ltr\"]:nth-child(8)"
+                ],
+                [
+                  "tr[aria-label=\"فتح بحث ⁦SYN113⁩\"] > td[dir=\"ltr\"]:nth-child(9)"
+                ],
+                [
+                  "tr[aria-label=\"فتح بحث ⁦SYN123⁩\"] > .numeric.positive[dir=\"ltr\"]:nth-child(5)"
+                ],
+                [
+                  "tr[aria-label=\"فتح بحث ⁦SYN123⁩\"] > .numeric.positive[dir=\"ltr\"]:nth-child(6)"
+                ],
+                [
+                  "tr[aria-label=\"فتح بحث ⁦SYN123⁩\"] > .numeric.positive[dir=\"ltr\"]:nth-child(7)"
+                ],
+                [
+                  "tr[aria-label=\"فتح بحث ⁦SYN123⁩\"] > td[dir=\"ltr\"]:nth-child(8)"
+                ],
+                [
+                  "tr[aria-label=\"فتح بحث ⁦SYN123⁩\"] > td[dir=\"ltr\"]:nth-child(9)"
+                ],
+                [
+                  "tr[aria-label=\"فتح بحث ⁦SYN219⁩\"] > .numeric.positive[dir=\"ltr\"]:nth-child(5)"
+                ],
+                [
+                  "tr[aria-label=\"فتح بحث ⁦SYN219⁩\"] > .numeric.positive[dir=\"ltr\"]:nth-child(6)"
+                ],
+                [
+                  "tr[aria-label=\"فتح بحث ⁦SYN219⁩\"] > .numeric.positive[dir=\"ltr\"]:nth-child(7)"
+                ],
+                [
+                  "tr[aria-label=\"فتح بحث ⁦SYN219⁩\"] > td[dir=\"ltr\"]:nth-child(8)"
+                ],
+                [
+                  "tr[aria-label=\"فتح بحث ⁦SYN219⁩\"] > td[dir=\"ltr\"]:nth-child(9)"
+                ],
+                [
+                  "tr[aria-label=\"فتح بحث ⁦SYN345⁩\"] > .numeric.positive[dir=\"ltr\"]:nth-child(5)"
+                ],
+                [
+                  "tr[aria-label=\"فتح بحث ⁦SYN345⁩\"] > .numeric.positive[dir=\"ltr\"]:nth-child(6)"
+                ],
+                [
+                  "tr[aria-label=\"فتح بحث ⁦SYN345⁩\"] > .numeric.positive[dir=\"ltr\"]:nth-child(7)"
+                ],
+                [
+                  "tr[aria-label=\"فتح بحث ⁦SYN345⁩\"] > td[dir=\"ltr\"]:nth-child(8)"
+                ],
+                [
+                  "tr[aria-label=\"فتح بحث ⁦SYN345⁩\"] > td[dir=\"ltr\"]:nth-child(9)"
+                ],
+                [
+                  "tr[aria-label=\"فتح بحث ⁦SYN165⁩\"] > td:nth-child(3)"
+                ],
+                [
+                  "tr[aria-label=\"فتح بحث ⁦SYN165⁩\"] > .numeric.positive[dir=\"ltr\"]:nth-child(5)"
+                ],
+                [
+                  "tr[aria-label=\"فتح بحث ⁦SYN165⁩\"] > .numeric.positive[dir=\"ltr\"]:nth-child(6)"
+                ],
+                [
+                  "tr[aria-label=\"فتح بحث ⁦SYN165⁩\"] > .numeric.positive[dir=\"ltr\"]:nth-child(7)"
+                ],
+                [
+                  "tr[aria-label=\"فتح بحث ⁦SYN165⁩\"] > td[dir=\"ltr\"]:nth-child(8)"
+                ],
+                [
+                  "tr[aria-label=\"فتح بحث ⁦SYN165⁩\"] > td[dir=\"ltr\"]:nth-child(9)"
+                ],
+                [
+                  "tr[aria-label=\"فتح بحث ⁦SYN423⁩\"] > .numeric.positive[dir=\"ltr\"]:nth-child(5)"
+                ],
+                [
+                  "tr[aria-label=\"فتح بحث ⁦SYN423⁩\"] > .numeric.positive[dir=\"ltr\"]:nth-child(6)"
+                ],
+                [
+                  "tr[aria-label=\"فتح بحث ⁦SYN423⁩\"] > .numeric.positive[dir=\"ltr\"]:nth-child(7)"
+                ],
+                [
+                  "tr[aria-label=\"فتح بحث ⁦SYN423⁩\"] > td[dir=\"ltr\"]:nth-child(8)"
+                ],
+                [
+                  "tr[aria-label=\"فتح بحث ⁦SYN423⁩\"] > td[dir=\"ltr\"]:nth-child(9)"
+                ],
+                [
+                  "tr[aria-label=\"فتح بحث ⁦SYN508⁩\"] > .numeric.positive[dir=\"ltr\"]:nth-child(5)"
+                ],
+                [
+                  "tr[aria-label=\"فتح بحث ⁦SYN508⁩\"] > .numeric.positive[dir=\"ltr\"]:nth-child(6)"
+                ],
+                [
+                  "tr[aria-label=\"فتح بحث ⁦SYN508⁩\"] > .numeric.positive[dir=\"ltr\"]:nth-child(7)"
+                ],
+                [
+                  "tr[aria-label=\"فتح بحث ⁦SYN508⁩\"] > td[dir=\"ltr\"]:nth-child(8)"
+                ],
+                [
+                  "tr[aria-label=\"فتح بحث ⁦SYN508⁩\"] > td[dir=\"ltr\"]:nth-child(9)"
+                ],
+                [
+                  "tr[aria-label=\"فتح بحث ⁦SYN207⁩\"] > .numeric.positive[dir=\"ltr\"]:nth-child(5)"
+                ],
+                [
+                  "tr[aria-label=\"فتح بحث ⁦SYN207⁩\"] > .numeric.positive[dir=\"ltr\"]:nth-child(6)"
+                ],
+                [
+                  "tr[aria-label=\"فتح بحث ⁦SYN207⁩\"] > .numeric.positive[dir=\"ltr\"]:nth-child(7)"
+                ],
+                [
+                  "tr[aria-label=\"فتح بحث ⁦SYN207⁩\"] > td[dir=\"ltr\"]:nth-child(8)"
+                ],
+                [
+                  "tr[aria-label=\"فتح بحث ⁦SYN207⁩\"] > td[dir=\"ltr\"]:nth-child(9)"
+                ],
+                [
+                  "tr[aria-label=\"فتح بحث ⁦SYN239⁩\"] > .numeric.positive[dir=\"ltr\"]:nth-child(5)"
+                ],
+                [
+                  "tr[aria-label=\"فتح بحث ⁦SYN239⁩\"] > .numeric.positive[dir=\"ltr\"]:nth-child(6)"
+                ],
+                [
+                  "tr[aria-label=\"فتح بحث ⁦SYN239⁩\"] > .numeric.positive[dir=\"ltr\"]:nth-child(7)"
+                ],
+                [
+                  "tr[aria-label=\"فتح بحث ⁦SYN239⁩\"] > td[dir=\"ltr\"]:nth-child(8)"
+                ],
+                [
+                  "tr[aria-label=\"فتح بحث ⁦SYN239⁩\"] > td[dir=\"ltr\"]:nth-child(9)"
+                ],
+                [
+                  "tr[aria-label=\"فتح بحث ⁦SYN102⁩\"] > .numeric.positive[dir=\"ltr\"]:nth-child(5)"
+                ],
+                [
+                  "tr[aria-label=\"فتح بحث ⁦SYN102⁩\"] > .numeric.positive[dir=\"ltr\"]:nth-child(6)"
+                ],
+                [
+                  "tr[aria-label=\"فتح بحث ⁦SYN102⁩\"] > .numeric.positive[dir=\"ltr\"]:nth-child(7)"
+                ],
+                [
+                  "tr[aria-label=\"فتح بحث ⁦SYN102⁩\"] > td[dir=\"ltr\"]:nth-child(8)"
+                ],
+                [
+                  "tr[aria-label=\"فتح بحث ⁦SYN102⁩\"] > td[dir=\"ltr\"]:nth-child(9)"
+                ]
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "locale": "ar",
+        "name": "detail/simple/axe",
+        "status": "PASS",
+        "evidence": {
+          "version": "4.14.0",
+          "url": "http://127.0.0.1:5256/ticker/us_equity/SYN369",
+          "timestamp": "2026-10-27T09:08:35.189Z",
+          "rawSha256": "dd191738740699a316dcc7e8aa95b1e4c958ae85a4ec78a82623ccba90002236",
+          "violations": [],
+          "incomplete": [
+            {
+              "id": "color-contrast",
+              "impact": "serious",
+              "help": "Elements must meet minimum color contrast ratio thresholds",
+              "targets": [
+                [
+                  ".brand-mark"
+                ],
+                [
+                  ".mode-banner > span[aria-hidden=\"true\"]"
+                ],
+                [
+                  "tr:nth-child(1) > td:nth-child(4) > bdi"
+                ],
+                [
+                  "tr:nth-child(2) > td:nth-child(4) > bdi"
+                ],
+                [
+                  "tr:nth-child(3) > td:nth-child(4) > bdi"
+                ]
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "locale": "ar",
+        "name": "detail/pro/axe",
+        "status": "PASS",
+        "evidence": {
+          "version": "4.14.0",
+          "url": "http://127.0.0.1:5256/ticker/us_equity/SYN369",
+          "timestamp": "2026-10-27T09:08:38.687Z",
+          "rawSha256": "08a73ffbe229424fa0f4ca1196366640eeffc850c5c6f74471288eb29c6b7c05",
+          "violations": [],
+          "incomplete": [
+            {
+              "id": "color-contrast",
+              "impact": "serious",
+              "help": "Elements must meet minimum color contrast ratio thresholds",
+              "targets": [
+                [
+                  ".brand-mark"
+                ],
+                [
+                  ".mode-banner > span[aria-hidden=\"true\"]"
+                ],
+                [
+                  "tr:nth-child(1) > td:nth-child(4) > bdi"
+                ],
+                [
+                  "tr:nth-child(2) > td:nth-child(4) > bdi"
+                ],
+                [
+                  "tr:nth-child(3) > td:nth-child(4) > bdi"
+                ]
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "locale": "ar",
+        "name": "factors/simple/axe",
+        "status": "PASS",
+        "evidence": {
+          "version": "4.14.0",
+          "url": "http://127.0.0.1:5256/factors",
+          "timestamp": "2026-10-27T09:08:45.864Z",
+          "rawSha256": "d32700fb93ea7be56ad4e76679a0db4e1c34525e709ec0685052c376ae590fd6",
+          "violations": [],
+          "incomplete": [
+            {
+              "id": "color-contrast",
+              "impact": "serious",
+              "help": "Elements must meet minimum color contrast ratio thresholds",
+              "targets": [
+                [
+                  ".brand-mark"
+                ],
+                [
+                  ".mode-banner > span[aria-hidden=\"true\"]"
+                ]
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "locale": "ar",
+        "name": "factors/pro/axe",
+        "status": "PASS",
+        "evidence": {
+          "version": "4.14.0",
+          "url": "http://127.0.0.1:5256/factors",
+          "timestamp": "2026-10-27T09:08:52.469Z",
+          "rawSha256": "abc94a70540a17aa53bdfa69a9fbbef6f3a9e6cde4d7948a2d2d72c900d9b45f",
+          "violations": [],
+          "incomplete": [
+            {
+              "id": "color-contrast",
+              "impact": "serious",
+              "help": "Elements must meet minimum color contrast ratio thresholds",
+              "targets": [
+                [
+                  ".brand-mark"
+                ],
+                [
+                  ".mode-banner > span[aria-hidden=\"true\"]"
+                ]
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "locale": "ar",
+        "name": "regime/simple/axe",
+        "status": "PASS",
+        "evidence": {
+          "version": "4.14.0",
+          "url": "http://127.0.0.1:5256/regime",
+          "timestamp": "2026-10-27T09:08:57.965Z",
+          "rawSha256": "deb70fae4001e586f05e36538b85fbaab6013bc7bbd08c75e112d676c77ed25c",
+          "violations": [],
+          "incomplete": [
+            {
+              "id": "color-contrast",
+              "impact": "serious",
+              "help": "Elements must meet minimum color contrast ratio thresholds",
+              "targets": [
+                [
+                  ".brand-mark"
+                ],
+                [
+                  ".mode-banner > span[aria-hidden=\"true\"]"
+                ],
+                [
+                  ".card:nth-child(6) > .two-column.regime-layout > div:nth-child(1) > .table-scroll[role=\"region\"] > table > tbody > tr:nth-child(1) > td:nth-child(5) > .original-source > .source-label"
+                ],
+                [
+                  ".card:nth-child(6) > .two-column.regime-layout > div:nth-child(1) > .table-scroll[role=\"region\"] > table > tbody > tr:nth-child(1) > td:nth-child(5) > .original-source > span[lang=\"\"][dir=\"auto\"]"
+                ],
+                [
+                  ".card:nth-child(6) > .two-column.regime-layout > div:nth-child(1) > .table-scroll[role=\"region\"] > table > tbody > tr:nth-child(2) > td:nth-child(5) > .original-source > .source-label"
+                ],
+                [
+                  ".card:nth-child(6) > .two-column.regime-layout > div:nth-child(1) > .table-scroll[role=\"region\"] > table > tbody > tr:nth-child(2) > td:nth-child(5) > .original-source > span[lang=\"\"][dir=\"auto\"]"
+                ],
+                [
+                  ".card:nth-child(6) > .two-column.regime-layout > div:nth-child(1) > .table-scroll[role=\"region\"] > table > tbody > tr:nth-child(3) > td:nth-child(5) > .original-source > .source-label"
+                ],
+                [
+                  ".card:nth-child(6) > .two-column.regime-layout > div:nth-child(1) > .table-scroll[role=\"region\"] > table > tbody > tr:nth-child(3) > td:nth-child(5) > .original-source > span[lang=\"\"][dir=\"auto\"]"
+                ],
+                [
+                  ".card:nth-child(6) > .two-column.regime-layout > div:nth-child(1) > .table-scroll[role=\"region\"] > table > tbody > tr:nth-child(4) > td:nth-child(5) > .original-source > .source-label"
+                ],
+                [
+                  ".card:nth-child(6) > .two-column.regime-layout > div:nth-child(1) > .table-scroll[role=\"region\"] > table > tbody > tr:nth-child(4) > td:nth-child(5) > .original-source > span[lang=\"\"][dir=\"auto\"]"
+                ],
+                [
+                  ".card:nth-child(6) > .two-column.regime-layout > div:nth-child(1) > .table-scroll[role=\"region\"] > table > tbody > tr:nth-child(5) > td:nth-child(5) > .original-source > .source-label"
+                ],
+                [
+                  ".card:nth-child(6) > .two-column.regime-layout > div:nth-child(1) > .table-scroll[role=\"region\"] > table > tbody > tr:nth-child(5) > td:nth-child(5) > .original-source > span[lang=\"\"][dir=\"auto\"]"
+                ],
+                [
+                  "#\\:r3\\: > table > caption"
+                ],
+                [
+                  "#\\:r3\\: > table > tbody > tr:nth-child(1) > td:nth-child(3) > bdi[translate=\"no\"]"
+                ],
+                [
+                  "#\\:r3\\: > table > tbody > tr:nth-child(2) > td:nth-child(3) > bdi[translate=\"no\"]"
+                ],
+                [
+                  "#\\:r3\\: > table > tbody > tr:nth-child(3) > td:nth-child(3) > bdi[translate=\"no\"]"
+                ],
+                [
+                  "#\\:r3\\: > table > tbody > tr:nth-child(4) > td:nth-child(3) > bdi[translate=\"no\"]"
+                ],
+                [
+                  "#\\:r3\\: > table > tbody > tr:nth-child(5) > td:nth-child(3) > bdi[translate=\"no\"]"
+                ],
+                [
+                  "#\\:r3\\: > table > tbody > tr:nth-child(6) > td:nth-child(3) > bdi[translate=\"no\"]"
+                ],
+                [
+                  "#\\:r3\\: > table > tbody > tr:nth-child(7) > td:nth-child(3) > bdi[translate=\"no\"]"
+                ],
+                [
+                  "#\\:r3\\: > table > tbody > tr:nth-child(8) > td:nth-child(3) > bdi[translate=\"no\"]"
+                ],
+                [
+                  "#\\:r3\\: > table > tbody > tr:nth-child(9) > td:nth-child(3) > bdi[translate=\"no\"]"
+                ],
+                [
+                  "#\\:r3\\: > table > tbody > tr:nth-child(10) > td:nth-child(3) > bdi[translate=\"no\"]"
+                ],
+                [
+                  "#\\:r3\\: > table > tbody > tr:nth-child(11) > td:nth-child(3) > bdi[translate=\"no\"]"
+                ],
+                [
+                  "#\\:r3\\: > table > tbody > tr:nth-child(12) > td:nth-child(3) > bdi[translate=\"no\"]"
+                ],
+                [
+                  "#\\:r3\\: > table > tbody > tr:nth-child(13) > td:nth-child(3) > bdi[translate=\"no\"]"
+                ],
+                [
+                  "#\\:r3\\: > table > tbody > tr:nth-child(14) > td:nth-child(3) > bdi[translate=\"no\"]"
+                ],
+                [
+                  "#\\:r3\\: > table > tbody > tr:nth-child(15) > td:nth-child(3) > bdi[translate=\"no\"]"
+                ],
+                [
+                  "#\\:r3\\: > table > tbody > tr:nth-child(16) > td:nth-child(3) > bdi[translate=\"no\"]"
+                ],
+                [
+                  "#\\:r3\\: > table > tbody > tr:nth-child(17) > td:nth-child(3) > bdi[translate=\"no\"]"
+                ],
+                [
+                  "#\\:r3\\: > table > tbody > tr:nth-child(18) > td:nth-child(3) > bdi[translate=\"no\"]"
+                ],
+                [
+                  "#\\:r3\\: > table > tbody > tr:nth-child(19) > td:nth-child(3) > bdi[translate=\"no\"]"
+                ],
+                [
+                  "#\\:r3\\: > table > tbody > tr:nth-child(20) > td:nth-child(3) > bdi[translate=\"no\"]"
+                ],
+                [
+                  "#\\:r3\\: > table > tbody > tr:nth-child(21) > td:nth-child(3) > bdi[translate=\"no\"]"
+                ],
+                [
+                  "#\\:r3\\: > table > tbody > tr:nth-child(22) > td:nth-child(3) > bdi[translate=\"no\"]"
+                ],
+                [
+                  "#\\:r3\\: > table > tbody > tr:nth-child(23) > td:nth-child(3) > bdi[translate=\"no\"]"
+                ],
+                [
+                  "#\\:r3\\: > table > tbody > tr:nth-child(24) > td:nth-child(3) > bdi[translate=\"no\"]"
+                ],
+                [
+                  "#\\:r3\\: > table > tbody > tr:nth-child(25) > td:nth-child(3) > bdi[translate=\"no\"]"
+                ],
+                [
+                  "#\\:r3\\: > table > tbody > tr:nth-child(26) > td:nth-child(3) > bdi[translate=\"no\"]"
+                ],
+                [
+                  "#\\:r3\\: > table > tbody > tr:nth-child(27) > td:nth-child(3) > bdi[translate=\"no\"]"
+                ],
+                [
+                  "#\\:r3\\: > table > tbody > tr:nth-child(28) > td:nth-child(3) > bdi[translate=\"no\"]"
+                ],
+                [
+                  "#\\:r3\\: > table > tbody > tr:nth-child(29) > td:nth-child(3) > bdi[translate=\"no\"]"
+                ],
+                [
+                  "#\\:r3\\: > table > tbody > tr:nth-child(30) > td:nth-child(3) > bdi[translate=\"no\"]"
+                ],
+                [
+                  "#\\:r3\\: > table > tbody > tr:nth-child(31) > td:nth-child(3) > bdi[translate=\"no\"]"
+                ],
+                [
+                  ".card:nth-child(7) > .two-column.regime-layout > div:nth-child(1) > .table-scroll[role=\"region\"] > table > tbody > tr:nth-child(1) > td:nth-child(5) > .original-source > .source-label"
+                ],
+                [
+                  ".card:nth-child(7) > .two-column.regime-layout > div:nth-child(1) > .table-scroll[role=\"region\"] > table > tbody > tr:nth-child(1) > td:nth-child(5) > .original-source > span[lang=\"\"][dir=\"auto\"]"
+                ],
+                [
+                  ".card:nth-child(7) > .two-column.regime-layout > div:nth-child(1) > .table-scroll[role=\"region\"] > table > tbody > tr:nth-child(2) > td:nth-child(5) > .original-source > .source-label"
+                ],
+                [
+                  ".card:nth-child(7) > .two-column.regime-layout > div:nth-child(1) > .table-scroll[role=\"region\"] > table > tbody > tr:nth-child(2) > td:nth-child(5) > .original-source > span[lang=\"\"][dir=\"auto\"]"
+                ],
+                [
+                  ".card:nth-child(7) > .two-column.regime-layout > div:nth-child(1) > .table-scroll[role=\"region\"] > table > tbody > tr:nth-child(3) > td:nth-child(5) > .original-source > .source-label"
+                ],
+                [
+                  ".card:nth-child(7) > .two-column.regime-layout > div:nth-child(1) > .table-scroll[role=\"region\"] > table > tbody > tr:nth-child(3) > td:nth-child(5) > .original-source > span[lang=\"\"][dir=\"auto\"]"
+                ],
+                [
+                  ".card:nth-child(7) > .two-column.regime-layout > div:nth-child(1) > .table-scroll[role=\"region\"] > table > tbody > tr:nth-child(4) > td:nth-child(5) > .original-source > .source-label"
+                ],
+                [
+                  ".card:nth-child(7) > .two-column.regime-layout > div:nth-child(1) > .table-scroll[role=\"region\"] > table > tbody > tr:nth-child(4) > td:nth-child(5) > .original-source > span[lang=\"\"][dir=\"auto\"]"
+                ],
+                [
+                  ".card:nth-child(7) > .two-column.regime-layout > div:nth-child(1) > .table-scroll[role=\"region\"] > table > tbody > tr:nth-child(5) > td:nth-child(5) > .original-source > .source-label"
+                ],
+                [
+                  ".card:nth-child(7) > .two-column.regime-layout > div:nth-child(1) > .table-scroll[role=\"region\"] > table > tbody > tr:nth-child(5) > td:nth-child(5) > .original-source > span[lang=\"\"][dir=\"auto\"]"
+                ],
+                [
+                  "#\\:r4\\: > table > caption"
+                ],
+                [
+                  "#\\:r4\\: > table > tbody > tr:nth-child(1) > td:nth-child(3) > bdi[translate=\"no\"]"
+                ],
+                [
+                  "#\\:r4\\: > table > tbody > tr:nth-child(2) > td:nth-child(3) > bdi[translate=\"no\"]"
+                ],
+                [
+                  "#\\:r4\\: > table > tbody > tr:nth-child(3) > td:nth-child(3) > bdi[translate=\"no\"]"
+                ],
+                [
+                  "#\\:r4\\: > table > tbody > tr:nth-child(4) > td:nth-child(3) > bdi[translate=\"no\"]"
+                ],
+                [
+                  "#\\:r4\\: > table > tbody > tr:nth-child(5) > td:nth-child(3) > bdi[translate=\"no\"]"
+                ],
+                [
+                  "#\\:r4\\: > table > tbody > tr:nth-child(6) > td:nth-child(3) > bdi[translate=\"no\"]"
+                ],
+                [
+                  "#\\:r4\\: > table > tbody > tr:nth-child(7) > td:nth-child(3) > bdi[translate=\"no\"]"
+                ],
+                [
+                  "#\\:r4\\: > table > tbody > tr:nth-child(8) > td:nth-child(3) > bdi[translate=\"no\"]"
+                ],
+                [
+                  "#\\:r4\\: > table > tbody > tr:nth-child(9) > td:nth-child(3) > bdi[translate=\"no\"]"
+                ],
+                [
+                  "#\\:r4\\: > table > tbody > tr:nth-child(10) > td:nth-child(3) > bdi[translate=\"no\"]"
+                ],
+                [
+                  "#\\:r4\\: > table > tbody > tr:nth-child(11) > td:nth-child(3) > bdi[translate=\"no\"]"
+                ],
+                [
+                  "#\\:r4\\: > table > tbody > tr:nth-child(12) > td:nth-child(3) > bdi[translate=\"no\"]"
+                ],
+                [
+                  "#\\:r4\\: > table > tbody > tr:nth-child(13) > td:nth-child(3) > bdi[translate=\"no\"]"
+                ],
+                [
+                  "#\\:r4\\: > table > tbody > tr:nth-child(14) > td:nth-child(3) > bdi[translate=\"no\"]"
+                ],
+                [
+                  "#\\:r4\\: > table > tbody > tr:nth-child(15) > td:nth-child(3) > bdi[translate=\"no\"]"
+                ],
+                [
+                  "#\\:r4\\: > table > tbody > tr:nth-child(16) > td:nth-child(3) > bdi[translate=\"no\"]"
+                ],
+                [
+                  "#\\:r4\\: > table > tbody > tr:nth-child(17) > td:nth-child(3) > bdi[translate=\"no\"]"
+                ],
+                [
+                  "#\\:r4\\: > table > tbody > tr:nth-child(18) > td:nth-child(3) > bdi[translate=\"no\"]"
+                ],
+                [
+                  "#\\:r4\\: > table > tbody > tr:nth-child(19) > td:nth-child(3) > bdi[translate=\"no\"]"
+                ],
+                [
+                  "#\\:r4\\: > table > tbody > tr:nth-child(20) > td:nth-child(3) > bdi[translate=\"no\"]"
+                ],
+                [
+                  "#\\:r4\\: > table > tbody > tr:nth-child(21) > td:nth-child(3) > bdi[translate=\"no\"]"
+                ],
+                [
+                  "#\\:r4\\: > table > tbody > tr:nth-child(22) > td:nth-child(3) > bdi[translate=\"no\"]"
+                ],
+                [
+                  "#\\:r4\\: > table > tbody > tr:nth-child(23) > td:nth-child(3) > bdi[translate=\"no\"]"
+                ],
+                [
+                  "#\\:r4\\: > table > tbody > tr:nth-child(24) > td:nth-child(3) > bdi[translate=\"no\"]"
+                ],
+                [
+                  "#\\:r4\\: > table > tbody > tr:nth-child(25) > td:nth-child(3) > bdi[translate=\"no\"]"
+                ],
+                [
+                  "#\\:r4\\: > table > tbody > tr:nth-child(26) > td:nth-child(3) > bdi[translate=\"no\"]"
+                ],
+                [
+                  "#\\:r4\\: > table > tbody > tr:nth-child(27) > td:nth-child(3) > bdi[translate=\"no\"]"
+                ],
+                [
+                  "#\\:r4\\: > table > tbody > tr:nth-child(28) > td:nth-child(3) > bdi[translate=\"no\"]"
+                ],
+                [
+                  "#\\:r4\\: > table > tbody > tr:nth-child(29) > td:nth-child(3) > bdi[translate=\"no\"]"
+                ],
+                [
+                  "#\\:r4\\: > table > tbody > tr:nth-child(30) > td:nth-child(3) > bdi[translate=\"no\"]"
+                ],
+                [
+                  "#\\:r4\\: > table > tbody > tr:nth-child(31) > td:nth-child(3) > bdi[translate=\"no\"]"
+                ],
+                [
+                  ".card:nth-child(7) > .two-column.regime-layout > div:nth-child(2) > .research-details > .table-scroll[role=\"region\"] > table > tbody > tr:nth-child(1) > td:nth-child(3)"
+                ],
+                [
+                  ".card:nth-child(7) > .two-column.regime-layout > div:nth-child(2) > .research-details > .table-scroll[role=\"region\"] > table > tbody > tr:nth-child(3) > td:nth-child(3)"
+                ],
+                [
+                  ".card:nth-child(7) > .two-column.regime-layout > div:nth-child(2) > .research-details > .table-scroll[role=\"region\"] > table > tbody > tr:nth-child(5) > td:nth-child(3)"
+                ],
+                [
+                  ".card:nth-child(7) > .two-column.regime-layout > div:nth-child(2) > .research-details > .table-scroll[role=\"region\"] > table > tbody > tr:nth-child(8) > td:nth-child(3)"
+                ],
+                [
+                  ".card:nth-child(7) > .two-column.regime-layout > div:nth-child(2) > .research-details > .table-scroll[role=\"region\"] > table > tbody > tr:nth-child(9) > td:nth-child(3)"
+                ],
+                [
+                  ".card:nth-child(7) > .two-column.regime-layout > div:nth-child(2) > .research-details > .table-scroll[role=\"region\"] > table > tbody > tr:nth-child(13) > td:nth-child(3)"
+                ],
+                [
+                  ".card:nth-child(7) > .two-column.regime-layout > div:nth-child(2) > .research-details > .table-scroll[role=\"region\"] > table > tbody > tr:nth-child(14) > td:nth-child(3)"
+                ],
+                [
+                  ".card:nth-child(7) > .two-column.regime-layout > div:nth-child(2) > .research-details > .table-scroll[role=\"region\"] > table > tbody > tr:nth-child(16) > td:nth-child(3)"
+                ],
+                [
+                  ".card:nth-child(7) > .two-column.regime-layout > div:nth-child(2) > .research-details > .table-scroll[role=\"region\"] > table > tbody > tr:nth-child(17) > td:nth-child(3)"
+                ],
+                [
+                  ".card:nth-child(7) > .two-column.regime-layout > div:nth-child(2) > .research-details > .table-scroll[role=\"region\"] > table > tbody > tr:nth-child(18) > td:nth-child(3)"
+                ],
+                [
+                  ".card:nth-child(7) > .two-column.regime-layout > div:nth-child(2) > .research-details > .table-scroll[role=\"region\"] > table > tbody > tr:nth-child(20) > td:nth-child(3)"
+                ],
+                [
+                  ".card:nth-child(7) > .two-column.regime-layout > div:nth-child(2) > .research-details > .table-scroll[role=\"region\"] > table > tbody > tr:nth-child(21) > td:nth-child(3)"
+                ],
+                [
+                  ".card:nth-child(7) > .two-column.regime-layout > div:nth-child(2) > .research-details > .table-scroll[role=\"region\"] > table > tbody > tr:nth-child(27) > td:nth-child(3)"
+                ],
+                [
+                  ".card:nth-child(7) > .two-column.regime-layout > div:nth-child(2) > .research-details > .table-scroll[role=\"region\"] > table > tbody > tr:nth-child(28) > td:nth-child(3)"
+                ],
+                [
+                  ".card:nth-child(7) > .two-column.regime-layout > div:nth-child(2) > .research-details > .table-scroll[role=\"region\"] > table > tbody > tr:nth-child(31) > td:nth-child(3)"
+                ],
+                [
+                  "div[aria-label=\"مؤشرات حالة السوق لـ⁦crypto⁩\"] > table > tbody > tr:nth-child(1) > td:nth-child(5) > .original-source > .source-label"
+                ],
+                [
+                  "div[aria-label=\"مؤشرات حالة السوق لـ⁦crypto⁩\"] > table > tbody > tr:nth-child(1) > td:nth-child(5) > .original-source > span[lang=\"\"][dir=\"auto\"]"
+                ],
+                [
+                  "div[aria-label=\"مؤشرات حالة السوق لـ⁦crypto⁩\"] > table > tbody > tr:nth-child(2) > td:nth-child(5) > .original-source > .source-label"
+                ],
+                [
+                  "div[aria-label=\"مؤشرات حالة السوق لـ⁦crypto⁩\"] > table > tbody > tr:nth-child(2) > td:nth-child(5) > .original-source > span[lang=\"\"][dir=\"auto\"]"
+                ],
+                [
+                  "div[aria-label=\"مؤشرات حالة السوق لـ⁦crypto⁩\"] > table > tbody > tr:nth-child(3) > td:nth-child(5) > .original-source > .source-label"
+                ],
+                [
+                  "div[aria-label=\"مؤشرات حالة السوق لـ⁦crypto⁩\"] > table > tbody > tr:nth-child(3) > td:nth-child(5) > .original-source > span[lang=\"\"][dir=\"auto\"]"
+                ],
+                [
+                  "div[aria-label=\"مؤشرات حالة السوق لـ⁦crypto⁩\"] > table > tbody > tr:nth-child(4) > td:nth-child(5) > .original-source > .source-label"
+                ],
+                [
+                  "div[aria-label=\"مؤشرات حالة السوق لـ⁦crypto⁩\"] > table > tbody > tr:nth-child(4) > td:nth-child(5) > .original-source > span[lang=\"\"][dir=\"auto\"]"
+                ],
+                [
+                  "div[aria-label=\"مؤشرات حالة السوق لـ⁦crypto⁩\"] > table > tbody > tr:nth-child(5) > td:nth-child(5) > .original-source > .source-label"
+                ],
+                [
+                  "div[aria-label=\"مؤشرات حالة السوق لـ⁦crypto⁩\"] > table > tbody > tr:nth-child(5) > td:nth-child(5) > .original-source > span[lang=\"\"][dir=\"auto\"]"
+                ],
+                [
+                  "#\\:r5\\: > table > caption"
+                ],
+                [
+                  "#\\:r5\\: > table > tbody > tr:nth-child(1) > td:nth-child(3) > bdi[translate=\"no\"]"
+                ],
+                [
+                  "#\\:r5\\: > table > tbody > tr:nth-child(2) > td:nth-child(3) > bdi[translate=\"no\"]"
+                ],
+                [
+                  "#\\:r5\\: > table > tbody > tr:nth-child(3) > td:nth-child(3) > bdi[translate=\"no\"]"
+                ],
+                [
+                  "#\\:r5\\: > table > tbody > tr:nth-child(4) > td:nth-child(3) > bdi[translate=\"no\"]"
+                ],
+                [
+                  "#\\:r5\\: > table > tbody > tr:nth-child(5) > td:nth-child(3) > bdi[translate=\"no\"]"
+                ],
+                [
+                  "#\\:r5\\: > table > tbody > tr:nth-child(6) > td:nth-child(3) > bdi[translate=\"no\"]"
+                ],
+                [
+                  "#\\:r5\\: > table > tbody > tr:nth-child(7) > td:nth-child(3) > bdi[translate=\"no\"]"
+                ],
+                [
+                  "#\\:r5\\: > table > tbody > tr:nth-child(8) > td:nth-child(3) > bdi[translate=\"no\"]"
+                ],
+                [
+                  "#\\:r5\\: > table > tbody > tr:nth-child(9) > td:nth-child(3) > bdi[translate=\"no\"]"
+                ],
+                [
+                  "#\\:r5\\: > table > tbody > tr:nth-child(10) > td:nth-child(3) > bdi[translate=\"no\"]"
+                ],
+                [
+                  "#\\:r5\\: > table > tbody > tr:nth-child(11) > td:nth-child(3) > bdi[translate=\"no\"]"
+                ],
+                [
+                  "#\\:r5\\: > table > tbody > tr:nth-child(12) > td:nth-child(3) > bdi[translate=\"no\"]"
+                ],
+                [
+                  "#\\:r5\\: > table > tbody > tr:nth-child(13) > td:nth-child(3) > bdi[translate=\"no\"]"
+                ],
+                [
+                  "#\\:r5\\: > table > tbody > tr:nth-child(14) > td:nth-child(3) > bdi[translate=\"no\"]"
+                ],
+                [
+                  "#\\:r5\\: > table > tbody > tr:nth-child(15) > td:nth-child(3) > bdi[translate=\"no\"]"
+                ],
+                [
+                  "#\\:r5\\: > table > tbody > tr:nth-child(16) > td:nth-child(3) > bdi[translate=\"no\"]"
+                ],
+                [
+                  "#\\:r5\\: > table > tbody > tr:nth-child(17) > td:nth-child(3) > bdi[translate=\"no\"]"
+                ],
+                [
+                  "#\\:r5\\: > table > tbody > tr:nth-child(18) > td:nth-child(3) > bdi[translate=\"no\"]"
+                ],
+                [
+                  "#\\:r5\\: > table > tbody > tr:nth-child(19) > td:nth-child(3) > bdi[translate=\"no\"]"
+                ],
+                [
+                  "#\\:r5\\: > table > tbody > tr:nth-child(20) > td:nth-child(3) > bdi[translate=\"no\"]"
+                ],
+                [
+                  "#\\:r5\\: > table > tbody > tr:nth-child(21) > td:nth-child(3) > bdi[translate=\"no\"]"
+                ],
+                [
+                  "#\\:r5\\: > table > tbody > tr:nth-child(22) > td:nth-child(3) > bdi[translate=\"no\"]"
+                ],
+                [
+                  "#\\:r5\\: > table > tbody > tr:nth-child(23) > td:nth-child(3) > bdi[translate=\"no\"]"
+                ],
+                [
+                  "#\\:r5\\: > table > tbody > tr:nth-child(24) > td:nth-child(3) > bdi[translate=\"no\"]"
+                ],
+                [
+                  "#\\:r5\\: > table > tbody > tr:nth-child(25) > td:nth-child(3) > bdi[translate=\"no\"]"
+                ],
+                [
+                  "#\\:r5\\: > table > tbody > tr:nth-child(26) > td:nth-child(3) > bdi[translate=\"no\"]"
+                ],
+                [
+                  "#\\:r5\\: > table > tbody > tr:nth-child(27) > td:nth-child(3) > bdi[translate=\"no\"]"
+                ],
+                [
+                  "#\\:r5\\: > table > tbody > tr:nth-child(28) > td:nth-child(3) > bdi[translate=\"no\"]"
+                ],
+                [
+                  "#\\:r5\\: > table > tbody > tr:nth-child(29) > td:nth-child(3) > bdi[translate=\"no\"]"
+                ],
+                [
+                  "#\\:r5\\: > table > tbody > tr:nth-child(30) > td:nth-child(3) > bdi[translate=\"no\"]"
+                ],
+                [
+                  "#\\:r5\\: > table > tbody > tr:nth-child(31) > td:nth-child(3) > bdi[translate=\"no\"]"
+                ],
+                [
+                  ".card:nth-child(8) > .two-column.regime-layout > div:nth-child(2) > .research-details > .table-scroll[role=\"region\"] > table > tbody > tr:nth-child(1) > td:nth-child(3)"
+                ],
+                [
+                  ".card:nth-child(8) > .two-column.regime-layout > div:nth-child(2) > .research-details > .table-scroll[role=\"region\"] > table > tbody > tr:nth-child(2) > td:nth-child(3)"
+                ],
+                [
+                  ".card:nth-child(8) > .two-column.regime-layout > div:nth-child(2) > .research-details > .table-scroll[role=\"region\"] > table > tbody > tr:nth-child(4) > td:nth-child(3)"
+                ],
+                [
+                  ".card:nth-child(8) > .two-column.regime-layout > div:nth-child(2) > .research-details > .table-scroll[role=\"region\"] > table > tbody > tr:nth-child(6) > td:nth-child(3)"
+                ],
+                [
+                  ".card:nth-child(8) > .two-column.regime-layout > div:nth-child(2) > .research-details > .table-scroll[role=\"region\"] > table > tbody > tr:nth-child(7) > td:nth-child(3)"
+                ],
+                [
+                  ".card:nth-child(8) > .two-column.regime-layout > div:nth-child(2) > .research-details > .table-scroll[role=\"region\"] > table > tbody > tr:nth-child(10) > td:nth-child(3)"
+                ],
+                [
+                  ".card:nth-child(8) > .two-column.regime-layout > div:nth-child(2) > .research-details > .table-scroll[role=\"region\"] > table > tbody > tr:nth-child(11) > td:nth-child(3)"
+                ],
+                [
+                  ".card:nth-child(8) > .two-column.regime-layout > div:nth-child(2) > .research-details > .table-scroll[role=\"region\"] > table > tbody > tr:nth-child(13) > td:nth-child(3)"
+                ],
+                [
+                  ".card:nth-child(8) > .two-column.regime-layout > div:nth-child(2) > .research-details > .table-scroll[role=\"region\"] > table > tbody > tr:nth-child(14) > td:nth-child(3)"
+                ],
+                [
+                  ".card:nth-child(8) > .two-column.regime-layout > div:nth-child(2) > .research-details > .table-scroll[role=\"region\"] > table > tbody > tr:nth-child(15) > td:nth-child(3)"
+                ],
+                [
+                  ".card:nth-child(8) > .two-column.regime-layout > div:nth-child(2) > .research-details > .table-scroll[role=\"region\"] > table > tbody > tr:nth-child(16) > td:nth-child(3)"
+                ],
+                [
+                  ".card:nth-child(8) > .two-column.regime-layout > div:nth-child(2) > .research-details > .table-scroll[role=\"region\"] > table > tbody > tr:nth-child(17) > td:nth-child(3)"
+                ],
+                [
+                  ".card:nth-child(8) > .two-column.regime-layout > div:nth-child(2) > .research-details > .table-scroll[role=\"region\"] > table > tbody > tr:nth-child(18) > td:nth-child(3)"
+                ],
+                [
+                  ".card:nth-child(8) > .two-column.regime-layout > div:nth-child(2) > .research-details > .table-scroll[role=\"region\"] > table > tbody > tr:nth-child(19) > td:nth-child(3)"
+                ],
+                [
+                  ".card:nth-child(8) > .two-column.regime-layout > div:nth-child(2) > .research-details > .table-scroll[role=\"region\"] > table > tbody > tr:nth-child(21) > td:nth-child(3)"
+                ],
+                [
+                  ".card:nth-child(8) > .two-column.regime-layout > div:nth-child(2) > .research-details > .table-scroll[role=\"region\"] > table > tbody > tr:nth-child(23) > td:nth-child(3)"
+                ],
+                [
+                  ".card:nth-child(8) > .two-column.regime-layout > div:nth-child(2) > .research-details > .table-scroll[role=\"region\"] > table > tbody > tr:nth-child(24) > td:nth-child(3)"
+                ],
+                [
+                  ".card:nth-child(8) > .two-column.regime-layout > div:nth-child(2) > .research-details > .table-scroll[role=\"region\"] > table > tbody > tr:nth-child(25) > td:nth-child(3)"
+                ],
+                [
+                  ".card:nth-child(8) > .two-column.regime-layout > div:nth-child(2) > .research-details > .table-scroll[role=\"region\"] > table > tbody > tr:nth-child(26) > td:nth-child(3)"
+                ],
+                [
+                  ".card:nth-child(8) > .two-column.regime-layout > div:nth-child(2) > .research-details > .table-scroll[role=\"region\"] > table > tbody > tr:nth-child(27) > td:nth-child(3)"
+                ],
+                [
+                  ".card:nth-child(8) > .two-column.regime-layout > div:nth-child(2) > .research-details > .table-scroll[role=\"region\"] > table > tbody > tr:nth-child(28) > td:nth-child(3)"
+                ],
+                [
+                  ".card:nth-child(8) > .two-column.regime-layout > div:nth-child(2) > .research-details > .table-scroll[role=\"region\"] > table > tbody > tr:nth-child(31) > td:nth-child(3)"
+                ]
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "locale": "ar",
+        "name": "regime/pro/axe",
+        "status": "PASS",
+        "evidence": {
+          "version": "4.14.0",
+          "url": "http://127.0.0.1:5256/regime",
+          "timestamp": "2026-10-27T09:09:02.666Z",
+          "rawSha256": "319c0a957bf35c18131f9e832f7237e1812036ef8e7415728f4b43046966db32",
+          "violations": [],
+          "incomplete": [
+            {
+              "id": "color-contrast",
+              "impact": "serious",
+              "help": "Elements must meet minimum color contrast ratio thresholds",
+              "targets": [
+                [
+                  ".brand-mark"
+                ],
+                [
+                  ".mode-banner > span[aria-hidden=\"true\"]"
+                ],
+                [
+                  ".card:nth-child(5) > .two-column.regime-layout > div:nth-child(1) > .table-scroll[role=\"region\"] > table > tbody > tr:nth-child(1) > td:nth-child(5) > .original-source > .source-label"
+                ],
+                [
+                  ".card:nth-child(5) > .two-column.regime-layout > div:nth-child(1) > .table-scroll[role=\"region\"] > table > tbody > tr:nth-child(1) > td:nth-child(5) > .original-source > span[lang=\"\"][dir=\"auto\"]"
+                ],
+                [
+                  ".card:nth-child(5) > .two-column.regime-layout > div:nth-child(1) > .table-scroll[role=\"region\"] > table > tbody > tr:nth-child(2) > td:nth-child(5) > .original-source > .source-label"
+                ],
+                [
+                  ".card:nth-child(5) > .two-column.regime-layout > div:nth-child(1) > .table-scroll[role=\"region\"] > table > tbody > tr:nth-child(2) > td:nth-child(5) > .original-source > span[lang=\"\"][dir=\"auto\"]"
+                ],
+                [
+                  ".card:nth-child(5) > .two-column.regime-layout > div:nth-child(1) > .table-scroll[role=\"region\"] > table > tbody > tr:nth-child(3) > td:nth-child(5) > .original-source > .source-label"
+                ],
+                [
+                  ".card:nth-child(5) > .two-column.regime-layout > div:nth-child(1) > .table-scroll[role=\"region\"] > table > tbody > tr:nth-child(3) > td:nth-child(5) > .original-source > span[lang=\"\"][dir=\"auto\"]"
+                ],
+                [
+                  ".card:nth-child(5) > .two-column.regime-layout > div:nth-child(1) > .table-scroll[role=\"region\"] > table > tbody > tr:nth-child(4) > td:nth-child(5) > .original-source > .source-label"
+                ],
+                [
+                  ".card:nth-child(5) > .two-column.regime-layout > div:nth-child(1) > .table-scroll[role=\"region\"] > table > tbody > tr:nth-child(4) > td:nth-child(5) > .original-source > span[lang=\"\"][dir=\"auto\"]"
+                ],
+                [
+                  ".card:nth-child(5) > .two-column.regime-layout > div:nth-child(1) > .table-scroll[role=\"region\"] > table > tbody > tr:nth-child(5) > td:nth-child(5) > .original-source > .source-label"
+                ],
+                [
+                  ".card:nth-child(5) > .two-column.regime-layout > div:nth-child(1) > .table-scroll[role=\"region\"] > table > tbody > tr:nth-child(5) > td:nth-child(5) > .original-source > span[lang=\"\"][dir=\"auto\"]"
+                ],
+                [
+                  "#\\:r3\\: > table > caption"
+                ],
+                [
+                  "#\\:r3\\: > table > tbody > tr:nth-child(1) > td:nth-child(3) > bdi[translate=\"no\"]"
+                ],
+                [
+                  "#\\:r3\\: > table > tbody > tr:nth-child(2) > td:nth-child(3) > bdi[translate=\"no\"]"
+                ],
+                [
+                  "#\\:r3\\: > table > tbody > tr:nth-child(3) > td:nth-child(3) > bdi[translate=\"no\"]"
+                ],
+                [
+                  "#\\:r3\\: > table > tbody > tr:nth-child(4) > td:nth-child(3) > bdi[translate=\"no\"]"
+                ],
+                [
+                  "#\\:r3\\: > table > tbody > tr:nth-child(5) > td:nth-child(3) > bdi[translate=\"no\"]"
+                ],
+                [
+                  "#\\:r3\\: > table > tbody > tr:nth-child(6) > td:nth-child(3) > bdi[translate=\"no\"]"
+                ],
+                [
+                  "#\\:r3\\: > table > tbody > tr:nth-child(7) > td:nth-child(3) > bdi[translate=\"no\"]"
+                ],
+                [
+                  "#\\:r3\\: > table > tbody > tr:nth-child(8) > td:nth-child(3) > bdi[translate=\"no\"]"
+                ],
+                [
+                  "#\\:r3\\: > table > tbody > tr:nth-child(9) > td:nth-child(3) > bdi[translate=\"no\"]"
+                ],
+                [
+                  "#\\:r3\\: > table > tbody > tr:nth-child(10) > td:nth-child(3) > bdi[translate=\"no\"]"
+                ],
+                [
+                  "#\\:r3\\: > table > tbody > tr:nth-child(11) > td:nth-child(3) > bdi[translate=\"no\"]"
+                ],
+                [
+                  "#\\:r3\\: > table > tbody > tr:nth-child(12) > td:nth-child(3) > bdi[translate=\"no\"]"
+                ],
+                [
+                  "#\\:r3\\: > table > tbody > tr:nth-child(13) > td:nth-child(3) > bdi[translate=\"no\"]"
+                ],
+                [
+                  "#\\:r3\\: > table > tbody > tr:nth-child(14) > td:nth-child(3) > bdi[translate=\"no\"]"
+                ],
+                [
+                  "#\\:r3\\: > table > tbody > tr:nth-child(15) > td:nth-child(3) > bdi[translate=\"no\"]"
+                ],
+                [
+                  "#\\:r3\\: > table > tbody > tr:nth-child(16) > td:nth-child(3) > bdi[translate=\"no\"]"
+                ],
+                [
+                  "#\\:r3\\: > table > tbody > tr:nth-child(17) > td:nth-child(3) > bdi[translate=\"no\"]"
+                ],
+                [
+                  "#\\:r3\\: > table > tbody > tr:nth-child(18) > td:nth-child(3) > bdi[translate=\"no\"]"
+                ],
+                [
+                  "#\\:r3\\: > table > tbody > tr:nth-child(19) > td:nth-child(3) > bdi[translate=\"no\"]"
+                ],
+                [
+                  "#\\:r3\\: > table > tbody > tr:nth-child(20) > td:nth-child(3) > bdi[translate=\"no\"]"
+                ],
+                [
+                  "#\\:r3\\: > table > tbody > tr:nth-child(21) > td:nth-child(3) > bdi[translate=\"no\"]"
+                ],
+                [
+                  "#\\:r3\\: > table > tbody > tr:nth-child(22) > td:nth-child(3) > bdi[translate=\"no\"]"
+                ],
+                [
+                  "#\\:r3\\: > table > tbody > tr:nth-child(23) > td:nth-child(3) > bdi[translate=\"no\"]"
+                ],
+                [
+                  "#\\:r3\\: > table > tbody > tr:nth-child(24) > td:nth-child(3) > bdi[translate=\"no\"]"
+                ],
+                [
+                  "#\\:r3\\: > table > tbody > tr:nth-child(25) > td:nth-child(3) > bdi[translate=\"no\"]"
+                ],
+                [
+                  "#\\:r3\\: > table > tbody > tr:nth-child(26) > td:nth-child(3) > bdi[translate=\"no\"]"
+                ],
+                [
+                  "#\\:r3\\: > table > tbody > tr:nth-child(27) > td:nth-child(3) > bdi[translate=\"no\"]"
+                ],
+                [
+                  "#\\:r3\\: > table > tbody > tr:nth-child(28) > td:nth-child(3) > bdi[translate=\"no\"]"
+                ],
+                [
+                  "#\\:r3\\: > table > tbody > tr:nth-child(29) > td:nth-child(3) > bdi[translate=\"no\"]"
+                ],
+                [
+                  "#\\:r3\\: > table > tbody > tr:nth-child(30) > td:nth-child(3) > bdi[translate=\"no\"]"
+                ],
+                [
+                  "#\\:r3\\: > table > tbody > tr:nth-child(31) > td:nth-child(3) > bdi[translate=\"no\"]"
+                ],
+                [
+                  ".card:nth-child(6) > .two-column.regime-layout > div:nth-child(1) > .table-scroll[role=\"region\"] > table > tbody > tr:nth-child(1) > td:nth-child(5) > .original-source > .source-label"
+                ],
+                [
+                  ".card:nth-child(6) > .two-column.regime-layout > div:nth-child(1) > .table-scroll[role=\"region\"] > table > tbody > tr:nth-child(1) > td:nth-child(5) > .original-source > span[lang=\"\"][dir=\"auto\"]"
+                ],
+                [
+                  ".card:nth-child(6) > .two-column.regime-layout > div:nth-child(1) > .table-scroll[role=\"region\"] > table > tbody > tr:nth-child(2) > td:nth-child(5) > .original-source > .source-label"
+                ],
+                [
+                  ".card:nth-child(6) > .two-column.regime-layout > div:nth-child(1) > .table-scroll[role=\"region\"] > table > tbody > tr:nth-child(2) > td:nth-child(5) > .original-source > span[lang=\"\"][dir=\"auto\"]"
+                ],
+                [
+                  ".card:nth-child(6) > .two-column.regime-layout > div:nth-child(1) > .table-scroll[role=\"region\"] > table > tbody > tr:nth-child(3) > td:nth-child(5) > .original-source > .source-label"
+                ],
+                [
+                  ".card:nth-child(6) > .two-column.regime-layout > div:nth-child(1) > .table-scroll[role=\"region\"] > table > tbody > tr:nth-child(3) > td:nth-child(5) > .original-source > span[lang=\"\"][dir=\"auto\"]"
+                ],
+                [
+                  ".card:nth-child(6) > .two-column.regime-layout > div:nth-child(1) > .table-scroll[role=\"region\"] > table > tbody > tr:nth-child(4) > td:nth-child(5) > .original-source > .source-label"
+                ],
+                [
+                  ".card:nth-child(6) > .two-column.regime-layout > div:nth-child(1) > .table-scroll[role=\"region\"] > table > tbody > tr:nth-child(4) > td:nth-child(5) > .original-source > span[lang=\"\"][dir=\"auto\"]"
+                ],
+                [
+                  ".card:nth-child(6) > .two-column.regime-layout > div:nth-child(1) > .table-scroll[role=\"region\"] > table > tbody > tr:nth-child(5) > td:nth-child(5) > .original-source > .source-label"
+                ],
+                [
+                  ".card:nth-child(6) > .two-column.regime-layout > div:nth-child(1) > .table-scroll[role=\"region\"] > table > tbody > tr:nth-child(5) > td:nth-child(5) > .original-source > span[lang=\"\"][dir=\"auto\"]"
+                ],
+                [
+                  "#\\:r4\\: > table > caption"
+                ],
+                [
+                  "#\\:r4\\: > table > tbody > tr:nth-child(1) > td:nth-child(3) > bdi[translate=\"no\"]"
+                ],
+                [
+                  "#\\:r4\\: > table > tbody > tr:nth-child(2) > td:nth-child(3) > bdi[translate=\"no\"]"
+                ],
+                [
+                  "#\\:r4\\: > table > tbody > tr:nth-child(3) > td:nth-child(3) > bdi[translate=\"no\"]"
+                ],
+                [
+                  "#\\:r4\\: > table > tbody > tr:nth-child(4) > td:nth-child(3) > bdi[translate=\"no\"]"
+                ],
+                [
+                  "#\\:r4\\: > table > tbody > tr:nth-child(5) > td:nth-child(3) > bdi[translate=\"no\"]"
+                ],
+                [
+                  "#\\:r4\\: > table > tbody > tr:nth-child(6) > td:nth-child(3) > bdi[translate=\"no\"]"
+                ],
+                [
+                  "#\\:r4\\: > table > tbody > tr:nth-child(7) > td:nth-child(3) > bdi[translate=\"no\"]"
+                ],
+                [
+                  "#\\:r4\\: > table > tbody > tr:nth-child(8) > td:nth-child(3) > bdi[translate=\"no\"]"
+                ],
+                [
+                  "#\\:r4\\: > table > tbody > tr:nth-child(9) > td:nth-child(3) > bdi[translate=\"no\"]"
+                ],
+                [
+                  "#\\:r4\\: > table > tbody > tr:nth-child(10) > td:nth-child(3) > bdi[translate=\"no\"]"
+                ],
+                [
+                  "#\\:r4\\: > table > tbody > tr:nth-child(11) > td:nth-child(3) > bdi[translate=\"no\"]"
+                ],
+                [
+                  "#\\:r4\\: > table > tbody > tr:nth-child(12) > td:nth-child(3) > bdi[translate=\"no\"]"
+                ],
+                [
+                  "#\\:r4\\: > table > tbody > tr:nth-child(13) > td:nth-child(3) > bdi[translate=\"no\"]"
+                ],
+                [
+                  "#\\:r4\\: > table > tbody > tr:nth-child(14) > td:nth-child(3) > bdi[translate=\"no\"]"
+                ],
+                [
+                  "#\\:r4\\: > table > tbody > tr:nth-child(15) > td:nth-child(3) > bdi[translate=\"no\"]"
+                ],
+                [
+                  "#\\:r4\\: > table > tbody > tr:nth-child(16) > td:nth-child(3) > bdi[translate=\"no\"]"
+                ],
+                [
+                  "#\\:r4\\: > table > tbody > tr:nth-child(17) > td:nth-child(3) > bdi[translate=\"no\"]"
+                ],
+                [
+                  "#\\:r4\\: > table > tbody > tr:nth-child(18) > td:nth-child(3) > bdi[translate=\"no\"]"
+                ],
+                [
+                  "#\\:r4\\: > table > tbody > tr:nth-child(19) > td:nth-child(3) > bdi[translate=\"no\"]"
+                ],
+                [
+                  "#\\:r4\\: > table > tbody > tr:nth-child(20) > td:nth-child(3) > bdi[translate=\"no\"]"
+                ],
+                [
+                  "#\\:r4\\: > table > tbody > tr:nth-child(21) > td:nth-child(3) > bdi[translate=\"no\"]"
+                ],
+                [
+                  "#\\:r4\\: > table > tbody > tr:nth-child(22) > td:nth-child(3) > bdi[translate=\"no\"]"
+                ],
+                [
+                  "#\\:r4\\: > table > tbody > tr:nth-child(23) > td:nth-child(3) > bdi[translate=\"no\"]"
+                ],
+                [
+                  "#\\:r4\\: > table > tbody > tr:nth-child(24) > td:nth-child(3) > bdi[translate=\"no\"]"
+                ],
+                [
+                  "#\\:r4\\: > table > tbody > tr:nth-child(25) > td:nth-child(3) > bdi[translate=\"no\"]"
+                ],
+                [
+                  "#\\:r4\\: > table > tbody > tr:nth-child(26) > td:nth-child(3) > bdi[translate=\"no\"]"
+                ],
+                [
+                  "#\\:r4\\: > table > tbody > tr:nth-child(27) > td:nth-child(3) > bdi[translate=\"no\"]"
+                ],
+                [
+                  "#\\:r4\\: > table > tbody > tr:nth-child(28) > td:nth-child(3) > bdi[translate=\"no\"]"
+                ],
+                [
+                  "#\\:r4\\: > table > tbody > tr:nth-child(29) > td:nth-child(3) > bdi[translate=\"no\"]"
+                ],
+                [
+                  "#\\:r4\\: > table > tbody > tr:nth-child(30) > td:nth-child(3) > bdi[translate=\"no\"]"
+                ],
+                [
+                  "#\\:r4\\: > table > tbody > tr:nth-child(31) > td:nth-child(3) > bdi[translate=\"no\"]"
+                ],
+                [
+                  ".card:nth-child(6) > .two-column.regime-layout > div:nth-child(2) > .research-details > .table-scroll[role=\"region\"] > table > tbody > tr:nth-child(1) > td:nth-child(3)"
+                ],
+                [
+                  ".card:nth-child(6) > .two-column.regime-layout > div:nth-child(2) > .research-details > .table-scroll[role=\"region\"] > table > tbody > tr:nth-child(3) > td:nth-child(3)"
+                ],
+                [
+                  ".card:nth-child(6) > .two-column.regime-layout > div:nth-child(2) > .research-details > .table-scroll[role=\"region\"] > table > tbody > tr:nth-child(5) > td:nth-child(3)"
+                ],
+                [
+                  ".card:nth-child(6) > .two-column.regime-layout > div:nth-child(2) > .research-details > .table-scroll[role=\"region\"] > table > tbody > tr:nth-child(8) > td:nth-child(3)"
+                ],
+                [
+                  ".card:nth-child(6) > .two-column.regime-layout > div:nth-child(2) > .research-details > .table-scroll[role=\"region\"] > table > tbody > tr:nth-child(9) > td:nth-child(3)"
+                ],
+                [
+                  ".card:nth-child(6) > .two-column.regime-layout > div:nth-child(2) > .research-details > .table-scroll[role=\"region\"] > table > tbody > tr:nth-child(13) > td:nth-child(3)"
+                ],
+                [
+                  ".card:nth-child(6) > .two-column.regime-layout > div:nth-child(2) > .research-details > .table-scroll[role=\"region\"] > table > tbody > tr:nth-child(14) > td:nth-child(3)"
+                ],
+                [
+                  ".card:nth-child(6) > .two-column.regime-layout > div:nth-child(2) > .research-details > .table-scroll[role=\"region\"] > table > tbody > tr:nth-child(16) > td:nth-child(3)"
+                ],
+                [
+                  ".card:nth-child(6) > .two-column.regime-layout > div:nth-child(2) > .research-details > .table-scroll[role=\"region\"] > table > tbody > tr:nth-child(17) > td:nth-child(3)"
+                ],
+                [
+                  ".card:nth-child(6) > .two-column.regime-layout > div:nth-child(2) > .research-details > .table-scroll[role=\"region\"] > table > tbody > tr:nth-child(18) > td:nth-child(3)"
+                ],
+                [
+                  ".card:nth-child(6) > .two-column.regime-layout > div:nth-child(2) > .research-details > .table-scroll[role=\"region\"] > table > tbody > tr:nth-child(20) > td:nth-child(3)"
+                ],
+                [
+                  ".card:nth-child(6) > .two-column.regime-layout > div:nth-child(2) > .research-details > .table-scroll[role=\"region\"] > table > tbody > tr:nth-child(21) > td:nth-child(3)"
+                ],
+                [
+                  ".card:nth-child(6) > .two-column.regime-layout > div:nth-child(2) > .research-details > .table-scroll[role=\"region\"] > table > tbody > tr:nth-child(27) > td:nth-child(3)"
+                ],
+                [
+                  ".card:nth-child(6) > .two-column.regime-layout > div:nth-child(2) > .research-details > .table-scroll[role=\"region\"] > table > tbody > tr:nth-child(28) > td:nth-child(3)"
+                ],
+                [
+                  ".card:nth-child(6) > .two-column.regime-layout > div:nth-child(2) > .research-details > .table-scroll[role=\"region\"] > table > tbody > tr:nth-child(31) > td:nth-child(3)"
+                ],
+                [
+                  "div[aria-label=\"مؤشرات حالة السوق لـ⁦crypto⁩\"] > table > tbody > tr:nth-child(1) > td:nth-child(5) > .original-source > .source-label"
+                ],
+                [
+                  "div[aria-label=\"مؤشرات حالة السوق لـ⁦crypto⁩\"] > table > tbody > tr:nth-child(1) > td:nth-child(5) > .original-source > span[lang=\"\"][dir=\"auto\"]"
+                ],
+                [
+                  "div[aria-label=\"مؤشرات حالة السوق لـ⁦crypto⁩\"] > table > tbody > tr:nth-child(2) > td:nth-child(5) > .original-source > .source-label"
+                ],
+                [
+                  "div[aria-label=\"مؤشرات حالة السوق لـ⁦crypto⁩\"] > table > tbody > tr:nth-child(2) > td:nth-child(5) > .original-source > span[lang=\"\"][dir=\"auto\"]"
+                ],
+                [
+                  "div[aria-label=\"مؤشرات حالة السوق لـ⁦crypto⁩\"] > table > tbody > tr:nth-child(3) > td:nth-child(5) > .original-source > .source-label"
+                ],
+                [
+                  "div[aria-label=\"مؤشرات حالة السوق لـ⁦crypto⁩\"] > table > tbody > tr:nth-child(3) > td:nth-child(5) > .original-source > span[lang=\"\"][dir=\"auto\"]"
+                ],
+                [
+                  "div[aria-label=\"مؤشرات حالة السوق لـ⁦crypto⁩\"] > table > tbody > tr:nth-child(4) > td:nth-child(5) > .original-source > .source-label"
+                ],
+                [
+                  "div[aria-label=\"مؤشرات حالة السوق لـ⁦crypto⁩\"] > table > tbody > tr:nth-child(4) > td:nth-child(5) > .original-source > span[lang=\"\"][dir=\"auto\"]"
+                ],
+                [
+                  "div[aria-label=\"مؤشرات حالة السوق لـ⁦crypto⁩\"] > table > tbody > tr:nth-child(5) > td:nth-child(5) > .original-source > .source-label"
+                ],
+                [
+                  "div[aria-label=\"مؤشرات حالة السوق لـ⁦crypto⁩\"] > table > tbody > tr:nth-child(5) > td:nth-child(5) > .original-source > span[lang=\"\"][dir=\"auto\"]"
+                ],
+                [
+                  "#\\:r5\\: > table > caption"
+                ],
+                [
+                  "#\\:r5\\: > table > tbody > tr:nth-child(1) > td:nth-child(3) > bdi[translate=\"no\"]"
+                ],
+                [
+                  "#\\:r5\\: > table > tbody > tr:nth-child(2) > td:nth-child(3) > bdi[translate=\"no\"]"
+                ],
+                [
+                  "#\\:r5\\: > table > tbody > tr:nth-child(3) > td:nth-child(3) > bdi[translate=\"no\"]"
+                ],
+                [
+                  "#\\:r5\\: > table > tbody > tr:nth-child(4) > td:nth-child(3) > bdi[translate=\"no\"]"
+                ],
+                [
+                  "#\\:r5\\: > table > tbody > tr:nth-child(5) > td:nth-child(3) > bdi[translate=\"no\"]"
+                ],
+                [
+                  "#\\:r5\\: > table > tbody > tr:nth-child(6) > td:nth-child(3) > bdi[translate=\"no\"]"
+                ],
+                [
+                  "#\\:r5\\: > table > tbody > tr:nth-child(7) > td:nth-child(3) > bdi[translate=\"no\"]"
+                ],
+                [
+                  "#\\:r5\\: > table > tbody > tr:nth-child(8) > td:nth-child(3) > bdi[translate=\"no\"]"
+                ],
+                [
+                  "#\\:r5\\: > table > tbody > tr:nth-child(9) > td:nth-child(3) > bdi[translate=\"no\"]"
+                ],
+                [
+                  "#\\:r5\\: > table > tbody > tr:nth-child(10) > td:nth-child(3) > bdi[translate=\"no\"]"
+                ],
+                [
+                  "#\\:r5\\: > table > tbody > tr:nth-child(11) > td:nth-child(3) > bdi[translate=\"no\"]"
+                ],
+                [
+                  "#\\:r5\\: > table > tbody > tr:nth-child(12) > td:nth-child(3) > bdi[translate=\"no\"]"
+                ],
+                [
+                  "#\\:r5\\: > table > tbody > tr:nth-child(13) > td:nth-child(3) > bdi[translate=\"no\"]"
+                ],
+                [
+                  "#\\:r5\\: > table > tbody > tr:nth-child(14) > td:nth-child(3) > bdi[translate=\"no\"]"
+                ],
+                [
+                  "#\\:r5\\: > table > tbody > tr:nth-child(15) > td:nth-child(3) > bdi[translate=\"no\"]"
+                ],
+                [
+                  "#\\:r5\\: > table > tbody > tr:nth-child(16) > td:nth-child(3) > bdi[translate=\"no\"]"
+                ],
+                [
+                  "#\\:r5\\: > table > tbody > tr:nth-child(17) > td:nth-child(3) > bdi[translate=\"no\"]"
+                ],
+                [
+                  "#\\:r5\\: > table > tbody > tr:nth-child(18) > td:nth-child(3) > bdi[translate=\"no\"]"
+                ],
+                [
+                  "#\\:r5\\: > table > tbody > tr:nth-child(19) > td:nth-child(3) > bdi[translate=\"no\"]"
+                ],
+                [
+                  "#\\:r5\\: > table > tbody > tr:nth-child(20) > td:nth-child(3) > bdi[translate=\"no\"]"
+                ],
+                [
+                  "#\\:r5\\: > table > tbody > tr:nth-child(21) > td:nth-child(3) > bdi[translate=\"no\"]"
+                ],
+                [
+                  "#\\:r5\\: > table > tbody > tr:nth-child(22) > td:nth-child(3) > bdi[translate=\"no\"]"
+                ],
+                [
+                  "#\\:r5\\: > table > tbody > tr:nth-child(23) > td:nth-child(3) > bdi[translate=\"no\"]"
+                ],
+                [
+                  "#\\:r5\\: > table > tbody > tr:nth-child(24) > td:nth-child(3) > bdi[translate=\"no\"]"
+                ],
+                [
+                  "#\\:r5\\: > table > tbody > tr:nth-child(25) > td:nth-child(3) > bdi[translate=\"no\"]"
+                ],
+                [
+                  "#\\:r5\\: > table > tbody > tr:nth-child(26) > td:nth-child(3) > bdi[translate=\"no\"]"
+                ],
+                [
+                  "#\\:r5\\: > table > tbody > tr:nth-child(27) > td:nth-child(3) > bdi[translate=\"no\"]"
+                ],
+                [
+                  "#\\:r5\\: > table > tbody > tr:nth-child(28) > td:nth-child(3) > bdi[translate=\"no\"]"
+                ],
+                [
+                  "#\\:r5\\: > table > tbody > tr:nth-child(29) > td:nth-child(3) > bdi[translate=\"no\"]"
+                ],
+                [
+                  "#\\:r5\\: > table > tbody > tr:nth-child(30) > td:nth-child(3) > bdi[translate=\"no\"]"
+                ],
+                [
+                  "#\\:r5\\: > table > tbody > tr:nth-child(31) > td:nth-child(3) > bdi[translate=\"no\"]"
+                ],
+                [
+                  ".card:nth-child(7) > .two-column.regime-layout > div:nth-child(2) > .research-details > .table-scroll[role=\"region\"] > table > tbody > tr:nth-child(1) > td:nth-child(3)"
+                ],
+                [
+                  ".card:nth-child(7) > .two-column.regime-layout > div:nth-child(2) > .research-details > .table-scroll[role=\"region\"] > table > tbody > tr:nth-child(2) > td:nth-child(3)"
+                ],
+                [
+                  ".card:nth-child(7) > .two-column.regime-layout > div:nth-child(2) > .research-details > .table-scroll[role=\"region\"] > table > tbody > tr:nth-child(4) > td:nth-child(3)"
+                ],
+                [
+                  ".card:nth-child(7) > .two-column.regime-layout > div:nth-child(2) > .research-details > .table-scroll[role=\"region\"] > table > tbody > tr:nth-child(6) > td:nth-child(3)"
+                ],
+                [
+                  ".card:nth-child(7) > .two-column.regime-layout > div:nth-child(2) > .research-details > .table-scroll[role=\"region\"] > table > tbody > tr:nth-child(7) > td:nth-child(3)"
+                ],
+                [
+                  ".card:nth-child(7) > .two-column.regime-layout > div:nth-child(2) > .research-details > .table-scroll[role=\"region\"] > table > tbody > tr:nth-child(10) > td:nth-child(3)"
+                ],
+                [
+                  ".card:nth-child(7) > .two-column.regime-layout > div:nth-child(2) > .research-details > .table-scroll[role=\"region\"] > table > tbody > tr:nth-child(11) > td:nth-child(3)"
+                ],
+                [
+                  ".card:nth-child(7) > .two-column.regime-layout > div:nth-child(2) > .research-details > .table-scroll[role=\"region\"] > table > tbody > tr:nth-child(13) > td:nth-child(3)"
+                ],
+                [
+                  ".card:nth-child(7) > .two-column.regime-layout > div:nth-child(2) > .research-details > .table-scroll[role=\"region\"] > table > tbody > tr:nth-child(14) > td:nth-child(3)"
+                ],
+                [
+                  ".card:nth-child(7) > .two-column.regime-layout > div:nth-child(2) > .research-details > .table-scroll[role=\"region\"] > table > tbody > tr:nth-child(15) > td:nth-child(3)"
+                ],
+                [
+                  ".card:nth-child(7) > .two-column.regime-layout > div:nth-child(2) > .research-details > .table-scroll[role=\"region\"] > table > tbody > tr:nth-child(16) > td:nth-child(3)"
+                ],
+                [
+                  ".card:nth-child(7) > .two-column.regime-layout > div:nth-child(2) > .research-details > .table-scroll[role=\"region\"] > table > tbody > tr:nth-child(17) > td:nth-child(3)"
+                ],
+                [
+                  ".card:nth-child(7) > .two-column.regime-layout > div:nth-child(2) > .research-details > .table-scroll[role=\"region\"] > table > tbody > tr:nth-child(18) > td:nth-child(3)"
+                ],
+                [
+                  ".card:nth-child(7) > .two-column.regime-layout > div:nth-child(2) > .research-details > .table-scroll[role=\"region\"] > table > tbody > tr:nth-child(19) > td:nth-child(3)"
+                ],
+                [
+                  ".card:nth-child(7) > .two-column.regime-layout > div:nth-child(2) > .research-details > .table-scroll[role=\"region\"] > table > tbody > tr:nth-child(21) > td:nth-child(3)"
+                ],
+                [
+                  ".card:nth-child(7) > .two-column.regime-layout > div:nth-child(2) > .research-details > .table-scroll[role=\"region\"] > table > tbody > tr:nth-child(23) > td:nth-child(3)"
+                ],
+                [
+                  ".card:nth-child(7) > .two-column.regime-layout > div:nth-child(2) > .research-details > .table-scroll[role=\"region\"] > table > tbody > tr:nth-child(24) > td:nth-child(3)"
+                ],
+                [
+                  ".card:nth-child(7) > .two-column.regime-layout > div:nth-child(2) > .research-details > .table-scroll[role=\"region\"] > table > tbody > tr:nth-child(25) > td:nth-child(3)"
+                ],
+                [
+                  ".card:nth-child(7) > .two-column.regime-layout > div:nth-child(2) > .research-details > .table-scroll[role=\"region\"] > table > tbody > tr:nth-child(26) > td:nth-child(3)"
+                ],
+                [
+                  ".card:nth-child(7) > .two-column.regime-layout > div:nth-child(2) > .research-details > .table-scroll[role=\"region\"] > table > tbody > tr:nth-child(27) > td:nth-child(3)"
+                ],
+                [
+                  ".card:nth-child(7) > .two-column.regime-layout > div:nth-child(2) > .research-details > .table-scroll[role=\"region\"] > table > tbody > tr:nth-child(28) > td:nth-child(3)"
+                ],
+                [
+                  ".card:nth-child(7) > .two-column.regime-layout > div:nth-child(2) > .research-details > .table-scroll[role=\"region\"] > table > tbody > tr:nth-child(31) > td:nth-child(3)"
+                ]
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "locale": "ar",
+        "name": "track-record/simple/axe",
+        "status": "PASS",
+        "evidence": {
+          "version": "4.14.0",
+          "url": "http://127.0.0.1:5256/track-record",
+          "timestamp": "2026-10-27T09:09:08.967Z",
+          "rawSha256": "2b308c5c99698331f02621661a01d8fae1e0929058ac9d416885f47c88e3fe5c",
+          "violations": [],
+          "incomplete": [
+            {
+              "id": "color-contrast",
+              "impact": "serious",
+              "help": "Elements must meet minimum color contrast ratio thresholds",
+              "targets": [
+                [
+                  ".brand-mark"
+                ],
+                [
+                  ".mode-banner > span[aria-hidden=\"true\"]"
+                ],
+                [
+                  "#\\:r4\\: > table > caption"
+                ],
+                [
+                  "tr:nth-child(1) > td:nth-child(4) > bdi[translate=\"no\"]"
+                ],
+                [
+                  "tr:nth-child(2) > td:nth-child(4) > bdi[translate=\"no\"]"
+                ],
+                [
+                  "tr:nth-child(3) > td:nth-child(4) > bdi[translate=\"no\"]"
+                ],
+                [
+                  "tr:nth-child(4) > td:nth-child(4) > bdi[translate=\"no\"]"
+                ],
+                [
+                  "tr:nth-child(5) > td:nth-child(4) > bdi[translate=\"no\"]"
+                ],
+                [
+                  "div[aria-label=\"قياسات الفئات الأصلية\"] > table > tbody > tr:nth-child(1) > td:nth-child(4) > bdi"
+                ],
+                [
+                  "div[aria-label=\"قياسات الفئات الأصلية\"] > table > tbody > tr:nth-child(1) > td:nth-child(5) > bdi"
+                ],
+                [
+                  "div[aria-label=\"قياسات الفئات الأصلية\"] > table > tbody > tr:nth-child(2) > td:nth-child(4) > bdi"
+                ],
+                [
+                  "div[aria-label=\"قياسات الفئات الأصلية\"] > table > tbody > tr:nth-child(2) > td:nth-child(5) > bdi"
+                ],
+                [
+                  "div[aria-label=\"قياسات الفئات الأصلية\"] > table > tbody > tr:nth-child(3) > td:nth-child(4) > bdi"
+                ],
+                [
+                  "div[aria-label=\"قياسات الفئات الأصلية\"] > table > tbody > tr:nth-child(3) > td:nth-child(5) > bdi"
+                ],
+                [
+                  "div[aria-label=\"قياسات الفئات الأصلية\"] > table > tbody > tr:nth-child(4) > td:nth-child(4) > bdi"
+                ],
+                [
+                  "div[aria-label=\"قياسات الفئات الأصلية\"] > table > tbody > tr:nth-child(4) > td:nth-child(5) > bdi"
+                ],
+                [
+                  "div[aria-label=\"قياسات الفئات الأصلية\"] > table > tbody > tr:nth-child(5) > td:nth-child(4) > bdi"
+                ],
+                [
+                  "div[aria-label=\"قياسات الفئات الأصلية\"] > table > tbody > tr:nth-child(5) > td:nth-child(5) > bdi"
+                ],
+                [
+                  ".table-card > .table-scroll[role=\"region\"] > table > tbody > tr:nth-child(1) > td:nth-child(4) > bdi"
+                ],
+                [
+                  ".table-card > .table-scroll[role=\"region\"] > table > tbody > tr:nth-child(1) > td:nth-child(5) > bdi"
+                ],
+                [
+                  ".table-card > .table-scroll[role=\"region\"] > table > tbody > tr:nth-child(2) > td:nth-child(4) > bdi"
+                ],
+                [
+                  ".table-card > .table-scroll[role=\"region\"] > table > tbody > tr:nth-child(2) > td:nth-child(5) > bdi"
+                ],
+                [
+                  ".table-card > .table-scroll[role=\"region\"] > table > tbody > tr:nth-child(3) > td:nth-child(4) > bdi"
+                ],
+                [
+                  ".table-card > .table-scroll[role=\"region\"] > table > tbody > tr:nth-child(3) > td:nth-child(5) > bdi"
+                ],
+                [
+                  ".table-card > .table-scroll[role=\"region\"] > table > tbody > tr:nth-child(4) > td:nth-child(4) > bdi"
+                ],
+                [
+                  ".table-card > .table-scroll[role=\"region\"] > table > tbody > tr:nth-child(4) > td:nth-child(5) > bdi"
+                ],
+                [
+                  ".table-card > .table-scroll[role=\"region\"] > table > tbody > tr:nth-child(5) > td:nth-child(4) > bdi"
+                ],
+                [
+                  ".table-card > .table-scroll[role=\"region\"] > table > tbody > tr:nth-child(5) > td:nth-child(5) > bdi"
+                ],
+                [
+                  "tr:nth-child(6) > td:nth-child(4) > bdi"
+                ],
+                [
+                  "tr:nth-child(6) > td:nth-child(5) > bdi"
+                ],
+                [
+                  "tr:nth-child(7) > td:nth-child(4) > bdi"
+                ],
+                [
+                  "tr:nth-child(7) > td:nth-child(5) > bdi"
+                ],
+                [
+                  "tr:nth-child(8) > td:nth-child(4) > bdi"
+                ],
+                [
+                  "tr:nth-child(8) > td:nth-child(5) > bdi"
+                ],
+                [
+                  "tr:nth-child(9) > td:nth-child(4) > bdi"
+                ],
+                [
+                  "tr:nth-child(9) > td:nth-child(5) > bdi"
+                ],
+                [
+                  "tr:nth-child(10) > td:nth-child(4) > bdi"
+                ],
+                [
+                  "tr:nth-child(10) > td:nth-child(5) > bdi"
+                ],
+                [
+                  "tr:nth-child(11) > td:nth-child(4) > bdi"
+                ],
+                [
+                  "tr:nth-child(11) > td:nth-child(5) > bdi"
+                ],
+                [
+                  "tr:nth-child(12) > td:nth-child(4) > bdi"
+                ],
+                [
+                  "tr:nth-child(12) > td:nth-child(5) > bdi"
+                ],
+                [
+                  "tr:nth-child(13) > td:nth-child(4) > bdi"
+                ],
+                [
+                  "tr:nth-child(13) > td:nth-child(5) > bdi"
+                ],
+                [
+                  "tr:nth-child(14) > td:nth-child(4) > bdi"
+                ],
+                [
+                  "tr:nth-child(14) > td:nth-child(5) > bdi"
+                ],
+                [
+                  "tr:nth-child(15) > td:nth-child(4) > bdi"
+                ],
+                [
+                  "tr:nth-child(15) > td:nth-child(5) > bdi"
+                ]
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "locale": "ar",
+        "name": "track-record/pro/axe",
+        "status": "PASS",
+        "evidence": {
+          "version": "4.14.0",
+          "url": "http://127.0.0.1:5256/track-record",
+          "timestamp": "2026-10-27T09:09:14.798Z",
+          "rawSha256": "4a6dec0eedfa45dcf7c23ff25417d9aafa8350cf89705b8286a9b164b43a0312",
+          "violations": [],
+          "incomplete": [
+            {
+              "id": "color-contrast",
+              "impact": "serious",
+              "help": "Elements must meet minimum color contrast ratio thresholds",
+              "targets": [
+                [
+                  ".brand-mark"
+                ],
+                [
+                  ".mode-banner > span[aria-hidden=\"true\"]"
+                ],
+                [
+                  "#\\:r4\\: > table > caption"
+                ],
+                [
+                  "tr:nth-child(1) > td:nth-child(4) > bdi[translate=\"no\"]"
+                ],
+                [
+                  "tr:nth-child(2) > td:nth-child(4) > bdi[translate=\"no\"]"
+                ],
+                [
+                  "tr:nth-child(3) > td:nth-child(4) > bdi[translate=\"no\"]"
+                ],
+                [
+                  "tr:nth-child(4) > td:nth-child(4) > bdi[translate=\"no\"]"
+                ],
+                [
+                  "tr:nth-child(5) > td:nth-child(4) > bdi[translate=\"no\"]"
+                ],
+                [
+                  "div[aria-label=\"قياسات الفئات الأصلية\"] > table > tbody > tr:nth-child(1) > td:nth-child(4) > bdi"
+                ],
+                [
+                  "div[aria-label=\"قياسات الفئات الأصلية\"] > table > tbody > tr:nth-child(1) > td:nth-child(5) > bdi"
+                ],
+                [
+                  "div[aria-label=\"قياسات الفئات الأصلية\"] > table > tbody > tr:nth-child(2) > td:nth-child(4) > bdi"
+                ],
+                [
+                  "div[aria-label=\"قياسات الفئات الأصلية\"] > table > tbody > tr:nth-child(2) > td:nth-child(5) > bdi"
+                ],
+                [
+                  "div[aria-label=\"قياسات الفئات الأصلية\"] > table > tbody > tr:nth-child(3) > td:nth-child(4) > bdi"
+                ],
+                [
+                  "div[aria-label=\"قياسات الفئات الأصلية\"] > table > tbody > tr:nth-child(3) > td:nth-child(5) > bdi"
+                ],
+                [
+                  "div[aria-label=\"قياسات الفئات الأصلية\"] > table > tbody > tr:nth-child(4) > td:nth-child(4) > bdi"
+                ],
+                [
+                  "div[aria-label=\"قياسات الفئات الأصلية\"] > table > tbody > tr:nth-child(4) > td:nth-child(5) > bdi"
+                ],
+                [
+                  "div[aria-label=\"قياسات الفئات الأصلية\"] > table > tbody > tr:nth-child(5) > td:nth-child(4) > bdi"
+                ],
+                [
+                  "div[aria-label=\"قياسات الفئات الأصلية\"] > table > tbody > tr:nth-child(5) > td:nth-child(5) > bdi"
+                ],
+                [
+                  ".table-card > .table-scroll[role=\"region\"] > table > tbody > tr:nth-child(1) > td:nth-child(4) > bdi"
+                ],
+                [
+                  ".table-card > .table-scroll[role=\"region\"] > table > tbody > tr:nth-child(1) > td:nth-child(5) > bdi"
+                ],
+                [
+                  ".table-card > .table-scroll[role=\"region\"] > table > tbody > tr:nth-child(2) > td:nth-child(4) > bdi"
+                ],
+                [
+                  ".table-card > .table-scroll[role=\"region\"] > table > tbody > tr:nth-child(2) > td:nth-child(5) > bdi"
+                ],
+                [
+                  ".table-card > .table-scroll[role=\"region\"] > table > tbody > tr:nth-child(3) > td:nth-child(4) > bdi"
+                ],
+                [
+                  ".table-card > .table-scroll[role=\"region\"] > table > tbody > tr:nth-child(3) > td:nth-child(5) > bdi"
+                ],
+                [
+                  ".table-card > .table-scroll[role=\"region\"] > table > tbody > tr:nth-child(4) > td:nth-child(4) > bdi"
+                ],
+                [
+                  ".table-card > .table-scroll[role=\"region\"] > table > tbody > tr:nth-child(4) > td:nth-child(5) > bdi"
+                ],
+                [
+                  ".table-card > .table-scroll[role=\"region\"] > table > tbody > tr:nth-child(5) > td:nth-child(4) > bdi"
+                ],
+                [
+                  ".table-card > .table-scroll[role=\"region\"] > table > tbody > tr:nth-child(5) > td:nth-child(5) > bdi"
+                ],
+                [
+                  "tr:nth-child(6) > td:nth-child(4) > bdi"
+                ],
+                [
+                  "tr:nth-child(6) > td:nth-child(5) > bdi"
+                ],
+                [
+                  "tr:nth-child(7) > td:nth-child(4) > bdi"
+                ],
+                [
+                  "tr:nth-child(7) > td:nth-child(5) > bdi"
+                ],
+                [
+                  "tr:nth-child(8) > td:nth-child(4) > bdi"
+                ],
+                [
+                  "tr:nth-child(8) > td:nth-child(5) > bdi"
+                ],
+                [
+                  "tr:nth-child(9) > td:nth-child(4) > bdi"
+                ],
+                [
+                  "tr:nth-child(9) > td:nth-child(5) > bdi"
+                ],
+                [
+                  "tr:nth-child(10) > td:nth-child(4) > bdi"
+                ],
+                [
+                  "tr:nth-child(10) > td:nth-child(5) > bdi"
+                ],
+                [
+                  "tr:nth-child(11) > td:nth-child(4) > bdi"
+                ],
+                [
+                  "tr:nth-child(11) > td:nth-child(5) > bdi"
+                ],
+                [
+                  "tr:nth-child(12) > td:nth-child(4) > bdi"
+                ],
+                [
+                  "tr:nth-child(12) > td:nth-child(5) > bdi"
+                ],
+                [
+                  "tr:nth-child(13) > td:nth-child(4) > bdi"
+                ],
+                [
+                  "tr:nth-child(13) > td:nth-child(5) > bdi"
+                ],
+                [
+                  "tr:nth-child(14) > td:nth-child(4) > bdi"
+                ],
+                [
+                  "tr:nth-child(14) > td:nth-child(5) > bdi"
+                ],
+                [
+                  "tr:nth-child(15) > td:nth-child(4) > bdi"
+                ],
+                [
+                  "tr:nth-child(15) > td:nth-child(5) > bdi"
+                ]
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "locale": "ar",
+        "name": "trace/simple/axe",
+        "status": "PASS",
+        "evidence": {
+          "version": "4.14.0",
+          "url": "http://127.0.0.1:5256/trace",
+          "timestamp": "2026-10-27T09:09:21.197Z",
+          "rawSha256": "f7e52415ebe81e272afb4e1626174333ef089f4224bb3f784216c48c217742e3",
+          "violations": [],
+          "incomplete": [
+            {
+              "id": "color-contrast",
+              "impact": "serious",
+              "help": "Elements must meet minimum color contrast ratio thresholds",
+              "targets": [
+                [
+                  ".brand-mark"
+                ],
+                [
+                  ".mode-banner > span[aria-hidden=\"true\"]"
+                ],
+                [
+                  "#\\:r0\\: > table > caption"
+                ],
+                [
+                  "tr:nth-child(1) > td:nth-child(3) > bdi[translate=\"no\"]"
+                ],
+                [
+                  "tr:nth-child(1) > td:nth-child(4) > bdi[translate=\"no\"]"
+                ],
+                [
+                  "tr:nth-child(2) > td:nth-child(3) > bdi[translate=\"no\"]"
+                ],
+                [
+                  "tr:nth-child(2) > td:nth-child(4) > bdi[translate=\"no\"]"
+                ],
+                [
+                  "tr:nth-child(3) > td:nth-child(3) > bdi[translate=\"no\"]"
+                ],
+                [
+                  "tr:nth-child(3) > td:nth-child(4) > bdi[translate=\"no\"]"
+                ],
+                [
+                  "tr:nth-child(4) > td:nth-child(3) > bdi[translate=\"no\"]"
+                ],
+                [
+                  "tr:nth-child(4) > td:nth-child(4) > bdi[translate=\"no\"]"
+                ],
+                [
+                  "tr:nth-child(5) > td:nth-child(3) > bdi[translate=\"no\"]"
+                ],
+                [
+                  "tr:nth-child(5) > td:nth-child(4) > bdi[translate=\"no\"]"
+                ],
+                [
+                  "tr:nth-child(6) > td:nth-child(3) > bdi[translate=\"no\"]"
+                ],
+                [
+                  "tr:nth-child(6) > td:nth-child(4) > bdi[translate=\"no\"]"
+                ],
+                [
+                  "tr:nth-child(7) > td:nth-child(3) > bdi[translate=\"no\"]"
+                ],
+                [
+                  "tr:nth-child(7) > td:nth-child(4) > bdi[translate=\"no\"]"
+                ],
+                [
+                  "tr:nth-child(8) > td:nth-child(3) > bdi[translate=\"no\"]"
+                ],
+                [
+                  "tr:nth-child(8) > td:nth-child(4) > bdi[translate=\"no\"]"
+                ],
+                [
+                  "tr:nth-child(9) > td:nth-child(3) > bdi[translate=\"no\"]"
+                ],
+                [
+                  "tr:nth-child(9) > td:nth-child(4) > bdi[translate=\"no\"]"
+                ],
+                [
+                  "div[aria-label=\"توقيت أزواج العقد الدقيق\"] > table > tbody > tr:nth-child(1) > td:nth-child(3) > bdi"
+                ],
+                [
+                  "div[aria-label=\"توقيت أزواج العقد الدقيق\"] > table > tbody > tr:nth-child(1) > td:nth-child(4) > bdi"
+                ],
+                [
+                  "tr:nth-child(1) > td:nth-child(5) > bdi"
+                ],
+                [
+                  "div[aria-label=\"توقيت أزواج العقد الدقيق\"] > table > tbody > tr:nth-child(2) > td:nth-child(2) > bdi"
+                ],
+                [
+                  "div[aria-label=\"توقيت أزواج العقد الدقيق\"] > table > tbody > tr:nth-child(2) > td:nth-child(3) > bdi"
+                ],
+                [
+                  "div[aria-label=\"توقيت أزواج العقد الدقيق\"] > table > tbody > tr:nth-child(2) > td:nth-child(4) > bdi"
+                ],
+                [
+                  "tr:nth-child(2) > td:nth-child(5) > bdi"
+                ],
+                [
+                  "div[aria-label=\"توقيت أزواج العقد الدقيق\"] > table > tbody > tr:nth-child(3) > td:nth-child(2) > bdi"
+                ],
+                [
+                  "div[aria-label=\"توقيت أزواج العقد الدقيق\"] > table > tbody > tr:nth-child(3) > td:nth-child(3) > bdi"
+                ],
+                [
+                  "div[aria-label=\"توقيت أزواج العقد الدقيق\"] > table > tbody > tr:nth-child(3) > td:nth-child(4) > bdi"
+                ],
+                [
+                  "tr:nth-child(3) > td:nth-child(5) > bdi"
+                ],
+                [
+                  "div[aria-label=\"توقيت أزواج العقد الدقيق\"] > table > tbody > tr:nth-child(4) > td:nth-child(2) > bdi"
+                ],
+                [
+                  "div[aria-label=\"توقيت أزواج العقد الدقيق\"] > table > tbody > tr:nth-child(4) > td:nth-child(3) > bdi"
+                ],
+                [
+                  "div[aria-label=\"توقيت أزواج العقد الدقيق\"] > table > tbody > tr:nth-child(4) > td:nth-child(4) > bdi"
+                ],
+                [
+                  "tr:nth-child(4) > td:nth-child(5) > bdi"
+                ],
+                [
+                  "div[aria-label=\"توقيت أزواج العقد الدقيق\"] > table > tbody > tr:nth-child(5) > td:nth-child(2) > bdi"
+                ],
+                [
+                  "div[aria-label=\"توقيت أزواج العقد الدقيق\"] > table > tbody > tr:nth-child(5) > td:nth-child(3) > bdi"
+                ],
+                [
+                  "div[aria-label=\"توقيت أزواج العقد الدقيق\"] > table > tbody > tr:nth-child(5) > td:nth-child(4) > bdi"
+                ],
+                [
+                  "tr:nth-child(5) > td:nth-child(5) > bdi"
+                ],
+                [
+                  "div[aria-label=\"توقيت أزواج العقد الدقيق\"] > table > tbody > tr:nth-child(6) > td:nth-child(2) > bdi"
+                ],
+                [
+                  "div[aria-label=\"توقيت أزواج العقد الدقيق\"] > table > tbody > tr:nth-child(6) > td:nth-child(3) > bdi"
+                ],
+                [
+                  "div[aria-label=\"توقيت أزواج العقد الدقيق\"] > table > tbody > tr:nth-child(6) > td:nth-child(4) > bdi"
+                ],
+                [
+                  "tr:nth-child(6) > td:nth-child(5) > bdi"
+                ],
+                [
+                  "div[aria-label=\"توقيت أزواج العقد الدقيق\"] > table > tbody > tr:nth-child(7) > td:nth-child(2) > bdi"
+                ],
+                [
+                  "div[aria-label=\"توقيت أزواج العقد الدقيق\"] > table > tbody > tr:nth-child(7) > td:nth-child(3) > bdi"
+                ],
+                [
+                  "div[aria-label=\"توقيت أزواج العقد الدقيق\"] > table > tbody > tr:nth-child(7) > td:nth-child(4) > bdi"
+                ],
+                [
+                  "tr:nth-child(7) > td:nth-child(5) > bdi"
+                ],
+                [
+                  "div[aria-label=\"توقيت أزواج العقد الدقيق\"] > table > tbody > tr:nth-child(8) > td:nth-child(2) > bdi"
+                ],
+                [
+                  "div[aria-label=\"توقيت أزواج العقد الدقيق\"] > table > tbody > tr:nth-child(8) > td:nth-child(3) > bdi"
+                ],
+                [
+                  "div[aria-label=\"توقيت أزواج العقد الدقيق\"] > table > tbody > tr:nth-child(8) > td:nth-child(4) > bdi"
+                ],
+                [
+                  "tr:nth-child(8) > td:nth-child(5) > bdi"
+                ],
+                [
+                  "div[aria-label=\"توقيت أزواج العقد الدقيق\"] > table > tbody > tr:nth-child(9) > td:nth-child(2) > bdi"
+                ],
+                [
+                  "div[aria-label=\"توقيت أزواج العقد الدقيق\"] > table > tbody > tr:nth-child(9) > td:nth-child(3) > bdi"
+                ],
+                [
+                  "div[aria-label=\"توقيت أزواج العقد الدقيق\"] > table > tbody > tr:nth-child(9) > td:nth-child(4) > bdi"
+                ],
+                [
+                  "tr:nth-child(9) > td:nth-child(5) > bdi"
+                ],
+                [
+                  "tr:nth-child(1) > td:nth-child(8) > p > .original-source > .source-label"
+                ],
+                [
+                  "tr:nth-child(1) > td:nth-child(8) > .event-payload > p"
+                ],
+                [
+                  "tr:nth-child(1) > td:nth-child(8) > .event-payload > p > bdi:nth-child(1)"
+                ],
+                [
+                  "tr:nth-child(2) > td:nth-child(8) > p > .original-source > .source-label"
+                ],
+                [
+                  "tr:nth-child(2) > td:nth-child(8) > .event-payload > p"
+                ],
+                [
+                  "tr:nth-child(2) > td:nth-child(8) > .event-payload > p > bdi:nth-child(1)"
+                ],
+                [
+                  "tr:nth-child(3) > td:nth-child(8) > p > .original-source > .source-label"
+                ],
+                [
+                  "tr:nth-child(3) > td:nth-child(8) > .event-payload > p"
+                ],
+                [
+                  "tr:nth-child(3) > td:nth-child(8) > .event-payload > p > bdi:nth-child(1)"
+                ],
+                [
+                  "tr:nth-child(4) > td:nth-child(8) > p > .original-source > .source-label"
+                ],
+                [
+                  "tr:nth-child(4) > td:nth-child(8) > .event-payload > p"
+                ],
+                [
+                  "tr:nth-child(4) > td:nth-child(8) > .event-payload > p > bdi:nth-child(1)"
+                ],
+                [
+                  "tr:nth-child(5) > td:nth-child(8) > p > .original-source > .source-label"
+                ],
+                [
+                  "tr:nth-child(5) > td:nth-child(8) > .event-payload > p"
+                ],
+                [
+                  "tr:nth-child(5) > td:nth-child(8) > .event-payload > p > bdi:nth-child(1)"
+                ],
+                [
+                  "tr:nth-child(6) > td:nth-child(8) > p > .original-source > .source-label"
+                ],
+                [
+                  "tr:nth-child(6) > td:nth-child(8) > .event-payload > p"
+                ],
+                [
+                  "tr:nth-child(6) > td:nth-child(8) > .event-payload > p > bdi:nth-child(1)"
+                ],
+                [
+                  "tr:nth-child(7) > td:nth-child(8) > p > .original-source > .source-label"
+                ],
+                [
+                  "tr:nth-child(7) > td:nth-child(8) > .event-payload > p"
+                ],
+                [
+                  "tr:nth-child(7) > td:nth-child(8) > .event-payload > p > bdi:nth-child(1)"
+                ],
+                [
+                  "tr:nth-child(8) > td:nth-child(8) > p > .original-source > .source-label"
+                ],
+                [
+                  "tr:nth-child(8) > td:nth-child(8) > .event-payload > p"
+                ],
+                [
+                  "tr:nth-child(8) > td:nth-child(8) > .event-payload > p > bdi:nth-child(1)"
+                ],
+                [
+                  "tr:nth-child(9) > td:nth-child(8) > p > .original-source > .source-label"
+                ],
+                [
+                  "tr:nth-child(9) > td:nth-child(8) > .event-payload > p"
+                ],
+                [
+                  "tr:nth-child(9) > td:nth-child(8) > .event-payload > p > bdi:nth-child(1)"
+                ],
+                [
+                  "tr:nth-child(10) > td:nth-child(8) > p > .original-source > .source-label"
+                ],
+                [
+                  "tr:nth-child(10) > td:nth-child(8) > .event-payload > p"
+                ],
+                [
+                  "tr:nth-child(10) > td:nth-child(8) > .event-payload > p > bdi:nth-child(1)"
+                ],
+                [
+                  "tr:nth-child(11) > td:nth-child(8) > p > .original-source > .source-label"
+                ],
+                [
+                  "tr:nth-child(11) > td:nth-child(8) > .event-payload > p"
+                ],
+                [
+                  "tr:nth-child(11) > td:nth-child(8) > .event-payload > p > bdi:nth-child(1)"
+                ],
+                [
+                  "tr:nth-child(12) > td:nth-child(8) > p > .original-source > .source-label"
+                ],
+                [
+                  "tr:nth-child(12) > td:nth-child(8) > .event-payload > p"
+                ],
+                [
+                  "tr:nth-child(12) > td:nth-child(8) > .event-payload > p > bdi:nth-child(1)"
+                ],
+                [
+                  "tr:nth-child(13) > td:nth-child(8) > p > .original-source > .source-label"
+                ],
+                [
+                  "tr:nth-child(13) > td:nth-child(8) > .event-payload > p"
+                ],
+                [
+                  "tr:nth-child(13) > td:nth-child(8) > .event-payload > p > bdi:nth-child(1)"
+                ],
+                [
+                  "tr:nth-child(14) > td:nth-child(8) > p > .original-source > .source-label"
+                ],
+                [
+                  "tr:nth-child(14) > td:nth-child(8) > .event-payload > p"
+                ],
+                [
+                  "tr:nth-child(14) > td:nth-child(8) > .event-payload > p > bdi:nth-child(1)"
+                ],
+                [
+                  "tr:nth-child(15) > td:nth-child(8) > p > .original-source > .source-label"
+                ],
+                [
+                  "tr:nth-child(15) > td:nth-child(8) > .event-payload > p"
+                ],
+                [
+                  "tr:nth-child(15) > td:nth-child(8) > .event-payload > p > bdi:nth-child(1)"
+                ],
+                [
+                  "tr:nth-child(16) > td:nth-child(8) > p > .original-source > .source-label"
+                ],
+                [
+                  "tr:nth-child(16) > td:nth-child(8) > .event-payload > p"
+                ],
+                [
+                  "tr:nth-child(16) > td:nth-child(8) > .event-payload > p > bdi:nth-child(1)"
+                ],
+                [
+                  "tr:nth-child(18) > td:nth-child(8) > p > .original-source > .source-label"
+                ],
+                [
+                  "tr:nth-child(18) > td:nth-child(8) > .event-payload > p"
+                ],
+                [
+                  "tr:nth-child(18) > td:nth-child(8) > .event-payload > p > bdi:nth-child(1)"
+                ],
+                [
+                  "tr:nth-child(19) > td:nth-child(8) > p > .original-source > .source-label"
+                ],
+                [
+                  "tr:nth-child(19) > td:nth-child(8) > .event-payload > p"
+                ],
+                [
+                  "tr:nth-child(19) > td:nth-child(8) > .event-payload > p > bdi:nth-child(1)"
+                ]
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "locale": "ar",
+        "name": "trace/pro/axe",
+        "status": "PASS",
+        "evidence": {
+          "version": "4.14.0",
+          "url": "http://127.0.0.1:5256/trace",
+          "timestamp": "2026-10-27T09:09:26.057Z",
+          "rawSha256": "ead760b005e631c4f1f9d46f506babf091fab96cdfa1d1ca01d302eafcf0df88",
+          "violations": [],
+          "incomplete": [
+            {
+              "id": "color-contrast",
+              "impact": "serious",
+              "help": "Elements must meet minimum color contrast ratio thresholds",
+              "targets": [
+                [
+                  ".brand-mark"
+                ],
+                [
+                  ".mode-banner > span[aria-hidden=\"true\"]"
+                ],
+                [
+                  "#\\:r0\\: > table > caption"
+                ],
+                [
+                  "tr:nth-child(1) > td:nth-child(3) > bdi[translate=\"no\"]"
+                ],
+                [
+                  "tr:nth-child(1) > td:nth-child(4) > bdi[translate=\"no\"]"
+                ],
+                [
+                  "tr:nth-child(2) > td:nth-child(3) > bdi[translate=\"no\"]"
+                ],
+                [
+                  "tr:nth-child(2) > td:nth-child(4) > bdi[translate=\"no\"]"
+                ],
+                [
+                  "tr:nth-child(3) > td:nth-child(3) > bdi[translate=\"no\"]"
+                ],
+                [
+                  "tr:nth-child(3) > td:nth-child(4) > bdi[translate=\"no\"]"
+                ],
+                [
+                  "tr:nth-child(4) > td:nth-child(3) > bdi[translate=\"no\"]"
+                ],
+                [
+                  "tr:nth-child(4) > td:nth-child(4) > bdi[translate=\"no\"]"
+                ],
+                [
+                  "tr:nth-child(5) > td:nth-child(3) > bdi[translate=\"no\"]"
+                ],
+                [
+                  "tr:nth-child(5) > td:nth-child(4) > bdi[translate=\"no\"]"
+                ],
+                [
+                  "tr:nth-child(6) > td:nth-child(3) > bdi[translate=\"no\"]"
+                ],
+                [
+                  "tr:nth-child(6) > td:nth-child(4) > bdi[translate=\"no\"]"
+                ],
+                [
+                  "tr:nth-child(7) > td:nth-child(3) > bdi[translate=\"no\"]"
+                ],
+                [
+                  "tr:nth-child(7) > td:nth-child(4) > bdi[translate=\"no\"]"
+                ],
+                [
+                  "tr:nth-child(8) > td:nth-child(3) > bdi[translate=\"no\"]"
+                ],
+                [
+                  "tr:nth-child(8) > td:nth-child(4) > bdi[translate=\"no\"]"
+                ],
+                [
+                  "tr:nth-child(9) > td:nth-child(3) > bdi[translate=\"no\"]"
+                ],
+                [
+                  "tr:nth-child(9) > td:nth-child(4) > bdi[translate=\"no\"]"
+                ],
+                [
+                  "div[aria-label=\"توقيت أزواج العقد الدقيق\"] > table > tbody > tr:nth-child(1) > td:nth-child(3) > bdi"
+                ],
+                [
+                  "div[aria-label=\"توقيت أزواج العقد الدقيق\"] > table > tbody > tr:nth-child(1) > td:nth-child(4) > bdi"
+                ],
+                [
+                  "tr:nth-child(1) > td:nth-child(5) > bdi"
+                ],
+                [
+                  "div[aria-label=\"توقيت أزواج العقد الدقيق\"] > table > tbody > tr:nth-child(2) > td:nth-child(2) > bdi"
+                ],
+                [
+                  "div[aria-label=\"توقيت أزواج العقد الدقيق\"] > table > tbody > tr:nth-child(2) > td:nth-child(3) > bdi"
+                ],
+                [
+                  "div[aria-label=\"توقيت أزواج العقد الدقيق\"] > table > tbody > tr:nth-child(2) > td:nth-child(4) > bdi"
+                ],
+                [
+                  "tr:nth-child(2) > td:nth-child(5) > bdi"
+                ],
+                [
+                  "div[aria-label=\"توقيت أزواج العقد الدقيق\"] > table > tbody > tr:nth-child(3) > td:nth-child(2) > bdi"
+                ],
+                [
+                  "div[aria-label=\"توقيت أزواج العقد الدقيق\"] > table > tbody > tr:nth-child(3) > td:nth-child(3) > bdi"
+                ],
+                [
+                  "div[aria-label=\"توقيت أزواج العقد الدقيق\"] > table > tbody > tr:nth-child(3) > td:nth-child(4) > bdi"
+                ],
+                [
+                  "tr:nth-child(3) > td:nth-child(5) > bdi"
+                ],
+                [
+                  "div[aria-label=\"توقيت أزواج العقد الدقيق\"] > table > tbody > tr:nth-child(4) > td:nth-child(2) > bdi"
+                ],
+                [
+                  "div[aria-label=\"توقيت أزواج العقد الدقيق\"] > table > tbody > tr:nth-child(4) > td:nth-child(3) > bdi"
+                ],
+                [
+                  "div[aria-label=\"توقيت أزواج العقد الدقيق\"] > table > tbody > tr:nth-child(4) > td:nth-child(4) > bdi"
+                ],
+                [
+                  "tr:nth-child(4) > td:nth-child(5) > bdi"
+                ],
+                [
+                  "div[aria-label=\"توقيت أزواج العقد الدقيق\"] > table > tbody > tr:nth-child(5) > td:nth-child(2) > bdi"
+                ],
+                [
+                  "div[aria-label=\"توقيت أزواج العقد الدقيق\"] > table > tbody > tr:nth-child(5) > td:nth-child(3) > bdi"
+                ],
+                [
+                  "div[aria-label=\"توقيت أزواج العقد الدقيق\"] > table > tbody > tr:nth-child(5) > td:nth-child(4) > bdi"
+                ],
+                [
+                  "tr:nth-child(5) > td:nth-child(5) > bdi"
+                ],
+                [
+                  "div[aria-label=\"توقيت أزواج العقد الدقيق\"] > table > tbody > tr:nth-child(6) > td:nth-child(2) > bdi"
+                ],
+                [
+                  "div[aria-label=\"توقيت أزواج العقد الدقيق\"] > table > tbody > tr:nth-child(6) > td:nth-child(3) > bdi"
+                ],
+                [
+                  "div[aria-label=\"توقيت أزواج العقد الدقيق\"] > table > tbody > tr:nth-child(6) > td:nth-child(4) > bdi"
+                ],
+                [
+                  "tr:nth-child(6) > td:nth-child(5) > bdi"
+                ],
+                [
+                  "div[aria-label=\"توقيت أزواج العقد الدقيق\"] > table > tbody > tr:nth-child(7) > td:nth-child(2) > bdi"
+                ],
+                [
+                  "div[aria-label=\"توقيت أزواج العقد الدقيق\"] > table > tbody > tr:nth-child(7) > td:nth-child(3) > bdi"
+                ],
+                [
+                  "div[aria-label=\"توقيت أزواج العقد الدقيق\"] > table > tbody > tr:nth-child(7) > td:nth-child(4) > bdi"
+                ],
+                [
+                  "tr:nth-child(7) > td:nth-child(5) > bdi"
+                ],
+                [
+                  "div[aria-label=\"توقيت أزواج العقد الدقيق\"] > table > tbody > tr:nth-child(8) > td:nth-child(2) > bdi"
+                ],
+                [
+                  "div[aria-label=\"توقيت أزواج العقد الدقيق\"] > table > tbody > tr:nth-child(8) > td:nth-child(3) > bdi"
+                ],
+                [
+                  "div[aria-label=\"توقيت أزواج العقد الدقيق\"] > table > tbody > tr:nth-child(8) > td:nth-child(4) > bdi"
+                ],
+                [
+                  "tr:nth-child(8) > td:nth-child(5) > bdi"
+                ],
+                [
+                  "div[aria-label=\"توقيت أزواج العقد الدقيق\"] > table > tbody > tr:nth-child(9) > td:nth-child(2) > bdi"
+                ],
+                [
+                  "div[aria-label=\"توقيت أزواج العقد الدقيق\"] > table > tbody > tr:nth-child(9) > td:nth-child(3) > bdi"
+                ],
+                [
+                  "div[aria-label=\"توقيت أزواج العقد الدقيق\"] > table > tbody > tr:nth-child(9) > td:nth-child(4) > bdi"
+                ],
+                [
+                  "tr:nth-child(9) > td:nth-child(5) > bdi"
+                ],
+                [
+                  "tr:nth-child(1) > td:nth-child(8) > p > .original-source > .source-label"
+                ],
+                [
+                  "tr:nth-child(1) > td:nth-child(8) > .event-payload > p"
+                ],
+                [
+                  "tr:nth-child(1) > td:nth-child(8) > .event-payload > p > bdi:nth-child(1)"
+                ],
+                [
+                  "tr:nth-child(2) > td:nth-child(8) > p > .original-source > .source-label"
+                ],
+                [
+                  "tr:nth-child(2) > td:nth-child(8) > .event-payload > p"
+                ],
+                [
+                  "tr:nth-child(2) > td:nth-child(8) > .event-payload > p > bdi:nth-child(1)"
+                ],
+                [
+                  "tr:nth-child(3) > td:nth-child(8) > p > .original-source > .source-label"
+                ],
+                [
+                  "tr:nth-child(3) > td:nth-child(8) > .event-payload > p"
+                ],
+                [
+                  "tr:nth-child(3) > td:nth-child(8) > .event-payload > p > bdi:nth-child(1)"
+                ],
+                [
+                  "tr:nth-child(4) > td:nth-child(8) > p > .original-source > .source-label"
+                ],
+                [
+                  "tr:nth-child(4) > td:nth-child(8) > .event-payload > p"
+                ],
+                [
+                  "tr:nth-child(4) > td:nth-child(8) > .event-payload > p > bdi:nth-child(1)"
+                ],
+                [
+                  "tr:nth-child(5) > td:nth-child(8) > p > .original-source > .source-label"
+                ],
+                [
+                  "tr:nth-child(5) > td:nth-child(8) > .event-payload > p"
+                ],
+                [
+                  "tr:nth-child(5) > td:nth-child(8) > .event-payload > p > bdi:nth-child(1)"
+                ],
+                [
+                  "tr:nth-child(6) > td:nth-child(8) > p > .original-source > .source-label"
+                ],
+                [
+                  "tr:nth-child(6) > td:nth-child(8) > .event-payload > p"
+                ],
+                [
+                  "tr:nth-child(6) > td:nth-child(8) > .event-payload > p > bdi:nth-child(1)"
+                ],
+                [
+                  "tr:nth-child(7) > td:nth-child(8) > p > .original-source > .source-label"
+                ],
+                [
+                  "tr:nth-child(7) > td:nth-child(8) > .event-payload > p"
+                ],
+                [
+                  "tr:nth-child(7) > td:nth-child(8) > .event-payload > p > bdi:nth-child(1)"
+                ],
+                [
+                  "tr:nth-child(8) > td:nth-child(8) > p > .original-source > .source-label"
+                ],
+                [
+                  "tr:nth-child(8) > td:nth-child(8) > .event-payload > p"
+                ],
+                [
+                  "tr:nth-child(8) > td:nth-child(8) > .event-payload > p > bdi:nth-child(1)"
+                ],
+                [
+                  "tr:nth-child(9) > td:nth-child(8) > p > .original-source > .source-label"
+                ],
+                [
+                  "tr:nth-child(9) > td:nth-child(8) > .event-payload > p"
+                ],
+                [
+                  "tr:nth-child(9) > td:nth-child(8) > .event-payload > p > bdi:nth-child(1)"
+                ],
+                [
+                  "tr:nth-child(10) > td:nth-child(8) > p > .original-source > .source-label"
+                ],
+                [
+                  "tr:nth-child(10) > td:nth-child(8) > .event-payload > p"
+                ],
+                [
+                  "tr:nth-child(10) > td:nth-child(8) > .event-payload > p > bdi:nth-child(1)"
+                ],
+                [
+                  "tr:nth-child(11) > td:nth-child(8) > p > .original-source > .source-label"
+                ],
+                [
+                  "tr:nth-child(11) > td:nth-child(8) > .event-payload > p"
+                ],
+                [
+                  "tr:nth-child(11) > td:nth-child(8) > .event-payload > p > bdi:nth-child(1)"
+                ],
+                [
+                  "tr:nth-child(12) > td:nth-child(8) > p > .original-source > .source-label"
+                ],
+                [
+                  "tr:nth-child(12) > td:nth-child(8) > .event-payload > p"
+                ],
+                [
+                  "tr:nth-child(12) > td:nth-child(8) > .event-payload > p > bdi:nth-child(1)"
+                ],
+                [
+                  "tr:nth-child(13) > td:nth-child(8) > p > .original-source > .source-label"
+                ],
+                [
+                  "tr:nth-child(13) > td:nth-child(8) > .event-payload > p"
+                ],
+                [
+                  "tr:nth-child(13) > td:nth-child(8) > .event-payload > p > bdi:nth-child(1)"
+                ],
+                [
+                  "tr:nth-child(14) > td:nth-child(8) > p > .original-source > .source-label"
+                ],
+                [
+                  "tr:nth-child(14) > td:nth-child(8) > .event-payload > p"
+                ],
+                [
+                  "tr:nth-child(14) > td:nth-child(8) > .event-payload > p > bdi:nth-child(1)"
+                ],
+                [
+                  "tr:nth-child(15) > td:nth-child(8) > p > .original-source > .source-label"
+                ],
+                [
+                  "tr:nth-child(15) > td:nth-child(8) > .event-payload > p"
+                ],
+                [
+                  "tr:nth-child(15) > td:nth-child(8) > .event-payload > p > bdi:nth-child(1)"
+                ],
+                [
+                  "tr:nth-child(16) > td:nth-child(8) > p > .original-source > .source-label"
+                ],
+                [
+                  "tr:nth-child(16) > td:nth-child(8) > .event-payload > p"
+                ],
+                [
+                  "tr:nth-child(16) > td:nth-child(8) > .event-payload > p > bdi:nth-child(1)"
+                ],
+                [
+                  "tr:nth-child(18) > td:nth-child(8) > p > .original-source > .source-label"
+                ],
+                [
+                  "tr:nth-child(18) > td:nth-child(8) > .event-payload > p"
+                ],
+                [
+                  "tr:nth-child(18) > td:nth-child(8) > .event-payload > p > bdi:nth-child(1)"
+                ],
+                [
+                  "tr:nth-child(19) > td:nth-child(8) > p > .original-source > .source-label"
+                ],
+                [
+                  "tr:nth-child(19) > td:nth-child(8) > .event-payload > p"
+                ],
+                [
+                  "tr:nth-child(19) > td:nth-child(8) > .event-payload > p > bdi:nth-child(1)"
+                ]
+              ]
+            }
+          ]
+        }
+      }
+    ],
+    "lighthouse": [
+      {
+        "locale": "ar",
+        "name": "detail/1440/lighthouse",
+        "status": "PASS",
+        "evidence": {
+          "version": "13.5.0",
+          "fetchTime": "2026-10-27T09:07:31.875Z",
+          "requestedUrl": "http://127.0.0.1:5256/ticker/us_equity/SYN369",
+          "finalDisplayedUrl": "http://127.0.0.1:5256/ticker/us_equity/SYN369",
+          "score": 100,
+          "runWarnings": [],
+          "failedAudits": [],
+          "rawSha256": "89acbc6e1d9c508652c37316005500a2cdecac15ab1af8b5e864e09d3b017782"
+        }
+      },
+      {
+        "locale": "ar",
+        "name": "detail/320/lighthouse",
+        "status": "PASS",
+        "evidence": {
+          "version": "13.5.0",
+          "fetchTime": "2026-10-27T09:07:42.277Z",
+          "requestedUrl": "http://127.0.0.1:5256/ticker/us_equity/SYN369",
+          "finalDisplayedUrl": "http://127.0.0.1:5256/ticker/us_equity/SYN369",
+          "score": 100,
+          "runWarnings": [],
+          "failedAudits": [],
+          "rawSha256": "606d0b3a1dc936d1dda198a2c60e557bbb8dfac7a977a7d9a25c89888de735d1"
+        }
+      }
+    ],
+    "native-zoom": [
+      {
+        "locale": "ar",
+        "name": "discover/720/simple/native-200-percent",
+        "status": "PASS",
+        "evidence": {
+          "method": "Chrome settingsPrivate.setDefaultZoom(2), viewport:null",
+          "before": {
+            "outer": 1440,
+            "inner": 1440,
+            "dpr": 1,
+            "font": "16px",
+            "visualScale": 1
+          },
+          "after": {
+            "outer": 1440,
+            "inner": 720,
+            "dpr": 2,
+            "font": "16px",
+            "visualScale": 1,
+            "root": 720,
+            "body": 720,
+            "lang": "ar"
+          }
+        }
+      },
+      {
+        "locale": "ar",
+        "name": "discover/720/pro/native-200-percent",
+        "status": "PASS",
+        "evidence": {
+          "method": "Chrome settingsPrivate.setDefaultZoom(2), viewport:null",
+          "before": {
+            "outer": 1440,
+            "inner": 1440,
+            "dpr": 1,
+            "font": "16px",
+            "visualScale": 1
+          },
+          "after": {
+            "outer": 1440,
+            "inner": 720,
+            "dpr": 2,
+            "font": "16px",
+            "visualScale": 1,
+            "root": 720,
+            "body": 720,
+            "lang": "ar"
+          }
+        }
+      },
+      {
+        "locale": "ar",
+        "name": "leaderboard/720/simple/native-200-percent",
+        "status": "PASS",
+        "evidence": {
+          "method": "Chrome settingsPrivate.setDefaultZoom(2), viewport:null",
+          "before": {
+            "outer": 1440,
+            "inner": 1440,
+            "dpr": 1,
+            "font": "16px",
+            "visualScale": 1
+          },
+          "after": {
+            "outer": 1440,
+            "inner": 720,
+            "dpr": 2,
+            "font": "16px",
+            "visualScale": 1,
+            "root": 720,
+            "body": 720,
+            "lang": "ar"
+          }
+        }
+      },
+      {
+        "locale": "ar",
+        "name": "leaderboard/720/pro/native-200-percent",
+        "status": "PASS",
+        "evidence": {
+          "method": "Chrome settingsPrivate.setDefaultZoom(2), viewport:null",
+          "before": {
+            "outer": 1440,
+            "inner": 1440,
+            "dpr": 1,
+            "font": "16px",
+            "visualScale": 1
+          },
+          "after": {
+            "outer": 1440,
+            "inner": 720,
+            "dpr": 2,
+            "font": "16px",
+            "visualScale": 1,
+            "root": 720,
+            "body": 720,
+            "lang": "ar"
+          }
+        }
+      },
+      {
+        "locale": "ar",
+        "name": "detail/720/simple/native-200-percent",
+        "status": "PASS",
+        "evidence": {
+          "method": "Chrome settingsPrivate.setDefaultZoom(2), viewport:null",
+          "before": {
+            "outer": 1440,
+            "inner": 1440,
+            "dpr": 1,
+            "font": "16px",
+            "visualScale": 1
+          },
+          "after": {
+            "outer": 1440,
+            "inner": 720,
+            "dpr": 2,
+            "font": "16px",
+            "visualScale": 1,
+            "root": 720,
+            "body": 720,
+            "lang": "ar"
+          }
+        }
+      },
+      {
+        "locale": "ar",
+        "name": "detail/720/pro/native-200-percent",
+        "status": "PASS",
+        "evidence": {
+          "method": "Chrome settingsPrivate.setDefaultZoom(2), viewport:null",
+          "before": {
+            "outer": 1440,
+            "inner": 1440,
+            "dpr": 1,
+            "font": "16px",
+            "visualScale": 1
+          },
+          "after": {
+            "outer": 1440,
+            "inner": 720,
+            "dpr": 2,
+            "font": "16px",
+            "visualScale": 1,
+            "root": 720,
+            "body": 720,
+            "lang": "ar"
+          }
+        }
+      },
+      {
+        "locale": "ar",
+        "name": "factors/720/simple/native-200-percent",
+        "status": "PASS",
+        "evidence": {
+          "method": "Chrome settingsPrivate.setDefaultZoom(2), viewport:null",
+          "before": {
+            "outer": 1440,
+            "inner": 1440,
+            "dpr": 1,
+            "font": "16px",
+            "visualScale": 1
+          },
+          "after": {
+            "outer": 1440,
+            "inner": 720,
+            "dpr": 2,
+            "font": "16px",
+            "visualScale": 1,
+            "root": 720,
+            "body": 720,
+            "lang": "ar"
+          }
+        }
+      },
+      {
+        "locale": "ar",
+        "name": "factors/720/pro/native-200-percent",
+        "status": "PASS",
+        "evidence": {
+          "method": "Chrome settingsPrivate.setDefaultZoom(2), viewport:null",
+          "before": {
+            "outer": 1440,
+            "inner": 1440,
+            "dpr": 1,
+            "font": "16px",
+            "visualScale": 1
+          },
+          "after": {
+            "outer": 1440,
+            "inner": 720,
+            "dpr": 2,
+            "font": "16px",
+            "visualScale": 1,
+            "root": 720,
+            "body": 720,
+            "lang": "ar"
+          }
+        }
+      },
+      {
+        "locale": "ar",
+        "name": "regime/720/simple/native-200-percent",
+        "status": "PASS",
+        "evidence": {
+          "method": "Chrome settingsPrivate.setDefaultZoom(2), viewport:null",
+          "before": {
+            "outer": 1440,
+            "inner": 1440,
+            "dpr": 1,
+            "font": "16px",
+            "visualScale": 1
+          },
+          "after": {
+            "outer": 1440,
+            "inner": 720,
+            "dpr": 2,
+            "font": "16px",
+            "visualScale": 1,
+            "root": 720,
+            "body": 720,
+            "lang": "ar"
+          }
+        }
+      },
+      {
+        "locale": "ar",
+        "name": "regime/720/pro/native-200-percent",
+        "status": "PASS",
+        "evidence": {
+          "method": "Chrome settingsPrivate.setDefaultZoom(2), viewport:null",
+          "before": {
+            "outer": 1440,
+            "inner": 1440,
+            "dpr": 1,
+            "font": "16px",
+            "visualScale": 1
+          },
+          "after": {
+            "outer": 1440,
+            "inner": 720,
+            "dpr": 2,
+            "font": "16px",
+            "visualScale": 1,
+            "root": 720,
+            "body": 720,
+            "lang": "ar"
+          }
+        }
+      },
+      {
+        "locale": "ar",
+        "name": "track-record/720/simple/native-200-percent",
+        "status": "PASS",
+        "evidence": {
+          "method": "Chrome settingsPrivate.setDefaultZoom(2), viewport:null",
+          "before": {
+            "outer": 1440,
+            "inner": 1440,
+            "dpr": 1,
+            "font": "16px",
+            "visualScale": 1
+          },
+          "after": {
+            "outer": 1440,
+            "inner": 720,
+            "dpr": 2,
+            "font": "16px",
+            "visualScale": 1,
+            "root": 720,
+            "body": 720,
+            "lang": "ar"
+          }
+        }
+      },
+      {
+        "locale": "ar",
+        "name": "track-record/720/pro/native-200-percent",
+        "status": "PASS",
+        "evidence": {
+          "method": "Chrome settingsPrivate.setDefaultZoom(2), viewport:null",
+          "before": {
+            "outer": 1440,
+            "inner": 1440,
+            "dpr": 1,
+            "font": "16px",
+            "visualScale": 1
+          },
+          "after": {
+            "outer": 1440,
+            "inner": 720,
+            "dpr": 2,
+            "font": "16px",
+            "visualScale": 1,
+            "root": 720,
+            "body": 720,
+            "lang": "ar"
+          }
+        }
+      },
+      {
+        "locale": "ar",
+        "name": "trace/720/simple/native-200-percent",
+        "status": "PASS",
+        "evidence": {
+          "method": "Chrome settingsPrivate.setDefaultZoom(2), viewport:null",
+          "before": {
+            "outer": 1440,
+            "inner": 1440,
+            "dpr": 1,
+            "font": "16px",
+            "visualScale": 1
+          },
+          "after": {
+            "outer": 1440,
+            "inner": 720,
+            "dpr": 2,
+            "font": "16px",
+            "visualScale": 1,
+            "root": 720,
+            "body": 720,
+            "lang": "ar"
+          }
+        }
+      },
+      {
+        "locale": "ar",
+        "name": "trace/720/pro/native-200-percent",
+        "status": "PASS",
+        "evidence": {
+          "method": "Chrome settingsPrivate.setDefaultZoom(2), viewport:null",
+          "before": {
+            "outer": 1440,
+            "inner": 1440,
+            "dpr": 1,
+            "font": "16px",
+            "visualScale": 1
+          },
+          "after": {
+            "outer": 1440,
+            "inner": 720,
+            "dpr": 2,
+            "font": "16px",
+            "visualScale": 1,
+            "root": 720,
+            "body": 720,
+            "lang": "ar"
+          }
+        }
+      },
+      {
+        "locale": "ar",
+        "name": "discover/320/simple/native-200-percent",
+        "status": "PASS",
+        "evidence": {
+          "method": "Chrome settingsPrivate.setDefaultZoom(2), viewport:null",
+          "before": {
+            "outer": 1440,
+            "inner": 1440,
+            "dpr": 1,
+            "font": "16px",
+            "visualScale": 1
+          },
+          "after": {
+            "outer": 640,
+            "inner": 320,
+            "dpr": 2,
+            "font": "16px",
+            "visualScale": 1,
+            "root": 320,
+            "body": 320,
+            "lang": "ar"
+          }
+        }
+      },
+      {
+        "locale": "ar",
+        "name": "discover/320/pro/native-200-percent",
+        "status": "PASS",
+        "evidence": {
+          "method": "Chrome settingsPrivate.setDefaultZoom(2), viewport:null",
+          "before": {
+            "outer": 1440,
+            "inner": 1440,
+            "dpr": 1,
+            "font": "16px",
+            "visualScale": 1
+          },
+          "after": {
+            "outer": 640,
+            "inner": 320,
+            "dpr": 2,
+            "font": "16px",
+            "visualScale": 1,
+            "root": 320,
+            "body": 320,
+            "lang": "ar"
+          }
+        }
+      },
+      {
+        "locale": "ar",
+        "name": "leaderboard/320/simple/native-200-percent",
+        "status": "PASS",
+        "evidence": {
+          "method": "Chrome settingsPrivate.setDefaultZoom(2), viewport:null",
+          "before": {
+            "outer": 1440,
+            "inner": 1440,
+            "dpr": 1,
+            "font": "16px",
+            "visualScale": 1
+          },
+          "after": {
+            "outer": 640,
+            "inner": 320,
+            "dpr": 2,
+            "font": "16px",
+            "visualScale": 1,
+            "root": 320,
+            "body": 320,
+            "lang": "ar"
+          }
+        }
+      },
+      {
+        "locale": "ar",
+        "name": "leaderboard/320/pro/native-200-percent",
+        "status": "PASS",
+        "evidence": {
+          "method": "Chrome settingsPrivate.setDefaultZoom(2), viewport:null",
+          "before": {
+            "outer": 1440,
+            "inner": 1440,
+            "dpr": 1,
+            "font": "16px",
+            "visualScale": 1
+          },
+          "after": {
+            "outer": 640,
+            "inner": 320,
+            "dpr": 2,
+            "font": "16px",
+            "visualScale": 1,
+            "root": 320,
+            "body": 320,
+            "lang": "ar"
+          }
+        }
+      },
+      {
+        "locale": "ar",
+        "name": "detail/320/simple/native-200-percent",
+        "status": "PASS",
+        "evidence": {
+          "method": "Chrome settingsPrivate.setDefaultZoom(2), viewport:null",
+          "before": {
+            "outer": 1440,
+            "inner": 1440,
+            "dpr": 1,
+            "font": "16px",
+            "visualScale": 1
+          },
+          "after": {
+            "outer": 640,
+            "inner": 320,
+            "dpr": 2,
+            "font": "16px",
+            "visualScale": 1,
+            "root": 320,
+            "body": 320,
+            "lang": "ar"
+          }
+        }
+      },
+      {
+        "locale": "ar",
+        "name": "detail/320/pro/native-200-percent",
+        "status": "PASS",
+        "evidence": {
+          "method": "Chrome settingsPrivate.setDefaultZoom(2), viewport:null",
+          "before": {
+            "outer": 1440,
+            "inner": 1440,
+            "dpr": 1,
+            "font": "16px",
+            "visualScale": 1
+          },
+          "after": {
+            "outer": 640,
+            "inner": 320,
+            "dpr": 2,
+            "font": "16px",
+            "visualScale": 1,
+            "root": 320,
+            "body": 320,
+            "lang": "ar"
+          }
+        }
+      },
+      {
+        "locale": "ar",
+        "name": "factors/320/simple/native-200-percent",
+        "status": "PASS",
+        "evidence": {
+          "method": "Chrome settingsPrivate.setDefaultZoom(2), viewport:null",
+          "before": {
+            "outer": 1440,
+            "inner": 1440,
+            "dpr": 1,
+            "font": "16px",
+            "visualScale": 1
+          },
+          "after": {
+            "outer": 640,
+            "inner": 320,
+            "dpr": 2,
+            "font": "16px",
+            "visualScale": 1,
+            "root": 320,
+            "body": 320,
+            "lang": "ar"
+          }
+        }
+      },
+      {
+        "locale": "ar",
+        "name": "factors/320/pro/native-200-percent",
+        "status": "PASS",
+        "evidence": {
+          "method": "Chrome settingsPrivate.setDefaultZoom(2), viewport:null",
+          "before": {
+            "outer": 1440,
+            "inner": 1440,
+            "dpr": 1,
+            "font": "16px",
+            "visualScale": 1
+          },
+          "after": {
+            "outer": 640,
+            "inner": 320,
+            "dpr": 2,
+            "font": "16px",
+            "visualScale": 1,
+            "root": 320,
+            "body": 320,
+            "lang": "ar"
+          }
+        }
+      },
+      {
+        "locale": "ar",
+        "name": "regime/320/simple/native-200-percent",
+        "status": "PASS",
+        "evidence": {
+          "method": "Chrome settingsPrivate.setDefaultZoom(2), viewport:null",
+          "before": {
+            "outer": 1440,
+            "inner": 1440,
+            "dpr": 1,
+            "font": "16px",
+            "visualScale": 1
+          },
+          "after": {
+            "outer": 640,
+            "inner": 320,
+            "dpr": 2,
+            "font": "16px",
+            "visualScale": 1,
+            "root": 320,
+            "body": 320,
+            "lang": "ar"
+          }
+        }
+      },
+      {
+        "locale": "ar",
+        "name": "regime/320/pro/native-200-percent",
+        "status": "PASS",
+        "evidence": {
+          "method": "Chrome settingsPrivate.setDefaultZoom(2), viewport:null",
+          "before": {
+            "outer": 1440,
+            "inner": 1440,
+            "dpr": 1,
+            "font": "16px",
+            "visualScale": 1
+          },
+          "after": {
+            "outer": 640,
+            "inner": 320,
+            "dpr": 2,
+            "font": "16px",
+            "visualScale": 1,
+            "root": 320,
+            "body": 320,
+            "lang": "ar"
+          }
+        }
+      },
+      {
+        "locale": "ar",
+        "name": "track-record/320/simple/native-200-percent",
+        "status": "PASS",
+        "evidence": {
+          "method": "Chrome settingsPrivate.setDefaultZoom(2), viewport:null",
+          "before": {
+            "outer": 1440,
+            "inner": 1440,
+            "dpr": 1,
+            "font": "16px",
+            "visualScale": 1
+          },
+          "after": {
+            "outer": 640,
+            "inner": 320,
+            "dpr": 2,
+            "font": "16px",
+            "visualScale": 1,
+            "root": 320,
+            "body": 320,
+            "lang": "ar"
+          }
+        }
+      },
+      {
+        "locale": "ar",
+        "name": "track-record/320/pro/native-200-percent",
+        "status": "PASS",
+        "evidence": {
+          "method": "Chrome settingsPrivate.setDefaultZoom(2), viewport:null",
+          "before": {
+            "outer": 1440,
+            "inner": 1440,
+            "dpr": 1,
+            "font": "16px",
+            "visualScale": 1
+          },
+          "after": {
+            "outer": 640,
+            "inner": 320,
+            "dpr": 2,
+            "font": "16px",
+            "visualScale": 1,
+            "root": 320,
+            "body": 320,
+            "lang": "ar"
+          }
+        }
+      },
+      {
+        "locale": "ar",
+        "name": "trace/320/simple/native-200-percent",
+        "status": "PASS",
+        "evidence": {
+          "method": "Chrome settingsPrivate.setDefaultZoom(2), viewport:null",
+          "before": {
+            "outer": 1440,
+            "inner": 1440,
+            "dpr": 1,
+            "font": "16px",
+            "visualScale": 1
+          },
+          "after": {
+            "outer": 640,
+            "inner": 320,
+            "dpr": 2,
+            "font": "16px",
+            "visualScale": 1,
+            "root": 320,
+            "body": 320,
+            "lang": "ar"
+          }
+        }
+      },
+      {
+        "locale": "ar",
+        "name": "trace/320/pro/native-200-percent",
+        "status": "PASS",
+        "evidence": {
+          "method": "Chrome settingsPrivate.setDefaultZoom(2), viewport:null",
+          "before": {
+            "outer": 1440,
+            "inner": 1440,
+            "dpr": 1,
+            "font": "16px",
+            "visualScale": 1
+          },
+          "after": {
+            "outer": 640,
+            "inner": 320,
+            "dpr": 2,
+            "font": "16px",
+            "visualScale": 1,
+            "root": 320,
+            "body": 320,
+            "lang": "ar"
+          }
+        }
+      }
+    ]
+  }
+}

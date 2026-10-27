@@ -1,0 +1,2 @@
+PASS: 614 application keys in 11 locales; all placeholders and nonempty values match.
+PASS: 528 explicit authored source sites; no remaining English JSX prose outside declared brands/technical tokens.

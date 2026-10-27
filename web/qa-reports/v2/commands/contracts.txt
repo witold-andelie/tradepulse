@@ -1,0 +1,24 @@
+
+> tradepulse-web@0.1.0 check:contracts
+> node scripts/check-contracts.mjs
+
+ok   ${REPO}/contracts/fixtures/run_output.fixture.json
+ok   trace line 1
+ok   trace line 2
+ok   trace line 3
+ok   trace line 4
+ok   trace line 5
+ok   trace line 6
+ok   trace line 7
+ok   trace line 8
+ok   trace line 9
+ok   trace line 10
+ok   trace line 11
+ok   trace line 12
+ok   trace line 13
+ok   trace line 14
+ok   trace line 15
+ok   trace line 16
+ok   trace line 17
+ok   trace line 18
+ok   trace line 19

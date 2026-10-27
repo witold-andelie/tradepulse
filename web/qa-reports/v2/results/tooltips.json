@@ -1,0 +1,1207 @@
+{
+  "revision": "4e61b5009777985096a81b195e3371fa7616e5b1",
+  "results": [
+    {
+      "locale": "en",
+      "name": "leaderboard",
+      "status": "PASS",
+      "evidence": {
+        "confine": true,
+        "renderMode": "richText",
+        "renderedTooltip": [
+          "",
+          "Instruments: —",
+          "Mean score: —"
+        ],
+        "screenshot": "en-leaderboard.png"
+      }
+    },
+    {
+      "locale": "en",
+      "name": "detail",
+      "status": "PASS",
+      "evidence": {
+        "confine": true,
+        "renderMode": "richText",
+        "renderedTooltip": [
+          "1-month momentum",
+          "",
+          "  ",
+          "+0.78"
+        ],
+        "screenshot": "en-detail.png"
+      }
+    },
+    {
+      "locale": "en",
+      "name": "factors",
+      "status": "PASS",
+      "evidence": {
+        "confine": true,
+        "renderMode": "richText",
+        "renderedTooltip": [
+          "Horizon: 1 day",
+          "Mean IC: +0.02",
+          "t-stat: 2.85",
+          "n: 250"
+        ],
+        "screenshot": "en-factors.png"
+      }
+    },
+    {
+      "locale": "en",
+      "name": "regime",
+      "status": "PASS",
+      "evidence": {
+        "confine": true,
+        "renderMode": "richText",
+        "renderedTooltip": [
+          "2026-09-21",
+          "normal",
+          "Points: 0 of 5"
+        ],
+        "screenshot": "en-regime.png"
+      }
+    },
+    {
+      "locale": "en",
+      "name": "track-record",
+      "status": "PASS",
+      "evidence": {
+        "confine": true,
+        "renderMode": "richText",
+        "renderedTooltip": [
+          "Mean score percentile: 0.1",
+          "Share beating benchmark: 0.097",
+          "n: 44",
+          "Bucket: 0–0.2"
+        ],
+        "screenshot": "en-track-record.png"
+      }
+    },
+    {
+      "locale": "en",
+      "name": "trace",
+      "status": "PASS",
+      "evidence": {
+        "confine": true,
+        "renderMode": "richText",
+        "renderedTooltip": [
+          "guard_request",
+          "Start: 2026-10-22T08:00:00Z",
+          "End: 2026-10-22T08:00:00.005000Z",
+          "Timestamp interval: 5 ms",
+          "Reported duration: 407 ms"
+        ],
+        "screenshot": "en-trace.png"
+      }
+    },
+    {
+      "locale": "zh-CN",
+      "name": "leaderboard",
+      "status": "PASS",
+      "evidence": {
+        "confine": true,
+        "renderMode": "richText",
+        "renderedTooltip": [
+          "",
+          "标的数：—",
+          "平均分数：—"
+        ],
+        "screenshot": "zh-CN-leaderboard.png"
+      }
+    },
+    {
+      "locale": "zh-CN",
+      "name": "detail",
+      "status": "PASS",
+      "evidence": {
+        "confine": true,
+        "renderMode": "richText",
+        "renderedTooltip": [
+          "一个月动量",
+          "",
+          "  ",
+          "+0.78"
+        ],
+        "screenshot": "zh-CN-detail.png"
+      }
+    },
+    {
+      "locale": "zh-CN",
+      "name": "factors",
+      "status": "PASS",
+      "evidence": {
+        "confine": true,
+        "renderMode": "richText",
+        "renderedTooltip": [
+          "研究期限：1天",
+          "平均IC：+0.02",
+          "t统计量：2.85",
+          "n：250"
+        ],
+        "screenshot": "zh-CN-factors.png"
+      }
+    },
+    {
+      "locale": "zh-CN",
+      "name": "regime",
+      "status": "PASS",
+      "evidence": {
+        "confine": true,
+        "renderMode": "richText",
+        "renderedTooltip": [
+          "2026-09-21",
+          "normal",
+          "分数：0/5"
+        ],
+        "screenshot": "zh-CN-regime.png"
+      }
+    },
+    {
+      "locale": "zh-CN",
+      "name": "track-record",
+      "status": "PASS",
+      "evidence": {
+        "confine": true,
+        "renderMode": "richText",
+        "renderedTooltip": [
+          "平均分数百分位：0.1",
+          "跑赢基准比例：0.097",
+          "n：44",
+          "区间：0–0.2"
+        ],
+        "screenshot": "zh-CN-track-record.png"
+      }
+    },
+    {
+      "locale": "zh-CN",
+      "name": "trace",
+      "status": "PASS",
+      "evidence": {
+        "confine": true,
+        "renderMode": "richText",
+        "renderedTooltip": [
+          "guard_request",
+          "开始：2026-10-22T08:00:00Z",
+          "结束：2026-10-22T08:00:00.005000Z",
+          "时间戳间隔：5 ms",
+          "报告时长：407 ms"
+        ],
+        "screenshot": "zh-CN-trace.png"
+      }
+    },
+    {
+      "locale": "zh-TW",
+      "name": "leaderboard",
+      "status": "PASS",
+      "evidence": {
+        "confine": true,
+        "renderMode": "richText",
+        "renderedTooltip": [
+          "",
+          "標的數：—",
+          "平均分數：—"
+        ],
+        "screenshot": "zh-TW-leaderboard.png"
+      }
+    },
+    {
+      "locale": "zh-TW",
+      "name": "detail",
+      "status": "PASS",
+      "evidence": {
+        "confine": true,
+        "renderMode": "richText",
+        "renderedTooltip": [
+          "一個月動能",
+          "",
+          "  ",
+          "+0.78"
+        ],
+        "screenshot": "zh-TW-detail.png"
+      }
+    },
+    {
+      "locale": "zh-TW",
+      "name": "factors",
+      "status": "PASS",
+      "evidence": {
+        "confine": true,
+        "renderMode": "richText",
+        "renderedTooltip": [
+          "研究期間：1天",
+          "平均IC：+0.02",
+          "t統計量：2.85",
+          "n：250"
+        ],
+        "screenshot": "zh-TW-factors.png"
+      }
+    },
+    {
+      "locale": "zh-TW",
+      "name": "regime",
+      "status": "PASS",
+      "evidence": {
+        "confine": true,
+        "renderMode": "richText",
+        "renderedTooltip": [
+          "2026-09-21",
+          "normal",
+          "分數：0/5"
+        ],
+        "screenshot": "zh-TW-regime.png"
+      }
+    },
+    {
+      "locale": "zh-TW",
+      "name": "track-record",
+      "status": "PASS",
+      "evidence": {
+        "confine": true,
+        "renderMode": "richText",
+        "renderedTooltip": [
+          "平均分數百分位：0.1",
+          "優於基準比例：0.097",
+          "n：44",
+          "區間：0–0.2"
+        ],
+        "screenshot": "zh-TW-track-record.png"
+      }
+    },
+    {
+      "locale": "zh-TW",
+      "name": "trace",
+      "status": "PASS",
+      "evidence": {
+        "confine": true,
+        "renderMode": "richText",
+        "renderedTooltip": [
+          "guard_request",
+          "開始：2026-10-22T08:00:00Z",
+          "結束：2026-10-22T08:00:00.005000Z",
+          "時間戳記間隔：5 ms",
+          "報告時長：407 ms"
+        ],
+        "screenshot": "zh-TW-trace.png"
+      }
+    },
+    {
+      "locale": "es",
+      "name": "leaderboard",
+      "status": "PASS",
+      "evidence": {
+        "confine": true,
+        "renderMode": "richText",
+        "renderedTooltip": [
+          "",
+          "Instrumentos: —",
+          "Puntuación media: —"
+        ],
+        "screenshot": "es-leaderboard.png"
+      }
+    },
+    {
+      "locale": "es",
+      "name": "detail",
+      "status": "PASS",
+      "evidence": {
+        "confine": true,
+        "renderMode": "richText",
+        "renderedTooltip": [
+          "Momento a un mes",
+          "",
+          "  ",
+          "+0.78"
+        ],
+        "screenshot": "es-detail.png"
+      }
+    },
+    {
+      "locale": "es",
+      "name": "factors",
+      "status": "PASS",
+      "evidence": {
+        "confine": true,
+        "renderMode": "richText",
+        "renderedTooltip": [
+          "Horizonte: 1 día",
+          "IC medio: +0.02",
+          "Estadístico t: 2.85",
+          "n: 250"
+        ],
+        "screenshot": "es-factors.png"
+      }
+    },
+    {
+      "locale": "es",
+      "name": "regime",
+      "status": "PASS",
+      "evidence": {
+        "confine": true,
+        "renderMode": "richText",
+        "renderedTooltip": [
+          "2026-09-21",
+          "normal",
+          "Puntos: 0 de 5"
+        ],
+        "screenshot": "es-regime.png"
+      }
+    },
+    {
+      "locale": "es",
+      "name": "track-record",
+      "status": "PASS",
+      "evidence": {
+        "confine": true,
+        "renderMode": "richText",
+        "renderedTooltip": [
+          "Percentil medio: 0.1",
+          "Proporción sobre índice: 0.097",
+          "n: 44",
+          "Intervalo: 0–0.2"
+        ],
+        "screenshot": "es-track-record.png"
+      }
+    },
+    {
+      "locale": "es",
+      "name": "trace",
+      "status": "PASS",
+      "evidence": {
+        "confine": true,
+        "renderMode": "richText",
+        "renderedTooltip": [
+          "guard_request",
+          "Inicio: 2026-10-22T08:00:00Z",
+          "Fin: 2026-10-22T08:00:00.005000Z",
+          "Intervalo: 5 ms",
+          "Duración declarada: 407 ms"
+        ],
+        "screenshot": "es-trace.png"
+      }
+    },
+    {
+      "locale": "fr",
+      "name": "leaderboard",
+      "status": "PASS",
+      "evidence": {
+        "confine": true,
+        "renderMode": "richText",
+        "renderedTooltip": [
+          "",
+          "Instruments : —",
+          "Score moyen : —"
+        ],
+        "screenshot": "fr-leaderboard.png"
+      }
+    },
+    {
+      "locale": "fr",
+      "name": "detail",
+      "status": "PASS",
+      "evidence": {
+        "confine": true,
+        "renderMode": "richText",
+        "renderedTooltip": [
+          "Momentum sur un mois",
+          "",
+          "  ",
+          "+0.78"
+        ],
+        "screenshot": "fr-detail.png"
+      }
+    },
+    {
+      "locale": "fr",
+      "name": "factors",
+      "status": "PASS",
+      "evidence": {
+        "confine": true,
+        "renderMode": "richText",
+        "renderedTooltip": [
+          "Horizon : 1 jour",
+          "IC moyen : +0.02",
+          "Statistique t : 2.85",
+          "n : 250"
+        ],
+        "screenshot": "fr-factors.png"
+      }
+    },
+    {
+      "locale": "fr",
+      "name": "regime",
+      "status": "PASS",
+      "evidence": {
+        "confine": true,
+        "renderMode": "richText",
+        "renderedTooltip": [
+          "2026-09-21",
+          "normal",
+          "Points : 0 sur 5"
+        ],
+        "screenshot": "fr-regime.png"
+      }
+    },
+    {
+      "locale": "fr",
+      "name": "track-record",
+      "status": "PASS",
+      "evidence": {
+        "confine": true,
+        "renderMode": "richText",
+        "renderedTooltip": [
+          "Percentile moyen : 0.1",
+          "Part dépassant l’indice : 0.097",
+          "n : 44",
+          "Tranche : 0–0.2"
+        ],
+        "screenshot": "fr-track-record.png"
+      }
+    },
+    {
+      "locale": "fr",
+      "name": "trace",
+      "status": "PASS",
+      "evidence": {
+        "confine": true,
+        "renderMode": "richText",
+        "renderedTooltip": [
+          "guard_request",
+          "Début : 2026-10-22T08:00:00Z",
+          "Fin : 2026-10-22T08:00:00.005000Z",
+          "Intervalle : 5 ms",
+          "Durée déclarée : 407 ms"
+        ],
+        "screenshot": "fr-trace.png"
+      }
+    },
+    {
+      "locale": "de",
+      "name": "leaderboard",
+      "status": "PASS",
+      "evidence": {
+        "confine": true,
+        "renderMode": "richText",
+        "renderedTooltip": [
+          "",
+          "Instrumente: —",
+          "Mittlerer Score: —"
+        ],
+        "screenshot": "de-leaderboard.png"
+      }
+    },
+    {
+      "locale": "de",
+      "name": "detail",
+      "status": "PASS",
+      "evidence": {
+        "confine": true,
+        "renderMode": "richText",
+        "renderedTooltip": [
+          "Einmonatsmomentum",
+          "",
+          "  ",
+          "+0.78"
+        ],
+        "screenshot": "de-detail.png"
+      }
+    },
+    {
+      "locale": "de",
+      "name": "factors",
+      "status": "PASS",
+      "evidence": {
+        "confine": true,
+        "renderMode": "richText",
+        "renderedTooltip": [
+          "Horizont: 1 Tag",
+          "Mittlerer IC: +0.02",
+          "t-Statistik: 2.85",
+          "n: 250"
+        ],
+        "screenshot": "de-factors.png"
+      }
+    },
+    {
+      "locale": "de",
+      "name": "regime",
+      "status": "PASS",
+      "evidence": {
+        "confine": true,
+        "renderMode": "richText",
+        "renderedTooltip": [
+          "2026-09-21",
+          "normal",
+          "Punkte: 0 von 5"
+        ],
+        "screenshot": "de-regime.png"
+      }
+    },
+    {
+      "locale": "de",
+      "name": "track-record",
+      "status": "PASS",
+      "evidence": {
+        "confine": true,
+        "renderMode": "richText",
+        "renderedTooltip": [
+          "Mittleres Perzentil: 0.1",
+          "Anteil über Benchmark: 0.097",
+          "n: 44",
+          "Bereich: 0–0.2"
+        ],
+        "screenshot": "de-track-record.png"
+      }
+    },
+    {
+      "locale": "de",
+      "name": "trace",
+      "status": "PASS",
+      "evidence": {
+        "confine": true,
+        "renderMode": "richText",
+        "renderedTooltip": [
+          "guard_request",
+          "Beginn: 2026-10-22T08:00:00Z",
+          "Ende: 2026-10-22T08:00:00.005000Z",
+          "Zeitintervall: 5 ms",
+          "Berichtete Dauer: 407 ms"
+        ],
+        "screenshot": "de-trace.png"
+      }
+    },
+    {
+      "locale": "pt-BR",
+      "name": "leaderboard",
+      "status": "PASS",
+      "evidence": {
+        "confine": true,
+        "renderMode": "richText",
+        "renderedTooltip": [
+          "",
+          "Instrumentos: —",
+          "Pontuação média: —"
+        ],
+        "screenshot": "pt-BR-leaderboard.png"
+      }
+    },
+    {
+      "locale": "pt-BR",
+      "name": "detail",
+      "status": "PASS",
+      "evidence": {
+        "confine": true,
+        "renderMode": "richText",
+        "renderedTooltip": [
+          "Momentum de um mês",
+          "",
+          "  ",
+          "+0.78"
+        ],
+        "screenshot": "pt-BR-detail.png"
+      }
+    },
+    {
+      "locale": "pt-BR",
+      "name": "factors",
+      "status": "PASS",
+      "evidence": {
+        "confine": true,
+        "renderMode": "richText",
+        "renderedTooltip": [
+          "Horizonte: 1 dia",
+          "IC médio: +0.02",
+          "Estatística t: 2.85",
+          "n: 250"
+        ],
+        "screenshot": "pt-BR-factors.png"
+      }
+    },
+    {
+      "locale": "pt-BR",
+      "name": "regime",
+      "status": "PASS",
+      "evidence": {
+        "confine": true,
+        "renderMode": "richText",
+        "renderedTooltip": [
+          "2026-09-21",
+          "normal",
+          "Pontos: 0 de 5"
+        ],
+        "screenshot": "pt-BR-regime.png"
+      }
+    },
+    {
+      "locale": "pt-BR",
+      "name": "track-record",
+      "status": "PASS",
+      "evidence": {
+        "confine": true,
+        "renderMode": "richText",
+        "renderedTooltip": [
+          "Percentil médio: 0.1",
+          "Parcela acima do índice: 0.097",
+          "n: 44",
+          "Faixa: 0–0.2"
+        ],
+        "screenshot": "pt-BR-track-record.png"
+      }
+    },
+    {
+      "locale": "pt-BR",
+      "name": "trace",
+      "status": "PASS",
+      "evidence": {
+        "confine": true,
+        "renderMode": "richText",
+        "renderedTooltip": [
+          "guard_request",
+          "Início: 2026-10-22T08:00:00Z",
+          "Fim: 2026-10-22T08:00:00.005000Z",
+          "Intervalo: 5 ms",
+          "Duração informada: 407 ms"
+        ],
+        "screenshot": "pt-BR-trace.png"
+      }
+    },
+    {
+      "locale": "ja",
+      "name": "leaderboard",
+      "status": "PASS",
+      "evidence": {
+        "confine": true,
+        "renderMode": "richText",
+        "renderedTooltip": [
+          "",
+          "銘柄数：—",
+          "平均スコア：—"
+        ],
+        "screenshot": "ja-leaderboard.png"
+      }
+    },
+    {
+      "locale": "ja",
+      "name": "detail",
+      "status": "PASS",
+      "evidence": {
+        "confine": true,
+        "renderMode": "richText",
+        "renderedTooltip": [
+          "1か月モメンタム",
+          "",
+          "  ",
+          "+0.78"
+        ],
+        "screenshot": "ja-detail.png"
+      }
+    },
+    {
+      "locale": "ja",
+      "name": "factors",
+      "status": "PASS",
+      "evidence": {
+        "confine": true,
+        "renderMode": "richText",
+        "renderedTooltip": [
+          "対象期間：1日",
+          "平均IC：+0.02",
+          "t統計量：2.85",
+          "n：250"
+        ],
+        "screenshot": "ja-factors.png"
+      }
+    },
+    {
+      "locale": "ja",
+      "name": "regime",
+      "status": "PASS",
+      "evidence": {
+        "confine": true,
+        "renderMode": "richText",
+        "renderedTooltip": [
+          "2026-09-21",
+          "normal",
+          "ポイント：0/5"
+        ],
+        "screenshot": "ja-regime.png"
+      }
+    },
+    {
+      "locale": "ja",
+      "name": "track-record",
+      "status": "PASS",
+      "evidence": {
+        "confine": true,
+        "renderMode": "richText",
+        "renderedTooltip": [
+          "平均百分位：0.1",
+          "ベンチマーク超過比率：0.097",
+          "n：44",
+          "区分：0–0.2"
+        ],
+        "screenshot": "ja-track-record.png"
+      }
+    },
+    {
+      "locale": "ja",
+      "name": "trace",
+      "status": "PASS",
+      "evidence": {
+        "confine": true,
+        "renderMode": "richText",
+        "renderedTooltip": [
+          "guard_request",
+          "開始：2026-10-22T08:00:00Z",
+          "終了：2026-10-22T08:00:00.005000Z",
+          "時刻間隔：5 ms",
+          "報告時間：407 ms"
+        ],
+        "screenshot": "ja-trace.png"
+      }
+    },
+    {
+      "locale": "ko",
+      "name": "leaderboard",
+      "status": "PASS",
+      "evidence": {
+        "confine": true,
+        "renderMode": "richText",
+        "renderedTooltip": [
+          "",
+          "종목 수: —",
+          "평균 점수: —"
+        ],
+        "screenshot": "ko-leaderboard.png"
+      }
+    },
+    {
+      "locale": "ko",
+      "name": "detail",
+      "status": "PASS",
+      "evidence": {
+        "confine": true,
+        "renderMode": "richText",
+        "renderedTooltip": [
+          "1개월 모멘텀",
+          "",
+          "  ",
+          "+0.78"
+        ],
+        "screenshot": "ko-detail.png"
+      }
+    },
+    {
+      "locale": "ko",
+      "name": "factors",
+      "status": "PASS",
+      "evidence": {
+        "confine": true,
+        "renderMode": "richText",
+        "renderedTooltip": [
+          "분석 기간: 1일",
+          "평균 IC: +0.02",
+          "t 통계량: 2.85",
+          "n: 250"
+        ],
+        "screenshot": "ko-factors.png"
+      }
+    },
+    {
+      "locale": "ko",
+      "name": "regime",
+      "status": "PASS",
+      "evidence": {
+        "confine": true,
+        "renderMode": "richText",
+        "renderedTooltip": [
+          "2026-09-21",
+          "normal",
+          "점수: 0/5"
+        ],
+        "screenshot": "ko-regime.png"
+      }
+    },
+    {
+      "locale": "ko",
+      "name": "track-record",
+      "status": "PASS",
+      "evidence": {
+        "confine": true,
+        "renderMode": "richText",
+        "renderedTooltip": [
+          "평균 백분위: 0.1",
+          "벤치마크 초과 비율: 0.097",
+          "n: 44",
+          "구간: 0–0.2"
+        ],
+        "screenshot": "ko-track-record.png"
+      }
+    },
+    {
+      "locale": "ko",
+      "name": "trace",
+      "status": "PASS",
+      "evidence": {
+        "confine": true,
+        "renderMode": "richText",
+        "renderedTooltip": [
+          "guard_request",
+          "시작: 2026-10-22T08:00:00Z",
+          "종료: 2026-10-22T08:00:00.005000Z",
+          "시각 간격: 5 ms",
+          "보고 시간: 407 ms"
+        ],
+        "screenshot": "ko-trace.png"
+      }
+    },
+    {
+      "locale": "cs",
+      "name": "leaderboard",
+      "status": "PASS",
+      "evidence": {
+        "confine": true,
+        "renderMode": "richText",
+        "renderedTooltip": [
+          "",
+          "Instrumenty: —",
+          "Průměrné skóre: —"
+        ],
+        "screenshot": "cs-leaderboard.png"
+      }
+    },
+    {
+      "locale": "cs",
+      "name": "detail",
+      "status": "PASS",
+      "evidence": {
+        "confine": true,
+        "renderMode": "richText",
+        "renderedTooltip": [
+          "Měsíční momentum",
+          "",
+          "  ",
+          "+0.78"
+        ],
+        "screenshot": "cs-detail.png"
+      }
+    },
+    {
+      "locale": "cs",
+      "name": "factors",
+      "status": "PASS",
+      "evidence": {
+        "confine": true,
+        "renderMode": "richText",
+        "renderedTooltip": [
+          "Horizont: 1 den",
+          "Průměrné IC: +0.02",
+          "t-statistika: 2.85",
+          "n: 250"
+        ],
+        "screenshot": "cs-factors.png"
+      }
+    },
+    {
+      "locale": "cs",
+      "name": "regime",
+      "status": "PASS",
+      "evidence": {
+        "confine": true,
+        "renderMode": "richText",
+        "renderedTooltip": [
+          "2026-09-21",
+          "normal",
+          "Body: 0 z 5"
+        ],
+        "screenshot": "cs-regime.png"
+      }
+    },
+    {
+      "locale": "cs",
+      "name": "track-record",
+      "status": "PASS",
+      "evidence": {
+        "confine": true,
+        "renderMode": "richText",
+        "renderedTooltip": [
+          "Průměrný percentil: 0.1",
+          "Podíl nad benchmarkem: 0.097",
+          "n: 44",
+          "Pásmo: 0–0.2"
+        ],
+        "screenshot": "cs-track-record.png"
+      }
+    },
+    {
+      "locale": "cs",
+      "name": "trace",
+      "status": "PASS",
+      "evidence": {
+        "confine": true,
+        "renderMode": "richText",
+        "renderedTooltip": [
+          "guard_request",
+          "Začátek: 2026-10-22T08:00:00Z",
+          "Konec: 2026-10-22T08:00:00.005000Z",
+          "Časový interval: 5 ms",
+          "Hlášené trvání: 407 ms"
+        ],
+        "screenshot": "cs-trace.png"
+      }
+    },
+    {
+      "locale": "ar",
+      "name": "leaderboard",
+      "status": "PASS",
+      "evidence": {
+        "confine": true,
+        "renderMode": "richText",
+        "renderedTooltip": [
+          "",
+          "الأصول: —",
+          "متوسط الدرجة: —"
+        ],
+        "screenshot": "ar-leaderboard.png"
+      }
+    },
+    {
+      "locale": "ar",
+      "name": "detail",
+      "status": "PASS",
+      "evidence": {
+        "confine": true,
+        "renderMode": "richText",
+        "renderedTooltip": [
+          "زخم شهر واحد",
+          "",
+          "  ",
+          "+0.78"
+        ],
+        "screenshot": "ar-detail.png"
+      }
+    },
+    {
+      "locale": "ar",
+      "name": "factors",
+      "status": "PASS",
+      "evidence": {
+        "confine": true,
+        "renderMode": "richText",
+        "renderedTooltip": [
+          "الأفق: ⁦1⁩ يوم",
+          "متوسط IC: ⁦+0.02⁩",
+          "إحصاء t: ⁦2.85⁩",
+          "n: ⁦250⁩"
+        ],
+        "screenshot": "ar-factors.png"
+      }
+    },
+    {
+      "locale": "ar",
+      "name": "regime",
+      "status": "PASS",
+      "evidence": {
+        "confine": true,
+        "renderMode": "richText",
+        "renderedTooltip": [
+          "⁦2026-09-21⁩",
+          "⁦normal⁩",
+          "النقاط: ⁦0⁩ من 5"
+        ],
+        "screenshot": "ar-regime.png"
+      }
+    },
+    {
+      "locale": "ar",
+      "name": "track-record",
+      "status": "PASS",
+      "evidence": {
+        "confine": true,
+        "renderMode": "richText",
+        "renderedTooltip": [
+          "متوسط المئين: ⁦0.1⁩",
+          "نسبة التفوق على المؤشر: ⁦0.097⁩",
+          "n: ⁦44⁩",
+          "الفئة: ⁦0⁩–⁦0.2⁩"
+        ],
+        "screenshot": "ar-track-record.png"
+      }
+    },
+    {
+      "locale": "ar",
+      "name": "trace",
+      "status": "PASS",
+      "evidence": {
+        "confine": true,
+        "renderMode": "richText",
+        "renderedTooltip": [
+          "⁦guard_request⁩",
+          "البداية: ⁦2026-10-22T08:00:00Z⁩",
+          "النهاية: ⁦2026-10-22T08:00:00.005000Z⁩",
+          "الفاصل: ⁦5⁩ ms",
+          "المدة المبلّغ عنها: ⁦407⁩ ms"
+        ],
+        "screenshot": "ar-trace.png"
+      }
+    },
+    {
+      "locale": "ar",
+      "name": "signed-value visual geometry",
+      "status": "PASS",
+      "evidence": [
+        {
+          "text": "+0.18",
+          "direction": "ltr",
+          "signX": 895.25,
+          "digitX": 903.25
+        },
+        {
+          "text": "+0.13",
+          "direction": "ltr",
+          "signX": 895.25,
+          "digitX": 903.25
+        },
+        {
+          "text": "+0.06",
+          "direction": "ltr",
+          "signX": 895.25,
+          "digitX": 903.25
+        },
+        {
+          "text": "+0.04",
+          "direction": "ltr",
+          "signX": 895.25,
+          "digitX": 903.25
+        },
+        {
+          "text": "-0.01",
+          "direction": "ltr",
+          "signX": 898.75,
+          "digitX": 903.25
+        },
+        {
+          "text": "-0.02",
+          "direction": "ltr",
+          "signX": 898.75,
+          "digitX": 903.25
+        },
+        {
+          "text": "-0.04",
+          "direction": "ltr",
+          "signX": 898.75,
+          "digitX": 903.25
+        },
+        {
+          "text": "-0.05",
+          "direction": "ltr",
+          "signX": 898.75,
+          "digitX": 903.25
+        },
+        {
+          "text": "-0.08",
+          "direction": "ltr",
+          "signX": 898.75,
+          "digitX": 903.25
+        },
+        {
+          "text": "-0.09",
+          "direction": "ltr",
+          "signX": 898.75,
+          "digitX": 903.25
+        },
+        {
+          "text": "-0.10",
+          "direction": "ltr",
+          "signX": 898.75,
+          "digitX": 903.25
+        },
+        {
+          "text": "+2.18",
+          "direction": "ltr",
+          "signX": 327.28125,
+          "digitX": 335.28125
+        },
+        {
+          "text": "+1.73",
+          "direction": "ltr",
+          "signX": 327.28125,
+          "digitX": 335.28125
+        },
+        {
+          "text": "+1.47",
+          "direction": "ltr",
+          "signX": 327.28125,
+          "digitX": 335.28125
+        },
+        {
+          "text": "+1.39",
+          "direction": "ltr",
+          "signX": 327.28125,
+          "digitX": 335.28125
+        },
+        {
+          "text": "+1.36",
+          "direction": "ltr",
+          "signX": 327.28125,
+          "digitX": 335.28125
+        },
+        {
+          "text": "-1.70",
+          "direction": "ltr",
+          "signX": 69.046875,
+          "digitX": 73.546875
+        },
+        {
+          "text": "-1.68",
+          "direction": "ltr",
+          "signX": 69.046875,
+          "digitX": 73.546875
+        },
+        {
+          "text": "-1.63",
+          "direction": "ltr",
+          "signX": 69.046875,
+          "digitX": 73.546875
+        },
+        {
+          "text": "-1.45",
+          "direction": "ltr",
+          "signX": 69.046875,
+          "digitX": 73.546875
+        },
+        {
+          "text": "-1.44",
+          "direction": "ltr",
+          "signX": 69.046875,
+          "digitX": 73.546875
+        },
+        {
+          "text": "+2.18",
+          "direction": "ltr",
+          "signX": 494.703125,
+          "digitX": 502.703125
+        },
+        {
+          "text": "+59.5 bp",
+          "direction": "ltr",
+          "signX": 301.46875,
+          "digitX": 309.46875
+        },
+        {
+          "text": "+69.5 bp",
+          "direction": "ltr",
+          "signX": 131.078125,
+          "digitX": 139.078125
+        },
+        {
+          "text": "-0.5%",
+          "direction": "ltr",
+          "signX": -65,
+          "digitX": -60.5
+        }
+      ]
+    }
+  ]
+}

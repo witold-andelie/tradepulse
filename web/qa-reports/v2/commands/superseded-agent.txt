@@ -1,0 +1,15 @@
+PASS explained record and four question-led disclosures
+PASS abstention, verified and rejected claims, exact original evidence and missing timing
+PASS same original claims and financial fields across Simple and Pro
+PASS all eleven locales preserve numbers, enums, evidence and original narratives
+PASS Arabic RTL region with isolated LTR identifiers and original text
+PASS locale persistence, invalid preference fallback and blocked storage
+PASS play, pause, resume, stop and exact readable structured speech
+PASS locale changes cancel speech without auto-playing another language
+FAIL route navigation and instrument changes cancel active speech page.waitForFunction: Timeout 12000ms exceeded.
+PASS no explanation and unknown instrument retain honest existing states
+PASS missing voices and unsupported browser remain readable with no silent fallback
+PASS speech errors leave the page and readable research usable
+PASS keyboard disclosures, language selection, focus ring and control labels
+PASS 1440, 768 and 320px layouts in all eleven locales
+PASS clean browser console throughout the normal fixture journeys

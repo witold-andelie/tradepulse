@@ -1,0 +1,177 @@
+PASS en initial load, persisted locale, navigation, filters and empty results
+PASS en rapid Factor Lab pool and status changes retain both filters
+PASS en SYN369 original verdict, source evidence, missing explanation and invalid ticker
+PASS en keyboard Listen entry, all speech controls, stop recovery, error, route cancellation
+PASS en reduced motion and keyboard disclosure/selector operability
+PASS en voice availability {"unsupported":true}
+PASS en voice availability {"empty":true}
+PASS en voice availability {"chineseOnly":true}
+PASS en voice availability {"delayed":true}
+PASS en voice availability {"delayed":true,"eventless":true}
+PASS en API loading
+PASS en API HTTP503
+PASS en API malformed
+PASS en API empty
+PASS en API missing-evidence
+PASS en API summary-only-abstention
+PASS zh-CN initial load, persisted locale, navigation, filters and empty results
+PASS zh-CN rapid Factor Lab pool and status changes retain both filters
+PASS zh-CN SYN369 original verdict, source evidence, missing explanation and invalid ticker
+PASS zh-CN keyboard Listen entry, all speech controls, stop recovery, error, route cancellation
+PASS zh-CN reduced motion and keyboard disclosure/selector operability
+PASS zh-CN voice availability {"unsupported":true}
+PASS zh-CN voice availability {"empty":true}
+PASS zh-CN voice availability {"chineseOnly":true}
+PASS zh-CN voice availability {"delayed":true}
+PASS zh-CN voice availability {"delayed":true,"eventless":true}
+PASS zh-CN API loading
+PASS zh-CN API HTTP503
+PASS zh-CN API malformed
+PASS zh-CN API empty
+PASS zh-CN API missing-evidence
+PASS zh-CN API summary-only-abstention
+PASS zh-TW initial load, persisted locale, navigation, filters and empty results
+PASS zh-TW rapid Factor Lab pool and status changes retain both filters
+PASS zh-TW SYN369 original verdict, source evidence, missing explanation and invalid ticker
+PASS zh-TW keyboard Listen entry, all speech controls, stop recovery, error, route cancellation
+PASS zh-TW reduced motion and keyboard disclosure/selector operability
+PASS zh-TW voice availability {"unsupported":true}
+PASS zh-TW voice availability {"empty":true}
+PASS zh-TW voice availability {"chineseOnly":true}
+PASS zh-TW voice availability {"delayed":true}
+PASS zh-TW voice availability {"delayed":true,"eventless":true}
+PASS zh-TW API loading
+PASS zh-TW API HTTP503
+PASS zh-TW API malformed
+PASS zh-TW API empty
+PASS zh-TW API missing-evidence
+PASS zh-TW API summary-only-abstention
+PASS es initial load, persisted locale, navigation, filters and empty results
+PASS es rapid Factor Lab pool and status changes retain both filters
+PASS es SYN369 original verdict, source evidence, missing explanation and invalid ticker
+PASS es keyboard Listen entry, all speech controls, stop recovery, error, route cancellation
+PASS es reduced motion and keyboard disclosure/selector operability
+PASS es voice availability {"unsupported":true}
+PASS es voice availability {"empty":true}
+PASS es voice availability {"chineseOnly":true}
+PASS es voice availability {"delayed":true}
+PASS es voice availability {"delayed":true,"eventless":true}
+PASS es API loading
+PASS es API HTTP503
+PASS es API malformed
+PASS es API empty
+PASS es API missing-evidence
+PASS es API summary-only-abstention
+PASS fr initial load, persisted locale, navigation, filters and empty results
+PASS fr rapid Factor Lab pool and status changes retain both filters
+PASS fr SYN369 original verdict, source evidence, missing explanation and invalid ticker
+PASS fr keyboard Listen entry, all speech controls, stop recovery, error, route cancellation
+PASS fr reduced motion and keyboard disclosure/selector operability
+PASS fr voice availability {"unsupported":true}
+PASS fr voice availability {"empty":true}
+PASS fr voice availability {"chineseOnly":true}
+PASS fr voice availability {"delayed":true}
+PASS fr voice availability {"delayed":true,"eventless":true}
+PASS fr API loading
+PASS fr API HTTP503
+PASS fr API malformed
+PASS fr API empty
+PASS fr API missing-evidence
+PASS fr API summary-only-abstention
+PASS de initial load, persisted locale, navigation, filters and empty results
+PASS de rapid Factor Lab pool and status changes retain both filters
+PASS de SYN369 original verdict, source evidence, missing explanation and invalid ticker
+PASS de keyboard Listen entry, all speech controls, stop recovery, error, route cancellation
+PASS de reduced motion and keyboard disclosure/selector operability
+PASS de voice availability {"unsupported":true}
+PASS de voice availability {"empty":true}
+PASS de voice availability {"chineseOnly":true}
+PASS de voice availability {"delayed":true}
+PASS de voice availability {"delayed":true,"eventless":true}
+PASS de API loading
+PASS de API HTTP503
+PASS de API malformed
+PASS de API empty
+PASS de API missing-evidence
+PASS de API summary-only-abstention
+PASS pt-BR initial load, persisted locale, navigation, filters and empty results
+PASS pt-BR rapid Factor Lab pool and status changes retain both filters
+PASS pt-BR SYN369 original verdict, source evidence, missing explanation and invalid ticker
+PASS pt-BR keyboard Listen entry, all speech controls, stop recovery, error, route cancellation
+PASS pt-BR reduced motion and keyboard disclosure/selector operability
+PASS pt-BR voice availability {"unsupported":true}
+PASS pt-BR voice availability {"empty":true}
+PASS pt-BR voice availability {"chineseOnly":true}
+PASS pt-BR voice availability {"delayed":true}
+PASS pt-BR voice availability {"delayed":true,"eventless":true}
+PASS pt-BR API loading
+PASS pt-BR API HTTP503
+PASS pt-BR API malformed
+PASS pt-BR API empty
+PASS pt-BR API missing-evidence
+PASS pt-BR API summary-only-abstention
+PASS ja initial load, persisted locale, navigation, filters and empty results
+PASS ja rapid Factor Lab pool and status changes retain both filters
+PASS ja SYN369 original verdict, source evidence, missing explanation and invalid ticker
+PASS ja keyboard Listen entry, all speech controls, stop recovery, error, route cancellation
+PASS ja reduced motion and keyboard disclosure/selector operability
+PASS ja voice availability {"unsupported":true}
+PASS ja voice availability {"empty":true}
+PASS ja voice availability {"chineseOnly":true}
+PASS ja voice availability {"delayed":true}
+PASS ja voice availability {"delayed":true,"eventless":true}
+PASS ja API loading
+PASS ja API HTTP503
+PASS ja API malformed
+PASS ja API empty
+PASS ja API missing-evidence
+PASS ja API summary-only-abstention
+PASS ko initial load, persisted locale, navigation, filters and empty results
+PASS ko rapid Factor Lab pool and status changes retain both filters
+PASS ko SYN369 original verdict, source evidence, missing explanation and invalid ticker
+PASS ko keyboard Listen entry, all speech controls, stop recovery, error, route cancellation
+PASS ko reduced motion and keyboard disclosure/selector operability
+PASS ko voice availability {"unsupported":true}
+PASS ko voice availability {"empty":true}
+PASS ko voice availability {"chineseOnly":true}
+PASS ko voice availability {"delayed":true}
+PASS ko voice availability {"delayed":true,"eventless":true}
+PASS ko API loading
+PASS ko API HTTP503
+PASS ko API malformed
+PASS ko API empty
+PASS ko API missing-evidence
+PASS ko API summary-only-abstention
+PASS cs initial load, persisted locale, navigation, filters and empty results
+PASS cs rapid Factor Lab pool and status changes retain both filters
+PASS cs SYN369 original verdict, source evidence, missing explanation and invalid ticker
+PASS cs keyboard Listen entry, all speech controls, stop recovery, error, route cancellation
+PASS cs reduced motion and keyboard disclosure/selector operability
+PASS cs voice availability {"unsupported":true}
+PASS cs voice availability {"empty":true}
+PASS cs voice availability {"chineseOnly":true}
+PASS cs voice availability {"delayed":true}
+PASS cs voice availability {"delayed":true,"eventless":true}
+PASS cs API loading
+PASS cs API HTTP503
+PASS cs API malformed
+PASS cs API empty
+PASS cs API missing-evidence
+PASS cs API summary-only-abstention
+PASS ar initial load, persisted locale, navigation, filters and empty results
+PASS ar rapid Factor Lab pool and status changes retain both filters
+PASS ar SYN369 original verdict, source evidence, missing explanation and invalid ticker
+PASS ar keyboard Listen entry, all speech controls, stop recovery, error, route cancellation
+PASS ar reduced motion and keyboard disclosure/selector operability
+PASS ar voice availability {"unsupported":true}
+PASS ar voice availability {"empty":true}
+PASS ar voice availability {"chineseOnly":true}
+PASS ar voice availability {"delayed":true}
+PASS ar voice availability {"delayed":true,"eventless":true}
+PASS ar API loading
+PASS ar API HTTP503
+PASS ar API malformed
+PASS ar API empty
+PASS ar API missing-evidence
+PASS ar API summary-only-abstention
+176/176 states checks passed

@@ -1,5 +1,10 @@
 # Agent research accessibility experiment
 
+Historical scope note: the guide-only approval below describes 25 October. On 27 October,
+the lead approved global authored UI localization and merged PR #8 (`a4d49a7`). Remaining
+acceptance now belongs to the lead; see [V2_LEAD_FOLLOWUP.md](V2_LEAD_FOLLOWUP.md). Original
+measurements below are preserved and do not certify the later global implementation.
+
 Current status, 25 October 2026: the lead explicitly approved merging the experiment and
 fixing review findings afterwards. Merge `9a0d76d` preserves original commit `b64ef94`.
 The guide-only multilingual exception is approved; native/accessibility acceptance below

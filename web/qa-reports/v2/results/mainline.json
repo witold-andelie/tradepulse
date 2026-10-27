@@ -1,0 +1,368 @@
+{
+  "revision": "4e61b5009777985096a81b195e3371fa7616e5b1",
+  "results": [
+    {
+      "locale": "en",
+      "name": "REPLAY Run context and current-main provenance",
+      "status": "PASS",
+      "evidence": {
+        "transport": "browser-mocked",
+        "dataMode": "REPLAY",
+        "canonicalSourceNumbersUnchanged": true
+      }
+    },
+    {
+      "locale": "en",
+      "name": "REAL Run context and current-main provenance",
+      "status": "PASS",
+      "evidence": {
+        "transport": "browser-mocked",
+        "dataMode": "REAL",
+        "canonicalSourceNumbersUnchanged": true
+      }
+    },
+    {
+      "locale": "en",
+      "name": "failed stage, timing discrepancy and event order survive localization",
+      "status": "PASS",
+      "evidence": {
+        "transport": "browser-mocked",
+        "failedStage": "guard_request",
+        "start": "2026-10-22T08:00:00Z",
+        "end": "2026-10-22T08:00:00.005000Z",
+        "reportedMs": 407,
+        "sourceEventsNotReordered": true
+      }
+    },
+    {
+      "locale": "zh-CN",
+      "name": "REPLAY Run context and current-main provenance",
+      "status": "PASS",
+      "evidence": {
+        "transport": "browser-mocked",
+        "dataMode": "REPLAY",
+        "canonicalSourceNumbersUnchanged": true
+      }
+    },
+    {
+      "locale": "zh-CN",
+      "name": "REAL Run context and current-main provenance",
+      "status": "PASS",
+      "evidence": {
+        "transport": "browser-mocked",
+        "dataMode": "REAL",
+        "canonicalSourceNumbersUnchanged": true
+      }
+    },
+    {
+      "locale": "zh-CN",
+      "name": "failed stage, timing discrepancy and event order survive localization",
+      "status": "PASS",
+      "evidence": {
+        "transport": "browser-mocked",
+        "failedStage": "guard_request",
+        "start": "2026-10-22T08:00:00Z",
+        "end": "2026-10-22T08:00:00.005000Z",
+        "reportedMs": 407,
+        "sourceEventsNotReordered": true
+      }
+    },
+    {
+      "locale": "zh-TW",
+      "name": "REPLAY Run context and current-main provenance",
+      "status": "PASS",
+      "evidence": {
+        "transport": "browser-mocked",
+        "dataMode": "REPLAY",
+        "canonicalSourceNumbersUnchanged": true
+      }
+    },
+    {
+      "locale": "zh-TW",
+      "name": "REAL Run context and current-main provenance",
+      "status": "PASS",
+      "evidence": {
+        "transport": "browser-mocked",
+        "dataMode": "REAL",
+        "canonicalSourceNumbersUnchanged": true
+      }
+    },
+    {
+      "locale": "zh-TW",
+      "name": "failed stage, timing discrepancy and event order survive localization",
+      "status": "PASS",
+      "evidence": {
+        "transport": "browser-mocked",
+        "failedStage": "guard_request",
+        "start": "2026-10-22T08:00:00Z",
+        "end": "2026-10-22T08:00:00.005000Z",
+        "reportedMs": 407,
+        "sourceEventsNotReordered": true
+      }
+    },
+    {
+      "locale": "es",
+      "name": "REPLAY Run context and current-main provenance",
+      "status": "PASS",
+      "evidence": {
+        "transport": "browser-mocked",
+        "dataMode": "REPLAY",
+        "canonicalSourceNumbersUnchanged": true
+      }
+    },
+    {
+      "locale": "es",
+      "name": "REAL Run context and current-main provenance",
+      "status": "PASS",
+      "evidence": {
+        "transport": "browser-mocked",
+        "dataMode": "REAL",
+        "canonicalSourceNumbersUnchanged": true
+      }
+    },
+    {
+      "locale": "es",
+      "name": "failed stage, timing discrepancy and event order survive localization",
+      "status": "PASS",
+      "evidence": {
+        "transport": "browser-mocked",
+        "failedStage": "guard_request",
+        "start": "2026-10-22T08:00:00Z",
+        "end": "2026-10-22T08:00:00.005000Z",
+        "reportedMs": 407,
+        "sourceEventsNotReordered": true
+      }
+    },
+    {
+      "locale": "fr",
+      "name": "REPLAY Run context and current-main provenance",
+      "status": "PASS",
+      "evidence": {
+        "transport": "browser-mocked",
+        "dataMode": "REPLAY",
+        "canonicalSourceNumbersUnchanged": true
+      }
+    },
+    {
+      "locale": "fr",
+      "name": "REAL Run context and current-main provenance",
+      "status": "PASS",
+      "evidence": {
+        "transport": "browser-mocked",
+        "dataMode": "REAL",
+        "canonicalSourceNumbersUnchanged": true
+      }
+    },
+    {
+      "locale": "fr",
+      "name": "failed stage, timing discrepancy and event order survive localization",
+      "status": "PASS",
+      "evidence": {
+        "transport": "browser-mocked",
+        "failedStage": "guard_request",
+        "start": "2026-10-22T08:00:00Z",
+        "end": "2026-10-22T08:00:00.005000Z",
+        "reportedMs": 407,
+        "sourceEventsNotReordered": true
+      }
+    },
+    {
+      "locale": "de",
+      "name": "REPLAY Run context and current-main provenance",
+      "status": "PASS",
+      "evidence": {
+        "transport": "browser-mocked",
+        "dataMode": "REPLAY",
+        "canonicalSourceNumbersUnchanged": true
+      }
+    },
+    {
+      "locale": "de",
+      "name": "REAL Run context and current-main provenance",
+      "status": "PASS",
+      "evidence": {
+        "transport": "browser-mocked",
+        "dataMode": "REAL",
+        "canonicalSourceNumbersUnchanged": true
+      }
+    },
+    {
+      "locale": "de",
+      "name": "failed stage, timing discrepancy and event order survive localization",
+      "status": "PASS",
+      "evidence": {
+        "transport": "browser-mocked",
+        "failedStage": "guard_request",
+        "start": "2026-10-22T08:00:00Z",
+        "end": "2026-10-22T08:00:00.005000Z",
+        "reportedMs": 407,
+        "sourceEventsNotReordered": true
+      }
+    },
+    {
+      "locale": "pt-BR",
+      "name": "REPLAY Run context and current-main provenance",
+      "status": "PASS",
+      "evidence": {
+        "transport": "browser-mocked",
+        "dataMode": "REPLAY",
+        "canonicalSourceNumbersUnchanged": true
+      }
+    },
+    {
+      "locale": "pt-BR",
+      "name": "REAL Run context and current-main provenance",
+      "status": "PASS",
+      "evidence": {
+        "transport": "browser-mocked",
+        "dataMode": "REAL",
+        "canonicalSourceNumbersUnchanged": true
+      }
+    },
+    {
+      "locale": "pt-BR",
+      "name": "failed stage, timing discrepancy and event order survive localization",
+      "status": "PASS",
+      "evidence": {
+        "transport": "browser-mocked",
+        "failedStage": "guard_request",
+        "start": "2026-10-22T08:00:00Z",
+        "end": "2026-10-22T08:00:00.005000Z",
+        "reportedMs": 407,
+        "sourceEventsNotReordered": true
+      }
+    },
+    {
+      "locale": "ja",
+      "name": "REPLAY Run context and current-main provenance",
+      "status": "PASS",
+      "evidence": {
+        "transport": "browser-mocked",
+        "dataMode": "REPLAY",
+        "canonicalSourceNumbersUnchanged": true
+      }
+    },
+    {
+      "locale": "ja",
+      "name": "REAL Run context and current-main provenance",
+      "status": "PASS",
+      "evidence": {
+        "transport": "browser-mocked",
+        "dataMode": "REAL",
+        "canonicalSourceNumbersUnchanged": true
+      }
+    },
+    {
+      "locale": "ja",
+      "name": "failed stage, timing discrepancy and event order survive localization",
+      "status": "PASS",
+      "evidence": {
+        "transport": "browser-mocked",
+        "failedStage": "guard_request",
+        "start": "2026-10-22T08:00:00Z",
+        "end": "2026-10-22T08:00:00.005000Z",
+        "reportedMs": 407,
+        "sourceEventsNotReordered": true
+      }
+    },
+    {
+      "locale": "ko",
+      "name": "REPLAY Run context and current-main provenance",
+      "status": "PASS",
+      "evidence": {
+        "transport": "browser-mocked",
+        "dataMode": "REPLAY",
+        "canonicalSourceNumbersUnchanged": true
+      }
+    },
+    {
+      "locale": "ko",
+      "name": "REAL Run context and current-main provenance",
+      "status": "PASS",
+      "evidence": {
+        "transport": "browser-mocked",
+        "dataMode": "REAL",
+        "canonicalSourceNumbersUnchanged": true
+      }
+    },
+    {
+      "locale": "ko",
+      "name": "failed stage, timing discrepancy and event order survive localization",
+      "status": "PASS",
+      "evidence": {
+        "transport": "browser-mocked",
+        "failedStage": "guard_request",
+        "start": "2026-10-22T08:00:00Z",
+        "end": "2026-10-22T08:00:00.005000Z",
+        "reportedMs": 407,
+        "sourceEventsNotReordered": true
+      }
+    },
+    {
+      "locale": "cs",
+      "name": "REPLAY Run context and current-main provenance",
+      "status": "PASS",
+      "evidence": {
+        "transport": "browser-mocked",
+        "dataMode": "REPLAY",
+        "canonicalSourceNumbersUnchanged": true
+      }
+    },
+    {
+      "locale": "cs",
+      "name": "REAL Run context and current-main provenance",
+      "status": "PASS",
+      "evidence": {
+        "transport": "browser-mocked",
+        "dataMode": "REAL",
+        "canonicalSourceNumbersUnchanged": true
+      }
+    },
+    {
+      "locale": "cs",
+      "name": "failed stage, timing discrepancy and event order survive localization",
+      "status": "PASS",
+      "evidence": {
+        "transport": "browser-mocked",
+        "failedStage": "guard_request",
+        "start": "2026-10-22T08:00:00Z",
+        "end": "2026-10-22T08:00:00.005000Z",
+        "reportedMs": 407,
+        "sourceEventsNotReordered": true
+      }
+    },
+    {
+      "locale": "ar",
+      "name": "REPLAY Run context and current-main provenance",
+      "status": "PASS",
+      "evidence": {
+        "transport": "browser-mocked",
+        "dataMode": "REPLAY",
+        "canonicalSourceNumbersUnchanged": true
+      }
+    },
+    {
+      "locale": "ar",
+      "name": "REAL Run context and current-main provenance",
+      "status": "PASS",
+      "evidence": {
+        "transport": "browser-mocked",
+        "dataMode": "REAL",
+        "canonicalSourceNumbersUnchanged": true
+      }
+    },
+    {
+      "locale": "ar",
+      "name": "failed stage, timing discrepancy and event order survive localization",
+      "status": "PASS",
+      "evidence": {
+        "transport": "browser-mocked",
+        "failedStage": "guard_request",
+        "start": "2026-10-22T08:00:00Z",
+        "end": "2026-10-22T08:00:00.005000Z",
+        "reportedMs": 407,
+        "sourceEventsNotReordered": true
+      }
+    }
+  ]
+}

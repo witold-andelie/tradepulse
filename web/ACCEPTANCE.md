@@ -8,6 +8,12 @@ The main baseline includes Huyin's implementation and recorded integration check
 `INTEGRATION.md` and `../docs/STATUS.md`. Items below are continuing acceptance requirements,
 not a declaration that every native/accessibility or real-backend check has passed.
 
+Explicit lead exception, 27 October: PR #8 was merged at `a4d49a7` before remaining native
+acceptance, at the lead's request. This is implementation acceptance, not a claim that every
+checkbox below passed. Ownership and the time-bounded follow-up are in
+[V2_LEAD_FOLLOWUP.md](V2_LEAD_FOLLOWUP.md). Audible/cross-browser voice tests and human
+editorial across all eleven languages are deferred by the lead, not assigned back to Huyin.
+
 ## Automated (must pass)
 
 ```
@@ -71,9 +77,9 @@ These need no extra packages. They use Chrome DevTools and the free axe DevTools
 - [ ] No `console.log` left in components. The browser console shows no errors or warnings on any
   page.
 - [ ] No secrets, external fonts, analytics or CDN links.
-- [ ] Everything is in English except the lead-approved localized research-guide labels.
-  Original source narratives, financial values and enums remain unchanged. The guide still
-  needs its own accessibility acceptance; previous-page results do not certify new controls.
+- [ ] English implementation/docs and lead-approved authored UI catalogs only. Global labels
+  are approved through PR #8. Original source narratives, financial values, identifiers and
+  enums remain unchanged. Native acceptance remains explicit; prior tests do not certify it.
 
 ## PR checklist (copy into the PR description)
 

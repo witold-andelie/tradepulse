@@ -1,0 +1,26 @@
+[
+  {
+    "url": "https://github.com/witold-andelie/tradepulse/pull/1",
+    "number": 1,
+    "state": "closed",
+    "draft": false,
+    "merged": true,
+    "base": "main",
+    "base_sha": "a5c685dfad7f4e710e2edc6d48dcc15c5428879f",
+    "head": "b/b1-helpers",
+    "head_sha": "c8e1d7da9bf18fd78ee297896e9a60b61cf857ea",
+    "updated_at": "2026-10-24T00:43:32Z"
+  },
+  {
+    "url": "https://github.com/witold-andelie/tradepulse/pull/2",
+    "number": 2,
+    "state": "closed",
+    "draft": true,
+    "merged": true,
+    "base": "main",
+    "base_sha": "a5c685dfad7f4e710e2edc6d48dcc15c5428879f",
+    "head": "b/b2-b10-frontend",
+    "head_sha": "a4a516909aae88b324f95ab5facbf6fd4b531ae2",
+    "updated_at": "2026-10-24T00:43:32Z"
+  }
+]

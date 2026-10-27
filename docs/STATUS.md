@@ -1,4 +1,20 @@
-# Project status — 26 October 2026
+# Project status — 27 October 2026
+
+## Latest frontend decision
+
+The lead approved merging Huyin's global localization V2 before remaining native acceptance.
+PR #8 is merged as `a4d49a7`, preserving her original implementation history. Global authored
+UI translations are approved; original source narratives, financial values and enums stay
+unchanged. Independent review passed 130 frontend tests, contracts, dictionary checks, build
+and 21 English/Chinese/Arabic narrow-screen pages. Focused contrast follow-up also passed;
+see [lead-owned acceptance](../web/V2_LEAD_FOLLOWUP.md) for measured scope and limitations.
+
+The lead owns the brief native screen-reader check. It remains NOT TESTED: this Windows
+environment has no NVDA at the checked standard installation paths and its native automation
+bridge is unavailable. Actual speech/cross-browser voices and eleven-language human editorial
+are explicitly deferred. Huyin is not assigned further V2 delivery. The older dated sections
+below retain historical measurements and may describe superseded ownership or service plans;
+the active sponsor-integration branch has its own current acceptance record.
 
 This is the current implementation and ownership index. Detailed task catalogues remain
 requirements, not evidence of completed deployment or historical market performance.
@@ -17,7 +33,7 @@ The lead approved that guide-only UI exception and took over the two follow-up r
 |---|---|---|
 | Core / lead | Research gates, ranking, regime, walk-forward, grounded extraction, LangGraph explanation/verifier, API/traces, sample launcher, three examples and optional World Model/H-MEM core wiring with offline port tests | Actual engine acceptance, pending/conflict semantics, complete model replay and final media |
 | A / ingest, lead follow-up | Real seven-table lake/sample for 2026-10-23, crypto CSV/provenance, source checks, accepted source exceptions, offline execution and reproducible private full-lake package/verification | Actual S3 upload awaits D's destination/access; model recordings are D's separate dependency |
-| B / Huyin | Six business pages, Discover, Simple/Pro, evidence drill-down, responsive/accessibility interactions, localized guide, independent Lighthouse/axe/native zoom and real-API journeys | New guide's actual NVDA/VoiceOver check, native-speaker editing and audible voice quality |
+| B / Huyin | Six business pages, Discover, Simple/Pro, evidence drill-down, responsive/accessibility interactions, global localization V2 merged in PR #8; original checks and history preserved | Lead owns brief native screen-reader check; human editorial and actual/cross-browser speech explicitly deferred |
 | C / Tanhao | C1–C7 math, 235 C9 property cases, B7–B9 fixes, fixture accessibility acceptance and real-API regressions completed by the lead | Recheck after D supplies fully explained real outputs |
 | D / integrations | SQL templates, DuckDB adapter, registration runner, hosted NIM record/replay client and Python engines client | Zetaris deployment/registration/live client/parity, recorded cassette and TypeScript engines sidecar |
 | Docker | Actual core/web builds, empty-volume startup, non-root core, health ordering, nginx proxy, memory limits and nine passing real-API browser groups | Engines service remains commented out; hosted sponsor acceptance |

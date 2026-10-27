@@ -1,0 +1,53 @@
+{
+  "method": "Actual cold-browser GET requests; gzip level 9; excludes CSS, HTML and non-requested lazy assets.",
+  "results": [
+    {
+      "label": "eager",
+      "route": "/discover",
+      "locale": "en",
+      "networkJavaScript": [
+        {
+          "file": "/assets/index-BtSYFHkf.js",
+          "bytes": 1124843,
+          "gzipLevel9Bytes": 364105
+        },
+        {
+          "file": "/assets/run_output.fixture-DZva71sA.js",
+          "bytes": 579649,
+          "gzipLevel9Bytes": 50974
+        },
+        {
+          "file": "/assets/Discover-DTQtcKY6.js",
+          "bytes": 6457,
+          "gzipLevel9Bytes": 2222
+        }
+      ],
+      "totalBytes": 1710949,
+      "totalGzipLevel9Bytes": 417301
+    },
+    {
+      "label": "lazy",
+      "route": "/discover",
+      "locale": "en",
+      "networkJavaScript": [
+        {
+          "file": "/assets/index-B90qvSNv.js",
+          "bytes": 563185,
+          "gzipLevel9Bytes": 171691
+        },
+        {
+          "file": "/assets/run_output.fixture-DZva71sA.js",
+          "bytes": 579649,
+          "gzipLevel9Bytes": 50974
+        },
+        {
+          "file": "/assets/Discover-NMyLlCKK.js",
+          "bytes": 6457,
+          "gzipLevel9Bytes": 2222
+        }
+      ],
+      "totalBytes": 1149291,
+      "totalGzipLevel9Bytes": 224887
+    }
+  ]
+}

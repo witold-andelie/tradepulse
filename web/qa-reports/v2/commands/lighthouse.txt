@@ -1,0 +1,23 @@
+PASS en detail/1440/lighthouse
+PASS en detail/320/lighthouse
+PASS zh-CN detail/1440/lighthouse
+PASS zh-CN detail/320/lighthouse
+PASS zh-TW detail/1440/lighthouse
+PASS zh-TW detail/320/lighthouse
+PASS es detail/1440/lighthouse
+PASS es detail/320/lighthouse
+PASS fr detail/1440/lighthouse
+PASS fr detail/320/lighthouse
+PASS de detail/1440/lighthouse
+PASS de detail/320/lighthouse
+PASS pt-BR detail/1440/lighthouse
+PASS pt-BR detail/320/lighthouse
+PASS ja detail/1440/lighthouse
+PASS ja detail/320/lighthouse
+PASS ko detail/1440/lighthouse
+PASS ko detail/320/lighthouse
+PASS cs detail/1440/lighthouse
+PASS cs detail/320/lighthouse
+PASS ar detail/1440/lighthouse
+PASS ar detail/320/lighthouse
+22/22

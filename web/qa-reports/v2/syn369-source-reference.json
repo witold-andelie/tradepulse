@@ -1,0 +1,89 @@
+{
+  "fixture": "contracts/fixtures/run_output.fixture.json",
+  "explanation": {
+    "explanation_id": "exp-us_equity-syn369",
+    "pool": "us_equity",
+    "symbol": "SYN369",
+    "verdict": "abstained",
+    "summary": "Synthetic explanation for interface development.",
+    "claims": [
+      {
+        "claim_id": "exp-us_equity-syn369-c1",
+        "text": "SYN369 ranks 4 of 520; the largest contribution comes from pv_mom_1m.",
+        "kind": "factor",
+        "evidence": [
+          {
+            "evidence_id": "ev-exp-us_equity-syn369-1",
+            "query_template": "factor_contributions",
+            "params": {
+              "symbol": "SYN369",
+              "as_of": "2026-10-21"
+            },
+            "rows_sha256": "5bb75cc322abedec20674cc784d4d617b9d21e8eeccc624661399029220c0d29",
+            "source_table": "factor_value",
+            "as_of": "2026-10-21",
+            "url": null
+          }
+        ],
+        "status": "verified",
+        "checks": [
+          {
+            "name": "rerun_hash_match",
+            "passed": true,
+            "detail": "synthetic"
+          },
+          {
+            "name": "contributions_sum",
+            "passed": true,
+            "detail": "synthetic"
+          },
+          {
+            "name": "no_future_data",
+            "passed": true,
+            "detail": "synthetic"
+          }
+        ]
+      },
+      {
+        "claim_id": "exp-us_equity-syn369-c2",
+        "text": "A linked supplier reported a capacity constraint.",
+        "kind": "relation",
+        "evidence": [
+          {
+            "evidence_id": "ev-exp-us_equity-syn369-2",
+            "query_template": "factor_contributions",
+            "params": {
+              "symbol": "SYN369",
+              "as_of": "2026-10-21"
+            },
+            "rows_sha256": "8fd98639a1e7e39c7c0cd4ddc200a86a996c4e082c25cca3ed4fcd6281499710",
+            "source_table": "factor_value",
+            "as_of": "2026-10-21",
+            "url": null
+          }
+        ],
+        "status": "rejected",
+        "checks": [
+          {
+            "name": "cause_before_move",
+            "passed": false,
+            "detail": "synthetic: event dated after the move"
+          }
+        ]
+      }
+    ],
+    "counter_case": [
+      "Part of the move may already be priced in.",
+      "Sector-wide flows could explain the score."
+    ],
+    "ruled_out": [
+      "Index rebalancing (no membership change in the window)."
+    ],
+    "models": {
+      "analyst": "synthetic-analyst",
+      "skeptic": "synthetic-skeptic"
+    },
+    "retries": 2
+  },
+  "limitations": "Generated SYNTHETIC test records; evidence row data and event/movement timestamps are absent. The two different hashes do not prove separate real market observations."
+}

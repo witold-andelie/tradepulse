@@ -1,0 +1,5 @@
+
+> tradepulse-web@0.1.0 test
+> vitest run --reporter=json --outputFile=${QA_ROOT}/stale-guide-red-unit.json
+
+JSON report written to ${QA_ROOT}/stale-guide-red-unit.json

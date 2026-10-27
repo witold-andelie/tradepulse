@@ -1,0 +1,7 @@
+{
+  "expected": "es",
+  "during": "en",
+  "after": "en",
+  "passed": false,
+  "meaning": "A prior guide import fails while the later requested application catalog is still loading."
+}

@@ -1,0 +1,545 @@
+[
+  {
+    "name": "install",
+    "command": [
+      "npm",
+      "ci",
+      "--registry=https://registry.npmjs.org",
+      "--fetch-retries=2",
+      "--fetch-timeout=30000"
+    ],
+    "cwd": "${REPO}/web",
+    "testedCommit": "4e61b5009777985096a81b195e3371fa7616e5b1",
+    "startedAt": "2026-10-27T08:46:22.723422+00:00",
+    "exit": 0
+  },
+  {
+    "name": "unit",
+    "command": [
+      "npm",
+      "test",
+      "--",
+      "--reporter=json",
+      "--outputFile=${QA_ROOT}/final-4e61b50/unit.json"
+    ],
+    "cwd": "${REPO}/web",
+    "testedCommit": "4e61b5009777985096a81b195e3371fa7616e5b1",
+    "startedAt": "2026-10-27T08:46:24.946347+00:00",
+    "exit": 0
+  },
+  {
+    "name": "contracts",
+    "command": [
+      "npm",
+      "run",
+      "check:contracts"
+    ],
+    "cwd": "${REPO}/web",
+    "testedCommit": "4e61b5009777985096a81b195e3371fa7616e5b1",
+    "startedAt": "2026-10-27T08:46:29.632955+00:00",
+    "exit": 0
+  },
+  {
+    "name": "i18n",
+    "command": [
+      "node",
+      "scripts/check-i18n.cjs"
+    ],
+    "cwd": "${REPO}/web",
+    "testedCommit": "4e61b5009777985096a81b195e3371fa7616e5b1",
+    "startedAt": "2026-10-27T08:46:29.898030+00:00",
+    "exit": 0
+  },
+  {
+    "name": "build",
+    "command": [
+      "npm",
+      "run",
+      "build",
+      "--",
+      "--manifest"
+    ],
+    "cwd": "${REPO}/web",
+    "testedCommit": "4e61b5009777985096a81b195e3371fa7616e5b1",
+    "startedAt": "2026-10-27T08:46:30.165168+00:00",
+    "exit": 0
+  },
+  {
+    "name": "audit",
+    "command": [
+      "npm",
+      "audit",
+      "--registry=https://registry.npmjs.org",
+      "--fetch-retries=2",
+      "--fetch-timeout=30000",
+      "--json"
+    ],
+    "cwd": "${REPO}/web",
+    "testedCommit": "4e61b5009777985096a81b195e3371fa7616e5b1",
+    "startedAt": "2026-10-27T08:46:35.595326+00:00",
+    "exit": 0
+  },
+  {
+    "name": "diff",
+    "command": [
+      "git",
+      "diff",
+      "HEAD^",
+      "HEAD",
+      "--check"
+    ],
+    "cwd": "${REPO}/web",
+    "testedCommit": "4e61b5009777985096a81b195e3371fa7616e5b1",
+    "startedAt": "2026-10-27T08:46:36.110960+00:00",
+    "exit": 0
+  },
+  {
+    "name": "api-build",
+    "command": [
+      "npm",
+      "run",
+      "build",
+      "--",
+      "--manifest",
+      "--outDir=${QA_ROOT}/final-4e61b50/api-dist"
+    ],
+    "cwd": "${REPO}/web",
+    "testedCommit": "4e61b5009777985096a81b195e3371fa7616e5b1",
+    "environment": {
+      "VITE_API_BASE": "http://127.0.0.1:5196"
+    },
+    "exit": 0
+  },
+  {
+    "name": "full-diff",
+    "command": [
+      "git",
+      "diff",
+      "eee913ad7b310e277b8b334ab6649e5cb0877bc4",
+      "HEAD",
+      "--check"
+    ],
+    "cwd": "${REPO}",
+    "testedCommit": "4e61b5009777985096a81b195e3371fa7616e5b1",
+    "exit": 0
+  },
+  {
+    "name": "worktree-diff",
+    "command": [
+      "git",
+      "diff",
+      "--check"
+    ],
+    "cwd": "${REPO}",
+    "testedCommit": "4e61b5009777985096a81b195e3371fa7616e5b1",
+    "exit": 0
+  },
+  {
+    "name": "data",
+    "command": [
+      "node",
+      "web/scripts/v2-data-acceptance.cjs"
+    ],
+    "cwd": "${REPO}",
+    "testedCommit": "4e61b5009777985096a81b195e3371fa7616e5b1",
+    "startedAt": "2026-10-27T08:50:20.994289+00:00",
+    "exit": 0,
+    "environment": {
+      "NODE_PATH": "${PLAYWRIGHT_RUNTIME}",
+      "TRADEPULSE_PREVIEW_URL": "http://127.0.0.1:5256",
+      "TRADEPULSE_API_PREVIEW": "http://127.0.0.1:5257",
+      "TRADEPULSE_CHROMIUM": "${CHROMIUM}",
+      "TRADEPULSE_BUILD_DIR": "${QA_ROOT}/final-4e61b50/fixture-dist",
+      "TRADEPULSE_AXE_PATH": "${QA_ROOT}/audit-tools/node_modules/axe-core/axe.min.js",
+      "TRADEPULSE_LIGHTHOUSE_PATH": "${QA_ROOT}/audit-tools/node_modules/lighthouse/core/index.js",
+      "TRADEPULSE_BASELINE_PREVIEW_URL": "http://127.0.0.1:5240",
+      "TRADEPULSE_QA_DIR": "${QA_ROOT}/final-4e61b50/data"
+    }
+  },
+  {
+    "name": "matrix-a",
+    "command": [
+      "node",
+      "web/scripts/full-locale-acceptance.cjs",
+      "matrix"
+    ],
+    "cwd": "${REPO}",
+    "testedCommit": "4e61b5009777985096a81b195e3371fa7616e5b1",
+    "startedAt": "2026-10-27T08:50:20.994514+00:00",
+    "exit": 0,
+    "environment": {
+      "NODE_PATH": "${PLAYWRIGHT_RUNTIME}",
+      "TRADEPULSE_PREVIEW_URL": "http://127.0.0.1:5256",
+      "TRADEPULSE_API_PREVIEW": "http://127.0.0.1:5257",
+      "TRADEPULSE_CHROMIUM": "${CHROMIUM}",
+      "TRADEPULSE_BUILD_DIR": "${QA_ROOT}/final-4e61b50/fixture-dist",
+      "TRADEPULSE_AXE_PATH": "${QA_ROOT}/audit-tools/node_modules/axe-core/axe.min.js",
+      "TRADEPULSE_LIGHTHOUSE_PATH": "${QA_ROOT}/audit-tools/node_modules/lighthouse/core/index.js",
+      "TRADEPULSE_BASELINE_PREVIEW_URL": "http://127.0.0.1:5240",
+      "TRADEPULSE_QA_DIR": "${QA_ROOT}/final-4e61b50/matrix-a",
+      "TRADEPULSE_LOCALES": "en,es,pt-BR,cs"
+    }
+  },
+  {
+    "name": "matrix-b",
+    "command": [
+      "node",
+      "web/scripts/full-locale-acceptance.cjs",
+      "matrix"
+    ],
+    "cwd": "${REPO}",
+    "testedCommit": "4e61b5009777985096a81b195e3371fa7616e5b1",
+    "startedAt": "2026-10-27T08:50:20.994762+00:00",
+    "exit": 0,
+    "environment": {
+      "NODE_PATH": "${PLAYWRIGHT_RUNTIME}",
+      "TRADEPULSE_PREVIEW_URL": "http://127.0.0.1:5256",
+      "TRADEPULSE_API_PREVIEW": "http://127.0.0.1:5257",
+      "TRADEPULSE_CHROMIUM": "${CHROMIUM}",
+      "TRADEPULSE_BUILD_DIR": "${QA_ROOT}/final-4e61b50/fixture-dist",
+      "TRADEPULSE_AXE_PATH": "${QA_ROOT}/audit-tools/node_modules/axe-core/axe.min.js",
+      "TRADEPULSE_LIGHTHOUSE_PATH": "${QA_ROOT}/audit-tools/node_modules/lighthouse/core/index.js",
+      "TRADEPULSE_BASELINE_PREVIEW_URL": "http://127.0.0.1:5240",
+      "TRADEPULSE_QA_DIR": "${QA_ROOT}/final-4e61b50/matrix-b",
+      "TRADEPULSE_LOCALES": "zh-CN,fr,ja,ar"
+    }
+  },
+  {
+    "name": "matrix-c",
+    "command": [
+      "node",
+      "web/scripts/full-locale-acceptance.cjs",
+      "matrix"
+    ],
+    "cwd": "${REPO}",
+    "testedCommit": "4e61b5009777985096a81b195e3371fa7616e5b1",
+    "startedAt": "2026-10-27T08:50:20.997104+00:00",
+    "exit": 0,
+    "environment": {
+      "NODE_PATH": "${PLAYWRIGHT_RUNTIME}",
+      "TRADEPULSE_PREVIEW_URL": "http://127.0.0.1:5256",
+      "TRADEPULSE_API_PREVIEW": "http://127.0.0.1:5257",
+      "TRADEPULSE_CHROMIUM": "${CHROMIUM}",
+      "TRADEPULSE_BUILD_DIR": "${QA_ROOT}/final-4e61b50/fixture-dist",
+      "TRADEPULSE_AXE_PATH": "${QA_ROOT}/audit-tools/node_modules/axe-core/axe.min.js",
+      "TRADEPULSE_LIGHTHOUSE_PATH": "${QA_ROOT}/audit-tools/node_modules/lighthouse/core/index.js",
+      "TRADEPULSE_BASELINE_PREVIEW_URL": "http://127.0.0.1:5240",
+      "TRADEPULSE_QA_DIR": "${QA_ROOT}/final-4e61b50/matrix-c",
+      "TRADEPULSE_LOCALES": "zh-TW,de,ko"
+    }
+  },
+  {
+    "name": "states",
+    "command": [
+      "node",
+      "web/scripts/full-locale-acceptance.cjs",
+      "states"
+    ],
+    "cwd": "${REPO}",
+    "testedCommit": "4e61b5009777985096a81b195e3371fa7616e5b1",
+    "startedAt": "2026-10-27T08:55:42.093540+00:00",
+    "exit": 0,
+    "environment": {
+      "NODE_PATH": "${PLAYWRIGHT_RUNTIME}",
+      "TRADEPULSE_PREVIEW_URL": "http://127.0.0.1:5256",
+      "TRADEPULSE_API_PREVIEW": "http://127.0.0.1:5257",
+      "TRADEPULSE_CHROMIUM": "${CHROMIUM}",
+      "TRADEPULSE_BUILD_DIR": "${QA_ROOT}/final-4e61b50/fixture-dist",
+      "TRADEPULSE_AXE_PATH": "${QA_ROOT}/audit-tools/node_modules/axe-core/axe.min.js",
+      "TRADEPULSE_LIGHTHOUSE_PATH": "${QA_ROOT}/audit-tools/node_modules/lighthouse/core/index.js",
+      "TRADEPULSE_BASELINE_PREVIEW_URL": "http://127.0.0.1:5240",
+      "TRADEPULSE_QA_DIR": "${QA_ROOT}/final-4e61b50/states"
+    }
+  },
+  {
+    "name": "axe",
+    "command": [
+      "node",
+      "web/scripts/v2-accessibility-acceptance.cjs",
+      "axe"
+    ],
+    "cwd": "${REPO}",
+    "testedCommit": "4e61b5009777985096a81b195e3371fa7616e5b1",
+    "startedAt": "2026-10-27T08:57:42.899491+00:00",
+    "exit": 0,
+    "environment": {
+      "NODE_PATH": "${PLAYWRIGHT_RUNTIME}",
+      "TRADEPULSE_PREVIEW_URL": "http://127.0.0.1:5256",
+      "TRADEPULSE_API_PREVIEW": "http://127.0.0.1:5257",
+      "TRADEPULSE_CHROMIUM": "${CHROMIUM}",
+      "TRADEPULSE_BUILD_DIR": "${QA_ROOT}/final-4e61b50/fixture-dist",
+      "TRADEPULSE_AXE_PATH": "${QA_ROOT}/audit-tools/node_modules/axe-core/axe.min.js",
+      "TRADEPULSE_LIGHTHOUSE_PATH": "${QA_ROOT}/audit-tools/node_modules/lighthouse/core/index.js",
+      "TRADEPULSE_BASELINE_PREVIEW_URL": "http://127.0.0.1:5240",
+      "TRADEPULSE_QA_DIR": "${QA_ROOT}/final-4e61b50/axe"
+    }
+  },
+  {
+    "name": "native-zoom",
+    "command": [
+      "node",
+      "web/scripts/v2-accessibility-acceptance.cjs",
+      "zoom"
+    ],
+    "cwd": "${REPO}",
+    "testedCommit": "4e61b5009777985096a81b195e3371fa7616e5b1",
+    "startedAt": "2026-10-27T08:57:53.539905+00:00",
+    "exit": 0,
+    "environment": {
+      "NODE_PATH": "${PLAYWRIGHT_RUNTIME}",
+      "TRADEPULSE_PREVIEW_URL": "http://127.0.0.1:5256",
+      "TRADEPULSE_API_PREVIEW": "http://127.0.0.1:5257",
+      "TRADEPULSE_CHROMIUM": "${CHROMIUM}",
+      "TRADEPULSE_BUILD_DIR": "${QA_ROOT}/final-4e61b50/fixture-dist",
+      "TRADEPULSE_AXE_PATH": "${QA_ROOT}/audit-tools/node_modules/axe-core/axe.min.js",
+      "TRADEPULSE_LIGHTHOUSE_PATH": "${QA_ROOT}/audit-tools/node_modules/lighthouse/core/index.js",
+      "TRADEPULSE_BASELINE_PREVIEW_URL": "http://127.0.0.1:5240",
+      "TRADEPULSE_QA_DIR": "${QA_ROOT}/final-4e61b50/native-zoom"
+    }
+  },
+  {
+    "name": "global",
+    "command": [
+      "node",
+      "web/scripts/global-i18n-acceptance.cjs"
+    ],
+    "cwd": "${REPO}",
+    "testedCommit": "4e61b5009777985096a81b195e3371fa7616e5b1",
+    "startedAt": "2026-10-27T09:03:36.198156+00:00",
+    "exit": 0,
+    "environment": {
+      "NODE_PATH": "${PLAYWRIGHT_RUNTIME}",
+      "TRADEPULSE_PREVIEW_URL": "http://127.0.0.1:5256",
+      "TRADEPULSE_API_PREVIEW": "http://127.0.0.1:5257",
+      "TRADEPULSE_CHROMIUM": "${CHROMIUM}",
+      "TRADEPULSE_BUILD_DIR": "${QA_ROOT}/final-4e61b50/fixture-dist",
+      "TRADEPULSE_AXE_PATH": "${QA_ROOT}/audit-tools/node_modules/axe-core/axe.min.js",
+      "TRADEPULSE_LIGHTHOUSE_PATH": "${QA_ROOT}/audit-tools/node_modules/lighthouse/core/index.js",
+      "TRADEPULSE_BASELINE_PREVIEW_URL": "http://127.0.0.1:5240",
+      "TRADEPULSE_QA_DIR": "${QA_ROOT}/final-4e61b50/global"
+    }
+  },
+  {
+    "name": "lighthouse",
+    "command": [
+      "node",
+      "web/scripts/v2-accessibility-acceptance.cjs",
+      "lighthouse"
+    ],
+    "cwd": "${REPO}",
+    "testedCommit": "4e61b5009777985096a81b195e3371fa7616e5b1",
+    "startedAt": "2026-10-27T09:04:17.895191+00:00",
+    "exit": 0,
+    "environment": {
+      "NODE_PATH": "${PLAYWRIGHT_RUNTIME}",
+      "TRADEPULSE_PREVIEW_URL": "http://127.0.0.1:5256",
+      "TRADEPULSE_API_PREVIEW": "http://127.0.0.1:5257",
+      "TRADEPULSE_CHROMIUM": "${CHROMIUM}",
+      "TRADEPULSE_BUILD_DIR": "${QA_ROOT}/final-4e61b50/fixture-dist",
+      "TRADEPULSE_AXE_PATH": "${QA_ROOT}/audit-tools/node_modules/axe-core/axe.min.js",
+      "TRADEPULSE_LIGHTHOUSE_PATH": "${QA_ROOT}/audit-tools/node_modules/lighthouse/core/index.js",
+      "TRADEPULSE_BASELINE_PREVIEW_URL": "http://127.0.0.1:5240",
+      "TRADEPULSE_QA_DIR": "${QA_ROOT}/final-4e61b50/lighthouse"
+    }
+  },
+  {
+    "name": "original",
+    "command": [
+      "node",
+      "--require",
+      "./web/scripts/pro-view-preload.cjs",
+      "web/scripts/browser-acceptance.cjs"
+    ],
+    "cwd": "${REPO}",
+    "testedCommit": "4e61b5009777985096a81b195e3371fa7616e5b1",
+    "startedAt": "2026-10-27T09:04:40.598745+00:00",
+    "exit": 0,
+    "environment": {
+      "NODE_PATH": "${PLAYWRIGHT_RUNTIME}",
+      "TRADEPULSE_PREVIEW_URL": "http://127.0.0.1:5256",
+      "TRADEPULSE_API_PREVIEW": "http://127.0.0.1:5257",
+      "TRADEPULSE_CHROMIUM": "${CHROMIUM}",
+      "TRADEPULSE_BUILD_DIR": "${QA_ROOT}/final-4e61b50/fixture-dist",
+      "TRADEPULSE_AXE_PATH": "${QA_ROOT}/audit-tools/node_modules/axe-core/axe.min.js",
+      "TRADEPULSE_LIGHTHOUSE_PATH": "${QA_ROOT}/audit-tools/node_modules/lighthouse/core/index.js",
+      "TRADEPULSE_BASELINE_PREVIEW_URL": "http://127.0.0.1:5240",
+      "TRADEPULSE_QA_DIR": "${QA_ROOT}/final-4e61b50/original"
+    }
+  },
+  {
+    "name": "redesign",
+    "command": [
+      "node",
+      "web/scripts/redesign-acceptance.cjs"
+    ],
+    "cwd": "${REPO}",
+    "testedCommit": "4e61b5009777985096a81b195e3371fa7616e5b1",
+    "startedAt": "2026-10-27T09:06:07.197741+00:00",
+    "exit": 0,
+    "environment": {
+      "NODE_PATH": "${PLAYWRIGHT_RUNTIME}",
+      "TRADEPULSE_PREVIEW_URL": "http://127.0.0.1:5256",
+      "TRADEPULSE_API_PREVIEW": "http://127.0.0.1:5257",
+      "TRADEPULSE_CHROMIUM": "${CHROMIUM}",
+      "TRADEPULSE_BUILD_DIR": "${QA_ROOT}/final-4e61b50/fixture-dist",
+      "TRADEPULSE_AXE_PATH": "${QA_ROOT}/audit-tools/node_modules/axe-core/axe.min.js",
+      "TRADEPULSE_LIGHTHOUSE_PATH": "${QA_ROOT}/audit-tools/node_modules/lighthouse/core/index.js",
+      "TRADEPULSE_BASELINE_PREVIEW_URL": "http://127.0.0.1:5240",
+      "TRADEPULSE_QA_DIR": "${QA_ROOT}/final-4e61b50/redesign"
+    }
+  },
+  {
+    "name": "agent",
+    "command": [
+      "node",
+      "web/scripts/agent-research-acceptance.cjs"
+    ],
+    "cwd": "${REPO}",
+    "testedCommit": "4e61b5009777985096a81b195e3371fa7616e5b1",
+    "startedAt": "2026-10-27T09:07:35.805137+00:00",
+    "exit": 0,
+    "environment": {
+      "NODE_PATH": "${PLAYWRIGHT_RUNTIME}",
+      "TRADEPULSE_PREVIEW_URL": "http://127.0.0.1:5256",
+      "TRADEPULSE_API_PREVIEW": "http://127.0.0.1:5257",
+      "TRADEPULSE_CHROMIUM": "${CHROMIUM}",
+      "TRADEPULSE_BUILD_DIR": "${QA_ROOT}/final-4e61b50/fixture-dist",
+      "TRADEPULSE_AXE_PATH": "${QA_ROOT}/audit-tools/node_modules/axe-core/axe.min.js",
+      "TRADEPULSE_LIGHTHOUSE_PATH": "${QA_ROOT}/audit-tools/node_modules/lighthouse/core/index.js",
+      "TRADEPULSE_BASELINE_PREVIEW_URL": "http://127.0.0.1:5240",
+      "TRADEPULSE_QA_DIR": "${QA_ROOT}/final-4e61b50/agent"
+    }
+  },
+  {
+    "name": "loader",
+    "command": [
+      "node",
+      "web/scripts/v2-loader-acceptance.cjs"
+    ],
+    "cwd": "${REPO}",
+    "testedCommit": "4e61b5009777985096a81b195e3371fa7616e5b1",
+    "startedAt": "2026-10-27T09:07:37.090413+00:00",
+    "exit": 0,
+    "environment": {
+      "NODE_PATH": "${PLAYWRIGHT_RUNTIME}",
+      "TRADEPULSE_PREVIEW_URL": "http://127.0.0.1:5256",
+      "TRADEPULSE_API_PREVIEW": "http://127.0.0.1:5257",
+      "TRADEPULSE_CHROMIUM": "${CHROMIUM}",
+      "TRADEPULSE_BUILD_DIR": "${QA_ROOT}/final-4e61b50/fixture-dist",
+      "TRADEPULSE_AXE_PATH": "${QA_ROOT}/audit-tools/node_modules/axe-core/axe.min.js",
+      "TRADEPULSE_LIGHTHOUSE_PATH": "${QA_ROOT}/audit-tools/node_modules/lighthouse/core/index.js",
+      "TRADEPULSE_BASELINE_PREVIEW_URL": "http://127.0.0.1:5240",
+      "TRADEPULSE_QA_DIR": "${QA_ROOT}/final-4e61b50/loader"
+    }
+  },
+  {
+    "name": "mainline",
+    "command": [
+      "node",
+      "web/scripts/v2-mainline-acceptance.cjs"
+    ],
+    "cwd": "${REPO}",
+    "testedCommit": "4e61b5009777985096a81b195e3371fa7616e5b1",
+    "startedAt": "2026-10-27T09:07:52.801257+00:00",
+    "exit": 0,
+    "environment": {
+      "NODE_PATH": "${PLAYWRIGHT_RUNTIME}",
+      "TRADEPULSE_PREVIEW_URL": "http://127.0.0.1:5256",
+      "TRADEPULSE_API_PREVIEW": "http://127.0.0.1:5257",
+      "TRADEPULSE_CHROMIUM": "${CHROMIUM}",
+      "TRADEPULSE_BUILD_DIR": "${QA_ROOT}/final-4e61b50/fixture-dist",
+      "TRADEPULSE_AXE_PATH": "${QA_ROOT}/audit-tools/node_modules/axe-core/axe.min.js",
+      "TRADEPULSE_LIGHTHOUSE_PATH": "${QA_ROOT}/audit-tools/node_modules/lighthouse/core/index.js",
+      "TRADEPULSE_BASELINE_PREVIEW_URL": "http://127.0.0.1:5240",
+      "TRADEPULSE_QA_DIR": "${QA_ROOT}/final-4e61b50/mainline"
+    }
+  },
+  {
+    "name": "tooltips",
+    "command": [
+      "node",
+      "web/scripts/v2-tooltip-acceptance.cjs"
+    ],
+    "cwd": "${REPO}",
+    "testedCommit": "4e61b5009777985096a81b195e3371fa7616e5b1",
+    "startedAt": "2026-10-27T09:08:07.854130+00:00",
+    "exit": 0,
+    "environment": {
+      "NODE_PATH": "${PLAYWRIGHT_RUNTIME}",
+      "TRADEPULSE_PREVIEW_URL": "http://127.0.0.1:5256",
+      "TRADEPULSE_API_PREVIEW": "http://127.0.0.1:5257",
+      "TRADEPULSE_CHROMIUM": "${CHROMIUM}",
+      "TRADEPULSE_BUILD_DIR": "${QA_ROOT}/final-4e61b50/fixture-dist",
+      "TRADEPULSE_AXE_PATH": "${QA_ROOT}/audit-tools/node_modules/axe-core/axe.min.js",
+      "TRADEPULSE_LIGHTHOUSE_PATH": "${QA_ROOT}/audit-tools/node_modules/lighthouse/core/index.js",
+      "TRADEPULSE_BASELINE_PREVIEW_URL": "http://127.0.0.1:5240",
+      "TRADEPULSE_QA_DIR": "${QA_ROOT}/final-4e61b50/tooltips"
+    }
+  },
+  {
+    "name": "api",
+    "command": [
+      "node",
+      "web/scripts/global-i18n-api-acceptance.cjs"
+    ],
+    "cwd": "${REPO}",
+    "testedCommit": "4e61b5009777985096a81b195e3371fa7616e5b1",
+    "startedAt": "2026-10-27T09:08:27.795340+00:00",
+    "exit": 0,
+    "environment": {
+      "NODE_PATH": "${PLAYWRIGHT_RUNTIME}",
+      "TRADEPULSE_PREVIEW_URL": "http://127.0.0.1:5257",
+      "TRADEPULSE_API_PREVIEW": "http://127.0.0.1:5257",
+      "TRADEPULSE_CHROMIUM": "${CHROMIUM}",
+      "TRADEPULSE_BUILD_DIR": "${QA_ROOT}/final-4e61b50/fixture-dist",
+      "TRADEPULSE_AXE_PATH": "${QA_ROOT}/audit-tools/node_modules/axe-core/axe.min.js",
+      "TRADEPULSE_LIGHTHOUSE_PATH": "${QA_ROOT}/audit-tools/node_modules/lighthouse/core/index.js",
+      "TRADEPULSE_BASELINE_PREVIEW_URL": "http://127.0.0.1:5240",
+      "TRADEPULSE_QA_DIR": "${QA_ROOT}/final-4e61b50/api"
+    }
+  },
+  {
+    "name": "contrast",
+    "command": [
+      "node",
+      "web/scripts/accessibility-check.cjs"
+    ],
+    "cwd": "${REPO}",
+    "testedCommit": "4e61b5009777985096a81b195e3371fa7616e5b1",
+    "startedAt": "2026-10-27T09:08:51.546499+00:00",
+    "exit": 0,
+    "environment": {
+      "NODE_PATH": "${PLAYWRIGHT_RUNTIME}",
+      "TRADEPULSE_PREVIEW_URL": "http://127.0.0.1:5256",
+      "TRADEPULSE_API_PREVIEW": "http://127.0.0.1:5257",
+      "TRADEPULSE_CHROMIUM": "${CHROMIUM}",
+      "TRADEPULSE_BUILD_DIR": "${QA_ROOT}/final-4e61b50/fixture-dist",
+      "TRADEPULSE_AXE_PATH": "${QA_ROOT}/audit-tools/node_modules/axe-core/axe.min.js",
+      "TRADEPULSE_LIGHTHOUSE_PATH": "${QA_ROOT}/audit-tools/node_modules/lighthouse/core/index.js",
+      "TRADEPULSE_BASELINE_PREVIEW_URL": "http://127.0.0.1:5240",
+      "TRADEPULSE_QA_DIR": "${QA_ROOT}/final-4e61b50/contrast"
+    }
+  },
+  {
+    "name": "reproductions",
+    "command": [
+      "node",
+      "web/scripts/v2-historical-reproductions.cjs"
+    ],
+    "cwd": "${REPO}",
+    "testedCommit": "4e61b5009777985096a81b195e3371fa7616e5b1",
+    "startedAt": "2026-10-27T09:09:09.902038+00:00",
+    "exit": 0,
+    "environment": {
+      "NODE_PATH": "${PLAYWRIGHT_RUNTIME}",
+      "TRADEPULSE_PREVIEW_URL": "http://127.0.0.1:5256",
+      "TRADEPULSE_API_PREVIEW": "http://127.0.0.1:5257",
+      "TRADEPULSE_CHROMIUM": "${CHROMIUM}",
+      "TRADEPULSE_BUILD_DIR": "${QA_ROOT}/final-4e61b50/fixture-dist",
+      "TRADEPULSE_AXE_PATH": "${QA_ROOT}/audit-tools/node_modules/axe-core/axe.min.js",
+      "TRADEPULSE_LIGHTHOUSE_PATH": "${QA_ROOT}/audit-tools/node_modules/lighthouse/core/index.js",
+      "TRADEPULSE_BASELINE_PREVIEW_URL": "http://127.0.0.1:5240",
+      "TRADEPULSE_QA_DIR": "${QA_ROOT}/final-4e61b50/reproductions"
+    }
+  }
+]

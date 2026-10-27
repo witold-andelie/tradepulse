@@ -1,0 +1,42 @@
+{
+  "verifiedAtUtc": "2026-10-27T09:17:15.868530+00:00",
+  "branch": "refs/heads/b/global-i18n-accessibility-v2-20261026",
+  "implementationSha": "4e61b5009777985096a81b195e3371fa7616e5b1",
+  "remoteSha": "4e61b5009777985096a81b195e3371fa7616e5b1",
+  "historicalBranchesAndMainUnchanged": true,
+  "branchesCreatedByThisV2Task": 1,
+  "otherContributorBranchObserved": "refs/heads/lead/sponsor-integration-wip-20261027 was independently added after the original snapshot, already existed before this push and was not changed by it.",
+  "refsBeforeThisPush": {
+    "refs/heads/a/ingest-pipeline": "e30df0e3285b92fe09c09d0326c4c5553e51c3e5",
+    "refs/heads/b/agent-accessibility-demo-20261025": "b64ef94abb79e58a12742aba0f4fd1fbfaa107be",
+    "refs/heads/b/agent-accessible-ui": "f9c8e0bc076ab7df6a111bcd04ea599ed704bf2e",
+    "refs/heads/b/b1-helpers": "c8e1d7da9bf18fd78ee297896e9a60b61cf857ea",
+    "refs/heads/b/b2-b10-frontend": "a4a516909aae88b324f95ab5facbf6fd4b531ae2",
+    "refs/heads/b/global-i18n-accessibility-20261025": "3d2ae4ff1a74837b9dd41bfe8d505ca2f0861584",
+    "refs/heads/b/global-i18n-accessibility-v2-20261026": "4cb7824ddb187a69b836f6a4aeb4028d4502a2a6",
+    "refs/heads/b/i18n-qa-evidence-20261026": "350f036792255c5e52fc27c9bb58704f3cfb9d5b",
+    "refs/heads/c/b7-b9-review": "f8869d9e52137701965faf0510be5417eb5d5be8",
+    "refs/heads/c/c9-property-tests": "b6422c6d6ba83e6f5e05bdaef28dfe7cd947cdae",
+    "refs/heads/lead/ci-and-meterless-wiring-20261025": "3c6718879cf068dc9f254428793f2fab838b287b",
+    "refs/heads/lead/security-and-timestamp-maintenance-20261025": "32cb53116cad0a93b06fc7936f6871ca04212db9",
+    "refs/heads/lead/sponsor-integration-wip-20261027": "6a2f71dfe7525e646b412474615cc76f2d386a82",
+    "refs/heads/main": "eee913ad7b310e277b8b334ab6649e5cb0877bc4"
+  },
+  "refsAfterThisPush": {
+    "refs/heads/a/ingest-pipeline": "e30df0e3285b92fe09c09d0326c4c5553e51c3e5",
+    "refs/heads/b/agent-accessibility-demo-20261025": "b64ef94abb79e58a12742aba0f4fd1fbfaa107be",
+    "refs/heads/b/agent-accessible-ui": "f9c8e0bc076ab7df6a111bcd04ea599ed704bf2e",
+    "refs/heads/b/b1-helpers": "c8e1d7da9bf18fd78ee297896e9a60b61cf857ea",
+    "refs/heads/b/b2-b10-frontend": "a4a516909aae88b324f95ab5facbf6fd4b531ae2",
+    "refs/heads/b/global-i18n-accessibility-20261025": "3d2ae4ff1a74837b9dd41bfe8d505ca2f0861584",
+    "refs/heads/b/global-i18n-accessibility-v2-20261026": "4e61b5009777985096a81b195e3371fa7616e5b1",
+    "refs/heads/b/i18n-qa-evidence-20261026": "350f036792255c5e52fc27c9bb58704f3cfb9d5b",
+    "refs/heads/c/b7-b9-review": "f8869d9e52137701965faf0510be5417eb5d5be8",
+    "refs/heads/c/c9-property-tests": "b6422c6d6ba83e6f5e05bdaef28dfe7cd947cdae",
+    "refs/heads/lead/ci-and-meterless-wiring-20261025": "3c6718879cf068dc9f254428793f2fab838b287b",
+    "refs/heads/lead/security-and-timestamp-maintenance-20261025": "32cb53116cad0a93b06fc7936f6871ca04212db9",
+    "refs/heads/lead/sponsor-integration-wip-20261027": "6a2f71dfe7525e646b412474615cc76f2d386a82",
+    "refs/heads/main": "eee913ad7b310e277b8b334ab6649e5cb0877bc4"
+  },
+  "pushCommand": "git push --no-follow-tags origin refs/heads/b/global-i18n-accessibility-v2-20261026:refs/heads/b/global-i18n-accessibility-v2-20261026"
+}

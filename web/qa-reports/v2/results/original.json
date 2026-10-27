@@ -1,0 +1,73 @@
+{
+  "results": [
+    {
+      "name": "root redirects and initial fixture load",
+      "status": "PASS"
+    },
+    {
+      "name": "all pool counts, source summary and pagination",
+      "status": "PASS"
+    },
+    {
+      "name": "search, sector and tier combine; clear and no-results",
+      "status": "PASS"
+    },
+    {
+      "name": "numeric sorting ascending and descending, nulls last",
+      "status": "PASS"
+    },
+    {
+      "name": "treemap click filters by actual sector",
+      "status": "PASS"
+    },
+    {
+      "name": "keyboard row, top/bottom links and detail metrics",
+      "status": "PASS"
+    },
+    {
+      "name": "explained and abstained claims with evidence expansion",
+      "status": "PASS"
+    },
+    {
+      "name": "unknown route, pool and instrument show friendly states",
+      "status": "PASS"
+    },
+    {
+      "name": "Factor Lab all pools, five gates and insufficient filing factors",
+      "status": "PASS"
+    },
+    {
+      "name": "regime classifications, history and source lift",
+      "status": "PASS"
+    },
+    {
+      "name": "track record by-tier table, calibration and IC charts",
+      "status": "PASS"
+    },
+    {
+      "name": "trace timeline, retry filtering, payload, timing switch",
+      "status": "PASS"
+    },
+    {
+      "name": "shared banner/disclaimer on all direct routes",
+      "status": "PASS"
+    },
+    {
+      "name": "responsive routes and screenshots at 1440px",
+      "status": "PASS"
+    },
+    {
+      "name": "responsive routes and screenshots at 768px",
+      "status": "PASS"
+    },
+    {
+      "name": "responsive routes and screenshots at 390px",
+      "status": "PASS"
+    },
+    {
+      "name": "no browser console warnings or errors",
+      "status": "PASS"
+    }
+  ],
+  "errors": []
+}

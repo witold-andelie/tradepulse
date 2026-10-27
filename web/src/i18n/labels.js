@@ -1,0 +1,14 @@
+// Display vocabulary for documented structured codes. Unknown codes remain unchanged.
+const pools = { us_equity: 'US equities', eu_equity: 'European equities', crypto: 'Crypto' };
+const states = { normal: 'Normal', elevated: 'Elevated', stressed: 'Stressed', explained: 'explained', abstained: 'abstained', verified: 'Verified', rejected: 'Rejected', ACTIVE: 'Active', MEASURED_ONLY: 'Measured only', INSUFFICIENT_DATA: 'Insufficient data', ok: 'OK', error: 'Error', skipped: 'Skipped', retry: 'Retry', node_start: 'Stage start', node_end: 'Stage end', tool_call: 'Tool call', llm_call: 'LLM call', verify: 'Verification', info: 'Information', walk_forward: 'Walk-forward' };
+const stages = { guard_request: 'Request validation', settle: 'Settle earlier decisions', extract_link: 'Extract events and relations', research_factors: 'Research factors', assess_regime: 'Assess market conditions', rank: 'Rank instruments', explain: 'Draft explanation', verify: 'Verify claims', report: 'Prepare report' };
+const factors = { pv_mom_12_1: '12-1 month momentum', pv_mom_1m: '1-month momentum', pv_rev_5d: '5-day reversal', pv_lowvol_20d: 'Low volatility', pv_volume_z: 'Volume z-score', pv_dist_52w_high: 'Distance to 52-week high', att_pageviews: 'Wikipedia attention', earn_sue: 'Earnings surprise (SUE)', earn_demand_language: 'Demand language', evt_drift: 'Event drift', rel_spillover: 'Relational spillover' };
+const indicators = { trend: 'Trend', volatility: 'Volatility', correlation: 'Correlation', breadth: 'Breadth', credit: 'Credit', measure: 'Measure', incremental: 'Incremental', predictive: 'Predictive', net_of_cost: 'Net of cost', consistency: 'Consistency' };
+export const sectorLabels = ['Information Technology', 'Health Care', 'Financials', 'Consumer Discretionary', 'Communication Services', 'Industrials', 'Consumer Staples', 'Energy', 'Utilities', 'Real Estate', 'Materials', 'layer-1', 'layer-2', 'defi', 'payments', 'exchange-token', 'oracle', 'meme'];
+export const displayVocabulary = [...Object.values(pools), ...Object.values(states), ...Object.values(stages), ...Object.values(factors), ...Object.values(indicators), ...sectorLabels];
+export const poolName = (code, t, fallback = code) => Object.hasOwn(pools, code) ? t(pools[code]) : fallback;
+export const enumName = (code, t) => t.locale === 'en' ? code : Object.hasOwn(states, code) ? t(states[code]) : code;
+export const stageName = (code, t) => t.locale === 'en' ? code.replaceAll('_', ' ') : Object.hasOwn(stages, code) ? t(stages[code]) : code;
+export const factorName = (code, t, fallback = code) => Object.hasOwn(factors, code) ? t(factors[code]) : fallback;
+export const indicatorName = (code, t) => Object.hasOwn(indicators, code) ? t(indicators[code]) : code;
+export const sectorName = (code, t) => sectorLabels.includes(code) ? t(code) : code;

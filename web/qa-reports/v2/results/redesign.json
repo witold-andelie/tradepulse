@@ -1,0 +1,77 @@
+{
+  "results": [
+    {
+      "name": "fresh Simple default, original redirect and honest Discover",
+      "status": "PASS"
+    },
+    {
+      "name": "working guided research and actual abstention evidence",
+      "status": "PASS"
+    },
+    {
+      "name": "same-instrument metric, source, rejected evidence and risk parity",
+      "status": "PASS"
+    },
+    {
+      "name": "preference persistence and keyboard switch without focus loss",
+      "status": "PASS"
+    },
+    {
+      "name": "filter, sector, tier and sort survive view changes",
+      "status": "PASS"
+    },
+    {
+      "name": "pagination and market context survive detail and browser Back",
+      "status": "PASS"
+    },
+    {
+      "name": "blocked storage still supports both views and navigation",
+      "status": "PASS"
+    },
+    {
+      "name": "every chart family has keyboard-operable numerical equivalents",
+      "status": "PASS"
+    },
+    {
+      "name": "Simple trace describes only actual node pairs and preserves retries",
+      "status": "PASS"
+    },
+    {
+      "name": "no-call and insufficient data remain limitations",
+      "status": "PASS"
+    },
+    {
+      "name": "keyboard-only Discover, evidence, glossary, mobile menu and Escape",
+      "status": "PASS"
+    },
+    {
+      "name": "both-view reflow, provenance and screenshots at 1440 CSS pixels",
+      "status": "PASS"
+    },
+    {
+      "name": "both-view reflow, provenance and screenshots at 768 CSS pixels",
+      "status": "PASS"
+    },
+    {
+      "name": "both-view reflow, provenance and screenshots at 390 CSS pixels",
+      "status": "PASS"
+    },
+    {
+      "name": "both-view reflow, provenance and screenshots at 320 CSS pixels",
+      "status": "PASS"
+    },
+    {
+      "name": "200% text enlargement at narrow viewport, plus 400% equivalent reflow",
+      "status": "PASS"
+    },
+    {
+      "name": "reduced motion and semantic accessibility names",
+      "status": "PASS"
+    },
+    {
+      "name": "no console errors or warnings in the new research journeys",
+      "status": "PASS"
+    }
+  ],
+  "errors": []
+}

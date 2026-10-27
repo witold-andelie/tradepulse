@@ -21,6 +21,7 @@ export default defineConfig({
   },
   test: {
     environment: 'node',
+    setupFiles: ['src/i18n/testCatalogSetup.js'],
     include: ['src/**/*.test.js'],
   },
 });

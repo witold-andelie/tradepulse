@@ -1,0 +1,336 @@
+{
+  "stage": "lighthouse",
+  "revision": "4e61b5009777985096a81b195e3371fa7616e5b1",
+  "results": [
+    {
+      "locale": "en",
+      "name": "detail/1440/lighthouse",
+      "status": "PASS",
+      "evidence": {
+        "version": "13.5.0",
+        "fetchTime": "2026-10-27T09:04:26.181Z",
+        "requestedUrl": "http://127.0.0.1:5256/ticker/us_equity/SYN369",
+        "finalDisplayedUrl": "http://127.0.0.1:5256/ticker/us_equity/SYN369",
+        "score": 100,
+        "runWarnings": [],
+        "failedAudits": [],
+        "rawSha256": "396cdd302d30e944039b54d10b77ad96b2f96c8399023b5d7b2c957280442d45"
+      }
+    },
+    {
+      "locale": "en",
+      "name": "detail/320/lighthouse",
+      "status": "PASS",
+      "evidence": {
+        "version": "13.5.0",
+        "fetchTime": "2026-10-27T09:04:36.067Z",
+        "requestedUrl": "http://127.0.0.1:5256/ticker/us_equity/SYN369",
+        "finalDisplayedUrl": "http://127.0.0.1:5256/ticker/us_equity/SYN369",
+        "score": 100,
+        "runWarnings": [],
+        "failedAudits": [],
+        "rawSha256": "61f3c76896386dd27b5ec4430f2ae2b4438e1b37c60b23d07df22980efd14b3a"
+      }
+    },
+    {
+      "locale": "zh-CN",
+      "name": "detail/1440/lighthouse",
+      "status": "PASS",
+      "evidence": {
+        "version": "13.5.0",
+        "fetchTime": "2026-10-27T09:04:44.700Z",
+        "requestedUrl": "http://127.0.0.1:5256/ticker/us_equity/SYN369",
+        "finalDisplayedUrl": "http://127.0.0.1:5256/ticker/us_equity/SYN369",
+        "score": 100,
+        "runWarnings": [],
+        "failedAudits": [],
+        "rawSha256": "7c810ff1f6ed54d4d941d8280be33873ea7dd4673996722f75ca214318e0d0ce"
+      }
+    },
+    {
+      "locale": "zh-CN",
+      "name": "detail/320/lighthouse",
+      "status": "PASS",
+      "evidence": {
+        "version": "13.5.0",
+        "fetchTime": "2026-10-27T09:04:54.895Z",
+        "requestedUrl": "http://127.0.0.1:5256/ticker/us_equity/SYN369",
+        "finalDisplayedUrl": "http://127.0.0.1:5256/ticker/us_equity/SYN369",
+        "score": 100,
+        "runWarnings": [],
+        "failedAudits": [],
+        "rawSha256": "9b29d1a223c7d05796bee98225a9dbaa7ebf8533c7d69f61da7ed7a488686283"
+      }
+    },
+    {
+      "locale": "zh-TW",
+      "name": "detail/1440/lighthouse",
+      "status": "PASS",
+      "evidence": {
+        "version": "13.5.0",
+        "fetchTime": "2026-10-27T09:05:03.943Z",
+        "requestedUrl": "http://127.0.0.1:5256/ticker/us_equity/SYN369",
+        "finalDisplayedUrl": "http://127.0.0.1:5256/ticker/us_equity/SYN369",
+        "score": 100,
+        "runWarnings": [],
+        "failedAudits": [],
+        "rawSha256": "2263d0eca4592efa529376a3c9bdcdba1c5490342303af747d2e4a3455f951f0"
+      }
+    },
+    {
+      "locale": "zh-TW",
+      "name": "detail/320/lighthouse",
+      "status": "PASS",
+      "evidence": {
+        "version": "13.5.0",
+        "fetchTime": "2026-10-27T09:05:14.555Z",
+        "requestedUrl": "http://127.0.0.1:5256/ticker/us_equity/SYN369",
+        "finalDisplayedUrl": "http://127.0.0.1:5256/ticker/us_equity/SYN369",
+        "score": 100,
+        "runWarnings": [],
+        "failedAudits": [],
+        "rawSha256": "1f9feb07b6d2e0af1aa93139c7b97490218c9f691c74b7f9727149ee513ddb07"
+      }
+    },
+    {
+      "locale": "es",
+      "name": "detail/1440/lighthouse",
+      "status": "PASS",
+      "evidence": {
+        "version": "13.5.0",
+        "fetchTime": "2026-10-27T09:05:23.446Z",
+        "requestedUrl": "http://127.0.0.1:5256/ticker/us_equity/SYN369",
+        "finalDisplayedUrl": "http://127.0.0.1:5256/ticker/us_equity/SYN369",
+        "score": 100,
+        "runWarnings": [],
+        "failedAudits": [],
+        "rawSha256": "bb76efc88b6e770854ea035fd726c844742816f4d456cd45a04b5e5f73fff789"
+      }
+    },
+    {
+      "locale": "es",
+      "name": "detail/320/lighthouse",
+      "status": "PASS",
+      "evidence": {
+        "version": "13.5.0",
+        "fetchTime": "2026-10-27T09:05:32.976Z",
+        "requestedUrl": "http://127.0.0.1:5256/ticker/us_equity/SYN369",
+        "finalDisplayedUrl": "http://127.0.0.1:5256/ticker/us_equity/SYN369",
+        "score": 100,
+        "runWarnings": [],
+        "failedAudits": [],
+        "rawSha256": "2ad7f3d4230ec2fa5ade3b1dbe60a20b5c906dd93bd4d407332b3abb20b178a4"
+      }
+    },
+    {
+      "locale": "fr",
+      "name": "detail/1440/lighthouse",
+      "status": "PASS",
+      "evidence": {
+        "version": "13.5.0",
+        "fetchTime": "2026-10-27T09:05:41.898Z",
+        "requestedUrl": "http://127.0.0.1:5256/ticker/us_equity/SYN369",
+        "finalDisplayedUrl": "http://127.0.0.1:5256/ticker/us_equity/SYN369",
+        "score": 100,
+        "runWarnings": [],
+        "failedAudits": [],
+        "rawSha256": "34b5763e16bac3c28892fd5b03a32e5c247cf5dacc78054daab45a51bc589867"
+      }
+    },
+    {
+      "locale": "fr",
+      "name": "detail/320/lighthouse",
+      "status": "PASS",
+      "evidence": {
+        "version": "13.5.0",
+        "fetchTime": "2026-10-27T09:05:50.482Z",
+        "requestedUrl": "http://127.0.0.1:5256/ticker/us_equity/SYN369",
+        "finalDisplayedUrl": "http://127.0.0.1:5256/ticker/us_equity/SYN369",
+        "score": 100,
+        "runWarnings": [],
+        "failedAudits": [],
+        "rawSha256": "6fb4f145c3a87ac421b7deb8971641c312bfa9ab4cb1dcfd19a8ed4c9877bf3a"
+      }
+    },
+    {
+      "locale": "de",
+      "name": "detail/1440/lighthouse",
+      "status": "PASS",
+      "evidence": {
+        "version": "13.5.0",
+        "fetchTime": "2026-10-27T09:05:59.099Z",
+        "requestedUrl": "http://127.0.0.1:5256/ticker/us_equity/SYN369",
+        "finalDisplayedUrl": "http://127.0.0.1:5256/ticker/us_equity/SYN369",
+        "score": 100,
+        "runWarnings": [],
+        "failedAudits": [],
+        "rawSha256": "1635eb1e5c36a8db9d8c82fcc9e749d886a28a4ec94b6600c23e1948d2021bc4"
+      }
+    },
+    {
+      "locale": "de",
+      "name": "detail/320/lighthouse",
+      "status": "PASS",
+      "evidence": {
+        "version": "13.5.0",
+        "fetchTime": "2026-10-27T09:06:07.403Z",
+        "requestedUrl": "http://127.0.0.1:5256/ticker/us_equity/SYN369",
+        "finalDisplayedUrl": "http://127.0.0.1:5256/ticker/us_equity/SYN369",
+        "score": 100,
+        "runWarnings": [],
+        "failedAudits": [],
+        "rawSha256": "7f43146e88650d7418d690085490961ec84df2dd70f4932a8a677ca85c3ff23c"
+      }
+    },
+    {
+      "locale": "pt-BR",
+      "name": "detail/1440/lighthouse",
+      "status": "PASS",
+      "evidence": {
+        "version": "13.5.0",
+        "fetchTime": "2026-10-27T09:06:16.749Z",
+        "requestedUrl": "http://127.0.0.1:5256/ticker/us_equity/SYN369",
+        "finalDisplayedUrl": "http://127.0.0.1:5256/ticker/us_equity/SYN369",
+        "score": 100,
+        "runWarnings": [],
+        "failedAudits": [],
+        "rawSha256": "6dd530b52fd05b7a931af9a0df20796d4e2df65c7d69a2e143dcda04a5bae641"
+      }
+    },
+    {
+      "locale": "pt-BR",
+      "name": "detail/320/lighthouse",
+      "status": "PASS",
+      "evidence": {
+        "version": "13.5.0",
+        "fetchTime": "2026-10-27T09:06:26.399Z",
+        "requestedUrl": "http://127.0.0.1:5256/ticker/us_equity/SYN369",
+        "finalDisplayedUrl": "http://127.0.0.1:5256/ticker/us_equity/SYN369",
+        "score": 100,
+        "runWarnings": [],
+        "failedAudits": [],
+        "rawSha256": "2f7ab6bbadb398e5e387cf29136144600018f57ddb8c6ce9ffa42086a3c61a2a"
+      }
+    },
+    {
+      "locale": "ja",
+      "name": "detail/1440/lighthouse",
+      "status": "PASS",
+      "evidence": {
+        "version": "13.5.0",
+        "fetchTime": "2026-10-27T09:06:35.394Z",
+        "requestedUrl": "http://127.0.0.1:5256/ticker/us_equity/SYN369",
+        "finalDisplayedUrl": "http://127.0.0.1:5256/ticker/us_equity/SYN369",
+        "score": 100,
+        "runWarnings": [],
+        "failedAudits": [],
+        "rawSha256": "cb4d4b81860b37aeefae6827b49728315349be8db987e5444a9dbcb0f8647776"
+      }
+    },
+    {
+      "locale": "ja",
+      "name": "detail/320/lighthouse",
+      "status": "PASS",
+      "evidence": {
+        "version": "13.5.0",
+        "fetchTime": "2026-10-27T09:06:45.086Z",
+        "requestedUrl": "http://127.0.0.1:5256/ticker/us_equity/SYN369",
+        "finalDisplayedUrl": "http://127.0.0.1:5256/ticker/us_equity/SYN369",
+        "score": 100,
+        "runWarnings": [],
+        "failedAudits": [],
+        "rawSha256": "25f941bd5fb7994f613fae50078da291965e19e6352935f94f2f8d86a4de200d"
+      }
+    },
+    {
+      "locale": "ko",
+      "name": "detail/1440/lighthouse",
+      "status": "PASS",
+      "evidence": {
+        "version": "13.5.0",
+        "fetchTime": "2026-10-27T09:06:53.872Z",
+        "requestedUrl": "http://127.0.0.1:5256/ticker/us_equity/SYN369",
+        "finalDisplayedUrl": "http://127.0.0.1:5256/ticker/us_equity/SYN369",
+        "score": 100,
+        "runWarnings": [],
+        "failedAudits": [],
+        "rawSha256": "f4b744c8a705da9a7a6e4539d91c3d9c72772ad69d83c0db0d75fca5bbf36aae"
+      }
+    },
+    {
+      "locale": "ko",
+      "name": "detail/320/lighthouse",
+      "status": "PASS",
+      "evidence": {
+        "version": "13.5.0",
+        "fetchTime": "2026-10-27T09:07:02.787Z",
+        "requestedUrl": "http://127.0.0.1:5256/ticker/us_equity/SYN369",
+        "finalDisplayedUrl": "http://127.0.0.1:5256/ticker/us_equity/SYN369",
+        "score": 100,
+        "runWarnings": [],
+        "failedAudits": [],
+        "rawSha256": "8ea236de47bdf6b5c68355c30650a5048ff685f7d7efa34a1bf1911de8930b1f"
+      }
+    },
+    {
+      "locale": "cs",
+      "name": "detail/1440/lighthouse",
+      "status": "PASS",
+      "evidence": {
+        "version": "13.5.0",
+        "fetchTime": "2026-10-27T09:07:12.561Z",
+        "requestedUrl": "http://127.0.0.1:5256/ticker/us_equity/SYN369",
+        "finalDisplayedUrl": "http://127.0.0.1:5256/ticker/us_equity/SYN369",
+        "score": 100,
+        "runWarnings": [],
+        "failedAudits": [],
+        "rawSha256": "9e629f5034b28f89e21113a95151718ded9ae4a730bd04d1aa0436cc5ebefe09"
+      }
+    },
+    {
+      "locale": "cs",
+      "name": "detail/320/lighthouse",
+      "status": "PASS",
+      "evidence": {
+        "version": "13.5.0",
+        "fetchTime": "2026-10-27T09:07:22.945Z",
+        "requestedUrl": "http://127.0.0.1:5256/ticker/us_equity/SYN369",
+        "finalDisplayedUrl": "http://127.0.0.1:5256/ticker/us_equity/SYN369",
+        "score": 100,
+        "runWarnings": [],
+        "failedAudits": [],
+        "rawSha256": "e0feb0eb158dcc300335665ebf9e4ed35c715481dd3b5cfe4590548717e2dd7f"
+      }
+    },
+    {
+      "locale": "ar",
+      "name": "detail/1440/lighthouse",
+      "status": "PASS",
+      "evidence": {
+        "version": "13.5.0",
+        "fetchTime": "2026-10-27T09:07:31.875Z",
+        "requestedUrl": "http://127.0.0.1:5256/ticker/us_equity/SYN369",
+        "finalDisplayedUrl": "http://127.0.0.1:5256/ticker/us_equity/SYN369",
+        "score": 100,
+        "runWarnings": [],
+        "failedAudits": [],
+        "rawSha256": "89acbc6e1d9c508652c37316005500a2cdecac15ab1af8b5e864e09d3b017782"
+      }
+    },
+    {
+      "locale": "ar",
+      "name": "detail/320/lighthouse",
+      "status": "PASS",
+      "evidence": {
+        "version": "13.5.0",
+        "fetchTime": "2026-10-27T09:07:42.277Z",
+        "requestedUrl": "http://127.0.0.1:5256/ticker/us_equity/SYN369",
+        "finalDisplayedUrl": "http://127.0.0.1:5256/ticker/us_equity/SYN369",
+        "score": 100,
+        "runWarnings": [],
+        "failedAudits": [],
+        "rawSha256": "606d0b3a1dc936d1dda198a2c60e557bbb8dfac7a977a7d9a25c89888de735d1"
+      }
+    }
+  ]
+}

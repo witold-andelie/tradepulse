@@ -1,0 +1,22 @@
+[
+  {
+    "name": "loading remains localized and mounted; all locale changes preserve one validated run request",
+    "status": "PASS"
+  },
+  {
+    "name": "HTTP 503: eleven localized error states; no fixture substitution",
+    "status": "PASS"
+  },
+  {
+    "name": "invalid contract: eleven localized error states; no fixture substitution",
+    "status": "PASS"
+  },
+  {
+    "name": "schema-valid empty collections: localized leaderboard, factors, regime and trace",
+    "status": "PASS"
+  },
+  {
+    "name": "lazy-route failure retains the global language selector and localized recovery",
+    "status": "PASS"
+  }
+]

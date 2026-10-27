@@ -1,0 +1,728 @@
+{
+  "results": [
+    {
+      "name": "en · discover: localization, interactions and 3 widths",
+      "status": "PASS"
+    },
+    {
+      "name": "en · leaderboard: localization, interactions and 3 widths",
+      "status": "PASS"
+    },
+    {
+      "name": "en · detail: localization, interactions and 3 widths",
+      "status": "PASS"
+    },
+    {
+      "name": "en · factors: localization, interactions and 3 widths",
+      "status": "PASS"
+    },
+    {
+      "name": "en · regime: localization, interactions and 3 widths",
+      "status": "PASS"
+    },
+    {
+      "name": "en · track-record: localization, interactions and 3 widths",
+      "status": "PASS"
+    },
+    {
+      "name": "en · trace: localization, interactions and 3 widths",
+      "status": "PASS"
+    },
+    {
+      "name": "zh-CN · discover: localization, interactions and 3 widths",
+      "status": "PASS"
+    },
+    {
+      "name": "zh-CN · leaderboard: localization, interactions and 3 widths",
+      "status": "PASS"
+    },
+    {
+      "name": "zh-CN · detail: localization, interactions and 3 widths",
+      "status": "PASS"
+    },
+    {
+      "name": "zh-CN · factors: localization, interactions and 3 widths",
+      "status": "PASS"
+    },
+    {
+      "name": "zh-CN · regime: localization, interactions and 3 widths",
+      "status": "PASS"
+    },
+    {
+      "name": "zh-CN · track-record: localization, interactions and 3 widths",
+      "status": "PASS"
+    },
+    {
+      "name": "zh-CN · trace: localization, interactions and 3 widths",
+      "status": "PASS"
+    },
+    {
+      "name": "zh-TW · discover: localization, interactions and 3 widths",
+      "status": "PASS"
+    },
+    {
+      "name": "zh-TW · leaderboard: localization, interactions and 3 widths",
+      "status": "PASS"
+    },
+    {
+      "name": "zh-TW · detail: localization, interactions and 3 widths",
+      "status": "PASS"
+    },
+    {
+      "name": "zh-TW · factors: localization, interactions and 3 widths",
+      "status": "PASS"
+    },
+    {
+      "name": "zh-TW · regime: localization, interactions and 3 widths",
+      "status": "PASS"
+    },
+    {
+      "name": "zh-TW · track-record: localization, interactions and 3 widths",
+      "status": "PASS"
+    },
+    {
+      "name": "zh-TW · trace: localization, interactions and 3 widths",
+      "status": "PASS"
+    },
+    {
+      "name": "es · discover: localization, interactions and 3 widths",
+      "status": "PASS"
+    },
+    {
+      "name": "es · leaderboard: localization, interactions and 3 widths",
+      "status": "PASS"
+    },
+    {
+      "name": "es · detail: localization, interactions and 3 widths",
+      "status": "PASS"
+    },
+    {
+      "name": "es · factors: localization, interactions and 3 widths",
+      "status": "PASS"
+    },
+    {
+      "name": "es · regime: localization, interactions and 3 widths",
+      "status": "PASS"
+    },
+    {
+      "name": "es · track-record: localization, interactions and 3 widths",
+      "status": "PASS"
+    },
+    {
+      "name": "es · trace: localization, interactions and 3 widths",
+      "status": "PASS"
+    },
+    {
+      "name": "fr · discover: localization, interactions and 3 widths",
+      "status": "PASS"
+    },
+    {
+      "name": "fr · leaderboard: localization, interactions and 3 widths",
+      "status": "PASS"
+    },
+    {
+      "name": "fr · detail: localization, interactions and 3 widths",
+      "status": "PASS"
+    },
+    {
+      "name": "fr · factors: localization, interactions and 3 widths",
+      "status": "PASS"
+    },
+    {
+      "name": "fr · regime: localization, interactions and 3 widths",
+      "status": "PASS"
+    },
+    {
+      "name": "fr · track-record: localization, interactions and 3 widths",
+      "status": "PASS"
+    },
+    {
+      "name": "fr · trace: localization, interactions and 3 widths",
+      "status": "PASS"
+    },
+    {
+      "name": "de · discover: localization, interactions and 3 widths",
+      "status": "PASS"
+    },
+    {
+      "name": "de · leaderboard: localization, interactions and 3 widths",
+      "status": "PASS"
+    },
+    {
+      "name": "de · detail: localization, interactions and 3 widths",
+      "status": "PASS"
+    },
+    {
+      "name": "de · factors: localization, interactions and 3 widths",
+      "status": "PASS"
+    },
+    {
+      "name": "de · regime: localization, interactions and 3 widths",
+      "status": "PASS"
+    },
+    {
+      "name": "de · track-record: localization, interactions and 3 widths",
+      "status": "PASS"
+    },
+    {
+      "name": "de · trace: localization, interactions and 3 widths",
+      "status": "PASS"
+    },
+    {
+      "name": "pt-BR · discover: localization, interactions and 3 widths",
+      "status": "PASS"
+    },
+    {
+      "name": "pt-BR · leaderboard: localization, interactions and 3 widths",
+      "status": "PASS"
+    },
+    {
+      "name": "pt-BR · detail: localization, interactions and 3 widths",
+      "status": "PASS"
+    },
+    {
+      "name": "pt-BR · factors: localization, interactions and 3 widths",
+      "status": "PASS"
+    },
+    {
+      "name": "pt-BR · regime: localization, interactions and 3 widths",
+      "status": "PASS"
+    },
+    {
+      "name": "pt-BR · track-record: localization, interactions and 3 widths",
+      "status": "PASS"
+    },
+    {
+      "name": "pt-BR · trace: localization, interactions and 3 widths",
+      "status": "PASS"
+    },
+    {
+      "name": "ja · discover: localization, interactions and 3 widths",
+      "status": "PASS"
+    },
+    {
+      "name": "ja · leaderboard: localization, interactions and 3 widths",
+      "status": "PASS"
+    },
+    {
+      "name": "ja · detail: localization, interactions and 3 widths",
+      "status": "PASS"
+    },
+    {
+      "name": "ja · factors: localization, interactions and 3 widths",
+      "status": "PASS"
+    },
+    {
+      "name": "ja · regime: localization, interactions and 3 widths",
+      "status": "PASS"
+    },
+    {
+      "name": "ja · track-record: localization, interactions and 3 widths",
+      "status": "PASS"
+    },
+    {
+      "name": "ja · trace: localization, interactions and 3 widths",
+      "status": "PASS"
+    },
+    {
+      "name": "ko · discover: localization, interactions and 3 widths",
+      "status": "PASS"
+    },
+    {
+      "name": "ko · leaderboard: localization, interactions and 3 widths",
+      "status": "PASS"
+    },
+    {
+      "name": "ko · detail: localization, interactions and 3 widths",
+      "status": "PASS"
+    },
+    {
+      "name": "ko · factors: localization, interactions and 3 widths",
+      "status": "PASS"
+    },
+    {
+      "name": "ko · regime: localization, interactions and 3 widths",
+      "status": "PASS"
+    },
+    {
+      "name": "ko · track-record: localization, interactions and 3 widths",
+      "status": "PASS"
+    },
+    {
+      "name": "ko · trace: localization, interactions and 3 widths",
+      "status": "PASS"
+    },
+    {
+      "name": "cs · discover: localization, interactions and 3 widths",
+      "status": "PASS"
+    },
+    {
+      "name": "cs · leaderboard: localization, interactions and 3 widths",
+      "status": "PASS"
+    },
+    {
+      "name": "cs · detail: localization, interactions and 3 widths",
+      "status": "PASS"
+    },
+    {
+      "name": "cs · factors: localization, interactions and 3 widths",
+      "status": "PASS"
+    },
+    {
+      "name": "cs · regime: localization, interactions and 3 widths",
+      "status": "PASS"
+    },
+    {
+      "name": "cs · track-record: localization, interactions and 3 widths",
+      "status": "PASS"
+    },
+    {
+      "name": "cs · trace: localization, interactions and 3 widths",
+      "status": "PASS"
+    },
+    {
+      "name": "ar · discover: localization, interactions and 3 widths",
+      "status": "PASS"
+    },
+    {
+      "name": "ar · leaderboard: localization, interactions and 3 widths",
+      "status": "PASS"
+    },
+    {
+      "name": "ar · detail: localization, interactions and 3 widths",
+      "status": "PASS"
+    },
+    {
+      "name": "ar · factors: localization, interactions and 3 widths",
+      "status": "PASS"
+    },
+    {
+      "name": "ar · regime: localization, interactions and 3 widths",
+      "status": "PASS"
+    },
+    {
+      "name": "ar · track-record: localization, interactions and 3 widths",
+      "status": "PASS"
+    },
+    {
+      "name": "ar · trace: localization, interactions and 3 widths",
+      "status": "PASS"
+    },
+    {
+      "name": "global preference migration, invalid fallback and blocked-storage navigation",
+      "status": "PASS"
+    },
+    {
+      "name": "unknown instrument, empty results and global language selector",
+      "status": "PASS"
+    },
+    {
+      "name": "native speech availability recorded without claiming audible playback",
+      "status": "PASS"
+    },
+    {
+      "name": "speech controller test double: all locales, pause/resume/stop, locale and navigation cancellation",
+      "status": "PASS"
+    },
+    {
+      "name": "no speech API and no matching voice retain localized readable guide",
+      "status": "PASS"
+    },
+    {
+      "name": "localized keyboard, mobile menu, focus, text enlargement and reduced motion",
+      "status": "PASS"
+    },
+    {
+      "name": "normal journeys have no console errors or warnings",
+      "status": "PASS"
+    }
+  ],
+  "matrix": [
+    {
+      "locale": "en",
+      "route": "discover",
+      "status": "PASS"
+    },
+    {
+      "locale": "en",
+      "route": "leaderboard",
+      "status": "PASS"
+    },
+    {
+      "locale": "en",
+      "route": "detail",
+      "status": "PASS"
+    },
+    {
+      "locale": "en",
+      "route": "factors",
+      "status": "PASS"
+    },
+    {
+      "locale": "en",
+      "route": "regime",
+      "status": "PASS"
+    },
+    {
+      "locale": "en",
+      "route": "track-record",
+      "status": "PASS"
+    },
+    {
+      "locale": "en",
+      "route": "trace",
+      "status": "PASS"
+    },
+    {
+      "locale": "zh-CN",
+      "route": "discover",
+      "status": "PASS"
+    },
+    {
+      "locale": "zh-CN",
+      "route": "leaderboard",
+      "status": "PASS"
+    },
+    {
+      "locale": "zh-CN",
+      "route": "detail",
+      "status": "PASS"
+    },
+    {
+      "locale": "zh-CN",
+      "route": "factors",
+      "status": "PASS"
+    },
+    {
+      "locale": "zh-CN",
+      "route": "regime",
+      "status": "PASS"
+    },
+    {
+      "locale": "zh-CN",
+      "route": "track-record",
+      "status": "PASS"
+    },
+    {
+      "locale": "zh-CN",
+      "route": "trace",
+      "status": "PASS"
+    },
+    {
+      "locale": "zh-TW",
+      "route": "discover",
+      "status": "PASS"
+    },
+    {
+      "locale": "zh-TW",
+      "route": "leaderboard",
+      "status": "PASS"
+    },
+    {
+      "locale": "zh-TW",
+      "route": "detail",
+      "status": "PASS"
+    },
+    {
+      "locale": "zh-TW",
+      "route": "factors",
+      "status": "PASS"
+    },
+    {
+      "locale": "zh-TW",
+      "route": "regime",
+      "status": "PASS"
+    },
+    {
+      "locale": "zh-TW",
+      "route": "track-record",
+      "status": "PASS"
+    },
+    {
+      "locale": "zh-TW",
+      "route": "trace",
+      "status": "PASS"
+    },
+    {
+      "locale": "es",
+      "route": "discover",
+      "status": "PASS"
+    },
+    {
+      "locale": "es",
+      "route": "leaderboard",
+      "status": "PASS"
+    },
+    {
+      "locale": "es",
+      "route": "detail",
+      "status": "PASS"
+    },
+    {
+      "locale": "es",
+      "route": "factors",
+      "status": "PASS"
+    },
+    {
+      "locale": "es",
+      "route": "regime",
+      "status": "PASS"
+    },
+    {
+      "locale": "es",
+      "route": "track-record",
+      "status": "PASS"
+    },
+    {
+      "locale": "es",
+      "route": "trace",
+      "status": "PASS"
+    },
+    {
+      "locale": "fr",
+      "route": "discover",
+      "status": "PASS"
+    },
+    {
+      "locale": "fr",
+      "route": "leaderboard",
+      "status": "PASS"
+    },
+    {
+      "locale": "fr",
+      "route": "detail",
+      "status": "PASS"
+    },
+    {
+      "locale": "fr",
+      "route": "factors",
+      "status": "PASS"
+    },
+    {
+      "locale": "fr",
+      "route": "regime",
+      "status": "PASS"
+    },
+    {
+      "locale": "fr",
+      "route": "track-record",
+      "status": "PASS"
+    },
+    {
+      "locale": "fr",
+      "route": "trace",
+      "status": "PASS"
+    },
+    {
+      "locale": "de",
+      "route": "discover",
+      "status": "PASS"
+    },
+    {
+      "locale": "de",
+      "route": "leaderboard",
+      "status": "PASS"
+    },
+    {
+      "locale": "de",
+      "route": "detail",
+      "status": "PASS"
+    },
+    {
+      "locale": "de",
+      "route": "factors",
+      "status": "PASS"
+    },
+    {
+      "locale": "de",
+      "route": "regime",
+      "status": "PASS"
+    },
+    {
+      "locale": "de",
+      "route": "track-record",
+      "status": "PASS"
+    },
+    {
+      "locale": "de",
+      "route": "trace",
+      "status": "PASS"
+    },
+    {
+      "locale": "pt-BR",
+      "route": "discover",
+      "status": "PASS"
+    },
+    {
+      "locale": "pt-BR",
+      "route": "leaderboard",
+      "status": "PASS"
+    },
+    {
+      "locale": "pt-BR",
+      "route": "detail",
+      "status": "PASS"
+    },
+    {
+      "locale": "pt-BR",
+      "route": "factors",
+      "status": "PASS"
+    },
+    {
+      "locale": "pt-BR",
+      "route": "regime",
+      "status": "PASS"
+    },
+    {
+      "locale": "pt-BR",
+      "route": "track-record",
+      "status": "PASS"
+    },
+    {
+      "locale": "pt-BR",
+      "route": "trace",
+      "status": "PASS"
+    },
+    {
+      "locale": "ja",
+      "route": "discover",
+      "status": "PASS"
+    },
+    {
+      "locale": "ja",
+      "route": "leaderboard",
+      "status": "PASS"
+    },
+    {
+      "locale": "ja",
+      "route": "detail",
+      "status": "PASS"
+    },
+    {
+      "locale": "ja",
+      "route": "factors",
+      "status": "PASS"
+    },
+    {
+      "locale": "ja",
+      "route": "regime",
+      "status": "PASS"
+    },
+    {
+      "locale": "ja",
+      "route": "track-record",
+      "status": "PASS"
+    },
+    {
+      "locale": "ja",
+      "route": "trace",
+      "status": "PASS"
+    },
+    {
+      "locale": "ko",
+      "route": "discover",
+      "status": "PASS"
+    },
+    {
+      "locale": "ko",
+      "route": "leaderboard",
+      "status": "PASS"
+    },
+    {
+      "locale": "ko",
+      "route": "detail",
+      "status": "PASS"
+    },
+    {
+      "locale": "ko",
+      "route": "factors",
+      "status": "PASS"
+    },
+    {
+      "locale": "ko",
+      "route": "regime",
+      "status": "PASS"
+    },
+    {
+      "locale": "ko",
+      "route": "track-record",
+      "status": "PASS"
+    },
+    {
+      "locale": "ko",
+      "route": "trace",
+      "status": "PASS"
+    },
+    {
+      "locale": "cs",
+      "route": "discover",
+      "status": "PASS"
+    },
+    {
+      "locale": "cs",
+      "route": "leaderboard",
+      "status": "PASS"
+    },
+    {
+      "locale": "cs",
+      "route": "detail",
+      "status": "PASS"
+    },
+    {
+      "locale": "cs",
+      "route": "factors",
+      "status": "PASS"
+    },
+    {
+      "locale": "cs",
+      "route": "regime",
+      "status": "PASS"
+    },
+    {
+      "locale": "cs",
+      "route": "track-record",
+      "status": "PASS"
+    },
+    {
+      "locale": "cs",
+      "route": "trace",
+      "status": "PASS"
+    },
+    {
+      "locale": "ar",
+      "route": "discover",
+      "status": "PASS"
+    },
+    {
+      "locale": "ar",
+      "route": "leaderboard",
+      "status": "PASS"
+    },
+    {
+      "locale": "ar",
+      "route": "detail",
+      "status": "PASS"
+    },
+    {
+      "locale": "ar",
+      "route": "factors",
+      "status": "PASS"
+    },
+    {
+      "locale": "ar",
+      "route": "regime",
+      "status": "PASS"
+    },
+    {
+      "locale": "ar",
+      "route": "track-record",
+      "status": "PASS"
+    },
+    {
+      "locale": "ar",
+      "route": "trace",
+      "status": "PASS"
+    }
+  ],
+  "consoleIssues": []
+}

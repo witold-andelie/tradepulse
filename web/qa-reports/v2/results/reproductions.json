@@ -1,0 +1,230 @@
+{
+  "historicalCommit": "3d2ae4ff1a74837b9dd41bfe8d505ca2f0861584",
+  "currentHead": "4e61b5009777985096a81b195e3371fa7616e5b1",
+  "results": [
+    {
+      "id": "FIX01",
+      "status": "PASS",
+      "evidence": [
+        {
+          "version": "before",
+          "text": "+0.18",
+          "signX": 923.03125,
+          "digitX": 895.25
+        },
+        {
+          "version": "after",
+          "text": "+0.18",
+          "signX": 895.25,
+          "digitX": 903.25
+        }
+      ]
+    },
+    {
+      "id": "FIX02",
+      "status": "PASS",
+      "evidence": {
+        "previous": "badge tone-muted",
+        "current": "badge tone-normal"
+      }
+    },
+    {
+      "id": "FIX03",
+      "status": "PASS",
+      "evidence": {
+        "previous": 0,
+        "current": 1
+      }
+    },
+    {
+      "id": "FIX04",
+      "status": "PASS",
+      "evidence": {
+        "oldSelector": "#research-guide-language",
+        "oldSelectorPresent": false,
+        "modernSelector": "#app-language",
+        "modernSuite": "web/scripts/agent-research-acceptance.cjs"
+      }
+    },
+    {
+      "id": "FIX05",
+      "status": "PASS",
+      "evidence": {
+        "entryGap": 27.03125,
+        "oldEntryAbsent": true
+      }
+    },
+    {
+      "id": "FIX06",
+      "status": "PASS",
+      "evidence": {
+        "measurements": [
+          {
+            "version": "before",
+            "options": 1,
+            "playDisabled": true,
+            "calls": 1
+          },
+          {
+            "version": "after",
+            "options": 1,
+            "playDisabled": false,
+            "calls": 3
+          }
+        ],
+        "audioHeard": false,
+        "mocked": true
+      }
+    },
+    {
+      "id": "FIX07",
+      "status": "PASS",
+      "evidence": [
+        {
+          "version": "before",
+          "pool": null,
+          "status": "ACTIVE",
+          "cards": 3
+        },
+        {
+          "version": "after",
+          "pool": "crypto",
+          "status": "ACTIVE",
+          "cards": 2
+        }
+      ]
+    },
+    {
+      "id": "FIX08",
+      "status": "PASS",
+      "evidence": {
+        "values": [
+          {
+            "version": "before",
+            "root": 801,
+            "viewport": 768
+          },
+          {
+            "version": "after",
+            "root": 768,
+            "viewport": 768
+          }
+        ],
+        "method": "CSS text enlargement, not native browser zoom"
+      }
+    },
+    {
+      "id": "FIX09",
+      "status": "PASS",
+      "evidence": {
+        "oldSummaryMissingFromGuideModel": true,
+        "sourceSummaryRetained": true,
+        "originalSourceUnchanged": true
+      }
+    },
+    {
+      "id": "FIX10",
+      "status": "PASS",
+      "evidence": {
+        "values": [
+          {
+            "locale": "ja",
+            "terms": [
+              {
+                "key": "Elevated",
+                "before": "上昇",
+                "after": "警戒度上昇"
+              }
+            ]
+          },
+          {
+            "locale": "ko",
+            "terms": [
+              {
+                "key": "Elevated",
+                "before": "상승",
+                "after": "위험도 상승"
+              }
+            ]
+          },
+          {
+            "locale": "de",
+            "terms": [
+              {
+                "key": "abstained",
+                "before": "Enthalten",
+                "after": "Enthaltung"
+              }
+            ]
+          },
+          {
+            "locale": "cs",
+            "terms": [
+              {
+                "key": "{value1} of {value2} instruments",
+                "before": "{value1} z {value2} instrumentů",
+                "after": "Instrumenty: {value1} z {value2}"
+              }
+            ]
+          },
+          {
+            "locale": "ar",
+            "terms": [
+              {
+                "key": "Hit rate",
+                "before": "نسبة الإصابة",
+                "after": "نسبة تحقق النتيجة وفق المعيار المرجعي"
+              }
+            ]
+          }
+        ],
+        "nativeEditorialApproval": false
+      }
+    },
+    {
+      "id": "FIX11",
+      "status": "PASS",
+      "evidence": [
+        {
+          "locale": "es",
+          "before": "Horizonte: 1 días",
+          "after": "Horizonte: 1 día"
+        },
+        {
+          "locale": "fr",
+          "before": "Horizon : 1 jours",
+          "after": "Horizon : 1 jour"
+        },
+        {
+          "locale": "de",
+          "before": "Horizont: 1 Tage",
+          "after": "Horizont: 1 Tag"
+        },
+        {
+          "locale": "pt-BR",
+          "before": "Horizonte: 1 dias",
+          "after": "Horizonte: 1 dia"
+        },
+        {
+          "locale": "cs",
+          "before": "Horizont: 1 dní",
+          "after": "Horizont: 1 den"
+        }
+      ]
+    },
+    {
+      "id": "FIX12",
+      "status": "PASS",
+      "evidence": [
+        {
+          "version": "before",
+          "gap": 0
+        },
+        {
+          "version": "after",
+          "gap": 3.3125
+        }
+      ]
+    }
+  ]
+}

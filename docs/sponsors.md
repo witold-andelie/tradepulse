@@ -1,10 +1,26 @@
 # Sponsor integration and evidence
 
-Updated 27 October 2026. The current submission requires Zetaris, an actual Meterless Engine
-in a working feature, Nightshift as AI provider, traces and three computed input/output cases.
-The dated AWS-only/NIM-only plan is superseded by the lead's local deployment direction.
+Updated 27 October 2026. The lead's current implementation uses hosted GLM for inference,
+Zetaris for queries and actual Meterless Engines in the core. Existing Nightshift invocation
+and late-completion evidence is preserved separately. Local-model diagnostics are stopped;
+the dated AWS-only, NIM-only and all-Nightshift plans no longer block product acceptance.
 See [current acceptance](../integrations/ACCEPTANCE.md) and
-[Mac live setup](../integrations/MAC_LIVE_SETUP.md).
+[hosted workflow](../integrations/HOSTED_ACCEPTANCE.md).
+
+## Hosted inference: GLM
+
+The lead supplies glm-5.3-flash at the OpenCode Go OpenAI-compatible endpoint. An explicit
+LLM_PROVIDER=glm selects it for extraction, guard, analyst and skeptic without initializing
+Nightshift or silently falling back to another provider. The current implementation records
+provider=glm and the requested model, retains raw cassettes, and applies the same strict JSON,
+schema and evidence verification. Timeout/concurrency/token budgets remain bounded.
+
+The original all-Nightshift acceptance profile is preserved. The new explicit glm+zetaris+engines
+profile requires real model responses plus actual engine snapshot, recall and remember in
+the core trace; it does not pass a cloud response off as Nightshift. Live hosted acceptance
+has not yet run on the Mac. The saved event rules permit arbitrary models/paid APIs while
+requiring Zetaris and Meterless integration; a successful three-case engineering profile
+is not an attestation of every event rule, media item or submitted entry.
 
 ## Zetaris
 
@@ -87,11 +103,11 @@ counts, not semantic relevance or remembered accuracy. Feedback uses the officia
 automatic pending selection and historical conflict consumption remain outside the active
 core path. JSON reference persistence is single-process storage, not a multi-writer database.
 
-## Nightshift
+## Nightshift: retained integration evidence, optional inference
 
-Load: the AI provider for extraction, analyst and skeptic requests. A configured Nightshift
+Historical load: the AI provider for extraction, analyst and skeptic requests. In auto mode a configured Nightshift
 token makes Meterless the first route for every role. The live acceptance runner restricts
-routes to Nightshift; cloud fallback or replay cannot satisfy its checks. Calls use the real
+routes to Nightshift for that original profile; cloud fallback or replay cannot satisfy those checks. Calls use the real
 token file, meterless-app/meterless-scope headers and a 180-second request timeout.
 
 Implemented: URL normalization, all-role routing, thread-safe record/replay, sanitized smoke
@@ -161,10 +177,10 @@ an unsupported investor-optimism attribution. Raw-reply grounding review is pend
 Bounded request/queue timeout overrides now support measured slow local inference without
 changing the default 180-second values, retries, schemas or verification requirements.
 
-Still required: wrong-token enforcement, actual catalog validation and the combined live cases.
-Independent skeptic-family routing and
-complete offline model replay remain unverified. NIM is an optional fallback in normal
-operation, not evidence of Nightshift use. Only Nightshift routes are allowed in live acceptance.
+The diagnostic history above is retained, but no further Nightshift experiment is a current
+product-acceptance prerequisite. Complete offline model replay and independent skeptic-family
+routing remain unverified. NIM remains an optional route in auto mode. The original Nightshift
+profile allows only Nightshift; the hosted GLM profile allows only GLM. Provider labels are honest.
 
 Contract: [official hotspot guide](https://github.com/Meterless/Meterless/blob/main/docs/products/nightshift/hotspot.md).
 
@@ -174,7 +190,7 @@ The existing [three computed examples](../examples/README.md) contain inputs, ou
 original traces. They process real public data offline with unavailable-model abstention.
 
 Run the integrations.live_acceptance module on the configured Mac to produce a new delivery
-under ignored runs/. It checks sample identities and Zetaris parity, uses Nightshift and the
+under ignored runs/. It checks sample identities and Zetaris parity, uses the selected live AI provider and the
 engines, and packages inputs, outputs, original traces, query/model receipts, a cassette,
 manifest and a computed README table. Service/model failure cannot produce status=ok.
 Review artifacts before publication. Keep the existing examples until the live command has

@@ -6,7 +6,7 @@ import os
 import re
 from pathlib import Path
 
-_ALLOWED = re.compile(r"(?:ZETARIS_|METERLESS_|NVIDIA_|NIM_|ENGINES_)[A-Z0-9_]+")
+_ALLOWED = re.compile(r"(?:(?:ZETARIS_|METERLESS_|NVIDIA_|NIM_|ENGINES_|GLM_)[A-Z0-9_]+|LLM_PROVIDER)")
 
 
 def load_private_env(path: Path) -> None:

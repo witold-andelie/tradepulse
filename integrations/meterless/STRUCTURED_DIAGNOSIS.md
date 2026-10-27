@@ -3,7 +3,16 @@
 Updated 27 October 2026. Evidence below was supplied by the lead from the Mac, not generated
 by offline tests. The original failed run and its artifacts must be preserved.
 
-## Current next step: offline review of the retained late response
+## Current decision: stop local-model diagnosis and use hosted GLM
+
+The lead supersedes the diagnostic plans below. No additional Nightshift raw text, model
+trial, timeout experiment or local inference is needed to enter hosted product acceptance.
+Keep the original failed HTTP reports and separate real runtime completion evidence as they
+are. Follow [HOSTED_ACCEPTANCE.md](../HOSTED_ACCEPTANCE.md) for GLM inference, live Zetaris
+queries and actual Meterless engine operations. Do not label a GLM answer as Nightshift.
+The plans below describe the investigation history, not new work to execute.
+
+## Previous plan: offline review of the retained late response (historical)
 
 The lead located the existing Qwen job's late completion. It finished in the runtime after
 267,437 ms, versus the client's 180,153 ms timeout, an approximately 87.3-second difference.

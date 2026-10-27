@@ -1,7 +1,8 @@
 """Run three sponsor-connected cases and package actual inputs, outputs and original traces.
 
-All live cases use Zetaris templates, Nightshift (with no cloud fallback) and the real engines
-sidecar. No synthetic answer or cassette reply can satisfy the success checks.
+All live cases use Zetaris templates, an explicitly selected live AI provider and the real
+engines sidecar. No synthetic answer or cassette reply can satisfy the success checks.
+The original Nightshift-only profile remains available; GLM is a distinct hosted profile.
 """
 
 from __future__ import annotations
@@ -22,9 +23,10 @@ from serve import verified_sample_request
 from tradepulse.contracts import REPO_ROOT, assert_payload
 from tradepulse.engines import configured_engines
 from tradepulse.pipeline import run_pipeline
+from tradepulse.store import RunStore
 
 from .environment import load_private_env
-from .meterless.llm import Cassette, ChainClient, build_routes_from_env, read_token
+from .meterless.llm import Cassette, ChainClient, build_routes_from_env, read_glm_api_key, read_token
 from .meterless.reply_checks import inspect_reply
 from .zetaris.adapter import DuckDBAdapter, ZetarisAdapter
 from .zetaris.client import ZetarisClient
@@ -105,19 +107,21 @@ class AuditedLLM:
         return result
 
 
-def validate_case(output: dict, events: list[dict]) -> dict:
+def validate_case(output: dict, events: list[dict], *, expected_provider: str = "meterless") -> dict:
+    if expected_provider not in {"meterless", "glm"}:
+        raise ValueError("Unknown live acceptance provider")
     assert_payload(output, "RunOutput")
     if output["sample_mode"] or output["data_mode"] != "REAL":
         raise ValueError("Live acceptance requires a REAL run")
     for event in events:
         assert_payload(event, "TraceEvent")
     answered = [event for event in events if event["kind"] == "llm_call"]
-    if not answered or any(event["payload"].get("provider") != "meterless" or
+    if not answered or any(event["payload"].get("provider") != expected_provider or
                            event["payload"].get("replayed") is not False for event in answered):
-        raise ValueError("Live acceptance requires actual Nightshift answers")
+        raise ValueError("Live acceptance requires actual answers from the selected provider")
     if not all(any(event["message"] == f"{role} answered" for event in answered)
                for role in ("analyst", "skeptic")):
-        raise ValueError("Nightshift must answer both analyst and skeptic roles")
+        raise ValueError("The selected provider must answer both analyst and skeptic roles")
     if any("unavailable" in explanation["models"].values()
            for explanation in output["explanations"]):
         raise ValueError("One or more explanation model calls were unavailable")
@@ -128,7 +132,9 @@ def validate_case(output: dict, events: list[dict]) -> dict:
     if any(event["node"] == "meterless" and event["status"] == "error" for event in events):
         raise ValueError("Core trace contains an engine error")
     return {
-        "nightshift_calls": len(answered), "engine_operations": dict(operations),
+        "llm_provider": expected_provider, "llm_calls": len(answered),
+        "nightshift_calls": len(answered) if expected_provider == "meterless" else 0,
+        "engine_operations": dict(operations),
         "verdicts": dict(Counter(item["verdict"] for item in output["explanations"])),
         "tiers": dict(Counter(item["tier"] for item in output["recommendations"])),
     }
@@ -142,6 +148,8 @@ def main(argv: list[str] | None = None) -> int:
                         help="new directory under the ignored runs/ directory")
     parser.add_argument("--pools", nargs="+", choices=ALL_POOLS, default=list(ALL_POOLS),
                         help="run selected pools first; only all three can complete submission acceptance")
+    parser.add_argument("--llm-provider", choices=("nightshift", "glm"), default="nightshift",
+                        help="explicit profile; hosted GLM never calls local Nightshift")
     args = parser.parse_args(argv)
     if len(set(args.pools)) != len(args.pools):
         parser.error("Each pool may be selected only once")
@@ -152,21 +160,27 @@ def main(argv: list[str] | None = None) -> int:
         raise FileExistsError("Choose a new destination; previous run evidence is preserved")
     for path in args.env_file:
         load_private_env(path.expanduser())
-    token_file = os.environ.get("METERLESS_TOKEN_FILE")
-    if not token_file:
-        raise ValueError("Configure METERLESS_TOKEN_FILE before live acceptance")
-    secrets = [read_token(token_file), os.environ.get("ZETARIS_API_KEY", ""),
-               os.environ.get("ENGINES_TOKEN", ""), os.environ.get("NVIDIA_API_KEY", "")]
+    expected_provider = "glm" if args.llm_provider == "glm" else "meterless"
+    os.environ["LLM_PROVIDER"] = "glm" if expected_provider == "glm" else "auto"
+    secrets = [os.environ.get(name, "") for name in
+               ("ZETARIS_API_KEY", "ZETARIS_PASSWORD", "ENGINES_TOKEN", "NVIDIA_API_KEY", "GLM_API_KEY")]
+    if expected_provider == "meterless":
+        token_file = os.environ.get("METERLESS_TOKEN_FILE")
+        if not token_file:
+            raise ValueError("Configure METERLESS_TOKEN_FILE for Nightshift acceptance")
+        secrets.append(read_token(token_file))
+    else:
+        secrets.append(read_glm_api_key())
     request_lock = threading.Lock()
 
     def record_request(receipt):
         with request_lock, (destination / "model_requests.jsonl").open("a", encoding="utf-8") as stream:
             stream.write(json.dumps(receipt, sort_keys=True) + "\n")
 
-    routes = {role: [route for route in values if route[0] == "meterless"]
+    routes = {role: [route for route in values if route[0] == expected_provider]
               for role, values in build_routes_from_env(diagnostics=record_request).items()}
     if any(not routes.get(role) for role in ("extractor", "analyst", "skeptic")):
-        raise ValueError("Nightshift must be configured for extractor, analyst and skeptic")
+        raise ValueError("The selected provider must be configured for extractor, analyst and skeptic")
 
     os.environ["SAMPLE_MODE"] = "false"
     os.environ["ENGINES_ENABLED"] = "true"
@@ -190,6 +204,9 @@ def main(argv: list[str] | None = None) -> int:
     cases = []
     started = perf_counter()
     manifest = {"status": "running", "as_of": request["as_of"],
+                "acceptance_profile": f"{args.llm_provider}+zetaris+engines",
+                "llm_provider": expected_provider,
+                "nightshift_required_for_this_profile": expected_provider == "meterless",
                 "engines": health["engines"], "cases": cases,
                 "selected_pools": args.pools, "submission_complete": False,
                 "generated_at": dt.datetime.now(dt.UTC).isoformat()}
@@ -219,8 +236,10 @@ def main(argv: list[str] | None = None) -> int:
                      "output.json": write_json(folder / "output.json", output, secrets),
                      original_trace.name: {"bytes": len(raw_trace), "sha256": digest(raw_trace)}}
             manifest["stage"] = "validate-case"
-            checked = validate_case(output, events)
+            checked = validate_case(output, events, expected_provider=expected_provider)
+            stored_output = RunStore().save(output)
             cases.append({"pool": pool, "run_id": output["run_id"], "files": files,
+                          "stored_output": stored_output.relative_to(REPO_ROOT).as_posix(),
                           "recommendations": len(output["recommendations"]), **checked})
             write_json(destination / "manifest.json", manifest, secrets)
             print(json.dumps({"status": "ok", "pool": pool, **checked}), flush=True)
@@ -231,14 +250,15 @@ def main(argv: list[str] | None = None) -> int:
                          "elapsed_s": round(perf_counter() - started, 2),
                          "zetaris_queries": len(query.calls)})
         lines = ["# Live sponsor acceptance examples", "",
-                 "Computed through Zetaris, Nightshift and the Meterless engines sidecar.", "",
-                 "| Pool | Recommendation records | Nightshift calls | Explanation verdicts |",
+                 f"Computed through Zetaris, {args.llm_provider} and the Meterless engines sidecar.", "",
+                 "| Pool | Recommendation records | Live model calls | Explanation verdicts |",
                  "| --- | ---: | ---: | --- |"]
         for item in cases:
             lines.append(f"| {item['pool']} | {item['recommendations']} | "
-                         f"{item['nightshift_calls']} | {json.dumps(item['verdicts'])} |")
+                         f"{item['llm_calls']} | {json.dumps(item['verdicts'])} |")
         lines += ["", "Each pool folder contains input.json, output.json and the original trace.",
                   f"Submission acceptance complete: {manifest['submission_complete']}.",
+                  f"Acceptance profile: {manifest['acceptance_profile']}; sponsor service evidence is disclosed separately.",
                   "All tiers and verdicts are computed. Abstention remains a valid research result.",
                   "The current engine integration uses historical record counts, not prior accuracy.",
                   "Review model text and traces for privacy before publishing these artifacts."]

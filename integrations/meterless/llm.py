@@ -28,6 +28,7 @@ from pathlib import Path
 from time import perf_counter
 from typing import Callable
 from urllib.parse import urlsplit, urlunsplit
+from uuid import uuid4
 
 from .error_checks import error_signals
 
@@ -96,6 +97,49 @@ def normalise_meterless_base_url(value: str) -> str:
     if path.endswith("/v1"):
         path = path[:-3].rstrip("/")
     return urlunsplit((parsed.scheme, parsed.netloc, f"{path}/v1", "", ""))
+
+
+def normalise_hosted_base_url(value: str) -> str:
+    """Preserve a configured provider's routing prefix; accept a pasted completion URL."""
+    parsed = urlsplit(value.strip())
+    if (parsed.scheme not in {"http", "https"} or not parsed.hostname or parsed.username
+            or parsed.password or parsed.query or parsed.fragment):
+        raise ValueError("GLM_BASE_URL must be an HTTP(S) URL without credentials")
+    if parsed.scheme == "http" and parsed.hostname not in {"localhost", "127.0.0.1", "::1"}:
+        raise ValueError("Remote GLM_BASE_URL requires HTTPS")
+    path = parsed.path.rstrip("/")
+    if path.endswith("/chat/completions"):
+        path = path[:-len("/chat/completions")]
+    return urlunsplit((parsed.scheme, parsed.netloc, path, "", ""))
+
+
+def read_glm_api_key() -> str:
+    """Read an existing private key; optionally reference OpenCode's existing Go credential.
+
+    Credentials remain in memory, never copied into generated configuration or receipts.
+    The JSON source is opt-in and selects exactly one provider entry.
+    """
+    if os.environ.get("GLM_API_KEY"):
+        return os.environ["GLM_API_KEY"]
+    if os.environ.get("GLM_API_KEY_FILE"):
+        return read_token(Path(os.environ["GLM_API_KEY_FILE"]).expanduser())
+    auth_file = os.environ.get("GLM_OPENCODE_AUTH_FILE")
+    if auth_file:
+        try:
+            path = Path(auth_file).expanduser()
+            if path.stat().st_size > 65536:
+                raise ValueError
+            payload = json.loads(path.read_text(encoding="utf-8"))
+            entry = payload.get("opencode-go")
+            if not isinstance(entry, dict) or entry.get("type") != "api":
+                raise ValueError
+            key = entry.get("key")
+            if not isinstance(key, str) or not key.strip() or len(key) > 8192:
+                raise ValueError
+            return key.strip()
+        except (OSError, ValueError, AttributeError):
+            raise ValueError("GLM_OPENCODE_AUTH_FILE has no usable opencode-go API credential") from None
+    raise ValueError("Configure GLM_API_KEY, GLM_API_KEY_FILE or GLM_OPENCODE_AUTH_FILE privately")
 
 
 def advertised_model_ids(payload: object) -> list[str]:
@@ -297,6 +341,29 @@ def build_routes_from_env(*, diagnostics: Callable[[dict], None] | None = None) 
         return call
 
     routes: dict[str, list] = {}
+    provider = os.environ.get("LLM_PROVIDER", "auto")
+    if provider not in {"auto", "glm"}:
+        raise ValueError("LLM_PROVIDER must be auto or glm")
+    if provider == "glm":
+        api_key = read_glm_api_key()
+        base = os.environ.get("GLM_BASE_URL")
+        model = os.environ.get("GLM_MODEL")
+        if not base or not model:
+            raise ValueError("Configure GLM_BASE_URL and GLM_MODEL explicitly")
+        timeout = _bounded_setting("GLM_TIMEOUT_SECONDS", 180, 600)
+        queue_timeout = _bounded_setting("GLM_QUEUE_TIMEOUT_SECONDS", 600, 1800)
+        client = OpenAI(
+            base_url=normalise_hosted_base_url(base), api_key=api_key,
+            timeout=float(timeout), max_retries=0,
+            default_headers={"User-Agent": "tradepulse/1.0",
+                             "x-opencode-session": str(uuid4())},
+        )
+        concurrency = threading.BoundedSemaphore(_bounded_setting("GLM_MAX_CONCURRENCY", 1, 4))
+        route = ("glm", model, caller(client, concurrency=concurrency,
+                 max_tokens=_bounded_setting("GLM_MAX_TOKENS", 4096, 8192),
+                 request_timeout=timeout, queue_timeout=queue_timeout))
+        # An explicit hosted profile bypasses local inference, including token-file reads.
+        return {role: [route] for role in ROLES}
     token_file = os.environ.get("METERLESS_TOKEN_FILE")
     if token_file:
         output_format = os.environ.get("METERLESS_RESPONSE_FORMAT", "prompt")

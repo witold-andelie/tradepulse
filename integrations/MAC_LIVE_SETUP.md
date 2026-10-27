@@ -1,10 +1,14 @@
 # Finish live sponsor acceptance on the Mac
 
+**Current route:** use [HOSTED_ACCEPTANCE.md](HOSTED_ACCEPTANCE.md): hosted GLM for inference,
+the existing Zetaris deployment and the existing Meterless engines. Local-model diagnosis is
+stopped. The older Nightshift instructions below remain optional/historical; do not run
+another probe or wait for local-model quality acceptance before the hosted cases.
+
 The lead reports all seven sample tables registered, real 12/12 Zetaris parity after
 6966b0c, and working Mac engine health/snapshot/recall/remember operations. The first Crypto
-case failed on model replies and remains unaccepted. Start with
-[the one-request Nightshift diagnostic](meterless/STRUCTURED_DIAGNOSIS.md); do not repeat
-the entire pipeline or US extraction while diagnosing that failure.
+case failed on model replies and remains unaccepted. Those facts are retained; continue
+with the hosted acceptance profile above rather than repeating the Nightshift diagnosis.
 
 Run these commands in macOS Terminal from the TradePulse checkout. This workflow uses the local
 Docker deployment; the historical AWS-only Member D plan is not a completed deployment claim.

@@ -4,6 +4,12 @@ Updated 27 October 2026. This checklist follows the lead's latest requirements.
 The earlier AWS-only/NIM-only assignment is historical context in TASK.md.
 Check items only after observing the actual result.
 
+Current lead direction: hosted GLM for normal inference, live Zetaris and real Meterless
+Engines. Nightshift evidence is retained separately and local-model diagnosis is stopped.
+Follow [HOSTED_ACCEPTANCE.md](HOSTED_ACCEPTANCE.md). The earlier all-Nightshift profile is
+still available, but does not block the explicitly selected GLM profile. This is engineering
+acceptance, not a claim that submission media and every event-rule check are complete.
+
 ## Code and local engine acceptance
 
 - [x] Offline integration tests pass; original given test assertions are preserved.
@@ -17,7 +23,7 @@ Check items only after observing the actual result.
 - [x] Requests use bounds/timeouts and the original GraphEdge/ExtractedEvent schemas.
 - [x] Wrong/missing tokens are rejected when ENGINES_TOKEN is configured.
 - [x] Historical queries exclude future records and preserve earlier eligible edge versions.
-- [x] Nightshift is first for every role when configured, including skeptic.
+- [x] Explicit GLM routing bypasses local inference; the original auto/Nightshift route is preserved.
 
 See [engine measurements](engines/VALIDATION.md) for scope. The core/container run used
 an empty model replay cassette and empty World Model snapshots. It establishes H-MEM
@@ -70,7 +76,8 @@ The lead now reports Qwen downloaded and ready as the sole resident model, but i
 probe timed out after 180,153 ms with no reply. Model and Crypto acceptance remain incomplete.
 The lead then found its runtime completion after 267,437 ms, retaining a separate original
 export. The lane is idle, but the narrative includes an unsupported causal attribution.
-The next step is offline original-reply review, not another generation or Crypto run.
+Those original artifacts are retained. Further local-model diagnosis is stopped by the lead;
+the next step is the hosted product acceptance command.
 Bounded request/queue timeout overrides are implemented; defaults remain 180 seconds.
 See the diagnosis's current step.
 
@@ -78,7 +85,7 @@ See the diagnosis's current step.
 
 - [ ] integrations.live_acceptance completes all three pool cases with status=ok and
   submission_complete=true. A selected-pool run cannot satisfy the full submission check.
-- [ ] Every run queries Zetaris and receives live Nightshift analyst and skeptic answers.
+- [ ] Every run queries Zetaris and receives live analyst/skeptic answers from the declared provider.
 - [ ] Original traces show successful engine snapshot, recall and recommendation writes.
 - [ ] Three inputs, outputs, original traces and the computed README table are reviewed.
 - [ ] Every result comes from computation; tiers and verification gates are preserved.

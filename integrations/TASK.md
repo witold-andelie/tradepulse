@@ -4,32 +4,29 @@
 
 The lead's latest requirements supersede the dated AWS-only and NIM-only plan below:
 
-1. A working end-to-end project with Zetaris queries, at least one actual Meterless Engine
-   in a working feature, and Nightshift as the AI provider.
+1. A working end-to-end project with Zetaris queries and actual Meterless Engines in a
+   working feature. Normal inference now uses the lead's hosted GLM API.
 2. Actual agent traces and three computed sample inputs/outputs ready for the README.
 3. Private credentials, point-in-time filtering, unchanged contracts and honest abstention.
 
-The client/adapter, official engines sidecar, all-role Nightshift routing and live acceptance
-runner are implemented. Local Docker/core-to-sidecar checks pass. The Mac has registered all
-seven sample tables and verified the official helper and TradePulse smoke. Nightshift's basic
-text smoke also passed. Following the timestamp/paging fix, the lead reports real 12/12
-parity and actual Mac engine operations. Crypto acceptance failed: eight of eleven
-returned replies failed JSON/schema checks, and all three explanations abstained.
-Diagnose the structured replies with [the one-request probe](meterless/STRUCTURED_DIAGNOSIS.md)
-before retrying the combined examples. Do not count the failed run as case acceptance.
+The lead explicitly stops local-model diagnostics and chooses glm-5.3-flash through the
+supplied OpenCode Go endpoint. Follow [HOSTED_ACCEPTANCE.md](HOSTED_ACCEPTANCE.md) now:
+one real three-pool acceptance command, then API/UI review. Do not add a new smoke/probe loop.
+The original Nightshift-only profile remains available separately; it is not a prerequisite
+for the hosted profile and GLM responses must never be labelled Nightshift responses.
 
-Latest Mac follow-up: Qwen 3B is downloaded and the sole resident model. Its first probe
-timed out at the client but completed later in Nightshift after about 267 seconds. A separate
-original export is preserved; its causal narrative remains unverified. Review that existing
-reply offline before any new inference. Request and queue timeouts are now independently
-configurable within explicit limits, retaining their 180-second defaults. See the diagnosis's
-current step; historical commands there are not instructions to repeat completed tests.
+Implemented: GLM all-role routing, provider-specific audit/acceptance, the live Zetaris
+adapter, official engines sidecar and private-env API launcher. The lead reports real 12/12
+Zetaris parity and actual Mac engine operations. Nightshift already generated real replies,
+including a Qwen completion after the HTTP client timed out; its original evidence is retained.
+Those failed product cases are not relabelled successful. Hosted GLM live cases remain pending.
 
 Follow [MAC_LIVE_SETUP.md](MAC_LIVE_SETUP.md), [current acceptance](ACCEPTANCE.md),
 [engine measurements](engines/VALIDATION.md) and [sponsor evidence](../docs/sponsors.md).
 No AWS deployment, NIM model selection or outside-universe EDGAR source is on the minimum
-submission critical path. Those remain unverified extensions. Nightshift is now required
-for submission acceptance; a fallback response cannot satisfy its check.
+submission critical path. Those remain unverified extensions. The saved event rules permit
+arbitrary models/paid APIs and require meaningful Zetaris/Meterless integration; the earlier
+all-Nightshift requirement was an internal profile superseded by the lead's latest decision.
 
 ## Historical assignment below
 

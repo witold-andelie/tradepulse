@@ -3,3 +3,6 @@
 *.parquet binary
 # Original trace bytes are part of the hashed example delivery.
 examples/**/trace.jsonl -text whitespace=cr-at-eol
+# The published Crypto evidence is verified by original byte hashes on every platform.
+runs/hosted-glm-acceptance-1/crypto/*.json -text
+runs/hosted-glm-acceptance-1/crypto/*.jsonl -text whitespace=cr-at-eol

@@ -26,6 +26,11 @@ These rules apply everywhere. A folder's own `AGENTS.md` adds rules for that fol
 
 ## Current implementation baseline
 
+- The submitted live scope is Crypto. US/EU live-market completion is future work. Main's
+  scripts.review_demo serves the original accepted Crypto artifact without inference or
+  provider calls; preserve its byte hashes and distinguish inspection from generation.
+- Current roster/contributions are in docs/TEAM.md. The lead took over unfinished sponsor
+  delivery; do not assign a new deadline or uncompleted deployment claim to Member D.
 - Read `docs/STATUS.md` for current owners, implemented work and remaining acceptance.
   Historical notes are not a new instruction to rebuild completed modules.
 - Huyin's complete frontend and accessibility work is preserved in merge `aaf3b5f`.

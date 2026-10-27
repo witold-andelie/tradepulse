@@ -1,5 +1,5 @@
-# Docker has a 5.6 GB total memory budget on this machine.
-# Zetaris is NOT run locally; it runs on AWS (see integrations/ACCESS.md).
+# Default offline core/web stack. It does not install Zetaris, Nightshift or the separate engines.
+# The accepted sponsor deployment was local to the lead's Mac, not a delivered AWS service.
 services:
   core:
     build: .
@@ -30,7 +30,8 @@ services:
       core:
         condition: service_healthy
 
-  # Future Meterless sidecar; commented out because it does not exist yet.
+  # Separate Meterless sidecar source is in the integration checkout documented in docs/RUNNING.md.
+  # It is intentionally not auto-started by this offline Compose stack.
   # engines:
   #   build:
   #     context: integrations/engines

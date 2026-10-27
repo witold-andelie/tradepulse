@@ -1,87 +1,61 @@
-# Honest limitations
+# Scope, limitations and evidence boundaries
 
-Status: 25 October 2026. See [project status](STATUS.md) for verified checks and owners.
+Updated 27 October 2026. The submitted live demonstration is Crypto; US and European equities
+are future live-market upgrades. Experimental code and offline samples for those markets
+exist, but their live end-to-end acceptance is not complete.
 
-## Data and deployment
+## The saved Crypto result
 
-- The committed browser demonstration uses fictional instruments and generated numbers,
-  labeled SYNTHETIC. It does not establish performance on real instruments.
-- A real seven-table sample for 2026-10-23 and verified crypto CSV/provenance are delivered.
-  Strict data acceptance is 31/32: 35 filings have no permitted exhibit on verified source
-  indexes. The lead accepted these source exceptions for release on 2026-10-25. The missing
-  rows remain missing and strict completeness remains false.
-- PR #5's sample was excluded. The lead independently rebuilt the delivered snapshot, whose
-  redacted text hashes and full share-class document selection supersede that old artifact.
-- A full offline three-pool run passed loading and API-contract checks, but the matching model
-  cassette is absent and all nine explanations abstained. Complete explained replay is pending.
-- Private S3 upload is pending D's destination/access method; production lake/cache/logs stay local.
-- ZetarisClient and ZetarisAdapter live methods are stubs. Hosted service access, query parity
-  and model smoke-test evidence are pending.
-- The Meterless client and optional core bridge exist, but official server/vendor execution
-  is not verified. Injected-port tests cover snapshots, provenance and feedback mapping;
-  no genuine persistent H-MEM settlement or World Model use is claimed. Pending selection,
-  feedback idempotency and dated conflict semantics must be agreed before automation.
-- Core/web images were built and validated with fresh named volumes, a non-root core,
-  health ordering and nginx-backed real API browser checks. The engines service and hosted
-  sponsor integrations have not been validated.
+- Original run 2026-10-23-87de33aa is REAL, with 38 records, all NO_CALL, three explained
+  observations and 49 trace events. The published files are unchanged from the accepted case.
+- GLM generated its explanations. Zetaris served data/evidence; actual Meterless snapshot,
+  recall and remember operations appear in its trace.
+- Nightshift was connected and called in an earlier explanation workflow. That earlier
+  Crypto attempt failed full acceptance. Historical Nightshift evidence is not evidence that
+  it generated the current GLM case.
+- The latest organizer reminder names Nightshift as an AI provider. Our engineering profile
+  and saved GLM run do not, by themselves, settle how the organizer assesses that requirement.
+- The credential-free review server inspects saved output; it does not perform fresh
+  sponsor calls or make a new prediction. REAL describes original generation, not this viewer.
+- A verified claim passed specific schema/reference/hash/date or contribution checks.
+  It is not universal factual or causal certification. Skeptic counter-cases remain hypotheses.
 
-## Research scope
+## Research and data
 
-- The design uses a one-year evaluation window plus warmup. Current constituents introduce
-  survivorship bias, and short histories provide few stress episodes.
-- Factor cards are in-sample diagnostics. Rankings use walk-forward weights and out-of-sample
-  composite IC; these are separate measurements.
-- The recorded real-data run has no ACTIVE factor: 20 cards are MEASURED_ONLY and 13 have
-  INSUFFICIENT_DATA; all 616 records are NO_CALL. Gates were not relaxed to produce an output.
-- Event priors and seed-edge validation are currently fitted in-sample. Event drift and
-  relational spillover are excluded from walk-forward ranking.
-- The pipeline does not apply the US valuation constraint. Filing-based inputs are unavailable
-  for the EU/crypto pools and must remain visibly insufficient when unsupported.
-- Expected alpha and net edge are model estimates with configured cost assumptions, never
-  realized returns. A descriptive signal need not predict; prediction need not survive costs.
-- Regime monitors measure fragility and report conditional lift with sample size. They do
-  not forecast black-swan dates.
-- The current pipeline anchors the decision date to the latest SPY session. Independent
-  weekend crypto decisions and cross-market timing need further review.
-- Historical fundamental restatements, revised macro series and market-close availability
-  remain point-in-time limitations. Three persisted EDGAR timestamps match original index
-  Accepted times. Documentation now distinguishes index-based UTC persistence from the legacy
-  synthetic helper. The date-only ingestion cutoff is next-day 00:00 UTC; a 16:00 New York
-  market-close decision or automatic next-session shift is not implemented.
-- Three crypto article titles are missing and some mapped titles describe a platform or issuer.
-  The curated pool meets the 90% title threshold but is not an exact top-40 market-cap index.
-- GDELT returned year-spanning daily observations for three probe names, with 20 missing dates
-  each. Those gaps were not imputed and no validated news factor is claimed.
-- Arbitrary out-of-universe ticker lookup and iterative model-proposed graph expansion are
-  target features, not completed end-to-end behavior.
+- No promise of predictive or investment performance is made. Stances are research labels.
+  No real order is placed, routed or sized.
+- The frozen sample uses current constituents and short histories; survivorship bias and
+  limited stress observations remain. Descriptive evidence is not predictive validation.
+- Factor cards are in-sample diagnostics; ranking uses separate walk-forward measurements.
+  Seed-edge validation/event priors are fitted in-sample. Event drift and relational
+  spillover are excluded from walk-forward ranking.
+- No ACTIVE factor or directional recommendation is manufactured. Offline examples
+  legitimately contain NO_CALL and unavailable-model abstentions.
+- A full hosted-model replay cassette is not included. Saved-result inspection and
+  deterministic sample recomputation are available; exact fresh generative prose is not promised.
+- The US valuation constraint, independent crypto weekend clock, arbitrary out-of-universe
+  lookup and iterative model-proposed graph expansion are not completed delivered features.
+- Fundamental restatements, revised macro data and market-close availability remain limitations.
+  The documented ingestion cutoff is date-based, not a New York market-close execution model.
+- Source completeness is 31/32 checks: 35 filings have no permitted exhibit on independently
+  checked source indexes. The lead accepted these visible exceptions; strict completeness
+  remains false. This filing limitation primarily concerns the future equity expansion.
+- The curated Crypto pool is not an exact top-40 market-cap index. Some article mappings/titles
+  have documented gaps. No validated GDELT news factor is claimed.
 
-## Explanation and presentation
+## UI and accessibility
 
-- Hash/date/contribution checks make claims inspectable. They do not establish that an
-  economic explanation is causal. Unsupported explanations abstain.
-- Discover opens guided journeys over existing records. No conversational endpoint or
-  interactive model recomputation is connected to that screen.
-- The generated fixture's by-tier counts total 1,808 while its settled count is 1,200.
-  Both values are retained with a reconciliation notice; source records were not rewritten.
-- Recorded trace timestamps and duration fields can disagree. The UI exposes both timing
-  sources and counts only explicit LLM-call events.
-- Track Record plots score percentile against the share beating the benchmark. It is not
-  probability calibration and uses a horizontal 50% reference.
+English is default; eleven authored UI catalogs load on demand. Original source narratives,
+identifiers and financial values are preserved. Translation coverage is not native-language
+financial editorial certification. Native guide screen-reader acceptance remains pending;
+actual audio/cross-browser voice tests and eleven-language editorial are deferred.
 
-## Acceptance still outstanding
+The fixture has known independently generated inconsistencies; tables and notices retain
+them. Those SYNTHETIC values are not the REAL Crypto demonstration. Track Record displays
+historical score-percentile/outcome relationships, not calibrated future probabilities.
 
-Focused Chromium, keyboard, reflow and contrast checks passed. PR #4 records Lighthouse 100,
-axe zero critical/serious, keyboard, native NVDA, 200% zoom and reduced-motion acceptance for
-Regime, Track Record and Run Trace on the synthetic fixture. These results do not complete
-other-page acceptance. The current real API and container frontend passed nine browser groups
-with no normal console errors or fixture requests. New guide acceptance includes Lighthouse
-100 desktop/mobile, 28 axe cases without violations and 18 native zoom cases; actual NVDA/
-VoiceOver on that guide, native-speaker editing and audible voice quality remain pending.
-Repeat real-output checks when genuine model recordings are supplied.
+## Deployment
 
-The 25 October security maintenance upgraded existing dependencies and reduced the official
-registry audit from 15 findings to zero. Original test suites, browser journeys and the
-Node 22 container build passed; see [maintenance scope](validation/maintenance-2026-10-25/README.md).
-An audit result is dated registry evidence rather than a guarantee against future disclosures.
-
-No real orders are placed, routed or sized. Research stances are not execution instructions.
+The accepted sponsor deployment was local to the lead's Mac, not a completed shared AWS
+deployment. S3 production upload is not claimed. Main's quick review requires no Docker/GPU;
+fresh sponsor execution requires separately installed services, hardware and private credentials.

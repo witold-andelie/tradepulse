@@ -1,5 +1,7 @@
 # Decision log
 
+Current release note, 27 October: historical AWS/NIM-only deployment decisions below are superseded for the submitted Crypto case. The actual sponsor deployment is local to the lead's Mac; accepted inference is GLM with separate historical Nightshift evidence. US/EU are future live-market upgrades. See README, docs/RUNNING.md and docs/sponsors.md; target architecture is not proof of completed delivery.
+
 Short records of decisions that shape the code. Newest first. Change a decision by adding a new
 entry, not by editing an old one.
 

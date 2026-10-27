@@ -28,6 +28,9 @@ data/cache/
 logs/
 runs/
 
+# Submission video, narration and local media stay outside Git.
+/video/
+
 # --- web ---
 web/node_modules/
 web/dist/

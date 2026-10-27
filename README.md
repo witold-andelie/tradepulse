@@ -1,198 +1,213 @@
 # TradePulse
 
-**An explainable ranking agent for US equities, European equities and crypto.**
+**Evidence-first crypto research: inspect a ranking, its explanation, and the checks behind it.**
 
-TradePulse's target universe combines the S&P 500 and Nasdaq-100, EURO STOXX 50 and crypto
-assets. Each pool is ranked separately. Factors must establish what they measure, whether they
-predict beyond a price-volume baseline, and whether an edge survives modeled costs.
+**Track 2 — The Agent That Can Explain Why.** The submitted demonstration focuses on Crypto.
+US and European equities are planned upgrades; experimental code and offline samples exist,
+but their live end-to-end acceptance is not complete.
 
-LLMs extract events, draft explanations and challenge claims. Deterministic code calculates
-scores, evaluates gates, assigns research stances and verifies the supporting evidence.
-Unsupported explanations abstain.
+> Research and education only. TradePulse does not place, route or size orders.
+> A research stance is not investment advice. An explained observation is not a profitable trade.
 
-> Research and education only. Tiers are research stances, never orders. TradePulse places no
-> trades. Synthetic fixtures and historical evaluation are not live investment performance.
+## What problem does it solve?
 
-## Hackathon track
+A financial ranking is easy to display and difficult to trust. A plausible model narrative
+can cite the wrong observation, use information unavailable at the decision date, confuse
+correlation with causality, or hide missing data. A high score alone does not explain why
+an instrument appears in a list.
 
-**Primary track: Track 2 — The Agent That Can Explain Why.** TradePulse is built around that
-problem: it combines market, filing, attention and relationship evidence; separates descriptive
-signals from predictive and cost-surviving ones; drafts claims through an analyst/skeptic flow;
-and verifies every explanation against query evidence. When the evidence or model answer is
-unavailable, it abstains instead of inventing a rationale.
+TradePulse gives researchers a path from a recorded ranking to its underlying evidence.
+An analyst drafts an explanation, a skeptic challenges it, and deterministic checks inspect
+the claim's references, source hashes, timing and supported measurements. The interface
+retains rejected claims, missing observations and abstentions. The aim is inspectable
+research rather than a promise that an AI can predict markets.
 
-## Current status — 27 October 2026
+The product separates three questions: **what can be measured, what predicts out of sample,
+and what survives modeled costs?** Those are different tests. The system does not lower a
+gate simply to produce a positive recommendation.
 
-The quantitative core, pipeline, HTTP API and complete fixture-backed frontend are implemented.
-Huyin's original B1–B10 and accessibility commits are preserved in the integration history,
-including six business pages, Discover and Simple/Pro presentation.
-PR #8 adds eleven-language authored UI labels with English as the default and lazy-loaded
-translations. Source narratives, financial values and evidence remain original. The lead
-approved the merge and owns remaining acceptance. Focused contrast checks passed; native
-screen-reader acceptance remains pending. Actual speech/cross-browser voice tests and human
-editorial across all eleven languages are deferred. See [current scope](web/V2_LEAD_FOLLOWUP.md).
+## What was delivered?
 
-The real seven-table sample for **2026-10-23** and verified crypto configuration are prepared.
-The sample is below 25 MB and includes hashes, source-exception evidence and offline validation.
-The strict data audit passes 31 of 32 checks: 35 filings have no permitted exhibit on their
-source index pages. The lead accepted these verified source exceptions for release; strict
-completeness remains false. See [real-data evidence](ingest/REAL_DATA_EVIDENCE.md).
+The accepted Crypto run is `2026-10-23-87de33aa`, using the decision date **2026-10-23**
+and a five-day horizon. Its original files contain **38 instruments, 38 NO_CALL stances,
+three explained observations and 49 trace events**, including six actual GLM calls.
+These are measured artifact counts, not promised outcomes of a future run.
 
-A full three-pool run completed with networking blocked. Without D's matching model cassette,
-its nine explanations abstained; the unchanged research gates yielded no ACTIVE factors and
-all 616 records were NO_CALL. These results are preserved rather than replaced with invented
-outputs. Hosted Zetaris, Meterless engines and model acceptance remain incomplete.
+The application includes Discover, a filterable leaderboard, instrument evidence drill-down,
+Factor Lab, regime diagnostics, Track Record and Run Trace; Simple/Pro presentation; and
+eleven-language authored UI labels. English is the default and other catalogs load on demand.
+Original model narratives, financial values, identifiers and evidence remain unchanged.
 
-Outside that sponsor-service work, the required product path is implemented: reproducible
-ingestion and a committed real sample, point-in-time factor research, walk-forward ranking,
-regime overlays, grounded explanation and abstention, traceable API output, the responsive web
-experience, offline startup, containers and CI. The remaining non-sponsor items are acceptance
-or documented extensions rather than broken release paths:
+The live Crypto case passed API/UI review on the lead's Mac. The public repository now
+includes the **same original input, output and trace shown in the video**, plus a read-only
+review server. It does not require a reviewer to own cloud credentials or rerun a paid model.
 
-- the new Ticker Detail guide still needs a native NVDA/VoiceOver and audible-speech spot check;
-- the target US price-to-sales constraint is not yet connected to the pipeline;
-- arbitrary out-of-universe ticker lookup and an independent weekend crypto decision clock are
-  not implemented;
-- iterative model-proposed graph expansion remains future work.
+## Review the video result locally — no keys, GPU or Docker
 
-These gaps are not silently simulated. Current runs disclose the missing valuation constraint,
-the frontend exposes only loaded symbols, and the limitations document records the clock and
-graph scope. None depends on presentation slides, which are intentionally outside this status.
+Prerequisites: Python 3.11+ and Node 22.12+ or Node 24+. Initial package installation needs
+internet access; serving the saved case does not call Zetaris, an engine or an AI provider.
 
-Read [project status and remaining owners](docs/STATUS.md),
-[frontend integration](web/INTEGRATION.md), and [honest limitations](docs/honest-limitations.md).
+```sh
+git clone https://github.com/witold-andelie/tradepulse.git
+cd tradepulse
+```
 
-## Preview the implemented frontend
+**macOS / Linux, terminal 1:**
 
-The standalone frontend runs on bundled **SYNTHETIC** contract fixtures without backend services
-or credentials. Leave `VITE_API_BASE` unset.
+```sh
+python3 -m venv .venv
+source .venv/bin/activate
+python -m pip install -e ".[agent,dev]"
+python -m scripts.review_demo --verify-only
+python -m scripts.review_demo --port 8001
+```
+
+**Windows PowerShell, terminal 1:**
+
+```powershell
+py -3 -m pip install -e ".[agent,dev]"
+py -3 -m scripts.review_demo --verify-only
+py -3 -m scripts.review_demo --port 8001
+```
+
+Windows users choosing a virtual environment should use that environment's Python executable
+consistently for installation and launch. The team's default Windows commands use `py -3`.
+
+**Terminal 2, macOS / Linux:**
+
+```sh
+cd tradepulse/web
+npm ci
+VITE_API_BASE=http://localhost:8001 npm run dev
+```
+
+If already in the repository root, use `cd web` instead. On Windows:
 
 ```powershell
 cd web
 npm ci
+$env:VITE_API_BASE = "http://localhost:8001"
 npm run dev
 ```
 
-Open http://localhost:5173. The root opens US equities; Discover is available at `/discover`.
-The other routes are Ticker Detail, Factor Lab, Regime, Track Record and Run Trace.
-The persistent banner identifies fictional instruments and generated numbers.
+**Open http://localhost:5173/pool/crypto**, not the default US route.
+Use `localhost` to match the API's default CORS origin. Start with the leaderboard, open
+WLD-USD, expand a claim's checks/evidence, then visit Factor Lab and Run Trace.
 
-On the team's Windows machines, set `npm_config_cache` to a folder on D: before installing.
-Use Node 22.12+ within the 22 LTS line or Node 24+; Node 20.19+ is also supported. The existing
-libraries were upgraded for security on 25 October; see [dependency policy](web/DEPENDENCIES.md).
+The verifier checks original file hashes and contracts before serving. `POST /run` is
+disabled in this review server. The `REAL` field describes the **original execution**;
+this viewing session is an offline inspection of saved results, not fresh inference.
+See [detailed reproduction and troubleshooting](docs/RUNNING.md).
 
-## Run the core
+## Data, examples and reproducibility
 
-```powershell
-py -3 -m pip install -e ".[ingest,agent,dev]"
-py -3 serve.py
-```
+The committed [real public-data snapshot](data/sample/README.md) is dated 2026-10-23 and is
+under 25 MB. Its seven tables cover prices, pool membership, attention, macro observations
+and filing/fundamental inputs. Public sources include Yahoo Finance through yfinance,
+Wikimedia pageviews, SEC EDGAR and FRED. Not every source applies to every pool.
 
-The managed launcher listens on `127.0.0.1:8000`. On a fresh SAMPLE_MODE checkout it verifies
-the frozen sample and generates a saved run before starting the API; subsequent starts reuse
-it. It does not automatically call or record live models. The lower-level `run.py --serve`
-command still exposes only the HTTP service. See [running instructions](docs/RUNNING.md).
+| Example | Input | Output | Original trace | Meaning |
+| --- | --- | --- | --- | --- |
+| Accepted Crypto demonstration | [input](runs/hosted-glm-acceptance-1/crypto/input.json) | [output](runs/hosted-glm-acceptance-1/crypto/output.json) | [trace](runs/hosted-glm-acceptance-1/crypto/trace-2026-10-23-87de33aa.jsonl) | Original REAL execution; GLM + Zetaris + Meterless engines |
+| Offline Crypto computation | [input](examples/crypto/input.json) | [output](examples/crypto/output.json) | [trace](examples/crypto/trace.jsonl) | REPLAY data path; missing model recordings cause abstention |
+| Offline US research baseline | [input](examples/us_equity/input.json) | [output](examples/us_equity/output.json) | [trace](examples/us_equity/trace.jsonl) | Experimental baseline for a future market upgrade |
+| Offline European research baseline | [input](examples/eu_equity/input.json) | [output](examples/eu_equity/output.json) | [trace](examples/eu_equity/trace.jsonl) | Experimental baseline for a future market upgrade |
 
-The real snapshot is under `data/sample/`. Use its decision date:
+These are distinct recorded inputs and computed outputs. Offline examples are not relabelled
+as passed live sponsor cases. [The evidence manifest](docs/review/crypto-evidence.json)
+records the accepted case's original byte hashes and source commit. Generative text is not
+promised to repeat verbatim in a new model run.
 
-```powershell
-$env:SAMPLE_MODE = "true"
-$env:RECORD_LLM = "false"
-py -3 run.py --as-of 2026-10-23
-```
+To recompute deterministic research from the sample, rather than inspect saved output, use
+[the separate offline-computation path](docs/RUNNING.md#recompute-from-the-public-snapshot).
+Without the matching model cassette, new offline explanations honestly abstain.
 
-SAMPLE_MODE uses DuckDB and recorded model answers; it never silently falls back to hosted
-services. The matching `llm_cassette.jsonl` and model extraction cache are not delivered yet,
-so unavailable model answers lead to abstention. Record them against this exact redacted-text
-snapshot, not the earlier excluded artifact described in PR #5.
-
-For the core and integrations, set configuration variables in the process environment.
-Ingestion explicitly reads its contact settings from the ignored root `.env`; this does not
-load all core/provider settings into the process. Docker Compose reads `.env` explicitly.
-The frontend reads `web/.env.local`; set `VITE_API_BASE=http://localhost:8000` there only after
-a backend run is available. Configured API failures remain visible instead of loading fixtures.
-
-## Architecture and ownership
+## How it works
 
 ```text
-ingest -> parquet lake -> templated DuckDB / planned Zetaris live adapter
-      -> event extraction + deterministic factor research and gates
-      -> walk-forward weights, regime and ranking
-      -> LangGraph analyst / skeptic / verifier -> report, API and trace
-      -> fixture-backed or API-backed React frontend
+Dated source data -> typed, allow-listed queries -> deterministic research gates and ranking
+                                            -> Analyst -> Skeptic -> Verifier
+Meterless World Model / H-MEM <--------------> evidence, dated context and persistence
+                                            -> saved output + original trace -> API -> web
 ```
 
-World Model and H-MEM have an opt-in core bridge against the agreed sidecar API: snapshot inputs,
-bounded historical memory context and research-record persistence. Official engine execution,
-automatic pending settlement and dated conflicts still need D's delivery/semantics acceptance.
-SAMPLE_MODE never auto-connects to engine HTTP services. See [wiring scope](docs/METERLESS_WIRING.md).
-All configured LLM roles use hosted NVIDIA NIM by default (D18).
-The current request guard itself is deterministic.
+Point-in-time checks limit what is available at a decision date. The verifier checks specific
+properties; it is not universal fact checking and does not prove economic causality.
+Skeptic suggestions remain hypotheses. Coverage is data availability, not confidence;
+Track Record is historical evaluation, not a forecast or trading record.
 
-| Path | Responsibility | Owner |
-|---|---|---|
-| [docs/architecture](docs/architecture/README.md) | Target OPM model, factors, sources and decisions | Lead |
-| [contracts](contracts/README.md) | Unchanged table/API schemas and synthetic fixtures | Lead |
-| `config/` | Parameters, universe extras and seed-edge hypotheses | Lead |
-| [tradepulse](tradepulse/README.md) | Core pipeline, research, ranking, explanation and API | Lead |
-| [ingest](ingest/TASK.md) | Preserved A implementation; real collection, sample and remaining source/upload acceptance | Lead, taking over A |
-| [web](web/TASK.md) | Existing complete frontend, visual/interaction review and acceptance | B / Huyin |
-| [quant](quant/TASK.md) | Existing math library, C9 properties, review of existing B7–B9 pages | C / Tanhao |
-| [integrations](integrations/TASK.md) | Zetaris, NIM recording and Meterless engines | D |
+## Sponsors and pre-existing components
 
-## Validation
+| Component | Actual role and delivery boundary |
+| --- | --- |
+| **Zetaris** | Real data and evidence queries in the accepted Crypto run. Original full-template parity was measured separately. The read-only viewer does not contact Zetaris. |
+| **Meterless World Model / H-MEM** | Actual snapshot, recall and remember operations in the Crypto trace. Official reference engines are third-party components, not engines invented by this team. |
+| **Nightshift** | Connected and genuinely called by an earlier Analyst/Skeptic workflow. That earlier Crypto run failed full acceptance. The video shows this history separately. |
+| **GLM-5.3-Flash** | Actual inference provider for the accepted Crypto demonstration. Its answers must not be attributed to Nightshift. |
+| **NVIDIA / spacexsi / Cursor** | No implemented sponsor-use claim is made for this delivery. Historical plans are not completed integrations. |
 
-[GitHub Actions CI](docs/CI.md) runs Python/Ruff/offline-sample acceptance on Windows and
-frontend tests/contracts/build/audit on Node 22 and 24. It needs no cloud credentials and
-publishes measured reports; live sponsor acceptance remains separate.
+The organizer's reminder explicitly lists Nightshift as an AI provider. The accepted GLM
+case alone is not proof that Nightshift generated that request; the distinction above is
+intentional. [Sponsor evidence and boundaries](docs/sponsors.md) explain what was actually tested.
+
+Third-party software includes React, Vite, TanStack Table, ECharts, FastAPI, LangGraph,
+DuckDB, pandas, NumPy, PyArrow and the OpenAI-compatible client SDK. Zetaris and Nightshift
+are existing sponsor platforms. The Meterless reference engines retain upstream licenses
+and attribution in the [integration source](https://github.com/witold-andelie/tradepulse/tree/194033a1d7f78d96e60ec16f28e633f8c81ebf29/integrations/engines).
+Existing libraries, public datasets and sponsor platforms are not claimed as original team work.
+See [component provenance](docs/PRE_EXISTING_COMPONENTS.md).
+
+## Team and delivery ownership
+
+| Member | Contribution |
+| --- | --- |
+| **Wentao Ma — lead** | Product/Track 2 direction; architecture, contracts, core research/ranking/explanation/API; integration and final QA. Took over unfinished sponsor deployment/integration, completed the working Crypto path, and owns final packaging and demo delivery. |
+| **Mengya Feng — Member A** | Ingestion-pipeline groundwork. Her implementation history is preserved; the lead completed fresh data collection, frozen-sample preparation and remaining data acceptance. |
+| **Yin Hu — Member B, GitHub YinnHuu** | Frontend pages, Discover, Simple/Pro, evidence UI, accessibility and global localization V2. Original contributor commits are preserved. |
+| **Hao Tan — Member C** | Quantitative-library work, 235 added property tests, and review/fixes for Regime, Track Record and Run Trace. |
+| **Ojas Vairagkar — Member D** | Initially assigned AWS sponsor deployment/integration. No project code, working service or reviewable deliverable was supplied. Reported AWS account/policy/ARN/region blockers; Wentao Ma implemented and completed the TradePulse-specific sponsor work. |
+
+The ownership change describes delivery status, not an assessment of a person's intent or
+effort. See [contributions and takeover scope](docs/TEAM.md) for details.
+
+## Next upgrades
+
+1. **US equities:** complete filing-event identity/grounding, valuation constraints and live
+   sponsor/API/UI acceptance before presenting that market as delivered.
+2. **European equities:** expand appropriate local inputs and complete model/evidence acceptance.
+3. **Stronger inference and replay:** improve structured-output reliability, preserve reviewed
+   cassettes, and make provider-specific provenance easier to reproduce.
+4. **Broader research validation:** independent crypto weekend timing, longer/less biased
+   histories, additional graph evidence and out-of-sample evaluation.
+5. **Accessibility editorial:** native screen-reader completion, financial-language review and
+   device speech testing. These are not certified complete.
+
+US/EU experimental samples remain available for inspection; they are not finished live-market
+products. [Limitations](docs/honest-limitations.md) retain known data and verification gaps.
+
+## Tests, video and delivery
 
 ```powershell
 py -3 -m pytest -q
-py -3 -m ruff check ingest quant integrations tradepulse run.py scripts --no-cache
+py -3 -m ruff check ingest quant integrations tradepulse run.py serve.py scripts --no-cache
 cd web
 npm test
 npm run check:contracts
 npm run build
 ```
 
-The collector's latest checks are **642 Python tests passed, none skipped**. The research-guide
-and provenance follow-up has **89 frontend tests passed**, valid contract fixtures and a successful production build. Existing browser suites
-passed 17/17 and 18/18 groups. See [status](docs/STATUS.md) for scope and outstanding manual QA.
-The full production lake is ignored rather than committed; its seven lake cases require local
-collection or the private handoff. At the initial real-sample release, a clean export passed **588 tests with 7 expected
-production-lake skips**, including the committed sample test, with no external network attempts.
-Keep Python temporary files on D: with `--basetemp`. Re-render changed OPM diagrams using
-`py -3 scripts/render_opm.py`.
+CI needs no sponsor credentials. Network-marked sponsor checks and private full-lake checks
+are separate from the public sample. See [CI scope](docs/CI.md).
 
-Independent Ticker Detail checks now include Lighthouse 100 desktop/mobile, 28 axe-core
-cases without violations and 18 native zoom cases. See [actual scope and remaining reader
-acceptance](web/ACCESSIBILITY_ACCEPTANCE.md). A's [private full-lake handoff](ingest/DELIVERY.md)
-is built and locally verified; actual S3 upload still awaits a supplied destination/access.
-Three [computed real-data examples](examples/README.md) include inputs, outputs and original
-traces, with explicit unavailable-model abstention and zero network attempts.
+The local recorded video is **130 seconds**, within the organizer's 1-4 minute range.
+Video and narration are distributed separately from Git; the local `video/` directory is
+excluded from both Git and Docker build contexts. Recording does not itself prove platform
+upload or a completed submission. See [submission checklist](docs/submission/README.md).
 
-## Docker
-
-```powershell
-docker compose up --build
-```
-
-The configuration defines core (3 GB) and web (256 MB); the engines service is still commented
-out. The web server is on http://localhost:8080 and proxies `/api` to core. On a fresh sample
-startup the core computes and saves a run; web waits for its health check. Named volumes retain
-the runs and traces. An API error stays visible instead of switching to fixture data.
-Default `SAMPLE_MODE=true` uses the delivered snapshot but does not supply its missing model cassette. Hosted Zetaris is
-an external service, not part of this Compose stack.
-
-The actual core/web images were built and started with fresh volumes in an isolated local
-Compose project. All nine real-API browser groups passed through nginx, including 320 px
-reflow and the deliberate failure case. See [runtime evidence](docs/validation/README.md).
-The engines service and hosted sponsor acceptance are still pending.
-
-The [submission preparation pack](docs/submission/README.md) contains a three-minute demo
-script, an eight-slide outline and actual product captures. Its cloud-service scenes and
-submission declarations remain drafts until their underlying evidence is supplied.
+Full sponsor re-execution uses the separate integration checkout described in
+[the running guide](docs/RUNNING.md#optional-live-sponsor-re-execution).
+The paused integration/US repair branch is not silently merged into main by this review release.
 
 ## License
 
-Apache-2.0
+Apache-2.0; third-party components retain their original licenses.

@@ -29,6 +29,8 @@ from time import perf_counter
 from typing import Callable
 from urllib.parse import urlsplit, urlunsplit
 
+from .error_checks import error_signals
+
 ROLES = ("extractor", "guard", "analyst", "skeptic")
 
 
@@ -278,6 +280,7 @@ def build_routes_from_env(*, diagnostics: Callable[[dict], None] | None = None) 
                 status = getattr(error, "status_code", None)
                 if isinstance(status, int) and 100 <= status <= 599:
                     receipt["http_status"] = status
+                    receipt["error_signals"] = error_signals(error)
                 raise
             finally:
                 if concurrency is not None:

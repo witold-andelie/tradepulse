@@ -93,3 +93,42 @@ based only on this diagnostic or remap references to make existing gates pass.
 Only after diagnosis and review should the lead rerun Crypto acceptance with an explicitly
 chosen format, using a new output directory. Full submission acceptance still needs three
 real pool cases, reviewed original traces and privacy-checked sample artifacts.
+
+## Reported first schema probe and next control
+
+The lead reports one webllm_schema probe at 143386e: live price_symbol_window returned
+61 rows for WLD-USD, 2026-08-24 through 2026-10-23, with rows_sha256
+b12675b09cc3869cbc4dbc658e1155abb1f245ad4c02d919cef56764d5333208.
+The subsequent provider request returned HTTP 400 / BadRequestError in 328 ms. No model
+reply or finish_reason was returned. The original artifact remains
+runs/nightshift-schema-probe-1/report.json on the Mac. The rejection's specific cause
+is not established; the first report omitted the error body.
+
+Ranked hypotheses: the nested response_format.schema is rejected; the entire response_format
+is rejected; or another field such as temperature causes request validation to fail.
+The next control changes only the nested schema field. It keeps the model, prompts,
+temperature, output bound and serial request setting the same. A regression verifies that
+these two modes produce otherwise identical SDK request arguments.
+
+New HTTP diagnostics include error_signals, extracted from the SDK-parsed body with a fixed
+vocabulary. They report known codes, parameter names and message categories, never arbitrary
+messages, echoed inputs, credentials or response headers. Empty hints are inconclusive;
+message-category matches alone do not prove a root cause.
+
+After updating the branch, execute exactly one control request and stop:
+
+```sh
+python3 -m integrations.meterless.structured_probe \
+  --env-file ~/getting-started/.env.local \
+  --env-file .env.nightshift.local \
+  --case-output runs/live-sponsors-crypto-first/crypto/output.json \
+  --symbol WLD-USD \
+  --response-format json_object \
+  --output runs/nightshift-json-object-probe-1
+```
+
+Use the same activated environment and exports as the first probe. Preserve all earlier
+evidence. Do not automatically retry prompt mode, remove temperature, raise the token cap,
+change models or run Crypto acceptance. Report the new report.json and, if generated and
+privacy-checked, original reply.json. If it succeeds where the schema mode failed, that
+implicates the nested schema handling; it does not prove all schema constraints are unsupported.

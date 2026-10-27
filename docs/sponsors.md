@@ -125,6 +125,12 @@ not an established fix. A bounded, opt-in structured-output request and a one-re
 Nightshift schema forwarding and factual reply quality remain unverified. New receipts
 record stop reasons and sanitized error types/statuses, without raw credentials.
 
+The lead's first webllm_schema probe at 143386e queried 61 live price rows and then received
+HTTP 400 / BadRequestError in 328 ms, without a model reply. It remains failed with
+feature_acceptance=false. The specific rejected field is unknown. The next diagnostic is
+one explicit json_object control, with only the nested schema removed; it is not an automatic
+fallback or Crypto acceptance. Fixed-vocabulary error hints avoid publishing raw error bodies.
+
 Still required: wrong-token enforcement, actual catalog validation and the combined live cases.
 Independent skeptic-family routing and
 complete offline model replay remain unverified. NIM is an optional fallback in normal

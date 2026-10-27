@@ -40,16 +40,34 @@ successes. This is not a passed US case. The original reports are retained.
 Provider documentation confirms GLM-5.3-Flash forces thinking and defaults to max effort.
 The earlier client did not set effort. The corrected client defaults GLM-5.3 requests to low,
 supports explicit JSON-object mode and records visible-content length and reported reasoning
-usage without retaining reasoning text. The next bounded US-only attempt uses the documented
-8192-token setting; it has not yet run. This configuration correction is not a verified
-explanation of every JSON failure and does not lower schema or evidence requirements.
+usage without retaining reasoning text. The second US attempt confirmed all 19 replies ended
+stop with low effort, 8192 tokens and JSON-object mode. Twelve extractor and all six explanation
+replies passed schema; one extractor reply did not. All three explanations were explained by
+the existing verifier. This does not certify the entire narrative: the BE skeptic introduced
+unsupported assertions, and prompts now require concise, evidence-limited conditional critique.
+
+That run still failed at final engine remember before full output was saved. The old client
+used ten seconds and did not retain the underlying exception; a later engine log reports 523
+records added. A timeout is plausible but unproven, and the old manifest remains failed.
+New client options bound sequential write batches separately from reads, retain safe request
+receipts and save pending payloads. A read-only tool can reconcile stored record identities.
+The acceptance wrapper also restores the core extractor's original bounded feedback retry
+instead of intercepting invalid array elements. No generated text or contract is repaired.
+
+The next US-only attempt explicitly rechecks prior parity against the frozen sample and
+caches only bulk windows matching original live Zetaris receipts by parameters/count/hash.
+Instrument evidence and verifier queries remain live. Cache hits, reused parity and source
+file hashes are disclosed separately; this is not a fresh full-parity measurement. These
+changes pass offline tests but remain pending live Mac acceptance. Preserve accepted Crypto.
 
 ## Zetaris
 
 Load: the live data/evidence query layer. Typed allow-listed templates supply the core and
 verifier. The live client/adapter now implement official direct REST and UI-proxy channels,
 fresh request IDs, timeouts, bounded result expansion, contract dtype coercion and result
-hashing. Configured live errors remain errors; there is no DuckDB fallback in the live path.
+hashing. Configured live errors remain errors; there is no silent DuckDB fallback. The opt-in
+receipt-verified bulk cache described above is explicitly labelled and never caches instrument
+evidence or verifier queries.
 
 The lead reports local Docker registration and SQL/API verification on the Mac:
 

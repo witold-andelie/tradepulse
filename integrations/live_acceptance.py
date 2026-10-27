@@ -31,6 +31,7 @@ from .meterless.reply_checks import inspect_reply
 from .zetaris.adapter import DuckDBAdapter, ZetarisAdapter
 from .zetaris.client import ZetarisClient
 from .zetaris.parity import check_parity
+from .zetaris.receipt_cache import ReceiptCache, read_receipt_file, verified_parity
 
 ALL_POOLS = ("crypto", "eu_equity", "us_equity")
 
@@ -102,9 +103,28 @@ class AuditedLLM:
                    "schema_valid": schema_valid, "schema_errors": checked["errors"]}
         with self._lock, self.path.open("a", encoding="utf-8") as stream:
             stream.write(json.dumps(receipt, sort_keys=True) + "\n")
-        if not schema_valid:
+        # The core extractor owns its bounded per-document feedback/grounding retry. Raising
+        # here would abort the entire extraction stage before that existing loop can act.
+        if not schema_valid and role != "extractor":
             raise ModelSchemaError("Provider response did not satisfy the requested JSON schema")
         return result
+
+
+class AuditedEngines:
+    """Keep the exact pending write payload before HTTP, without altering core orchestration."""
+
+    def __init__(self, client, destination, secrets):
+        self.client, self.destination, self.secrets = client, destination, secrets
+
+    def __getattr__(self, name):
+        return getattr(self.client, name)
+
+    def remember(self, records):
+        pool = records[0]["content"]["pool"] if records else "empty"
+        if pool not in (*ALL_POOLS, "empty"):
+            raise ValueError("Unexpected pending-memory pool")
+        write_json(self.destination / f"pending-memory-records-{pool}.json", {"records": records}, self.secrets)
+        return self.client.remember(records)
 
 
 def validate_case(output: dict, events: list[dict], *, expected_provider: str = "meterless") -> dict:
@@ -150,6 +170,10 @@ def main(argv: list[str] | None = None) -> int:
                         help="run selected pools first; only all three can complete submission acceptance")
     parser.add_argument("--llm-provider", choices=("nightshift", "glm"), default="nightshift",
                         help="explicit profile; hosted GLM never calls local Nightshift")
+    parser.add_argument("--reuse-parity", type=Path,
+                        help="explicit prior live parity evidence, rechecked against the current frozen sample")
+    parser.add_argument("--bulk-receipts", type=Path,
+                        help="prior real Zetaris query receipts for explicitly labelled bulk-window caching")
     args = parser.parse_args(argv)
     if len(set(args.pools)) != len(args.pools):
         parser.error("Each pool may be selected only once")
@@ -190,13 +214,30 @@ def main(argv: list[str] | None = None) -> int:
         raise ValueError("Engines sidecar is not ready")
     request = verified_sample_request()
     adapter = ZetarisAdapter(ZetarisClient.from_env())
-    parity = check_parity(adapter, DuckDBAdapter(REPO_ROOT / "data" / "sample"), request["as_of"])
+    offline = DuckDBAdapter(REPO_ROOT / "data" / "sample")
+    parity = (verified_parity(args.reuse_parity, offline, request["as_of"]) if args.reuse_parity else
+              check_parity(adapter, offline, request["as_of"]))
     if not all(item["match"] for item in parity):
         raise ValueError("Zetaris/DuckDB parity failed; run integrations.zetaris.parity for details")
 
     destination.mkdir(parents=True)
     write_json(destination / "parity.json", parity, secrets)
+    source_evidence = {}
+    for name, path in (("parity", args.reuse_parity), ("bulk_receipts", args.bulk_receipts)):
+        if path:
+            source_evidence[name] = {"path": path.resolve().relative_to(REPO_ROOT).as_posix(),
+                                     "sha256": digest(read_receipt_file(path))}
+    if args.bulk_receipts:
+        adapter = ReceiptCache(adapter, offline, args.bulk_receipts)
     query = AuditedQueries(adapter, destination / "queries.jsonl")
+    engine_lock = threading.Lock()
+
+    def record_engine(receipt):
+        with engine_lock, (destination / "engine_requests.jsonl").open("a", encoding="utf-8") as stream:
+            stream.write(json.dumps(receipt, sort_keys=True) + "\n")
+
+    engines.observer = record_engine
+    engines = AuditedEngines(engines, destination, secrets)
     llm = AuditedLLM(
         ChainClient(routes, Cassette(destination / "llm_cassette.jsonl"), mode="record"),
         destination / "models.jsonl",
@@ -207,6 +248,8 @@ def main(argv: list[str] | None = None) -> int:
                 "acceptance_profile": f"{args.llm_provider}+zetaris+engines",
                 "llm_provider": expected_provider,
                 "nightshift_required_for_this_profile": expected_provider == "meterless",
+                "parity_execution": "reused-verified-report" if args.reuse_parity else "fresh-live",
+                "source_evidence": source_evidence,
                 "engines": health["engines"], "cases": cases,
                 "selected_pools": args.pools, "submission_complete": False,
                 "generated_at": dt.datetime.now(dt.UTC).isoformat()}
@@ -220,11 +263,19 @@ def main(argv: list[str] | None = None) -> int:
             assert_payload(case, "RunRequest")
             folder = destination / pool
             folder.mkdir()
+            write_json(folder / "input.json", case, secrets)
             print(json.dumps({"status": "running", "pool": pool}), flush=True)
             with (folder / "console.log").open("w", encoding="utf-8") as console:
                 with contextlib.redirect_stdout(console):
                     output = run_pipeline(case, query=query, llm=llm, engines=engines,
                                           log_dir=folder)
+            if isinstance(adapter, ReceiptCache):
+                if adapter.integrity_failed:
+                    raise ValueError("A prior bulk receipt failed integrity checks")
+                output["warnings"].append(
+                    "Bulk input windows may use an explicitly labelled local cache matched to prior Zetaris "
+                    "row hashes; instrument evidence and verifier queries still use live Zetaris."
+                )
             check_public_bytes((folder / "console.log").read_bytes(), secrets)
             original_trace = REPO_ROOT / output["trace_path"]
             raw_trace = original_trace.read_bytes()
@@ -248,7 +299,9 @@ def main(argv: list[str] | None = None) -> int:
         check_public_bytes((destination / "models.jsonl").read_bytes(), secrets)
         manifest.update({**selection_result(cases, args.pools), "stage": "complete",
                          "elapsed_s": round(perf_counter() - started, 2),
-                         "zetaris_queries": len(query.calls)})
+                         "zetaris_queries": sum(item["backend"] == "zetaris" for item in query.calls),
+                         "verified_cache_queries": sum(item["backend"] == "zetaris-verified-local-cache"
+                                                       for item in query.calls)})
         lines = ["# Live sponsor acceptance examples", "",
                  f"Computed through Zetaris, {args.llm_provider} and the Meterless engines sidecar.", "",
                  "| Pool | Recommendation records | Live model calls | Explanation verdicts |",
@@ -257,6 +310,9 @@ def main(argv: list[str] | None = None) -> int:
             lines.append(f"| {item['pool']} | {item['recommendations']} | "
                          f"{item['llm_calls']} | {json.dumps(item['verdicts'])} |")
         lines += ["", "Each pool folder contains input.json, output.json and the original trace.",
+                  f"New live Zetaris queries: {manifest['zetaris_queries']}; "
+                  f"prior-receipt-verified local queries: {manifest['verified_cache_queries']}.",
+                  f"Parity execution: {manifest['parity_execution']}; source evidence is in manifest.json.",
                   f"Submission acceptance complete: {manifest['submission_complete']}.",
                   f"Acceptance profile: {manifest['acceptance_profile']}; sponsor service evidence is disclosed separately.",
                   "All tiers and verdicts are computed. Abstention remains a valid research result.",

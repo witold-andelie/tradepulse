@@ -12,13 +12,22 @@ acceptance, not a claim that submission media and every event-rule check are com
 
 Current lead-reported progress: first hosted parity 12/12; Crypto accepted with six GLM
 calls and three explained names, all 38 stances NO_CALL. EU failed strict JSON on one
-skeptic reply. US then ran but failed with unavailable model calls, including seven empty
-length-ended replies. The next US-only attempt requests low reasoning effort, an explicit
-8192-token bound and JSON-object mode; it remains unverified. The lead prioritizes US, then its
-API/UI review. Do not wait for EU or rerun accepted Crypto. The immutable evidence assembler
+skeptic reply. The first US attempt failed with unavailable model calls. The second US attempt
+used low effort, 8192 tokens and JSON-object mode: all 19 replies ended stop, all six explanation
+calls passed schema and three explanations were explained. One extractor reply was invalid.
+The pipeline still failed at final remember; a later server entry reports 523 added records.
+Persistence reconciliation and the revised write handling remain unverified on the Mac.
+The next US attempt uses explicit receipt-verified bulk caching and separate bounded writes,
+as detailed in HOSTED_ACCEPTANCE.md. The original failed runs remain failed. Existing verifier
+success does not certify the entire model narrative. Prioritize US, then its API/UI review.
+Do not wait for EU or rerun accepted Crypto. The immutable evidence assembler
 can combine separately accepted sources; a two-pool index remains incomplete.
 
 ## Code and local engine acceptance
+
+Latest offline regression after the US write/retry/cache fixes: 758 Python tests passed,
+14 network tests deselected; Ruff passed. The new read-only reconciliation script passed
+two Node tests. These are local software checks, not a live Mac run or narrative certification.
 
 - [x] Offline integration tests pass; original given test assertions are preserved.
 - [x] Official unchanged H-MEM and World Model references include LICENSE, commit NOTICE

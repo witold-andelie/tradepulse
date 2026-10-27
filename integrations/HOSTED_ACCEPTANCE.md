@@ -25,26 +25,74 @@ The GLM-5.3 client now defaults to reasoning_effort=low. GLM_RESPONSE_FORMAT opt
 the [documented JSON-object mode](https://docs.bigmodel.cn/cn/guide/capabilities/struct-output),
 while retaining strict schema checks. It does not force temperature=0 or send an unsupported
 thinking-disable flag. Native JSON mode constrains syntax, not claim truth or schema fields.
-The actual OpenCode gateway's handling still needs the real run; a rejected option is not
+The second US run confirmed the gateway accepts these options. A rejected option is not
 silently retried with another format. Raw model text remains unchanged.
 
 New receipts include configured_max_tokens, requested_reasoning_effort, content_chars,
 has_reasoning_content and completion/reasoning token counts when the provider reports them.
 Unknown reasoning counts remain null; reasoning text is never printed or saved by diagnostics.
 
-For the next single US attempt, use a fresh directory and explicit process settings so an
-older private env file cannot retain the old budget:
+The second US run, runs/hosted-glm-us-first-2/, also failed, now at the final Meterless remember
+operation rather than the model-explanation gate. Preserve that directory unchanged. All 19
+GLM replies ended stop: 12 extractor replies, three analyst replies and three skeptic replies
+passed their schemas; one extractor reply contained a string instead of an event object.
+The three explanations were explained, with FIX 3/3, CCI 2/2 and BE 2/2 claims passing the
+existing verifier. That verifier checks specific references/timing, not general factual
+entailment: the BE skeptic text includes unsupported company/industry assertions and must
+not be presented as verified truth. Prompts now require short conditional counter-cases,
+no unsupported company facts, and actual exclusion evidence for ruled_out statements.
+
+The original core owns a bounded extractor feedback/grounding retry. The acceptance wrapper
+previously raised a schema exception before this loop could handle an invalid array item,
+aborting the stage. It now records schema_valid=false and passes the unchanged reply back
+to that existing loop. It does not fill fields, strip invalid items itself or weaken grounding.
+
+The client reported the final remember error at 18:21:15 UTC; the engine recorded 523 added
+records at 18:21:32 UTC. The old client allowed ten seconds but retained neither the underlying
+exception nor HTTP status. A late write is plausible, not a proven timeout diagnosis. Its
+failed manifest remains failed. No full output.json was saved; memory records cannot recreate
+the complete output, explanations and evaluation, so do not backfill a successful report.
+
+### First reconcile the existing write, without changing state
+
+From the updated repository root on the Mac, use the existing running engine container:
 
 ```sh
-export GLM_REASONING_EFFORT=low
-export GLM_MAX_TOKENS=8192
-export GLM_RESPONSE_FORMAT=json_object
+docker exec -i engines-engines-1 node --input-type=module - \
+  --state /data/hmem/state.json \
+  --run-id 2026-10-23-f2f2b122 \
+  --expected-count 523 \
+  < integrations/engines/scripts/reconcile-run.mjs \
+  > runs/hosted-glm-us-first-2/persistence-reconciliation.json
 ```
 
-Then use the US command below with runs/hosted-glm-us-first-2 as its output. Do not increase
-timeouts or run a separate probe, Crypto, EU or another model before this attempt. The 8192
-budget includes both thinking and visible output; it is a bound, not a guarantee. If this
-attempt fails, inspect its original reply/usage/error metadata without editing results.
+Run this once in a terminal that does not already contain that diagnostic file; do not
+overwrite an existing diagnostic. The script reads the official persistent JSON file and
+checks counts, stable external record IDs and provenance. It never calls remember, edits
+state, restarts Docker or upgrades the old pipeline status. A successful persistence check
+explicitly reports run_acceptance_passed=false. Inspect its small summary, not raw memory.
+A missing or partial count with zero invalid records is not proof of state corruption:
+retain that finding, do not replay the old write, and continue with the distinct new run.
+If invalid records or a state-read error appear, inspect them before more writes.
+
+### One bounded US attempt, reusing explicitly verified bulk inputs
+
+The second run spent 1,685,576 ms loading US data. Avoid repeating that bulk scan. The opt-in
+flags below recheck the old 12-template parity against the current frozen DuckDB sample and
+reuse only bulk windows whose exact parameters, row counts and hashes match prior actual
+Zetaris receipts. No changed/missing receipt is silently trusted: a hash mismatch fails;
+missing receipts use live Zetaris. Instrument evidence and verifier templates remain live.
+Query receipts label cache hits zetaris-verified-local-cache; manifest.json records original
+receipt paths and file hashes, and parity_execution=reused-verified-report. The README counts
+new live queries separately. This is not a claim of a newly executed live 12/12 parity run.
+
+The Python client now permits an explicit write-only timeout and sequential batches. Use
+50 records per request with a 60-second write timeout; normal read timeouts are unchanged.
+The 523-record write needs at most 11 requests. Each must receive a valid acknowledgement.
+There are no automatic write retries; earlier batches can persist if a later batch fails.
+New engine_requests.jsonl receipts retain safe exception classes, HTTP status when available,
+batch sizes and elapsed times. Exact pending records are saved before HTTP; inputs are saved
+before pipeline execution. Neither artifact alone is a completed RunOutput.
 
 The lead reports the first hosted suite passed parity 12/12 and Crypto: six live GLM calls,
 three explained names, real engine snapshot/recall/remember, and 38 computed NO_CALL records.
@@ -53,19 +101,29 @@ run at that point. The later US-only failure and the next settings are recorded 
 The source directory is runs/hosted-glm-acceptance-1/. Preserve it unchanged. Do not repeat
 Crypto. Its NO_CALL stances are computed research outcomes, not a reason to alter gates.
 
-The lead now prioritizes US. Start its existing supported single-pool command immediately;
-do not wait for EU reply diagnosis, assembly tooling or another model probe:
+After the read-only reconciliation, run this once in the existing activated environment.
+Keep the existing extraction cache; do not clear it or run a separate model probe:
 
 ```sh
 export ZETARIS_API_MODE=proxy
 export ZETARIS_BASE_URL=http://localhost:3000
 export ENGINES_URL=http://127.0.0.1:8790
+export ENGINES_REMEMBER_BATCH_SIZE=50
+export ENGINES_WRITE_TIMEOUT_SECONDS=60
+export GLM_REASONING_EFFORT=low
+export GLM_MAX_TOKENS=8192
+export GLM_RESPONSE_FORMAT=json_object
+export GLM_MAX_CONCURRENCY=1
+export GLM_TIMEOUT_SECONDS=180
+export GLM_QUEUE_TIMEOUT_SECONDS=600
 python3 -m integrations.live_acceptance \
   --llm-provider glm \
   --env-file ~/getting-started/.env.local \
   --env-file .env.glm.local \
   --pools us_equity \
-  --output runs/hosted-glm-us-first-2
+  --reuse-parity runs/hosted-glm-us-first-2/parity.json \
+  --bulk-receipts runs/hosted-glm-us-first-2/queries.jsonl \
+  --output runs/hosted-glm-us-first-3
 ```
 
 This retains US filing extraction and its existing bounds. A successful US-only run is
@@ -79,7 +137,7 @@ To index the accepted Crypto and US evidence without model calls or source rewri
 ```sh
 python3 -m integrations.assemble_acceptance \
   --source runs/hosted-glm-acceptance-1 \
-  --source runs/hosted-glm-us-first-2 \
+  --source runs/hosted-glm-us-first-3 \
   --llm-provider glm \
   --output runs/hosted-glm-accepted-index-1
 ```
@@ -132,9 +190,11 @@ GLM_BASE_URL=https://opencode.ai/inference/go/openai/v1
 GLM_MODEL=glm-5.3-flash
 GLM_API_KEY=YOUR_EXISTING_PRIVATE_KEY
 GLM_MAX_CONCURRENCY=1
-GLM_MAX_TOKENS=4096
+GLM_MAX_TOKENS=8192
 GLM_TIMEOUT_SECONDS=180
 GLM_REASONING_EFFORT=low
+GLM_RESPONSE_FORMAT=json_object
+GLM_QUEUE_TIMEOUT_SECONDS=600
 ```
 
 Use the actual key locally, never in chat, screenshots or committed files. Alternatively,

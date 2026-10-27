@@ -29,6 +29,15 @@ set (local docker-compose, judges), there is no authentication. Compare tokens i
 Persistence: the engines' own stores live in a data directory (`ENGINES_DATA_DIR`, default
 `runs/engines/`), so memory survives restarts.
 
+The Python client optionally uses ENGINES_REMEMBER_BATCH_SIZE (1-5000, default 5000) and
+ENGINES_WRITE_TIMEOUT_SECONDS (greater than zero, at most 300, default the client timeout).
+These affect only remember requests, not the HTTP contract or reference implementation.
+Each sequential batch requires a valid added acknowledgement; identical existing IDs add
+zero and conflicting content returns 409. A failure can leave earlier batches persisted.
+The client does not retry a write with an unknown outcome. Read-only reconciliation via
+scripts/reconcile-run.mjs checks stored provenance and IDs without changing a failed run's
+acceptance. See ../HOSTED_ACCEPTANCE.md for the current Mac procedure.
+
 `GET /activity` is an additional authenticated diagnostic route. It returns store counts and
 the last 20 H-MEM ledger entries. The service also writes metadata-only `activity.jsonl` records
 with real request IDs, operation names and counts. Headers and credentials are never recorded.

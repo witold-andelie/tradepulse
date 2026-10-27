@@ -24,10 +24,14 @@ Those failed product cases are not relabelled successful. Hosted GLM acceptance 
 with the current pool progress recorded below.
 
 Latest hosted result: Crypto now passed (six GLM calls, three explained names, 38 NO_CALL
-records) after 12/12 parity. EU stopped on one skeptic JSON failure. US subsequently ran
-but failed with empty length-ended responses and invalid JSON. The GLM-5.3 configuration
-now requests low reasoning effort; the next US-only attempt uses the explicit JSON/output
-settings in HOSTED_ACCEPTANCE.md. Keep the accepted Crypto case and begin
+records) after 12/12 parity. EU stopped on one skeptic JSON failure. The second US attempt
+resolved length-ended model failures: all 19 replies ended stop and all three explanations
+were explained, but one extractor reply was malformed and final remember failed before output
+was saved. A later engine entry reports 523 records added; this does not pass that run.
+Follow HOSTED_ACCEPTANCE.md for read-only persistence reconciliation and one new US attempt
+with receipt-verified bulk caching, existing extractor feedback retry and bounded batch writes.
+Do not manufacture the missing full output or count schema checks as proof of narrative truth.
+Keep the accepted Crypto case and begin
 API/UI checks from accepted stored output without waiting for all pools. Follow the current
 priority section of HOSTED_ACCEPTANCE.md; do not repeat its historical full-suite command.
 

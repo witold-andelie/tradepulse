@@ -8,6 +8,7 @@ import datetime as dt
 import math
 import os
 import re
+from time import perf_counter
 
 import requests
 
@@ -15,7 +16,9 @@ from tradepulse.contracts import validate_payload
 
 
 class EnginesError(RuntimeError):
-    pass
+    def __init__(self, message: str, *, error_type=None, http_status=None):
+        super().__init__(message)
+        self.error_type, self.http_status = error_type, http_status
 
 
 class EnginesClient:
@@ -26,25 +29,44 @@ class EnginesClient:
         self.timeout_s = timeout_s
         self._session = session if session is not None else requests.Session()
         self._token = os.environ.get("ENGINES_TOKEN")
+        self.observer = None
 
-    def _request(self, method: str, path: str, **kwargs) -> dict:
+    def _request(self, method: str, path: str, *, timeout_s=None, **kwargs) -> dict:
         if self._token:
             kwargs["headers"] = {"Authorization": f"Bearer {self._token}"}
+        timeout = self.timeout_s if timeout_s is None else timeout_s
+        started = perf_counter()
+        receipt = {"method": method.upper(), "path": path, "timeout_seconds": timeout,
+                   "at": dt.datetime.now(dt.UTC).isoformat()}
+        if path == "/hmem/records":
+            receipt["batch_records"] = len(kwargs["json"]["records"])
         try:
-            response = getattr(self._session, method)(
-                f"{self.base_url}{path}", timeout=self.timeout_s, **kwargs
-            )
-        except Exception as error:
-            raise EnginesError(f"Engines request failed ({type(error).__name__})") from None
-        if not 200 <= response.status_code < 300:
-            raise EnginesError(f"Engines returned HTTP {response.status_code}")
-        try:
-            payload = response.json()
-        except ValueError:
-            raise EnginesError("Engines returned invalid JSON") from None
-        if not isinstance(payload, dict):
-            raise EnginesError("Engines response must be an object")
-        return payload
+            try:
+                response = getattr(self._session, method)(
+                    f"{self.base_url}{path}", timeout=timeout, **kwargs
+                )
+            except Exception as error:
+                raise EnginesError(f"Engines request failed ({type(error).__name__})",
+                                   error_type=type(error).__name__) from None
+            receipt["http_status"] = response.status_code
+            if not 200 <= response.status_code < 300:
+                raise EnginesError(f"Engines returned HTTP {response.status_code}",
+                                   error_type="HTTPError", http_status=response.status_code)
+            try:
+                payload = response.json()
+            except ValueError:
+                raise EnginesError("Engines returned invalid JSON", error_type="InvalidJSON") from None
+            if not isinstance(payload, dict):
+                raise EnginesError("Engines response must be an object", error_type="InvalidResponse")
+            receipt["status"] = "ok"
+            return payload
+        except EnginesError as error:
+            receipt.update(status="error", error_type=error.error_type)
+            raise
+        finally:
+            if self.observer is not None:
+                receipt["elapsed_ms"] = int((perf_counter() - started) * 1000)
+                self.observer(receipt)
 
     @staticmethod
     def _date(value: str) -> str:
@@ -88,8 +110,26 @@ class EnginesClient:
         return self._request("get", "/world-model/snapshot", params={"as_of": self._date(as_of)})
 
     def remember(self, records: list[dict]) -> dict:
-        """POST /hmem/records (recommendations to remember)."""
-        return self._request("post", "/hmem/records", json={"records": records})
+        """Bounded optional batches; never automatically repeat a write with unknown outcome."""
+        if not isinstance(records, list) or len(records) > 5000 or any(not isinstance(r, dict) for r in records):
+            raise ValueError("Memory writes require at most 5000 objects")
+        try:
+            batch_size = int(os.environ.get("ENGINES_REMEMBER_BATCH_SIZE", "5000"))
+            write_timeout = float(os.environ.get("ENGINES_WRITE_TIMEOUT_SECONDS", str(self.timeout_s)))
+        except ValueError:
+            raise ValueError("Engine write settings must be numeric") from None
+        if not 1 <= batch_size <= 5000 or not math.isfinite(write_timeout) or not 0 < write_timeout <= 300:
+            raise ValueError("Engine write settings exceed their bounds")
+        added = 0
+        for start in range(0, len(records), batch_size):
+            batch = records[start:start + batch_size]
+            receipt = self._request("post", "/hmem/records", timeout_s=write_timeout,
+                                    json={"records": batch})
+            count = receipt.get("added")
+            if type(count) is not int or not 0 <= count <= len(batch):
+                raise EnginesError("Invalid H-MEM write acknowledgement", error_type="InvalidResponse")
+            added += count
+        return {"added": added}
 
     def recall(self, symbol: str, as_of: str, k: int = 10) -> list[dict]:
         """POST /hmem/query."""

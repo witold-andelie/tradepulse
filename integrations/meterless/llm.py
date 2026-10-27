@@ -193,7 +193,15 @@ def _schema_messages(messages: list[dict], schema: dict | None) -> list[dict]:
             " Prefer one short, well-supported claim. Copy evidence IDs exactly from the "
             "brackets in EVIDENCE, without prefixes, suffixes or row numbers. Price evidence "
             "alone cannot establish an event, relationship or cause of a ranking. If support "
-            "is insufficient, return no claims and explain the limitation. Never invent facts."
+            "is insufficient, return no claims and explain the limitation. Filing timestamps "
+            "and item codes alone cannot establish the cause of a multi-session return. Never invent facts."
+        )
+    if "counter_case" in schema.get("properties", {}):
+        instruction += (
+            " Use at most three concise counter-cases, framed as uncertainties. Do not introduce "
+            "company, industry, numeric or named-event facts absent from DATA/EVIDENCE. "
+            "Missing evidence does not rule an alternative out: leave ruled_out empty unless "
+            "the provided evidence actually excludes it."
         )
     if prepared and prepared[0].get("role") == "system":
         prepared[0]["content"] = str(prepared[0].get("content", "")) + instruction

@@ -1,5 +1,7 @@
 # Member D — Sponsor integrations (`integrations/`)
 
+Current ownership, 27 October: the lead took over sponsor deployment/integration after the original Member D assignment did not reach working end-to-end delivery. Crypto is accepted; US/EU live completion is future work. Follow the current README, docs/TEAM.md, docs/RUNNING.md and docs/sponsors.md. Historical AWS/NIM assignments below are not new requirements.
+
 > **DEADLINE: finish everything by Sunday 25 October 2026, 11:59 pm US Eastern (EDT)**
 > = Monday 26 October 03:59 UTC. Target: done on Saturday 24 October. The hackathon closes
 > 27 October 23:45 UTC; the remaining time is for the lead's QA, demo video and submission.

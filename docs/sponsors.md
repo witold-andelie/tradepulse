@@ -1,61 +1,55 @@
-# Sponsor integration and evidence status
+# Sponsor integration: actual role and evidence
 
-Status: 25 October 2026. This is an evidence-tracking draft, not a claim that all sponsor
-requirements are complete. See [project status](STATUS.md) and
-[Member D's acceptance checklist](../integrations/ACCEPTANCE.md).
+The accepted Crypto case is 2026-10-23-87de33aa. Its original input/output/trace are committed
+and verified through docs/review/crypto-evidence.json. The lead's local Mac performed the
+original real execution and API/UI checks; the read-only judge server makes no fresh calls.
 
-## Zetaris
+| Technology | Evidence and role |
+| --- | --- |
+| Zetaris | Live data/evidence through allow-listed SQL templates; original full-template parity was separately measured 12/12. Saved Crypto is not a new parity run. |
+| Meterless World Model / H-MEM | Real snapshot, recall and remember in the accepted trace. Official reference engines are upstream components with retained licenses/commit attribution. |
+| Nightshift | Real provider connection/smoke and earlier Analyst/Skeptic calls. The earlier Crypto run abstained and failed full acceptance; separate late-runtime completion is not rewritten as a client success. |
+| GLM-5.3-Flash | Six real model calls in the accepted Crypto trace. These calls are labelled glm, not Nightshift. |
+| NVIDIA, spacexsi, Cursor | No completed sponsor-use claim for this delivery. Historical plans or placeholders do not establish usage. |
 
-Intended load: the live federated query layer over the lake and on-demand EDGAR data.
-It supports acquisition/registration and evidence queries in the target OPM model.
+## Organizer wording and honest disclosure
 
-Implemented code: typed SQL templates, registration runner, result hashing, dtype coercion
-and the offline DuckDB adapter in `integrations/zetaris/`. The live client and adapter remain
-unimplemented. DuckDB tests are evidence for the offline path, not proof of Zetaris use.
+The latest reminder supplied by the lead explicitly lists Zetaris, a Meterless Engine in a
+working feature, and Nightshift as an AI provider. The record above distinguishes completed
+connections from the provider used by the accepted demonstrated request. The saved GLM case
+alone does not prove that Nightshift generated that request. An internal engineering
+acceptance profile is not a guarantee of organizer eligibility decisions.
 
-Required evidence: AWS deployment and Europe smoke test, table registration, a sanitized
-real response, every-template hash parity, pagination, and one out-of-universe EDGAR lookup.
-D owns these items. No deployment endpoint or credential is published here.
-D reports using AWS Ohio (`us-east-2`) after unsuccessful EU/N. Virginia attempts. The lead
-accepts that region fallback; it does not establish deployment or European access acceptance.
+## Actual deployment
 
-## Meterless
+Member D supplied no project code, working service or reviewable sponsor deliverable.
+Wentao Ma completed all TradePulse-specific sponsor integration and deployment. The accepted
+deployment runs locally on the lead's Mac:
+Zetaris Docker, a separate official-engine sidecar, and the configured provider. No shared
+AWS HTTPS endpoint or S3 upload is claimed.
 
-Intended load: World Model maintains validated relations/events and as-of snapshots; H-MEM
-maintains recommendations, matured feedback and conflicts. These correspond to Extracting &
-Linking, Settling and the evidence/memory parts of the target recommending flow.
+Zetaris registered the unchanged seven-table real sample. The official helper and TradePulse
+client executed real queries. Spark-compatible microsecond Parquet copies were registered
+without overwriting source files. Earlier row-limit/timezone mismatches were diagnosed and
+corrected; the original failed reports remain failed.
 
-Implemented code: the Python HTTP client and contract checks in
-`integrations/meterless/engines_client.py`, plus the target HTTP specification.
-The optional core bridge now commits/reads checked World Model snapshots, recalls dated record
-counts as unverified context and writes recommendations/provenance. Caller-driven feedback
-mapping is prepared. See [wiring scope](METERLESS_WIRING.md). The official engines, TypeScript
-sidecar, persistence and conformance evidence remain pending. Injected-port/client tests do
-not establish actual engine execution. Automatic pending settlement and historical conflict
-handling require semantics absent from the current HTTP specification.
+The engine sidecar uses official Meterless reference/conformance code at
+1742dec56a66e58eef9dda2d2b865823758ca8cd. Its upstream LICENSE and NOTICE are retained.
+H-MEM context is explicitly unverified historical context, not new claim evidence or a
+record of profitable trading. World Model observations do not bypass research gates.
 
-Required evidence: vendor commit/LICENSE/NOTICE, unchanged official engine implementations,
-conformance suites, sidecar smoke/persistence/as-of/conflict tests, local Compose operation,
-and secured shared hosting. D delivers the sidecar; the lead connects it to the pipeline.
+Nightshift M1-M4 Edition accepted actual provider requests. Its local small-model trials
+had JSON, timing and evidence-quality problems. The team preserved these records and used
+GLM for the accepted Crypto demonstration. We do not repair old responses, invent inference
+receipts or relabel unavailable calls as passed.
 
-## NVIDIA NIM
+## Reproduction
 
-D18 routes every configured LLM role to hosted NIM by default. The extractor/guard route uses
-`NIM_EXTRACTOR_MODEL`, analyst uses `NIM_ANALYST_MODEL`, and skeptic uses
-`NIM_SKEPTIC_MODEL`. The current request guard itself is deterministic.
+- No keys: use the exact saved artifact through scripts.review_demo.
+- Offline math: recompute with SAMPLE_MODE=true and RECORD_LLM=false; missing models abstain.
+- Fresh services: use the separate integration checkout and private settings in RUNNING.md.
+  A fresh run is new evidence and may differ; never demand identical generated prose.
+- Original sponsor source and notices: [integration checkout](https://github.com/witold-andelie/tradepulse/tree/194033a1d7f78d96e60ec16f28e633f8c81ebf29/integrations).
 
-Implemented code: OpenAI-compatible hosted routes, bounded calls and hash-keyed record/replay.
-Actual model choices, live grounding/JSON smoke tests and a recorded sample cassette remain
-pending. Analyst and skeptic must use different model families.
-
-Required evidence: agreed model IDs, live smoke output, and a matching cassette/cache for A's
-snapshot. An offline replay of the same decision date must not report unavailable answers.
-
-## Runtime and disclosure
-
-Meterless Nightshift/local GGUF routing is optional and off by default. It is not the primary
-LLM path and is not the claimed Meterless load. No local-first inference credit is claimed.
-
-Offline frontend and Python checks establish code behavior on fixtures/test inputs.
-They do not substitute for the sponsor evidence above. Attach only genuine command outputs,
-screenshots and trace excerpts after the corresponding services have actually run.
+Do not publish environment files, proxy tokens, keys or personal contact data. Use your own
+authorized service accounts. No raw credentials are needed for the public reviewer path.

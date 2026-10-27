@@ -1,5 +1,7 @@
 # Computed real-snapshot examples
 
+Current submission scope, 27 October: the accepted live Crypto case is linked in the root README and docs/review/crypto-evidence.json. The three examples below retain their original offline/abstention meaning. US/EU are future live-market upgrades, not passed live sponsor cases.
+
 These three independent requests were executed against the frozen 2026-10-23 real sample,
 with all socket connection/DNS calls blocked. Zero network attempts occurred. Inputs and
 financial outputs were computed, not typed into fixtures or substituted in the UI.

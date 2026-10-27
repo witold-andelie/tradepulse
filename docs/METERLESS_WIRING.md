@@ -1,5 +1,7 @@
 # Meterless core wiring preparation
 
+Current submission note, 27 October: the lead completed real Meterless snapshot/recall/remember in the accepted Crypto run. Main provides saved-result review; full sidecar source is in the separate integration checkout linked from RUNNING.md. The dated interface/assignment text below remains historical where it says D must still deliver. US/EU live completion remains future work.
+
 This is core integration code against the existing `integrations/engines/API.md`, not delivery
 of the official engines or acceptance of D's cloud service. No API/table schema or original
 test has been changed.

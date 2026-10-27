@@ -1,0 +1,22 @@
+{
+  "source_commit": "194033a1d7f78d96e60ec16f28e633f8c81ebf29",
+  "run_id": "2026-10-23-87de33aa",
+  "origin": "Original accepted REAL Crypto run; frozen inspection is not a new live execution.",
+  "files": {
+    "input.json": {
+      "path": "runs/hosted-glm-acceptance-1/crypto/input.json",
+      "bytes": 111,
+      "sha256": "3984a07657089ae1987ee955e764b4bcd8a4de068a3ed8c96673a0c3e3d9ee05"
+    },
+    "output.json": {
+      "path": "runs/hosted-glm-acceptance-1/crypto/output.json",
+      "bytes": 88002,
+      "sha256": "58ba273643e237052b41b6f5de9bc7373f6eca999aaacf0eaf5fde8974266bc6"
+    },
+    "trace.jsonl": {
+      "path": "runs/hosted-glm-acceptance-1/crypto/trace-2026-10-23-87de33aa.jsonl",
+      "bytes": 17488,
+      "sha256": "a35385ae98f82f78c72ad27cc508fbb04e71b0255062bd98d45b3b882bb7eee9"
+    }
+  }
+}

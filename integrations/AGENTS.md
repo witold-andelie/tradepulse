@@ -1,5 +1,7 @@
 # Instructions for AI coding agents working in `integrations/`
 
+Current release scope: the lead owns sponsor delivery. The accepted Crypto case uses GLM inference, actual Zetaris and Meterless engine operations; Nightshift history is separate. Main's read-only review and the separate live integration checkout are documented in docs/RUNNING.md. Do not treat the historical D assignment below as a request to rebuild completed work.
+
 You are helping Member D integrate the sponsor technologies (Zetaris, Meterless, NVIDIA NIM).
 
 Read `docs/STATUS.md` for current blockers. Templates, DuckDB, record/replay and EnginesClient

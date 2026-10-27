@@ -20,6 +20,7 @@ web/dist
 web/.qa-output
 logs
 runs
+video
 **/__pycache__
 .pytest_tmp
 docs/hackathon

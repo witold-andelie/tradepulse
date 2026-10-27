@@ -1,0 +1,1275 @@
+{
+  "method": "Computed sRGB foreground/background with ancestor alpha compositing; representative element styles, not a full text-node audit.",
+  "samples": [
+    {
+      "locale": "en",
+      "route": "/pool/us_equity",
+      "values": [
+        {
+          "kind": "BUTTON",
+          "classes": "menu-toggle button",
+          "color": "rgb(255, 255, 255)",
+          "background": [
+            40,
+            57,
+            88
+          ],
+          "ratio": 11.561391602497022,
+          "minimum": 4.5,
+          "pass": true
+        },
+        {
+          "kind": "SELECT",
+          "classes": "",
+          "color": "rgb(36, 53, 79)",
+          "background": [
+            255,
+            255,
+            255
+          ],
+          "ratio": 12.37363108465764,
+          "minimum": 4.5,
+          "pass": true
+        },
+        {
+          "kind": "DIV",
+          "classes": "mode-banner warning",
+          "color": "rgb(108, 69, 11)",
+          "background": [
+            255,
+            243,
+            217
+          ],
+          "ratio": 7.648919208112302,
+          "minimum": 4.5,
+          "pass": true
+        },
+        {
+          "kind": "SPAN",
+          "classes": "badge tone-normal",
+          "color": "rgb(18, 92, 82)",
+          "background": [
+            226,
+            242,
+            238
+          ],
+          "ratio": 6.783562606978884,
+          "minimum": 4.5,
+          "pass": true
+        },
+        {
+          "kind": "SELECT",
+          "classes": "",
+          "color": "rgb(25, 43, 72)",
+          "background": [
+            255,
+            255,
+            255
+          ],
+          "ratio": 14.184767876652904,
+          "minimum": 4.5,
+          "pass": true
+        },
+        {
+          "kind": "BUTTON",
+          "classes": "button clear-button",
+          "color": "rgb(25, 43, 72)",
+          "background": [
+            255,
+            255,
+            255
+          ],
+          "ratio": 14.184767876652904,
+          "minimum": 4.5,
+          "pass": true
+        },
+        {
+          "kind": "TD",
+          "classes": "",
+          "color": "rgb(82, 96, 120)",
+          "background": [
+            255,
+            255,
+            255
+          ],
+          "ratio": 6.357607659477405,
+          "minimum": 4.5,
+          "pass": true
+        },
+        {
+          "kind": "TD",
+          "classes": "",
+          "color": "rgb(36, 53, 79)",
+          "background": [
+            255,
+            255,
+            255
+          ],
+          "ratio": 12.37363108465764,
+          "minimum": 4.5,
+          "pass": true
+        },
+        {
+          "kind": "SPAN",
+          "classes": "badge tone-strong-positive",
+          "color": "rgb(18, 92, 82)",
+          "background": [
+            226,
+            242,
+            238
+          ],
+          "ratio": 6.783562606978884,
+          "minimum": 4.5,
+          "pass": true
+        },
+        {
+          "kind": "TD",
+          "classes": "positive numeric",
+          "color": "rgb(11, 112, 104)",
+          "background": [
+            255,
+            255,
+            255
+          ],
+          "ratio": 5.94598849006985,
+          "minimum": 4.5,
+          "pass": true
+        },
+        {
+          "kind": "SPAN",
+          "classes": "badge tone-positive",
+          "color": "rgb(18, 92, 82)",
+          "background": [
+            226,
+            242,
+            238
+          ],
+          "ratio": 6.783562606978884,
+          "minimum": 4.5,
+          "pass": true
+        },
+        {
+          "kind": "SPAN",
+          "classes": "badge tone-neutral",
+          "color": "rgb(65, 56, 143)",
+          "background": [
+            238,
+            240,
+            255
+          ],
+          "ratio": 8.478690884611835,
+          "minimum": 4.5,
+          "pass": true
+        },
+        {
+          "kind": "BUTTON",
+          "classes": "button",
+          "color": "rgb(92, 102, 120)",
+          "background": [
+            238,
+            240,
+            245
+          ],
+          "ratio": 5.078266494563155,
+          "minimum": 4.5,
+          "pass": true
+        },
+        {
+          "kind": "BUTTON",
+          "classes": "button",
+          "color": "rgb(25, 43, 72)",
+          "background": [
+            255,
+            255,
+            255
+          ],
+          "ratio": 14.184767876652904,
+          "minimum": 4.5,
+          "pass": true
+        }
+      ]
+    },
+    {
+      "locale": "en",
+      "route": "/factors",
+      "values": [
+        {
+          "kind": "BUTTON",
+          "classes": "menu-toggle button",
+          "color": "rgb(255, 255, 255)",
+          "background": [
+            40,
+            57,
+            88
+          ],
+          "ratio": 11.561391602497022,
+          "minimum": 4.5,
+          "pass": true
+        },
+        {
+          "kind": "SELECT",
+          "classes": "",
+          "color": "rgb(36, 53, 79)",
+          "background": [
+            255,
+            255,
+            255
+          ],
+          "ratio": 12.37363108465764,
+          "minimum": 4.5,
+          "pass": true
+        },
+        {
+          "kind": "DIV",
+          "classes": "mode-banner warning",
+          "color": "rgb(108, 69, 11)",
+          "background": [
+            255,
+            243,
+            217
+          ],
+          "ratio": 7.648919208112302,
+          "minimum": 4.5,
+          "pass": true
+        },
+        {
+          "kind": "SELECT",
+          "classes": "",
+          "color": "rgb(25, 43, 72)",
+          "background": [
+            255,
+            255,
+            255
+          ],
+          "ratio": 14.184767876652904,
+          "minimum": 4.5,
+          "pass": true
+        },
+        {
+          "kind": "P",
+          "classes": "notice",
+          "color": "rgb(128, 80, 20)",
+          "background": [
+            255,
+            243,
+            217
+          ],
+          "ratio": 6.202171934377189,
+          "minimum": 4.5,
+          "pass": true
+        },
+        {
+          "kind": "SPAN",
+          "classes": "badge tone-MEASURED_ONLY",
+          "color": "rgb(65, 56, 143)",
+          "background": [
+            238,
+            240,
+            255
+          ],
+          "ratio": 8.478690884611835,
+          "minimum": 4.5,
+          "pass": true
+        },
+        {
+          "kind": "DL",
+          "classes": "chart-axis-labels",
+          "color": "rgb(82, 96, 120)",
+          "background": [
+            255,
+            255,
+            255
+          ],
+          "ratio": 6.357607659477405,
+          "minimum": 4.5,
+          "pass": true
+        },
+        {
+          "kind": "TD",
+          "classes": "",
+          "color": "rgb(36, 53, 79)",
+          "background": [
+            255,
+            255,
+            255
+          ],
+          "ratio": 12.37363108465764,
+          "minimum": 4.5,
+          "pass": true
+        },
+        {
+          "kind": "SPAN",
+          "classes": "badge tone-ACTIVE",
+          "color": "rgb(18, 92, 82)",
+          "background": [
+            226,
+            242,
+            238
+          ],
+          "ratio": 6.783562606978884,
+          "minimum": 4.5,
+          "pass": true
+        }
+      ]
+    },
+    {
+      "locale": "en",
+      "route": "/regime",
+      "values": [
+        {
+          "kind": "BUTTON",
+          "classes": "menu-toggle button",
+          "color": "rgb(255, 255, 255)",
+          "background": [
+            40,
+            57,
+            88
+          ],
+          "ratio": 11.561391602497022,
+          "minimum": 4.5,
+          "pass": true
+        },
+        {
+          "kind": "SELECT",
+          "classes": "",
+          "color": "rgb(36, 53, 79)",
+          "background": [
+            255,
+            255,
+            255
+          ],
+          "ratio": 12.37363108465764,
+          "minimum": 4.5,
+          "pass": true
+        },
+        {
+          "kind": "DIV",
+          "classes": "mode-banner warning",
+          "color": "rgb(108, 69, 11)",
+          "background": [
+            255,
+            243,
+            217
+          ],
+          "ratio": 7.648919208112302,
+          "minimum": 4.5,
+          "pass": true
+        },
+        {
+          "kind": "P",
+          "classes": "notice",
+          "color": "rgb(128, 80, 20)",
+          "background": [
+            255,
+            243,
+            217
+          ],
+          "ratio": 6.202171934377189,
+          "minimum": 4.5,
+          "pass": true
+        },
+        {
+          "kind": "SPAN",
+          "classes": "badge tone-normal",
+          "color": "rgb(18, 92, 82)",
+          "background": [
+            226,
+            242,
+            238
+          ],
+          "ratio": 6.783562606978884,
+          "minimum": 4.5,
+          "pass": true
+        },
+        {
+          "kind": "TD",
+          "classes": "",
+          "color": "rgb(36, 53, 79)",
+          "background": [
+            255,
+            255,
+            255
+          ],
+          "ratio": 12.37363108465764,
+          "minimum": 4.5,
+          "pass": true
+        },
+        {
+          "kind": "DL",
+          "classes": "chart-axis-labels",
+          "color": "rgb(82, 96, 120)",
+          "background": [
+            255,
+            255,
+            255
+          ],
+          "ratio": 6.357607659477405,
+          "minimum": 4.5,
+          "pass": true
+        },
+        {
+          "kind": "BUTTON",
+          "classes": "button",
+          "color": "rgb(25, 43, 72)",
+          "background": [
+            255,
+            255,
+            255
+          ],
+          "ratio": 14.184767876652904,
+          "minimum": 4.5,
+          "pass": true
+        },
+        {
+          "kind": "SPAN",
+          "classes": "badge tone-elevated",
+          "color": "rgb(121, 80, 11)",
+          "background": [
+            255,
+            240,
+            204
+          ],
+          "ratio": 6.268521925118424,
+          "minimum": 4.5,
+          "pass": true
+        },
+        {
+          "kind": "SPAN",
+          "classes": "badge tone-stressed",
+          "color": "rgb(138, 66, 34)",
+          "background": [
+            249,
+            234,
+            223
+          ],
+          "ratio": 6.195759422342806,
+          "minimum": 4.5,
+          "pass": true
+        }
+      ]
+    },
+    {
+      "locale": "en",
+      "route": "/ticker/us_equity/SYN369",
+      "values": [
+        {
+          "kind": "BUTTON",
+          "classes": "menu-toggle button",
+          "color": "rgb(255, 255, 255)",
+          "background": [
+            40,
+            57,
+            88
+          ],
+          "ratio": 11.561391602497022,
+          "minimum": 4.5,
+          "pass": true
+        },
+        {
+          "kind": "SELECT",
+          "classes": "",
+          "color": "rgb(36, 53, 79)",
+          "background": [
+            255,
+            255,
+            255
+          ],
+          "ratio": 12.37363108465764,
+          "minimum": 4.5,
+          "pass": true
+        },
+        {
+          "kind": "DIV",
+          "classes": "mode-banner warning",
+          "color": "rgb(108, 69, 11)",
+          "background": [
+            255,
+            243,
+            217
+          ],
+          "ratio": 7.648919208112302,
+          "minimum": 4.5,
+          "pass": true
+        },
+        {
+          "kind": "SPAN",
+          "classes": "badge tone-strong-positive",
+          "color": "rgb(18, 92, 82)",
+          "background": [
+            226,
+            242,
+            238
+          ],
+          "ratio": 6.783562606978884,
+          "minimum": 4.5,
+          "pass": true
+        },
+        {
+          "kind": "BUTTON",
+          "classes": "button",
+          "color": "rgb(25, 43, 72)",
+          "background": [
+            255,
+            255,
+            255
+          ],
+          "ratio": 14.184767876652904,
+          "minimum": 4.5,
+          "pass": true
+        },
+        {
+          "kind": "P",
+          "classes": "notice",
+          "color": "rgb(128, 80, 20)",
+          "background": [
+            255,
+            243,
+            217
+          ],
+          "ratio": 6.202171934377189,
+          "minimum": 4.5,
+          "pass": true
+        },
+        {
+          "kind": "BUTTON",
+          "classes": "button primary",
+          "color": "rgb(255, 255, 255)",
+          "background": [
+            85,
+            73,
+            232
+          ],
+          "ratio": 5.992269215312059,
+          "minimum": 4.5,
+          "pass": true
+        },
+        {
+          "kind": "BUTTON",
+          "classes": "button",
+          "color": "rgb(92, 102, 120)",
+          "background": [
+            238,
+            240,
+            245
+          ],
+          "ratio": 5.078266494563155,
+          "minimum": 4.5,
+          "pass": true
+        },
+        {
+          "kind": "DL",
+          "classes": "chart-axis-labels",
+          "color": "rgb(82, 96, 120)",
+          "background": [
+            255,
+            255,
+            255
+          ],
+          "ratio": 6.357607659477405,
+          "minimum": 4.5,
+          "pass": true
+        },
+        {
+          "kind": "TD",
+          "classes": "",
+          "color": "rgb(36, 53, 79)",
+          "background": [
+            255,
+            255,
+            255
+          ],
+          "ratio": 12.37363108465764,
+          "minimum": 4.5,
+          "pass": true
+        },
+        {
+          "kind": "SPAN",
+          "classes": "badge tone-abstained",
+          "color": "rgb(138, 66, 34)",
+          "background": [
+            249,
+            234,
+            223
+          ],
+          "ratio": 6.195759422342806,
+          "minimum": 4.5,
+          "pass": true
+        },
+        {
+          "kind": "SPAN",
+          "classes": "badge tone-positive",
+          "color": "rgb(18, 92, 82)",
+          "background": [
+            226,
+            242,
+            238
+          ],
+          "ratio": 6.783562606978884,
+          "minimum": 4.5,
+          "pass": true
+        },
+        {
+          "kind": "SPAN",
+          "classes": "badge tone-negative",
+          "color": "rgb(138, 66, 34)",
+          "background": [
+            249,
+            234,
+            223
+          ],
+          "ratio": 6.195759422342806,
+          "minimum": 4.5,
+          "pass": true
+        },
+        {
+          "kind": "A",
+          "classes": "button",
+          "color": "rgb(25, 43, 72)",
+          "background": [
+            255,
+            255,
+            255
+          ],
+          "ratio": 14.184767876652904,
+          "minimum": 4.5,
+          "pass": true
+        }
+      ]
+    },
+    {
+      "locale": "ar",
+      "route": "/pool/us_equity",
+      "values": [
+        {
+          "kind": "BUTTON",
+          "classes": "menu-toggle button",
+          "color": "rgb(255, 255, 255)",
+          "background": [
+            40,
+            57,
+            88
+          ],
+          "ratio": 11.561391602497022,
+          "minimum": 4.5,
+          "pass": true
+        },
+        {
+          "kind": "SELECT",
+          "classes": "",
+          "color": "rgb(36, 53, 79)",
+          "background": [
+            255,
+            255,
+            255
+          ],
+          "ratio": 12.37363108465764,
+          "minimum": 4.5,
+          "pass": true
+        },
+        {
+          "kind": "DIV",
+          "classes": "mode-banner warning",
+          "color": "rgb(108, 69, 11)",
+          "background": [
+            255,
+            243,
+            217
+          ],
+          "ratio": 7.648919208112302,
+          "minimum": 4.5,
+          "pass": true
+        },
+        {
+          "kind": "SPAN",
+          "classes": "badge tone-normal",
+          "color": "rgb(18, 92, 82)",
+          "background": [
+            226,
+            242,
+            238
+          ],
+          "ratio": 6.783562606978884,
+          "minimum": 4.5,
+          "pass": true
+        },
+        {
+          "kind": "SELECT",
+          "classes": "",
+          "color": "rgb(25, 43, 72)",
+          "background": [
+            255,
+            255,
+            255
+          ],
+          "ratio": 14.184767876652904,
+          "minimum": 4.5,
+          "pass": true
+        },
+        {
+          "kind": "BUTTON",
+          "classes": "button clear-button",
+          "color": "rgb(25, 43, 72)",
+          "background": [
+            255,
+            255,
+            255
+          ],
+          "ratio": 14.184767876652904,
+          "minimum": 4.5,
+          "pass": true
+        },
+        {
+          "kind": "TD",
+          "classes": "",
+          "color": "rgb(82, 96, 120)",
+          "background": [
+            255,
+            255,
+            255
+          ],
+          "ratio": 6.357607659477405,
+          "minimum": 4.5,
+          "pass": true
+        },
+        {
+          "kind": "TD",
+          "classes": "",
+          "color": "rgb(36, 53, 79)",
+          "background": [
+            255,
+            255,
+            255
+          ],
+          "ratio": 12.37363108465764,
+          "minimum": 4.5,
+          "pass": true
+        },
+        {
+          "kind": "SPAN",
+          "classes": "badge tone-strong-positive",
+          "color": "rgb(18, 92, 82)",
+          "background": [
+            226,
+            242,
+            238
+          ],
+          "ratio": 6.783562606978884,
+          "minimum": 4.5,
+          "pass": true
+        },
+        {
+          "kind": "TD",
+          "classes": "positive numeric",
+          "color": "rgb(11, 112, 104)",
+          "background": [
+            255,
+            255,
+            255
+          ],
+          "ratio": 5.94598849006985,
+          "minimum": 4.5,
+          "pass": true
+        },
+        {
+          "kind": "SPAN",
+          "classes": "badge tone-positive",
+          "color": "rgb(18, 92, 82)",
+          "background": [
+            226,
+            242,
+            238
+          ],
+          "ratio": 6.783562606978884,
+          "minimum": 4.5,
+          "pass": true
+        },
+        {
+          "kind": "SPAN",
+          "classes": "badge tone-neutral",
+          "color": "rgb(65, 56, 143)",
+          "background": [
+            238,
+            240,
+            255
+          ],
+          "ratio": 8.478690884611835,
+          "minimum": 4.5,
+          "pass": true
+        },
+        {
+          "kind": "BUTTON",
+          "classes": "button",
+          "color": "rgb(92, 102, 120)",
+          "background": [
+            238,
+            240,
+            245
+          ],
+          "ratio": 5.078266494563155,
+          "minimum": 4.5,
+          "pass": true
+        },
+        {
+          "kind": "BUTTON",
+          "classes": "button",
+          "color": "rgb(25, 43, 72)",
+          "background": [
+            255,
+            255,
+            255
+          ],
+          "ratio": 14.184767876652904,
+          "minimum": 4.5,
+          "pass": true
+        }
+      ]
+    },
+    {
+      "locale": "ar",
+      "route": "/factors",
+      "values": [
+        {
+          "kind": "BUTTON",
+          "classes": "menu-toggle button",
+          "color": "rgb(255, 255, 255)",
+          "background": [
+            40,
+            57,
+            88
+          ],
+          "ratio": 11.561391602497022,
+          "minimum": 4.5,
+          "pass": true
+        },
+        {
+          "kind": "SELECT",
+          "classes": "",
+          "color": "rgb(36, 53, 79)",
+          "background": [
+            255,
+            255,
+            255
+          ],
+          "ratio": 12.37363108465764,
+          "minimum": 4.5,
+          "pass": true
+        },
+        {
+          "kind": "DIV",
+          "classes": "mode-banner warning",
+          "color": "rgb(108, 69, 11)",
+          "background": [
+            255,
+            243,
+            217
+          ],
+          "ratio": 7.648919208112302,
+          "minimum": 4.5,
+          "pass": true
+        },
+        {
+          "kind": "SELECT",
+          "classes": "",
+          "color": "rgb(25, 43, 72)",
+          "background": [
+            255,
+            255,
+            255
+          ],
+          "ratio": 14.184767876652904,
+          "minimum": 4.5,
+          "pass": true
+        },
+        {
+          "kind": "P",
+          "classes": "notice",
+          "color": "rgb(128, 80, 20)",
+          "background": [
+            255,
+            243,
+            217
+          ],
+          "ratio": 6.202171934377189,
+          "minimum": 4.5,
+          "pass": true
+        },
+        {
+          "kind": "SPAN",
+          "classes": "badge tone-MEASURED_ONLY",
+          "color": "rgb(65, 56, 143)",
+          "background": [
+            238,
+            240,
+            255
+          ],
+          "ratio": 8.478690884611835,
+          "minimum": 4.5,
+          "pass": true
+        },
+        {
+          "kind": "DL",
+          "classes": "chart-axis-labels",
+          "color": "rgb(82, 96, 120)",
+          "background": [
+            255,
+            255,
+            255
+          ],
+          "ratio": 6.357607659477405,
+          "minimum": 4.5,
+          "pass": true
+        },
+        {
+          "kind": "TD",
+          "classes": "",
+          "color": "rgb(36, 53, 79)",
+          "background": [
+            255,
+            255,
+            255
+          ],
+          "ratio": 12.37363108465764,
+          "minimum": 4.5,
+          "pass": true
+        },
+        {
+          "kind": "SPAN",
+          "classes": "badge tone-ACTIVE",
+          "color": "rgb(18, 92, 82)",
+          "background": [
+            226,
+            242,
+            238
+          ],
+          "ratio": 6.783562606978884,
+          "minimum": 4.5,
+          "pass": true
+        }
+      ]
+    },
+    {
+      "locale": "ar",
+      "route": "/regime",
+      "values": [
+        {
+          "kind": "BUTTON",
+          "classes": "menu-toggle button",
+          "color": "rgb(255, 255, 255)",
+          "background": [
+            40,
+            57,
+            88
+          ],
+          "ratio": 11.561391602497022,
+          "minimum": 4.5,
+          "pass": true
+        },
+        {
+          "kind": "SELECT",
+          "classes": "",
+          "color": "rgb(36, 53, 79)",
+          "background": [
+            255,
+            255,
+            255
+          ],
+          "ratio": 12.37363108465764,
+          "minimum": 4.5,
+          "pass": true
+        },
+        {
+          "kind": "DIV",
+          "classes": "mode-banner warning",
+          "color": "rgb(108, 69, 11)",
+          "background": [
+            255,
+            243,
+            217
+          ],
+          "ratio": 7.648919208112302,
+          "minimum": 4.5,
+          "pass": true
+        },
+        {
+          "kind": "P",
+          "classes": "notice",
+          "color": "rgb(128, 80, 20)",
+          "background": [
+            255,
+            243,
+            217
+          ],
+          "ratio": 6.202171934377189,
+          "minimum": 4.5,
+          "pass": true
+        },
+        {
+          "kind": "SPAN",
+          "classes": "badge tone-normal",
+          "color": "rgb(18, 92, 82)",
+          "background": [
+            226,
+            242,
+            238
+          ],
+          "ratio": 6.783562606978884,
+          "minimum": 4.5,
+          "pass": true
+        },
+        {
+          "kind": "TD",
+          "classes": "",
+          "color": "rgb(36, 53, 79)",
+          "background": [
+            255,
+            255,
+            255
+          ],
+          "ratio": 12.37363108465764,
+          "minimum": 4.5,
+          "pass": true
+        },
+        {
+          "kind": "DL",
+          "classes": "chart-axis-labels",
+          "color": "rgb(82, 96, 120)",
+          "background": [
+            255,
+            255,
+            255
+          ],
+          "ratio": 6.357607659477405,
+          "minimum": 4.5,
+          "pass": true
+        },
+        {
+          "kind": "BUTTON",
+          "classes": "button",
+          "color": "rgb(25, 43, 72)",
+          "background": [
+            255,
+            255,
+            255
+          ],
+          "ratio": 14.184767876652904,
+          "minimum": 4.5,
+          "pass": true
+        },
+        {
+          "kind": "SPAN",
+          "classes": "badge tone-elevated",
+          "color": "rgb(121, 80, 11)",
+          "background": [
+            255,
+            240,
+            204
+          ],
+          "ratio": 6.268521925118424,
+          "minimum": 4.5,
+          "pass": true
+        },
+        {
+          "kind": "SPAN",
+          "classes": "badge tone-stressed",
+          "color": "rgb(138, 66, 34)",
+          "background": [
+            249,
+            234,
+            223
+          ],
+          "ratio": 6.195759422342806,
+          "minimum": 4.5,
+          "pass": true
+        }
+      ]
+    },
+    {
+      "locale": "ar",
+      "route": "/ticker/us_equity/SYN369",
+      "values": [
+        {
+          "kind": "BUTTON",
+          "classes": "menu-toggle button",
+          "color": "rgb(255, 255, 255)",
+          "background": [
+            40,
+            57,
+            88
+          ],
+          "ratio": 11.561391602497022,
+          "minimum": 4.5,
+          "pass": true
+        },
+        {
+          "kind": "SELECT",
+          "classes": "",
+          "color": "rgb(36, 53, 79)",
+          "background": [
+            255,
+            255,
+            255
+          ],
+          "ratio": 12.37363108465764,
+          "minimum": 4.5,
+          "pass": true
+        },
+        {
+          "kind": "DIV",
+          "classes": "mode-banner warning",
+          "color": "rgb(108, 69, 11)",
+          "background": [
+            255,
+            243,
+            217
+          ],
+          "ratio": 7.648919208112302,
+          "minimum": 4.5,
+          "pass": true
+        },
+        {
+          "kind": "SPAN",
+          "classes": "badge tone-strong-positive",
+          "color": "rgb(18, 92, 82)",
+          "background": [
+            226,
+            242,
+            238
+          ],
+          "ratio": 6.783562606978884,
+          "minimum": 4.5,
+          "pass": true
+        },
+        {
+          "kind": "BUTTON",
+          "classes": "button",
+          "color": "rgb(25, 43, 72)",
+          "background": [
+            255,
+            255,
+            255
+          ],
+          "ratio": 14.184767876652904,
+          "minimum": 4.5,
+          "pass": true
+        },
+        {
+          "kind": "P",
+          "classes": "notice",
+          "color": "rgb(128, 80, 20)",
+          "background": [
+            255,
+            243,
+            217
+          ],
+          "ratio": 6.202171934377189,
+          "minimum": 4.5,
+          "pass": true
+        },
+        {
+          "kind": "BUTTON",
+          "classes": "button primary",
+          "color": "rgb(255, 255, 255)",
+          "background": [
+            85,
+            73,
+            232
+          ],
+          "ratio": 5.992269215312059,
+          "minimum": 4.5,
+          "pass": true
+        },
+        {
+          "kind": "BUTTON",
+          "classes": "button",
+          "color": "rgb(92, 102, 120)",
+          "background": [
+            238,
+            240,
+            245
+          ],
+          "ratio": 5.078266494563155,
+          "minimum": 4.5,
+          "pass": true
+        },
+        {
+          "kind": "DL",
+          "classes": "chart-axis-labels",
+          "color": "rgb(82, 96, 120)",
+          "background": [
+            255,
+            255,
+            255
+          ],
+          "ratio": 6.357607659477405,
+          "minimum": 4.5,
+          "pass": true
+        },
+        {
+          "kind": "TD",
+          "classes": "",
+          "color": "rgb(36, 53, 79)",
+          "background": [
+            255,
+            255,
+            255
+          ],
+          "ratio": 12.37363108465764,
+          "minimum": 4.5,
+          "pass": true
+        },
+        {
+          "kind": "SPAN",
+          "classes": "badge tone-abstained",
+          "color": "rgb(138, 66, 34)",
+          "background": [
+            249,
+            234,
+            223
+          ],
+          "ratio": 6.195759422342806,
+          "minimum": 4.5,
+          "pass": true
+        },
+        {
+          "kind": "SPAN",
+          "classes": "badge tone-positive",
+          "color": "rgb(18, 92, 82)",
+          "background": [
+            226,
+            242,
+            238
+          ],
+          "ratio": 6.783562606978884,
+          "minimum": 4.5,
+          "pass": true
+        },
+        {
+          "kind": "SPAN",
+          "classes": "badge tone-negative",
+          "color": "rgb(138, 66, 34)",
+          "background": [
+            249,
+            234,
+            223
+          ],
+          "ratio": 6.195759422342806,
+          "minimum": 4.5,
+          "pass": true
+        },
+        {
+          "kind": "A",
+          "classes": "button",
+          "color": "rgb(25, 43, 72)",
+          "background": [
+            255,
+            255,
+            255
+          ],
+          "ratio": 14.184767876652904,
+          "minimum": 4.5,
+          "pass": true
+        }
+      ]
+    }
+  ]
+}

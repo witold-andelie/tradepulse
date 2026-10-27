@@ -2,6 +2,13 @@
 
 Hi Huyin,
 
+Current instruction, 27 October: your global localization V2 is merged through PR #8,
+preserving your commits. The lead approved the wider UI scope and takes over the remaining
+acceptance. No further V2 rebuild or delivery is requested from you. Actual speech and
+cross-browser voice testing, and eleven-language human editorial, are deferred. See
+[the current lead-owned follow-up](V2_LEAD_FOLLOWUP.md). The guide-only and remaining-help
+instructions below record the earlier assignment and are superseded where they conflict.
+
 Your B1, B2–B10 and accessibility work is now part of the main frontend baseline. I integrated
 your original commits and kept their author history, including the six business pages,
 Discover, Simple/Pro, the design system, keyboard interactions and chart data alternatives.

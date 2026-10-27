@@ -21,14 +21,16 @@ signals from predictive and cost-surviving ones; drafts claims through an analys
 and verifies every explanation against query evidence. When the evidence or model answer is
 unavailable, it abstains instead of inventing a rationale.
 
-## Current status — 26 October 2026
+## Current status — 27 October 2026
 
 The quantitative core, pipeline, HTTP API and complete fixture-backed frontend are implemented.
 Huyin's original B1–B10 and accessibility commits are preserved in the integration history,
 including six business pages, Discover and Simple/Pro presentation.
-Ticker Detail also includes a localized research guide and optional browser speech. Its
-guide-only language exception is approved; source narratives and financial values are preserved.
-See [guide scope and remaining acceptance](web/AGENT_ACCESSIBILITY_DEMO.md).
+PR #8 adds eleven-language authored UI labels with English as the default and lazy-loaded
+translations. Source narratives, financial values and evidence remain original. The lead
+approved the merge and owns remaining acceptance. Focused contrast checks passed; native
+screen-reader acceptance remains pending. Actual speech/cross-browser voice tests and human
+editorial across all eleven languages are deferred. See [current scope](web/V2_LEAD_FOLLOWUP.md).
 
 The real seven-table sample for **2026-10-23** and verified crypto configuration are prepared.
 The sample is below 25 MB and includes hashes, source-exception evidence and offline validation.

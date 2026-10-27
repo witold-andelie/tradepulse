@@ -1,5 +1,11 @@
 # Global internationalization V2 acceptance
 
+Lead decision, 27 October: PR #8 is merged as `a4d49a7` before remaining native acceptance,
+by explicit authorization. The lead takes over follow-up. See
+[current ownership and scope](../../V2_LEAD_FOLLOWUP.md) and
+[focused lead contrast review](../lead-v2/README.md). The proposal-stage readiness and
+original evidence below remain historical; they are not a claim of native sign-off.
+
 **READY FOR REVIEW. NOT READY FOR MERGE.** Technical browser acceptance is separate from
 native-language financial editorial, real screen-reader and audible speech sign-off.
 

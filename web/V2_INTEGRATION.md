@@ -1,5 +1,10 @@
 # Global internationalization V2 integration
 
+Lead update, 27 October: PR #8 is merged as `a4d49a7` by explicit lead authorization, before
+remaining native acceptance. The proposal-stage approval boundary below is historical.
+The lead owns follow-up; see [V2_LEAD_FOLLOWUP.md](V2_LEAD_FOLLOWUP.md). Original evidence
+and limitations are preserved; this merge does not certify unperformed native tests.
+
 This is a frontend-only proposal based on main `eee913ad7b310e277b8b334ab6649e5cb0877bc4`.
 The task authorizes one implementation branch, `b/global-i18n-accessibility-v2-20261026`,
 and at most one implementation PR. No merge or deployment is authorized.

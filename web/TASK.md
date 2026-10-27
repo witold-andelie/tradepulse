@@ -3,6 +3,12 @@
 Huyin's detailed current assignment is [HUYIN_NEXT_STEPS.md](HUYIN_NEXT_STEPS.md).
 It supersedes the earlier message asking for three new placeholder implementations.
 
+Lead update, 27 October: global localization V2 is merged as PR #8 (`a4d49a7`), with original
+contributor history preserved. The lead takes over remaining acceptance; no further rebuild
+or delivery is assigned to Huyin. Current scope is documentation, focused contrast review and
+a short native screen-reader check. Actual audio/cross-browser voice testing and human
+editorial across eleven languages are explicitly deferred. See [lead follow-up](V2_LEAD_FOLLOWUP.md).
+
 Lead QA update, 25 October: fresh real-sample API and container journeys now pass nine browser
 groups in Simple/Pro at 1440/320 px. Frontend tests: 89 passed; original tests unchanged.
 REPLAY is an execution mode, not proof that model recordings exist. The UI keeps this
@@ -85,9 +91,10 @@ npm run check:contracts   # validates the fixtures against the schema
 4. **Colour is never the only signal.** Each tier badge shows its label text, and gate results show
    ✓ / ✗ / – plus text.
 5. **No secrets, no tracking scripts, no external fonts or CDNs.** Everything is bundled.
-6. **English only**, except localized labels in the Ticker Detail research guide approved by
-   the lead on 2026-10-25. Its original source narratives, financial values and enums stay
-   unchanged; this is not application-wide localization. See `AGENT_ACCESSIBILITY_DEMO.md`.
+6. **English only** for implementation comments and documentation. The lead approved global
+   authored UI localization on 2026-10-27 through PR #8. Keep English as the default and lazy
+   load other catalogs. Original source narratives, financial values, identifiers and enums
+   stay unchanged. See `V2_LEAD_FOLLOWUP.md`; the older guide-only boundary is historical.
 
 ## Accessibility (WCAG 2.2 AA) — applies to every page
 
@@ -95,7 +102,7 @@ Accessibility is a first-class requirement, proposed by Huyin. The shared compon
 `Badge`, `State`) and the layout provide the site-wide parts. Every page adds the page-level parts.
 
 **Site-wide (base):**
-- `<html lang="en">`.
+- `<html lang="en">` by default; match the active catalog language and use RTL for Arabic.
 - A "Skip to main content" link as the first focusable element.
 - Landmarks: `<header>`, `<nav aria-label="Primary">`, `<main id="main">`, `<footer>`.
 - One `<h1>` per page, and headings that never skip a level.

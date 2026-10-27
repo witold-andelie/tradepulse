@@ -1,0 +1,15 @@
+{
+  "command": "py -3 run.py --pools crypto",
+  "request": {"as_of": null, "pools": ["crypto"], "tickers": [], "horizon_days": 5, "top_k": 5},
+  "environment": {
+    "SAMPLE_MODE": "true",
+    "RECORD_LLM": "true",
+    "LLM_PROVIDER": "auto",
+    "NVIDIA_BASE_URL": "https://integrate.api.nvidia.com/v1",
+    "NVIDIA_API_KEY": "<set locally in the ignored .env; not recorded>",
+    "NIM_EXTRACTOR_MODEL": "nvidia/nemotron-3.5-lightning-30b-a3b",
+    "NIM_ANALYST_MODEL": "nvidia/nemotron-3.5-lightning-30b-a3b",
+    "NIM_SKEPTIC_MODEL": "nvidia/nemotron-3.5-bolt-e4b"
+  },
+  "data": "Committed real-data sample snapshot (data/sample, as of 2026-10-23) through DuckDB; no Zetaris or Meterless engine calls in this run."
+}

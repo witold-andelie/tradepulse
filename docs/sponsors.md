@@ -10,7 +10,8 @@ original real execution and API/UI checks; the read-only judge server makes no f
 | Meterless World Model / H-MEM | Real snapshot, recall and remember in the accepted trace. Official reference engines are upstream components with retained licenses/commit attribution. |
 | Nightshift | Real provider connection/smoke and earlier Analyst/Skeptic calls. The earlier Crypto run abstained and failed full acceptance; separate late-runtime completion is not rewritten as a client success. |
 | GLM-5.3-Flash | Six real model calls in the accepted Crypto trace. These calls are labelled glm, not Nightshift. |
-| NVIDIA, spacexsi, Cursor | No completed sponsor-use claim for this delivery. Historical plans or placeholders do not establish usage. |
+| NVIDIA NIM | Nine real hosted calls to NVIDIA Nemotron 3.5 models (analyst and skeptic) in Crypto run 2026-10-23-b8637c6c on the committed sample snapshot; three explanations passed the verifier. That run used DuckDB and made no Zetaris or engine calls; the accepted Zetaris + Meterless case remains the GLM run. See [NIM evidence](../runs/nvidia-nim-crypto-1/README.md). |
+| spacexsi, Cursor | No completed sponsor-use claim for this delivery. Historical plans or placeholders do not establish usage. |
 
 ## Organizer wording and honest disclosure
 

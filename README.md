@@ -144,7 +144,8 @@ Track Record is historical evaluation, not a forecast or trading record.
 | **Meterless World Model / H-MEM** | Actual snapshot, recall and remember operations in the Crypto trace. Official reference engines are third-party components, not engines invented by this team. |
 | **Nightshift** | Connected and genuinely called by an earlier Analyst/Skeptic workflow. That earlier Crypto run failed full acceptance. The video shows this history separately. |
 | **GLM-5.3-Flash** | Actual inference provider for the accepted Crypto demonstration. Its answers must not be attributed to Nightshift. |
-| **NVIDIA / spacexsi / Cursor** | No implemented sponsor-use claim is made for this delivery. Historical plans are not completed integrations. |
+| **NVIDIA NIM (Nemotron 3.5)** | Nine real hosted NIM calls (analyst `nemotron-3.5-lightning-30b-a3b`, skeptic `nemotron-3.5-bolt-e4b`) in Crypto run 2026-10-23-b8637c6c on the committed sample; three explanations verified. That run used DuckDB, not Zetaris or the engines. See [the NIM evidence](runs/nvidia-nim-crypto-1/README.md). |
+| **spacexsi / Cursor** | No implemented sponsor-use claim is made for this delivery. Historical plans are not completed integrations. |
 
 The organizer's reminder explicitly lists Nightshift as an AI provider. The accepted GLM
 case alone is not proof that Nightshift generated that request; the distinction above is

@@ -2,6 +2,12 @@
 
 ## Current submission direction: 27 October 2026
 
+Immediate next step: [RECORDING_READY.md](RECORDING_READY.md). The third US attempt failed
+on a confirmed World Model POST ReadTimeout after 200 documents/732 grounded events.
+The Python client now batches World Model writes and applies explicit read/write budgets.
+Keep extraction/receipt caches and run first-4 once; start API/UI preparation from accepted
+Crypto concurrently. Do not repeat reconciliation, local-model probes or successful Crypto.
+
 The lead's latest requirements supersede the dated AWS-only and NIM-only plan below:
 
 1. A working end-to-end project with Zetaris queries and actual Meterless Engines in a

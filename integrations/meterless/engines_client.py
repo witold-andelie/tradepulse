@@ -34,12 +34,17 @@ class EnginesClient:
     def _request(self, method: str, path: str, *, timeout_s=None, **kwargs) -> dict:
         if self._token:
             kwargs["headers"] = {"Authorization": f"Bearer {self._token}"}
-        timeout = self.timeout_s if timeout_s is None else timeout_s
+        setting = ("ENGINES_WRITE_TIMEOUT_SECONDS" if method.lower() == "post" and path != "/hmem/query"
+                   else "ENGINES_READ_TIMEOUT_SECONDS")
+        timeout = self._timeout(setting) if timeout_s is None else timeout_s
         started = perf_counter()
         receipt = {"method": method.upper(), "path": path, "timeout_seconds": timeout,
                    "at": dt.datetime.now(dt.UTC).isoformat()}
         if path == "/hmem/records":
             receipt["batch_records"] = len(kwargs["json"]["records"])
+        if path in {"/world-model/events", "/world-model/edges"}:
+            key = path.rsplit("/", 1)[1]
+            receipt.update(batch_key=key, batch_items=len(kwargs["json"][key]))
         try:
             try:
                 response = getattr(self._session, method)(
@@ -79,8 +84,8 @@ class EnginesClient:
 
     @staticmethod
     def _validate(items: list[dict], definition: str) -> None:
-        if not isinstance(items, list):
-            raise ValueError(f"{definition} payload must be a list")
+        if not isinstance(items, list) or len(items) > 5000:
+            raise ValueError(f"{definition} payload must be a list of at most 5000 items")
         for item in items:
             if validate_payload(item, definition):
                 raise ValueError(f"Invalid {definition} payload")
@@ -98,12 +103,14 @@ class EnginesClient:
     def ingest_events(self, events: list[dict]) -> dict:
         """POST /world-model/events. Each event satisfies $defs/ExtractedEvent; invalid -> ValueError."""
         self._validate(events, "ExtractedEvent")
-        return self._request("post", "/world-model/events", json={"events": events})
+        return self._write_batches("/world-model/events", "events", events,
+                                   ("ingested", "duplicates"), "ENGINES_WORLD_BATCH_SIZE")
 
     def upsert_edges(self, edges: list[dict]) -> dict:
         """POST /world-model/edges. Each edge satisfies $defs/GraphEdge; invalid -> ValueError."""
         self._validate(edges, "GraphEdge")
-        return self._request("post", "/world-model/edges", json={"edges": edges})
+        return self._write_batches("/world-model/edges", "edges", edges,
+                                   ("upserted",), "ENGINES_WORLD_BATCH_SIZE")
 
     def snapshot(self, as_of: str) -> dict:
         """GET /world-model/snapshot?as_of=YYYY-MM-DD -> {"edges": [...], "events": [...]}."""
@@ -113,23 +120,39 @@ class EnginesClient:
         """Bounded optional batches; never automatically repeat a write with unknown outcome."""
         if not isinstance(records, list) or len(records) > 5000 or any(not isinstance(r, dict) for r in records):
             raise ValueError("Memory writes require at most 5000 objects")
+        return self._write_batches("/hmem/records", "records", records,
+                                   ("added",), "ENGINES_REMEMBER_BATCH_SIZE")
+
+    def _timeout(self, setting):
         try:
-            batch_size = int(os.environ.get("ENGINES_REMEMBER_BATCH_SIZE", "5000"))
-            write_timeout = float(os.environ.get("ENGINES_WRITE_TIMEOUT_SECONDS", str(self.timeout_s)))
+            value = float(os.environ.get(setting, str(self.timeout_s)))
         except ValueError:
-            raise ValueError("Engine write settings must be numeric") from None
-        if not 1 <= batch_size <= 5000 or not math.isfinite(write_timeout) or not 0 < write_timeout <= 300:
-            raise ValueError("Engine write settings exceed their bounds")
-        added = 0
-        for start in range(0, len(records), batch_size):
-            batch = records[start:start + batch_size]
-            receipt = self._request("post", "/hmem/records", timeout_s=write_timeout,
-                                    json={"records": batch})
-            count = receipt.get("added")
-            if type(count) is not int or not 0 <= count <= len(batch):
-                raise EnginesError("Invalid H-MEM write acknowledgement", error_type="InvalidResponse")
-            added += count
-        return {"added": added}
+            raise ValueError("Engine timeout must be numeric") from None
+        if not math.isfinite(value) or not 0 < value <= 300:
+            raise ValueError("Engine timeout exceeds its bounds")
+        return value
+
+    def _write_batches(self, path, key, items, count_fields, batch_setting):
+        """Acknowledge every bounded batch; unknown write outcomes are never retried."""
+        try:
+            batch_size = int(os.environ.get(batch_setting, "5000"))
+        except ValueError:
+            raise ValueError("Engine batch size must be numeric") from None
+        if not 1 <= batch_size <= 5000:
+            raise ValueError("Engine batch size exceeds its bounds")
+        write_timeout = self._timeout("ENGINES_WRITE_TIMEOUT_SECONDS")
+        totals = dict.fromkeys(count_fields, 0)
+        for start in range(0, len(items), batch_size):
+            batch = items[start:start + batch_size]
+            receipt = self._request("post", path, timeout_s=write_timeout, json={key: batch})
+            counts = [receipt.get(field) for field in count_fields]
+            if any(type(count) is not int or not 0 <= count <= len(batch) for count in counts):
+                raise EnginesError("Invalid engine write acknowledgement", error_type="InvalidResponse")
+            if key == "events" and sum(counts) != len(batch):
+                raise EnginesError("Incomplete event acknowledgement", error_type="InvalidResponse")
+            for field, count in zip(count_fields, counts):
+                totals[field] += count
+        return totals
 
     def recall(self, symbol: str, as_of: str, k: int = 10) -> list[dict]:
         """POST /hmem/query."""

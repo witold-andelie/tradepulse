@@ -38,6 +38,13 @@ The client does not retry a write with an unknown outcome. Read-only reconciliat
 scripts/reconcile-run.mjs checks stored provenance and IDs without changing a failed run's
 acceptance. See ../HOSTED_ACCEPTANCE.md for the current Mac procedure.
 
+ENGINES_WORLD_BATCH_SIZE (1-5000, default 5000) also batches World Model event/edge writes.
+ENGINES_WRITE_TIMEOUT_SECONDS applies to these writes and feedback, not just H-MEM records.
+ENGINES_READ_TIMEOUT_SECONDS (greater than zero, at most 300, default the client timeout)
+sets health, snapshot, recall and conflict-read budgets. Existing identical events count
+as duplicates; each event batch must acknowledge every item through ingested + duplicates.
+Batch diagnostics retain item counts and the original safe HTTP/error information.
+
 `GET /activity` is an additional authenticated diagnostic route. It returns store counts and
 the last 20 H-MEM ledger entries. The service also writes metadata-only `activity.jsonl` records
 with real request IDs, operation names and counts. Headers and credentials are never recorded.

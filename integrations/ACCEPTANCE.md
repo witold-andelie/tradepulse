@@ -23,9 +23,16 @@ success does not certify the entire model narrative. Prioritize US, then its API
 Do not wait for EU or rerun accepted Crypto. The immutable evidence assembler
 can combine separately accepted sources; a two-pool index remains incomplete.
 
+Latest lead report: first-2's 523 memory records reconciled with zero invalid identities.
+First-3 processed 200 documents and 732 grounded events but failed at World Model event POST:
+the actual receipt shows ReadTimeout at ten seconds, followed by a later service completion.
+World Model writes now share the bounded write budget and support batches; reads have an
+explicit bounded budget too. Live first-4 is pending. Existing Crypto can be served for API/UI
+and recording preparation while US runs; serving it is not a claim of US acceptance.
+
 ## Code and local engine acceptance
 
-Latest offline regression after the US write/retry/cache fixes: 758 Python tests passed,
+Latest offline regression after the US World Model write-budget fix: 762 Python tests passed,
 14 network tests deselected; Ruff passed. The new read-only reconciliation script passed
 two Node tests. These are local software checks, not a live Mac run or narrative certification.
 

@@ -60,6 +60,16 @@ Instrument evidence and verifier queries remain live. Cache hits, reused parity 
 file hashes are disclosed separately; this is not a fresh full-parity measurement. These
 changes pass offline tests but remain pending live Mac acceptance. Preserve accepted Crypto.
 
+The lead subsequently reconciled first-2's 523 stored records with 523 unique IDs and zero
+invalid records. First-3 processed 200 documents with 732 grounded events but failed on a
+confirmed ten-second ReadTimeout for POST /world-model/events; the service later logged its
+completion. That failed run remains failed. World Model writes now use bounded batches and
+the explicit write budget too; snapshot/recall have an explicit read budget. Existing events
+must be acknowledged as duplicates, not fabricated new ingestion. Live first-4 is pending.
+Serving accepted Crypto for API/UI and video preparation can proceed while US runs. See
+[recording preparation](../integrations/RECORDING_READY.md); pending pools and native checks
+must remain disclosed.
+
 ## Zetaris
 
 Load: the live data/evidence query layer. Typed allow-listed templates supply the core and

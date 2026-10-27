@@ -8,6 +8,45 @@ is no longer a prerequisite for this workflow.
 
 ## Current priority: US equities first, preserve Crypto
 
+### Current action: fourth US run and parallel recording preparation
+
+The lead reports first-3 failed before explanations: POST /world-model/events raised an
+actual ReadTimeout at ten seconds, then the service logged 732 ingested events about eighteen
+seconds later. Two hundred documents had been processed and their grounded extraction cache
+must be retained. The prior first-2 memory reconciliation is complete: 523 records, 523 unique
+IDs, zero invalid records. Do not repeat that reconciliation or reclassify either failed run.
+
+The fix now applies ENGINES_WRITE_TIMEOUT_SECONDS to World Model events/edges as well as
+H-MEM writes. ENGINES_WORLD_BATCH_SIZE bounds event/edge batches; snapshot/recall/health use
+ENGINES_READ_TIMEOUT_SECONDS. All options retain finite limits. Every event batch requires
+ingested + duplicates to equal its length. Existing identical events are acknowledged as
+duplicates; conflicting content fails. No automatic write retry is added. This is a Python
+client change: no Docker rebuild, state clearing or vendor change is required.
+
+Use the single-pool command below with the additional settings:
+
+```sh
+export ENGINES_WORLD_BATCH_SIZE=50
+export ENGINES_READ_TIMEOUT_SECONDS=60
+```
+
+Keep ENGINES_WRITE_TIMEOUT_SECONDS=60 and ENGINES_REMEMBER_BATCH_SIZE=50. Use a new destination
+runs/hosted-glm-us-first-4. Keep the original first-2 parity.json and queries.jsonl as receipt
+sources: first-3's cached bulk receipts are labelled local and are not fresh live receipts.
+Preserve data/cache/extraction_cache.jsonl. Previously cached documents do not call the LLM
+again; remaining uncached documents can still be processed within the unchanged core bound.
+Do not promise zero extractor calls, truncate the cache or invent missing events.
+
+Start the API and frontend now against the already accepted Crypto case, while US runs in
+the existing acceptance terminal. Serving saved output does not trigger another model run.
+Check the latest API run ID against the accepted Crypto manifest before recording; do not
+present an unrelated sample as that run. Once US is selected_cases_ok, its new saved run can
+be reviewed and used for the main demonstration. See [RECORDING_READY.md](RECORDING_READY.md).
+US success does not need to wait for EU, three-pool completeness or deferred voice/editorial
+work. Original failed reports and the remaining-pool status stay unchanged.
+
+### Earlier attempts and diagnostic evidence
+
 The first US-only run completed and failed at validate-case. Preserve
 runs/hosted-glm-us-first-1/. It matched parity 12/12, loaded 523 instruments, 279,982 price
 rows and 401,487 pageview rows, and produced two abstained explanations and one explained.
@@ -53,7 +92,7 @@ exception nor HTTP status. A late write is plausible, not a proven timeout diagn
 failed manifest remains failed. No full output.json was saved; memory records cannot recreate
 the complete output, explanations and evaluation, so do not backfill a successful report.
 
-### First reconcile the existing write, without changing state
+### Historical reconciliation procedure (completed; do not repeat)
 
 From the updated repository root on the Mac, use the existing running engine container:
 
@@ -87,7 +126,8 @@ receipt paths and file hashes, and parity_execution=reused-verified-report. The 
 new live queries separately. This is not a claim of a newly executed live 12/12 parity run.
 
 The Python client now permits an explicit write-only timeout and sequential batches. Use
-50 records per request with a 60-second write timeout; normal read timeouts are unchanged.
+50 records per request with a 60-second write timeout. Reads keep the original client budget
+unless explicitly configured; the current command sets their budget to 60 seconds too.
 The 523-record write needs at most 11 requests. Each must receive a valid acknowledgement.
 There are no automatic write retries; earlier batches can persist if a later batch fails.
 New engine_requests.jsonl receipts retain safe exception classes, HTTP status when available,
@@ -101,7 +141,7 @@ run at that point. The later US-only failure and the next settings are recorded 
 The source directory is runs/hosted-glm-acceptance-1/. Preserve it unchanged. Do not repeat
 Crypto. Its NO_CALL stances are computed research outcomes, not a reason to alter gates.
 
-After the read-only reconciliation, run this once in the existing activated environment.
+Run this once in the existing activated environment, using the current action above.
 Keep the existing extraction cache; do not clear it or run a separate model probe:
 
 ```sh
@@ -110,6 +150,8 @@ export ZETARIS_BASE_URL=http://localhost:3000
 export ENGINES_URL=http://127.0.0.1:8790
 export ENGINES_REMEMBER_BATCH_SIZE=50
 export ENGINES_WRITE_TIMEOUT_SECONDS=60
+export ENGINES_WORLD_BATCH_SIZE=50
+export ENGINES_READ_TIMEOUT_SECONDS=60
 export GLM_REASONING_EFFORT=low
 export GLM_MAX_TOKENS=8192
 export GLM_RESPONSE_FORMAT=json_object
@@ -123,7 +165,7 @@ python3 -m integrations.live_acceptance \
   --pools us_equity \
   --reuse-parity runs/hosted-glm-us-first-2/parity.json \
   --bulk-receipts runs/hosted-glm-us-first-2/queries.jsonl \
-  --output runs/hosted-glm-us-first-3
+  --output runs/hosted-glm-us-first-4
 ```
 
 This retains US filing extraction and its existing bounds. A successful US-only run is
@@ -137,7 +179,7 @@ To index the accepted Crypto and US evidence without model calls or source rewri
 ```sh
 python3 -m integrations.assemble_acceptance \
   --source runs/hosted-glm-acceptance-1 \
-  --source runs/hosted-glm-us-first-3 \
+  --source runs/hosted-glm-us-first-4 \
   --llm-provider glm \
   --output runs/hosted-glm-accepted-index-1
 ```

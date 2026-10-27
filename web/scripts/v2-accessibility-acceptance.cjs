@@ -16,11 +16,11 @@ try{
   browser=await chromium.launch({executablePath:process.env.TRADEPULSE_CHROMIUM||'/usr/bin/chromium',args:['--no-sandbox']});
   for(const locale of locales){const c=await browser.newContext({viewport:{width:320,height:1000},reducedMotion:'reduce'});await c.addInitScript(l=>localStorage.setItem('tradepulse.locale',l),locale);const p=await c.newPage();p.setDefaultTimeout(15000);
    for(const[name,url]of routes)for(const mode of['simple','pro'])await check(locale,`${name}/${mode}/axe`,async()=>{
-    await ready(p,url);const dict=require(path.join(root,'web/src/i18n',locale==='en'?'en.json':`locales/${locale}.json`));await p.getByRole('button',{name:dict[mode==='pro'?'Pro View':'Simple View'],exact:true}).click();await expand(p);
+    await ready(p,url);const dict=require(path.join(root,'web/src/i18n',locale==='en'?'en.json':`locales/${locale}.json`));await p.getByRole('button',{name:dict[mode==='pro'?'Pro View':'Simple View'],exact:true}).click();await expand(p);if(name==='factors')assert.equal(await p.getByRole('group',{name:dict['Five factor gates'],exact:true}).count(),await p.locator('.factor-card').count(),'Every factor card needs a named gate group');
     await p.addScriptTag({path:process.env.TRADEPULSE_AXE_PATH});const result=await p.evaluate(async()=>await axe.run(document,{resultTypes:['violations','incomplete']}));
     const raw=JSON.stringify(result);fs.writeFileSync(path.join(out,`${locale}-${name}-${mode}.axe.json`),raw);
     const evidence={version:result.testEngine.version,url:result.url,timestamp:result.timestamp,rawSha256:crypto.createHash('sha256').update(raw).digest('hex'),violations:result.violations,incomplete:result.incomplete.map(x=>({id:x.id,impact:x.impact,help:x.help,targets:x.nodes.map(n=>n.target)}))};
-    assert.equal(result.violations.filter(v=>['critical','serious'].includes(v.impact)).length,0,'Critical/serious axe violations: '+result.violations.map(x=>x.id).join(','));return evidence;
+    assert.equal(result.violations.filter(v=>['critical','serious'].includes(v.impact)).length,0,'Critical/serious axe violations: '+result.violations.map(x=>x.id).join(','));assert.equal(result.incomplete.filter(v=>v.id==='aria-prohibited-attr').length,0,'Resolve incomplete ARIA naming semantics');return evidence;
    });await c.close();}
  }else if(stage==='lighthouse'){
   assert(process.env.TRADEPULSE_LIGHTHOUSE_PATH,'Provide TRADEPULSE_LIGHTHOUSE_PATH from external audit tooling');

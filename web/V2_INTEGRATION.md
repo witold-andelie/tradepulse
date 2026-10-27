@@ -106,3 +106,8 @@ HEAD and uses committed repository-relative evidence paths. Historical `cd2b610`
 are not substituted for V2 results. Native editorial, NVDA/VoiceOver, audible speech and
 Windows Edge voice-inventory limitations must remain explicit. No automated result grants
 merge or release approval.
+
+Actual axe manual-review output also exposed `aria-label` on generic Factor Lab gate
+containers. They now use an explicit named group role. The regression suite retains all
+axe rules and requires that unresolved ARIA naming issue to remain absent; contrast
+manual-review entries remain visible rather than being suppressed.

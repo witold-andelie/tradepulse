@@ -66,7 +66,10 @@ invalid JSON with a normal stop after 37 output tokens. All probes remain failed
 step was the read-only model/resource inventory, now lead-reported complete. The installed
 Nightshift code rejects structured formats for webllm providers. The next controlled trial
 replaces the resident Llama 1B with Qwen2.5 3B q4f16, using prompt mode and one analyst request.
-The replacement is selected, not yet downloaded, run or accepted. See the diagnosis's current step.
+The lead now reports Qwen downloaded and ready as the sole resident model, but its one prompt
+probe timed out after 180,153 ms with no reply. Model and Crypto acceptance remain incomplete.
+Inspect existing runtime job/log evidence and cancellation behavior before any new inference;
+see the diagnosis's current step.
 
 ## End-to-end submission evidence
 

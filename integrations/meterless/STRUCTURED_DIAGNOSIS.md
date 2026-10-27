@@ -3,7 +3,51 @@
 Updated 27 October 2026. Evidence below was supplied by the lead from the Mac, not generated
 by offline tests. The original failed run and its artifacts must be preserved.
 
-## Current next step: replace the resident model, then one real probe
+## Current next step: locate the Qwen timeout in existing runtime evidence
+
+The selected Qwen model is now downloaded, the only resident model, and reported ready at
+about 2.2 GB. Its single prompt probe timed out after 180,153 ms with APITimeoutError.
+No reply was received and no feature acceptance passed. Do not repeat the loading/probe
+commands below. The current step is inspection of this existing request, not new inference.
+
+Ranked hypotheses to distinguish:
+
+1. Nightshift is still queueing or generating after the client stopped waiting.
+2. WebGPU compilation, prefill or decode is stalled or failed.
+3. The backend completed but the proxy did not return the reply to the HTTP client.
+
+queue_ms=0 measures only TradePulse's local semaphore, not Nightshift's internal queue.
+An idle/ready lane before a request does not establish that it generated tokens afterward.
+Green observed memory pressure does not prove or exclude a runtime stall. A client timeout
+does not establish cancellation or a failed JSON answer.
+
+On the Mac, perform the following bounded investigation without new generation:
+
+- Inspect Nightshift's existing Jobs/Lanes/history and local logs for the one tradepulse
+  Qwen request. Identify the request by available app/model/time metadata. Use the report
+  file timestamp only as an approximate interval if no real request timestamp is available.
+  Record actual status: queued, prefill, generating, completed, failed or unknown. Report
+  existing first-token/decode/error evidence only when recorded; do not invent timings.
+- Read the installed app's actual /v1/chat/completions handler and its webllm call path.
+  Check where it queues, when it loads/compiles, whether max_tokens is forwarded, and whether
+  client disconnection invokes cancellation. Inspect existing WebGPU errors or progress
+  records. Do not assume OpenAI parameter forwarding or invent an undocumented API route.
+- Determine whether the exact timed-out request is still running. Preserve evidence first.
+  If clearly identified and still active, use an existing supported UI cancel/stop control
+  for that request alone. Do not cancel unrelated work or restart Nightshift/Zetaris/Docker.
+  If request identity or cancellation support is unclear, report it without guessing.
+- If the existing job completed and retained original output, preserve it separately as a
+  late-runtime artifact with its actual source ID/status/timestamps and SHA-256 after privacy
+  review. Do not create the missing client reply.json or change the failed probe report.
+  Late completion is distinct from a successful HTTP request within the existing bound.
+- Capture current lane status and memory pressure/swap. Distinguish recorded task outcomes
+  from inference based on snapshots. Stop after the evidence review and any targeted cancel.
+
+No new model request, download, model switch, timeout extension, app patch, schema repair or
+Crypto run is part of this step. Do not invoke nightshift_smoke, which generates a reply.
+The next implementation change must follow evidence locating the stall or response failure.
+
+## Completed Qwen selection and probe instructions (historical)
 
 The read-only inventory is complete. The lead selects
 webllm/Qwen2.5-3B-Instruct-q4f16_1-MLC for one controlled trial through the existing Nightshift
@@ -250,3 +294,22 @@ installed-code restriction consistent with the two HTTP 400 reports. The raw his
 bodies were not retained, so the exact branch taken by those historic requests is unproven.
 Keep METERLESS_RESPONSE_FORMAT=prompt for this build. Do not patch capability metadata to
 claim support that the app does not expose. No new model inference occurred during inventory.
+
+## Lead-reported Qwen trial outcome
+
+After updating to include 6c257bf, the lead unloaded Llama 1B from memory while retaining its
+download and downloaded/loaded webllm/Qwen2.5-3B-Instruct-q4f16_1-MLC. Qwen was the sole
+resident model, lane ready, with about 2.2 GB reported residency. Exactly one plain-prompt
+probe was sent. It returned APITimeoutError after 180,153 ms, wrapped as AllProvidersFailed.
+There was no reply.json or finish_reason, so JSON and grounding quality remain unmeasured.
+The original failed report remains in runs/nightshift-qwen3b-prompt-probe-1/ on the Mac.
+
+| Snapshot | Reported system free percentage | Swap used MB |
+| --- | ---: | ---: |
+| Before loading | 48% | 9,905 |
+| Qwen ready | 42% | 11,052 |
+| After request | 36% | 10,868 |
+
+Memory pressure was briefly yellow during download and observed green after loading/during
+the request, without sustained red pressure. These readings do not prove an out-of-memory
+failure or establish that memory caused the timeout. No retry or Crypto run was reported.

@@ -143,7 +143,13 @@ Qwen2.5 3B q4f16 appeared as an available download. Inspection of the installed 
 code found structured formats disabled for webllm providers before inference. The next trial
 selects Qwen2.5-3B-Instruct-q4f16_1-MLC in prompt mode, replacing rather than adding to the
 resident model, followed by one unchanged analyst probe. This selection is not a successful
-download, memory measurement or model acceptance; those results remain pending.
+download, memory measurement or model acceptance by itself.
+
+The lead then reports Qwen loaded as the sole resident model at about 2.2 GB. Its one
+plain-prompt probe timed out after 180,153 ms without a reply. Observed memory pressure was
+green during the request; this neither establishes nor rules out a runtime problem. The
+next step is inspection of the existing request/job, WebGPU and proxy evidence, including
+whether it continued after the HTTP client timed out. No successful Qwen/analyst case is claimed.
 
 Still required: wrong-token enforcement, actual catalog validation and the combined live cases.
 Independent skeptic-family routing and

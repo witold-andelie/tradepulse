@@ -14,6 +14,7 @@ parse_response against it.
 from __future__ import annotations
 
 import math
+import hashlib
 import os
 import re
 import uuid
@@ -139,8 +140,12 @@ class ZetarisClient:
         self._query_limit = self._DEFAULT_QUERY_LIMIT
         self._max_rows = self._DEFAULT_MAX_ROWS
         self._max_requests = self._DEFAULT_MAX_REQUESTS
+        self._page_size = 1000
+        self._max_pages = 512
         self._api_mode = "direct"
         self._engine_id: str | None = None
+        self._request_observer = None
+        self._page_observer = None
 
     @classmethod
     def from_env(cls) -> "ZetarisClient":
@@ -168,10 +173,14 @@ class ZetarisClient:
             client._max_requests = _positive_int_env(
                 "ZETARIS_MAX_REQUESTS", cls._DEFAULT_MAX_REQUESTS
             )
+            client._page_size = _positive_int_env("ZETARIS_PAGE_SIZE", 1000)
+            client._max_pages = _positive_int_env("ZETARIS_MAX_PAGES", 512)
         except ValueError as error:
             raise ZetarisError(str(error)) from None
         if client._query_limit > client._max_rows:
             raise ZetarisError("ZETARIS_QUERY_LIMIT must not exceed ZETARIS_MAX_ROWS")
+        if client._page_size > client._max_rows or client._max_pages > 2000:
+            raise ZetarisError("Zetaris paging settings exceed the configured work bounds")
         return client
 
     def execute(self, sql: str) -> pd.DataFrame:
@@ -244,11 +253,19 @@ class ZetarisClient:
             suffix = f": {detail}" if detail else ""
             raise ZetarisError(f"Zetaris returned HTTP {response.status_code}{suffix}")
         try:
-            return response.json()
+            payload = response.json()
         except ValueError:
             if not getattr(response, "content", b""):
                 return None
             raise ZetarisError("Zetaris returned invalid JSON") from None
+        if self._request_observer is not None:
+            self._request_observer({
+                "sql_sha256": hashlib.sha256(sql.encode("utf-8")).hexdigest(),
+                "requested_limit": limit,
+                "returned_rows": len(self.parse_response(payload)),
+                "api_total": _response_total(payload),
+            })
+        return payload
 
     @staticmethod
     def parse_response(payload) -> pd.DataFrame:

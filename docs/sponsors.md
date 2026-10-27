@@ -36,9 +36,17 @@ The source Parquet files were preserved. Separate microsecond-compatible copies 
 Spark's nanosecond error. The durable [conversion helper](../integrations/zetaris/prepare_parquet.py)
 checks safe casts, exact logical equality and read-back.
 
-Still required: TradePulse's own client/adapter smoke and every-template parity on the Mac.
-Official helper success is not yet proof of the full core-to-Zetaris path. No AWS/S3 deployment,
+Still required: every-template parity on the Mac and the combined core-to-Zetaris feature run.
+The actual project smoke has now passed as reported below. No AWS/S3 deployment,
 public endpoint or outside-universe EDGAR feature is claimed.
+
+Follow-up reported at 6a2f71d: the actual project client/adapter smoke passed. Parity matched
+6/12 templates. Three large responses contained only 1,000 rows; three equal-count hash
+mismatches were exactly reproduced locally by removing UTC timezone information from the
+DuckDB result. Both adapters now enforce identical contract types before hashing. Verified
+ordinal paging protects the live adapter against capped responses and ambiguous API totals.
+All 12 frozen-snapshot templates matched through a simulated capped/string-valued API.
+The updated Mac live run is still required. See [diagnosis and scope](../integrations/zetaris/PARITY_DIAGNOSIS.md).
 
 Official contracts:
 [direct REST helper](https://github.com/zetaris/getting-started/blob/main/scripts/zetaris_sql.py),

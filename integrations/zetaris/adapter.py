@@ -25,6 +25,7 @@ import pandas as pd
 from tradepulse.contracts import load_table_spec, table_names, table_path
 
 from .client import ZetarisClient, coerce_frame
+from .paging import execute_template
 from .templates import render
 
 
@@ -106,10 +107,12 @@ class DuckDBAdapter:
 
     def run(self, template: str, params: dict) -> QueryResult:
         started = perf_counter()
+        used_tables: list[str] = []
 
         def table(name: str) -> str:
             if name not in self._tables:
                 raise FileNotFoundError(f"Missing lake table: {name}")
+            used_tables.append(name)
             return name
 
         saved_params = deepcopy(params)
@@ -118,6 +121,7 @@ class DuckDBAdapter:
         # explanation graph runs evidence queries in parallel.
         with self._connection.cursor() as cursor:
             df = cursor.execute(sql).fetchdf()
+        df = _coerce_result(df, used_tables)
         return QueryResult(template, saved_params, sql, self.backend, df, rows_sha256(df),
                            int((perf_counter() - started) * 1000))
 
@@ -147,20 +151,13 @@ class ZetarisAdapter:
 
         saved_params = deepcopy(params)
         sql = render(template, saved_params, table)
-        frame = self.client.execute(sql)
+        frame = execute_template(self.client, sql)
         columns = [str(column).lower() for column in frame.columns]
         if len(set(columns)) != len(columns):
             raise ValueError("Duplicate Zetaris result column names")
         frame = frame.copy()
         frame.columns = columns
-        dtypes: dict[str, str] = {}
-        for table_name in used_tables:
-            for column in load_table_spec(table_name)["columns"]:
-                previous = dtypes.get(column["name"])
-                if previous is not None and previous != column["dtype"]:
-                    raise ValueError(f"Conflicting contract dtype: {column['name']}")
-                dtypes[column["name"]] = column["dtype"]
-        frame = coerce_frame(frame, dtypes)
+        frame = _coerce_result(frame, used_tables)
         return QueryResult(
             template,
             saved_params,
@@ -170,6 +167,18 @@ class ZetarisAdapter:
             rows_sha256(frame),
             int((perf_counter() - started) * 1000),
         )
+
+
+def _coerce_result(frame: pd.DataFrame, used_tables: list[str]) -> pd.DataFrame:
+    """Both backends must obey the same contract types before canonical result hashing."""
+    dtypes: dict[str, str] = {}
+    for table_name in used_tables:
+        for column in load_table_spec(table_name)["columns"]:
+            previous = dtypes.get(column["name"])
+            if previous is not None and previous != column["dtype"]:
+                raise ValueError(f"Conflicting contract dtype: {column['name']}")
+            dtypes[column["name"]] = column["dtype"]
+    return coerce_frame(frame, dtypes)
 
 
 def make_adapter(sample_mode: bool, lake_root: Path | None = None):

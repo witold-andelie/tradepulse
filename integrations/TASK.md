@@ -11,8 +11,10 @@ The lead's latest requirements supersede the dated AWS-only and NIM-only plan be
 
 The client/adapter, official engines sidecar, all-role Nightshift routing and live acceptance
 runner are implemented. Local Docker/core-to-sidecar checks pass. The Mac has registered all
-seven sample tables and verified the official Zetaris helper. TradePulse parity, actual
-Nightshift inference and combined live examples still require that Mac's services.
+seven sample tables and verified the official helper and TradePulse smoke. Nightshift's basic
+text smoke also passed. The first live parity run matched 6/12 templates. Timestamp-hash
+normalization and capped-result handling are locally fixed; live 12/12 parity, structured
+Nightshift research and the combined examples still require the Mac rerun.
 
 Follow [MAC_LIVE_SETUP.md](MAC_LIVE_SETUP.md), [current acceptance](ACCEPTANCE.md),
 [engine measurements](engines/VALIDATION.md) and [sponsor evidence](../docs/sponsors.md).

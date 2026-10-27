@@ -41,7 +41,7 @@ Then in integrations/engines:
 - [x] Local Zetaris Docker runs and the official helper executes SELECT 1.
 - [x] Seven registered lake tables match the committed sample manifest row counts.
 - [x] Official helper returns crypto 38, eu_equity 55 and us_equity 523 members.
-- [ ] TradePulse ZetarisClient and ZetarisAdapter live smoke succeed on the Mac.
+- [x] The lead reports TradePulse ZetarisClient and ZetarisAdapter live smoke on the Mac.
 - [ ] Every template matches DuckDB rows_sha256 on the frozen sample.
 - [x] The lead reports Nightshift M1-M4 Edition responding through its Bearer-token API.
 - [x] A real token produces a text response through TradePulse's smoke check (lead-reported).
@@ -50,6 +50,9 @@ Then in integrations/engines:
 
 Use [MAC_LIVE_SETUP.md](MAC_LIVE_SETUP.md). Never request, print or include raw credentials
 in acceptance evidence.
+The 6a2f71d parity run matched 6/12. The capped-result and timestamp regressions are now
+locally reproduced and fixed, but the live 12/12 rerun remains unchecked. See
+[the parity diagnosis](zetaris/PARITY_DIAGNOSIS.md).
 
 ## End-to-end submission evidence
 

@@ -128,7 +128,8 @@ class AdapterClient:
                              "name": ["Bitcoin"], "sector": ["layer-1"],
                              "country": [None], "currency": ["USD"], "cik": [None],
                              "wikipedia_title": ["Bitcoin"],
-                             "index_membership": ["CRYPTO_TOP"]})
+                             "index_membership": ["CRYPTO_TOP"],
+                             "__tp_row": ["1"], "__tp_total": ["1"]})
 
 
 def test_adapter_renders_allow_listed_template_and_coerces_contract_columns():

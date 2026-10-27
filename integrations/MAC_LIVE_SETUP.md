@@ -48,11 +48,16 @@ with ZETARIS_API_MODE=direct and ZETARIS_REST_URL, not by silently switching end
 To run parity with the same private environment file:
 
 ```sh
-python3 -m integrations.zetaris.parity --env-file ~/getting-started/.env.local
+python3 -m integrations.zetaris.parity --env-file ~/getting-started/.env.local --report runs/zetaris-parity-fixed.json
 ```
 
 Every template must return the same logical row hash as DuckDB over the unchanged sample.
 On a mismatch, keep the output and fix the integration. Do not weaken the parity assertion.
+Choose a new report filename if one already exists. The report contains runtime versions,
+configured limits, template counts/hashes, request-size metadata and verified page ordinals;
+it never contains credentials or raw query data. Each completed template is printed immediately.
+Large results now use verified ordinal paging and can take longer than the earlier truncated
+response. See [the diagnosed failure patterns](zetaris/PARITY_DIAGNOSIS.md).
 
 ## 3. Start the actual Meterless engines
 

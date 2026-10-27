@@ -13,7 +13,14 @@ parse_response against it.
 
 from __future__ import annotations
 
+import math
+import os
+import re
+import uuid
+from urllib.parse import urlsplit
+
 import pandas as pd
+import requests
 
 
 class ZetarisError(RuntimeError):
@@ -107,21 +114,244 @@ def coerce_frame(df: pd.DataFrame, dtypes: dict[str, str]) -> pd.DataFrame:
 
 
 class ZetarisClient:
+    _DEFAULT_QUERY_LIMIT = 50_000
+    _DEFAULT_MAX_ROWS = 500_000
+    _DEFAULT_MAX_REQUESTS = 4
+
     def __init__(self, rest_url: str, api_key: str, org_id: str, timeout_s: float = 120.0,
                  session=None) -> None:
-        raise NotImplementedError("D3")
+        parsed = urlsplit(rest_url)
+        if parsed.scheme not in {"http", "https"} or not parsed.netloc:
+            raise ValueError("Zetaris REST URL must be an HTTP(S) URL")
+        if parsed.username or parsed.password or parsed.query or parsed.fragment:
+            raise ValueError("Zetaris REST URL must not contain credentials, a query or a fragment")
+        if not isinstance(api_key, str) or not api_key:
+            raise ValueError("Zetaris API key must not be empty")
+        if not isinstance(org_id, str) or not re.fullmatch(r"[0-9]+", org_id):
+            raise ValueError("Zetaris organisation id must be numeric")
+        if not math.isfinite(timeout_s) or timeout_s <= 0:
+            raise ValueError("Timeout must be finite and positive")
+        self.rest_url = rest_url.rstrip("/")
+        self._api_key = api_key
+        self.org_id = org_id
+        self.timeout_s = timeout_s
+        self._session = session if session is not None else requests.Session()
+        self._query_limit = self._DEFAULT_QUERY_LIMIT
+        self._max_rows = self._DEFAULT_MAX_ROWS
+        self._max_requests = self._DEFAULT_MAX_REQUESTS
+        self._api_mode = "direct"
+        self._engine_id: str | None = None
 
     @classmethod
     def from_env(cls) -> "ZetarisClient":
         """Read ZETARIS_REST_URL, ZETARIS_API_KEY and ZETARIS_ORG_ID. A missing value raises a
         ZetarisError naming the variable (never its value)."""
-        raise NotImplementedError("D3")
+        api_mode = os.environ.get("ZETARIS_API_MODE", "direct")
+        if api_mode not in {"direct", "proxy"}:
+            raise ZetarisError("ZETARIS_API_MODE must be direct or proxy")
+        url_name = "ZETARIS_BASE_URL" if api_mode == "proxy" else "ZETARIS_REST_URL"
+        required = (url_name, "ZETARIS_API_KEY", "ZETARIS_ORG_ID")
+        missing = [name for name in required if not os.environ.get(name)]
+        if missing:
+            raise ZetarisError("Missing Zetaris configuration: " + ", ".join(missing))
+        try:
+            timeout_s = _positive_float_env("ZETARIS_TIMEOUT_S", 120.0)
+            client = cls(*(os.environ[name] for name in required), timeout_s=timeout_s)
+            if api_mode == "proxy" and urlsplit(client.rest_url).path not in {"", "/"}:
+                raise ValueError("ZETARIS_BASE_URL must be an origin without a path")
+            client._api_mode = api_mode
+            client._engine_id = os.environ.get("ZETARIS_ENGINE_ID") or None
+            client._query_limit = _positive_int_env(
+                "ZETARIS_QUERY_LIMIT", cls._DEFAULT_QUERY_LIMIT
+            )
+            client._max_rows = _positive_int_env("ZETARIS_MAX_ROWS", cls._DEFAULT_MAX_ROWS)
+            client._max_requests = _positive_int_env(
+                "ZETARIS_MAX_REQUESTS", cls._DEFAULT_MAX_REQUESTS
+            )
+        except ValueError as error:
+            raise ZetarisError(str(error)) from None
+        if client._query_limit > client._max_rows:
+            raise ZetarisError("ZETARIS_QUERY_LIMIT must not exceed ZETARIS_MAX_ROWS")
+        return client
 
     def execute(self, sql: str) -> pd.DataFrame:
         """Run one statement (ensure_single_statement) and return parse_response(...)."""
-        raise NotImplementedError("D3")
+        statement = ensure_single_statement(sql)
+        limit = self._query_limit
+        query_like = bool(re.match(r"\s*(?:SELECT|WITH)\b", statement, re.IGNORECASE))
+
+        for _ in range(self._max_requests):
+            payload = self._request(statement, limit)
+            frame = self.parse_response(payload)
+            if not query_like:
+                return frame
+            if len(frame.columns) == 0:
+                raise ZetarisError("Zetaris query response is missing its result schema")
+
+            total = _response_total(payload)
+            if total is not None and total <= len(frame):
+                return frame
+            if total is None and len(frame) < limit:
+                return frame
+            if total is not None and total > self._max_rows:
+                raise ZetarisError(
+                    f"Zetaris result has {total} rows, above the configured maximum "
+                    f"of {self._max_rows}"
+                )
+
+            target = max(limit * 2, total or 0)
+            next_limit = min(self._max_rows, target)
+            if next_limit <= limit:
+                raise ZetarisError(
+                    "Zetaris result may be truncated at the configured maximum row limit"
+                )
+            limit = next_limit
+
+        raise ZetarisError("Zetaris result did not complete within the bounded request limit")
+
+    def _request(self, sql: str, limit: int):
+        request_id = str(uuid.uuid4())
+        body = {
+            "queryId": str(uuid.uuid4()),
+            "sql": sql,
+            "source": "SqlEditor",
+            "limit": limit,
+        }
+        endpoint = "/sql-editor/sqls/run"
+        if self._api_mode == "proxy":
+            endpoint = "/api/proxy/sql-editor/sqls/run-query"
+            body = {"sql": sql, "limit": limit}
+            if self._engine_id is not None:
+                body["engineId"] = self._engine_id
+        headers = {
+            "Authorization": f"Bearer {self._api_key}",
+            "X-Org-ID": self.org_id,
+            "X-Request-ID": request_id,
+            "Content-Type": "application/json",
+        }
+        try:
+            response = self._session.post(
+                f"{self.rest_url}{endpoint}",
+                json=body,
+                headers=headers,
+                timeout=self.timeout_s,
+                allow_redirects=False,
+            )
+        except Exception as error:
+            raise ZetarisError(f"Zetaris request failed ({type(error).__name__})") from None
+        if not 200 <= response.status_code < 300:
+            detail = _safe_detail(getattr(response, "text", ""), self._api_key)
+            suffix = f": {detail}" if detail else ""
+            raise ZetarisError(f"Zetaris returned HTTP {response.status_code}{suffix}")
+        try:
+            return response.json()
+        except ValueError:
+            if not getattr(response, "content", b""):
+                return None
+            raise ZetarisError("Zetaris returned invalid JSON") from None
 
     @staticmethod
     def parse_response(payload) -> pd.DataFrame:
         """Turn the JSON body of a query response into a DataFrame (all values as returned)."""
-        raise NotImplementedError("D3")
+        if payload is None:
+            return pd.DataFrame()
+        if not isinstance(payload, dict):
+            raise ZetarisError("Zetaris response must be an object")
+        if payload.get("error"):
+            raise ZetarisError("Zetaris response reported an error")
+
+        data = payload.get("data", payload.get("rows"))
+        if isinstance(data, dict):
+            return ZetarisClient.parse_response(data)
+        if data is None:
+            return pd.DataFrame()
+        if not isinstance(data, list):
+            raise ZetarisError("Zetaris response data must be a list")
+        if not data:
+            headers = _response_headers(payload)
+            return pd.DataFrame(columns=headers or None)
+        if all(isinstance(row, dict) for row in data):
+            return pd.DataFrame(data)
+        if any(not isinstance(row, (list, tuple)) for row in data):
+            raise ZetarisError("Zetaris response rows must be arrays or objects")
+
+        headers = _response_headers(payload)
+        if headers is None:
+            raise ZetarisError("Zetaris response is missing column headers")
+        if any(len(row) != len(headers) for row in data):
+            raise ZetarisError("Zetaris response row width does not match its headers")
+        return pd.DataFrame(data, columns=headers)
+
+
+def _response_headers(payload: dict) -> list[str] | None:
+    raw = next(
+        (payload.get(key) for key in ("headers", "columns", "header", "fields")
+         if payload.get(key) is not None),
+        None,
+    )
+    if raw is None:
+        return None
+    if not isinstance(raw, list):
+        raise ZetarisError("Zetaris response headers must be a list")
+    headers: list[str] = []
+    for item in raw:
+        if isinstance(item, str):
+            name = item
+        elif isinstance(item, dict):
+            name = item.get("name") or item.get("field") or item.get("column")
+        else:
+            name = None
+        if not isinstance(name, str) or not name:
+            raise ZetarisError("Zetaris response contains an invalid column header")
+        headers.append(name)
+    if len(set(headers)) != len(headers):
+        raise ZetarisError("Zetaris response contains duplicate column headers")
+    return headers
+
+
+def _response_total(payload) -> int | None:
+    if not isinstance(payload, dict):
+        return None
+    if "total" not in payload:
+        return _response_total(payload.get("data"))
+    value = payload["total"]
+    if isinstance(value, bool):
+        raise ZetarisError("Zetaris response total must be a non-negative integer")
+    if not isinstance(value, (str, int)) or not re.fullmatch(r"[0-9]+", str(value)):
+        raise ZetarisError("Zetaris response total must be a non-negative integer") from None
+    total = int(value)
+    if total < 0:
+        raise ZetarisError("Zetaris response total must be a non-negative integer")
+    return total
+
+
+def _positive_int_env(name: str, default: int) -> int:
+    raw = os.environ.get(name)
+    if raw is None:
+        return default
+    try:
+        value = int(raw)
+    except ValueError:
+        raise ValueError(f"{name} must be a positive integer") from None
+    if value <= 0:
+        raise ValueError(f"{name} must be a positive integer")
+    return value
+
+
+def _positive_float_env(name: str, default: float) -> float:
+    raw = os.environ.get(name)
+    if raw is None:
+        return default
+    try:
+        value = float(raw)
+    except ValueError:
+        raise ValueError(f"{name} must be finite and positive") from None
+    if not math.isfinite(value) or value <= 0:
+        raise ValueError(f"{name} must be finite and positive")
+    return value
+
+
+def _safe_detail(text: str, secret: str) -> str:
+    # The server body can include credentials, personal addresses or SQL text. HTTP status
+    # is enough to diagnose the transport; never echo untrusted response text into logs.
+    return "server detail [REDACTED]" if text else ""

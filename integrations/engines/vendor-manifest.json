@@ -1,0 +1,30 @@
+{
+  "repository": "https://github.com/Meterless/Meterless",
+  "commit": "1742dec56a66e58eef9dda2d2b865823758ca8cd",
+  "hash_algorithm": "Git blob SHA-1 after LF normalization",
+  "files": {
+    "hmem/LICENSE": "d1a6bb88af6e6b79738dd192fb491a99eb2a7fe3",
+    "hmem/conformance/README.md": "fb5bb7c440eee364ad9704923d6e94aa0e06af65",
+    "hmem/conformance/runner.ts": "dab4c66cac7d50542f73f5484980149072623c86",
+    "hmem/conformance/vectors/vectors.json": "776b6b6e808e82d25b110db4029b3d24f5eb7dcb",
+    "hmem/reference/src/conflictDetection.ts": "2d444ecb901fa7e8ccd0dbbd90090316cf90660b",
+    "hmem/reference/src/dreaming.ts": "e2c1dd041746d3369a21a38250f4a521bbb333c4",
+    "hmem/reference/src/embeddings.ts": "e9e6ae7f2adb4eabb4f47eeeb1268099a73f960a",
+    "hmem/reference/src/index.ts": "7f20562365b4c3149836d09cdc914b1d076d8997",
+    "hmem/reference/src/memoryMining.ts": "a3d27743c66720dc36636e6cf61e1b32b8f2d5f4",
+    "hmem/reference/src/memoryRetrieval.ts": "5c1b924806c203945ceb859fd62f175ed5337674",
+    "hmem/reference/src/memoryStore.ts": "92c49358c1745cc24cb73ec99892e053b639e22e",
+    "hmem/reference/src/sleepCycle.ts": "6d651535d5eb26e03c31ead6e5c05ff39fc3b8bb",
+    "hmem/reference/src/trustLedger.ts": "716880f548bf682d3e8898c63211b557e9b889a9",
+    "hmem/reference/src/types.ts": "de7838f2dceb471ef60a6b31ac0679b0303ccc91",
+    "world-model/LICENSE": "d1a6bb88af6e6b79738dd192fb491a99eb2a7fe3",
+    "world-model/conformance/README.md": "05e300a945560ffb22f9895c8795d8ee0c23c2fe",
+    "world-model/conformance/runner.ts": "d4e26f7901b8d5b51cc586b32d2d1aaf2a628ee3",
+    "world-model/reference/src/index.ts": "ce5d69410f5bbbbff43a512f82be69a4fdc9fe77",
+    "world-model/reference/src/ingest.ts": "7e8c5283625da1dcb010385b3ef4c8d9b85bb9a9",
+    "world-model/reference/src/resolve.ts": "449cb73118c1f39ba0b8bb782c7f89d58e84e2be",
+    "world-model/reference/src/stableIds.ts": "ad7efafd69f841ec6e5851c6d754b0f424f5c4a8",
+    "world-model/reference/src/store.ts": "eb9c772a278737d6b5b453d658ae7b77091569d6",
+    "world-model/reference/src/types.ts": "dddd2861570309b1e2c6c1e0baea5c7ff81f876e"
+  }
+}

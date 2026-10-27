@@ -1,9 +1,9 @@
 # Engines sidecar HTTP API (task D5)
 
-This is the target server contract. The Python client and optional core bridge are implemented;
-the TypeScript server/vendor engines and genuine service acceptance remain pending. The local
-Compose service is commented out. See [core wiring scope](../../docs/METERLESS_WIRING.md),
-[project status](../../docs/STATUS.md) and [sponsor evidence](../../docs/sponsors.md).
+The server, Python client and existing core bridge now implement this contract. Start the local
+sidecar with `docker compose -f integrations/engines/compose.yaml up -d --build --wait` from
+the repository root. See [current measured acceptance](VALIDATION.md),
+[Mac live setup](../MAC_LIVE_SETUP.md) and [sponsor evidence](../../docs/sponsors.md).
 
 A small Node (TypeScript) HTTP server that hosts the **official Meterless reference
 implementations** of World Model and H-MEM, listening on `127.0.0.1:8790` (`ENGINES_URL`). Inside
@@ -28,6 +28,31 @@ set (local docker-compose, judges), there is no authentication. Compare tokens i
 
 Persistence: the engines' own stores live in a data directory (`ENGINES_DATA_DIR`, default
 `runs/engines/`), so memory survives restarts.
+
+`GET /activity` is an additional authenticated diagnostic route. It returns store counts and
+the last 20 H-MEM ledger entries. The service also writes metadata-only `activity.jsonl` records
+with real request IDs, operation names and counts. Headers and credentials are never recorded.
+
+Implementation limits and semantics:
+
+- Request bodies are at most 5 MiB; a batch has at most 5,000 items. Canonical World Model
+  history is capped at 100,000 entries and H-MEM at 10,000 records. Capacity errors are explicit.
+- GraphEdge and ExtractedEvent use the unchanged repository JSON Schema. Invalid batches are
+  rejected before writes. Events are immutable by event_id; changed content returns 409.
+- Edge snapshots select the latest eligible valid_from for each edge_id. Future versions do
+  not hide earlier versions, including when observations arrive out of order.
+- Research records retain the original content and provenance in official H-MEM storage.
+  Recall selects at most 100 dated records for the exact symbol and writes official read audit
+  entries. Future records are not read or touched. The core uses counts only, explicitly as
+  unverified context. Semantic-memory relevance and remembered predictive accuracy are not
+  claimed.
+- The same settlement payload is idempotent; a changed outcome returns 409. This applies to
+  completed requests, not crash-atomic transactions across the reference JSON/ledger files.
+- Conflict scanning uses the unchanged official detector, isolated to at most 250 records of
+  one symbol. Only opposing stances with equal horizons are reported. Dated stances can change
+  legitimately; results are review candidates, never automatic trading or conflict resolution.
+  The core does not consume undated conflicts in historical decisions.
+- Reference persistence is single-process JSON, not a production multi-writer database.
 
 Rules:
 - Use the reference implementations unchanged. They are Apache-2.0: vendor them under `vendor/`

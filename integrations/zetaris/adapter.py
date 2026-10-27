@@ -22,9 +22,9 @@ from time import perf_counter
 import duckdb
 import pandas as pd
 
-from tradepulse.contracts import table_names, table_path
+from tradepulse.contracts import load_table_spec, table_names, table_path
 
-from .client import ZetarisClient
+from .client import ZetarisClient, coerce_frame
 from .templates import render
 
 
@@ -130,10 +130,46 @@ class ZetarisAdapter:
     backend = "zetaris"
 
     def __init__(self, client, database: str = "TRADEPULSE_LAKE") -> None:
-        raise NotImplementedError("D3")
+        if not isinstance(database, str) or not re.fullmatch(
+            r"[A-Za-z_][A-Za-z0-9_]*", database
+        ):
+            raise ValueError("Invalid Zetaris database identifier")
+        self.client = client
+        self.database = database
 
     def run(self, template: str, params: dict) -> QueryResult:
-        raise NotImplementedError("D3")
+        started = perf_counter()
+        used_tables: list[str] = []
+
+        def table(name: str) -> str:
+            used_tables.append(name)
+            return f"{self.database}.{name}"
+
+        saved_params = deepcopy(params)
+        sql = render(template, saved_params, table)
+        frame = self.client.execute(sql)
+        columns = [str(column).lower() for column in frame.columns]
+        if len(set(columns)) != len(columns):
+            raise ValueError("Duplicate Zetaris result column names")
+        frame = frame.copy()
+        frame.columns = columns
+        dtypes: dict[str, str] = {}
+        for table_name in used_tables:
+            for column in load_table_spec(table_name)["columns"]:
+                previous = dtypes.get(column["name"])
+                if previous is not None and previous != column["dtype"]:
+                    raise ValueError(f"Conflicting contract dtype: {column['name']}")
+                dtypes[column["name"]] = column["dtype"]
+        frame = coerce_frame(frame, dtypes)
+        return QueryResult(
+            template,
+            saved_params,
+            sql,
+            self.backend,
+            frame,
+            rows_sha256(frame),
+            int((perf_counter() - started) * 1000),
+        )
 
 
 def make_adapter(sample_mode: bool, lake_root: Path | None = None):

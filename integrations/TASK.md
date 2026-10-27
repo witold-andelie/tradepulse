@@ -1,5 +1,30 @@
 # Member D — Sponsor integrations (`integrations/`)
 
+## Current submission direction: 27 October 2026
+
+The lead's latest requirements supersede the dated AWS-only and NIM-only plan below:
+
+1. A working end-to-end project with Zetaris queries, at least one actual Meterless Engine
+   in a working feature, and Nightshift as the AI provider.
+2. Actual agent traces and three computed sample inputs/outputs ready for the README.
+3. Private credentials, point-in-time filtering, unchanged contracts and honest abstention.
+
+The client/adapter, official engines sidecar, all-role Nightshift routing and live acceptance
+runner are implemented. Local Docker/core-to-sidecar checks pass. The Mac has registered all
+seven sample tables and verified the official Zetaris helper. TradePulse parity, actual
+Nightshift inference and combined live examples still require that Mac's services.
+
+Follow [MAC_LIVE_SETUP.md](MAC_LIVE_SETUP.md), [current acceptance](ACCEPTANCE.md),
+[engine measurements](engines/VALIDATION.md) and [sponsor evidence](../docs/sponsors.md).
+No AWS deployment, NIM model selection or outside-universe EDGAR source is on the minimum
+submission critical path. Those remain unverified extensions. Nightshift is now required
+for submission acceptance; a fallback response cannot satisfy its check.
+
+## Historical assignment below
+
+The dated assignment below preserves planning context. Follow the current direction above
+where they conflict. Local Zetaris is the actual deployment being accepted.
+
 > **DEADLINE: finish everything by Sunday 25 October 2026, 11:59 pm US Eastern (EDT)**
 > = Monday 26 October 03:59 UTC. Target: done on Saturday 24 October. The hackathon closes
 > 27 October 23:45 UTC; the remaining time is for the lead's QA, demo video and submission.

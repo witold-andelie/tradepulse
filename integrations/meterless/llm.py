@@ -1,11 +1,8 @@
 """LLM provider chain with record/replay (task D4).
 
-Roles and default routes (decision D18: all models are hosted on NVIDIA NIM):
-    extractor, guard -> NVIDIA NIM (NIM_EXTRACTOR_MODEL, falls back to NIM_ANALYST_MODEL)
-    analyst          -> NVIDIA NIM (NIM_ANALYST_MODEL)
-    skeptic          -> NVIDIA NIM (NIM_SKEPTIC_MODEL; a different model family from the analyst)
-Optional and off by default: when METERLESS_TOKEN_FILE is set, Meterless Runtime is tried first
-for extractor and guard, with NIM as the fallback.
+When METERLESS_TOKEN_FILE is set, Nightshift is the first provider for every role. NVIDIA NIM may
+remain configured as a bounded fallback. This makes Nightshift a working provider in the actual
+extraction and explanation path instead of a decorative health check.
 
 Every provider is OpenAI-compatible (/v1/chat/completions). Meterless Runtime facts:
 - base http://127.0.0.1:8088/v1
@@ -25,9 +22,11 @@ from __future__ import annotations
 import hashlib
 import json
 import os
+import threading
 from dataclasses import dataclass
 from pathlib import Path
 from typing import Callable
+from urllib.parse import urlsplit, urlunsplit
 
 ROLES = ("extractor", "guard", "analyst", "skeptic")
 
@@ -76,6 +75,26 @@ def runtime_status(get: Callable[[str], int], base_url: str) -> str:
     return "unauthorized" if status in (401, 403) else "offline"
 
 
+def normalise_meterless_base_url(value: str) -> str:
+    """Normalise the Nightshift URLs people commonly paste to one <host>/v1 base URL."""
+    candidate = value.strip()
+    if not candidate:
+        candidate = "http://127.0.0.1:8088"
+    if "://" not in candidate:
+        candidate = f"http://{candidate}"
+    parsed = urlsplit(candidate)
+    if (parsed.scheme not in {"http", "https"} or not parsed.netloc or parsed.username
+            or parsed.password or parsed.query or parsed.fragment):
+        raise ValueError("Meterless base URL must be an HTTP(S) URL without credentials")
+    path = parsed.path.rstrip("/")
+    for suffix in ("/chat/completions", "/models", "/healthz"):
+        if path.endswith(suffix):
+            path = path[:-len(suffix)].rstrip("/")
+    if path.endswith("/v1"):
+        path = path[:-3].rstrip("/")
+    return urlunsplit((parsed.scheme, parsed.netloc, f"{path}/v1", "", ""))
+
+
 def cassette_key(role: str, messages: list[dict], response_schema: dict | None) -> str:
     """sha256 hex of json.dumps({"role", "messages", "schema"}, sort_keys=True, ensure_ascii=False).
     Provider and model are NOT part of the key, so a replay works whichever provider answered."""
@@ -88,6 +107,7 @@ class Cassette:
     def __init__(self, path: Path) -> None:
         self.path = Path(path)
         self._entries: dict[str, dict] = {}
+        self._lock = threading.Lock()
         if self.path.exists():
             for line in self.path.read_text(encoding="utf-8").splitlines():
                 if line.strip():
@@ -96,12 +116,17 @@ class Cassette:
 
     def get(self, key: str) -> dict:
         """Recorded entry or raise CassetteMiss."""
-        if key not in self._entries:
-            raise CassetteMiss(key)
-        return dict(self._entries[key])
+        with self._lock:
+            if key not in self._entries:
+                raise CassetteMiss(key)
+            return dict(self._entries[key])
 
     def put(self, key: str, entry: dict) -> None:
         """Append, and update the in-memory index. Re-recording a key keeps the newest entry."""
+        with self._lock:
+            self._put(key, entry)
+
+    def _put(self, key: str, entry: dict) -> None:
         recorded = {"key": key, **{field: entry[field] for field in
                     ("text", "provider", "model", "tokens_in", "tokens_out")}}
         line = json.dumps(recorded, ensure_ascii=False)
@@ -158,9 +183,8 @@ class ChainClient:
 
 
 def build_routes_from_env() -> dict:
-    """Build the default routes above from environment variables using the `openai` package
-    (base_url and api_key per provider, timeout 180 s). Not unit-tested; covered by the live
-    smoke test."""
+    """Build bounded OpenAI-compatible routes. A configured Nightshift route is first for all
+    roles, with optional NIM fallbacks. Without Nightshift, existing NIM settings still apply."""
     from openai import OpenAI
 
     def caller(client):
@@ -180,14 +204,16 @@ def build_routes_from_env() -> dict:
     token_file = os.environ.get("METERLESS_TOKEN_FILE")
     if token_file:
         meterless = OpenAI(
-            base_url=os.environ.get("METERLESS_BASE_URL") or "http://127.0.0.1:8088/v1",
+            base_url=normalise_meterless_base_url(
+                os.environ.get("METERLESS_BASE_URL") or "http://127.0.0.1:8088/v1"
+            ),
             api_key=read_token(token_file), timeout=180.0, max_retries=0,
             default_headers={"meterless-app": os.environ.get("METERLESS_APP") or "tradepulse",
                              "meterless-scope": "user"},
         )
-        route = ("meterless", os.environ.get("METERLESS_MODEL") or "meterless/fast",
+        route = ("meterless", os.environ.get("METERLESS_MODEL") or "meterless/auto",
                  caller(meterless))
-        for role in ("extractor", "guard"):
+        for role in ROLES:
             routes[role] = [route]
 
     api_key = os.environ.get("NVIDIA_API_KEY")
@@ -206,7 +232,7 @@ def build_routes_from_env() -> dict:
         if analyst:
             routes.setdefault("analyst", []).append(("nim", analyst, call))
         if skeptic:
-            routes["skeptic"] = [("nim", skeptic, call)]
+            routes.setdefault("skeptic", []).append(("nim", skeptic, call))
     return routes
 
 

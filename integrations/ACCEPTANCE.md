@@ -1,68 +1,65 @@
-# Acceptance — Member D (`integrations/`)
+# Sponsor acceptance: current submission
 
-The team lead merges a PR only when every item that applies is true. Paste command output into the
-PR, with secrets redacted.
+Updated 27 October 2026. This checklist follows the lead's latest requirements.
+The earlier AWS-only/NIM-only assignment is historical context in TASK.md.
+Check items only after observing the actual result.
 
-Offline helper/client tests are already implemented. They do not establish hosted Zetaris,
-actual Meterless engine use or NIM live acceptance. The current evidence draft is
-`../docs/sponsors.md`; missing evidence remains unchecked. See `../docs/STATUS.md`.
+## Code and local engine acceptance
 
-## Automated (must pass)
+- [x] Offline integration tests pass; original given test assertions are preserved.
+- [x] Official unchanged H-MEM and World Model references include LICENSE, commit NOTICE
+  and upstream Git-hash verification for all 23 vendored files.
+- [x] Official conformance: H-MEM 13/13 and World Model 8/8.
+- [x] Eight service tests and TypeScript checks pass; dependency audit has zero findings.
+- [x] The built Docker image starts and passes health checks with a persistent named volume.
+- [x] The real core pipeline calls EnginesClient over HTTP for three sample pools and
+  persists/retrieves output. Restart preserved the first run's 616 records.
+- [x] Requests use bounds/timeouts and the original GraphEdge/ExtractedEvent schemas.
+- [x] Wrong/missing tokens are rejected when ENGINES_TOKEN is configured.
+- [x] Historical queries exclude future records and preserve earlier eligible edge versions.
+- [x] Nightshift is first for every role when configured, including skeptic.
 
-```
-py -3 -m pytest integrations -q                  # offline tests: 0 failed
-py -3 -m pytest integrations -q -m network       # live tests (parity, runtime, NIM): 0 failed — run where the services are reachable
-cd integrations/engines && npm test && npm run conformance   # both exit 0
-```
+See [engine measurements](engines/VALIDATION.md) for scope. The core/container run used
+an empty model replay cassette and empty World Model snapshots. It establishes H-MEM
+service use, not Nightshift inference or non-empty real event/graph ingestion.
 
-## Evidence checklist
+Run the offline checks from the repository root:
 
-- [ ] D0: Zetaris and the engines sidecar run on **AWS** (EU region unless documented otherwise).
-  - [ ] `DEPLOY.md` explains the setup and how lake files reach Zetaris (private S3). Preflight and
-    verify output is pasted. A budget alert is set.
-  - [ ] Both endpoints are HTTPS only, IP allow-listed and token protected. No plain-HTTP port, and
-    the GUI is not public.
-  - [ ] `ACCESS.md` is complete, and **the lead has run its smoke test successfully from Europe**.
-  - [ ] Member A has write access to the S3 lake prefix only.
-  - [ ] No secrets anywhere in the repository.
-- [ ] D1: the registration CLI ran twice; the second run reports `exists`, not errors. A GUI
-  screenshot shows all 7 lake tables plus the EDGAR REST table.
-- [ ] D2: every template renders, passes the injection tests and runs on DuckDB over `data/sample`.
-- [ ] D3: `test_parity.py` shows equal `rows_sha256` on both back ends for every template. The
-  recorded response fixture contains no token or org id. The on-demand EDGAR lookup works for one
-  ticker outside the universe.
-- [ ] D4: the three NIM models were agreed with the lead (the skeptic is from a different family
-  than the analyst).
-  - [ ] `test_live_llm.py` passes for extractor, analyst and skeptic; the output is pasted.
-  - [ ] `data/sample/llm_cassette.jsonl` and `extraction_cache.jsonl` are committed. With the
-    network disabled, a SAMPLE_MODE run of the same `--as-of` prints no "model answer was
-    unavailable" warning.
-- [ ] D5:
-  - [ ] the conformance suites for World Model and H-MEM are green against the vendored engines
-  - [ ] the smoke test is green
-  - [ ] `vendor/` has LICENSE and NOTICE, and our code never edits it
-- [ ] D6: `docs/sponsors.md` draft exists. Every claim in it points to evidence from the items
-  above.
+    py -3 -m pytest integrations -q
+    py -3 -m ruff check integrations --no-cache
 
-## Code checks
+Then in integrations/engines:
 
-- [ ] No secret, token, org id, AWS key or personal e-mail in code, tests, fixtures, cassette, logs
-  or screenshots.
-- [ ] Every Zetaris call sends one statement, with a timeout and a fresh `X-Request-ID`.
-- [ ] No free-form SQL path exists. The only path is template, then `render()`, then the adapter.
-- [ ] SAMPLE_MODE never opens a network connection. Prove it with a run that has the network
-  disabled.
-- [ ] Every retry and loop is bounded.
-- [ ] No signature in the stubs changed; no given test was weakened.
-- [ ] Everything is in English.
+    npm ci
+    npm test
+    npm run check
+    npm run conformance
+    npm audit
 
-## PR checklist (copy into the PR description)
+## Actual services on the Mac
 
-```
-- [ ] task(s): D?
-- [ ] offline tests: <summary>
-- [ ] network tests: <summary or "not applicable">
-- [ ] conformance: <summary or "not applicable">
-- [ ] evidence links/screenshots: <list>
-- [ ] secrets check: grep for key/token patterns done, none found
-```
+- [x] Local Zetaris Docker runs and the official helper executes SELECT 1.
+- [x] Seven registered lake tables match the committed sample manifest row counts.
+- [x] Official helper returns crypto 38, eu_equity 55 and us_equity 523 members.
+- [ ] TradePulse ZetarisClient and ZetarisAdapter live smoke succeed on the Mac.
+- [ ] Every template matches DuckDB rows_sha256 on the frozen sample.
+- [ ] The installed Nightshift edition exposes an authenticated endpoint with Meterless IDs.
+- [ ] Wrong token gets 401/403; a real token produces a response through TradePulse.
+- [ ] The engine image builds and runs on the Mac's actual architecture.
+
+Use [MAC_LIVE_SETUP.md](MAC_LIVE_SETUP.md). Never request, print or include raw credentials
+in acceptance evidence.
+
+## End-to-end submission evidence
+
+- [ ] integrations.live_acceptance completes all three pool cases with status=ok.
+- [ ] Every run queries Zetaris and receives live Nightshift analyst and skeptic answers.
+- [ ] Original traces show successful engine snapshot, recall and recommendation writes.
+- [ ] Three inputs, outputs, original traces and the computed README table are reviewed.
+- [ ] Every result comes from computation; tiers and verification gates are preserved.
+- [ ] Model text/cassettes pass privacy review before publication.
+- [ ] README and sponsor write-up link actual artifacts and disclose remaining limits.
+- [ ] If offline model replay is claimed, exact prompts/cassette pass with networking blocked.
+
+AWS/S3 shared hosting, outside-universe EDGAR, automatic settlement scheduling, production
+multi-writer persistence and separate model-family routing are not certified by these tests.

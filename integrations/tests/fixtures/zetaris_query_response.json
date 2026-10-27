@@ -1,0 +1,22 @@
+{
+  "headers": [
+    "pool",
+    "members"
+  ],
+  "data": [
+    [
+      "crypto",
+      "38"
+    ],
+    [
+      "eu_equity",
+      "55"
+    ],
+    [
+      "us_equity",
+      "523"
+    ]
+  ],
+  "total": 3,
+  "timeUsed": 2228
+}

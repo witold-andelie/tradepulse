@@ -1,0 +1,15 @@
+TradePulse Meterless engines sidecar
+
+This distribution includes unchanged reference implementation and conformance source from:
+
+  Meterless/Meterless
+  https://github.com/Meterless/Meterless
+  commit 1742dec56a66e58eef9dda2d2b865823758ca8cd
+
+Included engines:
+
+  - H-MEM: integrations/engines/vendor/hmem/
+  - World Model: integrations/engines/vendor/world-model/
+
+The included work is licensed under Apache License 2.0. The original per-engine LICENSE files
+are preserved beside the vendored sources. TradePulse adaptation code lives outside vendor/.

@@ -31,6 +31,19 @@ and US API/UI review now take priority; no Crypto rerun or local-model experimen
 The new evidence-index tool revalidates and references existing accepted files by their
 recorded hashes, without issuing model/query/engine calls or changing failed source reports.
 
+The subsequent US-only run matched parity 12/12 and loaded 523 instruments, 279,982 price
+rows and 401,487 pageview rows. It failed at validate-case with two abstained explanations
+and one explained. Seven of 12 model request receipts ended length with empty/absent visible
+content; the five returned stop-ended replies included three JSON failures and two schema
+successes. This is not a passed US case. The original reports are retained.
+
+Provider documentation confirms GLM-5.3-Flash forces thinking and defaults to max effort.
+The earlier client did not set effort. The corrected client defaults GLM-5.3 requests to low,
+supports explicit JSON-object mode and records visible-content length and reported reasoning
+usage without retaining reasoning text. The next bounded US-only attempt uses the documented
+8192-token setting; it has not yet run. This configuration correction is not a verified
+explanation of every JSON failure and does not lower schema or evidence requirements.
+
 ## Zetaris
 
 Load: the live data/evidence query layer. Typed allow-listed templates supply the core and

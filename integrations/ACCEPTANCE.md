@@ -12,7 +12,9 @@ acceptance, not a claim that submission media and every event-rule check are com
 
 Current lead-reported progress: first hosted parity 12/12; Crypto accepted with six GLM
 calls and three explained names, all 38 stances NO_CALL. EU failed strict JSON on one
-skeptic reply; US had not started. The lead prioritizes US-only acceptance next, then its
+skeptic reply. US then ran but failed with unavailable model calls, including seven empty
+length-ended replies. The next US-only attempt requests low reasoning effort, an explicit
+8192-token bound and JSON-object mode; it remains unverified. The lead prioritizes US, then its
 API/UI review. Do not wait for EU or rerun accepted Crypto. The immutable evidence assembler
 can combine separately accepted sources; a two-pool index remains incomplete.
 

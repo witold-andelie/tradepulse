@@ -145,7 +145,7 @@ def test_real_sdk_uses_supplied_route_and_exact_model_without_new_library(monkey
     assert captured == [("/inference/go/openai/v1/chat/completions", {
         "messages": [{"role": "system", "content": 'RESPONSE SCHEMA:\n{"type": "object"}'
          '\nReturn only one JSON object matching this schema. Keep text concise.'}],
-        "model": "glm-5.3-flash", "max_tokens": 4096})]
+        "model": "glm-5.3-flash", "max_tokens": 4096, "reasoning_effort": "low"})]
 
 
 def test_launcher_passes_private_configuration_to_existing_cli_without_model_call(monkeypatch, tmp_path):

@@ -8,9 +8,48 @@ is no longer a prerequisite for this workflow.
 
 ## Current priority: US equities first, preserve Crypto
 
+The first US-only run completed and failed at validate-case. Preserve
+runs/hosted-glm-us-first-1/. It matched parity 12/12, loaded 523 instruments, 279,982 price
+rows and 401,487 pageview rows, and produced two abstained explanations and one explained.
+Of 12 model requests, seven ended length with the SHA-256 of absent/empty visible content;
+five ended stop. Three returned replies failed strict JSON and two passed. Existing receipts
+do not include reasoning-token breakdown, so the precise budget split is unconfirmed.
+
+The [GLM thinking specification](https://docs.bigmodel.cn/cn/guide/capabilities/thinking)
+states that GLM-5.3/5.3-Flash force thinking, reject thinking.type=disabled, support low/high/max
+effort, and default to max. The initial generic client omitted effort and allowed 4096 output
+tokens. This provider-configuration gap is consistent with the empty length-ended replies;
+it does not explain every malformed stop-ended reply by itself.
+
+The GLM-5.3 client now defaults to reasoning_effort=low. GLM_RESPONSE_FORMAT optionally requests
+the [documented JSON-object mode](https://docs.bigmodel.cn/cn/guide/capabilities/struct-output),
+while retaining strict schema checks. It does not force temperature=0 or send an unsupported
+thinking-disable flag. Native JSON mode constrains syntax, not claim truth or schema fields.
+The actual OpenCode gateway's handling still needs the real run; a rejected option is not
+silently retried with another format. Raw model text remains unchanged.
+
+New receipts include configured_max_tokens, requested_reasoning_effort, content_chars,
+has_reasoning_content and completion/reasoning token counts when the provider reports them.
+Unknown reasoning counts remain null; reasoning text is never printed or saved by diagnostics.
+
+For the next single US attempt, use a fresh directory and explicit process settings so an
+older private env file cannot retain the old budget:
+
+```sh
+export GLM_REASONING_EFFORT=low
+export GLM_MAX_TOKENS=8192
+export GLM_RESPONSE_FORMAT=json_object
+```
+
+Then use the US command below with runs/hosted-glm-us-first-2 as its output. Do not increase
+timeouts or run a separate probe, Crypto, EU or another model before this attempt. The 8192
+budget includes both thinking and visible output; it is a bound, not a guarantee. If this
+attempt fails, inspect its original reply/usage/error metadata without editing results.
+
 The lead reports the first hosted suite passed parity 12/12 and Crypto: six live GLM calls,
 three explained names, real engine snapshot/recall/remember, and 38 computed NO_CALL records.
-EU then failed because SAF.PA's skeptic reply did not pass strict JSON parsing; US never ran.
+EU then failed because SAF.PA's skeptic reply did not pass strict JSON parsing; US had not
+run at that point. The later US-only failure and the next settings are recorded above.
 The source directory is runs/hosted-glm-acceptance-1/. Preserve it unchanged. Do not repeat
 Crypto. Its NO_CALL stances are computed research outcomes, not a reason to alter gates.
 
@@ -26,7 +65,7 @@ python3 -m integrations.live_acceptance \
   --env-file ~/getting-started/.env.local \
   --env-file .env.glm.local \
   --pools us_equity \
-  --output runs/hosted-glm-us-first-1
+  --output runs/hosted-glm-us-first-2
 ```
 
 This retains US filing extraction and its existing bounds. A successful US-only run is
@@ -40,7 +79,7 @@ To index the accepted Crypto and US evidence without model calls or source rewri
 ```sh
 python3 -m integrations.assemble_acceptance \
   --source runs/hosted-glm-acceptance-1 \
-  --source runs/hosted-glm-us-first-1 \
+  --source runs/hosted-glm-us-first-2 \
   --llm-provider glm \
   --output runs/hosted-glm-accepted-index-1
 ```
@@ -95,6 +134,7 @@ GLM_API_KEY=YOUR_EXISTING_PRIVATE_KEY
 GLM_MAX_CONCURRENCY=1
 GLM_MAX_TOKENS=4096
 GLM_TIMEOUT_SECONDS=180
+GLM_REASONING_EFFORT=low
 ```
 
 Use the actual key locally, never in chat, screenshots or committed files. Alternatively,

@@ -176,6 +176,11 @@ def _bounded_setting(name: str, default: int, maximum: int) -> int:
     return value
 
 
+def _usage_count(usage, field: str) -> int | None:
+    value = getattr(usage, field, None)
+    return value if isinstance(value, int) and not isinstance(value, bool) and value >= 0 else None
+
+
 def _schema_messages(messages: list[dict], schema: dict | None) -> list[dict]:
     """Make the existing schema visible to small models without requiring JSON-mode support."""
     prepared = [dict(message) for message in messages]
@@ -290,7 +295,8 @@ def build_routes_from_env(*, diagnostics: Callable[[dict], None] | None = None) 
     from openai import OpenAI
 
     def caller(client, *, concurrency=None, max_tokens=None, output_format="prompt",
-               request_timeout=180, queue_timeout=180):
+               request_timeout=180, queue_timeout=180, reasoning_effort=None,
+               json_temperature=0):
         def call(messages: list[dict], model: str, schema: dict | None):
             queued = perf_counter()
             if concurrency is not None and not concurrency.acquire(timeout=queue_timeout):
@@ -302,25 +308,39 @@ def build_routes_from_env(*, diagnostics: Callable[[dict], None] | None = None) 
                 raise TimeoutError(f"Nightshift request queue wait exceeded {queue_timeout} seconds")
             started = perf_counter()
             receipt = {"response_format": output_format,
+                       "configured_max_tokens": max_tokens,
+                       "requested_reasoning_effort": reasoning_effort,
                        "request_timeout_seconds": request_timeout,
                        "queue_timeout_seconds": queue_timeout,
                        "queue_ms": int((started - queued) * 1000)}
             try:
                 options = {"max_tokens": max_tokens} if max_tokens is not None else {}
+                if reasoning_effort is not None:
+                    options["reasoning_effort"] = reasoning_effort
                 if schema is not None and output_format != "prompt":
                     response_format = {"type": "json_object"}
                     if output_format == "webllm_schema":
                         response_format["schema"] = json.dumps(schema, ensure_ascii=False)
-                    options.update(response_format=response_format, temperature=0)
+                    options["response_format"] = response_format
+                    if json_temperature is not None:
+                        options["temperature"] = json_temperature
                 response = client.chat.completions.create(
                     model=model, messages=_schema_messages(messages, schema), **options,
                 )
                 text = response.choices[0].message.content
                 usage = response.usage
+                message = response.choices[0].message
+                details = getattr(usage, "completion_tokens_details", None)
                 reason = getattr(response.choices[0], "finish_reason", None)
                 receipt.update({"finish_reason": reason if reason in
                                 {"stop", "length", "tool_calls", "abort", "content_filter"}
                                 else "unknown", "stage": "response",
+                                "content_chars": len(text) if isinstance(text, str) else 0,
+                                "has_reasoning_content": bool(getattr(message, "reasoning_content", None)
+                                                              or getattr(message, "reasoning", None)),
+                                "prompt_tokens": _usage_count(usage, "prompt_tokens"),
+                                "completion_tokens": _usage_count(usage, "completion_tokens"),
+                                "reasoning_tokens": _usage_count(details, "reasoning_tokens"),
                                 "response_sha256": hashlib.sha256((text or "").encode()).hexdigest()})
                 return (text, usage.prompt_tokens if usage else None,
                         usage.completion_tokens if usage else None)
@@ -350,6 +370,13 @@ def build_routes_from_env(*, diagnostics: Callable[[dict], None] | None = None) 
         model = os.environ.get("GLM_MODEL")
         if not base or not model:
             raise ValueError("Configure GLM_BASE_URL and GLM_MODEL explicitly")
+        effort = os.environ.get("GLM_REASONING_EFFORT",
+                                "low" if model.lower().startswith("glm-5.3") else "provider_default")
+        if effort not in {"provider_default", "low", "high", "max"}:
+            raise ValueError("GLM_REASONING_EFFORT must be provider_default, low, high or max")
+        output_format = os.environ.get("GLM_RESPONSE_FORMAT", "prompt")
+        if output_format not in {"prompt", "json_object"}:
+            raise ValueError("GLM_RESPONSE_FORMAT must be prompt or json_object")
         timeout = _bounded_setting("GLM_TIMEOUT_SECONDS", 180, 600)
         queue_timeout = _bounded_setting("GLM_QUEUE_TIMEOUT_SECONDS", 600, 1800)
         client = OpenAI(
@@ -361,7 +388,9 @@ def build_routes_from_env(*, diagnostics: Callable[[dict], None] | None = None) 
         concurrency = threading.BoundedSemaphore(_bounded_setting("GLM_MAX_CONCURRENCY", 1, 4))
         route = ("glm", model, caller(client, concurrency=concurrency,
                  max_tokens=_bounded_setting("GLM_MAX_TOKENS", 4096, 8192),
-                 request_timeout=timeout, queue_timeout=queue_timeout))
+                 request_timeout=timeout, queue_timeout=queue_timeout,
+                 reasoning_effort=None if effort == "provider_default" else effort,
+                 output_format=output_format, json_temperature=None))
         # An explicit hosted profile bypasses local inference, including token-file reads.
         return {role: [route] for role in ROLES}
     token_file = os.environ.get("METERLESS_TOKEN_FILE")

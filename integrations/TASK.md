@@ -24,8 +24,10 @@ Those failed product cases are not relabelled successful. Hosted GLM acceptance 
 with the current pool progress recorded below.
 
 Latest hosted result: Crypto now passed (six GLM calls, three explained names, 38 NO_CALL
-records) after 12/12 parity. EU stopped on one skeptic JSON failure; US never ran. The lead
-prioritizes US-only acceptance before EU diagnosis. Keep the accepted Crypto case and begin
+records) after 12/12 parity. EU stopped on one skeptic JSON failure. US subsequently ran
+but failed with empty length-ended responses and invalid JSON. The GLM-5.3 configuration
+now requests low reasoning effort; the next US-only attempt uses the explicit JSON/output
+settings in HOSTED_ACCEPTANCE.md. Keep the accepted Crypto case and begin
 API/UI checks from accepted stored output without waiting for all pools. Follow the current
 priority section of HOSTED_ACCEPTANCE.md; do not repeat its historical full-suite command.
 

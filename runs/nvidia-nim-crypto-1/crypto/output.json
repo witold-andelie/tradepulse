@@ -1,0 +1,2940 @@
+{
+ "schema_version": "1.0",
+ "run_id": "2026-10-23-b8637c6c",
+ "created_at": "2026-10-27T22:26:11.250248Z",
+ "as_of": "2026-10-23",
+ "data_mode": "REPLAY",
+ "sample_mode": true,
+ "horizon_days": 5,
+ "request": {
+  "as_of": null,
+  "pools": [
+   "crypto"
+  ],
+  "tickers": [],
+  "horizon_days": 5,
+  "top_k": 5
+ },
+ "pools": [
+  {
+   "pool": "crypto",
+   "label": "Crypto",
+   "benchmark": "BTC-USD",
+   "n_members": 38,
+   "n_ranked": 0,
+   "composite_ic": 0.052046,
+   "regime_state": "normal",
+   "as_of_close": "2026-10-23"
+  }
+ ],
+ "recommendations": [
+  {
+   "pool": "crypto",
+   "symbol": "AAVE-USD",
+   "name": "Aave",
+   "sector": "defi",
+   "rank": 1,
+   "percentile": 1.0,
+   "score": 0.0,
+   "coverage": 0.0,
+   "tier": "NO_CALL",
+   "expected_alpha_bps": null,
+   "cost_bps_round_trip": 30.0,
+   "net_edge_bps": null,
+   "horizon_days": 5,
+   "contributions": [],
+   "valuation_pctile": null,
+   "regime_adjusted": false,
+   "invalidation": [
+    "No stance: insufficient factor coverage or composite skill"
+   ],
+   "what_to_watch": [
+    "Moves in linked names",
+    "Pool regime state"
+   ],
+   "explanation_id": null,
+   "last_close": 144.1624298095703,
+   "ret_1d": -0.01576123152083786
+  },
+  {
+   "pool": "crypto",
+   "symbol": "ADA-USD",
+   "name": "Cardano",
+   "sector": "layer-1",
+   "rank": 2,
+   "percentile": 0.9736842105263158,
+   "score": 0.0,
+   "coverage": 0.0,
+   "tier": "NO_CALL",
+   "expected_alpha_bps": null,
+   "cost_bps_round_trip": 30.0,
+   "net_edge_bps": null,
+   "horizon_days": 5,
+   "contributions": [],
+   "valuation_pctile": null,
+   "regime_adjusted": false,
+   "invalidation": [
+    "No stance: insufficient factor coverage or composite skill"
+   ],
+   "what_to_watch": [
+    "Moves in linked names",
+    "Pool regime state"
+   ],
+   "explanation_id": null,
+   "last_close": 0.21045100688934326,
+   "ret_1d": -0.007423628079388789
+  },
+  {
+   "pool": "crypto",
+   "symbol": "ALGO-USD",
+   "name": "Algorand",
+   "sector": "layer-1",
+   "rank": 3,
+   "percentile": 0.9473684210526315,
+   "score": 0.0,
+   "coverage": 0.0,
+   "tier": "NO_CALL",
+   "expected_alpha_bps": null,
+   "cost_bps_round_trip": 30.0,
+   "net_edge_bps": null,
+   "horizon_days": 5,
+   "contributions": [],
+   "valuation_pctile": null,
+   "regime_adjusted": false,
+   "invalidation": [
+    "No stance: insufficient factor coverage or composite skill"
+   ],
+   "what_to_watch": [
+    "Moves in linked names",
+    "Pool regime state"
+   ],
+   "explanation_id": null,
+   "last_close": 0.10585100203752518,
+   "ret_1d": -0.007687150344772076
+  },
+  {
+   "pool": "crypto",
+   "symbol": "APT21794-USD",
+   "name": "Aptos",
+   "sector": "layer-1",
+   "rank": 4,
+   "percentile": 0.9210526315789473,
+   "score": 0.0,
+   "coverage": 0.0,
+   "tier": "NO_CALL",
+   "expected_alpha_bps": null,
+   "cost_bps_round_trip": 30.0,
+   "net_edge_bps": null,
+   "horizon_days": 5,
+   "contributions": [],
+   "valuation_pctile": null,
+   "regime_adjusted": false,
+   "invalidation": [
+    "No stance: insufficient factor coverage or composite skill"
+   ],
+   "what_to_watch": [
+    "Moves in linked names",
+    "Pool regime state"
+   ],
+   "explanation_id": null,
+   "last_close": 0.7354620099067688,
+   "ret_1d": -0.022041428841356958
+  },
+  {
+   "pool": "crypto",
+   "symbol": "ATOM-USD",
+   "name": "Cosmos Hub",
+   "sector": "layer-1",
+   "rank": 5,
+   "percentile": 0.8947368421052632,
+   "score": 0.0,
+   "coverage": 0.0,
+   "tier": "NO_CALL",
+   "expected_alpha_bps": null,
+   "cost_bps_round_trip": 30.0,
+   "net_edge_bps": null,
+   "horizon_days": 5,
+   "contributions": [],
+   "valuation_pctile": null,
+   "regime_adjusted": false,
+   "invalidation": [
+    "No stance: insufficient factor coverage or composite skill"
+   ],
+   "what_to_watch": [
+    "Moves in linked names",
+    "Pool regime state"
+   ],
+   "explanation_id": null,
+   "last_close": 1.7038929462432861,
+   "ret_1d": -0.005728509775668411
+  },
+  {
+   "pool": "crypto",
+   "symbol": "AVAX-USD",
+   "name": "Avalanche",
+   "sector": "layer-1",
+   "rank": 6,
+   "percentile": 0.868421052631579,
+   "score": 0.0,
+   "coverage": 0.0,
+   "tier": "NO_CALL",
+   "expected_alpha_bps": null,
+   "cost_bps_round_trip": 30.0,
+   "net_edge_bps": null,
+   "horizon_days": 5,
+   "contributions": [],
+   "valuation_pctile": null,
+   "regime_adjusted": false,
+   "invalidation": [
+    "No stance: insufficient factor coverage or composite skill"
+   ],
+   "what_to_watch": [
+    "Moves in linked names",
+    "Pool regime state"
+   ],
+   "explanation_id": null,
+   "last_close": 9.047340393066406,
+   "ret_1d": -0.007547465888061211
+  },
+  {
+   "pool": "crypto",
+   "symbol": "BCH-USD",
+   "name": "Bitcoin Cash",
+   "sector": "payments",
+   "rank": 7,
+   "percentile": 0.8421052631578947,
+   "score": 0.0,
+   "coverage": 0.0,
+   "tier": "NO_CALL",
+   "expected_alpha_bps": null,
+   "cost_bps_round_trip": 30.0,
+   "net_edge_bps": null,
+   "horizon_days": 5,
+   "contributions": [],
+   "valuation_pctile": null,
+   "regime_adjusted": false,
+   "invalidation": [
+    "No stance: insufficient factor coverage or composite skill"
+   ],
+   "what_to_watch": [
+    "Moves in linked names",
+    "Pool regime state"
+   ],
+   "explanation_id": null,
+   "last_close": 282.12786865234375,
+   "ret_1d": 0.026897509146783793
+  },
+  {
+   "pool": "crypto",
+   "symbol": "BGB-USD",
+   "name": "Bitget Token",
+   "sector": "exchange-token",
+   "rank": 8,
+   "percentile": 0.8157894736842105,
+   "score": 0.0,
+   "coverage": 0.0,
+   "tier": "NO_CALL",
+   "expected_alpha_bps": null,
+   "cost_bps_round_trip": 30.0,
+   "net_edge_bps": null,
+   "horizon_days": 5,
+   "contributions": [],
+   "valuation_pctile": null,
+   "regime_adjusted": false,
+   "invalidation": [
+    "No stance: insufficient factor coverage or composite skill"
+   ],
+   "what_to_watch": [
+    "Moves in linked names",
+    "Pool regime state"
+   ],
+   "explanation_id": null,
+   "last_close": 1.9001450538635254,
+   "ret_1d": 0.001409801715535286
+  },
+  {
+   "pool": "crypto",
+   "symbol": "BNB-USD",
+   "name": "BNB",
+   "sector": "exchange-token",
+   "rank": 9,
+   "percentile": 0.7894736842105263,
+   "score": 0.0,
+   "coverage": 0.0,
+   "tier": "NO_CALL",
+   "expected_alpha_bps": null,
+   "cost_bps_round_trip": 30.0,
+   "net_edge_bps": null,
+   "horizon_days": 5,
+   "contributions": [],
+   "valuation_pctile": null,
+   "regime_adjusted": false,
+   "invalidation": [
+    "No stance: insufficient factor coverage or composite skill"
+   ],
+   "what_to_watch": [
+    "Moves in linked names",
+    "Pool regime state"
+   ],
+   "explanation_id": null,
+   "last_close": 738.8374633789062,
+   "ret_1d": 0.011445732244363294
+  },
+  {
+   "pool": "crypto",
+   "symbol": "BTC-USD",
+   "name": "Bitcoin",
+   "sector": "layer-1",
+   "rank": 10,
+   "percentile": 0.7631578947368421,
+   "score": 0.0,
+   "coverage": 0.0,
+   "tier": "NO_CALL",
+   "expected_alpha_bps": null,
+   "cost_bps_round_trip": 30.0,
+   "net_edge_bps": null,
+   "horizon_days": 5,
+   "contributions": [],
+   "valuation_pctile": null,
+   "regime_adjusted": false,
+   "invalidation": [
+    "No stance: insufficient factor coverage or composite skill"
+   ],
+   "what_to_watch": [
+    "Moves in linked names",
+    "Pool regime state"
+   ],
+   "explanation_id": null,
+   "last_close": 81074.1875,
+   "ret_1d": -0.0029233501173433485
+  },
+  {
+   "pool": "crypto",
+   "symbol": "CRO-USD",
+   "name": "Cronos",
+   "sector": "exchange-token",
+   "rank": 11,
+   "percentile": 0.7368421052631579,
+   "score": 0.0,
+   "coverage": 0.0,
+   "tier": "NO_CALL",
+   "expected_alpha_bps": null,
+   "cost_bps_round_trip": 30.0,
+   "net_edge_bps": null,
+   "horizon_days": 5,
+   "contributions": [],
+   "valuation_pctile": null,
+   "regime_adjusted": false,
+   "invalidation": [
+    "No stance: insufficient factor coverage or composite skill"
+   ],
+   "what_to_watch": [
+    "Moves in linked names",
+    "Pool regime state"
+   ],
+   "explanation_id": null,
+   "last_close": 0.05574300140142441,
+   "ret_1d": -0.00693006731763901
+  },
+  {
+   "pool": "crypto",
+   "symbol": "DOGE-USD",
+   "name": "Dogecoin",
+   "sector": "meme",
+   "rank": 12,
+   "percentile": 0.7105263157894737,
+   "score": 0.0,
+   "coverage": 0.0,
+   "tier": "NO_CALL",
+   "expected_alpha_bps": null,
+   "cost_bps_round_trip": 30.0,
+   "net_edge_bps": null,
+   "horizon_days": 5,
+   "contributions": [],
+   "valuation_pctile": null,
+   "regime_adjusted": false,
+   "invalidation": [
+    "No stance: insufficient factor coverage or composite skill"
+   ],
+   "what_to_watch": [
+    "Moves in linked names",
+    "Pool regime state"
+   ],
+   "explanation_id": null,
+   "last_close": 0.0785370022058487,
+   "ret_1d": -0.0017667145151847308
+  },
+  {
+   "pool": "crypto",
+   "symbol": "DOT-USD",
+   "name": "Polkadot",
+   "sector": "layer-1",
+   "rank": 13,
+   "percentile": 0.6842105263157895,
+   "score": 0.0,
+   "coverage": 0.0,
+   "tier": "NO_CALL",
+   "expected_alpha_bps": null,
+   "cost_bps_round_trip": 30.0,
+   "net_edge_bps": null,
+   "horizon_days": 5,
+   "contributions": [],
+   "valuation_pctile": null,
+   "regime_adjusted": false,
+   "invalidation": [
+    "No stance: insufficient factor coverage or composite skill"
+   ],
+   "what_to_watch": [
+    "Moves in linked names",
+    "Pool regime state"
+   ],
+   "explanation_id": null,
+   "last_close": 1.083474040031433,
+   "ret_1d": -0.025538024793093417
+  },
+  {
+   "pool": "crypto",
+   "symbol": "ETC-USD",
+   "name": "Ethereum Classic",
+   "sector": "layer-1",
+   "rank": 14,
+   "percentile": 0.6578947368421053,
+   "score": 0.0,
+   "coverage": 0.0,
+   "tier": "NO_CALL",
+   "expected_alpha_bps": null,
+   "cost_bps_round_trip": 30.0,
+   "net_edge_bps": null,
+   "horizon_days": 5,
+   "contributions": [],
+   "valuation_pctile": null,
+   "regime_adjusted": false,
+   "invalidation": [
+    "No stance: insufficient factor coverage or composite skill"
+   ],
+   "what_to_watch": [
+    "Moves in linked names",
+    "Pool regime state"
+   ],
+   "explanation_id": null,
+   "last_close": 7.749860763549805,
+   "ret_1d": 0.006397794185215133
+  },
+  {
+   "pool": "crypto",
+   "symbol": "ETH-USD",
+   "name": "Ethereum",
+   "sector": "layer-1",
+   "rank": 15,
+   "percentile": 0.631578947368421,
+   "score": 0.0,
+   "coverage": 0.0,
+   "tier": "NO_CALL",
+   "expected_alpha_bps": null,
+   "cost_bps_round_trip": 30.0,
+   "net_edge_bps": null,
+   "horizon_days": 5,
+   "contributions": [],
+   "valuation_pctile": null,
+   "regime_adjusted": false,
+   "invalidation": [
+    "No stance: insufficient factor coverage or composite skill"
+   ],
+   "what_to_watch": [
+    "Moves in linked names",
+    "Pool regime state"
+   ],
+   "explanation_id": null,
+   "last_close": 2384.077392578125,
+   "ret_1d": -0.0008850163257375643
+  },
+  {
+   "pool": "crypto",
+   "symbol": "FIL-USD",
+   "name": "Filecoin",
+   "sector": "storage",
+   "rank": 16,
+   "percentile": 0.6052631578947368,
+   "score": 0.0,
+   "coverage": 0.0,
+   "tier": "NO_CALL",
+   "expected_alpha_bps": null,
+   "cost_bps_round_trip": 30.0,
+   "net_edge_bps": null,
+   "horizon_days": 5,
+   "contributions": [],
+   "valuation_pctile": null,
+   "regime_adjusted": false,
+   "invalidation": [
+    "No stance: insufficient factor coverage or composite skill"
+   ],
+   "what_to_watch": [
+    "Moves in linked names",
+    "Pool regime state"
+   ],
+   "explanation_id": null,
+   "last_close": 0.9582610130310059,
+   "ret_1d": -0.019827204476288163
+  },
+  {
+   "pool": "crypto",
+   "symbol": "GRAM-USD",
+   "name": "Gram (prev. Toncoin)",
+   "sector": "layer-1",
+   "rank": 17,
+   "percentile": 0.5789473684210527,
+   "score": 0.0,
+   "coverage": 0.0,
+   "tier": "NO_CALL",
+   "expected_alpha_bps": null,
+   "cost_bps_round_trip": 30.0,
+   "net_edge_bps": null,
+   "horizon_days": 5,
+   "contributions": [],
+   "valuation_pctile": null,
+   "regime_adjusted": false,
+   "invalidation": [
+    "No stance: insufficient factor coverage or composite skill"
+   ],
+   "what_to_watch": [
+    "Moves in linked names",
+    "Pool regime state"
+   ],
+   "explanation_id": "exp-crypto-gram-usd",
+   "last_close": 1.2193670272827148,
+   "ret_1d": -0.07197666367147981
+  },
+  {
+   "pool": "crypto",
+   "symbol": "HBAR-USD",
+   "name": "Hedera",
+   "sector": "layer-1",
+   "rank": 18,
+   "percentile": 0.5526315789473685,
+   "score": 0.0,
+   "coverage": 0.0,
+   "tier": "NO_CALL",
+   "expected_alpha_bps": null,
+   "cost_bps_round_trip": 30.0,
+   "net_edge_bps": null,
+   "horizon_days": 5,
+   "contributions": [],
+   "valuation_pctile": null,
+   "regime_adjusted": false,
+   "invalidation": [
+    "No stance: insufficient factor coverage or composite skill"
+   ],
+   "what_to_watch": [
+    "Moves in linked names",
+    "Pool regime state"
+   ],
+   "explanation_id": null,
+   "last_close": 0.07737100124359131,
+   "ret_1d": -0.03116704861853592
+  },
+  {
+   "pool": "crypto",
+   "symbol": "HYPE32196-USD",
+   "name": "Hyperliquid",
+   "sector": "defi",
+   "rank": 19,
+   "percentile": 0.5263157894736842,
+   "score": 0.0,
+   "coverage": 0.0,
+   "tier": "NO_CALL",
+   "expected_alpha_bps": null,
+   "cost_bps_round_trip": 30.0,
+   "net_edge_bps": null,
+   "horizon_days": 5,
+   "contributions": [],
+   "valuation_pctile": null,
+   "regime_adjusted": false,
+   "invalidation": [
+    "No stance: insufficient factor coverage or composite skill"
+   ],
+   "what_to_watch": [
+    "Moves in linked names",
+    "Pool regime state"
+   ],
+   "explanation_id": null,
+   "last_close": 77.00621032714844,
+   "ret_1d": -0.004140568175225567
+  },
+  {
+   "pool": "crypto",
+   "symbol": "ICP-USD",
+   "name": "Internet Computer",
+   "sector": "layer-1",
+   "rank": 20,
+   "percentile": 0.5,
+   "score": 0.0,
+   "coverage": 0.0,
+   "tier": "NO_CALL",
+   "expected_alpha_bps": null,
+   "cost_bps_round_trip": 30.0,
+   "net_edge_bps": null,
+   "horizon_days": 5,
+   "contributions": [],
+   "valuation_pctile": null,
+   "regime_adjusted": false,
+   "invalidation": [
+    "No stance: insufficient factor coverage or composite skill"
+   ],
+   "what_to_watch": [
+    "Moves in linked names",
+    "Pool regime state"
+   ],
+   "explanation_id": null,
+   "last_close": 2.7202649116516113,
+   "ret_1d": 0.008743294527981282
+  },
+  {
+   "pool": "crypto",
+   "symbol": "KAS-USD",
+   "name": "Kaspa",
+   "sector": "layer-1",
+   "rank": 21,
+   "percentile": 0.47368421052631576,
+   "score": 0.0,
+   "coverage": 0.0,
+   "tier": "NO_CALL",
+   "expected_alpha_bps": null,
+   "cost_bps_round_trip": 30.0,
+   "net_edge_bps": null,
+   "horizon_days": 5,
+   "contributions": [],
+   "valuation_pctile": null,
+   "regime_adjusted": false,
+   "invalidation": [
+    "No stance: insufficient factor coverage or composite skill"
+   ],
+   "what_to_watch": [
+    "Moves in linked names",
+    "Pool regime state"
+   ],
+   "explanation_id": null,
+   "last_close": 0.03624400123953819,
+   "ret_1d": -0.01966400341302743
+  },
+  {
+   "pool": "crypto",
+   "symbol": "KCS-USD",
+   "name": "KuCoin",
+   "sector": "exchange-token",
+   "rank": 22,
+   "percentile": 0.4473684210526316,
+   "score": 0.0,
+   "coverage": 0.0,
+   "tier": "NO_CALL",
+   "expected_alpha_bps": null,
+   "cost_bps_round_trip": 30.0,
+   "net_edge_bps": null,
+   "horizon_days": 5,
+   "contributions": [],
+   "valuation_pctile": null,
+   "regime_adjusted": false,
+   "invalidation": [
+    "No stance: insufficient factor coverage or composite skill"
+   ],
+   "what_to_watch": [
+    "Moves in linked names",
+    "Pool regime state"
+   ],
+   "explanation_id": null,
+   "last_close": 7.362806797027588,
+   "ret_1d": 0.0032344576357974386
+  },
+  {
+   "pool": "crypto",
+   "symbol": "LINK-USD",
+   "name": "Chainlink",
+   "sector": "oracle",
+   "rank": 23,
+   "percentile": 0.42105263157894735,
+   "score": 0.0,
+   "coverage": 0.0,
+   "tier": "NO_CALL",
+   "expected_alpha_bps": null,
+   "cost_bps_round_trip": 30.0,
+   "net_edge_bps": null,
+   "horizon_days": 5,
+   "contributions": [],
+   "valuation_pctile": null,
+   "regime_adjusted": false,
+   "invalidation": [
+    "No stance: insufficient factor coverage or composite skill"
+   ],
+   "what_to_watch": [
+    "Moves in linked names",
+    "Pool regime state"
+   ],
+   "explanation_id": null,
+   "last_close": 11.814297676086426,
+   "ret_1d": -0.010790112555643216
+  },
+  {
+   "pool": "crypto",
+   "symbol": "LTC-USD",
+   "name": "Litecoin",
+   "sector": "payments",
+   "rank": 24,
+   "percentile": 0.39473684210526316,
+   "score": 0.0,
+   "coverage": 0.0,
+   "tier": "NO_CALL",
+   "expected_alpha_bps": null,
+   "cost_bps_round_trip": 30.0,
+   "net_edge_bps": null,
+   "horizon_days": 5,
+   "contributions": [],
+   "valuation_pctile": null,
+   "regime_adjusted": false,
+   "invalidation": [
+    "No stance: insufficient factor coverage or composite skill"
+   ],
+   "what_to_watch": [
+    "Moves in linked names",
+    "Pool regime state"
+   ],
+   "explanation_id": null,
+   "last_close": 57.17401123046875,
+   "ret_1d": -0.026932750576848408
+  },
+  {
+   "pool": "crypto",
+   "symbol": "NEAR-USD",
+   "name": "NEAR Protocol",
+   "sector": "layer-1",
+   "rank": 25,
+   "percentile": 0.3684210526315789,
+   "score": 0.0,
+   "coverage": 0.0,
+   "tier": "NO_CALL",
+   "expected_alpha_bps": null,
+   "cost_bps_round_trip": 30.0,
+   "net_edge_bps": null,
+   "horizon_days": 5,
+   "contributions": [],
+   "valuation_pctile": null,
+   "regime_adjusted": false,
+   "invalidation": [
+    "No stance: insufficient factor coverage or composite skill"
+   ],
+   "what_to_watch": [
+    "Moves in linked names",
+    "Pool regime state"
+   ],
+   "explanation_id": null,
+   "last_close": 4.684359073638916,
+   "ret_1d": -0.039152164750982266
+  },
+  {
+   "pool": "crypto",
+   "symbol": "NEXO-USD",
+   "name": "NEXO",
+   "sector": "defi",
+   "rank": 26,
+   "percentile": 0.34210526315789475,
+   "score": 0.0,
+   "coverage": 0.0,
+   "tier": "NO_CALL",
+   "expected_alpha_bps": null,
+   "cost_bps_round_trip": 30.0,
+   "net_edge_bps": null,
+   "horizon_days": 5,
+   "contributions": [],
+   "valuation_pctile": null,
+   "regime_adjusted": false,
+   "invalidation": [
+    "No stance: insufficient factor coverage or composite skill"
+   ],
+   "what_to_watch": [
+    "Moves in linked names",
+    "Pool regime state"
+   ],
+   "explanation_id": null,
+   "last_close": 0.8133350014686584,
+   "ret_1d": 0.006830778902258805
+  },
+  {
+   "pool": "crypto",
+   "symbol": "OKB-USD",
+   "name": "OKB",
+   "sector": "exchange-token",
+   "rank": 27,
+   "percentile": 0.3157894736842105,
+   "score": 0.0,
+   "coverage": 0.0,
+   "tier": "NO_CALL",
+   "expected_alpha_bps": null,
+   "cost_bps_round_trip": 30.0,
+   "net_edge_bps": null,
+   "horizon_days": 5,
+   "contributions": [],
+   "valuation_pctile": null,
+   "regime_adjusted": false,
+   "invalidation": [
+    "No stance: insufficient factor coverage or composite skill"
+   ],
+   "what_to_watch": [
+    "Moves in linked names",
+    "Pool regime state"
+   ],
+   "explanation_id": null,
+   "last_close": 110.20133972167969,
+   "ret_1d": -0.0038511320433054497
+  },
+  {
+   "pool": "crypto",
+   "symbol": "PEPE24478-USD",
+   "name": "Pepe",
+   "sector": "meme",
+   "rank": 28,
+   "percentile": 0.2894736842105263,
+   "score": 0.0,
+   "coverage": 0.0,
+   "tier": "NO_CALL",
+   "expected_alpha_bps": null,
+   "cost_bps_round_trip": 30.0,
+   "net_edge_bps": null,
+   "horizon_days": 5,
+   "contributions": [],
+   "valuation_pctile": null,
+   "regime_adjusted": false,
+   "invalidation": [
+    "No stance: insufficient factor coverage or composite skill"
+   ],
+   "what_to_watch": [
+    "Moves in linked names",
+    "Pool regime state"
+   ],
+   "explanation_id": "exp-crypto-pepe24478-usd",
+   "last_close": 4.999999873689376e-06,
+   "ret_1d": 0.24999997157829057
+  },
+  {
+   "pool": "crypto",
+   "symbol": "SHIB-USD",
+   "name": "Shiba Inu",
+   "sector": "meme",
+   "rank": 29,
+   "percentile": 0.2631578947368421,
+   "score": 0.0,
+   "coverage": 0.0,
+   "tier": "NO_CALL",
+   "expected_alpha_bps": null,
+   "cost_bps_round_trip": 30.0,
+   "net_edge_bps": null,
+   "horizon_days": 5,
+   "contributions": [],
+   "valuation_pctile": null,
+   "regime_adjusted": false,
+   "invalidation": [
+    "No stance: insufficient factor coverage or composite skill"
+   ],
+   "what_to_watch": [
+    "Moves in linked names",
+    "Pool regime state"
+   ],
+   "explanation_id": null,
+   "last_close": 4.999999873689376e-06,
+   "ret_1d": 0.0
+  },
+  {
+   "pool": "crypto",
+   "symbol": "SOL-USD",
+   "name": "Solana",
+   "sector": "layer-1",
+   "rank": 30,
+   "percentile": 0.23684210526315788,
+   "score": 0.0,
+   "coverage": 0.0,
+   "tier": "NO_CALL",
+   "expected_alpha_bps": null,
+   "cost_bps_round_trip": 30.0,
+   "net_edge_bps": null,
+   "horizon_days": 5,
+   "contributions": [],
+   "valuation_pctile": null,
+   "regime_adjusted": false,
+   "invalidation": [
+    "No stance: insufficient factor coverage or composite skill"
+   ],
+   "what_to_watch": [
+    "Moves in linked names",
+    "Pool regime state"
+   ],
+   "explanation_id": null,
+   "last_close": 102.77986145019531,
+   "ret_1d": -0.007363740733429713
+  },
+  {
+   "pool": "crypto",
+   "symbol": "SUI20947-USD",
+   "name": "Sui",
+   "sector": "layer-1",
+   "rank": 31,
+   "percentile": 0.21052631578947367,
+   "score": 0.0,
+   "coverage": 0.0,
+   "tier": "NO_CALL",
+   "expected_alpha_bps": null,
+   "cost_bps_round_trip": 30.0,
+   "net_edge_bps": null,
+   "horizon_days": 5,
+   "contributions": [],
+   "valuation_pctile": null,
+   "regime_adjusted": false,
+   "invalidation": [
+    "No stance: insufficient factor coverage or composite skill"
+   ],
+   "what_to_watch": [
+    "Moves in linked names",
+    "Pool regime state"
+   ],
+   "explanation_id": null,
+   "last_close": 0.9598349928855896,
+   "ret_1d": -0.013247362825568154
+  },
+  {
+   "pool": "crypto",
+   "symbol": "TRX-USD",
+   "name": "TRON",
+   "sector": "layer-1",
+   "rank": 32,
+   "percentile": 0.18421052631578946,
+   "score": 0.0,
+   "coverage": 0.0,
+   "tier": "NO_CALL",
+   "expected_alpha_bps": null,
+   "cost_bps_round_trip": 30.0,
+   "net_edge_bps": null,
+   "horizon_days": 5,
+   "contributions": [],
+   "valuation_pctile": null,
+   "regime_adjusted": false,
+   "invalidation": [
+    "No stance: insufficient factor coverage or composite skill"
+   ],
+   "what_to_watch": [
+    "Moves in linked names",
+    "Pool regime state"
+   ],
+   "explanation_id": null,
+   "last_close": 0.32956698536872864,
+   "ret_1d": 0.004256890805097724
+  },
+  {
+   "pool": "crypto",
+   "symbol": "UNI7083-USD",
+   "name": "Uniswap",
+   "sector": "defi",
+   "rank": 33,
+   "percentile": 0.15789473684210525,
+   "score": 0.0,
+   "coverage": 0.0,
+   "tier": "NO_CALL",
+   "expected_alpha_bps": null,
+   "cost_bps_round_trip": 30.0,
+   "net_edge_bps": null,
+   "horizon_days": 5,
+   "contributions": [],
+   "valuation_pctile": null,
+   "regime_adjusted": false,
+   "invalidation": [
+    "No stance: insufficient factor coverage or composite skill"
+   ],
+   "what_to_watch": [
+    "Moves in linked names",
+    "Pool regime state"
+   ],
+   "explanation_id": null,
+   "last_close": 6.9565839767456055,
+   "ret_1d": -0.005806441896498926
+  },
+  {
+   "pool": "crypto",
+   "symbol": "WLD-USD",
+   "name": "Worldcoin",
+   "sector": "identity",
+   "rank": 34,
+   "percentile": 0.13157894736842105,
+   "score": 0.0,
+   "coverage": 0.0,
+   "tier": "NO_CALL",
+   "expected_alpha_bps": null,
+   "cost_bps_round_trip": 30.0,
+   "net_edge_bps": null,
+   "horizon_days": 5,
+   "contributions": [],
+   "valuation_pctile": null,
+   "regime_adjusted": false,
+   "invalidation": [
+    "No stance: insufficient factor coverage or composite skill"
+   ],
+   "what_to_watch": [
+    "Moves in linked names",
+    "Pool regime state"
+   ],
+   "explanation_id": "exp-crypto-wld-usd",
+   "last_close": 0.4820770025253296,
+   "ret_1d": -0.11513029162186017
+  },
+  {
+   "pool": "crypto",
+   "symbol": "XLM-USD",
+   "name": "Stellar",
+   "sector": "payments",
+   "rank": 35,
+   "percentile": 0.10526315789473684,
+   "score": 0.0,
+   "coverage": 0.0,
+   "tier": "NO_CALL",
+   "expected_alpha_bps": null,
+   "cost_bps_round_trip": 30.0,
+   "net_edge_bps": null,
+   "horizon_days": 5,
+   "contributions": [],
+   "valuation_pctile": null,
+   "regime_adjusted": false,
+   "invalidation": [
+    "No stance: insufficient factor coverage or composite skill"
+   ],
+   "what_to_watch": [
+    "Moves in linked names",
+    "Pool regime state"
+   ],
+   "explanation_id": null,
+   "last_close": 0.17316900193691254,
+   "ret_1d": -0.011643230436405583
+  },
+  {
+   "pool": "crypto",
+   "symbol": "XMR-USD",
+   "name": "Monero",
+   "sector": "privacy",
+   "rank": 36,
+   "percentile": 0.07894736842105263,
+   "score": 0.0,
+   "coverage": 0.0,
+   "tier": "NO_CALL",
+   "expected_alpha_bps": null,
+   "cost_bps_round_trip": 30.0,
+   "net_edge_bps": null,
+   "horizon_days": 5,
+   "contributions": [],
+   "valuation_pctile": null,
+   "regime_adjusted": false,
+   "invalidation": [
+    "No stance: insufficient factor coverage or composite skill"
+   ],
+   "what_to_watch": [
+    "Moves in linked names",
+    "Pool regime state"
+   ],
+   "explanation_id": null,
+   "last_close": 583.8970336914062,
+   "ret_1d": -0.027872665600364166
+  },
+  {
+   "pool": "crypto",
+   "symbol": "XRP-USD",
+   "name": "XRP",
+   "sector": "payments",
+   "rank": 37,
+   "percentile": 0.05263157894736842,
+   "score": 0.0,
+   "coverage": 0.0,
+   "tier": "NO_CALL",
+   "expected_alpha_bps": null,
+   "cost_bps_round_trip": 30.0,
+   "net_edge_bps": null,
+   "horizon_days": 5,
+   "contributions": [],
+   "valuation_pctile": null,
+   "regime_adjusted": false,
+   "invalidation": [
+    "No stance: insufficient factor coverage or composite skill"
+   ],
+   "what_to_watch": [
+    "Moves in linked names",
+    "Pool regime state"
+   ],
+   "explanation_id": null,
+   "last_close": 1.2939430475234985,
+   "ret_1d": -0.010486704212276043
+  },
+  {
+   "pool": "crypto",
+   "symbol": "ZEC-USD",
+   "name": "Zcash",
+   "sector": "privacy",
+   "rank": 38,
+   "percentile": 0.02631578947368421,
+   "score": 0.0,
+   "coverage": 0.0,
+   "tier": "NO_CALL",
+   "expected_alpha_bps": null,
+   "cost_bps_round_trip": 30.0,
+   "net_edge_bps": null,
+   "horizon_days": 5,
+   "contributions": [],
+   "valuation_pctile": null,
+   "regime_adjusted": false,
+   "invalidation": [
+    "No stance: insufficient factor coverage or composite skill"
+   ],
+   "what_to_watch": [
+    "Moves in linked names",
+    "Pool regime state"
+   ],
+   "explanation_id": null,
+   "last_close": 1181.2498779296875,
+   "ret_1d": -0.029990816948738952
+  }
+ ],
+ "factor_cards": [
+  {
+   "factor": "att_pageviews",
+   "pool": "crypto",
+   "title": "Wikipedia attention",
+   "measures": "abnormal public attention not explained by price-volume",
+   "definition": "log1p(7d mean views) - log1p(83d base), residualised on |5d return|, volume z, low vol",
+   "sources": [
+    "pageview",
+    "price_bar"
+   ],
+   "availability": "day t-1",
+   "status": "MEASURED_ONLY",
+   "weight": 0.0,
+   "coverage": 0.803922,
+   "gates": [
+    {
+     "gate": "G1",
+     "name": "measure",
+     "passed": true,
+     "value": 0.803921568627451,
+     "threshold": 0.6,
+     "note": "coverage 0.803921568627451; minimum 0.6; specification complete"
+    },
+    {
+     "gate": "G2",
+     "name": "incremental",
+     "passed": false,
+     "value": 0.9913459665195526,
+     "threshold": 2.0,
+     "note": "best residual IC t-stat 0.9913459665195526; minimum 2.0"
+    },
+    {
+     "gate": "G3",
+     "name": "predictive",
+     "passed": false,
+     "value": -0.02057930627773437,
+     "threshold": 0.0,
+     "note": "primary IC -0.02057930627773437; must be positive"
+    },
+    {
+     "gate": "G4",
+     "name": "net_of_cost",
+     "passed": false,
+     "value": -0.1503182566758322,
+     "threshold": 0.5,
+     "note": "net Sharpe -0.1503182566758322; minimum 0.5"
+    },
+    {
+     "gate": "G5",
+     "name": "consistency",
+     "passed": false,
+     "value": null,
+     "threshold": null,
+     "note": "half-window signs do not agree or are unavailable"
+    }
+   ],
+   "ic_decay": [
+    {
+     "horizon_days": 1,
+     "mean_ic": 0.008913078999705807,
+     "t_stat": 0.9913459665195526,
+     "n": 364
+    },
+    {
+     "horizon_days": 5,
+     "mean_ic": -0.02057930627773437,
+     "t_stat": -1.0253810956797913,
+     "n": 72
+    },
+    {
+     "horizon_days": 20,
+     "mean_ic": -0.01792737449403898,
+     "t_stat": -0.4658107770799423,
+     "n": 18
+    }
+   ],
+   "same_day_ic": -0.019252462301746886,
+   "mostly_descriptive": false,
+   "long_short": {
+    "gross_ann_return": 0.17819757342242204,
+    "net_ann_return": -0.041410759910911345,
+    "net_sharpe": -0.1503182566758322,
+    "turnover_per_rebalance": 2.005555555555555,
+    "max_drawdown": -0.2333371058560062
+   },
+   "evaluation_mode": "in_sample_research",
+   "window": {
+    "start": "2025-10-23",
+    "end": "2026-10-23"
+   }
+  },
+  {
+   "factor": "earn_demand_language",
+   "pool": "crypto",
+   "title": "Demand language",
+   "measures": "management says demand exceeds supply",
+   "definition": "signed demand-signal intensity from 8-K EX-99.1, held 60 rows",
+   "sources": [
+    "filing_text"
+   ],
+   "availability": "filing acceptance + 1 row",
+   "status": "INSUFFICIENT_DATA",
+   "weight": 0.0,
+   "coverage": 0.0,
+   "gates": [
+    {
+     "gate": "G1",
+     "name": "measure",
+     "passed": false,
+     "value": 0.0,
+     "threshold": 0.6,
+     "note": "coverage 0.0; minimum 0.6; specification complete"
+    },
+    {
+     "gate": "G2",
+     "name": "incremental",
+     "passed": null,
+     "value": null,
+     "threshold": 2.0,
+     "note": "not evaluated"
+    },
+    {
+     "gate": "G3",
+     "name": "predictive",
+     "passed": null,
+     "value": null,
+     "threshold": 0.0,
+     "note": "not evaluated"
+    },
+    {
+     "gate": "G4",
+     "name": "net_of_cost",
+     "passed": null,
+     "value": null,
+     "threshold": 0.5,
+     "note": "not evaluated"
+    },
+    {
+     "gate": "G5",
+     "name": "consistency",
+     "passed": null,
+     "value": null,
+     "threshold": null,
+     "note": "not evaluated"
+    }
+   ],
+   "ic_decay": [
+    {
+     "horizon_days": 1,
+     "mean_ic": null,
+     "t_stat": null,
+     "n": 0
+    },
+    {
+     "horizon_days": 5,
+     "mean_ic": null,
+     "t_stat": null,
+     "n": 0
+    },
+    {
+     "horizon_days": 20,
+     "mean_ic": null,
+     "t_stat": null,
+     "n": 0
+    }
+   ],
+   "same_day_ic": null,
+   "mostly_descriptive": false,
+   "long_short": {
+    "gross_ann_return": null,
+    "net_ann_return": null,
+    "net_sharpe": null,
+    "turnover_per_rebalance": null,
+    "max_drawdown": null
+   },
+   "evaluation_mode": "in_sample_research",
+   "window": {
+    "start": "2025-10-23",
+    "end": "2026-10-23"
+   }
+  },
+  {
+   "factor": "earn_sue",
+   "pool": "crypto",
+   "title": "Earnings surprise (SUE)",
+   "measures": "standardised unexpected diluted EPS",
+   "definition": "seasonal random-walk SUE, first-reported values, held 60 rows",
+   "sources": [
+    "fundamental_fact"
+   ],
+   "availability": "filing acceptance + 1 row",
+   "status": "INSUFFICIENT_DATA",
+   "weight": 0.0,
+   "coverage": 0.0,
+   "gates": [
+    {
+     "gate": "G1",
+     "name": "measure",
+     "passed": false,
+     "value": 0.0,
+     "threshold": 0.6,
+     "note": "coverage 0.0; minimum 0.6; specification complete"
+    },
+    {
+     "gate": "G2",
+     "name": "incremental",
+     "passed": null,
+     "value": null,
+     "threshold": 2.0,
+     "note": "not evaluated"
+    },
+    {
+     "gate": "G3",
+     "name": "predictive",
+     "passed": null,
+     "value": null,
+     "threshold": 0.0,
+     "note": "not evaluated"
+    },
+    {
+     "gate": "G4",
+     "name": "net_of_cost",
+     "passed": null,
+     "value": null,
+     "threshold": 0.5,
+     "note": "not evaluated"
+    },
+    {
+     "gate": "G5",
+     "name": "consistency",
+     "passed": null,
+     "value": null,
+     "threshold": null,
+     "note": "not evaluated"
+    }
+   ],
+   "ic_decay": [
+    {
+     "horizon_days": 1,
+     "mean_ic": null,
+     "t_stat": null,
+     "n": 0
+    },
+    {
+     "horizon_days": 5,
+     "mean_ic": null,
+     "t_stat": null,
+     "n": 0
+    },
+    {
+     "horizon_days": 20,
+     "mean_ic": null,
+     "t_stat": null,
+     "n": 0
+    }
+   ],
+   "same_day_ic": null,
+   "mostly_descriptive": false,
+   "long_short": {
+    "gross_ann_return": null,
+    "net_ann_return": null,
+    "net_sharpe": null,
+    "turnover_per_rebalance": null,
+    "max_drawdown": null
+   },
+   "evaluation_mode": "in_sample_research",
+   "window": {
+    "start": "2025-10-23",
+    "end": "2026-10-23"
+   }
+  },
+  {
+   "factor": "evt_drift",
+   "pool": "crypto",
+   "title": "Event drift",
+   "measures": "post-event drift after 8-K events",
+   "definition": "sum prior(type) * direction * exp(-(t-d)/10), rows 1..20 after the event",
+   "sources": [
+    "filing",
+    "filing_text"
+   ],
+   "availability": "filing acceptance + 1 row",
+   "status": "INSUFFICIENT_DATA",
+   "weight": 0.0,
+   "coverage": 0.0,
+   "gates": [
+    {
+     "gate": "G1",
+     "name": "measure",
+     "passed": false,
+     "value": 0.0,
+     "threshold": 0.6,
+     "note": "coverage 0.0; minimum 0.6; specification complete"
+    },
+    {
+     "gate": "G2",
+     "name": "incremental",
+     "passed": null,
+     "value": null,
+     "threshold": 2.0,
+     "note": "not evaluated"
+    },
+    {
+     "gate": "G3",
+     "name": "predictive",
+     "passed": null,
+     "value": null,
+     "threshold": 0.0,
+     "note": "not evaluated"
+    },
+    {
+     "gate": "G4",
+     "name": "net_of_cost",
+     "passed": null,
+     "value": null,
+     "threshold": 0.5,
+     "note": "not evaluated"
+    },
+    {
+     "gate": "G5",
+     "name": "consistency",
+     "passed": null,
+     "value": null,
+     "threshold": null,
+     "note": "not evaluated"
+    }
+   ],
+   "ic_decay": [
+    {
+     "horizon_days": 1,
+     "mean_ic": null,
+     "t_stat": null,
+     "n": 0
+    },
+    {
+     "horizon_days": 5,
+     "mean_ic": null,
+     "t_stat": null,
+     "n": 0
+    },
+    {
+     "horizon_days": 20,
+     "mean_ic": null,
+     "t_stat": null,
+     "n": 0
+    }
+   ],
+   "same_day_ic": null,
+   "mostly_descriptive": false,
+   "long_short": {
+    "gross_ann_return": null,
+    "net_ann_return": null,
+    "net_sharpe": null,
+    "turnover_per_rebalance": null,
+    "max_drawdown": null
+   },
+   "evaluation_mode": "in_sample_research",
+   "window": {
+    "start": "2025-10-23",
+    "end": "2026-10-23"
+   }
+  },
+  {
+   "factor": "pv_dist_52w_high",
+   "pool": "crypto",
+   "title": "Distance to 52-week high",
+   "measures": "anchoring to the 52-week high",
+   "definition": "P[t]/max(P[t-y+1..t]) - 1",
+   "sources": [
+    "price_bar"
+   ],
+   "availability": "close t",
+   "status": "MEASURED_ONLY",
+   "weight": 0.0,
+   "coverage": 0.968786,
+   "gates": [
+    {
+     "gate": "G1",
+     "name": "measure",
+     "passed": true,
+     "value": 0.9687860438292965,
+     "threshold": 0.6,
+     "note": "coverage 0.9687860438292965; minimum 0.6; specification complete"
+    },
+    {
+     "gate": "G2",
+     "name": "incremental",
+     "passed": true,
+     "value": 3.200958980629209,
+     "threshold": 2.0,
+     "note": "best residual IC t-stat 3.200958980629209; minimum 2.0"
+    },
+    {
+     "gate": "G3",
+     "name": "predictive",
+     "passed": true,
+     "value": 0.061951834592949666,
+     "threshold": 0.0,
+     "note": "primary IC 0.061951834592949666; must be positive"
+    },
+    {
+     "gate": "G4",
+     "name": "net_of_cost",
+     "passed": false,
+     "value": 0.09723852809929144,
+     "threshold": 0.5,
+     "note": "net Sharpe 0.09723852809929144; minimum 0.5"
+    },
+    {
+     "gate": "G5",
+     "name": "consistency",
+     "passed": true,
+     "value": null,
+     "threshold": null,
+     "note": "half-window signs agree"
+    }
+   ],
+   "ic_decay": [
+    {
+     "horizon_days": 1,
+     "mean_ic": 0.04871676475969159,
+     "t_stat": 3.200958980629209,
+     "n": 364
+    },
+    {
+     "horizon_days": 5,
+     "mean_ic": 0.061951834592949666,
+     "t_stat": 1.7213803855409127,
+     "n": 72
+    },
+    {
+     "horizon_days": 20,
+     "mean_ic": 0.018648723815134365,
+     "t_stat": 0.2942833310318027,
+     "n": 18
+    }
+   ],
+   "same_day_ic": 0.09771395298095217,
+   "mostly_descriptive": false,
+   "long_short": {
+    "gross_ann_return": 0.0898110150412824,
+    "net_ann_return": 0.051572919803187116,
+    "net_sharpe": 0.09723852809929144,
+    "turnover_per_rebalance": 0.34920634920634913,
+    "max_drawdown": -0.32683180268041123
+   },
+   "evaluation_mode": "in_sample_research",
+   "window": {
+    "start": "2025-10-23",
+    "end": "2026-10-23"
+   }
+  },
+  {
+   "factor": "pv_lowvol_20d",
+   "pool": "crypto",
+   "title": "Low volatility",
+   "measures": "low-volatility premium",
+   "definition": "-std(r[t-19..t]) * sqrt(rows_per_year)",
+   "sources": [
+    "price_bar"
+   ],
+   "availability": "close t",
+   "status": "MEASURED_ONLY",
+   "weight": 0.0,
+   "coverage": 0.997116,
+   "gates": [
+    {
+     "gate": "G1",
+     "name": "measure",
+     "passed": true,
+     "value": 0.9971164936562861,
+     "threshold": 0.6,
+     "note": "coverage 0.9971164936562861; minimum 0.6; specification complete"
+    },
+    {
+     "gate": "G2",
+     "name": "incremental",
+     "passed": true,
+     "value": 4.727802336082419,
+     "threshold": 2.0,
+     "note": "best residual IC t-stat 4.727802336082419; minimum 2.0"
+    },
+    {
+     "gate": "G3",
+     "name": "predictive",
+     "passed": true,
+     "value": 0.08872103776991855,
+     "threshold": 0.0,
+     "note": "primary IC 0.08872103776991855; must be positive"
+    },
+    {
+     "gate": "G4",
+     "name": "net_of_cost",
+     "passed": false,
+     "value": -0.5607704706188745,
+     "threshold": 0.5,
+     "note": "net Sharpe -0.5607704706188745; minimum 0.5"
+    },
+    {
+     "gate": "G5",
+     "name": "consistency",
+     "passed": true,
+     "value": null,
+     "threshold": null,
+     "note": "half-window signs agree"
+    }
+   ],
+   "ic_decay": [
+    {
+     "horizon_days": 1,
+     "mean_ic": 0.06553988133508554,
+     "t_stat": 4.727802336082419,
+     "n": 364
+    },
+    {
+     "horizon_days": 5,
+     "mean_ic": 0.08872103776991855,
+     "t_stat": 2.639201343659612,
+     "n": 72
+    },
+    {
+     "horizon_days": 20,
+     "mean_ic": 0.05175087486973384,
+     "t_stat": 0.7248233180190762,
+     "n": 18
+    }
+   ],
+   "same_day_ic": 0.049363310602796584,
+   "mostly_descriptive": false,
+   "long_short": {
+    "gross_ann_return": -0.2575649966406277,
+    "net_ann_return": -0.35229118711681806,
+    "net_sharpe": -0.5607704706188745,
+    "turnover_per_rebalance": 0.865079365079365,
+    "max_drawdown": -0.5622424365479481
+   },
+   "evaluation_mode": "in_sample_research",
+   "window": {
+    "start": "2025-10-23",
+    "end": "2026-10-23"
+   }
+  },
+  {
+   "factor": "pv_mom_12_1",
+   "pool": "crypto",
+   "title": "12-1 month momentum",
+   "measures": "12-month trend, skipping the last month",
+   "definition": "P[t-m]/P[t-y] - 1",
+   "sources": [
+    "price_bar"
+   ],
+   "availability": "close t",
+   "status": "MEASURED_ONLY",
+   "weight": 0.0,
+   "coverage": 0.997333,
+   "gates": [
+    {
+     "gate": "G1",
+     "name": "measure",
+     "passed": true,
+     "value": 0.9973327566320646,
+     "threshold": 0.6,
+     "note": "coverage 0.9973327566320646; minimum 0.6; specification complete"
+    },
+    {
+     "gate": "G2",
+     "name": "incremental",
+     "passed": true,
+     "value": 3.8064205796763546,
+     "threshold": 2.0,
+     "note": "best residual IC t-stat 3.8064205796763546; minimum 2.0"
+    },
+    {
+     "gate": "G3",
+     "name": "predictive",
+     "passed": true,
+     "value": 0.06848538241052299,
+     "threshold": 0.0,
+     "note": "primary IC 0.06848538241052299; must be positive"
+    },
+    {
+     "gate": "G4",
+     "name": "net_of_cost",
+     "passed": false,
+     "value": 0.24680333661130707,
+     "threshold": 0.5,
+     "note": "net Sharpe 0.24680333661130707; minimum 0.5"
+    },
+    {
+     "gate": "G5",
+     "name": "consistency",
+     "passed": true,
+     "value": null,
+     "threshold": null,
+     "note": "half-window signs agree"
+    }
+   ],
+   "ic_decay": [
+    {
+     "horizon_days": 1,
+     "mean_ic": 0.054000073758469845,
+     "t_stat": 3.8064205796763546,
+     "n": 364
+    },
+    {
+     "horizon_days": 5,
+     "mean_ic": 0.06848538241052299,
+     "t_stat": 1.9972504791066386,
+     "n": 72
+    },
+    {
+     "horizon_days": 20,
+     "mean_ic": 0.06900193927659035,
+     "t_stat": 0.9848920456911114,
+     "n": 18
+    }
+   ],
+   "same_day_ic": 0.05293470268112884,
+   "mostly_descriptive": false,
+   "long_short": {
+    "gross_ann_return": 0.20631715148297378,
+    "net_ann_return": 0.16112667529249744,
+    "net_sharpe": 0.24680333661130707,
+    "turnover_per_rebalance": 0.4126984126984126,
+    "max_drawdown": -0.4600191679175992
+   },
+   "evaluation_mode": "in_sample_research",
+   "window": {
+    "start": "2025-10-23",
+    "end": "2026-10-23"
+   }
+  },
+  {
+   "factor": "pv_mom_1m",
+   "pool": "crypto",
+   "title": "1-month momentum",
+   "measures": "1-month trend",
+   "definition": "P[t]/P[t-m] - 1",
+   "sources": [
+    "price_bar"
+   ],
+   "availability": "close t",
+   "status": "MEASURED_ONLY",
+   "weight": 0.0,
+   "coverage": 0.997765,
+   "gates": [
+    {
+     "gate": "G1",
+     "name": "measure",
+     "passed": true,
+     "value": 0.9977652825836217,
+     "threshold": 0.6,
+     "note": "coverage 0.9977652825836217; minimum 0.6; specification complete"
+    },
+    {
+     "gate": "G2",
+     "name": "incremental",
+     "passed": false,
+     "value": -1.594341459161998,
+     "threshold": 2.0,
+     "note": "best residual IC t-stat -1.594341459161998; minimum 2.0"
+    },
+    {
+     "gate": "G3",
+     "name": "predictive",
+     "passed": false,
+     "value": -0.05015562279318185,
+     "threshold": 0.0,
+     "note": "primary IC -0.05015562279318185; must be positive"
+    },
+    {
+     "gate": "G4",
+     "name": "net_of_cost",
+     "passed": false,
+     "value": -1.0351334827623913,
+     "threshold": 0.5,
+     "note": "net Sharpe -1.0351334827623913; minimum 0.5"
+    },
+    {
+     "gate": "G5",
+     "name": "consistency",
+     "passed": true,
+     "value": null,
+     "threshold": null,
+     "note": "half-window signs agree"
+    }
+   ],
+   "ic_decay": [
+    {
+     "horizon_days": 1,
+     "mean_ic": -0.02210034174889763,
+     "t_stat": -1.594341459161998,
+     "n": 364
+    },
+    {
+     "horizon_days": 5,
+     "mean_ic": -0.05015562279318185,
+     "t_stat": -1.780387276639714,
+     "n": 72
+    },
+    {
+     "horizon_days": 20,
+     "mean_ic": -0.12788686805091767,
+     "t_stat": -2.4518226916197015,
+     "n": 18
+    }
+   ],
+   "same_day_ic": 0.130889909193121,
+   "mostly_descriptive": false,
+   "long_short": {
+    "gross_ann_return": -0.28313792269279486,
+    "net_ann_return": -0.43956649412136634,
+    "net_sharpe": -1.0351334827623913,
+    "turnover_per_rebalance": 1.4285714285714282,
+    "max_drawdown": -0.5693640117007409
+   },
+   "evaluation_mode": "in_sample_research",
+   "window": {
+    "start": "2025-10-23",
+    "end": "2026-10-23"
+   }
+  },
+  {
+   "factor": "pv_rev_5d",
+   "pool": "crypto",
+   "title": "5-day reversal",
+   "measures": "short-term reversal",
+   "definition": "-(P[t]/P[t-5] - 1)",
+   "sources": [
+    "price_bar"
+   ],
+   "availability": "close t",
+   "status": "MEASURED_ONLY",
+   "weight": 0.0,
+   "coverage": 0.999567,
+   "gates": [
+    {
+     "gate": "G1",
+     "name": "measure",
+     "passed": true,
+     "value": 0.9995674740484429,
+     "threshold": 0.6,
+     "note": "coverage 0.9995674740484429; minimum 0.6; specification complete"
+    },
+    {
+     "gate": "G2",
+     "name": "incremental",
+     "passed": false,
+     "value": 0.7916760560149858,
+     "threshold": 2.0,
+     "note": "best residual IC t-stat 0.7916760560149858; minimum 2.0"
+    },
+    {
+     "gate": "G3",
+     "name": "predictive",
+     "passed": true,
+     "value": 0.007612837412163227,
+     "threshold": 0.0,
+     "note": "primary IC 0.007612837412163227; must be positive"
+    },
+    {
+     "gate": "G4",
+     "name": "net_of_cost",
+     "passed": false,
+     "value": -1.3404294999128208,
+     "threshold": 0.5,
+     "note": "net Sharpe -1.3404294999128208; minimum 0.5"
+    },
+    {
+     "gate": "G5",
+     "name": "consistency",
+     "passed": false,
+     "value": null,
+     "threshold": null,
+     "note": "half-window signs do not agree or are unavailable"
+    }
+   ],
+   "ic_decay": [
+    {
+     "horizon_days": 1,
+     "mean_ic": 0.009727429930721895,
+     "t_stat": 0.7916760560149858,
+     "n": 364
+    },
+    {
+     "horizon_days": 5,
+     "mean_ic": 0.007612837412163227,
+     "t_stat": 0.24574917804194668,
+     "n": 72
+    },
+    {
+     "horizon_days": 20,
+     "mean_ic": -0.012996008148100908,
+     "t_stat": -0.22983683060748872,
+     "n": 18
+    }
+   ],
+   "same_day_ic": -0.3599219259069695,
+   "mostly_descriptive": true,
+   "long_short": {
+    "gross_ann_return": -0.4245282473376975,
+    "net_ann_return": -0.767802056861507,
+    "net_sharpe": -1.3404294999128208,
+    "turnover_per_rebalance": 3.1349206349206344,
+    "max_drawdown": -0.5719423271335966
+   },
+   "evaluation_mode": "in_sample_research",
+   "window": {
+    "start": "2025-10-23",
+    "end": "2026-10-23"
+   }
+  },
+  {
+   "factor": "pv_volume_z",
+   "pool": "crypto",
+   "title": "Volume z-score",
+   "measures": "abnormal trading activity",
+   "definition": "(log V[t] - mean(log V[t-60..t-1])) / std(...)",
+   "sources": [
+    "price_bar"
+   ],
+   "availability": "close t",
+   "status": "MEASURED_ONLY",
+   "weight": 0.0,
+   "coverage": 0.991349,
+   "gates": [
+    {
+     "gate": "G1",
+     "name": "measure",
+     "passed": true,
+     "value": 0.9913494809688581,
+     "threshold": 0.6,
+     "note": "coverage 0.9913494809688581; minimum 0.6; specification complete"
+    },
+    {
+     "gate": "G2",
+     "name": "incremental",
+     "passed": false,
+     "value": -0.7864192159331036,
+     "threshold": 2.0,
+     "note": "best residual IC t-stat -0.7864192159331036; minimum 2.0"
+    },
+    {
+     "gate": "G3",
+     "name": "predictive",
+     "passed": false,
+     "value": -0.020322774235633032,
+     "threshold": 0.0,
+     "note": "primary IC -0.020322774235633032; must be positive"
+    },
+    {
+     "gate": "G4",
+     "name": "net_of_cost",
+     "passed": false,
+     "value": -0.15544487420043607,
+     "threshold": 0.5,
+     "note": "net Sharpe -0.15544487420043607; minimum 0.5"
+    },
+    {
+     "gate": "G5",
+     "name": "consistency",
+     "passed": true,
+     "value": null,
+     "threshold": null,
+     "note": "half-window signs agree"
+    }
+   ],
+   "ic_decay": [
+    {
+     "horizon_days": 1,
+     "mean_ic": -0.021452220707456286,
+     "t_stat": -1.9542311563267132,
+     "n": 364
+    },
+    {
+     "horizon_days": 5,
+     "mean_ic": -0.020322774235633032,
+     "t_stat": -0.7864192159331036,
+     "n": 72
+    },
+    {
+     "horizon_days": 20,
+     "mean_ic": -0.03822240922078582,
+     "t_stat": -0.9183965883569338,
+     "n": 18
+    }
+   ],
+   "same_day_ic": 0.1041510417903247,
+   "mostly_descriptive": true,
+   "long_short": {
+    "gross_ann_return": 0.18903840382593068,
+    "net_ann_return": -0.09383659617406935,
+    "net_sharpe": -0.15544487420043607,
+    "turnover_per_rebalance": 2.583333333333333,
+    "max_drawdown": -0.6572644506616964
+   },
+   "evaluation_mode": "in_sample_research",
+   "window": {
+    "start": "2025-10-23",
+    "end": "2026-10-23"
+   }
+  },
+  {
+   "factor": "rel_spillover",
+   "pool": "crypto",
+   "title": "Relational spillover",
+   "measures": "shocks at linked companies not yet priced",
+   "definition": "weighted 5-day residual-return shock of validated graph neighbours, lagged 1 row",
+   "sources": [
+    "price_bar",
+    "graph"
+   ],
+   "availability": "close t-1",
+   "status": "INSUFFICIENT_DATA",
+   "weight": 0.0,
+   "coverage": 0.0,
+   "gates": [
+    {
+     "gate": "G1",
+     "name": "measure",
+     "passed": false,
+     "value": 0.0,
+     "threshold": 0.6,
+     "note": "coverage 0.0; minimum 0.6; specification complete"
+    },
+    {
+     "gate": "G2",
+     "name": "incremental",
+     "passed": null,
+     "value": null,
+     "threshold": 2.0,
+     "note": "not evaluated"
+    },
+    {
+     "gate": "G3",
+     "name": "predictive",
+     "passed": null,
+     "value": null,
+     "threshold": 0.0,
+     "note": "not evaluated"
+    },
+    {
+     "gate": "G4",
+     "name": "net_of_cost",
+     "passed": null,
+     "value": null,
+     "threshold": 0.5,
+     "note": "not evaluated"
+    },
+    {
+     "gate": "G5",
+     "name": "consistency",
+     "passed": null,
+     "value": null,
+     "threshold": null,
+     "note": "not evaluated"
+    }
+   ],
+   "ic_decay": [
+    {
+     "horizon_days": 1,
+     "mean_ic": null,
+     "t_stat": null,
+     "n": 0
+    },
+    {
+     "horizon_days": 5,
+     "mean_ic": null,
+     "t_stat": null,
+     "n": 0
+    },
+    {
+     "horizon_days": 20,
+     "mean_ic": null,
+     "t_stat": null,
+     "n": 0
+    }
+   ],
+   "same_day_ic": null,
+   "mostly_descriptive": false,
+   "long_short": {
+    "gross_ann_return": null,
+    "net_ann_return": null,
+    "net_sharpe": null,
+    "turnover_per_rebalance": null,
+    "max_drawdown": null
+   },
+   "evaluation_mode": "in_sample_research",
+   "window": {
+    "start": "2025-10-23",
+    "end": "2026-10-23"
+   }
+  }
+ ],
+ "regimes": [
+  {
+   "pool": "crypto",
+   "as_of": "2026-10-23",
+   "points": 0,
+   "state": "normal",
+   "indicators": [
+    {
+     "name": "trend",
+     "value": 1.1127914193554027,
+     "threshold": 1.0,
+     "triggered": false,
+     "note": "BTC-USD close / 200-day MA (triggers below 1)"
+    },
+    {
+     "name": "volatility",
+     "value": 0.20273972602739726,
+     "threshold": 0.9,
+     "triggered": false,
+     "note": "BTC 20d realised vol percentile over 1 year"
+    },
+    {
+     "name": "correlation",
+     "value": 0.5397260273972603,
+     "threshold": 0.9,
+     "triggered": false,
+     "note": "20d mean pairwise correlation, 1-year percentile"
+    },
+    {
+     "name": "breadth",
+     "value": 0.6486486486486487,
+     "threshold": 0.4,
+     "triggered": false,
+     "note": "share of pool above its 200-day MA (triggers below threshold)"
+    },
+    {
+     "name": "credit",
+     "value": 60.00000000000001,
+     "threshold": 75.0,
+     "triggered": false,
+     "note": "20-day change in US high-yield OAS, basis points"
+    }
+   ],
+   "history": [
+    {
+     "date": "2026-08-25",
+     "points": 0,
+     "state": "normal"
+    },
+    {
+     "date": "2026-08-26",
+     "points": 0,
+     "state": "normal"
+    },
+    {
+     "date": "2026-08-27",
+     "points": 0,
+     "state": "normal"
+    },
+    {
+     "date": "2026-08-28",
+     "points": 0,
+     "state": "normal"
+    },
+    {
+     "date": "2026-08-29",
+     "points": 0,
+     "state": "normal"
+    },
+    {
+     "date": "2026-08-30",
+     "points": 0,
+     "state": "normal"
+    },
+    {
+     "date": "2026-08-31",
+     "points": 0,
+     "state": "normal"
+    },
+    {
+     "date": "2026-09-01",
+     "points": 0,
+     "state": "normal"
+    },
+    {
+     "date": "2026-09-02",
+     "points": 0,
+     "state": "normal"
+    },
+    {
+     "date": "2026-09-03",
+     "points": 1,
+     "state": "normal"
+    },
+    {
+     "date": "2026-09-04",
+     "points": 1,
+     "state": "normal"
+    },
+    {
+     "date": "2026-09-05",
+     "points": 1,
+     "state": "normal"
+    },
+    {
+     "date": "2026-09-06",
+     "points": 1,
+     "state": "normal"
+    },
+    {
+     "date": "2026-09-07",
+     "points": 1,
+     "state": "normal"
+    },
+    {
+     "date": "2026-09-08",
+     "points": 0,
+     "state": "normal"
+    },
+    {
+     "date": "2026-09-09",
+     "points": 0,
+     "state": "normal"
+    },
+    {
+     "date": "2026-09-10",
+     "points": 0,
+     "state": "normal"
+    },
+    {
+     "date": "2026-09-11",
+     "points": 0,
+     "state": "normal"
+    },
+    {
+     "date": "2026-09-12",
+     "points": 0,
+     "state": "normal"
+    },
+    {
+     "date": "2026-09-13",
+     "points": 0,
+     "state": "normal"
+    },
+    {
+     "date": "2026-09-14",
+     "points": 0,
+     "state": "normal"
+    },
+    {
+     "date": "2026-09-15",
+     "points": 0,
+     "state": "normal"
+    },
+    {
+     "date": "2026-09-16",
+     "points": 0,
+     "state": "normal"
+    },
+    {
+     "date": "2026-09-17",
+     "points": 0,
+     "state": "normal"
+    },
+    {
+     "date": "2026-09-18",
+     "points": 0,
+     "state": "normal"
+    },
+    {
+     "date": "2026-09-19",
+     "points": 0,
+     "state": "normal"
+    },
+    {
+     "date": "2026-09-20",
+     "points": 0,
+     "state": "normal"
+    },
+    {
+     "date": "2026-09-21",
+     "points": 0,
+     "state": "normal"
+    },
+    {
+     "date": "2026-09-22",
+     "points": 0,
+     "state": "normal"
+    },
+    {
+     "date": "2026-09-23",
+     "points": 0,
+     "state": "normal"
+    },
+    {
+     "date": "2026-09-24",
+     "points": 0,
+     "state": "normal"
+    },
+    {
+     "date": "2026-09-25",
+     "points": 0,
+     "state": "normal"
+    },
+    {
+     "date": "2026-09-26",
+     "points": 0,
+     "state": "normal"
+    },
+    {
+     "date": "2026-09-27",
+     "points": 0,
+     "state": "normal"
+    },
+    {
+     "date": "2026-09-28",
+     "points": 0,
+     "state": "normal"
+    },
+    {
+     "date": "2026-09-29",
+     "points": 0,
+     "state": "normal"
+    },
+    {
+     "date": "2026-09-30",
+     "points": 0,
+     "state": "normal"
+    },
+    {
+     "date": "2026-10-01",
+     "points": 0,
+     "state": "normal"
+    },
+    {
+     "date": "2026-10-02",
+     "points": 0,
+     "state": "normal"
+    },
+    {
+     "date": "2026-10-03",
+     "points": 0,
+     "state": "normal"
+    },
+    {
+     "date": "2026-10-04",
+     "points": 0,
+     "state": "normal"
+    },
+    {
+     "date": "2026-10-05",
+     "points": 0,
+     "state": "normal"
+    },
+    {
+     "date": "2026-10-06",
+     "points": 0,
+     "state": "normal"
+    },
+    {
+     "date": "2026-10-07",
+     "points": 0,
+     "state": "normal"
+    },
+    {
+     "date": "2026-10-08",
+     "points": 0,
+     "state": "normal"
+    },
+    {
+     "date": "2026-10-09",
+     "points": 0,
+     "state": "normal"
+    },
+    {
+     "date": "2026-10-10",
+     "points": 0,
+     "state": "normal"
+    },
+    {
+     "date": "2026-10-11",
+     "points": 0,
+     "state": "normal"
+    },
+    {
+     "date": "2026-10-12",
+     "points": 0,
+     "state": "normal"
+    },
+    {
+     "date": "2026-10-13",
+     "points": 0,
+     "state": "normal"
+    },
+    {
+     "date": "2026-10-14",
+     "points": 0,
+     "state": "normal"
+    },
+    {
+     "date": "2026-10-15",
+     "points": 0,
+     "state": "normal"
+    },
+    {
+     "date": "2026-10-16",
+     "points": 0,
+     "state": "normal"
+    },
+    {
+     "date": "2026-10-17",
+     "points": 0,
+     "state": "normal"
+    },
+    {
+     "date": "2026-10-18",
+     "points": 0,
+     "state": "normal"
+    },
+    {
+     "date": "2026-10-19",
+     "points": 0,
+     "state": "normal"
+    },
+    {
+     "date": "2026-10-20",
+     "points": 0,
+     "state": "normal"
+    },
+    {
+     "date": "2026-10-21",
+     "points": 0,
+     "state": "normal"
+    },
+    {
+     "date": "2026-10-22",
+     "points": 0,
+     "state": "normal"
+    },
+    {
+     "date": "2026-10-23",
+     "points": 0,
+     "state": "normal"
+    }
+   ],
+   "lift": {
+    "drawdown_threshold": 0.2,
+    "horizon_days": 20,
+    "lift_elevated": 1.1388829900191122,
+    "lift_stressed": 0.0,
+    "n_days": 346
+   }
+  }
+ ],
+ "explanations": [
+  {
+   "explanation_id": "exp-crypto-pepe24478-usd",
+   "pool": "crypto",
+   "symbol": "PEPE24478-USD",
+   "verdict": "explained",
+   "summary": "PEPE24478-USD gained +25.00% over the 2026-08-24 to 2026-10-23 observation window, with the 5-day return also +25.00% and price at the window high as of 2026-10-23.",
+   "claims": [
+    {
+     "claim_id": "PEPE24478-USD-r1-c1",
+     "text": "PEPE24478-USD gained +25.00% over the 2026-08-24 to 2026-10-23 observation window, with the 5-day return also +25.00% and price at the window high as of 2026-10-23.",
+     "kind": "price",
+     "evidence": [
+      {
+       "evidence_id": "ev-pepe24478-usd-price-symbol-window",
+       "query_template": "price_symbol_window",
+       "params": {
+        "symbol": "PEPE24478-USD",
+        "start": "2026-08-24",
+        "end": "2026-10-23"
+       },
+       "rows_sha256": "99a70d17164ec58adac994bf3de17d63ca4f3d619a26b41e982a76047a3bf9b9",
+       "source_table": "price_bar",
+       "as_of": "2026-10-23",
+       "url": null
+      }
+     ],
+     "status": "verified",
+     "checks": [
+      {
+       "name": "rerun_hash_match",
+       "passed": true,
+       "detail": "hash matches"
+      },
+      {
+       "name": "no_future_data",
+       "passed": true,
+       "detail": "dates are on or before as_of"
+      }
+     ]
+    }
+   ],
+   "counter_case": [
+    "Is the observed price action already priced into the current valuation?",
+    "Could broader market or sector movements explain the price trend?",
+    "Is the short time frame analyzed sufficient to warrant a specific investment conclusion?"
+   ],
+   "ruled_out": [],
+   "models": {
+    "analyst": "nvidia/nemotron-3.5-lightning-30b-a3b",
+    "skeptic": "nvidia/nemotron-3.5-bolt-e4b"
+   },
+   "retries": 1
+  },
+  {
+   "explanation_id": "exp-crypto-wld-usd",
+   "pool": "crypto",
+   "symbol": "WLD-USD",
+   "verdict": "explained",
+   "summary": "WLD-USD (rank 38, score 0.0) posted a +19.74% return over the 2026-08-24 to 2026-10-23 window, with a 5-day return of -1.42% and distance to window high of -19.36%.",
+   "claims": [
+    {
+     "claim_id": "WLD-USD-r1-c1",
+     "text": "WLD-USD gained +19.74% over the 2026-08-24 to 2026-10-23 price window.",
+     "kind": "price",
+     "evidence": [
+      {
+       "evidence_id": "ev-wld-usd-price-symbol-window",
+       "query_template": "price_symbol_window",
+       "params": {
+        "symbol": "WLD-USD",
+        "start": "2026-08-24",
+        "end": "2026-10-23"
+       },
+       "rows_sha256": "b12675b09cc3869cbc4dbc658e1155abb1f245ad4c02d919cef56764d5333208",
+       "source_table": "price_bar",
+       "as_of": "2026-10-23",
+       "url": null
+      }
+     ],
+     "status": "verified",
+     "checks": [
+      {
+       "name": "rerun_hash_match",
+       "passed": true,
+       "detail": "hash matches"
+      },
+      {
+       "name": "no_future_data",
+       "passed": true,
+       "detail": "dates are on or before as_of"
+      }
+     ]
+    }
+   ],
+   "counter_case": [
+    "Is the observed return already priced into the current instrument score?",
+    "Could broader market movements explain the short-term price fluctuation?",
+    "Is the timing of the short-term drawdown indicative of a larger trend reversal?"
+   ],
+   "ruled_out": [],
+   "models": {
+    "analyst": "nvidia/nemotron-3.5-lightning-30b-a3b",
+    "skeptic": "nvidia/nemotron-3.5-bolt-e4b"
+   },
+   "retries": 1
+  },
+  {
+   "explanation_id": "exp-crypto-gram-usd",
+   "pool": "crypto",
+   "symbol": "GRAM-USD",
+   "verdict": "explained",
+   "summary": "Gram-USD (TON) crypto instrument ranked 17/38 as of 2026-10-23, with price evidence showing a -16.60% window return over 2026-08-24 to 2026-10-23.",
+   "claims": [
+    {
+     "claim_id": "GRAM-USD-r1-c1",
+     "text": "GRAM-USD returned -16.60% over the 61-day window from 2026-08-24 to 2026-10-23, with a 5-day return of -9.53% and distance to window high of -25.17%.",
+     "kind": "price",
+     "evidence": [
+      {
+       "evidence_id": "ev-gram-usd-price-symbol-window",
+       "query_template": "price_symbol_window",
+       "params": {
+        "symbol": "GRAM-USD",
+        "start": "2026-08-24",
+        "end": "2026-10-23"
+       },
+       "rows_sha256": "1d6805c62eaf9477a08723805dc5930b3b31b283bc567ef937d077f56d30cf18",
+       "source_table": "price_bar",
+       "as_of": "2026-10-23",
+       "url": null
+      }
+     ],
+     "status": "verified",
+     "checks": [
+      {
+       "name": "rerun_hash_match",
+       "passed": true,
+       "detail": "hash matches"
+      },
+      {
+       "name": "no_future_data",
+       "passed": true,
+       "detail": "dates are on or before as_of"
+      }
+     ]
+    }
+   ],
+   "counter_case": [
+    "Is the score of 0.0 reflective of recent negative performance or a structural issue in the ranking engine?",
+    "Could broader market trends influence this specific price window return independent of fundamental changes?",
+    "Is the timing of the price window window representative of sustained or temporary weakness?"
+   ],
+   "ruled_out": [],
+   "models": {
+    "analyst": "nvidia/nemotron-3.5-lightning-30b-a3b",
+    "skeptic": "nvidia/nemotron-3.5-bolt-e4b"
+   },
+   "retries": 1
+  }
+ ],
+ "track_record": {
+  "mode": "walk_forward",
+  "window": {
+   "start": "2025-10-23",
+   "end": "2026-10-23"
+  },
+  "settled_count": 1816,
+  "pending_count": 84,
+  "by_tier": [
+   {
+    "pool": "crypto",
+    "tier": "AVOID",
+    "n": 15,
+    "hit_rate": 0.5333333333333333,
+    "mean_excess_bps": -127.06448751597817
+   },
+   {
+    "pool": "crypto",
+    "tier": "NEUTRAL",
+    "n": 382,
+    "hit_rate": null,
+    "mean_excess_bps": -43.23419159342438
+   },
+   {
+    "pool": "crypto",
+    "tier": "NO_CALL",
+    "n": 1210,
+    "hit_rate": null,
+    "mean_excess_bps": 33.94549205991094
+   },
+   {
+    "pool": "crypto",
+    "tier": "OVERWEIGHT",
+    "n": 113,
+    "hit_rate": 0.37168141592920356,
+    "mean_excess_bps": -40.75176977031315
+   },
+   {
+    "pool": "crypto",
+    "tier": "UNDERWEIGHT",
+    "n": 96,
+    "hit_rate": 0.5833333333333334,
+    "mean_excess_bps": -11.286764741905927
+   }
+  ],
+  "calibration": [
+   {
+    "bucket_low": 0.0,
+    "bucket_high": 0.2,
+    "n": 335,
+    "predicted": 0.10549882168106833,
+    "observed": 0.46567164179104475
+   },
+   {
+    "bucket_low": 0.2,
+    "bucket_high": 0.4,
+    "n": 384,
+    "predicted": 0.3026315789473684,
+    "observed": 0.4791666666666667
+   },
+   {
+    "bucket_low": 0.4,
+    "bucket_high": 0.6,
+    "n": 329,
+    "predicted": 0.49832026875699886,
+    "observed": 0.44072948328267475
+   },
+   {
+    "bucket_low": 0.6,
+    "bucket_high": 0.8,
+    "n": 384,
+    "predicted": 0.6973684210526315,
+    "observed": 0.3255208333333333
+   },
+   {
+    "bucket_low": 0.8,
+    "bucket_high": 1.0,
+    "n": 384,
+    "predicted": 0.9078947368421053,
+    "observed": 0.4088541666666667
+   }
+  ],
+  "composite_ic_series": [
+   {
+    "date": "2026-02-20",
+    "pool": "crypto",
+    "ic": 0.036630905167780066
+   },
+   {
+    "date": "2026-02-25",
+    "pool": "crypto",
+    "ic": 0.16424116424116425
+   },
+   {
+    "date": "2026-03-02",
+    "pool": "crypto",
+    "ic": 0.5030366041342378
+   },
+   {
+    "date": "2026-03-07",
+    "pool": "crypto",
+    "ic": -0.14804683225735857
+   },
+   {
+    "date": "2026-03-12",
+    "pool": "crypto",
+    "ic": -0.1441076704234599
+   },
+   {
+    "date": "2026-03-17",
+    "pool": "crypto",
+    "ic": 0.4870335922967502
+   },
+   {
+    "date": "2026-03-22",
+    "pool": "crypto",
+    "ic": 0.18011708731889395
+   },
+   {
+    "date": "2026-03-27",
+    "pool": "crypto",
+    "ic": -0.06576571657269457
+   },
+   {
+    "date": "2026-04-01",
+    "pool": "crypto",
+    "ic": -0.46843199474778424
+   },
+   {
+    "date": "2026-04-06",
+    "pool": "crypto",
+    "ic": 0.2550607287449393
+   },
+   {
+    "date": "2026-04-11",
+    "pool": "crypto",
+    "ic": -0.3883357041251778
+   },
+   {
+    "date": "2026-04-16",
+    "pool": "crypto",
+    "ic": 0.6548120598519206
+   },
+   {
+    "date": "2026-04-21",
+    "pool": "crypto",
+    "ic": -0.15122831997248568
+   },
+   {
+    "date": "2026-04-26",
+    "pool": "crypto",
+    "ic": 0.1760682828044352
+   },
+   {
+    "date": "2026-05-01",
+    "pool": "crypto",
+    "ic": -0.16600098509280808
+   },
+   {
+    "date": "2026-05-06",
+    "pool": "crypto",
+    "ic": -0.09235328986366331
+   },
+   {
+    "date": "2026-05-11",
+    "pool": "crypto",
+    "ic": null
+   },
+   {
+    "date": "2026-05-16",
+    "pool": "crypto",
+    "ic": null
+   },
+   {
+    "date": "2026-05-21",
+    "pool": "crypto",
+    "ic": null
+   },
+   {
+    "date": "2026-05-26",
+    "pool": "crypto",
+    "ic": null
+   },
+   {
+    "date": "2026-05-31",
+    "pool": "crypto",
+    "ic": null
+   },
+   {
+    "date": "2026-06-05",
+    "pool": "crypto",
+    "ic": null
+   },
+   {
+    "date": "2026-06-10",
+    "pool": "crypto",
+    "ic": null
+   },
+   {
+    "date": "2026-06-15",
+    "pool": "crypto",
+    "ic": null
+   },
+   {
+    "date": "2026-06-20",
+    "pool": "crypto",
+    "ic": null
+   },
+   {
+    "date": "2026-06-25",
+    "pool": "crypto",
+    "ic": null
+   },
+   {
+    "date": "2026-06-30",
+    "pool": "crypto",
+    "ic": null
+   },
+   {
+    "date": "2026-07-05",
+    "pool": "crypto",
+    "ic": null
+   },
+   {
+    "date": "2026-07-10",
+    "pool": "crypto",
+    "ic": null
+   },
+   {
+    "date": "2026-07-15",
+    "pool": "crypto",
+    "ic": null
+   },
+   {
+    "date": "2026-07-20",
+    "pool": "crypto",
+    "ic": null
+   },
+   {
+    "date": "2026-07-25",
+    "pool": "crypto",
+    "ic": null
+   },
+   {
+    "date": "2026-07-30",
+    "pool": "crypto",
+    "ic": null
+   },
+   {
+    "date": "2026-08-04",
+    "pool": "crypto",
+    "ic": null
+   },
+   {
+    "date": "2026-08-09",
+    "pool": "crypto",
+    "ic": null
+   },
+   {
+    "date": "2026-08-14",
+    "pool": "crypto",
+    "ic": null
+   },
+   {
+    "date": "2026-08-19",
+    "pool": "crypto",
+    "ic": null
+   },
+   {
+    "date": "2026-08-24",
+    "pool": "crypto",
+    "ic": null
+   },
+   {
+    "date": "2026-08-29",
+    "pool": "crypto",
+    "ic": null
+   },
+   {
+    "date": "2026-09-03",
+    "pool": "crypto",
+    "ic": null
+   },
+   {
+    "date": "2026-09-08",
+    "pool": "crypto",
+    "ic": null
+   },
+   {
+    "date": "2026-09-13",
+    "pool": "crypto",
+    "ic": null
+   },
+   {
+    "date": "2026-09-18",
+    "pool": "crypto",
+    "ic": null
+   },
+   {
+    "date": "2026-09-23",
+    "pool": "crypto",
+    "ic": null
+   },
+   {
+    "date": "2026-09-28",
+    "pool": "crypto",
+    "ic": null
+   },
+   {
+    "date": "2026-10-03",
+    "pool": "crypto",
+    "ic": null
+   },
+   {
+    "date": "2026-10-08",
+    "pool": "crypto",
+    "ic": null
+   },
+   {
+    "date": "2026-10-13",
+    "pool": "crypto",
+    "ic": null
+   }
+  ]
+ },
+ "warnings": [
+  "The valuation constraint is not applied in this run.",
+  "Ranking uses walk-forward weights and out-of-sample composite IC; factor cards show in-sample research statistics over the window.",
+  "Walk-forward excludes evt_drift and rel_spillover because their priors and edges are fitted in-sample.",
+  "Meterless engines were not used; no World Model/H-MEM persistence or memory context is claimed.",
+  "Graph edges are validated on the same window they are used in (in-sample)."
+ ],
+ "trace_path": "logs\\trace-2026-10-23-b8637c6c.jsonl",
+ "disclaimer": "Research and education only. Tiers are research stances, not orders or investment advice. TradePulse places no trades. Past performance does not predict future results."
+}

@@ -12,7 +12,9 @@ Required distinctions:
 - The accepted run uses GLM inference, Zetaris data/evidence and real Meterless engine calls.
 - Nightshift history is genuine but belongs to an earlier run that failed full acceptance.
 - NO_CALL stances, missing predictive support and speculative counter-cases stay visible.
-- US/EU are future upgrades; no NVIDIA/spacexsi/Cursor integration claim is made.
+- A separate sample-data Crypto run used hosted NVIDIA NIM (Nemotron 3.5) for analyst and
+  skeptic; show runs/nvidia-nim-crypto-1 and do not present it as the Zetaris + Meterless run.
+- US/EU are future upgrades; no spacexsi/Cursor integration claim is made.
 - Keep all keys and private configuration off screen.
 
 Use docs/RUNNING.md to reproduce the same saved result with latest-main frontend sources.

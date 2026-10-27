@@ -36,6 +36,7 @@ Confirm the platform roster before creating the submission; the organizer says i
 | Platform submission | Submit/update before 27 October 2026, 23:45 UTC; do not infer completion from local files |
 
 Keep speculative skeptic prose distinct from verifier-supported observations. Do not claim
-US/EU live acceptance, new Nightshift inference, NVIDIA/spacexsi usage or profitable returns
+US/EU live acceptance, new Nightshift inference, NVIDIA use beyond the recorded NIM sample run,
+spacexsi usage or profitable returns
 that are not established by the evidence. An implementation/CI pass is not full accessibility
 or event-eligibility certification.

@@ -24,5 +24,6 @@ Official Meterless source, commit notice and per-engine licenses are public in t
 [integration checkout](https://github.com/witold-andelie/tradepulse/tree/194033a1d7f78d96e60ec16f28e633f8c81ebf29/integrations/engines).
 The main license is Apache-2.0; it does not replace third-party licenses or data terms.
 
-No implemented NVIDIA, spacexsi or Cursor sponsor-use claim is made. Historical plans,
+NVIDIA NIM use is limited to the recorded Nemotron 3.5 run in runs/nvidia-nim-crypto-1.
+No implemented spacexsi or Cursor sponsor-use claim is made. Historical plans,
 configuration placeholders or available unused routes are not evidence of actual usage.

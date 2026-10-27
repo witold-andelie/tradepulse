@@ -5,7 +5,13 @@ export function matchingVoices(voices, locale) {
   // A generic language may use its regional voices. Explicit regional locales are not silently swapped.
   return voices.filter((voice) => {
     const lang = normalizedLanguage(voice.lang);
-    return lang === target || lang.startsWith(`${target}-`);
+    try {
+      const requested = new Intl.Locale(target);
+      const available = new Intl.Locale(lang);
+      return requested.language === available.language
+        && (!requested.region || requested.region === available.region)
+        && (!requested.script || requested.script === available.script);
+    } catch { return lang === target || lang.startsWith(`${target}-`); }
   });
 }
 
@@ -54,7 +60,7 @@ export function createSpeechController(synth, Utterance, notify, timers = global
         utterance.onerror = () => { if (token === generation) { clearTimer(); current = null; update('error'); } };
         update('speaking');
         watchStart(token);
-        // cancel() preserves the engine's global pause state across playback and navigation.
+        // Some engines retain the paused flag after cancel; recover only on explicit Play.
         if (synth.paused) synth.resume();
         synth.speak(utterance);
       } catch { cancel(false); update('error'); }

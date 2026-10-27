@@ -1,0 +1,142 @@
+[
+  {
+    "view": "simple",
+    "route": "/discover",
+    "inspected": 135,
+    "minimum": 5.66,
+    "failures": [],
+    "targetsBelow24": [],
+    "unnamed": [],
+    "controlBorderContrast": 3.64
+  },
+  {
+    "view": "simple",
+    "route": "/pool/us_equity",
+    "inspected": 876,
+    "minimum": 5.66,
+    "failures": [],
+    "targetsBelow24": [],
+    "unnamed": [],
+    "controlBorderContrast": 3.64
+  },
+  {
+    "view": "simple",
+    "route": "/ticker/us_equity/SYN088",
+    "inspected": 206,
+    "minimum": 5.66,
+    "failures": [],
+    "targetsBelow24": [],
+    "unnamed": [],
+    "controlBorderContrast": 3.64
+  },
+  {
+    "view": "simple",
+    "route": "/factors",
+    "inspected": 672,
+    "minimum": 5.66,
+    "failures": [],
+    "targetsBelow24": [],
+    "unnamed": [],
+    "controlBorderContrast": 3.64
+  },
+  {
+    "view": "simple",
+    "route": "/regime",
+    "inspected": 174,
+    "minimum": 5.66,
+    "failures": [],
+    "targetsBelow24": [],
+    "unnamed": [],
+    "controlBorderContrast": 3.64
+  },
+  {
+    "view": "simple",
+    "route": "/track-record",
+    "inspected": 132,
+    "minimum": 5.66,
+    "failures": [],
+    "targetsBelow24": [],
+    "unnamed": [],
+    "controlBorderContrast": 3.64
+  },
+  {
+    "view": "simple",
+    "route": "/trace",
+    "inspected": 298,
+    "minimum": 5.66,
+    "failures": [],
+    "targetsBelow24": [],
+    "unnamed": [],
+    "controlBorderContrast": 3.64
+  },
+  {
+    "view": "pro",
+    "route": "/discover",
+    "inspected": 135,
+    "minimum": 5.66,
+    "failures": [],
+    "targetsBelow24": [],
+    "unnamed": [],
+    "controlBorderContrast": 3.64
+  },
+  {
+    "view": "pro",
+    "route": "/pool/us_equity",
+    "inspected": 601,
+    "minimum": 5.66,
+    "failures": [],
+    "targetsBelow24": [],
+    "unnamed": [],
+    "controlBorderContrast": 3.64
+  },
+  {
+    "view": "pro",
+    "route": "/ticker/us_equity/SYN088",
+    "inspected": 212,
+    "minimum": 5.66,
+    "failures": [],
+    "targetsBelow24": [],
+    "unnamed": [],
+    "controlBorderContrast": 3.64
+  },
+  {
+    "view": "pro",
+    "route": "/factors",
+    "inspected": 670,
+    "minimum": 5.66,
+    "failures": [],
+    "targetsBelow24": [],
+    "unnamed": [],
+    "controlBorderContrast": 3.64
+  },
+  {
+    "view": "pro",
+    "route": "/regime",
+    "inspected": 172,
+    "minimum": 5.66,
+    "failures": [],
+    "targetsBelow24": [],
+    "unnamed": [],
+    "controlBorderContrast": 3.64
+  },
+  {
+    "view": "pro",
+    "route": "/track-record",
+    "inspected": 130,
+    "minimum": 5.66,
+    "failures": [],
+    "targetsBelow24": [],
+    "unnamed": [],
+    "controlBorderContrast": 3.64
+  },
+  {
+    "view": "pro",
+    "route": "/trace",
+    "inspected": 247,
+    "minimum": 5.66,
+    "failures": [],
+    "targetsBelow24": [],
+    "unnamed": [],
+    "controlBorderContrast": 3.64
+  }
+]

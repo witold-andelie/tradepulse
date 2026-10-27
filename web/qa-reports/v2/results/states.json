@@ -1,0 +1,2766 @@
+{
+  "revision": "4e61b5009777985096a81b195e3371fa7616e5b1",
+  "sourceDiff": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "browser": "154.0.8037.57",
+  "stage": "states",
+  "nativeSpeech": {
+    "api": true,
+    "voices": [],
+    "audioHeard": false
+  },
+  "results": [
+    {
+      "locale": "en",
+      "name": "initial load, persisted locale, navigation, filters and empty results",
+      "status": "PASS",
+      "evidence": {
+        "preference": "en",
+        "searchAndFiltersPreserved": true
+      }
+    },
+    {
+      "locale": "en",
+      "name": "rapid Factor Lab pool and status changes retain both filters",
+      "status": "PASS",
+      "evidence": {
+        "pool": "crypto",
+        "status": "ACTIVE",
+        "cards": 2
+      }
+    },
+    {
+      "locale": "en",
+      "name": "SYN369 original verdict, source evidence, missing explanation and invalid ticker",
+      "status": "PASS",
+      "evidence": {
+        "originalVerdict": "abstained"
+      }
+    },
+    {
+      "locale": "en",
+      "name": "keyboard Listen entry, all speech controls, stop recovery, error, route cancellation",
+      "status": "PASS",
+      "evidence": {
+        "mockVoice": "en-US",
+        "audioHeard": false,
+        "noAutoplay": true
+      }
+    },
+    {
+      "locale": "en",
+      "name": "reduced motion and keyboard disclosure/selector operability",
+      "status": "PASS",
+      "evidence": {
+        "keyboard": true,
+        "reducedMotion": true
+      }
+    },
+    {
+      "locale": "en",
+      "name": "voice availability {\"unsupported\":true}",
+      "status": "PASS",
+      "evidence": {
+        "mock": {
+          "unsupported": true
+        },
+        "voices": [],
+        "audioHeard": false
+      }
+    },
+    {
+      "locale": "en",
+      "name": "voice availability {\"empty\":true}",
+      "status": "PASS",
+      "evidence": {
+        "mock": {
+          "empty": true
+        },
+        "voices": [],
+        "audioHeard": false
+      }
+    },
+    {
+      "locale": "en",
+      "name": "voice availability {\"chineseOnly\":true}",
+      "status": "PASS",
+      "evidence": {
+        "mock": {
+          "chineseOnly": true
+        },
+        "voices": [
+          "zh-CN",
+          "zh-TW"
+        ],
+        "audioHeard": false
+      }
+    },
+    {
+      "locale": "en",
+      "name": "voice availability {\"delayed\":true}",
+      "status": "PASS",
+      "evidence": {
+        "mock": {
+          "delayed": true
+        },
+        "voices": [
+          "en-US",
+          "zh-CN",
+          "zh-TW",
+          "es-ES",
+          "es-MX",
+          "fr-FR",
+          "de-DE",
+          "pt-BR",
+          "pt-PT",
+          "ja-JP",
+          "ko-KR",
+          "cs-CZ",
+          "ar-SA",
+          "ar-EG"
+        ],
+        "audioHeard": false
+      }
+    },
+    {
+      "locale": "en",
+      "name": "voice availability {\"delayed\":true,\"eventless\":true}",
+      "status": "PASS",
+      "evidence": {
+        "mock": {
+          "delayed": true,
+          "eventless": true
+        },
+        "voices": [
+          "en-US",
+          "zh-CN",
+          "zh-TW",
+          "es-ES",
+          "es-MX",
+          "fr-FR",
+          "de-DE",
+          "pt-BR",
+          "pt-PT",
+          "ja-JP",
+          "ko-KR",
+          "cs-CZ",
+          "ar-SA",
+          "ar-EG"
+        ],
+        "audioHeard": false
+      }
+    },
+    {
+      "locale": "en",
+      "name": "API loading",
+      "status": "PASS",
+      "evidence": {
+        "scenario": "loading",
+        "requests": [
+          {
+            "url": "http://127.0.0.1:5196/runs/latest",
+            "method": "GET"
+          }
+        ],
+        "simulated": true
+      }
+    },
+    {
+      "locale": "en",
+      "name": "API HTTP503",
+      "status": "PASS",
+      "evidence": {
+        "scenario": "HTTP503",
+        "requests": [
+          {
+            "url": "http://127.0.0.1:5196/runs/latest",
+            "method": "GET"
+          }
+        ],
+        "simulated": true
+      }
+    },
+    {
+      "locale": "en",
+      "name": "API malformed",
+      "status": "PASS",
+      "evidence": {
+        "scenario": "malformed",
+        "requests": [
+          {
+            "url": "http://127.0.0.1:5196/runs/latest",
+            "method": "GET"
+          }
+        ],
+        "simulated": true
+      }
+    },
+    {
+      "locale": "en",
+      "name": "API empty",
+      "status": "PASS",
+      "evidence": {
+        "scenario": "empty",
+        "requests": [
+          {
+            "url": "http://127.0.0.1:5196/runs/latest",
+            "method": "GET"
+          },
+          {
+            "url": "http://127.0.0.1:5196/runs/latest",
+            "method": "GET"
+          },
+          {
+            "url": "http://127.0.0.1:5196/runs/latest",
+            "method": "GET"
+          },
+          {
+            "url": "http://127.0.0.1:5196/runs/latest",
+            "method": "GET"
+          },
+          {
+            "url": "http://127.0.0.1:5196/runs/latest",
+            "method": "GET"
+          },
+          {
+            "url": "http://127.0.0.1:5196/runs/synthetic-fixture-0001/trace",
+            "method": "GET"
+          }
+        ],
+        "simulated": true
+      }
+    },
+    {
+      "locale": "en",
+      "name": "API missing-evidence",
+      "status": "PASS",
+      "evidence": {
+        "scenario": "missing-evidence",
+        "requests": [
+          {
+            "url": "http://127.0.0.1:5196/runs/latest",
+            "method": "GET"
+          }
+        ],
+        "simulated": true
+      }
+    },
+    {
+      "locale": "en",
+      "name": "API summary-only-abstention",
+      "status": "PASS",
+      "evidence": {
+        "scenario": "summary-only-abstention",
+        "requests": [
+          {
+            "url": "http://127.0.0.1:5196/runs/latest",
+            "method": "GET"
+          }
+        ],
+        "simulated": true
+      }
+    },
+    {
+      "locale": "zh-CN",
+      "name": "initial load, persisted locale, navigation, filters and empty results",
+      "status": "PASS",
+      "evidence": {
+        "preference": "zh-CN",
+        "searchAndFiltersPreserved": true
+      }
+    },
+    {
+      "locale": "zh-CN",
+      "name": "rapid Factor Lab pool and status changes retain both filters",
+      "status": "PASS",
+      "evidence": {
+        "pool": "crypto",
+        "status": "ACTIVE",
+        "cards": 2
+      }
+    },
+    {
+      "locale": "zh-CN",
+      "name": "SYN369 original verdict, source evidence, missing explanation and invalid ticker",
+      "status": "PASS",
+      "evidence": {
+        "originalVerdict": "abstained"
+      }
+    },
+    {
+      "locale": "zh-CN",
+      "name": "keyboard Listen entry, all speech controls, stop recovery, error, route cancellation",
+      "status": "PASS",
+      "evidence": {
+        "mockVoice": "zh-CN",
+        "audioHeard": false,
+        "noAutoplay": true
+      }
+    },
+    {
+      "locale": "zh-CN",
+      "name": "reduced motion and keyboard disclosure/selector operability",
+      "status": "PASS",
+      "evidence": {
+        "keyboard": true,
+        "reducedMotion": true
+      }
+    },
+    {
+      "locale": "zh-CN",
+      "name": "voice availability {\"unsupported\":true}",
+      "status": "PASS",
+      "evidence": {
+        "mock": {
+          "unsupported": true
+        },
+        "voices": [],
+        "audioHeard": false
+      }
+    },
+    {
+      "locale": "zh-CN",
+      "name": "voice availability {\"empty\":true}",
+      "status": "PASS",
+      "evidence": {
+        "mock": {
+          "empty": true
+        },
+        "voices": [],
+        "audioHeard": false
+      }
+    },
+    {
+      "locale": "zh-CN",
+      "name": "voice availability {\"chineseOnly\":true}",
+      "status": "PASS",
+      "evidence": {
+        "mock": {
+          "chineseOnly": true
+        },
+        "voices": [
+          "zh-CN",
+          "zh-TW"
+        ],
+        "audioHeard": false
+      }
+    },
+    {
+      "locale": "zh-CN",
+      "name": "voice availability {\"delayed\":true}",
+      "status": "PASS",
+      "evidence": {
+        "mock": {
+          "delayed": true
+        },
+        "voices": [
+          "en-US",
+          "zh-CN",
+          "zh-TW",
+          "es-ES",
+          "es-MX",
+          "fr-FR",
+          "de-DE",
+          "pt-BR",
+          "pt-PT",
+          "ja-JP",
+          "ko-KR",
+          "cs-CZ",
+          "ar-SA",
+          "ar-EG"
+        ],
+        "audioHeard": false
+      }
+    },
+    {
+      "locale": "zh-CN",
+      "name": "voice availability {\"delayed\":true,\"eventless\":true}",
+      "status": "PASS",
+      "evidence": {
+        "mock": {
+          "delayed": true,
+          "eventless": true
+        },
+        "voices": [
+          "en-US",
+          "zh-CN",
+          "zh-TW",
+          "es-ES",
+          "es-MX",
+          "fr-FR",
+          "de-DE",
+          "pt-BR",
+          "pt-PT",
+          "ja-JP",
+          "ko-KR",
+          "cs-CZ",
+          "ar-SA",
+          "ar-EG"
+        ],
+        "audioHeard": false
+      }
+    },
+    {
+      "locale": "zh-CN",
+      "name": "API loading",
+      "status": "PASS",
+      "evidence": {
+        "scenario": "loading",
+        "requests": [
+          {
+            "url": "http://127.0.0.1:5196/runs/latest",
+            "method": "GET"
+          }
+        ],
+        "simulated": true
+      }
+    },
+    {
+      "locale": "zh-CN",
+      "name": "API HTTP503",
+      "status": "PASS",
+      "evidence": {
+        "scenario": "HTTP503",
+        "requests": [
+          {
+            "url": "http://127.0.0.1:5196/runs/latest",
+            "method": "GET"
+          }
+        ],
+        "simulated": true
+      }
+    },
+    {
+      "locale": "zh-CN",
+      "name": "API malformed",
+      "status": "PASS",
+      "evidence": {
+        "scenario": "malformed",
+        "requests": [
+          {
+            "url": "http://127.0.0.1:5196/runs/latest",
+            "method": "GET"
+          }
+        ],
+        "simulated": true
+      }
+    },
+    {
+      "locale": "zh-CN",
+      "name": "API empty",
+      "status": "PASS",
+      "evidence": {
+        "scenario": "empty",
+        "requests": [
+          {
+            "url": "http://127.0.0.1:5196/runs/latest",
+            "method": "GET"
+          },
+          {
+            "url": "http://127.0.0.1:5196/runs/latest",
+            "method": "GET"
+          },
+          {
+            "url": "http://127.0.0.1:5196/runs/latest",
+            "method": "GET"
+          },
+          {
+            "url": "http://127.0.0.1:5196/runs/latest",
+            "method": "GET"
+          },
+          {
+            "url": "http://127.0.0.1:5196/runs/latest",
+            "method": "GET"
+          },
+          {
+            "url": "http://127.0.0.1:5196/runs/synthetic-fixture-0001/trace",
+            "method": "GET"
+          }
+        ],
+        "simulated": true
+      }
+    },
+    {
+      "locale": "zh-CN",
+      "name": "API missing-evidence",
+      "status": "PASS",
+      "evidence": {
+        "scenario": "missing-evidence",
+        "requests": [
+          {
+            "url": "http://127.0.0.1:5196/runs/latest",
+            "method": "GET"
+          }
+        ],
+        "simulated": true
+      }
+    },
+    {
+      "locale": "zh-CN",
+      "name": "API summary-only-abstention",
+      "status": "PASS",
+      "evidence": {
+        "scenario": "summary-only-abstention",
+        "requests": [
+          {
+            "url": "http://127.0.0.1:5196/runs/latest",
+            "method": "GET"
+          }
+        ],
+        "simulated": true
+      }
+    },
+    {
+      "locale": "zh-TW",
+      "name": "initial load, persisted locale, navigation, filters and empty results",
+      "status": "PASS",
+      "evidence": {
+        "preference": "zh-TW",
+        "searchAndFiltersPreserved": true
+      }
+    },
+    {
+      "locale": "zh-TW",
+      "name": "rapid Factor Lab pool and status changes retain both filters",
+      "status": "PASS",
+      "evidence": {
+        "pool": "crypto",
+        "status": "ACTIVE",
+        "cards": 2
+      }
+    },
+    {
+      "locale": "zh-TW",
+      "name": "SYN369 original verdict, source evidence, missing explanation and invalid ticker",
+      "status": "PASS",
+      "evidence": {
+        "originalVerdict": "abstained"
+      }
+    },
+    {
+      "locale": "zh-TW",
+      "name": "keyboard Listen entry, all speech controls, stop recovery, error, route cancellation",
+      "status": "PASS",
+      "evidence": {
+        "mockVoice": "zh-TW",
+        "audioHeard": false,
+        "noAutoplay": true
+      }
+    },
+    {
+      "locale": "zh-TW",
+      "name": "reduced motion and keyboard disclosure/selector operability",
+      "status": "PASS",
+      "evidence": {
+        "keyboard": true,
+        "reducedMotion": true
+      }
+    },
+    {
+      "locale": "zh-TW",
+      "name": "voice availability {\"unsupported\":true}",
+      "status": "PASS",
+      "evidence": {
+        "mock": {
+          "unsupported": true
+        },
+        "voices": [],
+        "audioHeard": false
+      }
+    },
+    {
+      "locale": "zh-TW",
+      "name": "voice availability {\"empty\":true}",
+      "status": "PASS",
+      "evidence": {
+        "mock": {
+          "empty": true
+        },
+        "voices": [],
+        "audioHeard": false
+      }
+    },
+    {
+      "locale": "zh-TW",
+      "name": "voice availability {\"chineseOnly\":true}",
+      "status": "PASS",
+      "evidence": {
+        "mock": {
+          "chineseOnly": true
+        },
+        "voices": [
+          "zh-CN",
+          "zh-TW"
+        ],
+        "audioHeard": false
+      }
+    },
+    {
+      "locale": "zh-TW",
+      "name": "voice availability {\"delayed\":true}",
+      "status": "PASS",
+      "evidence": {
+        "mock": {
+          "delayed": true
+        },
+        "voices": [
+          "en-US",
+          "zh-CN",
+          "zh-TW",
+          "es-ES",
+          "es-MX",
+          "fr-FR",
+          "de-DE",
+          "pt-BR",
+          "pt-PT",
+          "ja-JP",
+          "ko-KR",
+          "cs-CZ",
+          "ar-SA",
+          "ar-EG"
+        ],
+        "audioHeard": false
+      }
+    },
+    {
+      "locale": "zh-TW",
+      "name": "voice availability {\"delayed\":true,\"eventless\":true}",
+      "status": "PASS",
+      "evidence": {
+        "mock": {
+          "delayed": true,
+          "eventless": true
+        },
+        "voices": [
+          "en-US",
+          "zh-CN",
+          "zh-TW",
+          "es-ES",
+          "es-MX",
+          "fr-FR",
+          "de-DE",
+          "pt-BR",
+          "pt-PT",
+          "ja-JP",
+          "ko-KR",
+          "cs-CZ",
+          "ar-SA",
+          "ar-EG"
+        ],
+        "audioHeard": false
+      }
+    },
+    {
+      "locale": "zh-TW",
+      "name": "API loading",
+      "status": "PASS",
+      "evidence": {
+        "scenario": "loading",
+        "requests": [
+          {
+            "url": "http://127.0.0.1:5196/runs/latest",
+            "method": "GET"
+          }
+        ],
+        "simulated": true
+      }
+    },
+    {
+      "locale": "zh-TW",
+      "name": "API HTTP503",
+      "status": "PASS",
+      "evidence": {
+        "scenario": "HTTP503",
+        "requests": [
+          {
+            "url": "http://127.0.0.1:5196/runs/latest",
+            "method": "GET"
+          }
+        ],
+        "simulated": true
+      }
+    },
+    {
+      "locale": "zh-TW",
+      "name": "API malformed",
+      "status": "PASS",
+      "evidence": {
+        "scenario": "malformed",
+        "requests": [
+          {
+            "url": "http://127.0.0.1:5196/runs/latest",
+            "method": "GET"
+          }
+        ],
+        "simulated": true
+      }
+    },
+    {
+      "locale": "zh-TW",
+      "name": "API empty",
+      "status": "PASS",
+      "evidence": {
+        "scenario": "empty",
+        "requests": [
+          {
+            "url": "http://127.0.0.1:5196/runs/latest",
+            "method": "GET"
+          },
+          {
+            "url": "http://127.0.0.1:5196/runs/latest",
+            "method": "GET"
+          },
+          {
+            "url": "http://127.0.0.1:5196/runs/latest",
+            "method": "GET"
+          },
+          {
+            "url": "http://127.0.0.1:5196/runs/latest",
+            "method": "GET"
+          },
+          {
+            "url": "http://127.0.0.1:5196/runs/latest",
+            "method": "GET"
+          },
+          {
+            "url": "http://127.0.0.1:5196/runs/synthetic-fixture-0001/trace",
+            "method": "GET"
+          }
+        ],
+        "simulated": true
+      }
+    },
+    {
+      "locale": "zh-TW",
+      "name": "API missing-evidence",
+      "status": "PASS",
+      "evidence": {
+        "scenario": "missing-evidence",
+        "requests": [
+          {
+            "url": "http://127.0.0.1:5196/runs/latest",
+            "method": "GET"
+          }
+        ],
+        "simulated": true
+      }
+    },
+    {
+      "locale": "zh-TW",
+      "name": "API summary-only-abstention",
+      "status": "PASS",
+      "evidence": {
+        "scenario": "summary-only-abstention",
+        "requests": [
+          {
+            "url": "http://127.0.0.1:5196/runs/latest",
+            "method": "GET"
+          }
+        ],
+        "simulated": true
+      }
+    },
+    {
+      "locale": "es",
+      "name": "initial load, persisted locale, navigation, filters and empty results",
+      "status": "PASS",
+      "evidence": {
+        "preference": "es",
+        "searchAndFiltersPreserved": true
+      }
+    },
+    {
+      "locale": "es",
+      "name": "rapid Factor Lab pool and status changes retain both filters",
+      "status": "PASS",
+      "evidence": {
+        "pool": "crypto",
+        "status": "ACTIVE",
+        "cards": 2
+      }
+    },
+    {
+      "locale": "es",
+      "name": "SYN369 original verdict, source evidence, missing explanation and invalid ticker",
+      "status": "PASS",
+      "evidence": {
+        "originalVerdict": "abstained"
+      }
+    },
+    {
+      "locale": "es",
+      "name": "keyboard Listen entry, all speech controls, stop recovery, error, route cancellation",
+      "status": "PASS",
+      "evidence": {
+        "mockVoice": "es-ES",
+        "audioHeard": false,
+        "noAutoplay": true
+      }
+    },
+    {
+      "locale": "es",
+      "name": "reduced motion and keyboard disclosure/selector operability",
+      "status": "PASS",
+      "evidence": {
+        "keyboard": true,
+        "reducedMotion": true
+      }
+    },
+    {
+      "locale": "es",
+      "name": "voice availability {\"unsupported\":true}",
+      "status": "PASS",
+      "evidence": {
+        "mock": {
+          "unsupported": true
+        },
+        "voices": [],
+        "audioHeard": false
+      }
+    },
+    {
+      "locale": "es",
+      "name": "voice availability {\"empty\":true}",
+      "status": "PASS",
+      "evidence": {
+        "mock": {
+          "empty": true
+        },
+        "voices": [],
+        "audioHeard": false
+      }
+    },
+    {
+      "locale": "es",
+      "name": "voice availability {\"chineseOnly\":true}",
+      "status": "PASS",
+      "evidence": {
+        "mock": {
+          "chineseOnly": true
+        },
+        "voices": [
+          "zh-CN",
+          "zh-TW"
+        ],
+        "audioHeard": false
+      }
+    },
+    {
+      "locale": "es",
+      "name": "voice availability {\"delayed\":true}",
+      "status": "PASS",
+      "evidence": {
+        "mock": {
+          "delayed": true
+        },
+        "voices": [
+          "en-US",
+          "zh-CN",
+          "zh-TW",
+          "es-ES",
+          "es-MX",
+          "fr-FR",
+          "de-DE",
+          "pt-BR",
+          "pt-PT",
+          "ja-JP",
+          "ko-KR",
+          "cs-CZ",
+          "ar-SA",
+          "ar-EG"
+        ],
+        "audioHeard": false
+      }
+    },
+    {
+      "locale": "es",
+      "name": "voice availability {\"delayed\":true,\"eventless\":true}",
+      "status": "PASS",
+      "evidence": {
+        "mock": {
+          "delayed": true,
+          "eventless": true
+        },
+        "voices": [
+          "en-US",
+          "zh-CN",
+          "zh-TW",
+          "es-ES",
+          "es-MX",
+          "fr-FR",
+          "de-DE",
+          "pt-BR",
+          "pt-PT",
+          "ja-JP",
+          "ko-KR",
+          "cs-CZ",
+          "ar-SA",
+          "ar-EG"
+        ],
+        "audioHeard": false
+      }
+    },
+    {
+      "locale": "es",
+      "name": "API loading",
+      "status": "PASS",
+      "evidence": {
+        "scenario": "loading",
+        "requests": [
+          {
+            "url": "http://127.0.0.1:5196/runs/latest",
+            "method": "GET"
+          }
+        ],
+        "simulated": true
+      }
+    },
+    {
+      "locale": "es",
+      "name": "API HTTP503",
+      "status": "PASS",
+      "evidence": {
+        "scenario": "HTTP503",
+        "requests": [
+          {
+            "url": "http://127.0.0.1:5196/runs/latest",
+            "method": "GET"
+          }
+        ],
+        "simulated": true
+      }
+    },
+    {
+      "locale": "es",
+      "name": "API malformed",
+      "status": "PASS",
+      "evidence": {
+        "scenario": "malformed",
+        "requests": [
+          {
+            "url": "http://127.0.0.1:5196/runs/latest",
+            "method": "GET"
+          }
+        ],
+        "simulated": true
+      }
+    },
+    {
+      "locale": "es",
+      "name": "API empty",
+      "status": "PASS",
+      "evidence": {
+        "scenario": "empty",
+        "requests": [
+          {
+            "url": "http://127.0.0.1:5196/runs/latest",
+            "method": "GET"
+          },
+          {
+            "url": "http://127.0.0.1:5196/runs/latest",
+            "method": "GET"
+          },
+          {
+            "url": "http://127.0.0.1:5196/runs/latest",
+            "method": "GET"
+          },
+          {
+            "url": "http://127.0.0.1:5196/runs/latest",
+            "method": "GET"
+          },
+          {
+            "url": "http://127.0.0.1:5196/runs/latest",
+            "method": "GET"
+          },
+          {
+            "url": "http://127.0.0.1:5196/runs/synthetic-fixture-0001/trace",
+            "method": "GET"
+          }
+        ],
+        "simulated": true
+      }
+    },
+    {
+      "locale": "es",
+      "name": "API missing-evidence",
+      "status": "PASS",
+      "evidence": {
+        "scenario": "missing-evidence",
+        "requests": [
+          {
+            "url": "http://127.0.0.1:5196/runs/latest",
+            "method": "GET"
+          }
+        ],
+        "simulated": true
+      }
+    },
+    {
+      "locale": "es",
+      "name": "API summary-only-abstention",
+      "status": "PASS",
+      "evidence": {
+        "scenario": "summary-only-abstention",
+        "requests": [
+          {
+            "url": "http://127.0.0.1:5196/runs/latest",
+            "method": "GET"
+          }
+        ],
+        "simulated": true
+      }
+    },
+    {
+      "locale": "fr",
+      "name": "initial load, persisted locale, navigation, filters and empty results",
+      "status": "PASS",
+      "evidence": {
+        "preference": "fr",
+        "searchAndFiltersPreserved": true
+      }
+    },
+    {
+      "locale": "fr",
+      "name": "rapid Factor Lab pool and status changes retain both filters",
+      "status": "PASS",
+      "evidence": {
+        "pool": "crypto",
+        "status": "ACTIVE",
+        "cards": 2
+      }
+    },
+    {
+      "locale": "fr",
+      "name": "SYN369 original verdict, source evidence, missing explanation and invalid ticker",
+      "status": "PASS",
+      "evidence": {
+        "originalVerdict": "abstained"
+      }
+    },
+    {
+      "locale": "fr",
+      "name": "keyboard Listen entry, all speech controls, stop recovery, error, route cancellation",
+      "status": "PASS",
+      "evidence": {
+        "mockVoice": "fr-FR",
+        "audioHeard": false,
+        "noAutoplay": true
+      }
+    },
+    {
+      "locale": "fr",
+      "name": "reduced motion and keyboard disclosure/selector operability",
+      "status": "PASS",
+      "evidence": {
+        "keyboard": true,
+        "reducedMotion": true
+      }
+    },
+    {
+      "locale": "fr",
+      "name": "voice availability {\"unsupported\":true}",
+      "status": "PASS",
+      "evidence": {
+        "mock": {
+          "unsupported": true
+        },
+        "voices": [],
+        "audioHeard": false
+      }
+    },
+    {
+      "locale": "fr",
+      "name": "voice availability {\"empty\":true}",
+      "status": "PASS",
+      "evidence": {
+        "mock": {
+          "empty": true
+        },
+        "voices": [],
+        "audioHeard": false
+      }
+    },
+    {
+      "locale": "fr",
+      "name": "voice availability {\"chineseOnly\":true}",
+      "status": "PASS",
+      "evidence": {
+        "mock": {
+          "chineseOnly": true
+        },
+        "voices": [
+          "zh-CN",
+          "zh-TW"
+        ],
+        "audioHeard": false
+      }
+    },
+    {
+      "locale": "fr",
+      "name": "voice availability {\"delayed\":true}",
+      "status": "PASS",
+      "evidence": {
+        "mock": {
+          "delayed": true
+        },
+        "voices": [
+          "en-US",
+          "zh-CN",
+          "zh-TW",
+          "es-ES",
+          "es-MX",
+          "fr-FR",
+          "de-DE",
+          "pt-BR",
+          "pt-PT",
+          "ja-JP",
+          "ko-KR",
+          "cs-CZ",
+          "ar-SA",
+          "ar-EG"
+        ],
+        "audioHeard": false
+      }
+    },
+    {
+      "locale": "fr",
+      "name": "voice availability {\"delayed\":true,\"eventless\":true}",
+      "status": "PASS",
+      "evidence": {
+        "mock": {
+          "delayed": true,
+          "eventless": true
+        },
+        "voices": [
+          "en-US",
+          "zh-CN",
+          "zh-TW",
+          "es-ES",
+          "es-MX",
+          "fr-FR",
+          "de-DE",
+          "pt-BR",
+          "pt-PT",
+          "ja-JP",
+          "ko-KR",
+          "cs-CZ",
+          "ar-SA",
+          "ar-EG"
+        ],
+        "audioHeard": false
+      }
+    },
+    {
+      "locale": "fr",
+      "name": "API loading",
+      "status": "PASS",
+      "evidence": {
+        "scenario": "loading",
+        "requests": [
+          {
+            "url": "http://127.0.0.1:5196/runs/latest",
+            "method": "GET"
+          }
+        ],
+        "simulated": true
+      }
+    },
+    {
+      "locale": "fr",
+      "name": "API HTTP503",
+      "status": "PASS",
+      "evidence": {
+        "scenario": "HTTP503",
+        "requests": [
+          {
+            "url": "http://127.0.0.1:5196/runs/latest",
+            "method": "GET"
+          }
+        ],
+        "simulated": true
+      }
+    },
+    {
+      "locale": "fr",
+      "name": "API malformed",
+      "status": "PASS",
+      "evidence": {
+        "scenario": "malformed",
+        "requests": [
+          {
+            "url": "http://127.0.0.1:5196/runs/latest",
+            "method": "GET"
+          }
+        ],
+        "simulated": true
+      }
+    },
+    {
+      "locale": "fr",
+      "name": "API empty",
+      "status": "PASS",
+      "evidence": {
+        "scenario": "empty",
+        "requests": [
+          {
+            "url": "http://127.0.0.1:5196/runs/latest",
+            "method": "GET"
+          },
+          {
+            "url": "http://127.0.0.1:5196/runs/latest",
+            "method": "GET"
+          },
+          {
+            "url": "http://127.0.0.1:5196/runs/latest",
+            "method": "GET"
+          },
+          {
+            "url": "http://127.0.0.1:5196/runs/latest",
+            "method": "GET"
+          },
+          {
+            "url": "http://127.0.0.1:5196/runs/latest",
+            "method": "GET"
+          },
+          {
+            "url": "http://127.0.0.1:5196/runs/synthetic-fixture-0001/trace",
+            "method": "GET"
+          }
+        ],
+        "simulated": true
+      }
+    },
+    {
+      "locale": "fr",
+      "name": "API missing-evidence",
+      "status": "PASS",
+      "evidence": {
+        "scenario": "missing-evidence",
+        "requests": [
+          {
+            "url": "http://127.0.0.1:5196/runs/latest",
+            "method": "GET"
+          }
+        ],
+        "simulated": true
+      }
+    },
+    {
+      "locale": "fr",
+      "name": "API summary-only-abstention",
+      "status": "PASS",
+      "evidence": {
+        "scenario": "summary-only-abstention",
+        "requests": [
+          {
+            "url": "http://127.0.0.1:5196/runs/latest",
+            "method": "GET"
+          }
+        ],
+        "simulated": true
+      }
+    },
+    {
+      "locale": "de",
+      "name": "initial load, persisted locale, navigation, filters and empty results",
+      "status": "PASS",
+      "evidence": {
+        "preference": "de",
+        "searchAndFiltersPreserved": true
+      }
+    },
+    {
+      "locale": "de",
+      "name": "rapid Factor Lab pool and status changes retain both filters",
+      "status": "PASS",
+      "evidence": {
+        "pool": "crypto",
+        "status": "ACTIVE",
+        "cards": 2
+      }
+    },
+    {
+      "locale": "de",
+      "name": "SYN369 original verdict, source evidence, missing explanation and invalid ticker",
+      "status": "PASS",
+      "evidence": {
+        "originalVerdict": "abstained"
+      }
+    },
+    {
+      "locale": "de",
+      "name": "keyboard Listen entry, all speech controls, stop recovery, error, route cancellation",
+      "status": "PASS",
+      "evidence": {
+        "mockVoice": "de-DE",
+        "audioHeard": false,
+        "noAutoplay": true
+      }
+    },
+    {
+      "locale": "de",
+      "name": "reduced motion and keyboard disclosure/selector operability",
+      "status": "PASS",
+      "evidence": {
+        "keyboard": true,
+        "reducedMotion": true
+      }
+    },
+    {
+      "locale": "de",
+      "name": "voice availability {\"unsupported\":true}",
+      "status": "PASS",
+      "evidence": {
+        "mock": {
+          "unsupported": true
+        },
+        "voices": [],
+        "audioHeard": false
+      }
+    },
+    {
+      "locale": "de",
+      "name": "voice availability {\"empty\":true}",
+      "status": "PASS",
+      "evidence": {
+        "mock": {
+          "empty": true
+        },
+        "voices": [],
+        "audioHeard": false
+      }
+    },
+    {
+      "locale": "de",
+      "name": "voice availability {\"chineseOnly\":true}",
+      "status": "PASS",
+      "evidence": {
+        "mock": {
+          "chineseOnly": true
+        },
+        "voices": [
+          "zh-CN",
+          "zh-TW"
+        ],
+        "audioHeard": false
+      }
+    },
+    {
+      "locale": "de",
+      "name": "voice availability {\"delayed\":true}",
+      "status": "PASS",
+      "evidence": {
+        "mock": {
+          "delayed": true
+        },
+        "voices": [
+          "en-US",
+          "zh-CN",
+          "zh-TW",
+          "es-ES",
+          "es-MX",
+          "fr-FR",
+          "de-DE",
+          "pt-BR",
+          "pt-PT",
+          "ja-JP",
+          "ko-KR",
+          "cs-CZ",
+          "ar-SA",
+          "ar-EG"
+        ],
+        "audioHeard": false
+      }
+    },
+    {
+      "locale": "de",
+      "name": "voice availability {\"delayed\":true,\"eventless\":true}",
+      "status": "PASS",
+      "evidence": {
+        "mock": {
+          "delayed": true,
+          "eventless": true
+        },
+        "voices": [
+          "en-US",
+          "zh-CN",
+          "zh-TW",
+          "es-ES",
+          "es-MX",
+          "fr-FR",
+          "de-DE",
+          "pt-BR",
+          "pt-PT",
+          "ja-JP",
+          "ko-KR",
+          "cs-CZ",
+          "ar-SA",
+          "ar-EG"
+        ],
+        "audioHeard": false
+      }
+    },
+    {
+      "locale": "de",
+      "name": "API loading",
+      "status": "PASS",
+      "evidence": {
+        "scenario": "loading",
+        "requests": [
+          {
+            "url": "http://127.0.0.1:5196/runs/latest",
+            "method": "GET"
+          }
+        ],
+        "simulated": true
+      }
+    },
+    {
+      "locale": "de",
+      "name": "API HTTP503",
+      "status": "PASS",
+      "evidence": {
+        "scenario": "HTTP503",
+        "requests": [
+          {
+            "url": "http://127.0.0.1:5196/runs/latest",
+            "method": "GET"
+          }
+        ],
+        "simulated": true
+      }
+    },
+    {
+      "locale": "de",
+      "name": "API malformed",
+      "status": "PASS",
+      "evidence": {
+        "scenario": "malformed",
+        "requests": [
+          {
+            "url": "http://127.0.0.1:5196/runs/latest",
+            "method": "GET"
+          }
+        ],
+        "simulated": true
+      }
+    },
+    {
+      "locale": "de",
+      "name": "API empty",
+      "status": "PASS",
+      "evidence": {
+        "scenario": "empty",
+        "requests": [
+          {
+            "url": "http://127.0.0.1:5196/runs/latest",
+            "method": "GET"
+          },
+          {
+            "url": "http://127.0.0.1:5196/runs/latest",
+            "method": "GET"
+          },
+          {
+            "url": "http://127.0.0.1:5196/runs/latest",
+            "method": "GET"
+          },
+          {
+            "url": "http://127.0.0.1:5196/runs/latest",
+            "method": "GET"
+          },
+          {
+            "url": "http://127.0.0.1:5196/runs/latest",
+            "method": "GET"
+          },
+          {
+            "url": "http://127.0.0.1:5196/runs/synthetic-fixture-0001/trace",
+            "method": "GET"
+          }
+        ],
+        "simulated": true
+      }
+    },
+    {
+      "locale": "de",
+      "name": "API missing-evidence",
+      "status": "PASS",
+      "evidence": {
+        "scenario": "missing-evidence",
+        "requests": [
+          {
+            "url": "http://127.0.0.1:5196/runs/latest",
+            "method": "GET"
+          }
+        ],
+        "simulated": true
+      }
+    },
+    {
+      "locale": "de",
+      "name": "API summary-only-abstention",
+      "status": "PASS",
+      "evidence": {
+        "scenario": "summary-only-abstention",
+        "requests": [
+          {
+            "url": "http://127.0.0.1:5196/runs/latest",
+            "method": "GET"
+          }
+        ],
+        "simulated": true
+      }
+    },
+    {
+      "locale": "pt-BR",
+      "name": "initial load, persisted locale, navigation, filters and empty results",
+      "status": "PASS",
+      "evidence": {
+        "preference": "pt-BR",
+        "searchAndFiltersPreserved": true
+      }
+    },
+    {
+      "locale": "pt-BR",
+      "name": "rapid Factor Lab pool and status changes retain both filters",
+      "status": "PASS",
+      "evidence": {
+        "pool": "crypto",
+        "status": "ACTIVE",
+        "cards": 2
+      }
+    },
+    {
+      "locale": "pt-BR",
+      "name": "SYN369 original verdict, source evidence, missing explanation and invalid ticker",
+      "status": "PASS",
+      "evidence": {
+        "originalVerdict": "abstained"
+      }
+    },
+    {
+      "locale": "pt-BR",
+      "name": "keyboard Listen entry, all speech controls, stop recovery, error, route cancellation",
+      "status": "PASS",
+      "evidence": {
+        "mockVoice": "pt-BR",
+        "audioHeard": false,
+        "noAutoplay": true
+      }
+    },
+    {
+      "locale": "pt-BR",
+      "name": "reduced motion and keyboard disclosure/selector operability",
+      "status": "PASS",
+      "evidence": {
+        "keyboard": true,
+        "reducedMotion": true
+      }
+    },
+    {
+      "locale": "pt-BR",
+      "name": "voice availability {\"unsupported\":true}",
+      "status": "PASS",
+      "evidence": {
+        "mock": {
+          "unsupported": true
+        },
+        "voices": [],
+        "audioHeard": false
+      }
+    },
+    {
+      "locale": "pt-BR",
+      "name": "voice availability {\"empty\":true}",
+      "status": "PASS",
+      "evidence": {
+        "mock": {
+          "empty": true
+        },
+        "voices": [],
+        "audioHeard": false
+      }
+    },
+    {
+      "locale": "pt-BR",
+      "name": "voice availability {\"chineseOnly\":true}",
+      "status": "PASS",
+      "evidence": {
+        "mock": {
+          "chineseOnly": true
+        },
+        "voices": [
+          "zh-CN",
+          "zh-TW"
+        ],
+        "audioHeard": false
+      }
+    },
+    {
+      "locale": "pt-BR",
+      "name": "voice availability {\"delayed\":true}",
+      "status": "PASS",
+      "evidence": {
+        "mock": {
+          "delayed": true
+        },
+        "voices": [
+          "en-US",
+          "zh-CN",
+          "zh-TW",
+          "es-ES",
+          "es-MX",
+          "fr-FR",
+          "de-DE",
+          "pt-BR",
+          "pt-PT",
+          "ja-JP",
+          "ko-KR",
+          "cs-CZ",
+          "ar-SA",
+          "ar-EG"
+        ],
+        "audioHeard": false
+      }
+    },
+    {
+      "locale": "pt-BR",
+      "name": "voice availability {\"delayed\":true,\"eventless\":true}",
+      "status": "PASS",
+      "evidence": {
+        "mock": {
+          "delayed": true,
+          "eventless": true
+        },
+        "voices": [
+          "en-US",
+          "zh-CN",
+          "zh-TW",
+          "es-ES",
+          "es-MX",
+          "fr-FR",
+          "de-DE",
+          "pt-BR",
+          "pt-PT",
+          "ja-JP",
+          "ko-KR",
+          "cs-CZ",
+          "ar-SA",
+          "ar-EG"
+        ],
+        "audioHeard": false
+      }
+    },
+    {
+      "locale": "pt-BR",
+      "name": "API loading",
+      "status": "PASS",
+      "evidence": {
+        "scenario": "loading",
+        "requests": [
+          {
+            "url": "http://127.0.0.1:5196/runs/latest",
+            "method": "GET"
+          }
+        ],
+        "simulated": true
+      }
+    },
+    {
+      "locale": "pt-BR",
+      "name": "API HTTP503",
+      "status": "PASS",
+      "evidence": {
+        "scenario": "HTTP503",
+        "requests": [
+          {
+            "url": "http://127.0.0.1:5196/runs/latest",
+            "method": "GET"
+          }
+        ],
+        "simulated": true
+      }
+    },
+    {
+      "locale": "pt-BR",
+      "name": "API malformed",
+      "status": "PASS",
+      "evidence": {
+        "scenario": "malformed",
+        "requests": [
+          {
+            "url": "http://127.0.0.1:5196/runs/latest",
+            "method": "GET"
+          }
+        ],
+        "simulated": true
+      }
+    },
+    {
+      "locale": "pt-BR",
+      "name": "API empty",
+      "status": "PASS",
+      "evidence": {
+        "scenario": "empty",
+        "requests": [
+          {
+            "url": "http://127.0.0.1:5196/runs/latest",
+            "method": "GET"
+          },
+          {
+            "url": "http://127.0.0.1:5196/runs/latest",
+            "method": "GET"
+          },
+          {
+            "url": "http://127.0.0.1:5196/runs/latest",
+            "method": "GET"
+          },
+          {
+            "url": "http://127.0.0.1:5196/runs/latest",
+            "method": "GET"
+          },
+          {
+            "url": "http://127.0.0.1:5196/runs/latest",
+            "method": "GET"
+          },
+          {
+            "url": "http://127.0.0.1:5196/runs/synthetic-fixture-0001/trace",
+            "method": "GET"
+          }
+        ],
+        "simulated": true
+      }
+    },
+    {
+      "locale": "pt-BR",
+      "name": "API missing-evidence",
+      "status": "PASS",
+      "evidence": {
+        "scenario": "missing-evidence",
+        "requests": [
+          {
+            "url": "http://127.0.0.1:5196/runs/latest",
+            "method": "GET"
+          }
+        ],
+        "simulated": true
+      }
+    },
+    {
+      "locale": "pt-BR",
+      "name": "API summary-only-abstention",
+      "status": "PASS",
+      "evidence": {
+        "scenario": "summary-only-abstention",
+        "requests": [
+          {
+            "url": "http://127.0.0.1:5196/runs/latest",
+            "method": "GET"
+          }
+        ],
+        "simulated": true
+      }
+    },
+    {
+      "locale": "ja",
+      "name": "initial load, persisted locale, navigation, filters and empty results",
+      "status": "PASS",
+      "evidence": {
+        "preference": "ja",
+        "searchAndFiltersPreserved": true
+      }
+    },
+    {
+      "locale": "ja",
+      "name": "rapid Factor Lab pool and status changes retain both filters",
+      "status": "PASS",
+      "evidence": {
+        "pool": "crypto",
+        "status": "ACTIVE",
+        "cards": 2
+      }
+    },
+    {
+      "locale": "ja",
+      "name": "SYN369 original verdict, source evidence, missing explanation and invalid ticker",
+      "status": "PASS",
+      "evidence": {
+        "originalVerdict": "abstained"
+      }
+    },
+    {
+      "locale": "ja",
+      "name": "keyboard Listen entry, all speech controls, stop recovery, error, route cancellation",
+      "status": "PASS",
+      "evidence": {
+        "mockVoice": "ja-JP",
+        "audioHeard": false,
+        "noAutoplay": true
+      }
+    },
+    {
+      "locale": "ja",
+      "name": "reduced motion and keyboard disclosure/selector operability",
+      "status": "PASS",
+      "evidence": {
+        "keyboard": true,
+        "reducedMotion": true
+      }
+    },
+    {
+      "locale": "ja",
+      "name": "voice availability {\"unsupported\":true}",
+      "status": "PASS",
+      "evidence": {
+        "mock": {
+          "unsupported": true
+        },
+        "voices": [],
+        "audioHeard": false
+      }
+    },
+    {
+      "locale": "ja",
+      "name": "voice availability {\"empty\":true}",
+      "status": "PASS",
+      "evidence": {
+        "mock": {
+          "empty": true
+        },
+        "voices": [],
+        "audioHeard": false
+      }
+    },
+    {
+      "locale": "ja",
+      "name": "voice availability {\"chineseOnly\":true}",
+      "status": "PASS",
+      "evidence": {
+        "mock": {
+          "chineseOnly": true
+        },
+        "voices": [
+          "zh-CN",
+          "zh-TW"
+        ],
+        "audioHeard": false
+      }
+    },
+    {
+      "locale": "ja",
+      "name": "voice availability {\"delayed\":true}",
+      "status": "PASS",
+      "evidence": {
+        "mock": {
+          "delayed": true
+        },
+        "voices": [
+          "en-US",
+          "zh-CN",
+          "zh-TW",
+          "es-ES",
+          "es-MX",
+          "fr-FR",
+          "de-DE",
+          "pt-BR",
+          "pt-PT",
+          "ja-JP",
+          "ko-KR",
+          "cs-CZ",
+          "ar-SA",
+          "ar-EG"
+        ],
+        "audioHeard": false
+      }
+    },
+    {
+      "locale": "ja",
+      "name": "voice availability {\"delayed\":true,\"eventless\":true}",
+      "status": "PASS",
+      "evidence": {
+        "mock": {
+          "delayed": true,
+          "eventless": true
+        },
+        "voices": [
+          "en-US",
+          "zh-CN",
+          "zh-TW",
+          "es-ES",
+          "es-MX",
+          "fr-FR",
+          "de-DE",
+          "pt-BR",
+          "pt-PT",
+          "ja-JP",
+          "ko-KR",
+          "cs-CZ",
+          "ar-SA",
+          "ar-EG"
+        ],
+        "audioHeard": false
+      }
+    },
+    {
+      "locale": "ja",
+      "name": "API loading",
+      "status": "PASS",
+      "evidence": {
+        "scenario": "loading",
+        "requests": [
+          {
+            "url": "http://127.0.0.1:5196/runs/latest",
+            "method": "GET"
+          }
+        ],
+        "simulated": true
+      }
+    },
+    {
+      "locale": "ja",
+      "name": "API HTTP503",
+      "status": "PASS",
+      "evidence": {
+        "scenario": "HTTP503",
+        "requests": [
+          {
+            "url": "http://127.0.0.1:5196/runs/latest",
+            "method": "GET"
+          }
+        ],
+        "simulated": true
+      }
+    },
+    {
+      "locale": "ja",
+      "name": "API malformed",
+      "status": "PASS",
+      "evidence": {
+        "scenario": "malformed",
+        "requests": [
+          {
+            "url": "http://127.0.0.1:5196/runs/latest",
+            "method": "GET"
+          }
+        ],
+        "simulated": true
+      }
+    },
+    {
+      "locale": "ja",
+      "name": "API empty",
+      "status": "PASS",
+      "evidence": {
+        "scenario": "empty",
+        "requests": [
+          {
+            "url": "http://127.0.0.1:5196/runs/latest",
+            "method": "GET"
+          },
+          {
+            "url": "http://127.0.0.1:5196/runs/latest",
+            "method": "GET"
+          },
+          {
+            "url": "http://127.0.0.1:5196/runs/latest",
+            "method": "GET"
+          },
+          {
+            "url": "http://127.0.0.1:5196/runs/latest",
+            "method": "GET"
+          },
+          {
+            "url": "http://127.0.0.1:5196/runs/latest",
+            "method": "GET"
+          },
+          {
+            "url": "http://127.0.0.1:5196/runs/synthetic-fixture-0001/trace",
+            "method": "GET"
+          }
+        ],
+        "simulated": true
+      }
+    },
+    {
+      "locale": "ja",
+      "name": "API missing-evidence",
+      "status": "PASS",
+      "evidence": {
+        "scenario": "missing-evidence",
+        "requests": [
+          {
+            "url": "http://127.0.0.1:5196/runs/latest",
+            "method": "GET"
+          }
+        ],
+        "simulated": true
+      }
+    },
+    {
+      "locale": "ja",
+      "name": "API summary-only-abstention",
+      "status": "PASS",
+      "evidence": {
+        "scenario": "summary-only-abstention",
+        "requests": [
+          {
+            "url": "http://127.0.0.1:5196/runs/latest",
+            "method": "GET"
+          }
+        ],
+        "simulated": true
+      }
+    },
+    {
+      "locale": "ko",
+      "name": "initial load, persisted locale, navigation, filters and empty results",
+      "status": "PASS",
+      "evidence": {
+        "preference": "ko",
+        "searchAndFiltersPreserved": true
+      }
+    },
+    {
+      "locale": "ko",
+      "name": "rapid Factor Lab pool and status changes retain both filters",
+      "status": "PASS",
+      "evidence": {
+        "pool": "crypto",
+        "status": "ACTIVE",
+        "cards": 2
+      }
+    },
+    {
+      "locale": "ko",
+      "name": "SYN369 original verdict, source evidence, missing explanation and invalid ticker",
+      "status": "PASS",
+      "evidence": {
+        "originalVerdict": "abstained"
+      }
+    },
+    {
+      "locale": "ko",
+      "name": "keyboard Listen entry, all speech controls, stop recovery, error, route cancellation",
+      "status": "PASS",
+      "evidence": {
+        "mockVoice": "ko-KR",
+        "audioHeard": false,
+        "noAutoplay": true
+      }
+    },
+    {
+      "locale": "ko",
+      "name": "reduced motion and keyboard disclosure/selector operability",
+      "status": "PASS",
+      "evidence": {
+        "keyboard": true,
+        "reducedMotion": true
+      }
+    },
+    {
+      "locale": "ko",
+      "name": "voice availability {\"unsupported\":true}",
+      "status": "PASS",
+      "evidence": {
+        "mock": {
+          "unsupported": true
+        },
+        "voices": [],
+        "audioHeard": false
+      }
+    },
+    {
+      "locale": "ko",
+      "name": "voice availability {\"empty\":true}",
+      "status": "PASS",
+      "evidence": {
+        "mock": {
+          "empty": true
+        },
+        "voices": [],
+        "audioHeard": false
+      }
+    },
+    {
+      "locale": "ko",
+      "name": "voice availability {\"chineseOnly\":true}",
+      "status": "PASS",
+      "evidence": {
+        "mock": {
+          "chineseOnly": true
+        },
+        "voices": [
+          "zh-CN",
+          "zh-TW"
+        ],
+        "audioHeard": false
+      }
+    },
+    {
+      "locale": "ko",
+      "name": "voice availability {\"delayed\":true}",
+      "status": "PASS",
+      "evidence": {
+        "mock": {
+          "delayed": true
+        },
+        "voices": [
+          "en-US",
+          "zh-CN",
+          "zh-TW",
+          "es-ES",
+          "es-MX",
+          "fr-FR",
+          "de-DE",
+          "pt-BR",
+          "pt-PT",
+          "ja-JP",
+          "ko-KR",
+          "cs-CZ",
+          "ar-SA",
+          "ar-EG"
+        ],
+        "audioHeard": false
+      }
+    },
+    {
+      "locale": "ko",
+      "name": "voice availability {\"delayed\":true,\"eventless\":true}",
+      "status": "PASS",
+      "evidence": {
+        "mock": {
+          "delayed": true,
+          "eventless": true
+        },
+        "voices": [
+          "en-US",
+          "zh-CN",
+          "zh-TW",
+          "es-ES",
+          "es-MX",
+          "fr-FR",
+          "de-DE",
+          "pt-BR",
+          "pt-PT",
+          "ja-JP",
+          "ko-KR",
+          "cs-CZ",
+          "ar-SA",
+          "ar-EG"
+        ],
+        "audioHeard": false
+      }
+    },
+    {
+      "locale": "ko",
+      "name": "API loading",
+      "status": "PASS",
+      "evidence": {
+        "scenario": "loading",
+        "requests": [
+          {
+            "url": "http://127.0.0.1:5196/runs/latest",
+            "method": "GET"
+          }
+        ],
+        "simulated": true
+      }
+    },
+    {
+      "locale": "ko",
+      "name": "API HTTP503",
+      "status": "PASS",
+      "evidence": {
+        "scenario": "HTTP503",
+        "requests": [
+          {
+            "url": "http://127.0.0.1:5196/runs/latest",
+            "method": "GET"
+          }
+        ],
+        "simulated": true
+      }
+    },
+    {
+      "locale": "ko",
+      "name": "API malformed",
+      "status": "PASS",
+      "evidence": {
+        "scenario": "malformed",
+        "requests": [
+          {
+            "url": "http://127.0.0.1:5196/runs/latest",
+            "method": "GET"
+          }
+        ],
+        "simulated": true
+      }
+    },
+    {
+      "locale": "ko",
+      "name": "API empty",
+      "status": "PASS",
+      "evidence": {
+        "scenario": "empty",
+        "requests": [
+          {
+            "url": "http://127.0.0.1:5196/runs/latest",
+            "method": "GET"
+          },
+          {
+            "url": "http://127.0.0.1:5196/runs/latest",
+            "method": "GET"
+          },
+          {
+            "url": "http://127.0.0.1:5196/runs/latest",
+            "method": "GET"
+          },
+          {
+            "url": "http://127.0.0.1:5196/runs/latest",
+            "method": "GET"
+          },
+          {
+            "url": "http://127.0.0.1:5196/runs/latest",
+            "method": "GET"
+          },
+          {
+            "url": "http://127.0.0.1:5196/runs/synthetic-fixture-0001/trace",
+            "method": "GET"
+          }
+        ],
+        "simulated": true
+      }
+    },
+    {
+      "locale": "ko",
+      "name": "API missing-evidence",
+      "status": "PASS",
+      "evidence": {
+        "scenario": "missing-evidence",
+        "requests": [
+          {
+            "url": "http://127.0.0.1:5196/runs/latest",
+            "method": "GET"
+          }
+        ],
+        "simulated": true
+      }
+    },
+    {
+      "locale": "ko",
+      "name": "API summary-only-abstention",
+      "status": "PASS",
+      "evidence": {
+        "scenario": "summary-only-abstention",
+        "requests": [
+          {
+            "url": "http://127.0.0.1:5196/runs/latest",
+            "method": "GET"
+          }
+        ],
+        "simulated": true
+      }
+    },
+    {
+      "locale": "cs",
+      "name": "initial load, persisted locale, navigation, filters and empty results",
+      "status": "PASS",
+      "evidence": {
+        "preference": "cs",
+        "searchAndFiltersPreserved": true
+      }
+    },
+    {
+      "locale": "cs",
+      "name": "rapid Factor Lab pool and status changes retain both filters",
+      "status": "PASS",
+      "evidence": {
+        "pool": "crypto",
+        "status": "ACTIVE",
+        "cards": 2
+      }
+    },
+    {
+      "locale": "cs",
+      "name": "SYN369 original verdict, source evidence, missing explanation and invalid ticker",
+      "status": "PASS",
+      "evidence": {
+        "originalVerdict": "abstained"
+      }
+    },
+    {
+      "locale": "cs",
+      "name": "keyboard Listen entry, all speech controls, stop recovery, error, route cancellation",
+      "status": "PASS",
+      "evidence": {
+        "mockVoice": "cs-CZ",
+        "audioHeard": false,
+        "noAutoplay": true
+      }
+    },
+    {
+      "locale": "cs",
+      "name": "reduced motion and keyboard disclosure/selector operability",
+      "status": "PASS",
+      "evidence": {
+        "keyboard": true,
+        "reducedMotion": true
+      }
+    },
+    {
+      "locale": "cs",
+      "name": "voice availability {\"unsupported\":true}",
+      "status": "PASS",
+      "evidence": {
+        "mock": {
+          "unsupported": true
+        },
+        "voices": [],
+        "audioHeard": false
+      }
+    },
+    {
+      "locale": "cs",
+      "name": "voice availability {\"empty\":true}",
+      "status": "PASS",
+      "evidence": {
+        "mock": {
+          "empty": true
+        },
+        "voices": [],
+        "audioHeard": false
+      }
+    },
+    {
+      "locale": "cs",
+      "name": "voice availability {\"chineseOnly\":true}",
+      "status": "PASS",
+      "evidence": {
+        "mock": {
+          "chineseOnly": true
+        },
+        "voices": [
+          "zh-CN",
+          "zh-TW"
+        ],
+        "audioHeard": false
+      }
+    },
+    {
+      "locale": "cs",
+      "name": "voice availability {\"delayed\":true}",
+      "status": "PASS",
+      "evidence": {
+        "mock": {
+          "delayed": true
+        },
+        "voices": [
+          "en-US",
+          "zh-CN",
+          "zh-TW",
+          "es-ES",
+          "es-MX",
+          "fr-FR",
+          "de-DE",
+          "pt-BR",
+          "pt-PT",
+          "ja-JP",
+          "ko-KR",
+          "cs-CZ",
+          "ar-SA",
+          "ar-EG"
+        ],
+        "audioHeard": false
+      }
+    },
+    {
+      "locale": "cs",
+      "name": "voice availability {\"delayed\":true,\"eventless\":true}",
+      "status": "PASS",
+      "evidence": {
+        "mock": {
+          "delayed": true,
+          "eventless": true
+        },
+        "voices": [
+          "en-US",
+          "zh-CN",
+          "zh-TW",
+          "es-ES",
+          "es-MX",
+          "fr-FR",
+          "de-DE",
+          "pt-BR",
+          "pt-PT",
+          "ja-JP",
+          "ko-KR",
+          "cs-CZ",
+          "ar-SA",
+          "ar-EG"
+        ],
+        "audioHeard": false
+      }
+    },
+    {
+      "locale": "cs",
+      "name": "API loading",
+      "status": "PASS",
+      "evidence": {
+        "scenario": "loading",
+        "requests": [
+          {
+            "url": "http://127.0.0.1:5196/runs/latest",
+            "method": "GET"
+          }
+        ],
+        "simulated": true
+      }
+    },
+    {
+      "locale": "cs",
+      "name": "API HTTP503",
+      "status": "PASS",
+      "evidence": {
+        "scenario": "HTTP503",
+        "requests": [
+          {
+            "url": "http://127.0.0.1:5196/runs/latest",
+            "method": "GET"
+          }
+        ],
+        "simulated": true
+      }
+    },
+    {
+      "locale": "cs",
+      "name": "API malformed",
+      "status": "PASS",
+      "evidence": {
+        "scenario": "malformed",
+        "requests": [
+          {
+            "url": "http://127.0.0.1:5196/runs/latest",
+            "method": "GET"
+          }
+        ],
+        "simulated": true
+      }
+    },
+    {
+      "locale": "cs",
+      "name": "API empty",
+      "status": "PASS",
+      "evidence": {
+        "scenario": "empty",
+        "requests": [
+          {
+            "url": "http://127.0.0.1:5196/runs/latest",
+            "method": "GET"
+          },
+          {
+            "url": "http://127.0.0.1:5196/runs/latest",
+            "method": "GET"
+          },
+          {
+            "url": "http://127.0.0.1:5196/runs/latest",
+            "method": "GET"
+          },
+          {
+            "url": "http://127.0.0.1:5196/runs/latest",
+            "method": "GET"
+          },
+          {
+            "url": "http://127.0.0.1:5196/runs/latest",
+            "method": "GET"
+          },
+          {
+            "url": "http://127.0.0.1:5196/runs/synthetic-fixture-0001/trace",
+            "method": "GET"
+          }
+        ],
+        "simulated": true
+      }
+    },
+    {
+      "locale": "cs",
+      "name": "API missing-evidence",
+      "status": "PASS",
+      "evidence": {
+        "scenario": "missing-evidence",
+        "requests": [
+          {
+            "url": "http://127.0.0.1:5196/runs/latest",
+            "method": "GET"
+          }
+        ],
+        "simulated": true
+      }
+    },
+    {
+      "locale": "cs",
+      "name": "API summary-only-abstention",
+      "status": "PASS",
+      "evidence": {
+        "scenario": "summary-only-abstention",
+        "requests": [
+          {
+            "url": "http://127.0.0.1:5196/runs/latest",
+            "method": "GET"
+          }
+        ],
+        "simulated": true
+      }
+    },
+    {
+      "locale": "ar",
+      "name": "initial load, persisted locale, navigation, filters and empty results",
+      "status": "PASS",
+      "evidence": {
+        "preference": "ar",
+        "searchAndFiltersPreserved": true
+      }
+    },
+    {
+      "locale": "ar",
+      "name": "rapid Factor Lab pool and status changes retain both filters",
+      "status": "PASS",
+      "evidence": {
+        "pool": "crypto",
+        "status": "ACTIVE",
+        "cards": 2
+      }
+    },
+    {
+      "locale": "ar",
+      "name": "SYN369 original verdict, source evidence, missing explanation and invalid ticker",
+      "status": "PASS",
+      "evidence": {
+        "originalVerdict": "abstained"
+      }
+    },
+    {
+      "locale": "ar",
+      "name": "keyboard Listen entry, all speech controls, stop recovery, error, route cancellation",
+      "status": "PASS",
+      "evidence": {
+        "mockVoice": "ar-SA",
+        "audioHeard": false,
+        "noAutoplay": true
+      }
+    },
+    {
+      "locale": "ar",
+      "name": "reduced motion and keyboard disclosure/selector operability",
+      "status": "PASS",
+      "evidence": {
+        "keyboard": true,
+        "reducedMotion": true
+      }
+    },
+    {
+      "locale": "ar",
+      "name": "voice availability {\"unsupported\":true}",
+      "status": "PASS",
+      "evidence": {
+        "mock": {
+          "unsupported": true
+        },
+        "voices": [],
+        "audioHeard": false
+      }
+    },
+    {
+      "locale": "ar",
+      "name": "voice availability {\"empty\":true}",
+      "status": "PASS",
+      "evidence": {
+        "mock": {
+          "empty": true
+        },
+        "voices": [],
+        "audioHeard": false
+      }
+    },
+    {
+      "locale": "ar",
+      "name": "voice availability {\"chineseOnly\":true}",
+      "status": "PASS",
+      "evidence": {
+        "mock": {
+          "chineseOnly": true
+        },
+        "voices": [
+          "zh-CN",
+          "zh-TW"
+        ],
+        "audioHeard": false
+      }
+    },
+    {
+      "locale": "ar",
+      "name": "voice availability {\"delayed\":true}",
+      "status": "PASS",
+      "evidence": {
+        "mock": {
+          "delayed": true
+        },
+        "voices": [
+          "en-US",
+          "zh-CN",
+          "zh-TW",
+          "es-ES",
+          "es-MX",
+          "fr-FR",
+          "de-DE",
+          "pt-BR",
+          "pt-PT",
+          "ja-JP",
+          "ko-KR",
+          "cs-CZ",
+          "ar-SA",
+          "ar-EG"
+        ],
+        "audioHeard": false
+      }
+    },
+    {
+      "locale": "ar",
+      "name": "voice availability {\"delayed\":true,\"eventless\":true}",
+      "status": "PASS",
+      "evidence": {
+        "mock": {
+          "delayed": true,
+          "eventless": true
+        },
+        "voices": [
+          "en-US",
+          "zh-CN",
+          "zh-TW",
+          "es-ES",
+          "es-MX",
+          "fr-FR",
+          "de-DE",
+          "pt-BR",
+          "pt-PT",
+          "ja-JP",
+          "ko-KR",
+          "cs-CZ",
+          "ar-SA",
+          "ar-EG"
+        ],
+        "audioHeard": false
+      }
+    },
+    {
+      "locale": "ar",
+      "name": "API loading",
+      "status": "PASS",
+      "evidence": {
+        "scenario": "loading",
+        "requests": [
+          {
+            "url": "http://127.0.0.1:5196/runs/latest",
+            "method": "GET"
+          }
+        ],
+        "simulated": true
+      }
+    },
+    {
+      "locale": "ar",
+      "name": "API HTTP503",
+      "status": "PASS",
+      "evidence": {
+        "scenario": "HTTP503",
+        "requests": [
+          {
+            "url": "http://127.0.0.1:5196/runs/latest",
+            "method": "GET"
+          }
+        ],
+        "simulated": true
+      }
+    },
+    {
+      "locale": "ar",
+      "name": "API malformed",
+      "status": "PASS",
+      "evidence": {
+        "scenario": "malformed",
+        "requests": [
+          {
+            "url": "http://127.0.0.1:5196/runs/latest",
+            "method": "GET"
+          }
+        ],
+        "simulated": true
+      }
+    },
+    {
+      "locale": "ar",
+      "name": "API empty",
+      "status": "PASS",
+      "evidence": {
+        "scenario": "empty",
+        "requests": [
+          {
+            "url": "http://127.0.0.1:5196/runs/latest",
+            "method": "GET"
+          },
+          {
+            "url": "http://127.0.0.1:5196/runs/latest",
+            "method": "GET"
+          },
+          {
+            "url": "http://127.0.0.1:5196/runs/latest",
+            "method": "GET"
+          },
+          {
+            "url": "http://127.0.0.1:5196/runs/latest",
+            "method": "GET"
+          },
+          {
+            "url": "http://127.0.0.1:5196/runs/latest",
+            "method": "GET"
+          },
+          {
+            "url": "http://127.0.0.1:5196/runs/synthetic-fixture-0001/trace",
+            "method": "GET"
+          }
+        ],
+        "simulated": true
+      }
+    },
+    {
+      "locale": "ar",
+      "name": "API missing-evidence",
+      "status": "PASS",
+      "evidence": {
+        "scenario": "missing-evidence",
+        "requests": [
+          {
+            "url": "http://127.0.0.1:5196/runs/latest",
+            "method": "GET"
+          }
+        ],
+        "simulated": true
+      }
+    },
+    {
+      "locale": "ar",
+      "name": "API summary-only-abstention",
+      "status": "PASS",
+      "evidence": {
+        "scenario": "summary-only-abstention",
+        "requests": [
+          {
+            "url": "http://127.0.0.1:5196/runs/latest",
+            "method": "GET"
+          }
+        ],
+        "simulated": true
+      }
+    }
+  ],
+  "consoleIssues": [],
+  "inventories": [],
+  "equivalence": []
+}

@@ -1,0 +1,34 @@
+PASS en REPLAY Run context and current-main provenance
+PASS en REAL Run context and current-main provenance
+PASS en failed stage, timing discrepancy and event order survive localization
+PASS zh-CN REPLAY Run context and current-main provenance
+PASS zh-CN REAL Run context and current-main provenance
+PASS zh-CN failed stage, timing discrepancy and event order survive localization
+PASS zh-TW REPLAY Run context and current-main provenance
+PASS zh-TW REAL Run context and current-main provenance
+PASS zh-TW failed stage, timing discrepancy and event order survive localization
+PASS es REPLAY Run context and current-main provenance
+PASS es REAL Run context and current-main provenance
+PASS es failed stage, timing discrepancy and event order survive localization
+PASS fr REPLAY Run context and current-main provenance
+PASS fr REAL Run context and current-main provenance
+PASS fr failed stage, timing discrepancy and event order survive localization
+PASS de REPLAY Run context and current-main provenance
+PASS de REAL Run context and current-main provenance
+PASS de failed stage, timing discrepancy and event order survive localization
+PASS pt-BR REPLAY Run context and current-main provenance
+PASS pt-BR REAL Run context and current-main provenance
+PASS pt-BR failed stage, timing discrepancy and event order survive localization
+PASS ja REPLAY Run context and current-main provenance
+PASS ja REAL Run context and current-main provenance
+PASS ja failed stage, timing discrepancy and event order survive localization
+PASS ko REPLAY Run context and current-main provenance
+PASS ko REAL Run context and current-main provenance
+PASS ko failed stage, timing discrepancy and event order survive localization
+PASS cs REPLAY Run context and current-main provenance
+PASS cs REAL Run context and current-main provenance
+PASS cs failed stage, timing discrepancy and event order survive localization
+PASS ar REPLAY Run context and current-main provenance
+PASS ar REAL Run context and current-main provenance
+PASS ar failed stage, timing discrepancy and event order survive localization
+33/33

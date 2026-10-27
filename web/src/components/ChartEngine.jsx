@@ -7,8 +7,8 @@ import { accessibleChartOption } from '../lib/a11y.js';
 echarts.use([BarChart, LineChart, ScatterChart, TreemapChart, AriaComponent, GridComponent, TooltipComponent, LegendComponent, VisualMapComponent, MarkAreaComponent, MarkLineComponent, CanvasRenderer]);
 
 export default function ChartEngine({ option, height = 280, onEvents }) {
-  const readableAxes = (axes) => Array.isArray(axes) ? axes.map(readableAxes) : axes && ({ ...axes, axisLabel: { ...axes.axisLabel, fontSize: 13, color: '#526078' }, nameTextStyle: { ...axes.nameTextStyle, fontSize: 13, color: '#526078' } });
-  return <div aria-hidden="true" className="chart chart-visual"><ReactEChartsCore echarts={echarts} option={accessibleChartOption({
+  const readableAxes = (axes) => Array.isArray(axes) ? axes.map(readableAxes) : axes && ({ ...axes, name: '', axisLabel: { hideOverlap: true, ...axes.axisLabel, fontSize: 13, color: '#526078' }, nameTextStyle: { ...axes.nameTextStyle, fontSize: 13, color: '#526078' } });
+  return <div dir="ltr" aria-hidden="true" className="chart chart-visual"><ReactEChartsCore echarts={echarts} option={accessibleChartOption({
     animation: false, color: ['#5549e8', '#954b26', '#0b7068'], textStyle: { fontFamily: 'system-ui, sans-serif', color: '#526078', fontSize: 13 },
     tooltip: { trigger: 'axis', confine: true, renderMode: 'richText' },
     grid: { left: 52, right: 22, top: 36, bottom: 44, containLabel: true },

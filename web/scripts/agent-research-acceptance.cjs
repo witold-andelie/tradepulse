@@ -28,6 +28,15 @@ function speechStub({ noApi = false, empty = false } = {}) {
   } });
 }
 
+
+async function chooseLocale(page, locale) {
+  await page.locator('#app-language').selectOption(locale);
+  await page.waitForFunction((value) => {
+    const guideReady = !location.pathname.startsWith('/ticker/') || document.querySelector('#agent-research-guide')?.lang === value;
+    return document.documentElement.lang === value && document.querySelector('#app-language')?.getAttribute('aria-busy') === 'false' && guideReady;
+  }, locale);
+}
+
 (async () => {
   const browser = await chromium.launch({ executablePath: process.env.TRADEPULSE_CHROMIUM || '/usr/bin/chromium', headless: true, args: ['--no-sandbox'] });
   const native = await browser.newPage();
@@ -89,12 +98,12 @@ function speechStub({ noApi = false, empty = false } = {}) {
     assert.deepEqual(snapshots[0], snapshots[1]);
   });
   await check('all eleven locales preserve numbers, enums, evidence and original narratives', async () => {
-    const values = await page.locator('#agent-research-guide dl dd').allTextContents();
+    const values = await page.locator('#agent-research-guide dl dd bdi').allTextContents();
     for (const locale of localeIds) {
-      await page.locator('#research-guide-language').selectOption(locale);
-      assert.deepEqual(await page.locator('#agent-research-guide dl dd').allTextContents(), values);
+      await chooseLocale(page, locale);
+      assert.deepEqual(await page.locator('#agent-research-guide dl dd bdi').allTextContents(), values);
       assert.equal(await page.locator('#agent-research-guide').getAttribute('lang'), locale);
-      assert.equal(await page.locator('html').getAttribute('lang'), 'en');
+      assert.equal(await page.locator('html').getAttribute('lang'), locale);
       assert((await page.locator('#agent-research-guide').innerText()).includes(abstained.claims[1].text));
       assert.equal(await page.locator('#explanation .claim.rejected .hash').textContent(), abstained.claims[1].evidence[0].rows_sha256);
     }
@@ -103,19 +112,21 @@ function speechStub({ noApi = false, empty = false } = {}) {
     assert.equal(await page.locator('#agent-research-guide').getAttribute('dir'), 'rtl');
     assert.equal(await page.locator('#agent-research-guide bdi').first().getAttribute('dir'), 'ltr');
     assert(await page.locator('#agent-research-guide [lang=""][dir="auto"][translate="no"]').count());
-    assert.equal(await page.locator('.detail-context').evaluate((node) => getComputedStyle(node).direction), 'ltr');
+    assert.equal(await page.locator('.detail-context').evaluate((node) => getComputedStyle(node).direction), 'rtl');
+    const sourceTier = fixture.recommendations.find((row) => row.pool === abstained.pool && row.symbol === abstained.symbol).tier;
+    assert.equal(await page.locator('.detail-context bdi').filter({ hasText: sourceTier }).first().getAttribute('dir'), 'ltr');
     await fs.promises.writeFile(path.join(out, 'arabic-aria.txt'), await page.locator('#agent-research-guide').ariaSnapshot());
   });
   await check('locale persistence, invalid preference fallback and blocked storage', async () => {
     await page.reload(); await page.locator('#agent-research-guide').waitFor();
-    assert.equal(await page.locator('#research-guide-language').inputValue(), 'ar');
-    await page.evaluate(() => localStorage.setItem('tradepulse.researchGuide.locale', 'unavailable'));
+    assert.equal(await page.locator('#app-language').inputValue(), 'ar');
+    await page.evaluate(() => localStorage.setItem('tradepulse.locale', 'unavailable'));
     await page.reload(); await page.locator('#agent-research-guide').waitFor();
-    assert.equal(await page.locator('#research-guide-language').inputValue(), 'en');
+    assert.equal(await page.locator('#app-language').inputValue(), 'en');
     const blocked = await context.newPage();
     await blocked.addInitScript(() => { Object.defineProperty(window, 'localStorage', { get() { throw new DOMException('Blocked', 'SecurityError'); } }); });
     await blocked.goto(base + route(abstained)); await blocked.locator('#agent-research-guide').waitFor();
-    await blocked.locator('#research-guide-language').selectOption('ja');
+    await chooseLocale(blocked, 'ja');
     assert.equal(await blocked.locator('#agent-research-guide').getAttribute('lang'), 'ja');
     await blocked.close();
   });
@@ -136,7 +147,7 @@ function speechStub({ noApi = false, empty = false } = {}) {
   await check('locale changes cancel speech without auto-playing another language', async () => {
     await page.getByRole('button', { name: 'Play', exact: true }).click();
     const before = await page.evaluate(() => ({ calls: window.__speech.calls.length, cancels: window.__speech.cancels }));
-    await page.locator('#research-guide-language').selectOption('ar');
+    await chooseLocale(page, 'ar');
     const after = await page.evaluate(() => ({ calls: window.__speech.calls.length, cancels: window.__speech.cancels }));
     assert.equal(after.calls, before.calls); assert(after.cancels > before.cancels);
     await page.locator('#agent-research-guide button.primary').click();
@@ -144,11 +155,12 @@ function speechStub({ noApi = false, empty = false } = {}) {
   });
   await check('route navigation and instrument changes cancel active speech', async () => {
     const before = await page.evaluate(() => window.__speech.cancels);
-    await page.getByRole('link', { name: 'Return to Discover', exact: true }).click();
+    await page.locator('.hero-actions a[href="/discover"]').click();
+    await chooseLocale(page, 'en');
     await page.getByRole('heading', { name: 'Make sense of the market.', exact: true }).waitFor();
     assert(await page.evaluate(() => window.__speech.cancels) > before);
     await goto(abstained);
-    await page.locator('#research-guide-language').selectOption('en');
+    await chooseLocale(page, 'en');
     await page.getByRole('button', { name: 'Play', exact: true }).click();
     const initial = await page.evaluate(() => window.__speech.cancels);
     await page.evaluate((url) => { history.pushState({}, '', url); window.dispatchEvent(new PopStateEvent('popstate')); }, route(explained));
@@ -178,7 +190,7 @@ function speechStub({ noApi = false, empty = false } = {}) {
     }
   });
   await check('speech errors leave the page and readable research usable', async () => {
-    await goto(abstained); await page.locator('#research-guide-language').selectOption('en');
+    await goto(abstained); await chooseLocale(page, 'en');
     await page.getByRole('button', { name: 'Play', exact: true }).click();
     await page.evaluate(() => window.__speech.current.onerror({ error: 'interrupted' }));
     await page.waitForFunction(() => document.querySelector('#agent-research-guide [role="status"]').textContent.includes('could not continue'));
@@ -186,9 +198,9 @@ function speechStub({ noApi = false, empty = false } = {}) {
     assert(await page.getByRole('button', { name: 'Play', exact: true }).isEnabled());
   });
   await check('keyboard disclosures, language selection, focus ring and control labels', async () => {
-    await page.locator('#research-guide-language').focus();
+    await page.locator('#app-language').focus();
     await page.keyboard.press('ArrowDown'); await page.keyboard.press('Enter');
-    assert.equal(await page.locator('#research-guide-language').inputValue(), 'zh-CN');
+    assert.equal(await page.locator('#app-language').inputValue(), 'zh-CN');
     const summary = page.locator('#agent-research-guide > details').nth(1).locator('summary');
     await summary.focus();
     const initiallyOpen = await summary.evaluate((node) => node.parentElement.open);
@@ -200,10 +212,10 @@ function speechStub({ noApi = false, empty = false } = {}) {
     assert.equal(unnamed, 0);
     await fs.promises.writeFile(path.join(out, 'guide-aria.txt'), await page.locator('#agent-research-guide').ariaSnapshot());
   });
-  await check('1440, 768 and 320px layouts in English, Chinese and Arabic', async () => {
+  await check('1440, 768 and 320px layouts in all eleven locales', async () => {
     await openQuestions();
-    for (const width of [1440, 768, 320]) for (const locale of ['en', 'zh-CN', 'ar']) {
-      await page.setViewportSize({ width, height: 1000 }); await page.locator('#research-guide-language').selectOption(locale);
+    for (const width of [1440, 768, 320]) for (const locale of localeIds) {
+      await page.setViewportSize({ width, height: 1000 }); await chooseLocale(page, locale);
       assert(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth), `${width} ${locale}: page overflow`);
       const dimensions = await page.locator('#agent-research-guide').evaluate((node) => ({ content: node.scrollWidth, outer: node.clientWidth }));
       assert(dimensions.content <= dimensions.outer + 1, `${width} ${locale}: guide overflow`);

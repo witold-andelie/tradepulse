@@ -1,0 +1,58 @@
+PASS en: immediate Discover selector and preference 1
+PASS en: all 620 instrument rows, every pool and financial table value 620
+PASS en: all 30 original explanations, verdicts, evidence and detail measurements 30
+PASS en: NO_CALL, absent explanation, rejected evidence and educational caveats 3
+PASS en: expanded seven routes, semantic inventory, both-view reflow and residual English 70
+PASS zh-CN: immediate Discover selector and preference 1
+PASS zh-CN: all 620 instrument rows, every pool and financial table value 620
+PASS zh-CN: all 30 original explanations, verdicts, evidence and detail measurements 30
+PASS zh-CN: NO_CALL, absent explanation, rejected evidence and educational caveats 3
+PASS zh-CN: expanded seven routes, semantic inventory, both-view reflow and residual English 70
+PASS zh-TW: immediate Discover selector and preference 1
+PASS zh-TW: all 620 instrument rows, every pool and financial table value 620
+PASS zh-TW: all 30 original explanations, verdicts, evidence and detail measurements 30
+PASS zh-TW: NO_CALL, absent explanation, rejected evidence and educational caveats 3
+PASS zh-TW: expanded seven routes, semantic inventory, both-view reflow and residual English 70
+PASS es: immediate Discover selector and preference 1
+PASS es: all 620 instrument rows, every pool and financial table value 620
+PASS es: all 30 original explanations, verdicts, evidence and detail measurements 30
+PASS es: NO_CALL, absent explanation, rejected evidence and educational caveats 3
+PASS es: expanded seven routes, semantic inventory, both-view reflow and residual English 70
+PASS fr: immediate Discover selector and preference 1
+PASS fr: all 620 instrument rows, every pool and financial table value 620
+PASS fr: all 30 original explanations, verdicts, evidence and detail measurements 30
+PASS fr: NO_CALL, absent explanation, rejected evidence and educational caveats 3
+PASS fr: expanded seven routes, semantic inventory, both-view reflow and residual English 70
+PASS de: immediate Discover selector and preference 1
+PASS de: all 620 instrument rows, every pool and financial table value 620
+PASS de: all 30 original explanations, verdicts, evidence and detail measurements 30
+PASS de: NO_CALL, absent explanation, rejected evidence and educational caveats 3
+PASS de: expanded seven routes, semantic inventory, both-view reflow and residual English 70
+PASS pt-BR: immediate Discover selector and preference 1
+PASS pt-BR: all 620 instrument rows, every pool and financial table value 620
+PASS pt-BR: all 30 original explanations, verdicts, evidence and detail measurements 30
+PASS pt-BR: NO_CALL, absent explanation, rejected evidence and educational caveats 3
+PASS pt-BR: expanded seven routes, semantic inventory, both-view reflow and residual English 70
+PASS ja: immediate Discover selector and preference 1
+PASS ja: all 620 instrument rows, every pool and financial table value 620
+PASS ja: all 30 original explanations, verdicts, evidence and detail measurements 30
+PASS ja: NO_CALL, absent explanation, rejected evidence and educational caveats 3
+PASS ja: expanded seven routes, semantic inventory, both-view reflow and residual English 70
+PASS ko: immediate Discover selector and preference 1
+PASS ko: all 620 instrument rows, every pool and financial table value 620
+PASS ko: all 30 original explanations, verdicts, evidence and detail measurements 30
+PASS ko: NO_CALL, absent explanation, rejected evidence and educational caveats 3
+PASS ko: expanded seven routes, semantic inventory, both-view reflow and residual English 70
+PASS cs: immediate Discover selector and preference 1
+PASS cs: all 620 instrument rows, every pool and financial table value 620
+PASS cs: all 30 original explanations, verdicts, evidence and detail measurements 30
+PASS cs: NO_CALL, absent explanation, rejected evidence and educational caveats 3
+PASS cs: expanded seven routes, semantic inventory, both-view reflow and residual English 70
+PASS ar: immediate Discover selector and preference 1
+PASS ar: all 620 instrument rows, every pool and financial table value 620
+PASS ar: all 30 original explanations, verdicts, evidence and detail measurements 30
+PASS ar: NO_CALL, absent explanation, rejected evidence and educational caveats 3
+PASS ar: expanded seven routes, semantic inventory, both-view reflow and residual English 70
+PASS exact English residuals outside protected source/canonical content 0
+PASS no normal-journey console errors 0
+57/57 independent groups passed

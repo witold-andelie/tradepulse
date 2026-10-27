@@ -1,0 +1,6 @@
+PASS loading remains localized and mounted; all locale changes preserve one validated run request
+PASS HTTP 503: eleven localized error states; no fixture substitution
+PASS invalid contract: eleven localized error states; no fixture substitution
+PASS schema-valid empty collections: localized leaderboard, factors, regime and trace
+PASS lazy-route failure retains the global language selector and localized recovery
+5/5 groups passed

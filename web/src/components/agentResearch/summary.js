@@ -51,10 +51,10 @@ export function buildGuide(record, run) {
 }
 
 // Only deterministic localized text is spoken. Arbitrary source narratives stay verbatim in the UI.
-export function guideSpeech(model, t) {
+export function guideSpeech(model, t, describeField = (field) => field.value) {
   return [t('title'), model.symbol, t('intro'), ...(model.synthetic ? [t('synthetic')] : []),
     ...model.sections.flatMap((section) => [t(section.key),
-      ...section.fields.map((field) => `${t(field.label)}: ${field.value ?? t('missing')}.`),
+      ...section.fields.map((field) => `${t(field.label)}: ${describeField(field) ?? t('missing')}.`),
       ...section.notes.map(t),
       ...(section.groups || []).map((group) => `${t(group.label)}: ${formatCount(group.items.length)}.`),
       ...(section.failed?.length ? [t('checks'), ...section.failed.map(({ check }) => `${check.name}: ${t('failed')}.`)] : []),

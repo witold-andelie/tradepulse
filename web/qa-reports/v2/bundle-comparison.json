@@ -1,0 +1,156 @@
+{
+  "before": {
+    "entry": {
+      "file": "index-BtSYFHkf.js",
+      "bytes": 1124843,
+      "gzipLevel9Bytes": 361362
+    },
+    "largestNonFixture": {
+      "file": "index-BtSYFHkf.js",
+      "bytes": 1124843,
+      "gzipLevel9Bytes": 361362
+    }
+  },
+  "after": {
+    "entry": {
+      "file": "index-B90qvSNv.js",
+      "bytes": 563185,
+      "gzipLevel9Bytes": 171315
+    },
+    "largestNonFixture": {
+      "file": "ChartEngine-6RXWhHeI.js",
+      "bytes": 672252,
+      "gzipLevel9Bytes": 226369
+    },
+    "lazyCatalogs": [
+      {
+        "source": "src/components/agentResearch/locales/ar.json",
+        "file": "ar-Cy4zbK23.js",
+        "bytes": 5217,
+        "gzipLevel9Bytes": 2255
+      },
+      {
+        "source": "src/components/agentResearch/locales/cs.json",
+        "file": "cs-CuD2xi73.js",
+        "bytes": 4084,
+        "gzipLevel9Bytes": 2070
+      },
+      {
+        "source": "src/components/agentResearch/locales/de.json",
+        "file": "de-CkBLcE8n.js",
+        "bytes": 4237,
+        "gzipLevel9Bytes": 2080
+      },
+      {
+        "source": "src/components/agentResearch/locales/es.json",
+        "file": "es-jAV22lnG.js",
+        "bytes": 4357,
+        "gzipLevel9Bytes": 2060
+      },
+      {
+        "source": "src/components/agentResearch/locales/fr.json",
+        "file": "fr-CzAnZt4F.js",
+        "bytes": 4381,
+        "gzipLevel9Bytes": 2099
+      },
+      {
+        "source": "src/components/agentResearch/locales/ja.json",
+        "file": "ja-DJjd2R1b.js",
+        "bytes": 4491,
+        "gzipLevel9Bytes": 2239
+      },
+      {
+        "source": "src/components/agentResearch/locales/ko.json",
+        "file": "ko-1KGszlRY.js",
+        "bytes": 4477,
+        "gzipLevel9Bytes": 2166
+      },
+      {
+        "source": "src/components/agentResearch/locales/pt-BR.json",
+        "file": "pt-BR-wemOmyJ3.js",
+        "bytes": 4245,
+        "gzipLevel9Bytes": 1993
+      },
+      {
+        "source": "src/components/agentResearch/locales/zh-CN.json",
+        "file": "zh-CN-CuXf-Whx.js",
+        "bytes": 3653,
+        "gzipLevel9Bytes": 2048
+      },
+      {
+        "source": "src/components/agentResearch/locales/zh-TW.json",
+        "file": "zh-TW-DAznCG5C.js",
+        "bytes": 3686,
+        "gzipLevel9Bytes": 2074
+      },
+      {
+        "source": "src/i18n/locales/ar.json",
+        "file": "ar-DzYhoUjG.js",
+        "bytes": 64013,
+        "gzipLevel9Bytes": 20317
+      },
+      {
+        "source": "src/i18n/locales/cs.json",
+        "file": "cs-CTrMSEGY.js",
+        "bytes": 53607,
+        "gzipLevel9Bytes": 19270
+      },
+      {
+        "source": "src/i18n/locales/de.json",
+        "file": "de-Cops_B3m.js",
+        "bytes": 53983,
+        "gzipLevel9Bytes": 18853
+      },
+      {
+        "source": "src/i18n/locales/es.json",
+        "file": "es-CYNlfpfG.js",
+        "bytes": 54404,
+        "gzipLevel9Bytes": 18609
+      },
+      {
+        "source": "src/i18n/locales/fr.json",
+        "file": "fr-_yFHF4ky.js",
+        "bytes": 55421,
+        "gzipLevel9Bytes": 18762
+      },
+      {
+        "source": "src/i18n/locales/ja.json",
+        "file": "ja-v6-CTZoW.js",
+        "bytes": 57307,
+        "gzipLevel9Bytes": 20131
+      },
+      {
+        "source": "src/i18n/locales/ko.json",
+        "file": "ko-BTqOVGKE.js",
+        "bytes": 55606,
+        "gzipLevel9Bytes": 19455
+      },
+      {
+        "source": "src/i18n/locales/pt-BR.json",
+        "file": "pt-BR-B_CfflLj.js",
+        "bytes": 54400,
+        "gzipLevel9Bytes": 18560
+      },
+      {
+        "source": "src/i18n/locales/zh-CN.json",
+        "file": "zh-CN-DS8p9Zc_.js",
+        "bytes": 51123,
+        "gzipLevel9Bytes": 19720
+      },
+      {
+        "source": "src/i18n/locales/zh-TW.json",
+        "file": "zh-TW-B6YhdRYq.js",
+        "bytes": 51156,
+        "gzipLevel9Bytes": 19711
+      }
+    ]
+  },
+  "method": {
+    "toolchain": "Node 24.19.0; npm 11.9.0; frozen main package-lock; Vite 7.3.7; same installed dependencies",
+    "before": "Actual integrated eager pre-optimization candidate, before final repairs; not a separate published baseline and not a controlled one-variable performance experiment. Build warning was present.",
+    "after": "4e61b5009777985096a81b195e3371fa7616e5b1",
+    "gzip": "Python gzip level 9 for both byte comparisons; Vite logs use their own gzip reporting and may differ.",
+    "budgetBytes": 1000000,
+    "warningThresholdUnchanged": true
+  }
+}

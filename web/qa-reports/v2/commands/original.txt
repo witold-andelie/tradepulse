@@ -1,0 +1,18 @@
+PASS root redirects and initial fixture load
+PASS all pool counts, source summary and pagination
+PASS search, sector and tier combine; clear and no-results
+PASS numeric sorting ascending and descending, nulls last
+PASS treemap click filters by actual sector
+PASS keyboard row, top/bottom links and detail metrics
+PASS explained and abstained claims with evidence expansion
+PASS unknown route, pool and instrument show friendly states
+PASS Factor Lab all pools, five gates and insufficient filing factors
+PASS regime classifications, history and source lift
+PASS track record by-tier table, calibration and IC charts
+PASS trace timeline, retry filtering, payload, timing switch
+PASS shared banner/disclaimer on all direct routes
+PASS responsive routes and screenshots at 1440px
+PASS responsive routes and screenshots at 768px
+PASS responsive routes and screenshots at 390px
+PASS no browser console warnings or errors
+17/17 passed

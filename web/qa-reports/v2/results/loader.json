@@ -1,0 +1,206 @@
+{
+  "revision": "4e61b5009777985096a81b195e3371fa7616e5b1",
+  "results": [
+    {
+      "name": "production graph has twenty lazy catalogs and no eager non-English catalog",
+      "status": "PASS",
+      "evidence": {
+        "eagerModules": [
+          "index.html"
+        ],
+        "lazyCatalogCount": 20,
+        "chunks": [
+          {
+            "name": "ChartEngine-6RXWhHeI.js",
+            "bytes": 672252
+          },
+          {
+            "name": "Discover-NMyLlCKK.js",
+            "bytes": 6457
+          },
+          {
+            "name": "FactorLabPage-Co7CLcJ2.js",
+            "bytes": 9140
+          },
+          {
+            "name": "RegimePage-DBEZHvdU.js",
+            "bytes": 6827
+          },
+          {
+            "name": "RunTracePage-BMnp1KZr.js",
+            "bytes": 12536
+          },
+          {
+            "name": "TickerPage-vFwKVSBE.js",
+            "bytes": 22519
+          },
+          {
+            "name": "TrackRecordPage-DgWtROZm.js",
+            "bytes": 10229
+          },
+          {
+            "name": "ar-Cy4zbK23.js",
+            "bytes": 5217
+          },
+          {
+            "name": "ar-DzYhoUjG.js",
+            "bytes": 64013
+          },
+          {
+            "name": "cs-CTrMSEGY.js",
+            "bytes": 53607
+          },
+          {
+            "name": "cs-CuD2xi73.js",
+            "bytes": 4084
+          },
+          {
+            "name": "de-CkBLcE8n.js",
+            "bytes": 4237
+          },
+          {
+            "name": "de-Cops_B3m.js",
+            "bytes": 53983
+          },
+          {
+            "name": "es-CYNlfpfG.js",
+            "bytes": 54404
+          },
+          {
+            "name": "es-jAV22lnG.js",
+            "bytes": 4357
+          },
+          {
+            "name": "figureSummaries-D_b91Rcz.js",
+            "bytes": 3651
+          },
+          {
+            "name": "fr-CzAnZt4F.js",
+            "bytes": 4381
+          },
+          {
+            "name": "fr-_yFHF4ky.js",
+            "bytes": 55421
+          },
+          {
+            "name": "index-B90qvSNv.js",
+            "bytes": 563185
+          },
+          {
+            "name": "ja-DJjd2R1b.js",
+            "bytes": 4491
+          },
+          {
+            "name": "ja-v6-CTZoW.js",
+            "bytes": 57307
+          },
+          {
+            "name": "ko-1KGszlRY.js",
+            "bytes": 4477
+          },
+          {
+            "name": "ko-BTqOVGKE.js",
+            "bytes": 55606
+          },
+          {
+            "name": "pt-BR-B_CfflLj.js",
+            "bytes": 54400
+          },
+          {
+            "name": "pt-BR-wemOmyJ3.js",
+            "bytes": 4245
+          },
+          {
+            "name": "run_output.fixture-DZva71sA.js",
+            "bytes": 579649
+          },
+          {
+            "name": "trace.fixture-BP1KLwvL.js",
+            "bytes": 5578
+          },
+          {
+            "name": "zh-CN-CuXf-Whx.js",
+            "bytes": 3653
+          },
+          {
+            "name": "zh-CN-DS8p9Zc_.js",
+            "bytes": 51123
+          },
+          {
+            "name": "zh-TW-B6YhdRYq.js",
+            "bytes": 51156
+          },
+          {
+            "name": "zh-TW-DAznCG5C.js",
+            "bytes": 3686
+          }
+        ]
+      }
+    },
+    {
+      "name": "initial English requests neither non-English catalogs nor guides",
+      "status": "PASS",
+      "evidence": {
+        "requests": [
+          "/discover",
+          "/assets/index-B90qvSNv.js",
+          "/assets/index-D4EWTEWJ.css",
+          "/assets/run_output.fixture-DZva71sA.js",
+          "/assets/Discover-NMyLlCKK.js"
+        ]
+      }
+    },
+    {
+      "name": "saved non-English preference gates English UI and exposes selector during loading",
+      "status": "PASS"
+    },
+    {
+      "name": "rapid switching activates the final selection when earlier import finishes later",
+      "status": "PASS"
+    },
+    {
+      "name": "legacy guide preference migrates, reloads and preserves RTL",
+      "status": "PASS"
+    },
+    {
+      "name": "catalog import failure gives accessible English fallback and explicit retry",
+      "status": "PASS"
+    },
+    {
+      "name": "offline locale failure does not erase records and recovers after retry",
+      "status": "PASS"
+    },
+    {
+      "name": "guide chunks load only on detail, cache on reuse, and preserve source evidence",
+      "status": "PASS",
+      "evidence": {
+        "catalogRequests": [
+          "/assets/fr-_yFHF4ky.js",
+          "/assets/fr-_yFHF4ky.js",
+          "/assets/fr-CzAnZt4F.js"
+        ]
+      }
+    },
+    {
+      "name": "guide import failure preserves selector and falls back without English caveat flash",
+      "status": "PASS"
+    },
+    {
+      "name": "delayed guide does not flash English and cannot override a later locale selection",
+      "status": "PASS"
+    },
+    {
+      "name": "a previous guide failure cannot cancel a newer pending language",
+      "status": "PASS",
+      "evidence": {
+        "previousLocale": "ja",
+        "latestLocale": "es",
+        "lateFailureIgnored": true
+      }
+    },
+    {
+      "name": "blocked localStorage permits in-memory selection and no unauthorized requests",
+      "status": "PASS"
+    }
+  ]
+}

@@ -1,0 +1,98 @@
+{
+  "testedCommit": "4e61b5009777985096a81b195e3371fa7616e5b1",
+  "mainBaseline": "eee913ad7b310e277b8b334ab6649e5cb0877bc4",
+  "unit": {
+    "passed": 130,
+    "total": 130,
+    "testFiles": 18
+  },
+  "browserSuites": {
+    "original": {
+      "checks": 17,
+      "failed": 0
+    },
+    "redesign": {
+      "checks": 18,
+      "failed": 0
+    },
+    "global": {
+      "checks": 84,
+      "failed": 0
+    },
+    "agent": {
+      "checks": 15,
+      "failed": 0
+    },
+    "contrast": {
+      "checks": 14,
+      "failed": 0
+    },
+    "loader": {
+      "checks": 12,
+      "failed": 0
+    },
+    "api": {
+      "checks": 5,
+      "failed": 0
+    },
+    "mainline": {
+      "checks": 33,
+      "failed": 0
+    },
+    "states": {
+      "checks": 176,
+      "failed": 0
+    },
+    "data": {
+      "checks": 57,
+      "failed": 0
+    },
+    "tooltips": {
+      "checks": 67,
+      "failed": 0
+    },
+    "reproductions": {
+      "checks": 12,
+      "failed": 0
+    },
+    "axe": {
+      "checks": 154,
+      "failed": 0
+    },
+    "lighthouse": {
+      "checks": 22,
+      "failed": 0
+    },
+    "native-zoom": {
+      "checks": 308,
+      "failed": 0
+    }
+  },
+  "matrixCases": 462,
+  "matrixExtraChecks": 14,
+  "audit": {
+    "vulnerabilities": {
+      "info": 0,
+      "low": 0,
+      "moderate": 0,
+      "high": 0,
+      "critical": 0,
+      "total": 0
+    },
+    "dependencies": {
+      "prod": 18,
+      "dev": 210,
+      "optional": 53,
+      "peer": 0,
+      "peerOptional": 0,
+      "total": 227
+    }
+  },
+  "readiness": "READY FOR REVIEW; NOT READY FOR MERGE",
+  "manualGates": [
+    "native financial-language editorial review for all eleven locales",
+    "NVDA / VoiceOver",
+    "actual audible speech and pronunciation",
+    "real Windows Edge voice inventory"
+  ]
+}

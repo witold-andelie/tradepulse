@@ -1,0 +1,14 @@
+simple /discover text=135, contrast failures=0, small targets=0, unnamed=0
+simple /pool/us_equity text=876, contrast failures=0, small targets=0, unnamed=0
+simple /ticker/us_equity/SYN088 text=206, contrast failures=0, small targets=0, unnamed=0
+simple /factors text=672, contrast failures=0, small targets=0, unnamed=0
+simple /regime text=174, contrast failures=0, small targets=0, unnamed=0
+simple /track-record text=132, contrast failures=0, small targets=0, unnamed=0
+simple /trace text=298, contrast failures=0, small targets=0, unnamed=0
+pro /discover text=135, contrast failures=0, small targets=0, unnamed=0
+pro /pool/us_equity text=601, contrast failures=0, small targets=0, unnamed=0
+pro /ticker/us_equity/SYN088 text=212, contrast failures=0, small targets=0, unnamed=0
+pro /factors text=670, contrast failures=0, small targets=0, unnamed=0
+pro /regime text=172, contrast failures=0, small targets=0, unnamed=0
+pro /track-record text=130, contrast failures=0, small targets=0, unnamed=0
+pro /trace text=247, contrast failures=0, small targets=0, unnamed=0

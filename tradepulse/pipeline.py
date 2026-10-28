@@ -20,7 +20,7 @@ from tradepulse import ranking, report
 from tradepulse.agents.explain import Explainer
 from tradepulse.config import load_config
 from tradepulse.contracts import REPO_ROOT
-from tradepulse.extract.grounding import ExtractionCache
+from tradepulse.extract.grounding import ExtractionCache, ExtractionIdentityError
 from tradepulse.extract.runner import run_extraction
 from tradepulse.ports import EnginesPort, LLMPort, QueryPort
 from tradepulse.engines import EngineBridge, configured_engines
@@ -140,7 +140,12 @@ def _signal_panels(cfg: dict, query: QueryPort, llm: LLMPort, loaded: list[dict]
                                         max_docs=cfg["extract"]["max_docs_per_run"], tracer=tracer)
                 events = result["events"]
                 tracer.event("extract", "info", message=f"{len(events)} grounded events",
-                             payload={k: result[k] for k in ("processed", "cached", "skipped", "rejected_problems")})
+                             payload={k: result[k] for k in ("processed", "cached", "skipped", "rejected_problems",
+                                                           "duplicate_events")})
+                if result["duplicate_events"]:
+                    warnings.append(f"Collapsed {result['duplicate_events']} identical grounded event repetitions.")
+            except ExtractionIdentityError:
+                raise
             except Exception as exc:  # missing table or extractor unavailable: the factors stay empty
                 warnings.append(f"Event extraction unavailable ({type(exc).__name__}); event factors are empty.")
 

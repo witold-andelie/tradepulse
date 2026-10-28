@@ -89,18 +89,75 @@ def demand_language_score(events: list[dict]) -> float | None:
     return (n_pos - n_neg) / (n_pos + n_neg + 1) if n_pos + n_neg else None
 
 
+class ExtractionIdentityError(ValueError):
+    """Cached provenance or a grounded identity conflicts; never degrade this to empty factors."""
+
+
 class ExtractionCache:
-    """JSON-lines file of {"doc_sha256", "events": [...]}. The newest line for a document wins."""
+    """Append-only extraction cache with source-scoped entries and legacy SHA lookup."""
 
     def __init__(self, path: Path) -> None:
         self.path = Path(path)
         self._events: dict[str, list[dict]] = {}
+        self._sources: dict[str, list[dict]] = {}
         if self.path.exists():
             with self.path.open(encoding="utf-8") as source:
                 for line in source:
                     if line.strip():
                         record = json.loads(line)
                         self._events[record["doc_sha256"]] = record["events"]
+                        if "source" in record:
+                            self._sources[self._source_key(record["source"])] = record["events"]
+                        elif record["events"]:
+                            first = record["events"][0]
+                            try:
+                                inferred = self._source({**first, "sha256": first["doc_sha256"]})
+                            except (KeyError, TypeError, ValueError):
+                                continue  # Unscoped legacy lookup still verifies provenance below.
+                            self._sources[self._source_key(inferred)] = record["events"]
+
+    @staticmethod
+    def _source(doc):
+        available = dt.datetime.fromisoformat(str(doc["available_at"]).replace("Z", "+00:00"))
+        if available.utcoffset() is None:
+            raise ExtractionIdentityError("Extraction source timing must be timezone-aware")
+        return {"sha256": doc["sha256"], "symbol": doc["symbol"],
+                "accession_number": doc["accession_number"],
+                "available_at": available.astimezone(dt.UTC).isoformat()}
+
+    @staticmethod
+    def _source_key(source):
+        return json.dumps(source, sort_keys=True)
+
+    def get_for_document(self, doc):
+        """Reuse legacy nonempty entries only when their complete source identity matches."""
+        source = self._source(doc)
+        key = self._source_key(source)
+        scoped = key in self._sources
+        values = self._sources[key] if scoped else self._events.get(doc["sha256"])
+        if values is None or (not scoped and not values):
+            return None  # Legacy empty entries do not identify their symbol/source.
+        if not isinstance(values, list) or len(values) > 5000:
+            raise ExtractionIdentityError("Invalid cached extraction list")
+        for event in values:
+            try:
+                matches = self._source({"sha256": event["doc_sha256"], **event}) == source
+            except (KeyError, TypeError, ValueError):
+                matches = False
+            if not matches:
+                if scoped:
+                    raise ExtractionIdentityError("Cached extraction provenance mismatch")
+                return None
+        for event in values:
+            if grounding_problems(event, doc["text"], doc["sha256"],
+                                  dt.datetime.fromisoformat(source["available_at"])):
+                raise ExtractionIdentityError("Cached extraction failed grounding")
+        return deepcopy(values)
+
+    def put_for_document(self, doc, events):
+        source = self._source(doc)
+        self._append({"doc_sha256": doc["sha256"], "source": source, "events": events})
+        self._sources[self._source_key(source)] = deepcopy(events)
 
     def has(self, doc_sha256: str) -> bool:
         return doc_sha256 in self._events
@@ -110,8 +167,11 @@ class ExtractionCache:
         return deepcopy(self._events[doc_sha256])
 
     def put(self, doc_sha256: str, events: list[dict]) -> None:
-        line = json.dumps({"doc_sha256": doc_sha256, "events": events}, sort_keys=True, allow_nan=False)
+        self._append({"doc_sha256": doc_sha256, "events": events})
+
+    def _append(self, record):
+        line = json.dumps(record, sort_keys=True, allow_nan=False)
         self.path.parent.mkdir(parents=True, exist_ok=True)
         with self.path.open("a", encoding="utf-8") as target:
             target.write(line + "\n")
-        self._events[doc_sha256] = json.loads(line)["events"]
+        self._events[record["doc_sha256"]] = json.loads(line)["events"]
